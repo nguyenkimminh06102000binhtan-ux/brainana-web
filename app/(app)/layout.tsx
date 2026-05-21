@@ -7,7 +7,7 @@ import { logout } from "./actions";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: "🏠" },
-  { label: "My Courses", href: "/lessons", icon: "📚" },
+  { label: "Courses", href: "/courses", icon: "📚" },
   { label: "Study", href: "/study", icon: "🧠" },
   { label: "Leaderboard", href: "/leaderboard", icon: "🏆" },
   { label: "Settings", href: "/settings", icon: "⚙️" },

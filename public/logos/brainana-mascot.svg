@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <!-- Body -->
+  <ellipse cx="60" cy="100" rx="30" ry="34" fill="#6BBF5E"/>
+  <!-- Head -->
+  <circle cx="60" cy="52" r="32" fill="#6BBF5E"/>
+  <!-- Brain bump (zombie thing) -->
+  <ellipse cx="60" cy="28" rx="18" ry="10" fill="#E85555" opacity="0.7"/>
+  <!-- Eyes -->
+  <circle cx="48" cy="50" r="7" fill="white"/>
+  <circle cx="72" cy="50" r="7" fill="white"/>
+  <circle cx="50" cy="51" r="3.5" fill="#2A2118"/>
+  <circle cx="74" cy="51" r="3.5" fill="#2A2118"/>
+  <!-- Mouth (smile) -->
+  <path d="M48 64 Q60 74 72 64" stroke="#2A2118" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Banana in hand -->
+  <path d="M82 95 Q98 80 100 95 Q102 108 88 108" stroke="#F5C842" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Arms -->
+  <path d="M30 88 Q18 78 20 95" stroke="#6BBF5E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M90 88 Q102 78 100 95" stroke="#6BBF5E" stroke-width="8" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="43" y="128" width="14" height="10" rx="5" fill="#6BBF5E"/>
+  <rect x="63" y="128" width="14" height="10" rx="5" fill="#6BBF5E"/>
+</svg>

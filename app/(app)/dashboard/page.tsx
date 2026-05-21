@@ -87,7 +87,7 @@ export default async function DashboardPage() {
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-dark text-xl font-extrabold">Continue Studying</h2>
-          <Link href="/lessons" className="text-brain font-bold text-sm hover:underline">View all →</Link>
+          <Link href="/courses" className="text-brain font-bold text-sm hover:underline">View all →</Link>
         </div>
 
         {enrollments && enrollments.length > 0 ? (
@@ -115,7 +115,7 @@ export default async function DashboardPage() {
             <p className="text-dark font-bold mb-1">No courses yet</p>
             <p className="text-dark/50 text-sm mb-4">Pick a course below to start learning.</p>
             <Link
-              href="/lessons"
+              href="/courses"
               className="inline-block bg-banana text-dark font-extrabold text-sm px-5 py-2.5 rounded-full hover:bg-banana/90 transition"
             >
               Browse Courses
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-dark text-xl font-extrabold">Explore Courses</h2>
-          <Link href="/lessons" className="text-brain font-bold text-sm hover:underline">See all →</Link>
+          <Link href="/courses" className="text-brain font-bold text-sm hover:underline">See all →</Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -148,7 +148,7 @@ export default async function DashboardPage() {
               </div>
               <p className="text-dark/55 text-sm leading-relaxed flex-1">{c.desc}</p>
               <Link
-                href="/lessons"
+                href="/courses"
                 className="block text-center bg-dark text-cream font-bold text-sm py-2.5 rounded-full hover:bg-banana hover:text-dark transition"
               >
                 Study Now
