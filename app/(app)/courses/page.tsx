@@ -60,7 +60,7 @@ export default async function CoursesPage({
     supabase.from("user_courses").select("course_id").eq("user_id", user.id),
   ]);
 
-  const courses = (coursesRaw ?? []) as CourseWithCreator[];
+  const courses = (coursesRaw ?? []) as unknown as CourseWithCreator[];
   const enrolledIds = new Set((enrolled ?? []).map((e) => e.course_id));
 
   /* ── helpers ── */
