@@ -61,8 +61,8 @@ export default async function CoursesPage({
   return (
     <div className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Explore Courses</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <h1 className="font-fredoka text-4xl font-[600] leading-tight tracking-tight">Explore Courses</h1>
+        <p className="mt-2 font-manrope text-sm text-ink-2">
           Find a published course and enroll when you are ready.
         </p>
       </div>
@@ -71,17 +71,21 @@ export default async function CoursesPage({
         {activeCategory !== "All" && (
           <input type="hidden" name="category" value={activeCategory} />
         )}
+        <label htmlFor="course-search" className="mb-2 block font-mono text-xs uppercase tracking-widest text-ink-2">
+          Search courses
+        </label>
         <div className="flex gap-2">
           <input
+            id="course-search"
             name="q"
             defaultValue={q}
             placeholder="Search courses"
             autoComplete="off"
-            className="min-w-0 flex-1 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-950 dark:border-zinc-700 dark:bg-zinc-950 dark:focus:border-zinc-50"
+            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
           />
           <button
             type="submit"
-            className="rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+            className="rounded-full bg-yellow px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
           >
             Search
           </button>
@@ -97,8 +101,8 @@ export default async function CoursesPage({
               href={filterHref(cat)}
               className={`rounded-md border px-3 py-1.5 text-sm ${
                 isActive
-                  ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-50 dark:bg-zinc-50 dark:text-zinc-950"
-                  : "border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900"
+                  ? "bg-orange font-manrope font-[800] text-ink shadow-hard-sm"
+                  : "bg-paper-2 font-manrope font-[800] text-ink shadow-hard-sm"
               }`}
             >
               {cat}
@@ -108,7 +112,7 @@ export default async function CoursesPage({
         {(q || activeCategory !== "All") && (
           <Link
             href="/courses"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+            className="rounded-full bg-paper-2 px-4 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm"
           >
             Clear
           </Link>
@@ -116,7 +120,7 @@ export default async function CoursesPage({
       </div>
 
       {(q || activeCategory !== "All") && (
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
           {courses.length} course{courses.length !== 1 ? "s" : ""} found
           {q ? ` for "${q}"` : ""}
           {activeCategory !== "All" ? ` in ${activeCategory}` : ""}
@@ -133,9 +137,9 @@ export default async function CoursesPage({
             return (
               <article
                 key={course.id}
-                className="overflow-hidden rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950"
+                className="overflow-hidden rounded-lg bg-paper-2 shadow-hard"
               >
-                <div className="relative flex h-32 items-center justify-center bg-zinc-100 dark:bg-zinc-900">
+                <div className="relative flex h-32 items-center justify-center bg-blue">
                   {course.cover_image_url ? (
                     <Image
                       src={course.cover_image_url}
@@ -144,7 +148,7 @@ export default async function CoursesPage({
                       className="object-cover"
                     />
                   ) : (
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <span className="font-mono text-xs uppercase tracking-widest text-ink">
                       {course.category ?? "Course"}
                     </span>
                   )}
@@ -152,27 +156,27 @@ export default async function CoursesPage({
 
                 <div className="flex min-h-56 flex-col gap-3 p-5">
                   <div>
-                    <h2 className="font-semibold leading-snug">{course.title}</h2>
-                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">by {creatorName}</p>
+                    <h2 className="font-fredoka text-2xl font-[600] leading-tight tracking-tight">{course.title}</h2>
+                    <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-2">by {creatorName}</p>
                   </div>
 
                   {course.description && (
-                    <p className="line-clamp-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                    <p className="line-clamp-2 font-manrope text-sm leading-6 text-ink-2">
                       {course.description}
                     </p>
                   )}
 
-                  <div className="mt-auto flex flex-wrap gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-                    <span>{formatCount(course.learner_count)} learners</span>
+                  <div className="mt-auto flex flex-wrap gap-2 font-mono text-xs text-ink-2">
+                    <span className="rounded-full border bg-green-soft px-2 py-1">🧠 {formatCount(course.learner_count)} learners</span>
                     {course.source_language && course.target_language && (
-                      <span>
+                      <span className="rounded-full border bg-yellow-soft px-2 py-1">
                         {course.source_language} to {course.target_language}
                       </span>
                     )}
                   </div>
 
                   {isEnrolled ? (
-                    <div className="rounded-md border border-zinc-300 px-3 py-2 text-center text-sm font-medium dark:border-zinc-700">
+                    <div className="rounded-full bg-green-soft px-5 py-3 text-center font-manrope text-base font-[800] text-ink shadow-hard-sm">
                       Enrolled
                     </div>
                   ) : (
@@ -180,7 +184,7 @@ export default async function CoursesPage({
                       <input type="hidden" name="course_id" value={course.id} />
                       <button
                         type="submit"
-                        className="w-full rounded-md bg-zinc-950 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+                        className="w-full rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
                       >
                         Enroll
                       </button>
@@ -202,16 +206,16 @@ function EmptyState({ query, category }: { query?: string; category: string }) {
   const isFiltered = query || category !== "All";
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-10 text-center dark:border-zinc-800 dark:bg-zinc-950">
-      <p className="font-medium">{isFiltered ? "No courses found" : "No courses yet"}</p>
-      <p className="mx-auto mt-2 max-w-sm text-sm text-zinc-600 dark:text-zinc-400">
+    <div className="rounded-lg bg-paper-2 p-10 text-center shadow-hard">
+      <p className="font-fredoka text-2xl font-[600] tracking-tight">{isFiltered ? "No courses found" : "No courses yet"}</p>
+      <p className="mx-auto mt-2 max-w-sm font-manrope text-sm text-ink-2">
         {isFiltered
           ? "Try a different search term or remove the filters."
           : "Published courses will appear here when they are available."}
       </p>
       <Link
         href={isFiltered ? "/courses" : "/dashboard"}
-        className="mt-4 inline-block rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+        className="mt-4 inline-block rounded-full bg-paper px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
       >
         {isFiltered ? "Clear filters" : "Back to dashboard"}
       </Link>

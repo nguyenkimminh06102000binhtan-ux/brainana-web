@@ -58,8 +58,8 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-6 py-8">
       <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Welcome back, {displayName}</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <h1 className="font-fredoka text-4xl font-[600] leading-tight tracking-tight">Welcome back, {displayName}</h1>
+        <p className="mt-2 font-manrope text-sm text-ink-2">
           {streak > 0
             ? `You are on a ${streak}-day streak.`
             : "Start studying today to build your streak."}
@@ -67,15 +67,15 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Day Streak" value={streak.toString()} sub="current streak" />
-        <StatCard label="Total XP" value={xp.toLocaleString()} sub="experience points" />
+        <StatCard label="🔥 Day Streak" value={streak.toString()} sub="current streak" />
+        <StatCard label="🧠 Total XP" value={xp.toLocaleString()} sub="experience points" />
         <StatCard label="Longest Streak" value={longestStreak.toString()} sub="personal best" />
       </div>
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Continue Studying</h2>
-          <Link href="/courses" className="text-sm font-medium underline-offset-4 hover:underline">
+          <h2 className="font-fredoka text-3xl font-[600] tracking-tight">Continue Studying</h2>
+          <Link href="/courses" className="font-manrope text-sm font-[600] text-red underline-offset-4 hover:underline">
             View all
           </Link>
         </div>
@@ -103,14 +103,14 @@ export default async function DashboardPage() {
             })}
           </div>
         ) : (
-          <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-zinc-950">
-            <p className="font-medium">No courses yet</p>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="rounded-lg bg-paper-2 p-8 text-center shadow-hard">
+            <p className="font-fredoka text-2xl font-[600] tracking-tight">No courses yet</p>
+            <p className="mt-1 font-manrope text-sm text-ink-2">
               Pick a course below to start learning.
             </p>
             <Link
               href="/courses"
-              className="mt-4 inline-block rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+              className="mt-4 inline-block rounded-full bg-orange px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Browse Courses
             </Link>
@@ -120,8 +120,8 @@ export default async function DashboardPage() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Explore Courses</h2>
-          <Link href="/courses" className="text-sm font-medium underline-offset-4 hover:underline">
+          <h2 className="font-fredoka text-3xl font-[600] tracking-tight">Explore Courses</h2>
+          <Link href="/courses" className="font-manrope text-sm font-[600] text-red underline-offset-4 hover:underline">
             See all
           </Link>
         </div>
@@ -130,18 +130,18 @@ export default async function DashboardPage() {
           {exploreCourses.map((course) => (
             <article
               key={course.title}
-              className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950"
+              className="rounded-lg bg-paper-2 p-6 shadow-hard"
             >
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                {course.category} · {course.learners} learners
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
+                {course.category} / {course.learners} learners
               </p>
-              <h3 className="mt-2 font-semibold">{course.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              <h3 className="mt-2 font-fredoka text-2xl font-[600] tracking-tight">{course.title}</h3>
+              <p className="mt-2 font-manrope text-sm leading-6 text-ink-2">
                 {course.description}
               </p>
               <Link
                 href="/courses"
-                className="mt-4 inline-block rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+                className="mt-4 inline-block rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
               >
                 View course
               </Link>
@@ -163,10 +163,10 @@ function StatCard({
   sub: string;
 }) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-      <p className="text-2xl font-semibold">{value}</p>
-      <p className="mt-1 text-sm font-medium">{label}</p>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">{sub}</p>
+    <div className="rounded-lg bg-paper-2 p-6 shadow-hard">
+      <p className="font-mono text-3xl font-[600]">{value}</p>
+      <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-2">{label}</p>
+      <p className="font-manrope text-xs text-ink-2">{sub}</p>
     </div>
   );
 }
@@ -185,24 +185,24 @@ function CourseCard({
   href: string;
 }) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-      <p className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{category}</p>
-      <p className="mt-1 font-semibold">{title}</p>
-      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{completed} items completed</p>
+    <div className="rounded-lg bg-paper-2 p-6 shadow-hard">
+      <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{category}</p>
+      <p className="mt-1 font-fredoka text-2xl font-[600] tracking-tight">{title}</p>
+      <p className="mt-1 font-mono text-xs text-ink-2">{completed} items completed</p>
 
       <div className="mt-4">
-        <div className="mb-1.5 flex items-center justify-between text-xs">
-          <span className="text-zinc-500 dark:text-zinc-400">Progress</span>
-          <span className="font-medium">{progress}%</span>
+        <div className="mb-1.5 flex items-center justify-between font-mono text-xs uppercase tracking-widest">
+          <span className="text-ink-2">Progress</span>
+          <span className="font-[600]">{progress}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
-          <div className="h-full rounded-full bg-zinc-950 dark:bg-zinc-50" style={{ width: `${progress}%` }} />
+        <div className="h-3 overflow-hidden rounded-full bg-paper">
+          <div className="h-full bg-orange" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
       <Link
         href={href}
-        className="mt-4 block rounded-md bg-zinc-950 px-3 py-2 text-center text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+        className="mt-4 block rounded-full bg-blue px-5 py-3 text-center font-manrope text-base font-[800] text-ocean shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
       >
         Study Now
       </Link>

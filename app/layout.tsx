@@ -1,16 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import ThemeToggle from "./theme-toggle";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Brainana",
@@ -23,11 +13,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen font-manrope antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var theme = localStorage.getItem('brainana-theme');
+                if (theme === 'dark') {
+                  document.documentElement.dataset.theme = 'dark';
+                } else {
+                  document.documentElement.dataset.theme = 'light';
+                }
+              } catch (_) {
+                document.documentElement.dataset.theme = 'light';
+              }
+            `,
+          }}
+        />
         {children}
+        <ThemeToggle />
       </body>
     </html>
   );

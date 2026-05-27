@@ -34,24 +34,24 @@ const sections = [
 
 export default function TermsOfServicePage() {
   return (
-    <main className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+    <main className="min-h-screen bg-paper text-ink">
       <Header />
 
       <section className="mx-auto max-w-3xl px-6 py-14">
-        <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Legal</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight">Terms of Service</h1>
-        <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">Last updated: May 21, 2026</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Legal</p>
+        <h1 className="mt-3 font-fredoka text-5xl font-[600] leading-tight tracking-tight">Terms of Service</h1>
+        <p className="mt-3 font-mono text-xs uppercase tracking-widest text-ink-2">Last updated: May 21, 2026</p>
 
         <div className="mt-10 space-y-8">
-          <p className="leading-7 text-zinc-600 dark:text-zinc-400">
+          <p className="font-manrope leading-7 text-ink-2">
             Please read these Terms of Service carefully before using Brainana. By
             accessing or using the service, you agree to these terms.
           </p>
 
           {sections.map((section) => (
-            <section key={section.title} className="border-t border-zinc-200 pt-8 dark:border-zinc-800">
-              <h2 className="text-xl font-semibold">{section.title}</h2>
-              <p className="mt-3 leading-7 text-zinc-600 dark:text-zinc-400">{section.body}</p>
+            <section key={section.title} className="rounded-lg border border-ink/30 bg-paper-2 p-5">
+              <h2 className="font-fredoka text-2xl font-[600] tracking-tight">{section.title}</h2>
+              <p className="mt-3 font-manrope leading-7 text-ink-2">{section.body}</p>
             </section>
           ))}
         </div>
@@ -64,16 +64,16 @@ export default function TermsOfServicePage() {
 
 function Header() {
   return (
-    <header className="border-b border-zinc-200 dark:border-zinc-800">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <Link href="/" className="text-lg font-semibold">
+    <header className="mx-auto mt-8 max-w-5xl rounded-full bg-paper-2 shadow-hard">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Link href="/" className="font-fredoka text-2xl font-[700] tracking-tight">
           Brainana
         </Link>
         <nav className="flex items-center gap-3 text-sm">
-          <Link href="/login" className="rounded-md border border-zinc-300 px-3 py-2 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900">
+          <Link href="/login" className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none">
             Log in
           </Link>
-          <Link href="/signup" className="rounded-md bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200">
+          <Link href="/signup" className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm">
             Sign up
           </Link>
         </nav>
@@ -84,15 +84,15 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-200 dark:border-zinc-800">
-      <div className="mx-auto flex max-w-5xl gap-5 px-6 py-8 text-sm text-zinc-500">
-        <Link href="/privacy" className="hover:text-zinc-950 dark:hover:text-zinc-50">
+    <footer className="bg-paper">
+      <div className="mx-auto flex max-w-5xl gap-5 px-6 py-8 font-mono text-xs uppercase tracking-widest text-ink-2">
+        <Link href="/privacy" className="hover:text-ink">
           Privacy
         </Link>
-        <Link href="/terms" className="hover:text-zinc-950 dark:hover:text-zinc-50">
+        <Link href="/terms" className="hover:text-ink">
           Terms
         </Link>
-        <Link href="/" className="hover:text-zinc-950 dark:hover:text-zinc-50">
+        <Link href="/" className="hover:text-ink">
           Home
         </Link>
       </div>

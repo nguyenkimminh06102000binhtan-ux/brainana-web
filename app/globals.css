@@ -1,26 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-orange: #F36B2E;
+  --color-mango: #F59A1E;
+  --color-ocean: #C4E7E5;
+  --color-blue: #253C96;
+  --color-navy: #19244E;
+  --color-red: #F36B2E;
+  --color-yellow: #F59A1E;
+  --color-green: #C4E7E5;
+  --brainana-ink: #19244E;
+  --brainana-paper: #C4E7E5;
+  --brainana-paper-2: #E7F6F5;
+  --brainana-red-soft: #FFD6C4;
+  --brainana-yellow-soft: #FFE3A6;
+  --brainana-green-soft: #DDF1EF;
+  --brainana-ink-2: #3D4B72;
+  --brainana-ink-3: #7890A0;
+  --background-glow-1: #F59A1E45;
+  --background-glow-2: #F36B2E38;
+  --background-glow-3: #253C9620;
+  --font-fredoka: "Fredoka", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+  --font-kalam: "Kalam", cursive;
+  --font-mono: "JetBrains Mono", monospace;
+  --brainana-shadow-hard: 0 18px 40px #19244E24;
+  --brainana-shadow-hard-sm: 0 10px 24px #19244E1F;
+  --brainana-shadow-hard-red: 0 18px 36px #F36B2E40;
+  --border-default: 1.5px;
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 30px;
+  --radius-full: 999px;
+}
+
+:root[data-theme="dark"] {
+  --brainana-ink: #FFF9E8;
+  --brainana-paper: #19244E;
+  --brainana-paper-2: #2D3764;
+  --brainana-red-soft: #4D2A33;
+  --brainana-yellow-soft: #4E4021;
+  --brainana-green-soft: #28495A;
+  --brainana-ink-2: #C9D2E8;
+  --brainana-ink-3: #8390B7;
+  --background-glow-1: #F59A1E40;
+  --background-glow-2: #F36B2E45;
+  --background-glow-3: #253C9680;
+  --brainana-shadow-hard: 0 24px 60px #070B1F80;
+  --brainana-shadow-hard-sm: 0 12px 28px #070B1F66;
+  --brainana-shadow-hard-red: 0 18px 42px #F36B2E66;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-orange: #F36B2E;
+  --color-mango: #F59A1E;
+  --color-ocean: #C4E7E5;
+  --color-blue: #253C96;
+  --color-navy: #19244E;
+  --color-red: #F36B2E;
+  --color-yellow: #F59A1E;
+  --color-green: #C4E7E5;
+  --color-ink: var(--brainana-ink);
+  --color-paper: var(--brainana-paper);
+  --color-paper-2: var(--brainana-paper-2);
+  --color-red-soft: var(--brainana-red-soft);
+  --color-yellow-soft: var(--brainana-yellow-soft);
+  --color-green-soft: var(--brainana-green-soft);
+  --color-ink-2: var(--brainana-ink-2);
+  --color-ink-3: var(--brainana-ink-3);
+  --font-fredoka: "Fredoka", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+  --font-kalam: "Kalam", cursive;
+  --font-mono: "JetBrains Mono", monospace;
+  --shadow-hard: var(--brainana-shadow-hard);
+  --shadow-hard-sm: var(--brainana-shadow-hard-sm);
+  --shadow-hard-red: var(--brainana-shadow-hard-red);
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 30px;
+  --radius-full: 999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--brainana-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 58% 18%, var(--background-glow-1) 0, transparent 16rem),
+    radial-gradient(circle at 88% 78%, var(--background-glow-2) 0, transparent 18rem),
+    radial-gradient(circle at 12% 5%, var(--background-glow-3) 0, transparent 22rem),
+    var(--brainana-paper);
+  color: var(--brainana-ink);
+  font-family: var(--font-manrope);
+  transition: background-color 180ms ease, color 180ms ease;
 }
