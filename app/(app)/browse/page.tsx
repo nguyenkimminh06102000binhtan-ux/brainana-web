@@ -3,215 +3,227 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import BrowseFilters from "./browse-filters";
+import BrowseSort from "./browse-sort";
 
 type Course = {
   id: string;
   slug: string;
   title: string;
-  description: string | null;
   category: string | null;
   cover_image_url: string | null;
-  source_language: string | null;
-  target_language: string | null;
   level: string | null;
   card_count: number;
   learner_count: number;
+  rating: number;
+  rating_count: number;
   has_audio: boolean;
-  has_images: boolean;
-  profiles: { username: string; display_name: string | null; avatar_url: string | null } | null;
+  mems_count: number;
+  profiles: { username: string; display_name: string | null } | null;
 };
 
-const CATEGORIES = ["All", "Language", "Science", "History", "Math", "Geography", "Literature", "Music", "Art", "Technology"];
-const LEVEL_LABEL: Record<string, string> = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
+const LEVEL_HEADER: Record<string, string> = {
+  beginner:     "bg-green-soft",
+  intermediate: "bg-yellow-soft",
+  advanced:     "bg-red-soft",
+};
+const LEVEL_DOT: Record<string, string> = {
+  beginner:     "#4ade80",
+  intermediate: "#fbbf24",
+  advanced:     "#f97316",
+};
+const STRIPE = {
+  backgroundImage:
+    "repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(0,0,0,0.04) 8px,rgba(0,0,0,0.04) 9px)",
+};
 
-function formatCount(n: number) {
+function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 }
 
 export default async function BrowsePage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; q?: string }>;
+  searchParams: Promise<Record<string, string>>;
 }) {
-  const { category, q } = await searchParams;
-  const activeCategory = category ?? "All";
+  const p = await searchParams;
+
+  const q                 = p.q ?? "";
+  const selectedCategories = p.categories ? p.categories.split(",").filter(Boolean) : [];
+  const level             = p.level ?? "";
+  const minCards          = p.min_cards ? parseInt(p.min_cards) : 0;
+  const hasAudio          = p.has_audio === "1";
+  const hasMems           = p.has_mems  === "1";
+  const hasImages         = p.has_images === "1";
+  const sortBy            = p.sort ?? "learner_count";
 
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  // Resolve image/audio filters via items table (flags may be stale on old rows)
+  const [imageCourseIds, audioCourseIds] = await Promise.all([
+    hasImages
+      ? supabase.from("items").select("course_id").not("image_url", "is", null)
+          .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
+      : Promise.resolve(null),
+    hasAudio
+      ? supabase.from("items").select("course_id")
+          .or("front_audio_url.not.is.null,back_audio_url.not.is.null")
+          .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
+      : Promise.resolve(null),
+  ]);
+
+  // Short-circuit if a filter yields no matching courses
+  const noResults =
+    (imageCourseIds !== null && imageCourseIds.length === 0) ||
+    (audioCourseIds !== null && audioCourseIds.length === 0);
+
   let query = supabase
     .from("courses")
-    .select("id, slug, title, description, category, cover_image_url, source_language, target_language, level, card_count, learner_count, has_audio, has_images, profiles!creator_id (username, display_name, avatar_url)")
+    .select(
+      "id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, mems_count, profiles!creator_id (username, display_name)"
+    )
     .eq("visibility", "public")
-    .eq("is_published", true)
-    .order("learner_count", { ascending: false })
-    .limit(60);
+    .eq("is_published", true);
 
-  if (activeCategory !== "All") query = query.eq("category", activeCategory);
-  if (q) query = query.ilike("title", `%${q}%`);
+  if (q)                         query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%,source_language.ilike.%${q}%,target_language.ilike.%${q}%,category.ilike.%${q}%`);
+  if (selectedCategories.length) query = query.in("category", selectedCategories);
+  if (level)                     query = query.eq("level", level);
+  if (minCards > 0)              query = query.gte("card_count", minCards);
+  if (hasMems)                   query = query.gt("mems_count", 0);
+  if (imageCourseIds)            query = query.in("id", imageCourseIds);
+  if (audioCourseIds)            query = query.in("id", audioCourseIds);
 
-  const { data: coursesRaw } = await query;
+  if (sortBy === "rating")       query = query.order("rating", { ascending: false });
+  else if (sortBy === "newest")  query = query.order("created_at", { ascending: false });
+  else                           query = query.order("learner_count", { ascending: false });
+
+  const { data: coursesRaw } = noResults ? { data: [] } : await query.limit(60);
   const courses = (coursesRaw ?? []) as unknown as Course[];
 
-  function filterHref(cat: string) {
-    const params = new URLSearchParams();
-    if (cat !== "All") params.set("category", cat);
-    if (q) params.set("q", q);
-    const qs = params.toString();
-    return `/browse${qs ? `?${qs}` : ""}`;
-  }
-
   return (
-    <div className="mx-auto max-w-5xl space-y-6 px-6 py-8">
-      <div>
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Browse</p>
-        <h1 className="mt-1 font-fredoka text-4xl font-[700] tracking-tight">
-          Discover <span className="text-orange">courses</span>
-        </h1>
-        <p className="mt-2 font-manrope text-sm text-ink-2">
-          Public courses from the Brainana community.
-        </p>
-      </div>
+    <div className="mx-auto max-w-6xl px-6 py-8">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
 
-      {/* Search */}
-      <form method="get" action="/browse">
-        {activeCategory !== "All" && <input type="hidden" name="category" value={activeCategory} />}
-        <div className="flex gap-2">
-          <input
-            name="q"
-            defaultValue={q}
-            placeholder="Search courses..."
-            autoComplete="off"
-            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow shadow-hard-sm"
+        {/* ── Sidebar ── */}
+        <div className="w-full shrink-0 lg:w-60">
+          <BrowseFilters
+            initialQ={q}
+            selectedCategories={selectedCategories}
+            level={level}
+            minCards={minCards}
+            hasAudio={hasAudio}
+            hasMems={hasMems}
+            hasImages={hasImages}
           />
-          <button type="submit"
-            className="rounded-full bg-yellow px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm">
-            Search
-          </button>
         </div>
-      </form>
 
-      {/* Category filters */}
-      <div className="flex flex-wrap gap-2">
-        {CATEGORIES.map((cat) => (
-          <Link key={cat} href={filterHref(cat)}
-            className={`rounded-full px-4 py-1.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
-              cat === activeCategory
-                ? "bg-orange text-white"
-                : "bg-paper-2 text-ink hover:bg-orange hover:text-white"
-            }`}>
-            {cat}
-          </Link>
-        ))}
-        {(q || activeCategory !== "All") && (
-          <Link href="/browse"
-            className="rounded-full bg-paper-2 px-4 py-1.5 font-manrope text-sm font-[800] text-ink-2 shadow-hard-sm">
-            Clear
-          </Link>
-        )}
-      </div>
-
-      {(q || activeCategory !== "All") && (
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-          {courses.length} course{courses.length !== 1 ? "s" : ""} found
-          {q ? ` for "${q}"` : ""}
-          {activeCategory !== "All" ? ` in ${activeCategory}` : ""}
-        </p>
-      )}
-
-      {courses.length > 0 ? (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.map((course) => {
-            const creator = course.profiles;
-            const creatorName = creator?.display_name ?? creator?.username ?? "Unknown";
-
-            return (
-              <Link key={course.id} href={`/c/${course.slug}`}
-                className="group overflow-hidden rounded-lg bg-paper-2 shadow-hard transition hover:-translate-y-0.5 hover:shadow-hard">
-
-                {/* Cover */}
-                <div className="relative flex h-28 items-center justify-center bg-blue">
-                  {course.cover_image_url ? (
-                    <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
-                  ) : (
-                    <span className="font-mono text-xs uppercase tracking-widest text-ocean">
-                      {course.category ?? "Course"}
-                    </span>
-                  )}
-                  {course.level && (
-                    <span className="absolute right-3 top-3 rounded-full bg-paper/90 px-2 py-0.5 font-mono text-xs font-[700] uppercase tracking-wider text-ink">
-                      {LEVEL_LABEL[course.level] ?? course.level}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-3 p-5">
-                  {/* Title + creator */}
-                  <div>
-                    <h2 className="font-fredoka text-xl font-[700] leading-tight tracking-tight group-hover:text-orange">
-                      {course.title}
-                    </h2>
-                    <p className="mt-0.5 font-mono text-xs uppercase tracking-widest text-ink-2">
-                      by {creatorName}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  {course.description && (
-                    <p className="line-clamp-2 font-manrope text-sm leading-relaxed text-ink-2">
-                      {course.description}
-                    </p>
-                  )}
-
-                  {/* Meta tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    <span className="rounded-full bg-green-soft px-2.5 py-1 font-mono text-xs text-ink-2">
-                      {course.card_count} cards
-                    </span>
-                    <span className="rounded-full bg-yellow-soft px-2.5 py-1 font-mono text-xs text-ink-2">
-                      {formatCount(course.learner_count)} learners
-                    </span>
-                    {course.source_language && course.target_language && (
-                      <span className="rounded-full bg-paper px-2.5 py-1 font-mono text-xs text-ink-2">
-                        {course.source_language} → {course.target_language}
-                      </span>
-                    )}
-                    {course.has_audio && (
-                      <span className="rounded-full bg-blue/20 px-2.5 py-1 font-mono text-xs text-ink-2">
-                        audio
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="rounded-lg bg-paper-2 p-10 text-center shadow-hard">
-          <p className="font-fredoka text-2xl font-[700] tracking-tight">
-            {q || activeCategory !== "All" ? "No courses found" : "No courses yet"}
-          </p>
-          <p className="mx-auto mt-2 max-w-sm font-manrope text-sm text-ink-2">
-            {q || activeCategory !== "All"
-              ? "Try a different search term or remove the filters."
-              : "Be the first — create a course and share it with the community."}
-          </p>
-          <div className="mt-4 flex justify-center gap-3">
-            {(q || activeCategory !== "All") && (
-              <Link href="/browse"
-                className="rounded-full bg-paper px-6 py-3 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none">
-                Clear filters
-              </Link>
-            )}
-            <Link href="/create"
-              className="rounded-full bg-orange px-6 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm">
-              Create a course
-            </Link>
+        {/* ── Results ── */}
+        <div className="min-w-0 flex-1">
+          {/* Header row */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <p className="font-fredoka text-2xl font-[700]">
+              <span className="text-orange">{courses.length}</span> course{courses.length !== 1 ? "s" : ""}
+              {q && <> for <span className="text-orange">&ldquo;{q}&rdquo;</span></>}
+            </p>
+            <BrowseSort value={sortBy} />
           </div>
+
+          {courses.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {courses.map((course) => {
+                const creator = course.profiles;
+                const handle = creator?.username ? `@${creator.username}` : (creator?.display_name ?? "Unknown");
+                const headerBg = LEVEL_HEADER[course.level ?? ""] ?? "bg-blue/20";
+                const dotColor = LEVEL_DOT[course.level ?? ""] ?? "#93c5fd";
+
+                return (
+                  <Link
+                    key={course.id}
+                    href={`/c/${course.slug}`}
+                    className="group overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5"
+                  >
+                    {/* Card header */}
+                    <div
+                      className={`relative flex h-24 items-end px-4 pb-3 ${headerBg}`}
+                      style={STRIPE}
+                    >
+                      {course.cover_image_url ? (
+                        <Image
+                          src={course.cover_image_url}
+                          alt={course.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
+                          [{" "}
+                          {[course.category?.toLowerCase(), course.level]
+                            .filter(Boolean)
+                            .join(" · ")}
+                          {" "}]
+                        </span>
+                      )}
+                      <span
+                        className="absolute right-3 top-3 z-10 h-3.5 w-3.5 rounded-full border-2 border-paper-2"
+                        style={{ backgroundColor: dotColor }}
+                      />
+                    </div>
+
+                    {/* Card body */}
+                    <div className="flex flex-col gap-2.5 p-4">
+                      <div>
+                        <h2 className="font-fredoka text-xl font-[700] leading-tight tracking-tight group-hover:text-orange">
+                          {course.title}
+                        </h2>
+                        <p className="font-mono text-xs text-ink-2">by {handle}</p>
+                      </div>
+
+                      {/* Tag row */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {course.category && (
+                          <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
+                            {course.category.toLowerCase()}
+                          </span>
+                        )}
+                        {course.rating > 0 && (
+                          <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
+                            ★ {course.rating.toFixed(1)}
+                          </span>
+                        )}
+                        {course.has_audio && (
+                          <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
+                            audio
+                          </span>
+                        )}
+                        {course.mems_count > 0 && (
+                          <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
+                            mems
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Stats */}
+                      <div className="flex items-center gap-4 font-mono text-xs text-ink-2">
+                        <span>👥 {fmt(course.learner_count)}</span>
+                        <span>📚 {course.card_count} cards</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="rounded-xl bg-paper-2 p-10 text-center shadow-hard">
+              <p className="font-fredoka text-2xl font-[700] tracking-tight">No courses found</p>
+              <p className="mx-auto mt-2 max-w-sm font-manrope text-sm text-ink-2">
+                Try adjusting your filters or search term.
+              </p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

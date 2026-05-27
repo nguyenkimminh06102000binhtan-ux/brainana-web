@@ -68,6 +68,9 @@ export async function createCourse(
   const slug = generateSlug(title);
   const totalCards = validItems.length;
 
+  const hasImages = validItems.some((i) => i.imageUrl);
+  const hasAudio  = validItems.some((i) => i.frontAudioUrl || i.backAudioUrl);
+
   const { data: course, error: courseError } = await supabase
     .from("courses")
     .insert({
@@ -82,6 +85,8 @@ export async function createCourse(
       slug,
       is_published: true,
       card_count: totalCards,
+      has_images: hasImages,
+      has_audio: hasAudio,
     })
     .select("id, slug")
     .single();

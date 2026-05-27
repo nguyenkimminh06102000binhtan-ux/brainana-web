@@ -155,8 +155,14 @@ export async function updateCourse(
     totalCards += validItems.length;
   }
 
-  // 4. Sync card_count
-  await supabase.from("courses").update({ card_count: totalCards }).eq("id", courseId);
+  // 4. Sync card_count, has_images, has_audio
+  const allValidItems = sections.flatMap((s) => s.items.filter((i) => i.front.trim() && i.back.trim()));
+  const hasImages = allValidItems.some((i) => i.imageUrl);
+  const hasAudio  = allValidItems.some((i) => i.frontAudioUrl || i.backAudioUrl);
+  await supabase
+    .from("courses")
+    .update({ card_count: totalCards, has_images: hasImages, has_audio: hasAudio })
+    .eq("id", courseId);
 
   redirect(`/c/${courseSlug}`);
 }
