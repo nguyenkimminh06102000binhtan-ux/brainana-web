@@ -67,7 +67,7 @@ export default async function CourseDetailPage({
   ]);
 
   const isEnrolled = Boolean(enrollmentData);
-  type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match";
+  type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
   const preferredTypes = (enrollmentData?.preferred_question_types ?? ["flashcard"]) as QType[];
   const isFollowing = Boolean(followData);
   const followingIds = (followingList ?? []).map((f) => f.following_id);
@@ -262,6 +262,7 @@ export default async function CourseDetailPage({
               <QuestionTypeSelector
                 courseId={course.id}
                 initial={preferredTypes}
+                hasAudio={course.has_audio ?? false}
               />
             </aside>
           )}
