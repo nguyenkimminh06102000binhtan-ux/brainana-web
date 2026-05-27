@@ -46,6 +46,7 @@ export type Database = {
       }
       courses: {
         Row: {
+          avg_completion_days: number | null
           card_count: number
           category: string | null
           cover_image_url: string | null
@@ -59,6 +60,7 @@ export type Database = {
           is_published: boolean
           learner_count: number
           level: string | null
+          mems_count: number
           rating: number
           rating_count: number
           slug: string
@@ -72,6 +74,7 @@ export type Database = {
           visibility: string
         }
         Insert: {
+          avg_completion_days?: number | null
           card_count?: number
           category?: string | null
           cover_image_url?: string | null
@@ -85,6 +88,7 @@ export type Database = {
           is_published?: boolean
           learner_count?: number
           level?: string | null
+          mems_count?: number
           rating?: number
           rating_count?: number
           slug: string
@@ -98,6 +102,7 @@ export type Database = {
           visibility?: string
         }
         Update: {
+          avg_completion_days?: number | null
           card_count?: number
           category?: string | null
           cover_image_url?: string | null
@@ -111,6 +116,7 @@ export type Database = {
           is_published?: boolean
           learner_count?: number
           level?: string | null
+          mems_count?: number
           rating?: number
           rating_count?: number
           slug?: string
@@ -602,7 +608,7 @@ export type Database = {
           enrolled_at: string
           id: string
           last_studied_at: string | null
-          preferred_question_type: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          preferred_question_types: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
           user_id: string
         }
         Insert: {
@@ -611,7 +617,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
-          preferred_question_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
           user_id: string
         }
         Update: {
@@ -620,7 +626,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
-          preferred_question_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
           user_id?: string
         }
         Relationships: [

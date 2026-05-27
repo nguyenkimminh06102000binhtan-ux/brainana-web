@@ -52,6 +52,43 @@ function label(text: string, optional?: boolean) {
 const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow";
 const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-yellow appearance-none";
 
+function parseCsv(text: string): Array<[string, string]> {
+  const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+  const results: Array<[string, string]> = [];
+
+  function parseRow(line: string): string[] {
+    const cols: string[] = [];
+    let i = 0;
+    while (i < line.length) {
+      if (line[i] === '"') {
+        let val = "";
+        i++;
+        while (i < line.length) {
+          if (line[i] === '"' && line[i + 1] === '"') { val += '"'; i += 2; }
+          else if (line[i] === '"') { i++; break; }
+          else { val += line[i++]; }
+        }
+        cols.push(val);
+        if (line[i] === ",") i++;
+      } else {
+        const end = line.indexOf(",", i);
+        if (end === -1) { cols.push(line.slice(i)); break; }
+        else { cols.push(line.slice(i, end)); i = end + 1; }
+      }
+    }
+    return cols;
+  }
+
+  for (const line of lines.slice(1)) {
+    if (!line.trim()) continue;
+    const cols = parseRow(line);
+    const front = cols[0]?.trim() ?? "";
+    const back = cols[1]?.trim() ?? "";
+    if (front && back) results.push([front, back]);
+  }
+  return results;
+}
+
 async function uploadToStorage(file: File): Promise<string> {
   const isImage = IMAGE_TYPES.includes(file.type);
   const isAudio = AUDIO_TYPES.includes(file.type);
@@ -240,6 +277,25 @@ export default function CreateCourseForm() {
     }
   }
 
+  function handleCsvImport(sectionId: number, file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      const rows = parseCsv(text);
+      if (rows.length === 0) return;
+      const newItems = rows.map(([front, back]) => ({ ...makeItem(), front, back }));
+      setSections((prev) => prev.map((s) => {
+        if (s.id !== sectionId) return s;
+        const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
+        return {
+          ...s,
+          items: hasContent ? [...s.items, ...newItems] : newItems,
+        };
+      }));
+    };
+    reader.readAsText(file);
+  }
+
   const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
   const hasValidItem = sections.some((s) => s.items.some((i) => i.front.trim() && i.back.trim()));
   const isUploading = sections.some((s) => s.items.some((i) => Object.values(i.uploads).some((u) => u.uploading)));
@@ -351,9 +407,16 @@ export default function CreateCourseForm() {
 
           {/* Items nested inside section */}
           <div className="border-t border-ink/10 px-6 pb-6 pt-4">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">
-              Cards — {section.items.length}
-            </p>
+            <div className="mb-3 flex items-center justify-between">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
+                Cards — {section.items.length}
+              </p>
+              <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
+                Import CSV
+                <input type="file" accept=".csv,text/csv" className="hidden"
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
+              </label>
+            </div>
             <div className="flex flex-col gap-3">
               {section.items.map((item, iIdx) => (
                 <ItemCard
