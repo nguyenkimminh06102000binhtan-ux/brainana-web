@@ -202,6 +202,7 @@ export type Database = {
           incorrect_count: number
           interval_days: number
           item_id: string
+          last_question_type: string | null
           last_reviewed_at: string | null
           mastered: boolean
           next_review_at: string
@@ -217,6 +218,7 @@ export type Database = {
           incorrect_count?: number
           interval_days?: number
           item_id: string
+          last_question_type?: string | null
           last_reviewed_at?: string | null
           mastered?: boolean
           next_review_at?: string
@@ -232,6 +234,7 @@ export type Database = {
           incorrect_count?: number
           interval_days?: number
           item_id?: string
+          last_question_type?: string | null
           last_reviewed_at?: string | null
           mastered?: boolean
           next_review_at?: string
@@ -522,7 +525,7 @@ export type Database = {
           id: string
           incorrect_count: number
           items_studied: number
-          session_type: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          session_type: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer'
           started_at: string
           user_id: string
           xp_earned: number
@@ -534,7 +537,7 @@ export type Database = {
           id?: string
           incorrect_count?: number
           items_studied?: number
-          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer'
           started_at?: string
           user_id: string
           xp_earned?: number
@@ -546,7 +549,7 @@ export type Database = {
           id?: string
           incorrect_count?: number
           items_studied?: number
-          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
+          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer'
           started_at?: string
           user_id?: string
           xp_earned?: number
@@ -608,7 +611,7 @@ export type Database = {
           enrolled_at: string
           id: string
           last_studied_at: string | null
-          preferred_question_types: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
+          preferred_question_types: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer')[]
           user_id: string
         }
         Insert: {
@@ -617,7 +620,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
-          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
+          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer')[]
           user_id: string
         }
         Update: {
@@ -626,7 +629,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
-          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match')[]
+          preferred_question_types?: ('flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer')[]
           user_id?: string
         }
         Relationships: [

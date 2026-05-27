@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 
-type QuestionType = 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match';
-const VALID_TYPES = new Set<QuestionType>(['flashcard', 'multiple_choice', 'audio_type', 'speed_match']);
+type QuestionType = 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match' | 'type_answer';
+const VALID_TYPES = new Set<QuestionType>(['flashcard', 'multiple_choice', 'audio_type', 'speed_match', 'type_answer']);
 
 export async function updateQuestionTypes(formData: FormData) {
   const courseId = String(formData.get("course_id") ?? "");
