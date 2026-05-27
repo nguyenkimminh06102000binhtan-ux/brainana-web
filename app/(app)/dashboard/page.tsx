@@ -110,7 +110,7 @@ export default async function DashboardPage() {
             </p>
             <Link
               href="/courses"
-              className="mt-4 inline-block rounded-full bg-orange px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="mt-4 inline-block rounded-full bg-orange px-6 py-3 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Browse Courses
             </Link>
@@ -202,7 +202,7 @@ function CourseCard({
 
       <Link
         href={href}
-        className="mt-4 block rounded-full bg-blue px-5 py-3 text-center font-manrope text-base font-[800] text-ocean shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
+        className="mt-4 block rounded-full bg-orange px-5 py-3 text-center font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
       >
         Study Now
       </Link>

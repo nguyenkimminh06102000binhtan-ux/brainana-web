@@ -45,7 +45,7 @@ export default function StartPage() {
         <form action={completeOnboarding} className="mt-6">
           <button
             type="submit"
-            className="rounded-full bg-orange px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+            className="rounded-full bg-orange px-6 py-3 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
           >
             Complete onboarding
           </button>

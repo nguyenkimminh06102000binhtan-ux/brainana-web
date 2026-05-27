@@ -112,7 +112,7 @@ export default async function CoursesPage({
               href={filterHref(cat)}
               className={`rounded-md border px-3 py-1.5 text-sm ${
                 isActive
-                  ? "bg-orange font-manrope font-[800] text-ink shadow-hard-sm"
+                  ? "bg-orange font-manrope font-[800] text-white shadow-hard-sm"
                   : "bg-paper-2 font-manrope font-[800] text-ink shadow-hard-sm"
               }`}
             >
@@ -195,7 +195,7 @@ export default async function CoursesPage({
                       <input type="hidden" name="course_id" value={course.id} />
                       <button
                         type="submit"
-                        className="w-full rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+                        className="w-full rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
                       >
                         Enroll
                       </button>

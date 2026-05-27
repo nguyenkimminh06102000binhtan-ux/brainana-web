@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { loginWithEmail, signInWithGoogle } from "../actions";
 
@@ -15,88 +15,172 @@ function GoogleIcon() {
   );
 }
 
+function BrandPanel() {
+  return (
+    <section className="flex min-h-[560px] flex-col justify-between rounded-lg bg-yellow-soft p-8 shadow-hard">
+      <Link href="/" className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-green-soft text-2xl text-ink shadow-hard-sm">
+          B
+        </span>
+        <span>
+          <span className="text-orange">brainana</span>.app
+        </span>
+      </Link>
+
+      <div>
+        <h1 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-6xl">
+          welcome back, <span className="text-orange">keep</span> your streak alive.
+        </h1>
+        <p className="mt-6 max-w-xl font-manrope text-lg leading-8 text-ink-2">
+          Your courses, saved mems, and next review are ready when you are.
+        </p>
+      </div>
+
+      <div className="flex flex-wrap items-end gap-5">
+        {[
+          { eyebrow: "[ korean ]", title: "Korean", accent: "bg-green-soft" },
+          { eyebrow: "[ GRE ]", title: "GRE Vocab", accent: "bg-red-soft" },
+        ].map((card) => (
+          <article key={card.title} className="w-40 overflow-hidden rounded-md bg-paper-2 shadow-hard-sm">
+            <div className={`${card.accent} border-b border-ink px-4 py-5`}>
+              <p className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">
+                {card.eyebrow}
+              </p>
+            </div>
+            <div className="p-4">
+              <h2 className="font-fredoka text-xl font-[700] tracking-tight">{card.title}</h2>
+            </div>
+          </article>
+        ))}
+        <p className="font-manrope text-sm font-[800] text-ink-2">480k learners and counting</p>
+      </div>
+    </section>
+  );
+}
+
+function getEmailError(email: string) {
+  if (!email) return "Email is required.";
+  if (!email.includes("@")) return "Email needs an @ sign.";
+
+  const [localPart, domain] = email.split("@");
+  if (!localPart) return "Email needs a name before @.";
+  if (!domain) return "Email needs a domain after @.";
+  if (!domain.includes(".")) return "Email domain needs a dot, like hello.io.";
+  if (domain.endsWith(".")) return "Email domain cannot end with a dot.";
+
+  return "";
+}
+
 export default function LoginPage() {
   const [state, formAction, pending] = useActionState(loginWithEmail, null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
+
+  const emailError = useMemo(() => getEmailError(email), [email]);
+  const canSubmit = !emailError && password.length > 0 && !pending;
+
+  useEffect(() => {
+    if (!state?.error) return;
+    setPassword("");
+  }, [state]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-paper px-6 py-12 text-ink">
-      <div className="w-full max-w-sm rounded-lg bg-paper-2 p-8 shadow-hard">
-        <div className="mb-8 text-center">
-          <Link href="/" className="font-fredoka text-3xl font-[600] tracking-tight">
-            Brainana
-          </Link>
-          <p className="mt-2 font-manrope text-sm text-ink-2">
-            Log in to continue.
-          </p>
-        </div>
+    <main className="min-h-screen bg-paper px-6 py-8 text-ink">
+      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl gap-8 lg:grid-cols-2 lg:items-stretch">
+        <BrandPanel />
 
-        <form action={formAction} className="flex flex-col gap-3">
-          <div>
-            <label htmlFor="email" className="mb-1.5 block font-mono text-xs uppercase tracking-widest text-ink-2">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email address"
-              required
-              autoComplete="email"
-              className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
-            />
+        <div className="flex items-center justify-center rounded-lg bg-paper-2 p-8 shadow-hard">
+          <div className="w-full max-w-md">
+            <div className="mb-8">
+              <h1 className="font-fredoka text-5xl font-[700] tracking-tight">Hey, welcome back</h1>
+              <p className="mt-2 font-manrope text-sm font-[800] text-ink-2">
+                Log in to continue your streak, or{" "}
+                <Link href="/signup" className="text-orange">
+                  create an account
+                </Link>
+              </p>
+            </div>
+
+            <form action={signInWithGoogle}>
+              <button
+                type="submit"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-paper px-5 py-4 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
+              >
+                <GoogleIcon />
+                Continue with Google
+              </button>
+            </form>
+
+            <div className="my-6 flex items-center gap-4">
+              <div className="h-[1.5px] flex-1 bg-ink" />
+              <span className="font-mono text-xs uppercase tracking-widest text-ink-2">or with email</span>
+              <div className="h-[1.5px] flex-1 bg-ink" />
+            </div>
+
+            <form action={formAction} className="flex flex-col gap-5">
+              <div>
+                <label htmlFor="email" className="mb-1.5 block font-mono text-xs uppercase tracking-widest text-ink-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="sam@hello.io"
+                  required
+                  value={email}
+                  onBlur={() => setEmailTouched(true)}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (!emailTouched) setEmailTouched(true);
+                  }}
+                  autoComplete="email"
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                />
+                {emailTouched && emailError && (
+                  <p className="mt-2 font-manrope text-sm font-[700] text-orange">{emailError}</p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="password" className="mb-1.5 block font-mono text-xs uppercase tracking-widest text-ink-2">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="********"
+                  required
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  autoComplete="current-password"
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                />
+              </div>
+
+              {state?.error && (
+                <p className="rounded-md border border-red bg-red-soft px-3 py-2 font-manrope text-sm text-ink">
+                  {state.error}
+                </p>
+              )}
+
+              <div className="flex justify-end font-manrope text-sm font-[800] text-ink-2">
+                <Link href="/login" className="text-orange">
+                  Forgot password?
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="mt-1 w-full cursor-pointer rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none"
+              >
+                {pending ? "Logging in..." : "Log in"}
+              </button>
+            </form>
           </div>
-          <div>
-            <label htmlFor="password" className="mb-1.5 block font-mono text-xs uppercase tracking-widest text-ink-2">
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              required
-              autoComplete="current-password"
-              className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
-            />
-          </div>
-
-          {state?.error && (
-            <p className="rounded-md border border-red bg-red-soft px-3 py-2 font-manrope text-sm text-ink">
-              {state.error}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={pending}
-            className="mt-1 w-full rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-70"
-          >
-            {pending ? "Logging in…" : "Login"}
-          </button>
-        </form>
-
-        <div className="my-6 flex items-center gap-4">
-          <div className="h-[1.5px] flex-1 bg-ink" />
-          <span className="font-mono text-xs uppercase tracking-widest text-ink-2">or</span>
-          <div className="h-[1.5px] flex-1 bg-ink" />
         </div>
-
-        <form action={signInWithGoogle}>
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center gap-3 rounded-full bg-paper px-5 py-3 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
-          >
-            <GoogleIcon />
-            Continue with Google
-          </button>
-        </form>
-
-        <p className="mt-6 text-center font-manrope text-sm text-ink-2">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup" className="font-[600] text-red underline-offset-4 hover:underline">
-            Sign up
-          </Link>
-        </p>
       </div>
     </main>
   );

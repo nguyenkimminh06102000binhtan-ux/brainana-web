@@ -5,6 +5,7 @@ const config = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      white: "#FFF9E8",
       orange: "#F36B2E",
       mango: "#F59A1E",
       ocean: "#C4E7E5",

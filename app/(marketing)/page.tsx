@@ -79,7 +79,7 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/signup"
-              className="rounded-full bg-blue px-6 py-3 font-manrope text-sm font-[800] text-ocean shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-6 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Try free
             </Link>
@@ -101,7 +101,7 @@ export default function LandingPage() {
           <div className="mt-10 flex flex-wrap gap-5">
             <Link
               href="/courses"
-              className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Browse all courses
             </Link>

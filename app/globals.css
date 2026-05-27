@@ -4,6 +4,7 @@
 
 :root {
   --color-orange: #F36B2E;
+  --color-white: #FFF9E8;
   --color-mango: #F59A1E;
   --color-ocean: #C4E7E5;
   --color-blue: #253C96;
@@ -55,6 +56,7 @@
 
 @theme inline {
   --color-orange: #F36B2E;
+  --color-white: #FFF9E8;
   --color-mango: #F59A1E;
   --color-ocean: #C4E7E5;
   --color-blue: #253C96;

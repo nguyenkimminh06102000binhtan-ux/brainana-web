@@ -73,7 +73,7 @@ function Header() {
           <Link href="/login" className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none">
             Log in
           </Link>
-          <Link href="/signup" className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm">
+          <Link href="/signup" className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm">
             Sign up
           </Link>
         </nav>

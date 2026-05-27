@@ -88,7 +88,7 @@ export default async function AppLayout({
           <form action={logout}>
             <button
               type="submit"
-              className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Log out
             </button>

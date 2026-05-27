@@ -6,6 +6,20 @@ import { createClient } from "@/utils/supabase/server";
 
 type AuthState = { error: string } | null;
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isStrongPassword(password: string) {
+  return (
+    password.length >= 8 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /\d/.test(password) &&
+    /[^A-Za-z0-9]/.test(password)
+  );
+}
+
 export async function loginWithEmail(
   _prevState: AuthState,
   formData: FormData
@@ -17,7 +31,7 @@ export async function loginWithEmail(
     password: formData.get("password") as string,
   });
 
-  if (error) return { error: error.message };
+  if (error) return { error: "Login details are wrong." };
 
   redirect("/dashboard");
 }
@@ -29,6 +43,14 @@ export async function signupWithEmail(
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
+
+  if (!isValidEmail(email)) {
+    return { error: "Enter a valid email address." };
+  }
+
+  if (!isStrongPassword(password)) {
+    return { error: "Password must meet all strength requirements." };
+  }
 
   if (password !== confirmPassword) {
     return { error: "Passwords do not match." };
