@@ -3,8 +3,19 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import type { CourseWithCreator } from "@/types/supabase";
 import { enrollInCourse } from "./actions";
+
+type CourseWithCreator = {
+  id: string;
+  title: string;
+  description: string | null;
+  category: string | null;
+  cover_image_url: string | null;
+  source_language: string | null;
+  target_language: string | null;
+  learner_count: number;
+  profiles: { username: string; display_name: string | null } | null;
+};
 
 const CATEGORIES = ["All", "Language", "Science", "History", "Culture", "Technology"];
 
