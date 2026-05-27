@@ -1,0 +1,7 @@
+level_title,level_position,front_text,back_text,romanization,notes,image_url,front_audio_url,back_audio_url,accepted_answers,distractors,position
+Greetings,1,Hello,Xin chào,sin chào,Common greeting used any time of day,,,,"xin chao,hello there","Tạm biệt,Cảm ơn,Xin lỗi",1
+Greetings,1,Goodbye,Tạm biệt,tam biệt,,,,,"tam biet,tạm biệt","Xin chào,Cảm ơn,Xin lỗi",2
+Greetings,1,Thank you,Cảm ơn,gam ơn,Can be strengthened with "rất" (very),,,,"cam on,cảm ơn","Xin chào,Tạm biệt,Xin lỗi",3
+Numbers,2,One,Một,moht,,https://example.com/images/one.png,https://example.com/audio/one-front.mp3,https://example.com/audio/one-back.mp3,"mot,một","Hai,Ba,Bốn",1
+Numbers,2,Two,Hai,high,,https://example.com/images/two.png,,,"hai","Một,Ba,Bốn",2
+Numbers,2,Three,Ba,bah,,,,,,"Một,Hai,Bốn",3

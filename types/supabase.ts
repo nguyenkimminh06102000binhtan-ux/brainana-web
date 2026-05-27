@@ -44,44 +44,6 @@ export type Database = {
         }
         Relationships: []
       }
-      chapters: {
-        Row: {
-          course_id: string
-          created_at: string
-          description: string | null
-          id: string
-          position: number
-          title: string
-          unlock_condition: Json | null
-        }
-        Insert: {
-          course_id: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          position?: number
-          title: string
-          unlock_condition?: Json | null
-        }
-        Update: {
-          course_id?: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          position?: number
-          title?: string
-          unlock_condition?: Json | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "chapters_course_id_fkey"
-            columns: ["course_id"]
-            isOneToOne: false
-            referencedRelation: "courses"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       courses: {
         Row: {
           card_count: number
@@ -175,25 +137,19 @@ export type Database = {
         Row: {
           description: string | null
           feature_key: string
-          free_enabled: boolean
           id: string
-          pro_enabled: boolean
           updated_at: string
         }
         Insert: {
           description?: string | null
           feature_key: string
-          free_enabled?: boolean
           id?: string
-          pro_enabled?: boolean
           updated_at?: string
         }
         Update: {
           description?: string | null
           feature_key?: string
-          free_enabled?: boolean
           id?: string
-          pro_enabled?: boolean
           updated_at?: string
         }
         Relationships: []
@@ -303,51 +259,57 @@ export type Database = {
       }
       items: {
         Row: {
+          accepted_answers: string[] | null
           back: Json | null
           back_audio_url: string | null
           back_text: string
           course_id: string
           created_at: string
+          distractors: string[] | null
           front: Json | null
           front_audio_url: string | null
           front_text: string
           id: string
           image_url: string | null
-          level_id: string
+          section_id: string
           mems_count: number
           notes: string | null
           position: number
           romanization: string | null
         }
         Insert: {
+          accepted_answers?: string[] | null
           back?: Json | null
           back_audio_url?: string | null
           back_text: string
           course_id: string
           created_at?: string
+          distractors?: string[] | null
           front?: Json | null
           front_audio_url?: string | null
           front_text: string
           id?: string
           image_url?: string | null
-          level_id: string
+          section_id: string
           mems_count?: number
           notes?: string | null
           position?: number
           romanization?: string | null
         }
         Update: {
+          accepted_answers?: string[] | null
           back?: Json | null
           back_audio_url?: string | null
           back_text?: string
           course_id?: string
           created_at?: string
+          distractors?: string[] | null
           front?: Json | null
           front_audio_url?: string | null
           front_text?: string
           id?: string
           image_url?: string | null
-          level_id?: string
+          section_id?: string
           mems_count?: number
           notes?: string | null
           position?: number
@@ -362,15 +324,15 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "items_level_id_fkey"
-            columns: ["level_id"]
+            foreignKeyName: "items_section_id_fkey"
+            columns: ["section_id"]
             isOneToOne: false
-            referencedRelation: "levels"
+            referencedRelation: "sections"
             referencedColumns: ["id"]
           },
         ]
       }
-      levels: {
+      sections: {
         Row: {
           course_id: string
           created_at: string
@@ -397,7 +359,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "levels_course_id_fkey"
+            foreignKeyName: "sections_course_id_fkey"
             columns: ["course_id"]
             isOneToOne: false
             referencedRelation: "courses"
@@ -554,6 +516,7 @@ export type Database = {
           id: string
           incorrect_count: number
           items_studied: number
+          session_type: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           started_at: string
           user_id: string
           xp_earned: number
@@ -565,6 +528,7 @@ export type Database = {
           id?: string
           incorrect_count?: number
           items_studied?: number
+          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           started_at?: string
           user_id: string
           xp_earned?: number
@@ -576,6 +540,7 @@ export type Database = {
           id?: string
           incorrect_count?: number
           items_studied?: number
+          session_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           started_at?: string
           user_id?: string
           xp_earned?: number
@@ -637,6 +602,7 @@ export type Database = {
           enrolled_at: string
           id: string
           last_studied_at: string | null
+          preferred_question_type: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           user_id: string
         }
         Insert: {
@@ -645,6 +611,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
+          preferred_question_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           user_id: string
         }
         Update: {
@@ -653,6 +620,7 @@ export type Database = {
           enrolled_at?: string
           id?: string
           last_studied_at?: string | null
+          preferred_question_type?: 'flashcard' | 'multiple_choice' | 'audio_type' | 'speed_match'
           user_id?: string
         }
         Relationships: [
