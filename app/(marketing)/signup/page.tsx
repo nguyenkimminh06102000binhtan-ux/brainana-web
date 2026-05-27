@@ -19,17 +19,17 @@ export default function SignupPage() {
   const [state, formAction, pending] = useActionState(signupWithEmail, null);
 
   return (
-    <main className="font-nunito min-h-screen bg-dark flex items-center justify-center px-6 py-12">
-      <div className="bg-cream rounded-2xl p-8 md:p-10 w-full max-w-md">
-
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <span className="text-5xl">🧠</span>
-          <h1 className="text-banana font-extrabold text-2xl mt-2">Brainana</h1>
-          <p className="text-dark/55 text-sm mt-1">Create your account, future zombie scholar</p>
+    <main className="flex min-h-screen items-center justify-center bg-white px-6 py-12 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <div className="w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="mb-8 text-center">
+          <Link href="/" className="text-xl font-semibold">
+            Brainana
+          </Link>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            Create an account to continue.
+          </p>
         </div>
 
-        {/* Signup form */}
         <form action={formAction} className="flex flex-col gap-3">
           <input
             name="email"
@@ -37,7 +37,7 @@ export default function SignupPage() {
             placeholder="Email address"
             required
             autoComplete="email"
-            className="rounded-xl border border-dark/20 px-4 py-3 w-full bg-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-banana placeholder:text-dark/35"
+            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-950 dark:border-zinc-700 dark:bg-zinc-950 dark:focus:border-zinc-50"
           />
           <input
             name="password"
@@ -46,7 +46,7 @@ export default function SignupPage() {
             required
             minLength={8}
             autoComplete="new-password"
-            className="rounded-xl border border-dark/20 px-4 py-3 w-full bg-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-banana placeholder:text-dark/35"
+            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-950 dark:border-zinc-700 dark:bg-zinc-950 dark:focus:border-zinc-50"
           />
           <input
             name="confirmPassword"
@@ -54,11 +54,11 @@ export default function SignupPage() {
             placeholder="Confirm password"
             required
             autoComplete="new-password"
-            className="rounded-xl border border-dark/20 px-4 py-3 w-full bg-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-banana placeholder:text-dark/35"
+            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-950 dark:border-zinc-700 dark:bg-zinc-950 dark:focus:border-zinc-50"
           />
 
           {state?.error && (
-            <p className="text-brain text-sm font-semibold bg-brain/10 rounded-xl px-4 py-3">
+            <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
               {state.error}
             </p>
           )}
@@ -66,48 +66,43 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full bg-banana text-dark font-extrabold py-3 rounded-full hover:bg-banana/90 transition disabled:opacity-50 mt-1"
+            className="mt-1 w-full rounded-md bg-zinc-950 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
           >
             {pending ? "Creating account…" : "Create Account"}
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center gap-4 my-6">
-          <div className="flex-1 h-px bg-dark/15" />
-          <span className="text-dark/40 text-sm font-medium">or</span>
-          <div className="flex-1 h-px bg-dark/15" />
+        <div className="my-6 flex items-center gap-4">
+          <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
+          <span className="text-sm text-zinc-500">or</span>
+          <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
         </div>
 
-        {/* Google */}
         <form action={signInWithGoogle}>
           <button
             type="submit"
-            className="flex items-center justify-center gap-3 w-full border-2 border-dark/20 text-dark font-bold py-3 rounded-full hover:bg-dark/5 transition text-sm"
+            className="flex w-full items-center justify-center gap-3 rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
           >
             <GoogleIcon />
             Sign up with Google
           </button>
         </form>
 
-        {/* Terms note */}
-        <p className="text-center text-xs text-dark/35 mt-4 leading-relaxed">
+        <p className="mt-4 text-center text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
           By signing up you agree to our{" "}
-          <Link href="/terms" className="underline hover:text-dark transition">Terms</Link>
+          <Link href="/terms" className="underline underline-offset-4">Terms</Link>
           {" "}and{" "}
-          <Link href="/privacy" className="underline hover:text-dark transition">Privacy Policy</Link>.
+          <Link href="/privacy" className="underline underline-offset-4">Privacy Policy</Link>.
         </p>
 
-        <div className="h-px bg-dark/10 my-5" />
+        <div className="my-5 h-px bg-zinc-200 dark:bg-zinc-800" />
 
-        {/* Switch link */}
-        <p className="text-center text-sm text-dark/55">
+        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
           Already have an account?{" "}
-          <Link href="/login" className="text-brain font-bold hover:underline">
+          <Link href="/login" className="font-medium text-zinc-950 underline-offset-4 hover:underline dark:text-zinc-50">
             Login
           </Link>
         </p>
-
       </div>
     </main>
   );

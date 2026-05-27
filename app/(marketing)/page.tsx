@@ -1,302 +1,117 @@
+import Image from "next/image";
 import Link from "next/link";
-
-/* ─── data ────────────────────────────────────────────────────────── */
-
-const steps = [
-  {
-    num: "01",
-    icon: "📚",
-    title: "Create or find a course",
-    desc: "Browse thousands of community-made decks or build your own in minutes.",
-  },
-  {
-    num: "02",
-    icon: "🃏",
-    title: "Study with flashcards",
-    desc: "Our spaced repetition engine shows you each card at exactly the right moment.",
-  },
-  {
-    num: "03",
-    icon: "📈",
-    title: "Track your progress",
-    desc: "Watch your retention rate climb with streaks, accuracy charts, and XP.",
-  },
-];
 
 const features = [
   {
-    icon: "🔁",
-    title: "Spaced Repetition",
-    desc: "The scientifically proven method to lock knowledge into long-term memory — automatically.",
+    title: "Course library",
+    description: "Browse published learning material and enroll in the courses that fit your goals.",
   },
   {
-    icon: "🌍",
-    title: "Community Courses",
-    desc: "Thousands of user-created decks on every topic. Learn anything, taught by everyone.",
+    title: "Progress overview",
+    description: "See your enrolled courses, completed items, XP, and current study streak.",
   },
   {
-    icon: "📊",
-    title: "Progress Tracking",
-    desc: "Detailed stats on accuracy, speed, and streak history so you always know where you stand.",
+    title: "Account access",
+    description: "Sign up with email or Google and continue into the authenticated app.",
   },
 ];
-
-const freeFeatures = [
-  "Up to 3 courses",
-  "Basic flashcard study",
-  "Progress tracking",
-  "Community access",
-];
-
-const proFeatures = [
-  "Unlimited courses",
-  "Spaced repetition algorithm",
-  "Advanced analytics",
-  "Offline study mode",
-  "Priority support",
-  "Zombie Mode 🧟",
-];
-
-/* ─── page ─────────────────────────────────────────────────────────── */
 
 export default function LandingPage() {
   return (
-    <div className="font-nunito flex flex-col min-h-screen">
-
-      {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-50 bg-dark border-b border-cream/10">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl">🧠</span>
-            <span className="text-banana font-extrabold text-xl tracking-tight">Brainana</span>
+    <main className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <header className="border-b border-zinc-200 dark:border-zinc-800">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+          <Link href="/" className="text-lg font-semibold">
+            Brainana
           </Link>
-
-          <div className="flex items-center gap-3">
+          <nav className="flex items-center gap-3 text-sm">
             <Link
               href="/login"
-              className="border-2 border-cream/30 text-cream font-bold text-sm px-6 py-2.5 rounded-full hover:border-cream transition"
+              className="rounded-md border border-zinc-300 px-3 py-2 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
             >
               Log in
             </Link>
             <Link
               href="/signup"
-              className="bg-banana text-dark font-extrabold text-sm px-6 py-2.5 rounded-full hover:bg-banana/90 transition"
+              className="rounded-md bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
               Sign up
             </Link>
-          </div>
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      {/* ── Hero ── */}
-      <section className="bg-dark py-24 px-6">
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-16">
-          {/* text */}
-          <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 bg-banana/15 text-banana border border-banana/20 rounded-full px-4 py-1.5 text-sm font-bold mb-8">
-              🧟 Free to start · No credit card needed
-            </div>
-            <h1 className="text-cream text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-              Learn anything.
-              <br />
-              Eat brains.
-              <br />
-              <span className="text-banana">Repeat.</span>
-            </h1>
-            <p className="text-cream/60 text-lg md:text-xl max-w-lg mb-10 leading-relaxed">
-              Brainana uses spaced repetition to make knowledge stick for good.
-              Study smarter, build streaks, and unlock your inner zombie.
-            </p>
+      <section className="mx-auto grid max-w-5xl gap-10 px-6 py-20 md:grid-cols-[1fr_360px] md:items-center">
+        <div>
+          <p className="mb-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            Learning app template
+          </p>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            Study courses and track progress in one place.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
+            Brainana keeps the product surface simple: authentication, course discovery,
+            enrollment, and a dashboard for your current learning activity.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/signup"
-              className="inline-block bg-banana text-dark font-extrabold text-lg px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg shadow-banana/20"
+              className="rounded-md bg-zinc-950 px-4 py-2.5 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
-              Start for free 🍌
+              Get started
+            </Link>
+            <Link
+              href="/login"
+              className="rounded-md border border-zinc-300 px-4 py-2.5 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+            >
+              I already have an account
             </Link>
           </div>
+        </div>
 
-          {/* illustration */}
-          <div className="shrink-0 relative flex items-center justify-center w-72 h-72">
-            <div className="w-64 h-64 bg-banana/10 border border-banana/15 rounded-full flex items-center justify-center">
-              <span className="text-[7rem] leading-none select-none">🧟</span>
-            </div>
-            <span className="absolute top-4 right-4 text-4xl animate-bounce select-none">🧠</span>
-            <span className="absolute bottom-6 left-4 text-3xl select-none">🍌</span>
-            <span className="absolute top-16 left-0 text-2xl select-none opacity-60">⭐</span>
+        <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-8 dark:border-zinc-800 dark:bg-zinc-900">
+          <Image
+            src="/next.svg"
+            alt="Next.js"
+            width={160}
+            height={34}
+            className="dark:invert"
+            priority
+          />
+          <div className="mt-10 space-y-4 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="font-medium text-zinc-950 dark:text-zinc-50">Template baseline</p>
+            <p>Neutral colors, simple spacing, standard controls, and minimal global CSS.</p>
           </div>
         </div>
       </section>
 
-      {/* ── Social proof bar ── */}
-      <section className="bg-banana py-4 px-6">
-        <p className="text-center text-dark font-extrabold text-sm md:text-base">
-          🧠 12,000 learners already eating brains — join them today
-        </p>
-      </section>
-
-      {/* ── How it works ── */}
-      <section id="how-it-works" className="bg-cream py-24 px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-dark text-4xl md:text-5xl font-extrabold mb-4">
-              How it works
-            </h2>
-            <p className="text-dark/55 text-lg max-w-md mx-auto">
-              Three simple steps to becoming the most knowledgeable zombie on the block.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((s) => (
-              <div key={s.num} className="flex flex-col items-center text-center md:items-start md:text-left">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-banana font-extrabold text-3xl leading-none">{s.num}</span>
-                  <span className="text-3xl">{s.icon}</span>
-                </div>
-                <h3 className="text-dark text-xl font-extrabold mb-2">{s.title}</h3>
-                <p className="text-dark/55 leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
+      <section className="border-y border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/60">
+        <div className="mx-auto grid max-w-5xl gap-4 px-6 py-12 md:grid-cols-3">
+          {features.map((feature) => (
+            <article
+              key={feature.title}
+              className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950"
+            >
+              <h2 className="font-semibold">{feature.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                {feature.description}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* ── Features ── */}
-      <section id="features" className="bg-dark py-24 px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-cream text-4xl md:text-5xl font-extrabold mb-4">
-              Built for real learning
-            </h2>
-            <p className="text-cream/55 text-lg max-w-md mx-auto">
-              Not just another flashcard app. Brainana is engineered to make things actually stick.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="bg-cream/5 border border-cream/10 rounded-3xl p-8 hover:border-banana/40 transition group"
-              >
-                <div className="w-14 h-14 bg-banana/15 border border-banana/20 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                  {f.icon}
-                </div>
-                <h3 className="text-cream text-xl font-extrabold mb-3">{f.title}</h3>
-                <p className="text-cream/55 leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section id="pricing" className="bg-cream py-24 px-6">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-dark text-4xl md:text-5xl font-extrabold mb-4">
-              Simple pricing
-            </h2>
-            <p className="text-dark/55 text-lg">
-              Start free. Upgrade when your brain demands more.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            {/* Free */}
-            <div className="bg-white rounded-3xl p-8 border border-dark/10">
-              <p className="text-dark/40 text-xs font-bold uppercase tracking-widest mb-4">Free</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-dark text-5xl font-extrabold">$0</span>
-              </div>
-              <p className="text-dark/40 text-sm mb-8">Forever free, no strings attached.</p>
-
-              <ul className="space-y-3 mb-8">
-                {freeFeatures.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-dark/70">
-                    <span className="text-zombie font-extrabold text-base">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/signup"
-                className="block text-center border-2 border-dark/20 text-dark font-bold px-6 py-3 rounded-full hover:bg-dark hover:text-cream transition"
-              >
-                Get started free
-              </Link>
-            </div>
-
-            {/* Pro */}
-            <div className="bg-dark rounded-3xl p-8 border-4 border-banana relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-banana text-dark text-xs font-extrabold px-5 py-1.5 rounded-full whitespace-nowrap">
-                MOST POPULAR
-              </div>
-              <p className="text-banana text-xs font-bold uppercase tracking-widest mb-4">Pro</p>
-              <div className="flex items-end gap-1 mb-1">
-                <span className="text-cream text-5xl font-extrabold">$9</span>
-                <span className="text-cream/40 text-sm mb-2">/mo</span>
-              </div>
-              <p className="text-cream/40 text-sm mb-8">Everything your brain could ever want.</p>
-
-              <ul className="space-y-3 mb-8">
-                {proFeatures.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-cream/70">
-                    <span className="text-banana font-extrabold text-base">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/signup"
-                className="block text-center bg-banana text-dark font-extrabold px-6 py-3 rounded-full hover:bg-banana/90 transition"
-              >
-                Start free trial
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Final CTA ── */}
-      <section className="bg-banana py-24 px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-dark text-4xl md:text-5xl font-extrabold mb-4">
-            Ready to eat some brains?
-          </h2>
-          <p className="text-dark/60 text-lg mb-10">
-            Join thousands of learners who chose to grow instead of scroll.
-          </p>
-          <Link
-            href="/signup"
-            className="inline-block bg-dark text-banana font-extrabold text-lg px-8 py-4 rounded-full hover:scale-105 transition-transform"
-          >
-            Create free account →
+      <footer className="mx-auto flex max-w-5xl flex-col gap-3 px-6 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>Brainana</p>
+        <div className="flex gap-5">
+          <Link href="/privacy" className="hover:text-zinc-950 dark:hover:text-zinc-50">
+            Privacy
           </Link>
-        </div>
-      </section>
-
-      {/* ── Footer ── */}
-      <footer className="bg-dark border-t border-cream/10 py-10 px-6">
-        <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl">🧠</span>
-            <span className="text-banana font-extrabold text-lg">Brainana</span>
+          <Link href="/terms" className="hover:text-zinc-950 dark:hover:text-zinc-50">
+            Terms
           </Link>
-
-          <div className="flex items-center gap-8 text-sm text-cream/40">
-            <Link href="#" className="hover:text-cream transition">About</Link>
-            <Link href="#pricing" className="hover:text-cream transition">Pricing</Link>
-            <Link href="#" className="hover:text-cream transition">Blog</Link>
-            <Link href="#" className="hover:text-cream transition">Contact</Link>
-            <Link href="/privacy" className="hover:text-cream transition">Privacy</Link>
-            <Link href="/terms" className="hover:text-cream transition">Terms</Link>
-          </div>
         </div>
       </footer>
-
-    </div>
+    </main>
   );
 }

@@ -6,11 +6,11 @@ import { createClient } from "@/utils/supabase/server";
 import { logout } from "./actions";
 
 const navItems = [
-  { label: "Dashboard", href: "/dashboard", icon: "🏠" },
-  { label: "Courses", href: "/courses", icon: "📚" },
-  { label: "Study", href: "/study", icon: "🧠" },
-  { label: "Leaderboard", href: "/leaderboard", icon: "🏆" },
-  { label: "Settings", href: "/settings", icon: "⚙️" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Courses", href: "/courses" },
+  { label: "Study", href: "/study" },
+  { label: "Leaderboard", href: "/leaderboard" },
+  { label: "Settings", href: "/settings" },
 ];
 
 export default async function AppLayout({
@@ -31,148 +31,96 @@ export default async function AppLayout({
     .eq("id", user.id)
     .single();
 
-  const displayName = profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
+  const displayName =
+    profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
   const initial = displayName[0].toUpperCase();
   const plan = profile?.plan ?? "free";
   const totalXp = profile?.total_xp ?? 0;
   const currentStreak = profile?.current_streak ?? 0;
 
   return (
-    <div className="font-nunito flex min-h-screen">
-      {/*
-        CSS-only mobile sidebar toggle.
-        The hidden checkbox is the state store; the sidebar and overlay
-        are siblings and respond via peer-checked: variants.
-        The hamburger button and overlay are <label> elements pointing
-        at the checkbox by id — they can live anywhere in the DOM.
-      */}
+    <div className="flex min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
       <input type="checkbox" id="sidebar-toggle" className="peer sr-only" />
 
-      {/* Overlay — closes sidebar when tapped on mobile */}
       <label
         htmlFor="sidebar-toggle"
-        className="fixed inset-0 z-20 bg-dark/60 backdrop-blur-sm hidden peer-checked:block lg:hidden cursor-default"
+        className="fixed inset-0 z-20 hidden bg-black/40 peer-checked:block lg:hidden"
         aria-hidden="true"
       />
 
-      {/* Sidebar */}
-      <aside className="
-        fixed inset-y-0 left-0 z-30 w-64 bg-dark flex flex-col border-r border-cream/10
-        -translate-x-full peer-checked:translate-x-0
-        transition-transform duration-300
-        lg:relative lg:translate-x-0 lg:z-auto
-      ">
-        {/* Logo */}
-        <div className="px-5 py-5 border-b border-cream/10 shrink-0">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <Image
-              src="/logos/brainana-navbar.svg"
-              alt="Brainana"
-              width={140}
-              height={32}
-              priority
-            />
+      <aside className="fixed inset-y-0 left-0 z-30 flex w-64 -translate-x-full flex-col border-r border-zinc-200 bg-white transition-transform peer-checked:translate-x-0 dark:border-zinc-800 dark:bg-zinc-950 lg:relative lg:z-auto lg:translate-x-0">
+        <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
+          <Link href="/dashboard" className="text-lg font-semibold">
+            Brainana
           </Link>
         </div>
 
-        {/* Nav */}
-        <nav className="flex-1 px-3 py-5 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-cream/55 hover:text-cream hover:bg-cream/10 transition"
+              className="block rounded-md px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
             >
-              <span className="text-base">{item.icon}</span>
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Streak widget */}
-        <div className="px-3 pb-4 shrink-0 space-y-3">
-          <div className="bg-banana/10 border border-banana/20 rounded-xl px-4 py-3 flex items-center gap-3">
-            <span className="text-xl">🔥</span>
-            <div>
-              <p className="text-banana font-extrabold text-sm">{currentStreak}-day streak!</p>
-              <p className="text-banana/50 text-xs">Keep going</p>
-            </div>
+        <div className="border-t border-zinc-200 p-4 dark:border-zinc-800">
+          <div className="mb-3 rounded-md border border-zinc-200 p-3 text-sm dark:border-zinc-800">
+            <p className="font-medium">{currentStreak}-day streak</p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{totalXp.toLocaleString()} XP</p>
           </div>
-
-          {/* User card */}
-          <div className="flex items-center gap-3 px-2 py-1">
-            <div className="w-9 h-9 rounded-full bg-banana flex items-center justify-center text-dark font-extrabold text-sm shrink-0 overflow-hidden">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-200 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
               {profile?.avatar_url ? (
-                <Image src={profile.avatar_url} alt={displayName} width={36} height={36} className="object-cover" />
+                <Image
+                  src={profile.avatar_url}
+                  alt={displayName}
+                  width={36}
+                  height={36}
+                  className="h-full w-full object-cover"
+                />
               ) : (
                 initial
               )}
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-cream font-bold text-sm truncate">{displayName}</p>
-              <p className="text-cream/40 text-xs capitalize">{plan} plan</p>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium">{displayName}</p>
+              <p className="text-xs capitalize text-zinc-500 dark:text-zinc-400">{plan} plan</p>
             </div>
           </div>
         </div>
       </aside>
 
-      {/* Main column */}
-      <div className="flex flex-1 flex-col min-w-0">
-        {/* Topbar */}
-        <header className="bg-white border-b border-dark/10 px-6 py-3.5 flex items-center gap-4 shrink-0">
-          {/* Hamburger — toggles sidebar on mobile */}
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="flex items-center gap-4 border-b border-zinc-200 bg-white px-6 py-3 dark:border-zinc-800 dark:bg-zinc-950">
           <label
             htmlFor="sidebar-toggle"
-            className="lg:hidden p-2 rounded-xl text-dark/60 hover:text-dark hover:bg-dark/5 transition cursor-pointer"
+            className="cursor-pointer rounded-md border border-zinc-300 px-2 py-1 text-sm lg:hidden dark:border-zinc-700"
             aria-label="Toggle menu"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+            Menu
           </label>
 
-          {/* Page title placeholder — real title comes from page metadata */}
-          <span className="flex-1 text-dark font-extrabold text-lg">Brainana</span>
+          <span className="flex-1 text-sm font-medium">Brainana</span>
 
-          <div className="flex items-center gap-3">
-            {/* Notification bell */}
-            <button className="p-2 rounded-xl text-dark/40 hover:text-dark hover:bg-dark/5 transition" aria-label="Notifications">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-              </svg>
-            </button>
-
-            {/* XP badge */}
-            <div className="hidden sm:flex items-center gap-1.5 bg-banana/10 border border-banana/20 rounded-full px-3 py-1.5">
-              <span className="text-sm">⭐</span>
-              <span className="text-dark font-extrabold text-xs">{totalXp.toLocaleString()} XP</span>
-            </div>
-
-            {/* Avatar */}
-            <div className="w-9 h-9 rounded-full bg-banana flex items-center justify-center text-dark font-extrabold text-sm shrink-0 overflow-hidden">
-              {profile?.avatar_url ? (
-                <Image src={profile.avatar_url} alt={displayName} width={36} height={36} className="object-cover" />
-              ) : (
-                initial
-              )}
-            </div>
-
-            {/* Logout */}
-            <form action={logout}>
-              <button
-                type="submit"
-                className="border-2 border-dark/15 text-dark font-bold text-sm px-4 py-2 rounded-full hover:bg-dark hover:text-cream hover:border-dark transition"
-              >
-                Log out
-              </button>
-            </form>
+          <div className="hidden text-sm text-zinc-500 dark:text-zinc-400 sm:block">
+            {totalXp.toLocaleString()} XP
           </div>
+
+          <form action={logout}>
+            <button
+              type="submit"
+              className="rounded-md border border-zinc-300 px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+            >
+              Log out
+            </button>
+          </form>
         </header>
 
-        {/* Page content */}
-        <main className="flex-1 bg-cream">
-          {children}
-        </main>
+        <main className="flex-1 bg-zinc-50 dark:bg-zinc-900/40">{children}</main>
       </div>
     </div>
   );
