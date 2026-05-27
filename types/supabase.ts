@@ -489,11 +489,13 @@ export type Database = {
           daily_goal: number
           display_name: string | null
           id: string
+          interests: string[] | null
           last_activity_date: string | null
           level: number
           longest_streak: number
           onboarding_completed: boolean
           plan: string
+          purpose: string | null
           total_xp: number
           twitter_handle: string | null
           updated_at: string
@@ -508,11 +510,13 @@ export type Database = {
           daily_goal?: number
           display_name?: string | null
           id: string
+          interests?: string[] | null
           last_activity_date?: string | null
           level?: number
           longest_streak?: number
           onboarding_completed?: boolean
           plan?: string
+          purpose?: string | null
           total_xp?: number
           twitter_handle?: string | null
           updated_at?: string
@@ -527,11 +531,13 @@ export type Database = {
           daily_goal?: number
           display_name?: string | null
           id?: string
+          interests?: string[] | null
           last_activity_date?: string | null
           level?: number
           longest_streak?: number
           onboarding_completed?: boolean
           plan?: string
+          purpose?: string | null
           total_xp?: number
           twitter_handle?: string | null
           updated_at?: string
