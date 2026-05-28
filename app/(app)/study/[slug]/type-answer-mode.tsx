@@ -62,6 +62,15 @@ export default function TypeAnswerMode({
     setTimeout(() => inputRef.current?.focus(), 50);
   }, [card.itemId]);
 
+  useEffect(() => {
+    if (!submitted) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Enter") advance();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [submitted]); // eslint-disable-line react-hooks/exhaustive-deps
+
   function submit() {
     if (submitted) {
       advance();
