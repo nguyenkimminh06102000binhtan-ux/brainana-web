@@ -27,7 +27,7 @@ export default async function HomePage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("display_name, avatar_url, current_streak, daily_goal, onboarding_completed")
+    .select("display_name, avatar_url, current_streak, daily_goal, onboarding_completed, active_origin_language")
     .eq("id", user.id)
     .single();
 
@@ -40,7 +40,9 @@ export default async function HomePage() {
   const todayStart = new Date();
   todayStart.setUTCHours(0, 0, 0, 0);
 
-  const [{ data: sessionsToday }, { data: enrolledRaw }] = await Promise.all([
+  const activeOriginLanguage = (profile?.active_origin_language as string | null) ?? null;
+
+  const [{ data: sessionsToday }, { data: enrolledRaw }, { data: discoverRaw }] = await Promise.all([
     supabase
       .from("study_sessions")
       .select("items_studied")
@@ -51,6 +53,17 @@ export default async function HomePage() {
       .from("user_courses")
       .select("courses!course_id (id, slug, title, category, cover_image_url, level, card_count)")
       .eq("user_id", user.id),
+
+    activeOriginLanguage
+      ? supabase
+          .from("courses")
+          .select("id, slug, title, category, cover_image_url, level, card_count")
+          .eq("visibility", "public")
+          .eq("is_published", true)
+          .eq("source_language", activeOriginLanguage)
+          .order("learner_count", { ascending: false })
+          .limit(4)
+      : Promise.resolve({ data: [] }),
   ]);
 
   const studiedToday = (sessionsToday ?? []).reduce((sum, s) => sum + (s.items_studied ?? 0), 0);
@@ -58,6 +71,8 @@ export default async function HomePage() {
   const enrolledCourses = ((enrolledRaw ?? []) as unknown as {
     courses: CourseRow;
   }[]).map((row) => row.courses) as CourseRow[];
+
+  const discoverCourses = (discoverRaw ?? []) as CourseRow[];
 
   // Single item_progress query for all per-course + global stats
   const courseIds = enrolledCourses.map((c) => c.id);
@@ -200,6 +215,44 @@ export default async function HomePage() {
               </div>
             )}
           </section>
+
+          {/* Discover courses based on origin language */}
+          {activeOriginLanguage && discoverCourses.length > 0 && (
+            <section>
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h2 className="font-fredoka text-2xl font-[700] tracking-tight">Discover</h2>
+                  <p className="font-manrope text-xs text-ink-2">Courses from {activeOriginLanguage}</p>
+                </div>
+                <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="font-mono text-xs text-ink-2 hover:text-orange transition">
+                  See all →
+                </Link>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {discoverCourses.map((course) => (
+                  <Link
+                    key={course.id}
+                    href={`/c/${course.slug}`}
+                    className="flex items-center gap-3 rounded-xl bg-paper-2 p-4 shadow-hard-sm transition hover:-translate-y-0.5 hover:shadow-hard"
+                  >
+                    {course.cover_image_url ? (
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
+                        <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue">
+                        <span className="font-mono text-xs text-ocean">{course.title[0]}</span>
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="truncate font-manrope text-sm font-[800] text-ink">{course.title}</p>
+                      <p className="font-mono text-xs text-ink-2">{course.card_count} cards{course.level ? ` · ${course.level}` : ""}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         {/* ── RIGHT SIDEBAR ── */}

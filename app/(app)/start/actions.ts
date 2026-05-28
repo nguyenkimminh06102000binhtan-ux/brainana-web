@@ -46,6 +46,8 @@ export async function saveOnboarding(
       interests: selectedInterests.length > 0 ? selectedInterests : null,
       native_language: nativeLanguage,
       onboarding_completed: true,
+      origin_languages: [nativeLanguage],
+      active_origin_language: nativeLanguage,
     })
     .eq("id", user.id)
     .select("id");
