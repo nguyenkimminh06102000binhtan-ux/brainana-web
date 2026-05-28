@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import EditCourseForm from "./form";
+import { getLocale } from "@/utils/i18n";
 
 export default async function EditCoursePage({
   params,
@@ -31,6 +32,13 @@ export default async function EditCoursePage({
     .eq("course_id", course.id)
     .order("position");
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("active_origin_language")
+    .eq("id", user.id)
+    .single();
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+
   const { data: items } = await supabase
     .from("items")
     .select("id, section_id, front_text, back_text, image_url, front_audio_url, back_audio_url, position")
@@ -47,16 +55,26 @@ export default async function EditCoursePage({
   return (
     <div className="mx-auto max-w-3xl px-6 py-8">
       <div className="mb-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Edit</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.createEdit.editEyebrow}</p>
         <h1 className="mt-1 font-fredoka text-4xl font-[700] tracking-tight">
-          Edit <span className="text-orange">course</span>
+          {loc.createEdit.editTitlePrefix} <span className="text-orange">{loc.createEdit.editTitleAccent}</span>
         </h1>
         <p className="mt-2 font-manrope text-sm text-ink-2">
-          Changes are saved immediately when you hit save.
+          {loc.createEdit.editIntro}
         </p>
       </div>
 
-      <EditCourseForm course={course} sections={sectionsWithItems} />
+      <EditCourseForm
+        course={course}
+        sections={sectionsWithItems}
+        labels={loc.createEdit}
+        categories={loc.categories}
+        levels={{
+          beginner: loc.course.beginner,
+          intermediate: loc.course.intermediate,
+          advanced: loc.course.advanced,
+        }}
+      />
     </div>
   );
 }

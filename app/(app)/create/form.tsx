@@ -5,6 +5,7 @@ import { createCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
+import { t } from "@/utils/t";
 
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
@@ -42,10 +43,13 @@ const freshUpload = (): Record<UploadField, UploadState> => ({
 const makeItem = (): Item => ({ id: uid++, front: "", back: "", imageUrl: "", frontAudioUrl: "", backAudioUrl: "", uploads: freshUpload() });
 const makeSection = (): Section => ({ id: uid++, title: "", description: "", items: [makeItem()] });
 
-function label(text: string, optional?: boolean) {
+type CreateEditLabels = Record<string, string>;
+type LevelLabels = { beginner: string; intermediate: string; advanced: string };
+
+function label(text: string, optional?: boolean, optionalLabel = "optional") {
   return (
     <p className="mb-1.5 font-mono text-xs uppercase tracking-widest text-ink-2">
-      {text}{optional && <span className="ml-1 normal-case">(optional)</span>}
+      {text}{optional && <span className="ml-1 normal-case">({optionalLabel})</span>}
     </p>
   );
 }
@@ -90,11 +94,11 @@ function parseCsv(text: string): Array<[string, string]> {
   return results;
 }
 
-async function uploadToStorage(file: File): Promise<string> {
+async function uploadToStorage(file: File, labels: CreateEditLabels): Promise<string> {
   const isImage = IMAGE_TYPES.includes(file.type);
   const isAudio = AUDIO_TYPES.includes(file.type);
-  if (!isImage && !isAudio) throw new Error("Unsupported file type.");
-  if (isAudio && file.size > AUDIO_MAX) throw new Error("Audio must be under 10 MB.");
+  if (!isImage && !isAudio) throw new Error(labels.unsupportedFileType);
+  if (isAudio && file.size > AUDIO_MAX) throw new Error(labels.audioTooLarge);
 
   const fileToUpload = isImage ? await compressImage(file, IMAGE_MAX) : file;
   const supabase = createClient();
@@ -106,8 +110,8 @@ async function uploadToStorage(file: File): Promise<string> {
   return publicUrl;
 }
 
-function UploadButton({ label: lbl, accept, uploading, compressing, error, onFile }: {
-  label: string; accept: string; uploading: boolean; compressing: boolean; error: string | null; onFile: (f: File) => void;
+function UploadButton({ label: lbl, labels, accept, uploading, compressing, error, onFile }: {
+  label: string; labels: CreateEditLabels; accept: string; uploading: boolean; compressing: boolean; error: string | null; onFile: (f: File) => void;
 }) {
   const ref = useRef<HTMLInputElement>(null);
   return (
@@ -116,37 +120,38 @@ function UploadButton({ label: lbl, accept, uploading, compressing, error, onFil
         onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = ""; }} />
       <button type="button" disabled={uploading || compressing} onClick={() => ref.current?.click()}
         className="rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50">
-        {compressing ? "Processing…" : uploading ? "Uploading..." : lbl}
+        {compressing ? labels.processing : uploading ? labels.uploading : lbl}
       </button>
-      {compressing && <p className="mt-1 font-manrope text-xs text-ink-2">Image is large — compressing before upload, please wait…</p>}
+      {compressing && <p className="mt-1 font-manrope text-xs text-ink-2">{labels.compressingImage}</p>}
       {error && <p className="mt-1 font-manrope text-xs text-orange">{error}</p>}
     </div>
   );
 }
 
-function AudioPreview({ url, onRemove }: { url: string; onRemove: () => void }) {
+function AudioPreview({ url, onRemove, removeLabel }: { url: string; onRemove: () => void; removeLabel: string }) {
   return (
     <div className="mt-1.5 flex items-center gap-2">
       <audio src={url} controls className="h-8 min-w-0 flex-1" />
-      <button type="button" onClick={onRemove} className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange">Remove</button>
+      <button type="button" onClick={onRemove} className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange">{removeLabel}</button>
     </div>
   );
 }
 
-function ImagePreview({ url, onRemove }: { url: string; onRemove: () => void }) {
+function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: () => void; removeLabel: string }) {
   return (
     <div className="mt-1.5 flex items-start gap-2">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={url} alt="" className="h-20 w-20 rounded-md object-cover shadow-hard-sm" />
-      <button type="button" onClick={onRemove} className="font-manrope text-xs font-[800] text-ink-3 hover:text-orange">Remove</button>
+      <button type="button" onClick={onRemove} className="font-manrope text-xs font-[800] text-ink-3 hover:text-orange">{removeLabel}</button>
     </div>
   );
 }
 
-function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUrl }: {
+function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
   item: Item;
   index: number;
   isOnly: boolean;
+  labels: CreateEditLabels;
   onUpdate: (field: "front" | "back", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
@@ -155,41 +160,41 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
       <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
-        <span className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">Card {index + 1}</span>
+        <span className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">{t(labels.cardLabel, { number: index + 1 })}</span>
         {!isOnly && (
           <button type="button" onClick={onRemove}
             className="font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange">
-            Remove
+            {labels.remove}
           </button>
         )}
       </div>
 
       <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
         <div className="bg-paper p-4">
-          {label("Question")}
+          {label(labels.question)}
           <textarea name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)}
-            placeholder="e.g. Hello" rows={2}
+            placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
-            {label("Front audio", true)}
+            {label(labels.frontAudio, true, labels.optional)}
             {item.frontAudioUrl
-              ? <AudioPreview url={item.frontAudioUrl} onRemove={() => onClearUrl("frontAudioUrl")} />
-              : <UploadButton label="+ Upload audio" accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
+              ? <AudioPreview url={item.frontAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioUrl")} />
+              : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
                   onFile={(f) => onUpload("frontAudio", f)} />}
           </div>
         </div>
 
         <div className="bg-paper-2 p-4">
-          {label("Answer")}
+          {label(labels.answer)}
           <textarea name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)}
-            placeholder="e.g. Xin chào" rows={2}
+            placeholder={labels.answerPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
-            {label("Back audio", true)}
+            {label(labels.backAudio, true, labels.optional)}
             {item.backAudioUrl
-              ? <AudioPreview url={item.backAudioUrl} onRemove={() => onClearUrl("backAudioUrl")} />
-              : <UploadButton label="+ Upload audio" accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
+              ? <AudioPreview url={item.backAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioUrl")} />
+              : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
                   onFile={(f) => onUpload("backAudio", f)} />}
           </div>
@@ -197,10 +202,10 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
       </div>
 
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
-        {label("Image", true)}
+        {label(labels.image, true, labels.optional)}
         {item.imageUrl
-          ? <ImagePreview url={item.imageUrl} onRemove={() => onClearUrl("imageUrl")} />
-          : <UploadButton label="+ Upload image" accept="image/jpeg,image/png,image/webp"
+          ? <ImagePreview url={item.imageUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("imageUrl")} />
+          : <UploadButton label={labels.uploadImage} labels={labels} accept="image/jpeg,image/png,image/webp"
               uploading={item.uploads.image.uploading} compressing={item.uploads.image.compressing} error={item.uploads.image.error}
               onFile={(f) => onUpload("image", f)} />}
       </div>
@@ -210,7 +215,15 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
 
 const COLLAPSE_THRESHOLD = 5;
 
-export default function CreateCourseForm() {
+export default function CreateCourseForm({
+  labels,
+  categories,
+  levels,
+}: {
+  labels: CreateEditLabels;
+  categories: Record<string, string>;
+  levels: LevelLabels;
+}) {
   const [state, formAction, pending] = useActionState(createCourse, null);
   const [sections, setSections] = useState<Section[]>([makeSection()]);
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
@@ -273,7 +286,7 @@ export default function CreateCourseForm() {
         : s
     ));
     try {
-      const url = await uploadToStorage(file);
+      const url = await uploadToStorage(file, labels);
       setSections((prev) => prev.map((s) =>
         s.id === sectionId
           ? { ...s, items: s.items.map((item) =>
@@ -320,7 +333,7 @@ export default function CreateCourseForm() {
 
   const sectionsPayload = JSON.stringify(
     sections.map((s) => ({
-      title: s.title || "Untitled section",
+      title: s.title || labels.untitledSection,
       description: s.description,
       items: s.items.map((i) => ({
         front: i.front,
@@ -338,26 +351,26 @@ export default function CreateCourseForm() {
 
       {/* Course info */}
       <section className="rounded-lg bg-paper-2 p-8 shadow-hard">
-        <h2 className="font-fredoka text-2xl font-[700] tracking-tight">Course info</h2>
+        <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{labels.courseInfo}</h2>
 
         <div className="mt-6 flex flex-col gap-5">
           <div>
-            {label("Title")}
-            <input id="title" name="title" type="text" defaultValue="My First Course"
-              placeholder="e.g. Vietnamese for Beginners" required className={inputCls} />
+            {label(labels.title)}
+            <input id="title" name="title" type="text" defaultValue={labels.titleDefault}
+              placeholder={labels.titlePlaceholder} required className={inputCls} />
           </div>
 
           <div>
-            {label("Description", true)}
+            {label(labels.description, true, labels.optional)}
             <textarea id="description" name="description"
-              defaultValue="A collection of flashcards to help you learn."
-              placeholder="What will learners get from this course?"
+              defaultValue={labels.descriptionDefault}
+              placeholder={labels.descriptionPlaceholder}
               rows={3} className={`${inputCls} resize-none`} />
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              {label("Category")}
+              {label(labels.category)}
               <select
                 id="category"
                 name="category"
@@ -365,42 +378,42 @@ export default function CreateCourseForm() {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className={selectCls}
               >
-                {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{categories[c] ?? c}</option>)}
               </select>
             </div>
             <div>
-              {label("Subcategory")}
+              {label(labels.subcategory)}
               <select id="subcategory" name="subcategory" className={selectCls}>
-                {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{s}</option>)}
+                {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{categories[s] ?? s}</option>)}
               </select>
             </div>
             <div>
-              {label("Difficulty")}
+              {label(labels.difficulty)}
               <select id="level" name="level" defaultValue="beginner" className={selectCls}>
-                <option value="">Any level</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
+                <option value="">{labels.anyLevel}</option>
+                <option value="beginner">{levels.beginner}</option>
+                <option value="intermediate">{levels.intermediate}</option>
+                <option value="advanced">{levels.advanced}</option>
               </select>
             </div>
             <div>
-              {label("Question language")}
-              <select id="source_language" name="source_language" defaultValue="English" className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{l}</option>)}
-              </select>
-            </div>
-            <div>
-              {label("Answer language")}
-              <select id="target_language" name="target_language" defaultValue="Vietnamese" className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{l}</option>)}
-              </select>
-            </div>
-            <div>
-              {label("Visibility")}
+              {label(labels.visibility)}
               <select id="visibility" name="visibility" defaultValue="public" className={selectCls}>
-                <option value="public">Public</option>
-                <option value="unlisted">Unlisted</option>
-                <option value="private">Private</option>
+                <option value="public">{labels.public}</option>
+                <option value="unlisted">{labels.unlisted}</option>
+                <option value="private">{labels.private}</option>
+              </select>
+            </div>
+            <div>
+              {label(labels.questionLanguage)}
+              <select id="source_language" name="source_language" defaultValue="English" className={selectCls}>
+                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
+              </select>
+            </div>
+            <div>
+              {label(labels.answerLanguage)}
+              <select id="target_language" name="target_language" defaultValue="Vietnamese" className={selectCls}>
+                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
           </div>
@@ -414,15 +427,15 @@ export default function CreateCourseForm() {
           <div className="flex items-start gap-4 p-6 pb-4">
             <div className="flex-1 flex flex-col gap-3">
               <div>
-                {label("Section name")}
-                <input type="text" value={section.title} placeholder={`Section ${sIdx + 1}`}
+                {label(labels.sectionName)}
+                <input type="text" value={section.title} placeholder={t(labels.sectionPlaceholder, { number: sIdx + 1 })}
                   onChange={(e) => updateSection(section.id, "title", e.target.value)}
                   className={inputCls} />
               </div>
               <div>
-                {label("Description", true)}
+                {label(labels.description, true, labels.optional)}
                 <input type="text" value={section.description}
-                  placeholder="What's covered in this section?"
+                  placeholder={labels.sectionDescriptionPlaceholder}
                   onChange={(e) => updateSection(section.id, "description", e.target.value)}
                   className={inputCls} />
               </div>
@@ -430,7 +443,7 @@ export default function CreateCourseForm() {
             {sections.length > 1 && (
               <button type="button" onClick={() => removeSection(section.id)}
                 className="mt-5 shrink-0 rounded-md px-3 py-2 font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange">
-                Remove section
+                {labels.removeSection}
               </button>
             )}
           </div>
@@ -444,10 +457,10 @@ export default function CreateCourseForm() {
                 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition hover:text-ink"
               >
                 <span className="text-[10px]">{collapsed.has(section.id) ? "▶" : "▼"}</span>
-                Cards — {section.items.length}
+                {t(labels.cardsSummary, { count: section.items.length })}
               </button>
               <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
-                Import CSV
+                {labels.importCsv}
                 <input type="file" accept=".csv,text/csv" className="hidden"
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
               </label>
@@ -462,6 +475,7 @@ export default function CreateCourseForm() {
                       item={item}
                       index={iIdx}
                       isOnly={section.items.length === 1}
+                      labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
@@ -471,7 +485,7 @@ export default function CreateCourseForm() {
                 </div>
                 <button type="button" onClick={() => addItem(section.id)}
                   className="mt-3 w-full rounded-md border-2 border-dashed border-ink/20 py-3 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
-                  + Add card
+                  {labels.addCard}
                 </button>
               </>
             )}
@@ -481,7 +495,7 @@ export default function CreateCourseForm() {
 
       <button type="button" onClick={addSection}
         className="rounded-lg border-2 border-dashed border-ink/20 py-4 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
-        + Add section
+        {labels.addSection}
       </button>
 
       {state?.error && (
@@ -493,14 +507,19 @@ export default function CreateCourseForm() {
       <div className="flex items-center justify-between pb-8">
         <p className="font-manrope text-sm text-ink-2">
           {isUploading
-            ? "Uploading files..."
+            ? labels.uploadingFiles
             : hasValidItem
-            ? `${sections.length} section${sections.length === 1 ? "" : "s"} · ${totalItems} card${totalItems === 1 ? "" : "s"}`
-            : "Add at least one card to continue"}
+            ? t(labels.summary, {
+                sections: sections.length,
+                sectionUnit: sections.length === 1 ? labels.sectionUnit : labels.sectionUnits,
+                cards: totalItems,
+                cardUnit: totalItems === 1 ? labels.cardUnit : labels.cardUnits,
+              })
+            : labels.addAtLeastOneCard}
         </p>
         <button type="submit" disabled={!hasValidItem || pending || isUploading}
           className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none">
-          {pending ? "Creating..." : "Create course"}
+          {pending ? labels.creating : labels.createCourse}
         </button>
       </div>
     </form>
