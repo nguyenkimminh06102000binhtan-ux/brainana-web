@@ -499,5 +499,38 @@
     "cancel": "रद्द करा",
     "saving": "सेव्ह करत आहे...",
     "saveChanges": "बदल जतन करा"
+  },
+  "start": {
+    "estimatedTime": "~60 सेकंद · सर्व एका पृष्ठावर",
+    "title": "चला तुमचा मेंदू सेट करूया.",
+    "languageTitle": "01 · मातृभाषा",
+    "languageIntro": "प्रथम तुमची मूळ भाषा निवडा. तुम्ही सुरू ठेवण्यापूर्वी आम्ही हा सेटअप त्या भाषेत स्विच करू.",
+    "motherTongue": "मातृभाषा",
+    "motherTonguePlaceholder": "तुमची मूळ भाषा निवडा...",
+    "chooseLanguageHelp": "तुमची भाषा सेव्ह केल्यानंतर पुढील बटण अनलॉक होते.",
+    "savingLanguage": "भाषा जतन करत आहे...",
+    "next": "पुढे",
+    "name": "02 · तुमचे नाव",
+    "namePlaceholder": "तुमचे नाव टाइप करा...",
+    "avatar": "03 · तुमचा अवतार",
+    "whyHere": "०४ · तू इथे का आहेस?",
+    "dailyGoal": "05 · दैनिक ध्येय",
+    "cardsPerDay": "{count} कार्ड/दिवस",
+    "topics": "06 · विषय (कोणतेही निवडा)",
+    "takeMeHome": "मला घरी घेऊन जा ->",
+    "saving": "सेव्ह करत आहे...",
+    "validationName": "कृपया आपले नाव प्रविष्ट करा.",
+    "validationReason": "कृपया एक वैध कारण निवडा.",
+    "validationDailyGoal": "कृपया रोजचे ध्येय निवडा.",
+    "validationMotherTongue": "कृपया तुमची मातृभाषा निवडा.",
+    "purposes": {
+      "School": "शाळा",
+      "Job/test": "नोकरी/चाचणी",
+      "Hobby": "छंद",
+      "Travel": "प्रवास",
+      "For fun": "मनोरंजनासाठी",
+      "My kid": "माझी पोर"
+    },
+    "validationProfileNotFound": "प्रोफाइल आढळले नाही. कृपया साइन आउट करा आणि पुन्हा प्रयत्न करा."
   }
 }

@@ -499,5 +499,38 @@
     "sectionUnits": "sekcje",
     "uploadingFiles": "Przesyłanie plików...",
     "creating": "Tworzenie..."
+  },
+  "start": {
+    "estimatedTime": "~60 sekund · wszystko na jednej stronie",
+    "title": "Skonfigurujmy twój mózg.",
+    "languageTitle": "01 · Język ojczysty",
+    "languageIntro": "Najpierw wybierz swój język ojczysty. Zanim będziesz kontynuować, przełączymy tę konfigurację na ten język.",
+    "motherTongue": "Język ojczysty",
+    "motherTonguePlaceholder": "Wybierz swój język ojczysty...",
+    "chooseLanguageHelp": "Następny przycisk zostanie odblokowany po zapisaniu języka.",
+    "savingLanguage": "Zapisywanie języka...",
+    "next": "Następny",
+    "name": "02 · Twoje imię",
+    "namePlaceholder": "wpisz swoje imię...",
+    "avatar": "03 · Twój awatar",
+    "whyHere": "04 · Dlaczego tu jesteś?",
+    "dailyGoal": "05 · Dzienny cel",
+    "cardsPerDay": "{count} kart/dzień",
+    "topics": "06 · Tematy (wybierz dowolny)",
+    "takeMeHome": "Zabierz mnie do domu ->",
+    "saving": "Zapisywanie...",
+    "validationName": "Proszę wpisać swoje imię i nazwisko.",
+    "validationReason": "Wybierz ważny powód.",
+    "validationDailyGoal": "Wybierz cel dzienny.",
+    "validationMotherTongue": "Proszę wybrać swój język ojczysty.",
+    "purposes": {
+      "School": "Szkoła",
+      "Job/test": "Praca/test",
+      "Hobby": "Hobby",
+      "Travel": "Podróż",
+      "For fun": "Dla zabawy",
+      "My kid": "Moje dziecko"
+    },
+    "validationProfileNotFound": "Nie znaleziono profilu. Wyloguj się i spróbuj ponownie."
   }
 }

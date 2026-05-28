@@ -499,5 +499,38 @@
     "saveChanges": "परिवर्तनों को सुरक्षित करें",
     "createCourse": "पाठ्यक्रम बनायें",
     "creating": "बनाया जा रहा है..."
+  },
+  "start": {
+    "estimatedTime": "~60 सेकंड · सभी एक पृष्ठ पर",
+    "title": "आइए अपना दिमाग व्यवस्थित करें।",
+    "languageTitle": "01 · मातृभाषा",
+    "languageIntro": "सबसे पहले अपनी मूल भाषा चुनें. आपके जारी रखने से पहले हम इस सेटअप को उस भाषा में बदल देंगे।",
+    "motherTongue": "मातृभाषा",
+    "motherTonguePlaceholder": "अपनी मूल भाषा चुनें...",
+    "chooseLanguageHelp": "आपकी भाषा सेव होने के बाद अगला बटन अनलॉक हो जाता है।",
+    "savingLanguage": "भाषा सहेजी जा रही है...",
+    "next": "अगला",
+    "name": "02 · आपका नाम",
+    "namePlaceholder": "अपना नाम टाइप करें...",
+    "avatar": "03 · आपका अवतार",
+    "whyHere": "04 · आप यहाँ क्यों हैं?",
+    "dailyGoal": "05 · दैनिक लक्ष्य",
+    "cardsPerDay": "{count} कार्ड/दिन",
+    "topics": "06 · विषय (कोई भी चुनें)",
+    "takeMeHome": "मुझे घर ले चलो ->",
+    "saving": "सहेजा जा रहा है...",
+    "validationName": "कृपया अपना नाम दर्ज करें.",
+    "validationReason": "कृपया कोई वैध कारण चुनें.",
+    "validationDailyGoal": "कृपया एक दैनिक लक्ष्य चुनें.",
+    "validationMotherTongue": "कृपया अपनी मातृभाषा चुनें.",
+    "purposes": {
+      "School": "स्कूल",
+      "Job/test": "नौकरी/परीक्षा",
+      "Hobby": "शौक",
+      "Travel": "यात्रा",
+      "For fun": "मनोरंजन के लिए",
+      "My kid": "मेरा बच्चा"
+    },
+    "validationProfileNotFound": "प्रोफ़ाइल नहीं मिला। कृपया साइन आउट करें और पुनः प्रयास करें।"
   }
 }

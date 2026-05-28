@@ -499,5 +499,38 @@
     "saveChanges": "שמור שינויים",
     "sectionUnits": "סעיפים",
     "createCourse": "צור קורס"
+  },
+  "start": {
+    "estimatedTime": "~60 שניות · הכל בעמוד אחד",
+    "title": "בוא נסדר את המוח שלך.",
+    "languageTitle": "01 · שפת אם",
+    "languageIntro": "תחילה בחר את שפת האם שלך. אנו נעביר את ההגדרה הזו לשפה זו לפני שתמשיך.",
+    "motherTongue": "שפת אם",
+    "motherTonguePlaceholder": "בחר את שפת האם שלך...",
+    "chooseLanguageHelp": "הלחצן הבא יבוטל לאחר שמירת השפה שלך.",
+    "savingLanguage": "שומר שפה...",
+    "next": "הבא",
+    "name": "02 · השם שלך",
+    "namePlaceholder": "הקלד את שמך...",
+    "avatar": "03 · הדמות שלך",
+    "whyHere": "04 · למה אתה כאן?",
+    "dailyGoal": "05 · מטרה יומית",
+    "cardsPerDay": "כרטיסי {count} ליום",
+    "topics": "06 · נושאים (בחר כל אחד)",
+    "takeMeHome": "קח אותי הביתה ->",
+    "saving": "שומר...",
+    "validationName": "נא להזין את שמך.",
+    "validationReason": "אנא בחר סיבה חוקית.",
+    "validationDailyGoal": "בחר יעד יומי.",
+    "validationMotherTongue": "אנא בחר את שפת האם שלך.",
+    "purposes": {
+      "School": "בית ספר",
+      "Job/test": "עבודה/מבחן",
+      "Hobby": "תחביב",
+      "Travel": "נסיעות",
+      "For fun": "בשביל הכיף",
+      "My kid": "הילד שלי"
+    },
+    "validationProfileNotFound": "הפרופיל לא נמצא. אנא צא ונסה שוב."
   }
 }

@@ -499,5 +499,38 @@
     "cardUnit": "карта",
     "createCourse": "Стварыць курс",
     "sectionUnits": "раздзелы"
+  },
+  "start": {
+    "estimatedTime": "~60 с · усё на адной старонцы",
+    "title": "Давайце настроім ваш мозг.",
+    "languageTitle": "01 · Родная мова",
+    "languageIntro": "Спачатку абярыце родную мову. Перш чым вы працягнеце, мы пераключым гэтую наладу на гэту мову.",
+    "motherTongue": "Родная мова",
+    "motherTonguePlaceholder": "Выберыце сваю родную мову...",
+    "chooseLanguageHelp": "Наступная кнопка разблакіруецца пасля захавання вашай мовы.",
+    "savingLanguage": "Захаванне мовы...",
+    "next": "Далей",
+    "name": "02 · Ваша імя",
+    "namePlaceholder": "увядзіце сваё імя...",
+    "avatar": "03 · Ваш аватар",
+    "whyHere": "04 · Чаму вы тут?",
+    "dailyGoal": "05 · Штодзённая мэта",
+    "cardsPerDay": "{count} карт у дзень",
+    "topics": "06 · Тэмы (выберыце любую)",
+    "takeMeHome": "Адвядзі мяне дадому ->",
+    "saving": "Захаванне...",
+    "validationName": "Калі ласка, увядзіце сваё імя.",
+    "validationReason": "Выберыце слушную прычыну.",
+    "validationDailyGoal": "Выберыце штодзённую мэту.",
+    "validationMotherTongue": "Калі ласка, абярыце родную мову.",
+    "purposes": {
+      "School": "Школа",
+      "Job/test": "Праца/выпрабаванне",
+      "Hobby": "хобі",
+      "Travel": "Падарожжа",
+      "For fun": "Для забавы",
+      "My kid": "Маё дзіця"
+    },
+    "validationProfileNotFound": "Профіль не знойдзены. Выйдзіце і паўтарыце спробу."
   }
 }

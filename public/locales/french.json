@@ -499,5 +499,38 @@
     "saveChanges": "Enregistrer les modifications",
     "addAtLeastOneCard": "Ajoutez au moins une carte pour continuer",
     "createCourse": "Créer un cours"
+  },
+  "start": {
+    "estimatedTime": "~60 secondes · le tout sur une seule page",
+    "title": "Installons votre cerveau.",
+    "languageTitle": "01 · Langue maternelle",
+    "languageIntro": "Choisissez d'abord votre langue maternelle. Nous basculerons cette configuration dans cette langue avant de continuer.",
+    "motherTongue": "Langue maternelle",
+    "motherTonguePlaceholder": "Sélectionnez votre langue maternelle...",
+    "chooseLanguageHelp": "Le bouton suivant se déverrouille une fois votre langue enregistrée.",
+    "savingLanguage": "Sauvegarder la langue...",
+    "next": "Suivant",
+    "name": "02 · Votre nom",
+    "namePlaceholder": "tape ton nom...",
+    "avatar": "03 · Votre avatar",
+    "whyHere": "04 · Pourquoi es-tu ici ?",
+    "dailyGoal": "05 · Objectif quotidien",
+    "cardsPerDay": "{count} cartes/jour",
+    "topics": "06 · Sujets (choisissez-en un)",
+    "takeMeHome": "Ramène-moi à la maison ->",
+    "saving": "Sauvegarde...",
+    "validationName": "Veuillez entrer votre nom.",
+    "validationReason": "Veuillez sélectionner une raison valable.",
+    "validationDailyGoal": "Veuillez sélectionner un objectif quotidien.",
+    "validationMotherTongue": "Veuillez sélectionner votre langue maternelle.",
+    "purposes": {
+      "School": "École",
+      "Job/test": "Travail/test",
+      "Hobby": "Passe-temps",
+      "Travel": "Voyage",
+      "For fun": "Pour le plaisir",
+      "My kid": "Mon enfant"
+    },
+    "validationProfileNotFound": "Profil introuvable. Veuillez vous déconnecter et réessayer."
   }
 }

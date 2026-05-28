@@ -499,5 +499,38 @@
     "sectionUnits": "ailt",
     "creating": "Ag cruthú...",
     "createCourse": "Cruthaigh cúrsa"
+  },
+  "start": {
+    "estimatedTime": "~60 soicind · ar fad ar aon leathanach amháin",
+    "title": "A ligean ar bun do inchinn.",
+    "languageTitle": "01 · Máthairtheanga",
+    "languageIntro": "Roghnaigh do theanga dhúchais ar dtús. Athróimid an socrú seo go dtí an teanga sin sula leanann tú ar aghaidh.",
+    "motherTongue": "Máthairtheanga",
+    "motherTonguePlaceholder": "Roghnaigh do theanga dhúchais...",
+    "chooseLanguageHelp": "Díghlasálann an chéad chnaipe eile tar éis do theanga a shábháil.",
+    "savingLanguage": "Teanga á sábháil...",
+    "next": "Ar aghaidh",
+    "name": "02 · D'ainm",
+    "namePlaceholder": "clóscríobh d'ainm...",
+    "avatar": "03 · Do avatar",
+    "whyHere": "04 · Cén fáth a bhfuil tú anseo?",
+    "dailyGoal": "05 · Sprioc laethúil",
+    "cardsPerDay": "Cártaí {count}/lá",
+    "topics": "06 · Ábhair (pioc aon cheann)",
+    "takeMeHome": "Tóg abhaile mé ->",
+    "saving": "Ag sábháil...",
+    "validationName": "Cuir isteach d'ainm le do thoil.",
+    "validationReason": "Roghnaigh cúis bhailí.",
+    "validationDailyGoal": "Roghnaigh sprioc laethúil le do thoil.",
+    "validationMotherTongue": "Roghnaigh do mháthairtheanga le do thoil.",
+    "purposes": {
+      "School": "Scoil",
+      "Job/test": "Post/tástáil",
+      "Hobby": "Caitheamh aimsire",
+      "Travel": "Taisteal",
+      "For fun": "Le haghaidh spraoi",
+      "My kid": "Mo leanbh"
+    },
+    "validationProfileNotFound": "Próifíl gan aimsiú. Sínigh amach agus bain triail eile as."
   }
 }

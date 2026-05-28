@@ -499,5 +499,38 @@
     "creating": "Se creează...",
     "createCourse": "Creați un curs",
     "saveChanges": "Salvați modificările"
+  },
+  "start": {
+    "estimatedTime": "~60 sec · toate pe o singură pagină",
+    "title": "Hai să-ți punem la punct creierul.",
+    "languageTitle": "01 · Limba maternă",
+    "languageIntro": "Alegeți mai întâi limba maternă. Vom comuta această configurare în limba respectivă înainte de a continua.",
+    "motherTongue": "Limba maternă",
+    "motherTonguePlaceholder": "Selectați limba maternă...",
+    "chooseLanguageHelp": "Următorul buton se deblochează după ce limba dvs. este salvată.",
+    "savingLanguage": "Se salvează limba...",
+    "next": "În continuare",
+    "name": "02 · Numele tău",
+    "namePlaceholder": "scrie-ti numele...",
+    "avatar": "03 · Avatarul tău",
+    "whyHere": "04 · De ce ești aici?",
+    "dailyGoal": "05 · Obiectiv zilnic",
+    "cardsPerDay": "{count} carduri/zi",
+    "topics": "06 · Subiecte (alegeți oricare)",
+    "takeMeHome": "Du-mă acasă ->",
+    "saving": "Se salvează...",
+    "validationName": "Vă rugăm să introduceți numele dvs.",
+    "validationReason": "Vă rugăm să selectați un motiv valid.",
+    "validationDailyGoal": "Vă rugăm să selectați un obiectiv zilnic.",
+    "validationMotherTongue": "Vă rugăm să selectați limba maternă.",
+    "purposes": {
+      "School": "scoala",
+      "Job/test": "Job/test",
+      "Hobby": "Hobby",
+      "Travel": "Călătorie",
+      "For fun": "Pentru distracție",
+      "My kid": "Copilul meu"
+    },
+    "validationProfileNotFound": "Profilul nu a fost găsit. Deconectați-vă și încercați din nou."
   }
 }

@@ -499,5 +499,38 @@
     "saveChanges": "Sačuvaj promjene",
     "addAtLeastOneCard": "Dodajte barem jednu karticu da nastavite",
     "createCourse": "Kreirajte kurs"
+  },
+  "start": {
+    "estimatedTime": "~60 sekundi · sve na jednoj stranici",
+    "title": "Hajde da podesimo tvoj mozak.",
+    "languageTitle": "01 · Maternji jezik",
+    "languageIntro": "Prvo odaberite svoj maternji jezik. Prebacit ćemo ovo podešavanje na taj jezik prije nego što nastavite.",
+    "motherTongue": "maternji jezik",
+    "motherTonguePlaceholder": "Odaberite svoj maternji jezik...",
+    "chooseLanguageHelp": "Sljedeće dugme se otključava nakon što je vaš jezik sačuvan.",
+    "savingLanguage": "Spremanje jezika...",
+    "next": "Sledeći",
+    "name": "02 · Vaše ime",
+    "namePlaceholder": "ukucaj svoje ime...",
+    "avatar": "03 · Vaš avatar",
+    "whyHere": "04 · Zašto si ovdje?",
+    "dailyGoal": "05 · Dnevni cilj",
+    "cardsPerDay": "{count} kartica/dan",
+    "topics": "06 · Teme (odaberite bilo koju)",
+    "takeMeHome": "Odvezi me kući ->",
+    "saving": "Spremanje...",
+    "validationName": "Molimo unesite svoje ime.",
+    "validationReason": "Molimo odaberite valjan razlog.",
+    "validationDailyGoal": "Molimo odaberite dnevni cilj.",
+    "validationMotherTongue": "Molimo odaberite svoj maternji jezik.",
+    "purposes": {
+      "School": "Škola",
+      "Job/test": "Posao/test",
+      "Hobby": "Hobi",
+      "Travel": "Putovanja",
+      "For fun": "Za zabavu",
+      "My kid": "Moje dete"
+    },
+    "validationProfileNotFound": "Profil nije pronađen. Molimo odjavite se i pokušajte ponovo."
   }
 }

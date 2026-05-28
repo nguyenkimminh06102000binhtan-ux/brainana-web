@@ -499,5 +499,38 @@
     "creating": "Oluşturuluyor...",
     "saveChanges": "Değişiklikleri kaydet",
     "createCourse": "Kurs oluştur"
+  },
+  "start": {
+    "estimatedTime": "~60 saniye · hepsi tek sayfada",
+    "title": "Beyninizi ayarlayalım.",
+    "languageTitle": "01 · Ana dil",
+    "languageIntro": "Önce ana dilinizi seçin. Devam etmeden önce bu kurulumu o dile değiştireceğiz.",
+    "motherTongue": "Ana dil",
+    "motherTonguePlaceholder": "Ana dilinizi seçin...",
+    "chooseLanguageHelp": "Diliniz kaydedildikten sonra sonraki düğmenin kilidi açılır.",
+    "savingLanguage": "Dil kaydediliyor...",
+    "next": "Sonraki",
+    "name": "02 · Adınız",
+    "namePlaceholder": "adınızı yazın...",
+    "avatar": "03 · Avatarınız",
+    "whyHere": "04 · Neden buradasın?",
+    "dailyGoal": "05 · Günlük hedef",
+    "cardsPerDay": "{count} kart/gün",
+    "topics": "06 · Konular (herhangi birini seçin)",
+    "takeMeHome": "Beni eve götür ->",
+    "saving": "Kaydediliyor...",
+    "validationName": "Lütfen isminizi giriniz.",
+    "validationReason": "Lütfen geçerli bir neden seçin.",
+    "validationDailyGoal": "Lütfen günlük bir hedef seçin.",
+    "validationMotherTongue": "Lütfen ana dilinizi seçin.",
+    "purposes": {
+      "School": "okul",
+      "Job/test": "İş/test",
+      "Hobby": "Hobi",
+      "Travel": "Seyahat",
+      "For fun": "Eğlence için",
+      "My kid": "Çocuğum"
+    },
+    "validationProfileNotFound": "Profil bulunamadı. Lütfen oturumu kapatıp tekrar deneyin."
   }
 }

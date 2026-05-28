@@ -499,5 +499,38 @@
     "creating": "Iyadala...",
     "createCourse": "Dala isifundo",
     "saveChanges": "Londoloza izinguquko"
+  },
+  "start": {
+    "estimatedTime": "~60 isekhondi · konke ekhasini elilodwa",
+    "title": "Masimise ubuchopho bakho.",
+    "languageTitle": "01 · Ulimi lwebele",
+    "languageIntro": "Khetha ulimi lwakho lwendabuko kuqala. Sizoshintsha lokhu kusetha sikuyise kulolo limi ngaphambi kokuthi uqhubeke.",
+    "motherTongue": "Ulimi lwebele",
+    "motherTonguePlaceholder": "Khetha ulimi lwakho lwendabuko...",
+    "chooseLanguageHelp": "Inkinobho elandelayo iyavuleka ngemva kokuba ulimi lwakho lulondolozwe.",
+    "savingLanguage": "Ilondoloza ulimi...",
+    "next": "Okulandelayo",
+    "name": "02 · Igama lakho",
+    "namePlaceholder": "bhala igama lakho...",
+    "avatar": "03 · I-avatar yakho",
+    "whyHere": "04 · Kungani ulapha?",
+    "dailyGoal": "05 · Umgomo wansuku zonke",
+    "cardsPerDay": "{count} amakhadi/ngosuku",
+    "topics": "06 · Izihloko (khetha noma yiziphi)",
+    "takeMeHome": "Ngiyise ekhaya ->",
+    "saving": "Iyalondoloza...",
+    "validationName": "Sicela ufake igama lakho.",
+    "validationReason": "Sicela ukhethe isizathu esivumelekile.",
+    "validationDailyGoal": "Sicela ukhethe umgomo wansuku zonke.",
+    "validationMotherTongue": "Sicela ukhethe ulimi lwakho lwebele.",
+    "purposes": {
+      "School": "Isikole",
+      "Job/test": "Umsebenzi/ukuhlola",
+      "Hobby": "Okokuzilibazisa",
+      "Travel": "Ukuhamba",
+      "For fun": "Okokuzijabulisa",
+      "My kid": "Ingane yami"
+    },
+    "validationProfileNotFound": "Iphrofayela ayitholakali. Sicela uphume bese uzama futhi."
   }
 }

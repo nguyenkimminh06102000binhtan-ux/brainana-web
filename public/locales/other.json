@@ -499,5 +499,38 @@
     "cancel": "Cancel",
     "saving": "Saving...",
     "saveChanges": "Save changes"
+  },
+  "start": {
+    "estimatedTime": "~60 sec · all on one page",
+    "title": "Let's set up your brain.",
+    "languageTitle": "01 · Mother tongue",
+    "languageIntro": "Choose your native language first. We will switch this setup into that language before you continue.",
+    "motherTongue": "Mother tongue",
+    "motherTonguePlaceholder": "Select your native language...",
+    "chooseLanguageHelp": "The next button unlocks after your language is saved.",
+    "savingLanguage": "Saving language...",
+    "next": "Next",
+    "name": "02 · Your name",
+    "namePlaceholder": "type your name...",
+    "avatar": "03 · Your avatar",
+    "whyHere": "04 · Why are you here?",
+    "dailyGoal": "05 · Daily goal",
+    "cardsPerDay": "{count} cards/day",
+    "topics": "06 · Topics (pick any)",
+    "takeMeHome": "Take me home ->",
+    "saving": "Saving...",
+    "validationName": "Please enter your name.",
+    "validationReason": "Please select a valid reason.",
+    "validationDailyGoal": "Please select a daily goal.",
+    "validationMotherTongue": "Please select your mother tongue.",
+    "purposes": {
+      "School": "School",
+      "Job/test": "Job/test",
+      "Hobby": "Hobby",
+      "Travel": "Travel",
+      "For fun": "For fun",
+      "My kid": "My kid"
+    },
+    "validationProfileNotFound": "Profile not found. Please sign out and try again."
   }
 }

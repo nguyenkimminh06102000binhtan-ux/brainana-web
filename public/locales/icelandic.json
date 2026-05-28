@@ -499,5 +499,38 @@
     "sectionUnits": "köflum",
     "saveChanges": "Vista breytingar",
     "creating": "Býr til..."
+  },
+  "start": {
+    "estimatedTime": "~60 sek · allt á einni síðu",
+    "title": "Við skulum setja upp heilann.",
+    "languageTitle": "01 · Móðurmál",
+    "languageIntro": "Veldu móðurmál þitt fyrst. Við munum skipta þessari uppsetningu yfir á það tungumál áður en þú heldur áfram.",
+    "motherTongue": "Móðurmál",
+    "motherTonguePlaceholder": "Veldu móðurmálið þitt...",
+    "chooseLanguageHelp": "Næsti hnappur opnast eftir að tungumálið þitt hefur verið vistað.",
+    "savingLanguage": "Vistar tungumál...",
+    "next": "Næst",
+    "name": "02 · Nafnið þitt",
+    "namePlaceholder": "skrifaðu nafnið þitt...",
+    "avatar": "03 · Avatarinn þinn",
+    "whyHere": "04 · Af hverju ertu hér?",
+    "dailyGoal": "05 · Daglegt markmið",
+    "cardsPerDay": "{count} kort/dag",
+    "topics": "06 · Efni (veljið hvaða)",
+    "takeMeHome": "Farðu með mig heim ->",
+    "saving": "Vistar...",
+    "validationName": "Vinsamlegast sláðu inn nafnið þitt.",
+    "validationReason": "Vinsamlegast veldu gilda ástæðu.",
+    "validationDailyGoal": "Vinsamlegast veldu daglegt markmið.",
+    "validationMotherTongue": "Vinsamlegast veldu móðurmál þitt.",
+    "purposes": {
+      "School": "Skóli",
+      "Job/test": "Starf/próf",
+      "Hobby": "Áhugamál",
+      "Travel": "Ferðalög",
+      "For fun": "Til gamans",
+      "My kid": "Barnið mitt"
+    },
+    "validationProfileNotFound": "Prófíll fannst ekki. Vinsamlegast skráðu þig út og reyndu aftur."
   }
 }

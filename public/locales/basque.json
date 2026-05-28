@@ -499,5 +499,38 @@
     "createCourse": "Sortu ikastaroa",
     "cardUnit": "txartela",
     "addAtLeastOneCard": "Gehitu gutxienez txartel bat jarraitzeko"
+  },
+  "start": {
+    "estimatedTime": "~60 segundo · dena orrialde bakarrean",
+    "title": "Konfigura dezagun zure garuna.",
+    "languageTitle": "01 · Ama hizkuntza",
+    "languageIntro": "Aukeratu zure ama hizkuntza lehenik. Jarraitu aurretik, konfigurazio hau hizkuntza horretara aldatuko dugu.",
+    "motherTongue": "Ama hizkuntza",
+    "motherTonguePlaceholder": "Hautatu zure ama hizkuntza...",
+    "chooseLanguageHelp": "Hurrengo botoia zure hizkuntza gorde ondoren desblokeatzen da.",
+    "savingLanguage": "Hizkuntza gordetzen...",
+    "next": "Hurrengoa",
+    "name": "02 · Zure izena",
+    "namePlaceholder": "idatzi zure izena...",
+    "avatar": "03 · Zure avatarra",
+    "whyHere": "04 · Zergatik zaude hemen?",
+    "dailyGoal": "05 · Eguneko helburua",
+    "cardsPerDay": "{count} txartelak/egun",
+    "topics": "06 · Gaiak (aukeratu edozein)",
+    "takeMeHome": "Eraman nazazu etxera ->",
+    "saving": "Gordetzen...",
+    "validationName": "Mesedez, idatzi zure izena.",
+    "validationReason": "Mesedez, hautatu baliozko arrazoi bat.",
+    "validationDailyGoal": "Mesedez, hautatu eguneroko helburu bat.",
+    "validationMotherTongue": "Mesedez, hautatu zure ama hizkuntza.",
+    "purposes": {
+      "School": "Eskola",
+      "Job/test": "Lana/proba",
+      "Hobby": "Zaletasuna",
+      "Travel": "Bidaia",
+      "For fun": "Ondo pasatzeko",
+      "My kid": "Nire umea"
+    },
+    "validationProfileNotFound": "Ez da profila aurkitu. Mesedez, amaitu saioa eta saiatu berriro."
   }
 }

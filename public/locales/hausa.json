@@ -499,5 +499,38 @@
     "saving": "Ana ajiyewa...",
     "cancel": "Soke",
     "createCourse": "Ƙirƙiri hanya"
+  },
+  "start": {
+    "estimatedTime": "~60 sec · duk a shafi daya",
+    "title": "Mu kafa kwakwalwarka.",
+    "languageTitle": "01 · Harshen uwa",
+    "languageIntro": "Zaba yarenku na asali tukuna. Za mu canza wannan saitin zuwa wannan harshe kafin ku ci gaba.",
+    "motherTongue": "Harshen uwa",
+    "motherTonguePlaceholder": "Zaɓi yarenku na asali...",
+    "chooseLanguageHelp": "Maɓalli na gaba yana buɗewa bayan an adana yaren ku.",
+    "savingLanguage": "Ajiye harshe...",
+    "next": "Na gaba",
+    "name": "02 · Sunanku",
+    "namePlaceholder": "rubuta sunan ku...",
+    "avatar": "03 · Avatar ku",
+    "whyHere": "04 · Me yasa kuke nan?",
+    "dailyGoal": "05 · burin yau da kullun",
+    "cardsPerDay": "katunan {count}/rana",
+    "topics": "06 · Batutuwa (zaba kowane)",
+    "takeMeHome": "Kai ni gida ->",
+    "saving": "Ana ajiyewa...",
+    "validationName": "Da fatan za a shigar da sunan ku.",
+    "validationReason": "Da fatan za a zaɓi ingantaccen dalili.",
+    "validationDailyGoal": "Da fatan za a zaɓi burin yau da kullun.",
+    "validationMotherTongue": "Da fatan za a zaɓi harshen ku na mahaifa.",
+    "purposes": {
+      "School": "Makaranta",
+      "Job/test": "Aiki/gwaji",
+      "Hobby": "Hobby",
+      "Travel": "Tafiya",
+      "For fun": "Don jin daɗi",
+      "My kid": "Yaro na"
+    },
+    "validationProfileNotFound": "Ba a samo bayanin martaba ba. Da fatan za a fita kuma a sake gwadawa."
   }
 }

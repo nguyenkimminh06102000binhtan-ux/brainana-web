@@ -499,5 +499,38 @@
     "saveChanges": "Salvar alterações",
     "saving": "Salvando...",
     "sectionUnits": "seções"
+  },
+  "start": {
+    "estimatedTime": "~60 segundos · tudo em uma página",
+    "title": "Vamos configurar seu cérebro.",
+    "languageTitle": "01 · Língua materna",
+    "languageIntro": "Escolha primeiro seu idioma nativo. Mudaremos esta configuração para esse idioma antes de você continuar.",
+    "motherTongue": "Língua materna",
+    "motherTonguePlaceholder": "Selecione seu idioma nativo...",
+    "chooseLanguageHelp": "O próximo botão é desbloqueado depois que seu idioma é salvo.",
+    "savingLanguage": "Salvando idioma...",
+    "next": "Próximo",
+    "name": "02 · Seu nome",
+    "namePlaceholder": "digite seu nome...",
+    "avatar": "03 · Seu avatar",
+    "whyHere": "04 · Por que você está aqui?",
+    "dailyGoal": "05 · Meta diária",
+    "cardsPerDay": "{count} cartões/dia",
+    "topics": "06 · Tópicos (escolha qualquer)",
+    "takeMeHome": "Leve-me para casa ->",
+    "saving": "Salvando...",
+    "validationName": "Por favor, digite seu nome.",
+    "validationReason": "Selecione um motivo válido.",
+    "validationDailyGoal": "Selecione uma meta diária.",
+    "validationMotherTongue": "Por favor selecione a sua língua materna.",
+    "purposes": {
+      "School": "Escola",
+      "Job/test": "Trabalho/teste",
+      "Hobby": "Passatempo",
+      "Travel": "Viajar",
+      "For fun": "Para se divertir",
+      "My kid": "Meu filho"
+    },
+    "validationProfileNotFound": "Perfil não encontrado. Saia e tente novamente."
   }
 }

@@ -1,11 +1,79 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 
 export type OnboardingState = { error: string } | null;
+export type NativeLanguageState = {
+  error: string | null;
+  language: string | null;
+  labels: ReturnType<typeof getLocale>["start"];
+  categories: ReturnType<typeof getLocale>["categories"];
+};
+
+function languageLabels(language: string | null) {
+  const locale = getLocale(language);
+  return { labels: locale.start, categories: locale.categories };
+}
+
+export async function saveNativeLanguage(language: string): Promise<NativeLanguageState> {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const nativeLanguage = language.trim();
+  if (!(LANGUAGES as readonly string[]).includes(nativeLanguage)) {
+    const { labels, categories } = languageLabels(null);
+    return {
+      error: labels.validationMotherTongue,
+      language: null,
+      labels,
+      categories,
+    };
+  }
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      native_language: nativeLanguage,
+      origin_languages: [nativeLanguage],
+      active_origin_language: nativeLanguage,
+    })
+    .eq("id", user.id);
+
+  const { labels, categories } = languageLabels(nativeLanguage);
+
+  if (error) {
+    return {
+      error: error.message,
+      language: null,
+      labels,
+      categories,
+    };
+  }
+
+  cookieStore.set("brainana_active_origin_language", nativeLanguage, {
+    path: "/",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 365,
+  });
+
+  revalidatePath("/", "layout");
+
+  return {
+    error: null,
+    language: nativeLanguage,
+    labels,
+    categories,
+  };
+}
 
 export async function saveOnboarding(
   _prev: OnboardingState,
@@ -28,13 +96,15 @@ export async function saveOnboarding(
     .filter((i): boolean => (INTERESTS as readonly string[]).includes(i));
   const nativeLanguage = String(formData.get("native_language") ?? "").trim();
 
-  if (!displayName) return { error: "Please enter your name." };
+  const locale = getLocale(nativeLanguage || null);
+
+  if (!displayName) return { error: locale.start.validationName };
   if (!(PURPOSES as readonly string[]).includes(purpose))
-    return { error: "Please select a valid reason." };
+    return { error: locale.start.validationReason };
   if (!(DAILY_GOALS as readonly number[]).includes(dailyGoal))
-    return { error: "Please select a daily goal." };
+    return { error: locale.start.validationDailyGoal };
   if (!(LANGUAGES as readonly string[]).includes(nativeLanguage))
-    return { error: "Please select your mother tongue." };
+    return { error: locale.start.validationMotherTongue };
 
   const { data, error } = await supabase
     .from("profiles")
@@ -54,7 +124,7 @@ export async function saveOnboarding(
 
   if (error) return { error: error.message };
   if (!data || data.length === 0)
-    return { error: "Profile not found. Please sign out and try again." };
+    return { error: locale.start.validationProfileNotFound };
 
   redirect("/home");
 }

@@ -499,5 +499,38 @@
     "saving": "Gardando...",
     "createCourse": "Crear curso",
     "sectionUnits": "seccións"
+  },
+  "start": {
+    "estimatedTime": "~60 segundos · todo nunha páxina",
+    "title": "Configuramos o teu cerebro.",
+    "languageTitle": "01 · Lingua materna",
+    "languageIntro": "Escolla primeiro o seu idioma nativo. Cambiaremos esta configuración a ese idioma antes de continuar.",
+    "motherTongue": "Lingua materna",
+    "motherTonguePlaceholder": "Selecciona o teu idioma nativo...",
+    "chooseLanguageHelp": "O seguinte botón desbloquearase despois de gardar o teu idioma.",
+    "savingLanguage": "Gardando idioma...",
+    "next": "A continuación",
+    "name": "02 · O teu nome",
+    "namePlaceholder": "escribe o teu nome...",
+    "avatar": "03 · O teu avatar",
+    "whyHere": "04 · Por que estás aquí?",
+    "dailyGoal": "05 · Obxectivo diario",
+    "cardsPerDay": "Tarxetas {count}/día",
+    "topics": "06 · Temas (escolla calquera)",
+    "takeMeHome": "Lévame a casa ->",
+    "saving": "Gardando...",
+    "validationName": "Introduce o teu nome.",
+    "validationReason": "Selecciona un motivo válido.",
+    "validationDailyGoal": "Selecciona un obxectivo diario.",
+    "validationMotherTongue": "Seleccione a súa lingua materna.",
+    "purposes": {
+      "School": "Escola",
+      "Job/test": "Traballo/proba",
+      "Hobby": "Pasatempo",
+      "Travel": "Viaxar",
+      "For fun": "Por diversión",
+      "My kid": "Meu fillo"
+    },
+    "validationProfileNotFound": "Non se atopou o perfil. Pecha sesión e téntao de novo."
   }
 }

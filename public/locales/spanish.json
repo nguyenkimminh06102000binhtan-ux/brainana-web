@@ -499,5 +499,38 @@
     "saving": "Ahorro...",
     "cardUnits": "tarjetas",
     "saveChanges": "Guardar cambios"
+  },
+  "start": {
+    "estimatedTime": "~60 segundos · todo en una página",
+    "title": "Configuremos tu cerebro.",
+    "languageTitle": "01 · Lengua materna",
+    "languageIntro": "Elija su idioma nativo primero. Cambiaremos esta configuración a ese idioma antes de continuar.",
+    "motherTongue": "lengua materna",
+    "motherTonguePlaceholder": "Seleccione su idioma nativo...",
+    "chooseLanguageHelp": "El siguiente botón se desbloquea después de guardar su idioma.",
+    "savingLanguage": "Guardando idioma...",
+    "next": "Siguiente",
+    "name": "02 · Tu nombre",
+    "namePlaceholder": "escribe tu nombre...",
+    "avatar": "03 · Tu avatar",
+    "whyHere": "04 · ¿Por qué estás aquí?",
+    "dailyGoal": "05 · Meta diaria",
+    "cardsPerDay": "{count} tarjetas/día",
+    "topics": "06 · Temas (elija cualquiera)",
+    "takeMeHome": "Llévame a casa ->",
+    "saving": "Guardando...",
+    "validationName": "Por favor ingrese su nombre.",
+    "validationReason": "Seleccione un motivo válido.",
+    "validationDailyGoal": "Seleccione un objetivo diario.",
+    "validationMotherTongue": "Por favor seleccione su lengua materna.",
+    "purposes": {
+      "School": "escuela",
+      "Job/test": "Trabajo/prueba",
+      "Hobby": "Pasatiempo",
+      "Travel": "viajar",
+      "For fun": "Para divertirse",
+      "My kid": "mi hijo"
+    },
+    "validationProfileNotFound": "Perfil no encontrado. Por favor, cierra sesión e inténtalo de nuevo."
   }
 }

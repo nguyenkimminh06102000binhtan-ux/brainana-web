@@ -499,5 +499,38 @@
     "saveChanges": "Uložte změny",
     "createCourse": "Vytvořit kurz",
     "sectionUnits": "sekce"
+  },
+  "start": {
+    "estimatedTime": "~60 sekund · vše na jedné stránce",
+    "title": "Pojďme nastavit váš mozek.",
+    "languageTitle": "01 · Mateřský jazyk",
+    "languageIntro": "Nejprve si vyberte svůj rodný jazyk. Než budete pokračovat, přepneme toto nastavení do tohoto jazyka.",
+    "motherTongue": "Mateřský jazyk",
+    "motherTonguePlaceholder": "Vyberte svůj rodný jazyk...",
+    "chooseLanguageHelp": "Další tlačítko se odemkne po uložení vašeho jazyka.",
+    "savingLanguage": "Ukládání jazyka...",
+    "next": "Další",
+    "name": "02 · Vaše jméno",
+    "namePlaceholder": "napište své jméno...",
+    "avatar": "03 · Váš avatar",
+    "whyHere": "04 · Proč jsi tady?",
+    "dailyGoal": "05 · Denní cíl",
+    "cardsPerDay": "{count} karet/den",
+    "topics": "06 · Témata (vyberte libovolné)",
+    "takeMeHome": "Vezmi mě domů ->",
+    "saving": "Ukládání...",
+    "validationName": "Zadejte prosím své jméno.",
+    "validationReason": "Vyberte platný důvod.",
+    "validationDailyGoal": "Vyberte prosím denní cíl.",
+    "validationMotherTongue": "Vyberte prosím svůj mateřský jazyk.",
+    "purposes": {
+      "School": "Škola",
+      "Job/test": "Práce/test",
+      "Hobby": "Hobby",
+      "Travel": "Cestování",
+      "For fun": "Pro zábavu",
+      "My kid": "Moje dítě"
+    },
+    "validationProfileNotFound": "Profil nenalezen. Odhlaste se prosím a zkuste to znovu."
   }
 }

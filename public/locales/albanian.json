@@ -499,5 +499,38 @@
     "cardUnit": "kartelë",
     "sectionUnits": "seksionet",
     "createCourse": "Krijo kurs"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · të gjitha në një faqe",
+    "title": "Le të rregullojmë trurin tuaj.",
+    "languageTitle": "01 · Gjuha amtare",
+    "languageIntro": "Së pari zgjidhni gjuhën tuaj amtare. Ne do ta kalojmë këtë konfigurim në atë gjuhë përpara se të vazhdoni.",
+    "motherTongue": "Gjuha amtare",
+    "motherTonguePlaceholder": "Zgjidhni gjuhën tuaj amtare...",
+    "chooseLanguageHelp": "Butoni tjetër zhbllokohet pasi të ruhet gjuha juaj.",
+    "savingLanguage": "Gjuha po ruhet...",
+    "next": "Tjetra",
+    "name": "02 · Emri juaj",
+    "namePlaceholder": "shkruani emrin tuaj...",
+    "avatar": "03 · Avatari juaj",
+    "whyHere": "04 · Pse jeni këtu?",
+    "dailyGoal": "05 · Objektivi ditor",
+    "cardsPerDay": "Kartat {count}/ditë",
+    "topics": "06 · Tema (zgjidh ndonjë)",
+    "takeMeHome": "Më çoni në shtëpi ->",
+    "saving": "Po ruan...",
+    "validationName": "Ju lutemi shkruani emrin tuaj.",
+    "validationReason": "Ju lutemi zgjidhni një arsye të vlefshme.",
+    "validationDailyGoal": "Ju lutemi zgjidhni një objektiv ditor.",
+    "validationMotherTongue": "Ju lutemi zgjidhni gjuhën tuaj amtare.",
+    "purposes": {
+      "School": "Shkolla",
+      "Job/test": "Punë/test",
+      "Hobby": "Hobi",
+      "Travel": "Udhëtoni",
+      "For fun": "Për argëtim",
+      "My kid": "djali im"
+    },
+    "validationProfileNotFound": "Profili nuk u gjet. Dil dhe provo sërish."
   }
 }

@@ -499,5 +499,38 @@
     "saveChanges": "Simpan perubahan",
     "createCourse": "Buat kursus",
     "addAtLeastOneCard": "Tambahkan setidaknya satu kartu untuk melanjutkan"
+  },
+  "start": {
+    "estimatedTime": "~60 detik · semuanya dalam satu halaman",
+    "title": "Ayo siapkan otakmu.",
+    "languageTitle": "01 · Bahasa ibu",
+    "languageIntro": "Pilih bahasa ibu Anda terlebih dahulu. Kami akan mengalihkan pengaturan ini ke bahasa tersebut sebelum Anda melanjutkan.",
+    "motherTongue": "Bahasa ibu",
+    "motherTonguePlaceholder": "Pilih bahasa ibu Anda...",
+    "chooseLanguageHelp": "Tombol berikutnya terbuka setelah bahasa Anda disimpan.",
+    "savingLanguage": "Menyimpan bahasa...",
+    "next": "Selanjutnya",
+    "name": "02 · Namamu",
+    "namePlaceholder": "ketikkan namamu...",
+    "avatar": "03 · Avatarmu",
+    "whyHere": "04 · Mengapa kamu ada di sini?",
+    "dailyGoal": "05 · Tujuan harian",
+    "cardsPerDay": "Kartu {count}/hari",
+    "topics": "06 · Topik (pilih apa saja)",
+    "takeMeHome": "Antar aku pulang ->",
+    "saving": "Menyimpan...",
+    "validationName": "Silakan masukkan nama Anda.",
+    "validationReason": "Silakan pilih alasan yang valid.",
+    "validationDailyGoal": "Silakan pilih sasaran harian.",
+    "validationMotherTongue": "Silakan pilih bahasa ibu Anda.",
+    "purposes": {
+      "School": "Sekolah",
+      "Job/test": "Pekerjaan/tes",
+      "Hobby": "Hobi",
+      "Travel": "Perjalanan",
+      "For fun": "Untuk bersenang-senang",
+      "My kid": "Anakku"
+    },
+    "validationProfileNotFound": "Profil tidak ditemukan. Silakan keluar dan coba lagi."
   }
 }

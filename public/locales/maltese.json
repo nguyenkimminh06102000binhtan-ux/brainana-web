@@ -499,5 +499,38 @@
     "saving": "Iffrankar...",
     "creating": "Il-ħolqien...",
     "sectionUnits": "sezzjonijiet"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · kollha fuq paġna waħda",
+    "title": "Ejja nwaqqfu moħħok.",
+    "languageTitle": "01 · Ilsien omm",
+    "languageIntro": "Agħżel il-lingwa nattiva tiegħek l-ewwel. Aħna se naqilbu din is-setup f'dik il-lingwa qabel ma tkompli.",
+    "motherTongue": "Ilsien omm",
+    "motherTonguePlaceholder": "Agħżel il-lingwa nattiva tiegħek...",
+    "chooseLanguageHelp": "Il-buttuna li jmiss tinfetaħ wara li tiġi salvata l-lingwa tiegħek.",
+    "savingLanguage": "Nissejvja l-lingwa...",
+    "next": "Li jmiss",
+    "name": "02 · Ismek",
+    "namePlaceholder": "ittajpja ismek...",
+    "avatar": "03 · L-avatar tiegħek",
+    "whyHere": "04 · Għaliex qiegħed hawn?",
+    "dailyGoal": "05 · Għan ta’ kuljum",
+    "cardsPerDay": "{count} cards/jum",
+    "topics": "06 · Suġġetti (agħżel kwalunkwe)",
+    "takeMeHome": "Ħudni d-dar ->",
+    "saving": "Iffrankar...",
+    "validationName": "Jekk jogħġbok daħħal ismek.",
+    "validationReason": "Jekk jogħġbok agħżel raġuni valida.",
+    "validationDailyGoal": "Jekk jogħġbok agħżel mira ta' kuljum.",
+    "validationMotherTongue": "Jekk jogħġbok agħżel ilsien matern tiegħek.",
+    "purposes": {
+      "School": "Skola",
+      "Job/test": "Xogħol/test",
+      "Hobby": "passatemp",
+      "Travel": "Ivvjaġġar",
+      "For fun": "Għall-gost",
+      "My kid": "It-tifel tiegħi"
+    },
+    "validationProfileNotFound": "Profil ma nstabx. Jekk jogħġbok iffirma u erġa' pprova."
   }
 }

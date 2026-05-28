@@ -499,5 +499,38 @@
     "cardUnit": "kart",
     "createCourse": "Kurs yaradın",
     "sectionUnit": "bölmə"
+  },
+  "start": {
+    "estimatedTime": "~60 saniyə · hamısı bir səhifədə",
+    "title": "Gəlin beyninizi quraq.",
+    "languageTitle": "01 · Ana dili",
+    "languageIntro": "Əvvəlcə doğma dilinizi seçin. Davam etməzdən əvvəl bu quraşdırmanı həmin dilə keçirəcəyik.",
+    "motherTongue": "Ana dili",
+    "motherTonguePlaceholder": "Ana dilinizi seçin...",
+    "chooseLanguageHelp": "Diliniz saxlandıqdan sonra növbəti düymənin kilidi açılır.",
+    "savingLanguage": "Dil yadda saxlanılır...",
+    "next": "Sonrakı",
+    "name": "02 · Adınız",
+    "namePlaceholder": "adınızı yazın...",
+    "avatar": "03 · Sizin avatarınız",
+    "whyHere": "04 · Niyə buradasan?",
+    "dailyGoal": "05 · Gündəlik məqsəd",
+    "cardsPerDay": "{count} kartları/gün",
+    "topics": "06 · Mövzular (istənilənləri seçin)",
+    "takeMeHome": "Məni evə apar ->",
+    "saving": "Yadda saxlanılır...",
+    "validationName": "Zəhmət olmasa adınızı daxil edin.",
+    "validationReason": "Zəhmət olmasa etibarlı səbəb seçin.",
+    "validationDailyGoal": "Gündəlik hədəf seçin.",
+    "validationMotherTongue": "Zəhmət olmasa ana dilinizi seçin.",
+    "purposes": {
+      "School": "Məktəb",
+      "Job/test": "İş/test",
+      "Hobby": "Hobbi",
+      "Travel": "Səyahət",
+      "For fun": "Əylənmək üçün",
+      "My kid": "mənim balam"
+    },
+    "validationProfileNotFound": "Profil tapılmadı. Zəhmət olmasa hesabdan çıxın və yenidən cəhd edin."
   }
 }

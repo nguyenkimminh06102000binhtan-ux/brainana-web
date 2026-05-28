@@ -499,5 +499,38 @@
     "creating": "Notiek izveide...",
     "createCourse": "Izveidot kursu",
     "saveChanges": "Saglabāt izmaiņas"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · viss vienā lapā",
+    "title": "Sakārtosim jūsu smadzenes.",
+    "languageTitle": "01 · Dzimtā valoda",
+    "languageIntro": "Vispirms izvēlieties savu dzimto valodu. Pirms turpināt, mēs pārslēgsim šo iestatījumu uz šo valodu.",
+    "motherTongue": "Dzimtā valoda",
+    "motherTonguePlaceholder": "Izvēlieties savu dzimto valodu...",
+    "chooseLanguageHelp": "Nākamā poga tiek atbloķēta pēc valodas saglabāšanas.",
+    "savingLanguage": "Notiek valodas saglabāšana...",
+    "next": "Tālāk",
+    "name": "02 · Tavs vārds",
+    "namePlaceholder": "ieraksti savu vārdu...",
+    "avatar": "03 · Tavs iemiesojums",
+    "whyHere": "04 · Kāpēc tu esi šeit?",
+    "dailyGoal": "05 · Dienas mērķis",
+    "cardsPerDay": "{count} kartes/dienā",
+    "topics": "06 · Tēmas (izvēlieties jebkuru)",
+    "takeMeHome": "Aizved mani mājās ->",
+    "saving": "Notiek saglabāšana...",
+    "validationName": "Lūdzu, ievadiet savu vārdu.",
+    "validationReason": "Lūdzu, atlasiet derīgu iemeslu.",
+    "validationDailyGoal": "Lūdzu, atlasiet dienas mērķi.",
+    "validationMotherTongue": "Lūdzu, izvēlieties savu dzimto valodu.",
+    "purposes": {
+      "School": "Skola",
+      "Job/test": "Darbs/pārbaudījums",
+      "Hobby": "Hobijs",
+      "Travel": "Ceļot",
+      "For fun": "Izklaidei",
+      "My kid": "Mans bērns"
+    },
+    "validationProfileNotFound": "Profils nav atrasts. Lūdzu, izrakstieties un mēģiniet vēlreiz."
   }
 }

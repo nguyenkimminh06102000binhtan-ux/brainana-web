@@ -499,5 +499,38 @@
     "saving": "保存...",
     "saveChanges": "保存更改",
     "createCourse": "创建课程"
+  },
+  "start": {
+    "estimatedTime": "~60 秒 · 全部在一页上",
+    "title": "让我们来设置你的大脑。",
+    "languageTitle": "01 · 母语",
+    "languageIntro": "首先选择您的母语。在您继续之前，我们会将此设置切换为该语言。",
+    "motherTongue": "母语",
+    "motherTonguePlaceholder": "选择您的母语...",
+    "chooseLanguageHelp": "保存您的语言后，下一个按钮将解锁。",
+    "savingLanguage": "正在保存语言...",
+    "next": "下一步",
+    "name": "02·你的名字",
+    "namePlaceholder": "输入你的名字...",
+    "avatar": "03·你的头像",
+    "whyHere": "04 · 你为什么在这里？",
+    "dailyGoal": "05·每日目标",
+    "cardsPerDay": "{count} 卡/天",
+    "topics": "06·主题（任选）",
+    "takeMeHome": "带我回家->",
+    "saving": "正在保存...",
+    "validationName": "请输入您的姓名。",
+    "validationReason": "请选择一个有效的理由。",
+    "validationDailyGoal": "请选择每日目标。",
+    "validationMotherTongue": "请选择您的母语。",
+    "purposes": {
+      "School": "学校",
+      "Job/test": "作业/测试",
+      "Hobby": "爱好",
+      "Travel": "旅行",
+      "For fun": "为了好玩",
+      "My kid": "我的孩子"
+    },
+    "validationProfileNotFound": "未找到个人资料。请退出并重试。"
   }
 }

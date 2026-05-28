@@ -499,5 +499,38 @@
     "cancel": "Avboka",
     "saving": "Sparande...",
     "saveChanges": "Spara ändringar"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · allt på en sida",
+    "title": "Låt oss ställa in din hjärna.",
+    "languageTitle": "01 · Modersmål",
+    "languageIntro": "Välj ditt modersmål först. Vi kommer att byta denna inställning till det språket innan du fortsätter.",
+    "motherTongue": "Modersmål",
+    "motherTonguePlaceholder": "Välj ditt modersmål...",
+    "chooseLanguageHelp": "Nästa knapp låses upp efter att ditt språk har sparats.",
+    "savingLanguage": "Sparar språk...",
+    "next": "Nästa",
+    "name": "02 · Ditt namn",
+    "namePlaceholder": "skriv ditt namn...",
+    "avatar": "03 · Din avatar",
+    "whyHere": "04 · Varför är du här?",
+    "dailyGoal": "05 · Dagligt mål",
+    "cardsPerDay": "{count}-kort/dag",
+    "topics": "06 · Ämnen (välj valfritt)",
+    "takeMeHome": "Ta mig hem ->",
+    "saving": "Sparar...",
+    "validationName": "Vänligen ange ditt namn.",
+    "validationReason": "Välj ett giltigt skäl.",
+    "validationDailyGoal": "Välj ett dagligt mål.",
+    "validationMotherTongue": "Välj ditt modersmål.",
+    "purposes": {
+      "School": "Skola",
+      "Job/test": "Jobb/test",
+      "Hobby": "Hobby",
+      "Travel": "Resa",
+      "For fun": "För skojs skull",
+      "My kid": "Mitt barn"
+    },
+    "validationProfileNotFound": "Profilen hittades inte. Logga ut och försök igen."
   }
 }

@@ -499,5 +499,38 @@
     "cancel": "Zrušiť",
     "saveChanges": "Uložte zmeny",
     "saving": "Ukladá sa..."
+  },
+  "start": {
+    "estimatedTime": "~60 sekúnd · všetko na jednej stránke",
+    "title": "Nastavme si mozog.",
+    "languageTitle": "01 · Materinský jazyk",
+    "languageIntro": "Najprv si vyberte svoj rodný jazyk. Pred pokračovaním prepneme toto nastavenie do tohto jazyka.",
+    "motherTongue": "Materinský jazyk",
+    "motherTonguePlaceholder": "Vyberte svoj rodný jazyk...",
+    "chooseLanguageHelp": "Po uložení jazyka sa odomkne ďalšie tlačidlo.",
+    "savingLanguage": "Ukladá sa jazyk...",
+    "next": "Ďalej",
+    "name": "02 · Vaše meno",
+    "namePlaceholder": "napíš svoje meno...",
+    "avatar": "03 · Váš avatar",
+    "whyHere": "04 · Prečo si tu?",
+    "dailyGoal": "05 · Denný cieľ",
+    "cardsPerDay": "{count} kariet/deň",
+    "topics": "06 · Témy (vyberte ľubovoľné)",
+    "takeMeHome": "Vezmi ma domov ->",
+    "saving": "Ukladá sa...",
+    "validationName": "Zadajte svoje meno.",
+    "validationReason": "Vyberte platný dôvod.",
+    "validationDailyGoal": "Vyberte denný cieľ.",
+    "validationMotherTongue": "Vyberte svoj materinský jazyk.",
+    "purposes": {
+      "School": "Škola",
+      "Job/test": "Práca/test",
+      "Hobby": "Hobby",
+      "Travel": "Cestovanie",
+      "For fun": "Pre zábavu",
+      "My kid": "Moje dieťa"
+    },
+    "validationProfileNotFound": "Profil sa nenašiel. Odhláste sa a skúste to znova."
   }
 }

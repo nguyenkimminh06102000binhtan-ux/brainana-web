@@ -1,17 +1,77 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useRef, useState, useTransition } from "react";
 import Link from "next/link";
-import { saveOnboarding, type OnboardingState } from "./actions";
+import { useRouter } from "next/navigation";
+import { saveNativeLanguage, saveOnboarding, type OnboardingState } from "./actions";
 import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 import AvatarPicker from "@/components/avatar-picker";
+import { t } from "@/utils/t";
 
-export default function OnboardingForm({ userId }: { userId: string }) {
+type StartLabels = {
+  estimatedTime: string;
+  title: string;
+  languageTitle: string;
+  languageIntro: string;
+  motherTongue: string;
+  motherTonguePlaceholder: string;
+  chooseLanguageHelp: string;
+  savingLanguage: string;
+  next: string;
+  name: string;
+  namePlaceholder: string;
+  avatar: string;
+  whyHere: string;
+  dailyGoal: string;
+  cardsPerDay: string;
+  topics: string;
+  takeMeHome: string;
+  saving: string;
+  purposes: Record<string, string>;
+};
+
+export default function OnboardingForm({
+  userId,
+  initialNativeLanguage,
+  initialLabels,
+  initialCategories,
+}: {
+  userId: string;
+  initialNativeLanguage: string | null;
+  initialLabels: StartLabels;
+  initialCategories: Record<string, string>;
+}) {
+  const router = useRouter();
   const [state, action, pending] = useActionState<OnboardingState, FormData>(
     saveOnboarding,
     null
   );
+  const [labels, setLabels] = useState(initialLabels);
+  const [categories, setCategories] = useState(initialCategories);
+  const [step, setStep] = useState(initialNativeLanguage ? 2 : 1);
+  const [nativeLanguage, setNativeLanguage] = useState(initialNativeLanguage ?? "");
+  const nativeLanguageRef = useRef(initialNativeLanguage ?? "");
+  const [nativeLanguageSaved, setNativeLanguageSaved] = useState(Boolean(initialNativeLanguage));
+  const [nativeLanguageError, setNativeLanguageError] = useState<string | null>(null);
+  const [savingNativeLanguage, startSavingNativeLanguage] = useTransition();
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
+  function handleNativeLanguageChange(value: string) {
+    setNativeLanguage(value);
+    nativeLanguageRef.current = value;
+    setNativeLanguageSaved(false);
+    setNativeLanguageError(null);
+
+    startSavingNativeLanguage(async () => {
+      const result = await saveNativeLanguage(value);
+      if (nativeLanguageRef.current !== value) return;
+      setLabels(result.labels);
+      setCategories(result.categories);
+      setNativeLanguageError(result.error);
+      setNativeLanguageSaved(!result.error && result.language === value);
+      if (!result.error) router.refresh();
+    });
+  }
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -28,13 +88,58 @@ export default function OnboardingForm({ userId }: { userId: string }) {
               <span className="text-orange">brainana</span>.app
             </span>
           </Link>
-          <p className="font-manrope text-sm font-[800] text-ink-2">~60 sec · all on one page</p>
+          <p className="font-manrope text-sm font-[800] text-ink-2">{labels.estimatedTime}</p>
         </div>
 
         <h1 className="mt-10 font-fredoka text-4xl font-[700] leading-tight tracking-tight">
-          Let&apos;s set up your brain.
+          {labels.title}
         </h1>
 
+        {step === 1 && (
+          <div className="mt-8 space-y-5">
+            <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
+                {labels.languageTitle}
+              </p>
+              <p className="mt-3 font-manrope text-sm text-ink-2">
+                {labels.languageIntro}
+              </p>
+              <label
+                htmlFor="native_language_step"
+                className="mt-6 block font-mono text-xs uppercase tracking-widest text-ink-2"
+              >
+                {labels.motherTongue}
+              </label>
+              <select
+                id="native_language_step"
+                value={nativeLanguage}
+                onChange={(event) => handleNativeLanguageChange(event.target.value)}
+                className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-yellow"
+              >
+                <option value="" disabled>{labels.motherTonguePlaceholder}</option>
+                {LANGUAGES.map((lang) => (
+                  <option key={lang} value={lang}>{categories[lang] ?? lang}</option>
+                ))}
+              </select>
+              <p className="mt-3 font-manrope text-sm text-ink-2">
+                {nativeLanguageError ?? labels.chooseLanguageHelp}
+              </p>
+            </section>
+
+            <div className="flex justify-end pt-3">
+              <button
+                type="button"
+                disabled={!nativeLanguageSaved || savingNativeLanguage}
+                onClick={() => setStep(2)}
+                className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none"
+              >
+                {savingNativeLanguage ? labels.savingLanguage : labels.next}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 2 && (
         <form action={action} className="mt-8 space-y-5">
           {state?.error && (
             <div
@@ -46,26 +151,27 @@ export default function OnboardingForm({ userId }: { userId: string }) {
           )}
 
           <input type="hidden" name="avatar_url" value={avatarUrl ?? ""} />
+          <input type="hidden" name="native_language" value={nativeLanguage} />
 
           <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
             <label
               htmlFor="display_name"
               className="font-mono text-xs uppercase tracking-widest text-ink-2"
             >
-              01 · Your name
+              {labels.name}
             </label>
             <input
               id="display_name"
               name="display_name"
               required
-              placeholder="type your name..."
+              placeholder={labels.namePlaceholder}
               className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-base font-[700] text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
             />
           </section>
 
           <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-              02 · Your avatar
+              {labels.avatar}
             </p>
             <div className="mt-4">
               <AvatarPicker userId={userId} value={avatarUrl} onChange={setAvatarUrl} />
@@ -74,7 +180,7 @@ export default function OnboardingForm({ userId }: { userId: string }) {
 
           <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-              03 · Why are you here?
+              {labels.whyHere}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               {PURPOSES.map((p) => (
@@ -88,7 +194,7 @@ export default function OnboardingForm({ userId }: { userId: string }) {
                     className="peer sr-only"
                   />
                   <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-yellow-soft">
-                    {p}
+                    {labels.purposes[p] ?? p}
                   </span>
                 </label>
               ))}
@@ -97,7 +203,7 @@ export default function OnboardingForm({ userId }: { userId: string }) {
 
           <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-              04 · Daily goal
+              {labels.dailyGoal}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               {DAILY_GOALS.map((goal) => (
@@ -111,7 +217,7 @@ export default function OnboardingForm({ userId }: { userId: string }) {
                     className="peer sr-only"
                   />
                   <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-blue peer-checked:text-ocean peer-checked:shadow-hard">
-                    {goal} cards/day
+                    {t(labels.cardsPerDay, { count: goal })}
                   </span>
                 </label>
               ))}
@@ -120,7 +226,7 @@ export default function OnboardingForm({ userId }: { userId: string }) {
 
           <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-              05 · Topics (pick any)
+              {labels.topics}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               {INTERESTS.map((interest) => (
@@ -133,32 +239,11 @@ export default function OnboardingForm({ userId }: { userId: string }) {
                     className="peer sr-only"
                   />
                   <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-red-soft">
-                    {interest}
+                    {categories[interest] ?? interest}
                   </span>
                 </label>
               ))}
             </div>
-          </section>
-
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
-            <label
-              htmlFor="native_language"
-              className="font-mono text-xs uppercase tracking-widest text-ink-2"
-            >
-              06 · Mother tongue
-            </label>
-            <select
-              id="native_language"
-              name="native_language"
-              required
-              defaultValue=""
-              className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-yellow"
-            >
-              <option value="" disabled>Select your native language…</option>
-              {LANGUAGES.map((lang) => (
-                <option key={lang} value={lang}>{lang}</option>
-              ))}
-            </select>
           </section>
 
           <div className="flex justify-end pt-3">
@@ -167,10 +252,11 @@ export default function OnboardingForm({ userId }: { userId: string }) {
               disabled={pending}
               className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-60"
             >
-              {pending ? "Saving…" : "Take me home →"}
+              {pending ? labels.saving : labels.takeMeHome}
             </button>
           </div>
         </form>
+        )}
       </section>
     </div>
   );

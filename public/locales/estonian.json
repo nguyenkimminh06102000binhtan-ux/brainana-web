@@ -499,5 +499,38 @@
     "createCourse": "Loo kursus",
     "sectionUnits": "lõigud",
     "addAtLeastOneCard": "Jätkamiseks lisage vähemalt üks kaart"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · kõik ühel lehel",
+    "title": "Paneme teie aju paika.",
+    "languageTitle": "01 · Emakeel",
+    "languageIntro": "Valige kõigepealt oma emakeel. Enne jätkamist lülitame selle seadistuse sellesse keelde.",
+    "motherTongue": "Emakeel",
+    "motherTonguePlaceholder": "Valige oma emakeel...",
+    "chooseLanguageHelp": "Järgmine nupp avaneb pärast teie keele salvestamist.",
+    "savingLanguage": "Keele salvestamine...",
+    "next": "Edasi",
+    "name": "02 · Sinu nimi",
+    "namePlaceholder": "kirjuta oma nimi...",
+    "avatar": "03 · Sinu avatar",
+    "whyHere": "04 · Miks sa siin oled?",
+    "dailyGoal": "05 · Päevane eesmärk",
+    "cardsPerDay": "{count} kaardid päevas",
+    "topics": "06 · Teemad (valige ükskõik milline)",
+    "takeMeHome": "Vii mind koju ->",
+    "saving": "Salvestamine...",
+    "validationName": "Palun sisesta oma nimi.",
+    "validationReason": "Valige sobiv põhjus.",
+    "validationDailyGoal": "Valige päevane eesmärk.",
+    "validationMotherTongue": "Palun valige oma emakeel.",
+    "purposes": {
+      "School": "Kool",
+      "Job/test": "Töö/test",
+      "Hobby": "Hobi",
+      "Travel": "Reisimine",
+      "For fun": "Lõbu pärast",
+      "My kid": "Minu laps"
+    },
+    "validationProfileNotFound": "Profiili ei leitud. Logige välja ja proovige uuesti."
   }
 }

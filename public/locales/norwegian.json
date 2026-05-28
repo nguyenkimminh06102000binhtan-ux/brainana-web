@@ -499,5 +499,38 @@
     "sectionUnits": "seksjoner",
     "creating": "Oppretter ...",
     "createCourse": "Lag kurs"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · alt på én side",
+    "title": "La oss sette opp hjernen din.",
+    "languageTitle": "01 · Morsmål",
+    "languageIntro": "Velg ditt morsmål først. Vi bytter dette oppsettet til det språket før du fortsetter.",
+    "motherTongue": "Morsmål",
+    "motherTonguePlaceholder": "Velg morsmålet ditt...",
+    "chooseLanguageHelp": "Den neste knappen låses opp etter at språket ditt er lagret.",
+    "savingLanguage": "Lagrer språk...",
+    "next": "Neste",
+    "name": "02 · Navnet ditt",
+    "namePlaceholder": "skriv navnet ditt...",
+    "avatar": "03 · Din avatar",
+    "whyHere": "04 · Hvorfor er du her?",
+    "dailyGoal": "05 · Daglig mål",
+    "cardsPerDay": "{count}-kort/dag",
+    "topics": "06 · Emner (velg hvilke som helst)",
+    "takeMeHome": "Ta meg med hjem ->",
+    "saving": "Lagrer...",
+    "validationName": "Vennligst skriv inn navnet ditt.",
+    "validationReason": "Velg en gyldig grunn.",
+    "validationDailyGoal": "Velg et daglig mål.",
+    "validationMotherTongue": "Vennligst velg ditt morsmål.",
+    "purposes": {
+      "School": "Skole",
+      "Job/test": "Jobb/prøve",
+      "Hobby": "Hobby",
+      "Travel": "Reise",
+      "For fun": "For moro skyld",
+      "My kid": "Min gutt"
+    },
+    "validationProfileNotFound": "Finner ikke profil. Logg av og prøv igjen."
   }
 }

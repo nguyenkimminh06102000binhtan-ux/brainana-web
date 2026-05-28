@@ -499,5 +499,38 @@
     "sectionUnits": "ክፍሎች",
     "uploadingFiles": "ፋይሎችን በመስቀል ላይ...",
     "createCourse": "ኮርስ ይፍጠሩ"
+  },
+  "start": {
+    "estimatedTime": "~60 ሰከንድ · ሁሉም በአንድ ገጽ ላይ",
+    "title": "አእምሮህን እናዋቅር።",
+    "languageTitle": "01 · የአፍ መፍቻ ቋንቋ",
+    "languageIntro": "መጀመሪያ የአፍ መፍቻ ቋንቋዎን ይምረጡ። ይህን ማዋቀር ከመቀጠልዎ በፊት ወደዚያ ቋንቋ እንቀይረዋለን።",
+    "motherTongue": "የአፍ መፍቻ ቋንቋ",
+    "motherTonguePlaceholder": "የአፍ መፍቻ ቋንቋዎን ይምረጡ...",
+    "chooseLanguageHelp": "ቋንቋዎ ከተቀመጠ በኋላ የሚቀጥለው አዝራር ይከፈታል።",
+    "savingLanguage": "ቋንቋን በማስቀመጥ ላይ...",
+    "next": "ቀጥሎ",
+    "name": "02 · የእርስዎ ስም",
+    "namePlaceholder": "ስምህን ጻፍ...",
+    "avatar": "03 · የእርስዎ አምሳያ",
+    "whyHere": "04 · ለምን መጣህ?",
+    "dailyGoal": "05 · ዕለታዊ ግብ",
+    "cardsPerDay": "{count} ካርዶች/ቀን",
+    "topics": "06 · ርዕሶች (ማንኛውንም ይምረጡ)",
+    "takeMeHome": "ወደ ቤት ውሰደኝ ->",
+    "saving": "በማስቀመጥ ላይ...",
+    "validationName": "እባክህ ስምህን አስገባ።",
+    "validationReason": "እባክዎ ትክክለኛ ምክንያት ይምረጡ።",
+    "validationDailyGoal": "እባክዎ ዕለታዊ ግብ ይምረጡ።",
+    "validationMotherTongue": "እባኮትን የአፍ መፍቻ ቋንቋዎን ይምረጡ።",
+    "purposes": {
+      "School": "ትምህርት ቤት",
+      "Job/test": "ሥራ/ሙከራ",
+      "Hobby": "የትርፍ ጊዜ ማሳለፊያ",
+      "Travel": "ጉዞ",
+      "For fun": "ለመዝናናት",
+      "My kid": "ልጄ"
+    },
+    "validationProfileNotFound": "መገለጫ አልተገኘም። እባክዎ ዘግተው ይውጡ እና እንደገና ይሞክሩ።"
   }
 }

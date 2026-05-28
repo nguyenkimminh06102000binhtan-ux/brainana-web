@@ -499,5 +499,38 @@
     "createCourse": "建立課程",
     "saving": "慳緊 …",
     "creating": "創造緊 ..."
+  },
+  "start": {
+    "estimatedTime": "~ 60秒 · 全部喺一頁",
+    "title": "我哋設定下你個腦啦。",
+    "languageTitle": "01 · 母語",
+    "languageIntro": "揀你嘅母語先。我哋會喺你繼續之前將呢個設定切換為嗰種語言。",
+    "motherTongue": "母語",
+    "motherTonguePlaceholder": "揀你嘅母語 ...",
+    "chooseLanguageHelp": "儲存咗你嘅語言之後，下一個掣就會解鎖。",
+    "savingLanguage": "儲存語言 ...",
+    "next": "下一個",
+    "name": "02 · 你個名",
+    "namePlaceholder": "打你個名 ...",
+    "avatar": "03 · 你嘅頭像",
+    "whyHere": "04 · 點解你喺度？",
+    "dailyGoal": "05 · 每日目標",
+    "cardsPerDay": "{count} 卡 / 日",
+    "topics": "06 · 主題（任選）",
+    "takeMeHome": "帶我返屋企 - >",
+    "saving": "慳緊 …",
+    "validationName": "請輸入你個名。",
+    "validationReason": "請揀一個有效嘅理由。",
+    "validationDailyGoal": "請揀一個每日目標。",
+    "validationMotherTongue": "請選擇你嘅母語。",
+    "purposes": {
+      "School": "學校",
+      "Job/test": "工作/測試",
+      "Hobby": "嗜好",
+      "Travel": "旅行",
+      "For fun": "為咗玩",
+      "My kid": "我個仔"
+    },
+    "validationProfileNotFound": "搵唔到個人檔案。請登出，然後再試一次。"
   }
 }

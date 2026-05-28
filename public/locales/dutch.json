@@ -499,5 +499,38 @@
     "saveChanges": "Wijzigingen opslaan",
     "sectionUnits": "secties",
     "createCourse": "Cursus maken"
+  },
+  "start": {
+    "estimatedTime": "~60 sec · alles op één pagina",
+    "title": "Laten we je hersenen instellen.",
+    "languageTitle": "01 · Moedertaal",
+    "languageIntro": "Kies eerst uw moedertaal. We zullen deze configuratie naar die taal omzetten voordat u doorgaat.",
+    "motherTongue": "Moedertaal",
+    "motherTonguePlaceholder": "Selecteer uw moedertaal...",
+    "chooseLanguageHelp": "De volgende knop wordt ontgrendeld nadat uw taal is opgeslagen.",
+    "savingLanguage": "Taal opslaan...",
+    "next": "Volgende",
+    "name": "02 · Jouw naam",
+    "namePlaceholder": "typ je naam...",
+    "avatar": "03 · Je avatar",
+    "whyHere": "04 · Waarom ben je hier?",
+    "dailyGoal": "05 · Dagelijks doel",
+    "cardsPerDay": "{count}-kaarten/dag",
+    "topics": "06 · Onderwerpen (kies er een)",
+    "takeMeHome": "Breng me naar huis ->",
+    "saving": "Opslaan...",
+    "validationName": "Voer uw naam in.",
+    "validationReason": "Selecteer een geldige reden.",
+    "validationDailyGoal": "Selecteer een dagelijks doel.",
+    "validationMotherTongue": "Selecteer uw moedertaal.",
+    "purposes": {
+      "School": "Scholen",
+      "Job/test": "Taak/test",
+      "Hobby": "Hobby",
+      "Travel": "Reizen",
+      "For fun": "Voor de lol",
+      "My kid": "Mijn kind"
+    },
+    "validationProfileNotFound": "Profiel niet gevonden. Meld u af en probeer het opnieuw."
   }
 }

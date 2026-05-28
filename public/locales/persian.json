@@ -499,5 +499,38 @@
     "saving": "در حال ذخیره...",
     "saveChanges": "ذخیره تغییرات",
     "creating": "ایجاد..."
+  },
+  "start": {
+    "estimatedTime": "~60 ثانیه · همه در یک صفحه",
+    "title": "بیایید مغزتان را تنظیم کنید.",
+    "languageTitle": "01 · زبان مادری",
+    "languageIntro": "ابتدا زبان مادری خود را انتخاب کنید. قبل از ادامه، این تنظیمات را به آن زبان تغییر می‌دهیم.",
+    "motherTongue": "زبان مادری",
+    "motherTonguePlaceholder": "زبان مادری خود را انتخاب کنید...",
+    "chooseLanguageHelp": "دکمه بعدی پس از ذخیره زبان شما باز می شود.",
+    "savingLanguage": "در حال ذخیره زبان...",
+    "next": "بعدی",
+    "name": "02 · نام شما",
+    "namePlaceholder": "نام خود را تایپ کنید ...",
+    "avatar": "03 · آواتار شما",
+    "whyHere": "04 · چرا اینجایی؟",
+    "dailyGoal": "05 · هدف روزانه",
+    "cardsPerDay": "کارت {count} در روز",
+    "topics": "06 · موضوعات (هر کدام را انتخاب کنید)",
+    "takeMeHome": "منو ببر خونه ->",
+    "saving": "در حال ذخیره...",
+    "validationName": "لطفا نام خود را وارد کنید",
+    "validationReason": "لطفاً یک دلیل معتبر انتخاب کنید.",
+    "validationDailyGoal": "لطفا یک هدف روزانه انتخاب کنید.",
+    "validationMotherTongue": "لطفا زبان مادری خود را انتخاب کنید.",
+    "purposes": {
+      "School": "مدرسه",
+      "Job/test": "شغل/آزمون",
+      "Hobby": "سرگرمی",
+      "Travel": "سفر کنید",
+      "For fun": "برای تفریح",
+      "My kid": "بچه من"
+    },
+    "validationProfileNotFound": "نمایه پیدا نشد لطفاً از سیستم خارج شوید و دوباره امتحان کنید."
   }
 }

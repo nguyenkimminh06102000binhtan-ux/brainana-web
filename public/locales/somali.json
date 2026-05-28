@@ -499,5 +499,38 @@
     "cancel": "Jooji",
     "saving": "Keydinaya...",
     "saveChanges": "Badbaadada isbeddelada"
+  },
+  "start": {
+    "estimatedTime": "~60 ilbiriqsi · dhamaantood hal bog",
+    "title": "Aan dejinno maskaxdaada.",
+    "languageTitle": "01 · Afka hooyo",
+    "languageIntro": "Marka hore dooro afkaaga hooyo. Waxa aanu u badali doonaa habayntan luuqadaas ka hor inta aanad sii wadin.",
+    "motherTongue": "Afka hooyo",
+    "motherTonguePlaceholder": "Dooro luqadaada hooyo...",
+    "chooseLanguageHelp": "Badhanka xiga ayaa furmaya ka dib marka afkaaga la kaydiyo.",
+    "savingLanguage": "Kaydinta luqadda...",
+    "next": "Xiga",
+    "name": "02 · Magacaaga",
+    "namePlaceholder": "ku qor magacaaga...",
+    "avatar": "03 · Avatarkaaga",
+    "whyHere": "04 · Maxaad halkan u joogtaa?",
+    "dailyGoal": "05 · Hadafka maalinlaha ah",
+    "cardsPerDay": "{count} kaararka/maalintii",
+    "topics": "06 · Mowduucyada (mid ka soo qaado)",
+    "takeMeHome": "Guriga i gee ->",
+    "saving": "Keydinaya...",
+    "validationName": "Fadlan gali magacaga",
+    "validationReason": "Fadlan door sabab sax ah",
+    "validationDailyGoal": "Fadlan door yoolka maalinlaha ah.",
+    "validationMotherTongue": "Fadlan door afkaaga hooyo.",
+    "purposes": {
+      "School": "Dugsiga",
+      "Job/test": "Shaqo/imtixaan",
+      "Hobby": "Hiwaayad",
+      "Travel": "Safarka",
+      "For fun": "madadaalo",
+      "My kid": "Ilmahayga"
+    },
+    "validationProfileNotFound": "Profile lama helin Fadlan ka bax oo isku day markale."
   }
 }

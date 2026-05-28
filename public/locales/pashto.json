@@ -499,5 +499,38 @@
     "createCourse": "کورس جوړ کړئ",
     "cancel": "لغوه کړئ",
     "saveChanges": "بدلونونه خوندي کړئ"
+  },
+  "start": {
+    "estimatedTime": "~ 60 ثانیې · ټول په یوه پاڼه کې",
+    "title": "راځئ چې خپل دماغ تنظیم کړو.",
+    "languageTitle": "01 · مورنۍ ژبه",
+    "languageIntro": "لومړی خپله مورنۍ ژبه غوره کړئ. مخکې له دې چې تاسو دوام ورکړئ موږ به دا ترتیب په دې ژبه بدل کړو.",
+    "motherTongue": "مورنۍ ژبه",
+    "motherTonguePlaceholder": "خپله مورنۍ ژبه وټاکئ...",
+    "chooseLanguageHelp": "بله تڼۍ خلاصیږي کله چې ستاسو ژبه خوندي شي.",
+    "savingLanguage": "ژبه خوندي کول...",
+    "next": "بل",
+    "name": "02 · ستاسو نوم",
+    "namePlaceholder": "خپل نوم وليکئ...",
+    "avatar": "03 · ستاسو اوتار",
+    "whyHere": "04 · ته ولې دلته یې؟",
+    "dailyGoal": "05 · ورځنی هدف",
+    "cardsPerDay": "{count} کارتونه/ورځ",
+    "topics": "06 · موضوعات (هر یو غوره کړئ)",
+    "takeMeHome": "ما کور ته بوځه ->",
+    "saving": "خوندي کول...",
+    "validationName": "مهرباني وکړئ خپل نوم ولیکئ.",
+    "validationReason": "مهرباني وکړئ یو معتبر دلیل وټاکئ.",
+    "validationDailyGoal": "مهرباني وکړئ یو ورځنی هدف وټاکئ.",
+    "validationMotherTongue": "مهرباني وکړئ خپله مورنۍ ژبه وټاکئ.",
+    "purposes": {
+      "School": "ښوونځی",
+      "Job/test": "دنده / ازموینه",
+      "Hobby": "شوق",
+      "Travel": "سفر",
+      "For fun": "د تفریح لپاره",
+      "My kid": "زما ماشوم"
+    },
+    "validationProfileNotFound": "پروفایل ونه موندل شو. مهرباني وکړئ لاسلیک کړئ او بیا هڅه وکړئ."
   }
 }

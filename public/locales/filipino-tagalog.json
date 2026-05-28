@@ -499,5 +499,38 @@
     "saveChanges": "I-save ang mga pagbabago",
     "untitledSection": "Walang pamagat na seksyon",
     "createCourse": "Lumikha ng kurso"
+  },
+  "start": {
+    "estimatedTime": "~60 segundo · lahat sa isang pahina",
+    "title": "I-set up natin ang utak mo.",
+    "languageTitle": "01 · Katutubong wika",
+    "languageIntro": "Piliin muna ang iyong sariling wika. Ililipat namin ang setup na ito sa wikang iyon bago ka magpatuloy.",
+    "motherTongue": "Inang wika",
+    "motherTonguePlaceholder": "Piliin ang iyong katutubong wika...",
+    "chooseLanguageHelp": "Magbubukas ang susunod na button pagkatapos ma-save ang iyong wika.",
+    "savingLanguage": "Sine-save ang wika...",
+    "next": "Susunod",
+    "name": "02 · Ang iyong pangalan",
+    "namePlaceholder": "i-type ang iyong pangalan...",
+    "avatar": "03 · Ang iyong avatar",
+    "whyHere": "04 · Bakit ka nandito?",
+    "dailyGoal": "05 · Araw-araw na layunin",
+    "cardsPerDay": "{count} card/araw",
+    "topics": "06 · Mga Paksa (pumili ng anuman)",
+    "takeMeHome": "Iuwi mo na ako ->",
+    "saving": "Nagse-save...",
+    "validationName": "Pakilagay ang iyong pangalan.",
+    "validationReason": "Mangyaring pumili ng wastong dahilan.",
+    "validationDailyGoal": "Mangyaring pumili ng pang-araw-araw na layunin.",
+    "validationMotherTongue": "Mangyaring piliin ang iyong sariling wika.",
+    "purposes": {
+      "School": "Paaralan",
+      "Job/test": "Trabaho/pagsusulit",
+      "Hobby": "libangan",
+      "Travel": "Paglalakbay",
+      "For fun": "Para masaya",
+      "My kid": "anak ko"
+    },
+    "validationProfileNotFound": "Hindi nahanap ang profile. Mangyaring mag-sign out at subukang muli."
   }
 }

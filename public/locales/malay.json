@@ -499,5 +499,38 @@
     "addAtLeastOneCard": "Tambahkan sekurang-kurangnya satu kad untuk meneruskan",
     "audioTooLarge": "Audio mestilah di bawah 10 MB.",
     "compressingImage": "Imej adalah besar — ​​memampatkan sebelum memuat naik, sila tunggu…"
+  },
+  "start": {
+    "estimatedTime": "~60 saat · semua pada satu halaman",
+    "title": "Mari sediakan otak anda.",
+    "languageTitle": "01 · Bahasa ibunda",
+    "languageIntro": "Pilih bahasa ibunda anda dahulu. Kami akan menukar persediaan ini ke dalam bahasa itu sebelum anda meneruskan.",
+    "motherTongue": "bahasa ibunda",
+    "motherTonguePlaceholder": "Pilih bahasa ibunda anda...",
+    "chooseLanguageHelp": "Butang seterusnya dibuka selepas bahasa anda disimpan.",
+    "savingLanguage": "Menyimpan bahasa...",
+    "next": "Seterusnya",
+    "name": "02 · Nama anda",
+    "namePlaceholder": "taip nama anda...",
+    "avatar": "03 · Avatar anda",
+    "whyHere": "04 · Kenapa awak ada di sini?",
+    "dailyGoal": "05 · Matlamat harian",
+    "cardsPerDay": "{count} kad/hari",
+    "topics": "06 · Topik (pilih mana-mana)",
+    "takeMeHome": "Bawa saya pulang ->",
+    "saving": "Menyimpan...",
+    "validationName": "Sila masukkan nama anda.",
+    "validationReason": "Sila pilih sebab yang sah.",
+    "validationDailyGoal": "Sila pilih matlamat harian.",
+    "validationMotherTongue": "Sila pilih bahasa ibunda anda.",
+    "purposes": {
+      "School": "Sekolah",
+      "Job/test": "Kerja/ujian",
+      "Hobby": "hobi",
+      "Travel": "Perjalanan",
+      "For fun": "Untuk keseronokan",
+      "My kid": "anak saya"
+    },
+    "validationProfileNotFound": "Profil tidak ditemui. Sila log keluar dan cuba lagi."
   }
 }

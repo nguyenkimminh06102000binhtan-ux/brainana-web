@@ -499,5 +499,38 @@
     "saving": "保存中...",
     "saveChanges": "変更を保存する",
     "createCourse": "コースの作成"
+  },
+  "start": {
+    "estimatedTime": "~60 秒 · すべてが 1 ページに",
+    "title": "あなたの脳をセットアップしましょう。",
+    "languageTitle": "01・母語",
+    "languageIntro": "まず母国語を選択してください。続行する前に、この設定をその言語に切り替えます。",
+    "motherTongue": "母国語",
+    "motherTonguePlaceholder": "母国語を選択してください...",
+    "chooseLanguageHelp": "言語を保存すると、次のボタンのロックが解除されます。",
+    "savingLanguage": "言語を保存しています...",
+    "next": "次へ",
+    "name": "02・君の名は。",
+    "namePlaceholder": "あなたの名前を入力してください...",
+    "avatar": "03・あなたのアバター",
+    "whyHere": "04 ・なぜここにいるのですか？",
+    "dailyGoal": "05・毎日の目標",
+    "cardsPerDay": "{count} カード/日",
+    "topics": "06 · トピック (いずれかを選択)",
+    "takeMeHome": "家に連れて帰ってください ->",
+    "saving": "保存中...",
+    "validationName": "お名前を入力してください。",
+    "validationReason": "正当な理由を選択してください。",
+    "validationDailyGoal": "毎日の目標を選択してください。",
+    "validationMotherTongue": "母語を選択してください。",
+    "purposes": {
+      "School": "学校",
+      "Job/test": "仕事/テスト",
+      "Hobby": "趣味",
+      "Travel": "旅行",
+      "For fun": "楽しみのために",
+      "My kid": "うちの子"
+    },
+    "validationProfileNotFound": "プロフィールが見つかりません。サインアウトして、もう一度試してください。"
   }
 }

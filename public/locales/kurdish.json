@@ -499,5 +499,38 @@
     "creating": "Çêkirin...",
     "saveChanges": "Guherandinên tomar bike",
     "saving": "Sazkirin..."
+  },
+  "start": {
+    "estimatedTime": "~ 60 saniye · hemî li ser yek rûpelê",
+    "title": "Were mejiyê xwe saz bike.",
+    "languageTitle": "01 · Zimanê zikmakî",
+    "languageIntro": "Pêşî zimanê xwe yê zikmakî hilbijêrin. Berî ku hûn berdewam bikin, em ê vê sazkirinê veguherînin wî zimanî.",
+    "motherTongue": "Zimanê zikmakî",
+    "motherTonguePlaceholder": "Zimanê xwe yê zikmakî hilbijêre...",
+    "chooseLanguageHelp": "Bişkoka paşîn piştî ku zimanê we hate tomarkirin vedibe.",
+    "savingLanguage": "Ziman diparêze...",
+    "next": "Next",
+    "name": "02 · Navê te",
+    "namePlaceholder": "navê xwe binivîse...",
+    "avatar": "03 · Avatara te",
+    "whyHere": "04 · Çima tu li vir î?",
+    "dailyGoal": "05 · Armanca rojane",
+    "cardsPerDay": "kartên {count} / roj",
+    "topics": "06 · Mijar (yekî hilbijêre)",
+    "takeMeHome": "Min bibe malê ->",
+    "saving": "Sazkirin...",
+    "validationName": "Ji kerema xwe navê xwe binivîse.",
+    "validationReason": "Ji kerema xwe sedemek derbasdar hilbijêrin.",
+    "validationDailyGoal": "Ji kerema xwe armancek rojane hilbijêrin.",
+    "validationMotherTongue": "Ji kerema xwe zimanê xwe yê zikmakî hilbijêrin.",
+    "purposes": {
+      "School": "School",
+      "Job/test": "Kar / test",
+      "Hobby": "Hobby",
+      "Travel": "Travel",
+      "For fun": "Ji bo kêfê",
+      "My kid": "Zarokê min"
+    },
+    "validationProfileNotFound": "Profîl nehat dîtin. Ji kerema xwe derkeve û dîsa biceribîne."
   }
 }

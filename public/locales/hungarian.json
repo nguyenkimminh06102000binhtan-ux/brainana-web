@@ -499,5 +499,38 @@
     "creating": "Létrehozás...",
     "createCourse": "Kurzus létrehozása",
     "saveChanges": "Módosítások mentése"
+  },
+  "start": {
+    "estimatedTime": "~60 mp · minden egy oldalon",
+    "title": "Állítsuk be az agyát.",
+    "languageTitle": "01 · Anyanyelv",
+    "languageIntro": "Először válassza ki az anyanyelvét. Ezt a beállítást erre a nyelvre kapcsoljuk, mielőtt folytatná.",
+    "motherTongue": "Anyanyelv",
+    "motherTonguePlaceholder": "Válassza ki az anyanyelvét...",
+    "chooseLanguageHelp": "A következő gomb a nyelv mentése után oldja fel a zárolást.",
+    "savingLanguage": "Nyelv mentése...",
+    "next": "Következő",
+    "name": "02 · Az Ön neve",
+    "namePlaceholder": "írd be a neved...",
+    "avatar": "03 · Az avatarod",
+    "whyHere": "04 · Miért vagy itt?",
+    "dailyGoal": "05 · Napi cél",
+    "cardsPerDay": "{count} kártya/nap",
+    "topics": "06 · Témák (bármelyik közül választhat)",
+    "takeMeHome": "Vigyél haza ->",
+    "saving": "Mentés...",
+    "validationName": "Kérjük, adja meg a nevét.",
+    "validationReason": "Kérjük, válasszon érvényes okot.",
+    "validationDailyGoal": "Kérjük, válasszon napi célt.",
+    "validationMotherTongue": "Kérjük, válassza ki az anyanyelvét.",
+    "purposes": {
+      "School": "Iskola",
+      "Job/test": "Munka/vizsga",
+      "Hobby": "Hobbi",
+      "Travel": "Utazás",
+      "For fun": "A szórakozás kedvéért",
+      "My kid": "a gyerekem"
+    },
+    "validationProfileNotFound": "A profil nem található. Kérjük, jelentkezzen ki, és próbálja újra."
   }
 }

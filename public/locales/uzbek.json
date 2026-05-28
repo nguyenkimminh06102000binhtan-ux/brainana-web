@@ -499,5 +499,38 @@
     "cancel": "Bekor qilish",
     "saveChanges": "O'zgarishlarni saqlang",
     "creating": "Yaratilmoqda..."
+  },
+  "start": {
+    "estimatedTime": "~60 soniya · hammasi bitta sahifada",
+    "title": "Keling, miyangizni sozlaymiz.",
+    "languageTitle": "01 · Ona tili",
+    "languageIntro": "Avval ona tilingizni tanlang. Davom etishingizdan oldin biz ushbu sozlashni o‘sha tilga o‘tkazamiz.",
+    "motherTongue": "Ona tili",
+    "motherTonguePlaceholder": "Ona tilingizni tanlang...",
+    "chooseLanguageHelp": "Tilingiz saqlanganidan keyin keyingi tugma qulfdan chiqariladi.",
+    "savingLanguage": "Til saqlanmoqda...",
+    "next": "Keyingi",
+    "name": "02 · Sizning ismingiz",
+    "namePlaceholder": "ismingizni yozing...",
+    "avatar": "03 · Sizning avataringiz",
+    "whyHere": "04 · Nega bu yerdasiz?",
+    "dailyGoal": "05 · Kunlik maqsad",
+    "cardsPerDay": "{count} kartalar/kun",
+    "topics": "06 · Mavzular (istalganini tanlang)",
+    "takeMeHome": "Meni uyga olib boring ->",
+    "saving": "Saqlanmoqda...",
+    "validationName": "Iltimos, ismingizni kiriting.",
+    "validationReason": "Iltimos, asosli sababni tanlang.",
+    "validationDailyGoal": "Kunlik maqsadni tanlang.",
+    "validationMotherTongue": "Iltimos, ona tilingizni tanlang.",
+    "purposes": {
+      "School": "Maktab",
+      "Job/test": "Ish / sinov",
+      "Hobby": "Xobbi",
+      "Travel": "Sayohat",
+      "For fun": "O'yin-kulgi uchun",
+      "My kid": "Mening bolam"
+    },
+    "validationProfileNotFound": "Profil topilmadi. Iltimos, tizimdan chiqing va qaytadan urining."
   }
 }

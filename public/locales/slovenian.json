@@ -499,5 +499,38 @@
     "createCourse": "Ustvari tečaj",
     "saveChanges": "Shranite spremembe",
     "saving": "Shranjevanje ..."
+  },
+  "start": {
+    "estimatedTime": "~60 s · vse na eni strani",
+    "title": "Nastavimo vaše možgane.",
+    "languageTitle": "01 · Materni jezik",
+    "languageIntro": "Najprej izberite svoj materni jezik. Preden nadaljujete, bomo to nastavitev preklopili v ta jezik.",
+    "motherTongue": "materni jezik",
+    "motherTonguePlaceholder": "Izberite svoj materni jezik ...",
+    "chooseLanguageHelp": "Naslednji gumb se odklene, ko je vaš jezik shranjen.",
+    "savingLanguage": "Shranjevanje jezika ...",
+    "next": "Naprej",
+    "name": "02 · Vaše ime",
+    "namePlaceholder": "vpiši svoje ime...",
+    "avatar": "03 · Vaš avatar",
+    "whyHere": "04 · Zakaj si tukaj?",
+    "dailyGoal": "05 · Dnevni cilj",
+    "cardsPerDay": "{count} kartic/dan",
+    "topics": "06 · Teme (izberite katero koli)",
+    "takeMeHome": "Pelji me domov ->",
+    "saving": "Shranjevanje ...",
+    "validationName": "Prosim vnesite svoje ime.",
+    "validationReason": "Izberite veljaven razlog.",
+    "validationDailyGoal": "Izberite dnevni cilj.",
+    "validationMotherTongue": "Prosimo izberite svoj materni jezik.",
+    "purposes": {
+      "School": "Šola",
+      "Job/test": "Delovno mesto/test",
+      "Hobby": "hobi",
+      "Travel": "Potovanje",
+      "For fun": "Za zabavo",
+      "My kid": "Moj otrok"
+    },
+    "validationProfileNotFound": "Profil ni bil najden. Odjavite se in poskusite znova."
   }
 }

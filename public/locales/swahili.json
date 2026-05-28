@@ -499,5 +499,38 @@
     "saving": "Inahifadhi...",
     "createCourse": "Unda kozi",
     "saveChanges": "Hifadhi mabadiliko"
+  },
+  "start": {
+    "estimatedTime": "Sekunde ~60 · zote kwenye ukurasa mmoja",
+    "title": "Hebu tuanzishe ubongo wako.",
+    "languageTitle": "01 · Lugha mama",
+    "languageIntro": "Chagua lugha yako ya asili kwanza. Tutabadilisha usanidi huu kuwa lugha hiyo kabla ya kuendelea.",
+    "motherTongue": "Lugha mama",
+    "motherTonguePlaceholder": "Chagua lugha yako ya asili...",
+    "chooseLanguageHelp": "Kitufe kinachofuata hufunguka baada ya lugha yako kuhifadhiwa.",
+    "savingLanguage": "Inahifadhi lugha...",
+    "next": "Inayofuata",
+    "name": "02 · Jina lako",
+    "namePlaceholder": "andika jina lako...",
+    "avatar": "03 · Avatar yako",
+    "whyHere": "04 · Kwa nini uko hapa?",
+    "dailyGoal": "05 · Lengo la kila siku",
+    "cardsPerDay": "{count} kadi / siku",
+    "topics": "06 · Mada (chagua yoyote)",
+    "takeMeHome": "Nipeleke nyumbani ->",
+    "saving": "Inahifadhi...",
+    "validationName": "Tafadhali weka jina lako.",
+    "validationReason": "Tafadhali chagua sababu halali.",
+    "validationDailyGoal": "Tafadhali chagua lengo la kila siku.",
+    "validationMotherTongue": "Tafadhali chagua lugha yako ya mama.",
+    "purposes": {
+      "School": "Shule",
+      "Job/test": "Kazi/mtihani",
+      "Hobby": "Hobby",
+      "Travel": "Safari",
+      "For fun": "Kwa furaha",
+      "My kid": "Mtoto wangu"
+    },
+    "validationProfileNotFound": "Wasifu haujapatikana. Tafadhali ondoka na ujaribu tena."
   }
 }

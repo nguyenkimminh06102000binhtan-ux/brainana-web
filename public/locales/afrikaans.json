@@ -499,5 +499,38 @@
     "saveChanges": "Stoor veranderinge",
     "saving": "Stoor tans …",
     "createCourse": "Skep kursus"
+  },
+  "start": {
+    "estimatedTime": "~60 sekondes · alles op een bladsy",
+    "title": "Kom ons stel jou brein op.",
+    "languageTitle": "01 · Moedertaal",
+    "languageIntro": "Kies eers jou moedertaal. Ons sal hierdie opstelling na daardie taal oorskakel voordat jy voortgaan.",
+    "motherTongue": "Moedertaal",
+    "motherTonguePlaceholder": "Kies jou moedertaal...",
+    "chooseLanguageHelp": "Die volgende knoppie ontsluit nadat jou taal gestoor is.",
+    "savingLanguage": "Stoor tans taal …",
+    "next": "Volgende",
+    "name": "02 · Jou naam",
+    "namePlaceholder": "tik jou naam...",
+    "avatar": "03 · Jou avatar",
+    "whyHere": "04 · Hoekom is jy hier?",
+    "dailyGoal": "05 · Daaglikse doelwit",
+    "cardsPerDay": "{count} kaarte/dag",
+    "topics": "06 · Onderwerpe (kies enige)",
+    "takeMeHome": "Neem my huis toe ->",
+    "saving": "Stoor tans …",
+    "validationName": "Voer asseblief jou naam in.",
+    "validationReason": "Kies asseblief 'n geldige rede.",
+    "validationDailyGoal": "Kies asseblief 'n daaglikse doelwit.",
+    "validationMotherTongue": "Kies asseblief jou moedertaal.",
+    "purposes": {
+      "School": "Skool",
+      "Job/test": "Werk/toets",
+      "Hobby": "Stokperdjie",
+      "Travel": "Reis",
+      "For fun": "Vir die pret",
+      "My kid": "My kind"
+    },
+    "validationProfileNotFound": "Profiel nie gevind nie. Meld asseblief af en probeer weer."
   }
 }

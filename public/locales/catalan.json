@@ -499,5 +499,38 @@
     "sectionUnits": "seccions",
     "cardUnit": "targeta",
     "createCourse": "Crear curs"
+  },
+  "start": {
+    "estimatedTime": "~60 segons · tot en una pàgina",
+    "title": "Configurem el teu cervell.",
+    "languageTitle": "01 · Llengua materna",
+    "languageIntro": "Trieu primer la vostra llengua materna. Canviarem aquesta configuració a aquest idioma abans de continuar.",
+    "motherTongue": "Llengua materna",
+    "motherTonguePlaceholder": "Seleccioneu la vostra llengua materna...",
+    "chooseLanguageHelp": "El botó següent es desbloqueja després de desar el vostre idioma.",
+    "savingLanguage": "S'està desant l'idioma...",
+    "next": "A continuació",
+    "name": "02 · El teu nom",
+    "namePlaceholder": "escriu el teu nom...",
+    "avatar": "03 · El teu avatar",
+    "whyHere": "04 · Per què estàs aquí?",
+    "dailyGoal": "05 · Objectiu diari",
+    "cardsPerDay": "Targetes {count}/dia",
+    "topics": "06 · Temes (escolliu-ne qualsevol)",
+    "takeMeHome": "Porta'm a casa ->",
+    "saving": "S'està desant...",
+    "validationName": "Introduïu el vostre nom.",
+    "validationReason": "Seleccioneu un motiu vàlid.",
+    "validationDailyGoal": "Seleccioneu un objectiu diari.",
+    "validationMotherTongue": "Seleccioneu la vostra llengua materna.",
+    "purposes": {
+      "School": "Escola",
+      "Job/test": "Treball/prova",
+      "Hobby": "Hobby",
+      "Travel": "Viatjar",
+      "For fun": "Per diversió",
+      "My kid": "El meu fill"
+    },
+    "validationProfileNotFound": "No s'ha trobat el perfil. Tanqueu la sessió i torneu-ho a provar."
   }
 }

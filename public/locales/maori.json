@@ -499,5 +499,38 @@
     "createCourse": "Waihanga akoranga",
     "cancel": "Whakakore",
     "addAtLeastOneCard": "Tāpirihia kia kotahi te kaari kia haere tonu"
+  },
+  "start": {
+    "estimatedTime": "~60 hēkona · kei te whārangi kotahi",
+    "title": "Me whakarite to roro.",
+    "languageTitle": "01 · Te reo rangatira",
+    "languageIntro": "Whiriwhiria to reo taketake i te tuatahi. Ka huri matou i tenei tatūnga ki taua reo i mua i to haere tonu.",
+    "motherTongue": "Te reo whaea",
+    "motherTonguePlaceholder": "Tīpakohia tō reo māori...",
+    "chooseLanguageHelp": "Ka tuwhera te patene panuku i muri i te tiakitanga o to reo.",
+    "savingLanguage": "Tiaki reo...",
+    "next": "Whai muri",
+    "name": "02 · To ingoa",
+    "namePlaceholder": "patohia to ingoa...",
+    "avatar": "03 · To avatar",
+    "whyHere": "04 · He aha koe i konei?",
+    "dailyGoal": "05 · Te whāinga o ia rā",
+    "cardsPerDay": "{count} kāri/ra",
+    "topics": "06 · Kaupapa (whiriwhirihia)",
+    "takeMeHome": "Kawea ahau ki te kainga ->",
+    "saving": "Tiaki ana...",
+    "validationName": "Whakauruhia to ingoa.",
+    "validationReason": "Tīpakohia he take tika.",
+    "validationDailyGoal": "Tīpakohia koa he whāinga ia rā.",
+    "validationMotherTongue": "Tena koa tohua to reo whaea.",
+    "purposes": {
+      "School": "Kura",
+      "Job/test": "Mahi/whakamatautau",
+      "Hobby": "Rererangi",
+      "Travel": "Haerenga",
+      "For fun": "Mo te ngahau",
+      "My kid": "Taku tamaiti"
+    },
+    "validationProfileNotFound": "Kāore i kitea te kōtaha. Tena koa haina ki waho ka ngana ano."
   }
 }

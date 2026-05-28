@@ -499,5 +499,38 @@
     "saveChanges": "Simpen owah-owahan",
     "saving": "Ngirit...",
     "createCourse": "Nggawe kursus"
+  },
+  "start": {
+    "estimatedTime": "~60 detik · kabeh ing sak kaca",
+    "title": "Ayo atur otakmu.",
+    "languageTitle": "01 · Basa ibu",
+    "languageIntro": "Pilih basa ibu dhisik. Kita bakal ngalih setelan iki menyang basa kasebut sadurunge sampeyan nerusake.",
+    "motherTongue": "Basa ibu",
+    "motherTonguePlaceholder": "Pilih basa ibumu...",
+    "chooseLanguageHelp": "Tombol sabanjure mbukak kunci sawise basa sampeyan disimpen.",
+    "savingLanguage": "Nyimpen basa...",
+    "next": "Sabanjure",
+    "name": "02 · Jenengmu",
+    "namePlaceholder": "ketik jenengmu...",
+    "avatar": "03 · Avatar sampeyan",
+    "whyHere": "04 · Kok kowe neng kene?",
+    "dailyGoal": "05 · Tujuan saben dina",
+    "cardsPerDay": "{count} kertu / dina",
+    "topics": "06 · Topik (pilih wae)",
+    "takeMeHome": "Bawa aku mulih ->",
+    "saving": "Ngirit...",
+    "validationName": "Mangga ketik jeneng sampeyan.",
+    "validationReason": "Mangga pilih alesan sing bener.",
+    "validationDailyGoal": "Mangga pilih gol saben dina.",
+    "validationMotherTongue": "Mangga pilih basa ibu.",
+    "purposes": {
+      "School": "sekolah",
+      "Job/test": "Proyek / tes",
+      "Hobby": "hobi",
+      "Travel": "Lelungan",
+      "For fun": "Kanggo seneng-seneng",
+      "My kid": "anakku"
+    },
+    "validationProfileNotFound": "Profil ora ditemokake. Mangga metu lan coba maneh."
   }
 }

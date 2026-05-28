@@ -211,6 +211,32 @@ export type Locale = {
     saving: string;
     saveChanges: string;
   };
+  start: {
+    estimatedTime: string;
+    title: string;
+    languageTitle: string;
+    languageIntro: string;
+    motherTongue: string;
+    motherTonguePlaceholder: string;
+    chooseLanguageHelp: string;
+    savingLanguage: string;
+    next: string;
+    name: string;
+    namePlaceholder: string;
+    avatar: string;
+    whyHere: string;
+    dailyGoal: string;
+    cardsPerDay: string;
+    topics: string;
+    takeMeHome: string;
+    saving: string;
+    validationName: string;
+    validationReason: string;
+    validationDailyGoal: string;
+    validationMotherTongue: string;
+    validationProfileNotFound: string;
+    purposes: Record<string, string>;
+  };
   study: {
     allSections: string;
     howManyWords: string;

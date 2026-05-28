@@ -32,7 +32,7 @@
   },
   "common": {
     "seeAll": "Xem tất cả",
-    "browseCourses":"Tìm kiếm các khóa học",
+    "browseCourses": "Tìm kiếm các khóa học",
     "cards": "{count} thẻ",
     "courses": "{count} các khóa học",
     "courseCount": "{count} khóa học",
@@ -499,5 +499,38 @@
     "addAtLeastOneCard": "Thêm ít nhất một thẻ để tiếp tục",
     "creating": "Đang tạo...",
     "uploadingFiles": "Đang tải tệp lên..."
+  },
+  "start": {
+    "estimatedTime": "~60 giây · tất cả trên một trang",
+    "title": "Hãy thiết lập bộ não của bạn.",
+    "languageTitle": "01 · Tiếng mẹ đẻ",
+    "languageIntro": "Chọn ngôn ngữ mẹ đẻ của bạn đầu tiên. Chúng tôi sẽ chuyển thiết lập này sang ngôn ngữ đó trước khi bạn tiếp tục.",
+    "motherTongue": "Tiếng mẹ đẻ",
+    "motherTonguePlaceholder": "Chọn ngôn ngữ mẹ đẻ của bạn...",
+    "chooseLanguageHelp": "Nút tiếp theo sẽ mở khóa sau khi ngôn ngữ của bạn được lưu.",
+    "savingLanguage": "Đang lưu ngôn ngữ...",
+    "next": "Tiếp tục",
+    "name": "02 · Tên của bạn",
+    "namePlaceholder": "gõ tên của bạn...",
+    "avatar": "03 · Hình đại diện của bạn",
+    "whyHere": "04 · Tại sao bạn lại ở đây?",
+    "dailyGoal": "05 · Mục tiêu hàng ngày",
+    "cardsPerDay": "{count} thẻ/ngày",
+    "topics": "06 · Chủ đề (chọn bất kỳ)",
+    "takeMeHome": "Về trang chủ",
+    "saving": "Đang lưu...",
+    "validationName": "Vui lòng nhập tên của bạn.",
+    "validationReason": "Vui lòng chọn một lý do hợp lệ.",
+    "validationDailyGoal": "Vui lòng chọn mục tiêu hàng ngày.",
+    "validationMotherTongue": "Hãy chọn tiếng mẹ đẻ của bạn.",
+    "purposes": {
+      "School": "trường học",
+      "Job/test": "Công việc/kiểm tra",
+      "Hobby": "Sở thích",
+      "Travel": "du lịch",
+      "For fun": "Để giải trí",
+      "My kid": "Con tôi"
+    },
+    "validationProfileNotFound": "Không tìm thấy hồ sơ. Vui lòng đăng xuất và thử lại."
   }
 }

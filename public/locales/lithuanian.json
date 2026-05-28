@@ -499,5 +499,38 @@
     "saving": "Išsaugoma...",
     "createCourse": "Sukurti kursą",
     "saveChanges": "Išsaugoti pakeitimus"
+  },
+  "start": {
+    "estimatedTime": "~60 sek · viskas viename puslapyje",
+    "title": "Sutvarkykime jūsų smegenis.",
+    "languageTitle": "01 · Gimtoji kalba",
+    "languageIntro": "Pirmiausia pasirinkite savo gimtąją kalbą. Prieš tęsdami šią sąranką pakeisime ta kalba.",
+    "motherTongue": "Gimtoji kalba",
+    "motherTonguePlaceholder": "Pasirinkite savo gimtąją kalbą...",
+    "chooseLanguageHelp": "Kitas mygtukas atrakinamas, kai išsaugoma jūsų kalba.",
+    "savingLanguage": "Išsaugoma kalba...",
+    "next": "Kitas",
+    "name": "02 · Jūsų vardas",
+    "namePlaceholder": "įveskite savo vardą...",
+    "avatar": "03 · Jūsų avataras",
+    "whyHere": "04 · Kodėl tu čia?",
+    "dailyGoal": "05 · Dienos tikslas",
+    "cardsPerDay": "{count} kortelės per dieną",
+    "topics": "06 · Temos (pasirinkite bet kurią)",
+    "takeMeHome": "Parvežk mane namo ->",
+    "saving": "Išsaugoma...",
+    "validationName": "Įveskite savo vardą.",
+    "validationReason": "Pasirinkite tinkamą priežastį.",
+    "validationDailyGoal": "Pasirinkite dienos tikslą.",
+    "validationMotherTongue": "Prašome pasirinkti savo gimtąją kalbą.",
+    "purposes": {
+      "School": "Mokykla",
+      "Job/test": "Darbas/testas",
+      "Hobby": "Hobis",
+      "Travel": "Kelionės",
+      "For fun": "Dėl linksmybių",
+      "My kid": "Mano vaikas"
+    },
+    "validationProfileNotFound": "Profilis nerastas. Atsijunkite ir bandykite dar kartą."
   }
 }

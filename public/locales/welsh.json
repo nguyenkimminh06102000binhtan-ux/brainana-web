@@ -499,5 +499,38 @@
     "saving": "Wrthi'n cadw...",
     "saveChanges": "Cadw newidiadau",
     "addAtLeastOneCard": "Ychwanegwch o leiaf un cerdyn i barhau"
+  },
+  "start": {
+    "estimatedTime": "~60 eiliad · i gyd ar un dudalen",
+    "title": "Gadewch i ni sefydlu eich ymennydd.",
+    "languageTitle": "01 · Mamiaith",
+    "languageIntro": "Dewiswch eich iaith frodorol yn gyntaf. Byddwn yn newid y gosodiad hwn i'r iaith honno cyn i chi barhau.",
+    "motherTongue": "Mamiaith",
+    "motherTonguePlaceholder": "Dewiswch eich iaith frodorol...",
+    "chooseLanguageHelp": "Mae'r botwm nesaf yn datgloi ar ôl i'ch iaith gael ei chadw.",
+    "savingLanguage": "Wrthi'n arbed iaith...",
+    "next": "Nesaf",
+    "name": "02 · Eich enw",
+    "namePlaceholder": "teipiwch eich enw...",
+    "avatar": "03 · Eich rhithffurf",
+    "whyHere": "04 · Pam wyt ti yma?",
+    "dailyGoal": "05 · Nod dyddiol",
+    "cardsPerDay": "Cardiau / diwrnod {count}",
+    "topics": "06 · Pynciau (dewiswch unrhyw un)",
+    "takeMeHome": "Ewch â fi adref ->",
+    "saving": "Wrthi'n cadw...",
+    "validationName": "Rhowch eich enw.",
+    "validationReason": "Dewiswch reswm dilys.",
+    "validationDailyGoal": "Dewiswch nod dyddiol.",
+    "validationMotherTongue": "Dewiswch eich mamiaith.",
+    "purposes": {
+      "School": "Ysgol",
+      "Job/test": "Swydd/prawf",
+      "Hobby": "Hobi",
+      "Travel": "Teithio",
+      "For fun": "Am hwyl",
+      "My kid": "Fy mhlentyn"
+    },
+    "validationProfileNotFound": "Proffil heb ei ganfod. Allgofnodwch a rhowch gynnig arall arni."
   }
 }

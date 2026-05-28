@@ -499,5 +499,38 @@
     "cancel": "Fagilee",
     "saveChanges": "Fi awọn ayipada pamọ",
     "saving": "Nfipamọ..."
+  },
+  "start": {
+    "estimatedTime": "~ 60 iṣẹju-aaya · gbogbo rẹ ni oju-iwe kan",
+    "title": "Jẹ ki a ṣeto ọpọlọ rẹ.",
+    "languageTitle": "01 · Iya ede",
+    "languageIntro": "Yan ede abinibi rẹ akọkọ. A yoo yipada iṣeto yii si ede yẹn ṣaaju ki o to tẹsiwaju.",
+    "motherTongue": "Ede iya",
+    "motherTonguePlaceholder": "Yan ede abinibi rẹ...",
+    "chooseLanguageHelp": "Bọtini atẹle yoo ṣii lẹhin ti o ti fipamọ ede rẹ.",
+    "savingLanguage": "Nfi ede pamọ...",
+    "next": "Itele",
+    "name": "02 · Orukọ rẹ",
+    "namePlaceholder": "tẹ orukọ rẹ...",
+    "avatar": "03 · Afata rẹ",
+    "whyHere": "04 · Kini idi ti o wa nibi?",
+    "dailyGoal": "05 · Daily ìlépa",
+    "cardsPerDay": "{count} awọn kaadi / ọjọ",
+    "topics": "06 · Awọn koko-ọrọ (yan eyikeyi)",
+    "takeMeHome": "Mu mi lọ si ile ->",
+    "saving": "Nfipamọ...",
+    "validationName": "Jọwọ tẹ orukọ rẹ sii.",
+    "validationReason": "Jọwọ yan idi to wulo.",
+    "validationDailyGoal": "Jọwọ yan ibi-afẹde ojoojumọ kan.",
+    "validationMotherTongue": "Jọwọ yan ede abinibi rẹ.",
+    "purposes": {
+      "School": "Ile-iwe",
+      "Job/test": "Job/idanwo",
+      "Hobby": "Ifisere",
+      "Travel": "Irin-ajo",
+      "For fun": "Fun igbadun",
+      "My kid": "Omo mi"
+    },
+    "validationProfileNotFound": "A ko ri profaili. Jọwọ jade ki o gbiyanju lẹẹkansi."
   }
 }

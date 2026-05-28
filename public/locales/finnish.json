@@ -499,5 +499,38 @@
     "sectionUnit": "osio",
     "saveChanges": "Tallenna muutokset",
     "creating": "Luodaan..."
+  },
+  "start": {
+    "estimatedTime": "~60 s · kaikki yhdellä sivulla",
+    "title": "Laitetaan aivosi kuntoon.",
+    "languageTitle": "01 · Äidinkieli",
+    "languageIntro": "Valitse ensin äidinkielesi. Vaihdamme tämän asennuksen kyseiselle kielelle ennen kuin jatkat.",
+    "motherTongue": "Äidinkieli",
+    "motherTonguePlaceholder": "Valitse äidinkielesi...",
+    "chooseLanguageHelp": "Seuraava-painike avautuu, kun kieli on tallennettu.",
+    "savingLanguage": "Tallennetaan kieltä...",
+    "next": "Seuraavaksi",
+    "name": "02 · Nimesi",
+    "namePlaceholder": "kirjoita nimesi...",
+    "avatar": "03 · Avatarisi",
+    "whyHere": "04 · Miksi olet täällä?",
+    "dailyGoal": "05 · Päivittäinen tavoite",
+    "cardsPerDay": "{count}-kortteja/päivä",
+    "topics": "06 · Aiheet (valitse mikä tahansa)",
+    "takeMeHome": "Vie minut kotiin ->",
+    "saving": "Tallennetaan...",
+    "validationName": "Kirjoita nimesi.",
+    "validationReason": "Valitse kelvollinen syy.",
+    "validationDailyGoal": "Valitse päivittäinen tavoite.",
+    "validationMotherTongue": "Valitse äidinkielesi.",
+    "purposes": {
+      "School": "Koulu",
+      "Job/test": "Työ/testi",
+      "Hobby": "Harrastus",
+      "Travel": "Matkustaa",
+      "For fun": "huvin vuoksi",
+      "My kid": "Lapseni"
+    },
+    "validationProfileNotFound": "Profiilia ei löydy. Kirjaudu ulos ja yritä uudelleen."
   }
 }

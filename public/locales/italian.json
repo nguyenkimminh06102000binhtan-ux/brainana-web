@@ -499,5 +499,38 @@
     "addAtLeastOneCard": "Aggiungi almeno una carta per continuare",
     "createCourse": "Crea corso",
     "saveChanges": "Salva modifiche"
+  },
+  "start": {
+    "estimatedTime": "~60 sec · tutto su una pagina",
+    "title": "Sistemiamo il tuo cervello.",
+    "languageTitle": "01 · Lingua materna",
+    "languageIntro": "Scegli prima la tua lingua madre. Trasformeremo questa configurazione in quella lingua prima di continuare.",
+    "motherTongue": "Lingua madre",
+    "motherTonguePlaceholder": "Seleziona la tua lingua madre...",
+    "chooseLanguageHelp": "Il pulsante successivo si sblocca dopo aver salvato la lingua.",
+    "savingLanguage": "Salvataggio della lingua...",
+    "next": "Avanti",
+    "name": "02 · Il tuo nome",
+    "namePlaceholder": "digita il tuo nome...",
+    "avatar": "03 · Il tuo avatar",
+    "whyHere": "04 · Perché sei qui?",
+    "dailyGoal": "05 · Obiettivo quotidiano",
+    "cardsPerDay": "{count} carte/giorno",
+    "topics": "06 · Argomenti (scegli uno qualsiasi)",
+    "takeMeHome": "Portami a casa ->",
+    "saving": "Salvataggio...",
+    "validationName": "Per favore inserisci il tuo nome.",
+    "validationReason": "Seleziona un motivo valido.",
+    "validationDailyGoal": "Seleziona un obiettivo giornaliero.",
+    "validationMotherTongue": "Seleziona la tua lingua madre.",
+    "purposes": {
+      "School": "Scuola",
+      "Job/test": "Lavoro/prova",
+      "Hobby": "Hobby",
+      "Travel": "Viaggio",
+      "For fun": "Per divertimento",
+      "My kid": "Mio figlio"
+    },
+    "validationProfileNotFound": "Profilo non trovato. Esci e riprova."
   }
 }

@@ -499,5 +499,38 @@
     "untitledSection": "Unavngivet afsnit",
     "saveChanges": "Gem ændringer",
     "saving": "Gemmer..."
+  },
+  "start": {
+    "estimatedTime": "~60 sek. · alt på én side",
+    "title": "Lad os sætte din hjerne op.",
+    "languageTitle": "01 · Modersmål",
+    "languageIntro": "Vælg dit modersmål først. Vi skifter denne opsætning til det sprog, før du fortsætter.",
+    "motherTongue": "Modersmål",
+    "motherTonguePlaceholder": "Vælg dit modersmål...",
+    "chooseLanguageHelp": "Den næste knap låses op, når dit sprog er gemt.",
+    "savingLanguage": "Gemmer sprog...",
+    "next": "Næste",
+    "name": "02 · Dit navn",
+    "namePlaceholder": "skriv dit navn...",
+    "avatar": "03 · Din avatar",
+    "whyHere": "04 · Hvorfor er du her?",
+    "dailyGoal": "05 · Dagligt mål",
+    "cardsPerDay": "{count}-kort/dag",
+    "topics": "06 · Emner (vælg et hvilket som helst)",
+    "takeMeHome": "Tag mig hjem ->",
+    "saving": "Gemmer...",
+    "validationName": "Indtast venligst dit navn.",
+    "validationReason": "Vælg venligst en gyldig årsag.",
+    "validationDailyGoal": "Vælg venligst et dagligt mål.",
+    "validationMotherTongue": "Vælg venligst dit modersmål.",
+    "purposes": {
+      "School": "Skole",
+      "Job/test": "Job/test",
+      "Hobby": "Hobby",
+      "Travel": "Rejser",
+      "For fun": "For sjov",
+      "My kid": "Mit barn"
+    },
+    "validationProfileNotFound": "Profil ikke fundet. Log venligst ud og prøv igen."
   }
 }

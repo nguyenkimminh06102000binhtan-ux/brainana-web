@@ -499,5 +499,38 @@
     "saveChanges": "حفظ التغييرات",
     "createCourse": "إنشاء دورة",
     "sectionUnits": "أقسام"
+  },
+  "start": {
+    "estimatedTime": "~60 ثانية · كل ذلك في صفحة واحدة",
+    "title": "دعونا إعداد عقلك.",
+    "languageTitle": "01 · اللغة الأم",
+    "languageIntro": "اختر لغتك الأم أولاً. سنقوم بتبديل هذا الإعداد إلى تلك اللغة قبل المتابعة.",
+    "motherTongue": "اللغة الأم",
+    "motherTonguePlaceholder": "اختر لغتك الأم...",
+    "chooseLanguageHelp": "يتم فتح الزر التالي بعد حفظ لغتك.",
+    "savingLanguage": "جارٍ حفظ اللغة...",
+    "next": "التالي",
+    "name": "02 · اسمك",
+    "namePlaceholder": "اكتب اسمك...",
+    "avatar": "03 · الصورة الرمزية الخاصة بك",
+    "whyHere": "04 · لماذا أنت هنا؟",
+    "dailyGoal": "05 · الهدف اليومي",
+    "cardsPerDay": "بطاقات {count}/اليوم",
+    "topics": "06 · المواضيع (اختر أي منها)",
+    "takeMeHome": "خذني إلى المنزل ->",
+    "saving": "جارٍ الحفظ...",
+    "validationName": "الرجاء إدخال اسمك.",
+    "validationReason": "الرجاء تحديد سبب صالح.",
+    "validationDailyGoal": "الرجاء تحديد هدف يومي.",
+    "validationMotherTongue": "الرجاء اختيار لغتك الأم.",
+    "purposes": {
+      "School": "المدرسة",
+      "Job/test": "الوظيفة/الاختبار",
+      "Hobby": "هواية",
+      "Travel": "السفر",
+      "For fun": "من أجل المتعة",
+      "My kid": "طفلي"
+    },
+    "validationProfileNotFound": "لم يتم العثور على الملف الشخصي. الرجاء تسجيل الخروج والمحاولة مرة أخرى."
   }
 }

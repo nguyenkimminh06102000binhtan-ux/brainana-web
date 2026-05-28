@@ -499,5 +499,38 @@
     "creating": "Erstellen...",
     "createCourse": "Kurs erstellen",
     "sectionUnits": "Abschnitte"
+  },
+  "start": {
+    "estimatedTime": "~60 Sek. · alles auf einer Seite",
+    "title": "Lassen Sie uns Ihr Gehirn einrichten.",
+    "languageTitle": "01 · Muttersprache",
+    "languageIntro": "Wählen Sie zunächst Ihre Muttersprache. Wir werden dieses Setup auf diese Sprache umstellen, bevor Sie fortfahren.",
+    "motherTongue": "Muttersprache",
+    "motherTonguePlaceholder": "Wählen Sie Ihre Muttersprache...",
+    "chooseLanguageHelp": "Die Schaltfläche „Weiter“ wird entsperrt, nachdem Ihre Sprache gespeichert wurde.",
+    "savingLanguage": "Sprache speichern...",
+    "next": "Als nächstes",
+    "name": "02 · Dein Name",
+    "namePlaceholder": "Geben Sie Ihren Namen ein...",
+    "avatar": "03 · Dein Avatar",
+    "whyHere": "04 · Warum bist du hier?",
+    "dailyGoal": "05 · Tagesziel",
+    "cardsPerDay": "{count} Karten/Tag",
+    "topics": "06 · Themen (wählen Sie eines aus)",
+    "takeMeHome": "Bring mich nach Hause ->",
+    "saving": "Sparen...",
+    "validationName": "Bitte geben Sie Ihren Namen ein.",
+    "validationReason": "Bitte wählen Sie einen gültigen Grund aus.",
+    "validationDailyGoal": "Bitte wählen Sie ein Tagesziel aus.",
+    "validationMotherTongue": "Bitte wählen Sie Ihre Muttersprache aus.",
+    "purposes": {
+      "School": "Schule",
+      "Job/test": "Job/Test",
+      "Hobby": "Hobby",
+      "Travel": "Reisen",
+      "For fun": "Zum Spaß",
+      "My kid": "Mein Kind"
+    },
+    "validationProfileNotFound": "Profil nicht gefunden. Bitte melden Sie sich ab und versuchen Sie es erneut."
   }
 }

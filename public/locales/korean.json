@@ -499,5 +499,38 @@
     "saveChanges": "변경사항 저장",
     "sectionUnits": "섹션",
     "untitledSection": "제목 없는 섹션"
+  },
+  "start": {
+    "estimatedTime": "~60초 · 한 페이지에 모두 포함",
+    "title": "당신의 두뇌를 설정합시다.",
+    "languageTitle": "01 · 모국어",
+    "languageIntro": "먼저 모국어를 선택하세요. 계속하기 전에 이 설정을 해당 언어로 전환하겠습니다.",
+    "motherTongue": "모국어",
+    "motherTonguePlaceholder": "모국어를 선택하세요...",
+    "chooseLanguageHelp": "언어가 저장되면 다음 버튼이 잠금 해제됩니다.",
+    "savingLanguage": "언어 저장 중...",
+    "next": "다음",
+    "name": "02 · 너의 이름은",
+    "namePlaceholder": "이름을 입력하세요...",
+    "avatar": "03 · 당신의 아바타",
+    "whyHere": "04 · 당신은 왜 여기에 있습니까?",
+    "dailyGoal": "05 · 일일 목표",
+    "cardsPerDay": "{count} 카드/일",
+    "topics": "06 · 주제(아무거나 선택)",
+    "takeMeHome": "집에 데려다주세요 ->",
+    "saving": "저장 중...",
+    "validationName": "이름을 입력해주세요.",
+    "validationReason": "유효한 이유를 선택하세요.",
+    "validationDailyGoal": "일일 목표를 선택하세요.",
+    "validationMotherTongue": "모국어를 선택해 주세요.",
+    "purposes": {
+      "School": "학교",
+      "Job/test": "직업/시험",
+      "Hobby": "취미",
+      "Travel": "여행",
+      "For fun": "재미로",
+      "My kid": "내 아이"
+    },
+    "validationProfileNotFound": "프로필을 찾을 수 없습니다. 로그아웃한 후 다시 시도해 주세요."
   }
 }
