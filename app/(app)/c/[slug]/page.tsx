@@ -7,6 +7,7 @@ import PreviewSection from "./preview";
 import FollowButton from "./follow-button";
 import ShareButton from "./share-button";
 import QuestionTypeSelector from "./question-type-selector";
+import DiscussionThread from "./discussion-thread";
 import { toggleEnroll } from "./actions";
 
 const LEVEL_LABEL: Record<string, string> = {
@@ -223,6 +224,9 @@ export default async function CourseDetailPage({
               This course has <strong>{formatCount(course.mems_count ?? 0)} community mems</strong> — mnemonic hints from other learners. Tap any card to see them.
             </p>
           </div>
+
+          {/* Discussion */}
+          <DiscussionThread courseId={course.id} courseSlug={course.slug} isOwner={isOwner} />
         </div>
 
         {/* ── RIGHT SIDEBAR ── */}
