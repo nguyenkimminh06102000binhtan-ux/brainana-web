@@ -6,6 +6,14 @@ import { createClient } from "@/utils/supabase/server";
 
 type AuthState = { error: string } | null;
 
+type OnboardingProfile = {
+  display_name: string | null;
+  purpose: string | null;
+  interests: string[] | null;
+  native_language: string | null;
+  onboarding_completed: boolean | null;
+};
+
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -18,6 +26,37 @@ function isStrongPassword(password: string) {
     /\d/.test(password) &&
     /[^A-Za-z0-9]/.test(password)
   );
+}
+
+function hasCompletedOnboarding(profile: OnboardingProfile | null) {
+  return Boolean(
+    profile?.onboarding_completed &&
+      profile.display_name?.trim() &&
+      profile.purpose?.trim() &&
+      profile.native_language?.trim() &&
+      profile.interests &&
+      profile.interests.length > 0
+  );
+}
+
+async function getPostAuthPath(
+  supabase: Awaited<ReturnType<typeof createClient>>
+) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return "/login";
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("display_name, purpose, interests, native_language, onboarding_completed")
+    .eq("id", user.id)
+    .single();
+
+  return hasCompletedOnboarding(profile as OnboardingProfile | null)
+    ? "/home"
+    : "/start";
 }
 
 export async function loginWithEmail(
@@ -33,7 +72,7 @@ export async function loginWithEmail(
 
   if (error) return { error: "Login details are wrong." };
 
-  redirect("/dashboard");
+  redirect(await getPostAuthPath(supabase));
 }
 
 export async function signupWithEmail(
@@ -72,7 +111,7 @@ export async function signupWithEmail(
     redirect(`/verify-email?email=${encodeURIComponent(email)}`);
   }
 
-  redirect("/dashboard");
+  redirect(await getPostAuthPath(supabase));
 }
 
 export async function signInWithGoogle() {

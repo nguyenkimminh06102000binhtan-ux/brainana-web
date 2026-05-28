@@ -225,10 +225,10 @@ function EmptyState({ query, category }: { query?: string; category: string }) {
           : "Published courses will appear here when they are available."}
       </p>
       <Link
-        href={isFiltered ? "/courses" : "/dashboard"}
+        href={isFiltered ? "/courses" : "/home"}
         className="mt-4 inline-block rounded-full bg-paper px-6 py-3 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
       >
-        {isFiltered ? "Clear filters" : "Back to dashboard"}
+        {isFiltered ? "Clear filters" : "Back to home"}
       </Link>
     </div>
   );

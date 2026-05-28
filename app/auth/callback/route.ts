@@ -2,6 +2,25 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
+type OnboardingProfile = {
+  display_name: string | null;
+  purpose: string | null;
+  interests: string[] | null;
+  native_language: string | null;
+  onboarding_completed: boolean | null;
+};
+
+function hasCompletedOnboarding(profile: OnboardingProfile | null) {
+  return Boolean(
+    profile?.onboarding_completed &&
+      profile.display_name?.trim() &&
+      profile.purpose?.trim() &&
+      profile.native_language?.trim() &&
+      profile.interests &&
+      profile.interests.length > 0
+  );
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
@@ -15,11 +34,11 @@ export async function GET(request: Request) {
     if (!error && data.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("onboarding_completed")
+        .select("display_name, purpose, interests, native_language, onboarding_completed")
         .eq("id", data.user.id)
         .single();
 
-      if (!profile?.onboarding_completed) {
+      if (!hasCompletedOnboarding(profile as OnboardingProfile | null)) {
         return NextResponse.redirect(new URL("/start", request.url));
       }
 
