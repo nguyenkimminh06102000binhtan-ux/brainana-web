@@ -48,50 +48,56 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex min-h-screen bg-paper text-ink">
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="m-4 flex flex-wrap items-center gap-4 rounded-full bg-paper-2 px-6 py-4 shadow-hard">
-          <Link href="/home" className="flex items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-ink">
-              B
-            </span>
-            {loc.app.brand}
-          </Link>
-
-          <nav className="flex flex-1 flex-wrap items-center gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 hover:bg-blue hover:text-ocean"
-              >
-                {item.label}
+        <header className="m-3 rounded-[2rem] bg-paper-2 px-4 py-4 shadow-hard sm:m-4 sm:px-5 xl:rounded-full xl:px-6">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-4">
+            <div className="flex min-w-0 items-center gap-3 xl:contents">
+              <Link href="/home" className="flex min-w-0 shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-ink">
+                  B
+                </span>
+                <span className="hidden truncate sm:inline">{loc.app.brand}</span>
               </Link>
-            ))}
-          </nav>
 
-          <form action="/browse" className="hidden min-w-48 sm:block">
-            <input
-              name="q"
-              placeholder={loc.app.searchPlaceholder}
-              className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
-            />
-          </form>
+              <div className="ml-auto flex shrink-0 items-center gap-2 xl:order-last xl:ml-0">
+                <div className="hidden rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean sm:block">
+                  🔥 {t(loc.app.streakDays, { count: currentStreak })}
+                </div>
 
-          <div className="rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean">
-            🔥 {t(loc.app.streakDays, { count: currentStreak })}
+                <OriginLanguageSwitcher
+                  originLanguages={originLanguages}
+                  activeOriginLanguage={activeOriginLanguage}
+                  labels={loc.app.originLanguage}
+                />
+
+                <AvatarMenu
+                  avatarUrl={profile?.avatar_url ?? null}
+                  initial={initial}
+                  username={profile?.username ?? ""}
+                  labels={loc.app.avatar}
+                />
+              </div>
+            </div>
+
+            <nav className="flex min-w-0 gap-1 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] xl:flex-1 xl:flex-wrap xl:items-center xl:gap-2 xl:overflow-visible xl:pb-0 [&::-webkit-scrollbar]:hidden">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="shrink-0 rounded-full px-3 py-2 font-manrope text-sm font-[800] text-ink-2 hover:bg-blue hover:text-ocean sm:px-4"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <form action="/browse" className="hidden w-full sm:block xl:w-auto xl:min-w-48">
+              <input
+                name="q"
+                placeholder={loc.app.searchPlaceholder}
+                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
+              />
+            </form>
           </div>
-
-          <OriginLanguageSwitcher
-            originLanguages={originLanguages}
-            activeOriginLanguage={activeOriginLanguage}
-            labels={loc.app.originLanguage}
-          />
-
-          <AvatarMenu
-            avatarUrl={profile?.avatar_url ?? null}
-            initial={initial}
-            username={profile?.username ?? ""}
-            labels={loc.app.avatar}
-          />
         </header>
 
         <main className="flex-1">{children}</main>
