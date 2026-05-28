@@ -48,20 +48,6 @@ function pickDistractors(
   return shuffled.slice(0, 3);
 }
 
-export async function savePreferredTypes(courseId: string, types: QType[]): Promise<void> {
-  if (types.length === 0) return;
-  const supabase = createClient(await cookies());
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return;
-  await supabase
-    .from("user_courses")
-    .upsert(
-      { user_id: user.id, course_id: courseId, preferred_question_types: types },
-      { onConflict: "user_id,course_id" },
-    );
-}
 
 export async function fetchStudyCards(
   courseId: string,
