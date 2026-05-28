@@ -3,6 +3,7 @@
 import { useActionState, useRef, useState } from "react";
 import { createCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
+import { compressImage } from "@/utils/compress-image";
 
 const CATEGORIES = ["Language", "Science", "History", "Math", "Geography", "Literature", "Music", "Art", "Technology", "Other"];
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
@@ -12,7 +13,7 @@ const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
 const IMAGE_MAX = 5 * 1024 * 1024;
 const AUDIO_MAX = 10 * 1024 * 1024;
 
-type UploadState = { uploading: boolean; error: string | null };
+type UploadState = { uploading: boolean; compressing: boolean; error: string | null };
 type UploadField = "image" | "frontAudio" | "backAudio";
 
 type Item = {
@@ -34,9 +35,9 @@ type Section = {
 
 let uid = 1;
 const freshUpload = (): Record<UploadField, UploadState> => ({
-  image: { uploading: false, error: null },
-  frontAudio: { uploading: false, error: null },
-  backAudio: { uploading: false, error: null },
+  image: { uploading: false, compressing: false, error: null },
+  frontAudio: { uploading: false, compressing: false, error: null },
+  backAudio: { uploading: false, compressing: false, error: null },
 });
 const makeItem = (): Item => ({ id: uid++, front: "", back: "", imageUrl: "", frontAudioUrl: "", backAudioUrl: "", uploads: freshUpload() });
 const makeSection = (): Section => ({ id: uid++, title: "", description: "", items: [makeItem()] });
@@ -93,30 +94,31 @@ async function uploadToStorage(file: File): Promise<string> {
   const isImage = IMAGE_TYPES.includes(file.type);
   const isAudio = AUDIO_TYPES.includes(file.type);
   if (!isImage && !isAudio) throw new Error("Unsupported file type.");
-  if (isImage && file.size > IMAGE_MAX) throw new Error("Image must be under 5 MB.");
   if (isAudio && file.size > AUDIO_MAX) throw new Error("Audio must be under 10 MB.");
 
+  const fileToUpload = isImage ? await compressImage(file, IMAGE_MAX) : file;
   const supabase = createClient();
-  const ext = file.name.split(".").pop();
+  const ext = fileToUpload.name.split(".").pop();
   const path = `items/${crypto.randomUUID()}.${ext}`;
-  const { data, error } = await supabase.storage.from("course-media").upload(path, file);
+  const { data, error } = await supabase.storage.from("course-media").upload(path, fileToUpload, { contentType: fileToUpload.type });
   if (error) throw new Error(error.message);
   const { data: { publicUrl } } = supabase.storage.from("course-media").getPublicUrl(data.path);
   return publicUrl;
 }
 
-function UploadButton({ label: lbl, accept, uploading, error, onFile }: {
-  label: string; accept: string; uploading: boolean; error: string | null; onFile: (f: File) => void;
+function UploadButton({ label: lbl, accept, uploading, compressing, error, onFile }: {
+  label: string; accept: string; uploading: boolean; compressing: boolean; error: string | null; onFile: (f: File) => void;
 }) {
   const ref = useRef<HTMLInputElement>(null);
   return (
     <div>
       <input ref={ref} type="file" accept={accept} className="hidden"
         onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = ""; }} />
-      <button type="button" disabled={uploading} onClick={() => ref.current?.click()}
+      <button type="button" disabled={uploading || compressing} onClick={() => ref.current?.click()}
         className="rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50">
-        {uploading ? "Uploading..." : lbl}
+        {compressing ? "Processing…" : uploading ? "Uploading..." : lbl}
       </button>
+      {compressing && <p className="mt-1 font-manrope text-xs text-ink-2">Image is large — compressing before upload, please wait…</p>}
       {error && <p className="mt-1 font-manrope text-xs text-orange">{error}</p>}
     </div>
   );
@@ -173,7 +175,7 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
             {item.frontAudioUrl
               ? <AudioPreview url={item.frontAudioUrl} onRemove={() => onClearUrl("frontAudioUrl")} />
               : <UploadButton label="+ Upload audio" accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
-                  uploading={item.uploads.frontAudio.uploading} error={item.uploads.frontAudio.error}
+                  uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
                   onFile={(f) => onUpload("frontAudio", f)} />}
           </div>
         </div>
@@ -188,7 +190,7 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
             {item.backAudioUrl
               ? <AudioPreview url={item.backAudioUrl} onRemove={() => onClearUrl("backAudioUrl")} />
               : <UploadButton label="+ Upload audio" accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
-                  uploading={item.uploads.backAudio.uploading} error={item.uploads.backAudio.error}
+                  uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
                   onFile={(f) => onUpload("backAudio", f)} />}
           </div>
         </div>
@@ -199,7 +201,7 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
         {item.imageUrl
           ? <ImagePreview url={item.imageUrl} onRemove={() => onClearUrl("imageUrl")} />
           : <UploadButton label="+ Upload image" accept="image/jpeg,image/png,image/webp"
-              uploading={item.uploads.image.uploading} error={item.uploads.image.error}
+              uploading={item.uploads.image.uploading} compressing={item.uploads.image.compressing} error={item.uploads.image.error}
               onFile={(f) => onUpload("image", f)} />}
       </div>
     </div>
@@ -261,10 +263,11 @@ export default function CreateCourseForm() {
 
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
     const urlField = field === "image" ? "imageUrl" : field === "frontAudio" ? "frontAudioUrl" : "backAudioUrl";
+    const willCompress = field === "image" && IMAGE_TYPES.includes(file.type) && file.size > IMAGE_MAX;
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
         ? { ...s, items: s.items.map((item) =>
-            item.id === itemId ? { ...item, uploads: { ...item.uploads, [field]: { uploading: true, error: null } } } : item
+            item.id === itemId ? { ...item, uploads: { ...item.uploads, [field]: { uploading: !willCompress, compressing: willCompress, error: null } } } : item
           )}
         : s
     ));
@@ -273,7 +276,7 @@ export default function CreateCourseForm() {
       setSections((prev) => prev.map((s) =>
         s.id === sectionId
           ? { ...s, items: s.items.map((item) =>
-              item.id === itemId ? { ...item, [urlField]: url, uploads: { ...item.uploads, [field]: { uploading: false, error: null } } } : item
+              item.id === itemId ? { ...item, [urlField]: url, uploads: { ...item.uploads, [field]: { uploading: false, compressing: false, error: null } } } : item
             )}
           : s
       ));
@@ -281,7 +284,7 @@ export default function CreateCourseForm() {
       setSections((prev) => prev.map((s) =>
         s.id === sectionId
           ? { ...s, items: s.items.map((item) =>
-              item.id === itemId ? { ...item, uploads: { ...item.uploads, [field]: { uploading: false, error: (err as Error).message } } } : item
+              item.id === itemId ? { ...item, uploads: { ...item.uploads, [field]: { uploading: false, compressing: false, error: (err as Error).message } } } : item
             )}
           : s
       ));
@@ -312,7 +315,7 @@ export default function CreateCourseForm() {
 
   const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
   const hasValidItem = sections.some((s) => s.items.some((i) => i.front.trim() && i.back.trim()));
-  const isUploading = sections.some((s) => s.items.some((i) => Object.values(i.uploads).some((u) => u.uploading)));
+  const isUploading = sections.some((s) => s.items.some((i) => Object.values(i.uploads).some((u) => u.uploading || u.compressing)));
 
   const sectionsPayload = JSON.stringify(
     sections.map((s) => ({
