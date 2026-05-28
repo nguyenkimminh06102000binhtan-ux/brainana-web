@@ -1,9 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "./actions";
+import AvatarMenu from "./_components/avatar-menu";
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -71,28 +70,11 @@ export default async function AppLayout({
             🔥 {currentStreak} days
           </div>
 
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-yellow font-mono text-sm font-[800] text-ink">
-            {profile?.avatar_url ? (
-              <Image
-                src={profile.avatar_url}
-                alt={displayName}
-                width={40}
-                height={40}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              initial
-            )}
-          </div>
-
-          <form action={logout}>
-            <button
-              type="submit"
-              className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
-            >
-              Log out
-            </button>
-          </form>
+          <AvatarMenu
+            avatarUrl={profile?.avatar_url ?? null}
+            initial={initial}
+            username={profile?.username ?? ""}
+          />
         </header>
 
         <main className="flex-1">{children}</main>
