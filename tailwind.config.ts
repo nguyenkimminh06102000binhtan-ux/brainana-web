@@ -24,11 +24,11 @@ const config = {
       "ink-3": "#7890A0",
     },
     fontFamily: {
-      fredoka: ["Fredoka", "sans-serif"],
-      manrope: ["Manrope", "sans-serif"],
-      kalam: ["Kalam", "cursive"],
+      fredoka: ["Young Typeface", "sans-serif"],
+      manrope: ["Young Typeface", "sans-serif"],
+      kalam: ["Young Typeface", "sans-serif"],
       mono: ["Young Typeface", "sans-serif"],
-      young: ["Young Typeface Display", "sans-serif"],
+      young: ["Young Typeface", "sans-serif"],
     },
     borderWidth: {
       DEFAULT: "1.5px",

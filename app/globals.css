@@ -1,17 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Kalam:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap");
-
 @font-face {
   font-family: "Young Typeface";
   src: url("/fonts/Young Typeface.otf") format("opentype");
-  font-weight: 400;
+  font-weight: 400 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Young Typeface Display";
+  font-family: "Young Typeface";
   src: url("/fonts/Young Typeface - Bold Display.otf") format("opentype");
-  font-weight: 700;
+  font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }
@@ -39,11 +37,11 @@
   --background-glow-1: #F59A1E45;
   --background-glow-2: #F36B2E38;
   --background-glow-3: #253C9620;
-  --font-fredoka: "Fredoka", sans-serif;
-  --font-manrope: "Manrope", sans-serif;
-  --font-kalam: "Kalam", cursive;
+  --font-fredoka: "Young Typeface", sans-serif;
+  --font-manrope: "Young Typeface", sans-serif;
+  --font-kalam: "Young Typeface", sans-serif;
   --font-mono: "Young Typeface", sans-serif;
-  --font-young: "Young Typeface Display", sans-serif;
+  --font-young: "Young Typeface", sans-serif;
   --brainana-shadow-hard: 0 18px 40px #19244E24;
   --brainana-shadow-hard-sm: 0 10px 24px #19244E1F;
   --brainana-shadow-hard-red: 0 18px 36px #F36B2E40;
@@ -89,11 +87,11 @@
   --color-green-soft: var(--brainana-green-soft);
   --color-ink-2: var(--brainana-ink-2);
   --color-ink-3: var(--brainana-ink-3);
-  --font-fredoka: "Fredoka", sans-serif;
-  --font-manrope: "Manrope", sans-serif;
-  --font-kalam: "Kalam", cursive;
+  --font-fredoka: "Young Typeface", sans-serif;
+  --font-manrope: "Young Typeface", sans-serif;
+  --font-kalam: "Young Typeface", sans-serif;
   --font-mono: "Young Typeface", sans-serif;
-  --font-young: "Young Typeface Display", sans-serif;
+  --font-young: "Young Typeface", sans-serif;
   --shadow-hard: var(--brainana-shadow-hard);
   --shadow-hard-sm: var(--brainana-shadow-hard-sm);
   --shadow-hard-red: var(--brainana-shadow-hard-red);
