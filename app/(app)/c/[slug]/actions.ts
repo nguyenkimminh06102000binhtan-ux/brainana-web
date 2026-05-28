@@ -18,12 +18,27 @@ export async function updateQuestionTypes(formData: FormData) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const { data: existing } = await supabase
+    .from("user_courses")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("course_id", courseId)
+    .maybeSingle();
+
   await supabase
     .from("user_courses")
     .upsert(
       { user_id: user.id, course_id: courseId, preferred_question_types: types },
       { onConflict: "user_id,course_id" }
     );
+
+  // Keep learner_count in sync when this creates a new row
+  if (!existing) {
+    const { data: course } = await supabase.from("courses").select("learner_count").eq("id", courseId).single();
+    if (course) {
+      await supabase.from("courses").update({ learner_count: course.learner_count + 1 }).eq("id", courseId);
+    }
+  }
 }
 
 export async function toggleFollow(formData: FormData) {
