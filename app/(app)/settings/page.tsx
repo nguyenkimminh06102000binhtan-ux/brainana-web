@@ -12,7 +12,7 @@ export default async function SettingsPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, display_name, username, bio, avatar_url, website_url, twitter_handle, daily_goal, show_romanization")
+    .select("id, display_name, username, bio, avatar_url, website_url, twitter_handle, daily_goal, show_romanization, native_language")
     .eq("id", user.id)
     .single();
 
@@ -32,6 +32,7 @@ export default async function SettingsPage() {
         twitter_handle: profile.twitter_handle,
         daily_goal: profile.daily_goal ?? 10,
         show_romanization: profile.show_romanization ?? true,
+        native_language: profile.native_language ?? null,
       }}
       email={user.email ?? ""}
       googleIdentity={googleIdentity}

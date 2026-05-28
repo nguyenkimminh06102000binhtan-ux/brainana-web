@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { PURPOSES, DAILY_GOALS, INTERESTS } from "./constants";
+import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 
 export type OnboardingState = { error: string } | null;
 
@@ -26,12 +26,15 @@ export async function saveOnboarding(
     .getAll("interests")
     .map(String)
     .filter((i): boolean => (INTERESTS as readonly string[]).includes(i));
+  const nativeLanguage = String(formData.get("native_language") ?? "").trim();
 
   if (!displayName) return { error: "Please enter your name." };
   if (!(PURPOSES as readonly string[]).includes(purpose))
     return { error: "Please select a valid reason." };
   if (!(DAILY_GOALS as readonly number[]).includes(dailyGoal))
     return { error: "Please select a daily goal." };
+  if (!(LANGUAGES as readonly string[]).includes(nativeLanguage))
+    return { error: "Please select your mother tongue." };
 
   const { data, error } = await supabase
     .from("profiles")
@@ -41,6 +44,7 @@ export async function saveOnboarding(
       purpose,
       daily_goal: dailyGoal,
       interests: selectedInterests.length > 0 ? selectedInterests : null,
+      native_language: nativeLanguage,
       onboarding_completed: true,
     })
     .eq("id", user.id)

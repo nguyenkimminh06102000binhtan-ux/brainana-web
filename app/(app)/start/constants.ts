@@ -1,4 +1,31 @@
 export const PURPOSES = ["School", "Job/test", "Hobby", "Travel", "For fun", "My kid"] as const;
+
+export const LANGUAGES = [
+  "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",
+  "Basque", "Belarusian", "Bengali", "Bosnian", "Bulgarian",
+  "Catalan", "Chinese (Cantonese)", "Chinese (Mandarin)", "Croatian", "Czech",
+  "Danish", "Dutch",
+  "English", "Estonian",
+  "Filipino/Tagalog", "Finnish", "French",
+  "Galician", "Georgian", "German", "Greek", "Gujarati",
+  "Hausa", "Hebrew", "Hindi", "Hungarian",
+  "Icelandic", "Indonesian", "Irish", "Italian",
+  "Japanese", "Javanese",
+  "Kannada", "Kazakh", "Khmer", "Korean", "Kurdish",
+  "Lao", "Latvian", "Lithuanian",
+  "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian",
+  "Nepali", "Norwegian",
+  "Pashto", "Persian", "Polish", "Portuguese", "Punjabi",
+  "Romanian", "Russian",
+  "Serbian", "Sinhala", "Slovak", "Slovenian", "Somali", "Spanish", "Swahili", "Swedish",
+  "Tajik", "Tamil", "Telugu", "Thai", "Turkish",
+  "Ukrainian", "Urdu", "Uzbek",
+  "Vietnamese",
+  "Welsh",
+  "Yoruba",
+  "Zulu",
+  "Other",
+] as const;
 export const DAILY_GOALS = [5, 10, 20, 40] as const;
 export const INTERESTS = [
   "Languages",

@@ -4,6 +4,7 @@ import { useActionState, useEffect, useMemo, useState } from "react";
 import AvatarPicker from "@/components/avatar-picker";
 import { createClient } from "@/utils/supabase/client";
 import { saveAccountSettings, saveProfileSettings, type AccountSettingsState, type ProfileSettingsState } from "./actions";
+import { LANGUAGES } from "@/app/(app)/start/constants";
 
 type ProfileSettings = {
   id: string;
@@ -15,6 +16,7 @@ type ProfileSettings = {
   twitter_handle: string | null;
   daily_goal: number;
   show_romanization: boolean;
+  native_language: string | null;
 };
 
 type GoogleIdentity = {
@@ -201,6 +203,22 @@ export default function SettingsForm({
                   className={inputClassName}
                 />
               </Field>
+
+              <div className="md:col-span-2">
+                <Field label="Mother tongue" htmlFor="native_language">
+                  <select
+                    id="native_language"
+                    name="native_language"
+                    defaultValue={profile.native_language ?? ""}
+                    className={inputClassName}
+                  >
+                    <option value="">— not set —</option>
+                    {LANGUAGES.map((lang) => (
+                      <option key={lang} value={lang}>{lang}</option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
             </div>
 
             <div className="mt-6 rounded-lg bg-paper p-5 shadow-hard-sm">

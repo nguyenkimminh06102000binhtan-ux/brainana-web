@@ -64,6 +64,7 @@ export async function saveProfileSettings(
   const twitterHandle = normalizeTwitterHandle(String(formData.get("twitter_handle") ?? ""));
   const dailyGoal = Number(formData.get("daily_goal"));
   const showRomanization = formData.get("show_romanization") === "on";
+  const nativeLanguage = String(formData.get("native_language") ?? "").trim() || null;
 
   if (!displayName) return { error: "Display name is required." };
   if (!USERNAME_RE.test(username)) {
@@ -100,6 +101,7 @@ export async function saveProfileSettings(
       twitter_handle: twitterHandle,
       daily_goal: dailyGoal,
       show_romanization: showRomanization,
+      native_language: nativeLanguage,
       updated_at: new Date().toISOString(),
     })
     .eq("id", user.id);
