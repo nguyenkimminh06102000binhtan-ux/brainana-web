@@ -14,25 +14,25 @@ const ESCALATION: Record<string, QType> = {
 };
 
 function assignQuestionType(lastType: string | null, selectedTypes: QType[]): QType {
-  // New card: randomly distribute across selected types for variety
+  const types = selectedTypes.length > 0 ? selectedTypes : (["flashcard"] as QType[]);
   if (lastType == null) {
-    return selectedTypes[Math.floor(Math.random() * selectedTypes.length)]!;
+    return types[Math.floor(Math.random() * types.length)]!;
   }
 
   // Card with history: escalate to the next difficulty level
   const target: QType = ESCALATION[lastType] ?? "flashcard";
-  if (selectedTypes.includes(target)) return target;
+  if (types.includes(target)) return target;
 
   // Target not in selected types — find nearest available in the ladder
   const ladder: QType[] = ["speed_match", "multiple_choice", "type_answer", "audio_type", "flashcard"];
   const targetIdx = ladder.indexOf(target);
   for (let i = targetIdx + 1; i < ladder.length; i++) {
-    if (selectedTypes.includes(ladder[i])) return ladder[i];
+    if (types.includes(ladder[i])) return ladder[i];
   }
   for (let i = targetIdx - 1; i >= 0; i--) {
-    if (selectedTypes.includes(ladder[i])) return ladder[i];
+    if (types.includes(ladder[i])) return ladder[i];
   }
-  return selectedTypes[0]!;
+  return types[0]!;
 }
 
 function pickDistractors(
@@ -46,6 +46,21 @@ function pickDistractors(
 
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, 3);
+}
+
+export async function savePreferredTypes(courseId: string, types: QType[]): Promise<void> {
+  if (types.length === 0) return;
+  const supabase = createClient(await cookies());
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+  await supabase
+    .from("user_courses")
+    .upsert(
+      { user_id: user.id, course_id: courseId, preferred_question_types: types },
+      { onConflict: "user_id,course_id" },
+    );
 }
 
 export async function fetchStudyCards(
@@ -78,8 +93,6 @@ export async function fetchStudyCards(
   let newItems: { id: string; front_text: string; back_text: string; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null }[] = [];
 
   if (needed > 0) {
-    const seenIds = overdue.map((r) => r.item_id);
-
     const { data: allProgressIds } = await supabase
       .from("item_progress")
       .select("item_id")
