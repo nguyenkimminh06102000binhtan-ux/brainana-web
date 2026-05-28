@@ -74,7 +74,6 @@ export default async function StudyPage({
       newCards={newCards}
       totalCount={total}
       preferredTypes={preferredTypes}
-      hasAudio={hasAudio}
     />
   );
 }

@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { fetchStudyCards, savePreferredTypes } from "./actions";
+import { fetchStudyCards } from "./actions";
 import SessionView from "./session-view";
 import ResultsScreen from "./results-screen";
-import type { QType, StudyCard, SessionConfig, SessionStats } from "./types";
+import type { QType, StudyCard, SessionStats } from "./types";
 
 type Stage = "setup" | "loading" | "session" | "results";
 
@@ -18,16 +18,7 @@ interface StudyClientProps {
   newCards: number;
   totalCount: number;
   preferredTypes: QType[];
-  hasAudio: boolean;
 }
-
-const QUESTION_OPTIONS: { value: QType; label: string; icon: string }[] = [
-  { value: "flashcard",       label: "Flashcard",       icon: "🃏" },
-  { value: "multiple_choice", label: "Multiple choice", icon: "☑️" },
-  { value: "audio_type",      label: "Audio type",      icon: "🎧" },
-  { value: "speed_match",     label: "Speed match",     icon: "⚡" },
-  { value: "type_answer",     label: "Type answer",     icon: "⌨️" },
-];
 
 export default function StudyClient({
   userId,
@@ -38,24 +29,17 @@ export default function StudyClient({
   newCards,
   totalCount,
   preferredTypes,
-  hasAudio,
 }: StudyClientProps) {
   const available = reviewDue + newCards;
   const [stage, setStage] = useState<Stage>("setup");
   const [sessionCards, setSessionCards] = useState<StudyCard[]>([]);
   const [sessionStats, setSessionStats] = useState<SessionStats | null>(null);
-  const [config, setConfig] = useState<SessionConfig>({
-    count: available > 0 ? Math.min(10, available) : 0,
-    types: preferredTypes,
-  });
+  const [count, setCount] = useState(available > 0 ? Math.min(10, available) : 0);
 
   async function handleStart() {
     setStage("loading");
     try {
-      const [cards] = await Promise.all([
-        fetchStudyCards(courseId, config.count, config.types),
-        savePreferredTypes(courseId, config.types),
-      ]);
+      const cards = await fetchStudyCards(courseId, count, preferredTypes);
       setSessionCards(cards);
       setStage("session");
     } catch {
@@ -114,26 +98,14 @@ export default function StudyClient({
   // ─── Setup screen ─────────────────────────────────────────────────────────
 
   function adjustCount(delta: number) {
-    setConfig((prev) => ({
-      ...prev,
-      count: Math.min(available, Math.max(1, prev.count + delta)),
-    }));
+    setCount((prev) => Math.min(available, Math.max(1, prev + delta)));
   }
 
   function handleCountInput(e: React.ChangeEvent<HTMLInputElement>) {
     const val = Number(e.target.value);
     if (!Number.isNaN(val)) {
-      setConfig((prev) => ({ ...prev, count: Math.min(available, Math.max(1, val)) }));
+      setCount(Math.min(available, Math.max(1, val)));
     }
-  }
-
-  function toggleType(type: QType) {
-    setConfig((prev) => {
-      const next = prev.types.includes(type)
-        ? prev.types.filter((t) => t !== type)
-        : [...prev.types, type];
-      return { ...prev, types: next.length === 0 ? prev.types : next };
-    });
   }
 
   return (
@@ -162,7 +134,7 @@ export default function StudyClient({
               <button
                 type="button"
                 onClick={() => adjustCount(-1)}
-                disabled={config.count <= 1 || available === 0}
+                disabled={count <= 1 || available === 0}
                 className="px-3 py-2 font-fredoka text-2xl text-ink-2 transition hover:text-ink disabled:opacity-30"
                 aria-label="Decrease"
               >
@@ -172,7 +144,7 @@ export default function StudyClient({
                 type="number"
                 min={1}
                 max={available}
-                value={config.count}
+                value={count}
                 onChange={handleCountInput}
                 disabled={available === 0}
                 className="w-16 bg-transparent py-2 text-center font-fredoka text-3xl font-[600] text-ink focus:outline-none disabled:opacity-40 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
@@ -180,7 +152,7 @@ export default function StudyClient({
               <button
                 type="button"
                 onClick={() => adjustCount(1)}
-                disabled={config.count >= available || available === 0}
+                disabled={count >= available || available === 0}
                 className="px-3 py-2 font-fredoka text-2xl text-ink-2 transition hover:text-ink disabled:opacity-30"
                 aria-label="Increase"
               >
@@ -204,33 +176,6 @@ export default function StudyClient({
               All caught up! No cards are due for review.
             </p>
           )}
-        </div>
-
-        {/* Question types */}
-        <div className="mb-6">
-          <p className="mb-2 font-manrope text-xs font-[700] uppercase tracking-wider text-ink-3">
-            Question types
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {QUESTION_OPTIONS.filter((o) => o.value !== "audio_type" || hasAudio).map(({ value, label, icon }) => {
-              const active = config.types.includes(value);
-              return (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => toggleType(value)}
-                  className={`flex cursor-pointer items-center gap-2 rounded-sm border-2 px-3 py-2.5 font-manrope text-sm font-[700] transition active:translate-y-[1px] ${
-                    active
-                      ? "border-orange bg-orange text-white"
-                      : "border-ink/20 bg-ink/5 text-ink-2 hover:border-ink/30 hover:bg-ink/10"
-                  }`}
-                >
-                  <span>{icon}</span>
-                  <span>{label}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* Buttons */}

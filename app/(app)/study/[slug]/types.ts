@@ -41,7 +41,3 @@ export interface SessionStats {
   updatedStreak: number;
 }
 
-export interface SessionConfig {
-  count: number;
-  types: QType[];
-}
