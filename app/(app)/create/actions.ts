@@ -43,6 +43,7 @@ export async function createCourse(
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim() || null;
   const category = String(formData.get("category") ?? "").trim() || null;
+  const subcategory = String(formData.get("subcategory") ?? "").trim() || null;
   const sourceLanguage = String(formData.get("source_language") ?? "").trim() || null;
   const targetLanguage = String(formData.get("target_language") ?? "").trim() || null;
   const visibility = String(formData.get("visibility") ?? "public") as "public" | "unlisted" | "private";
@@ -78,6 +79,7 @@ export async function createCourse(
       title,
       description,
       category,
+      subcategory,
       source_language: sourceLanguage,
       target_language: targetLanguage,
       visibility,

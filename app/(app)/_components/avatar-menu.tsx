@@ -9,9 +9,10 @@ interface AvatarMenuProps {
   avatarUrl: string | null;
   initial: string;
   username: string;
+  labels: { profile: string; settings: string; logout: string };
 }
 
-export default function AvatarMenu({ avatarUrl, initial, username }: AvatarMenuProps) {
+export default function AvatarMenu({ avatarUrl, initial, username, labels }: AvatarMenuProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,14 +47,14 @@ export default function AvatarMenu({ avatarUrl, initial, username }: AvatarMenuP
             onClick={() => setOpen(false)}
             className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
           >
-            <span>👤</span> My profile
+            <span>👤</span> {labels.profile}
           </Link>
           <Link
             href="/settings"
             onClick={() => setOpen(false)}
             className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
           >
-            <span>⚙️</span> Settings
+            <span>⚙️</span> {labels.settings}
           </Link>
           <div className="mx-4 border-t border-ink/10" />
           <form action={logout}>
@@ -61,7 +62,7 @@ export default function AvatarMenu({ avatarUrl, initial, username }: AvatarMenuP
               type="submit"
               className="flex w-full items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-orange transition hover:bg-red-soft"
             >
-              <span>🚪</span> Log out
+              <span>🚪</span> {labels.logout}
             </button>
           </form>
         </div>

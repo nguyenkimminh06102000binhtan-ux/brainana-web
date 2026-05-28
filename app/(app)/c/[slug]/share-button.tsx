@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 
-export default function ShareButton({ title, slug }: { title: string; slug: string }) {
+export default function ShareButton({
+  title,
+  slug,
+  labels,
+}: {
+  title: string;
+  slug: string;
+  labels: { share: string; copied: string };
+}) {
   const [copied, setCopied] = useState(false);
 
   async function handleShare() {
@@ -22,7 +30,7 @@ export default function ShareButton({ title, slug }: { title: string; slug: stri
       onClick={handleShare}
       className="cursor-pointer rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-paper active:translate-y-[1px] active:shadow-none"
     >
-      {copied ? "Copied!" : "Share"}
+      {copied ? labels.copied : labels.share}
     </button>
   );
 }

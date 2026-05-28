@@ -5,12 +5,14 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import BrowseFilters from "./browse-filters";
 import BrowseSort from "./browse-sort";
+import { getLocale, t } from "@/utils/i18n";
 
 type Course = {
   id: string;
   slug: string;
   title: string;
   category: string | null;
+  subcategory: string | null;
   cover_image_url: string | null;
   level: string | null;
   card_count: number;
@@ -48,9 +50,9 @@ export default async function BrowsePage({
 }) {
   const p = await searchParams;
 
-  const q                 = p.q ?? "";
-  const selectedCategories = p.categories ? p.categories.split(",").filter(Boolean) : [];
-  const level             = p.level ?? "";
+  const q                    = p.q ?? "";
+  const selectedSubcategories = p.subcategories ? p.subcategories.split(",").filter(Boolean) : [];
+  const level                = p.level ?? "";
   const minCards          = p.min_cards ? parseInt(p.min_cards) : 0;
   const hasAudio          = p.has_audio === "1";
   const hasMems           = p.has_mems  === "1";
@@ -61,6 +63,18 @@ export default async function BrowsePage({
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("active_origin_language")
+    .eq("id", user.id)
+    .single();
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const levelLabels: Record<string, string> = {
+    beginner: loc.course.beginner,
+    intermediate: loc.course.intermediate,
+    advanced: loc.course.advanced,
+  };
 
   // Resolve image/audio filters via items table (flags may be stale on old rows)
   const [imageCourseIds, audioCourseIds] = await Promise.all([
@@ -83,13 +97,13 @@ export default async function BrowsePage({
   let query = supabase
     .from("courses")
     .select(
-      "id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, mems_count, profiles!creator_id (username, display_name)"
+      "id, slug, title, category, subcategory, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, mems_count, profiles!creator_id (username, display_name)"
     )
     .eq("visibility", "public")
     .eq("is_published", true);
 
-  if (q)                         query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%,source_language.ilike.%${q}%,target_language.ilike.%${q}%,category.ilike.%${q}%`);
-  if (selectedCategories.length) query = query.in("category", selectedCategories);
+  if (q)                              query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%,source_language.ilike.%${q}%,target_language.ilike.%${q}%,category.ilike.%${q}%`);
+  if (selectedSubcategories.length)   query = query.in("subcategory", selectedSubcategories);
   if (level)                     query = query.eq("level", level);
   if (minCards > 0)              query = query.gte("card_count", minCards);
   if (hasMems)                   query = query.gt("mems_count", 0);
@@ -101,7 +115,8 @@ export default async function BrowsePage({
   else if (sortBy === "newest")  query = query.order("created_at", { ascending: false });
   else                           query = query.order("learner_count", { ascending: false });
 
-  const { data: coursesRaw } = noResults ? { data: [] } : await query.limit(60);
+  const { data: coursesRaw, error: coursesError } = noResults ? { data: [], error: null } : await query.limit(60);
+  if (coursesError) console.error("[browse] courses query error:", JSON.stringify(coursesError));
   const courses = (coursesRaw ?? []) as unknown as Course[];
 
   // Fetch live learner counts from user_courses (learner_count column can be stale)
@@ -123,12 +138,28 @@ export default async function BrowsePage({
         <div className="w-full shrink-0 lg:w-60">
           <BrowseFilters
             initialQ={q}
-            selectedCategories={selectedCategories}
+            selectedSubcategories={selectedSubcategories}
             level={level}
             minCards={minCards}
             hasAudio={hasAudio}
             hasMems={hasMems}
             hasImages={hasImages}
+            labels={{
+              searchPlaceholder: loc.browse.searchPlaceholder,
+              category: loc.browse.category,
+              level: loc.browse.level,
+              size: loc.browse.size,
+              has: loc.browse.has,
+              any: loc.browse.any,
+              beginner: loc.browse.beginner,
+              intermediate: loc.browse.intermediateShort,
+              advanced: loc.browse.advancedShort,
+              audio: loc.browse.audio,
+              mems: loc.browse.mems,
+              images: loc.browse.images,
+              clearAllFilters: loc.browse.clearAllFilters,
+              categoryLabels: loc.categories,
+            }}
           />
         </div>
 
@@ -137,17 +168,18 @@ export default async function BrowsePage({
           {/* Header row */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <p className="font-fredoka text-2xl font-[700]">
-              <span className="text-orange">{courses.length}</span> course{courses.length !== 1 ? "s" : ""}
-              {q && <> for <span className="text-orange">&ldquo;{q}&rdquo;</span></>}
+              <span className="text-orange">{courses.length}</span>{" "}
+              {courses.length !== 1 ? loc.common.coursePlural : loc.common.courseSingular}
+              {q && <> {loc.browse.resultsForPrefix} <span className="text-orange">&ldquo;{q}&rdquo;</span></>}
             </p>
-            <BrowseSort value={sortBy} />
+            <BrowseSort value={sortBy} labels={{ sort: loc.browse.sort, mostLoved: loc.browse.mostLoved, topRated: loc.browse.topRated, newest: loc.browse.newest }} />
           </div>
 
           {courses.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {courses.map((course) => {
                 const creator = course.profiles;
-                const handle = creator?.username ? `@${creator.username}` : (creator?.display_name ?? "Unknown");
+                const handle = creator?.username ? `@${creator.username}` : (creator?.display_name ?? loc.common.unknown);
                 const headerBg = LEVEL_HEADER[course.level ?? ""] ?? "bg-blue/20";
                 const dotColor = LEVEL_DOT[course.level ?? ""] ?? "#93c5fd";
 
@@ -172,7 +204,7 @@ export default async function BrowsePage({
                       ) : (
                         <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
                           [{" "}
-                          {[course.category?.toLowerCase(), course.level]
+                          {[(course.subcategory ? (loc.categories[course.subcategory] ?? course.subcategory) : course.category ? (loc.categories[course.category] ?? course.category) : null)?.toLowerCase(), course.level ? (levelLabels[course.level] ?? course.level).toLowerCase() : null]
                             .filter(Boolean)
                             .join(" · ")}
                           {" "}]
@@ -190,14 +222,14 @@ export default async function BrowsePage({
                         <h2 className="font-fredoka text-xl font-[700] leading-tight tracking-tight group-hover:text-orange">
                           {course.title}
                         </h2>
-                        <p className="font-mono text-xs text-ink-2">by {handle}</p>
+                        <p className="font-mono text-xs text-ink-2">{t(loc.common.by, { name: handle })}</p>
                       </div>
 
                       {/* Tag row */}
                       <div className="flex flex-wrap gap-1.5">
-                        {course.category && (
+                        {(course.subcategory ?? course.category) && (
                           <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
-                            {course.category.toLowerCase()}
+                            {(loc.categories[course.subcategory ?? course.category!] ?? (course.subcategory ?? course.category!)).toLowerCase()}
                           </span>
                         )}
                         {course.rating > 0 && (
@@ -207,12 +239,12 @@ export default async function BrowsePage({
                         )}
                         {course.has_audio && (
                           <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
-                            audio
+                            {loc.common.audio}
                           </span>
                         )}
                         {course.mems_count > 0 && (
                           <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
-                            mems
+                            {loc.common.mems}
                           </span>
                         )}
                       </div>
@@ -220,7 +252,7 @@ export default async function BrowsePage({
                       {/* Stats */}
                       <div className="flex items-center gap-4 font-mono text-xs text-ink-2">
                         <span>👥 {fmt(learnerCountMap[course.id] ?? course.learner_count)}</span>
-                        <span>📚 {course.card_count} cards</span>
+                        <span>📚 {t(loc.common.cards, { count: course.card_count })}</span>
                       </div>
                     </div>
                   </Link>
@@ -229,9 +261,9 @@ export default async function BrowsePage({
             </div>
           ) : (
             <div className="rounded-xl bg-paper-2 p-10 text-center shadow-hard">
-              <p className="font-fredoka text-2xl font-[700] tracking-tight">No courses found</p>
+              <p className="font-fredoka text-2xl font-[700] tracking-tight">{loc.browse.noCoursesFound}</p>
               <p className="mx-auto mt-2 max-w-sm font-manrope text-sm text-ink-2">
-                Try adjusting your filters or search term.
+                {loc.browse.noCoursesFoundHelp}
               </p>
             </div>
           )}

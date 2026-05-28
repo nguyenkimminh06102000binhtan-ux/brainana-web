@@ -3,29 +3,44 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
+import { t } from "@/utils/t";
 import TypeAnswerMode from "./type-answer-mode";
 import type { StudyCard, CardAnswer } from "./types";
+
+interface AudioTypeModeLabels {
+  letters: string;
+  startsWith: string;
+  placeholder: string;
+  correct: string;
+  wrong: string;
+  submit: string;
+  continueBtn: string;
+  noAudio: string;
+  playAudio: string;
+}
 
 interface AudioTypeModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
+  labels: AudioTypeModeLabels;
 }
 
-export default function AudioTypeMode({ card, onAnswer }: AudioTypeModeProps) {
+export default function AudioTypeMode({ card, onAnswer, labels }: AudioTypeModeProps) {
   if (!card.frontAudioUrl) {
     return (
       <TypeAnswerMode
         card={card}
         onAnswer={(a) => onAnswer({ ...a, questionType: "audio_type" })}
         showNoAudioNotice
+        labels={labels}
       />
     );
   }
 
-  return <AudioTypePlayer card={card} onAnswer={onAnswer} />;
+  return <AudioTypePlayer card={card} onAnswer={onAnswer} labels={labels} />;
 }
 
-function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: CardAnswer) => void }) {
+function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; labels: AudioTypeModeLabels }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -170,11 +185,11 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
       {/* Hint chips */}
       <div className="flex gap-2">
         <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
-          {card.backText.length} letters
+          {t(labels.letters, { count: card.backText.length })}
         </span>
         {showFirstLetter && (
           <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange">
-            Starts with "{card.backText[0]}"
+            {t(labels.startsWith, { letter: card.backText[0] ?? "" })}
           </span>
         )}
       </div>
@@ -190,7 +205,7 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
           onCompositionEnd={() => setIsComposing(false)}
           onKeyDown={(e) => e.key === "Enter" && !isComposing && submit()}
           disabled={!!submitted}
-          placeholder="Type what you hear…"
+          placeholder={labels.placeholder}
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
               ? submitted.correct ? "border-green bg-green-soft" : "border-red-soft bg-red-soft"
@@ -201,7 +216,7 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
           <div className="mt-2 flex items-center gap-2">
             <span className="text-lg">{submitted.correct ? "✓" : "✗"}</span>
             <span className="font-manrope text-sm text-ink-2">
-              {submitted.correct ? "Correct!" : `Answer: ${card.backText}`}
+              {submitted.correct ? labels.correct : t(labels.wrong, { answer: card.backText })}
             </span>
           </div>
         )}
@@ -212,7 +227,7 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
               onClick={submit}
               className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
-              Submit ↵
+              {labels.submit}
             </button>
           ) : (
             <button
@@ -220,7 +235,7 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
               onClick={advance}
               className="w-full cursor-pointer rounded-full bg-ink px-4 py-2.5 font-manrope text-sm font-[800] text-white transition hover:opacity-80 active:translate-y-[1px]"
             >
-              Continue →
+              {labels.continueBtn}
             </button>
           )}
         </div>

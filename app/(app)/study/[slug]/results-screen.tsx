@@ -1,13 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import { t } from "@/utils/t";
 import type { SessionStats } from "./types";
+
+interface ResultsLabels {
+  brainFed: string;
+  greatSession: string;
+  cardsStudied: string;
+  correctRate: string;
+  xpEarned: string;
+  streak: string;
+  masteredNew: string;
+  masteredCard: string;
+  masteredCards: string;
+  studyMore: string;
+  backToCourse: string;
+}
 
 interface ResultsScreenProps {
   courseSlug: string;
   stats: SessionStats;
   totalCards: number;
   onStudyMore: () => void;
+  labels: ResultsLabels;
 }
 
 export default function ResultsScreen({
@@ -15,6 +31,7 @@ export default function ResultsScreen({
   stats,
   totalCards,
   onStudyMore,
+  labels,
 }: ResultsScreenProps) {
   const correctRate =
     totalCards > 0 ? Math.round((stats.correct / totalCards) * 100) : 0;
@@ -32,26 +49,28 @@ export default function ResultsScreen({
       </div>
 
       <div className="text-center">
-        <p className="font-kalam text-2xl text-ink">Brain fed!</p>
+        <p className="font-kalam text-2xl text-ink">{labels.brainFed}</p>
         <p className="mt-1 font-manrope text-sm text-ink-2">
-          Great session — keep it up!
+          {labels.greatSession}
         </p>
       </div>
 
       {/* Stats grid */}
       <div className="grid w-full grid-cols-2 gap-3">
-        <StatCard label="Cards studied" value={String(totalCards)} />
-        <StatCard label="Correct rate" value={`${correctRate}%`} />
-        <StatCard label="XP earned" value={`+${stats.xpEarned}`} />
-        <StatCard label="Streak" value={`${stats.updatedStreak} 🔥`} />
+        <StatCard label={labels.cardsStudied} value={String(totalCards)} />
+        <StatCard label={labels.correctRate} value={`${correctRate}%`} />
+        <StatCard label={labels.xpEarned} value={`+${stats.xpEarned}`} />
+        <StatCard label={labels.streak} value={`${stats.updatedStreak} 🔥`} />
       </div>
 
       {/* Mastered callout */}
       {stats.masteredCount > 0 && (
         <div className="w-full rounded-sm border-2 border-green bg-green-soft px-4 py-3 text-center">
           <p className="font-manrope text-sm font-[700] text-ink">
-            🎓 You mastered {stats.masteredCount} new{" "}
-            {stats.masteredCount === 1 ? "card" : "cards"}!
+            🎓 {t(labels.masteredNew, {
+              count: stats.masteredCount,
+              unit: stats.masteredCount === 1 ? labels.masteredCard : labels.masteredCards,
+            })}
           </p>
         </div>
       )}
@@ -63,13 +82,13 @@ export default function ResultsScreen({
           onClick={onStudyMore}
           className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
         >
-          Study more →
+          {labels.studyMore}
         </button>
         <Link
           href={`/c/${courseSlug}`}
           className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/40"
         >
-          ← Back to course
+          {labels.backToCourse}
         </Link>
       </div>
     </div>

@@ -9,16 +9,25 @@ interface FlashcardModeProps {
   card: StudyCard;
   showRomanization: boolean;
   onAnswer: (answer: CardAnswer) => void;
+  labels: {
+    flip: string;
+    howWellRemember: string;
+    ratingAgain: string;
+    ratingHard: string;
+    ratingGood: string;
+    ratingEasy: string;
+  };
 }
 
-const RATINGS = [
-  { label: "Again", quality: 1 },
-  { label: "Hard",  quality: 3 },
-  { label: "Good",  quality: 4 },
-  { label: "Easy",  quality: 5 },
-] as const;
+const QUALITIES = [1, 3, 4, 5] as const;
 
-export default function FlashcardMode({ card, showRomanization, onAnswer }: FlashcardModeProps) {
+export default function FlashcardMode({ card, showRomanization, onAnswer, labels }: FlashcardModeProps) {
+  const ratingButtons = [
+    { label: labels.ratingAgain, quality: QUALITIES[0] },
+    { label: labels.ratingHard,  quality: QUALITIES[1] },
+    { label: labels.ratingGood,  quality: QUALITIES[2] },
+    { label: labels.ratingEasy,  quality: QUALITIES[3] },
+  ];
   const [flipped, setFlipped] = useState(false);
 
   const ef = card.progress?.easeFactor ?? 2.5;
@@ -37,7 +46,7 @@ export default function FlashcardMode({ card, showRomanization, onAnswer }: Flas
       }
       if (!flipped) return;
       const idx = ["1", "2", "3", "4"].indexOf(e.key);
-      if (idx !== -1) rate(RATINGS[idx]!.quality);
+      if (idx !== -1) rate(QUALITIES[idx]!);
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -91,7 +100,7 @@ export default function FlashcardMode({ card, showRomanization, onAnswer }: Flas
               {card.frontText}
             </p>
             <p className="mt-4 font-manrope text-xs text-ink-3">
-              Click or press Space to flip
+              {labels.flip}
             </p>
           </div>
           {/* Back */}
@@ -110,10 +119,10 @@ export default function FlashcardMode({ card, showRomanization, onAnswer }: Flas
       {flipped && (
         <div className="w-full max-w-md">
           <p className="mb-2 text-center font-manrope text-xs font-[600] uppercase tracking-wider text-ink-3">
-            How well did you remember?
+            {labels.howWellRemember}
           </p>
           <div className="grid grid-cols-4 gap-2">
-            {RATINGS.map((r, i) => {
+            {ratingButtons.map((r, i) => {
               const result = calculateSM2(r.quality, ef, iv, rp);
               return (
                 <button

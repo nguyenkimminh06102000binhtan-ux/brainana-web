@@ -5,8 +5,7 @@ import Link from "next/link";
 import { updateCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
-
-const CATEGORIES = ["Language", "Science", "History", "Math", "Geography", "Literature", "Music", "Art", "Technology", "Other"];
+import { TOP_LEVEL_CATEGORIES, getCategoryItems, getCategoryForItem } from "@/app/constants/categories";
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -58,6 +57,7 @@ type Course = {
   title: string;
   description: string | null;
   category: string | null;
+  subcategory: string | null;
   source_language: string | null;
   target_language: string | null;
   visibility: string;
@@ -266,6 +266,11 @@ export default function EditCourseForm({ course, sections: dbSections }: { cours
     const initial = dbSections.length > 0 ? fromDb(dbSections) : [makeSection()];
     return new Set(initial.filter((s) => s.items.length > COLLAPSE_THRESHOLD).map((s) => s.id));
   });
+  const initialCategory =
+    (course.category && TOP_LEVEL_CATEGORIES.includes(course.category) ? course.category : null) ??
+    (course.subcategory ? getCategoryForItem(course.subcategory) : null) ??
+    TOP_LEVEL_CATEGORIES[0];
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -388,8 +393,19 @@ export default function EditCourseForm({ course, sections: dbSections }: { cours
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               {lbl("Category")}
-              <select name="category" defaultValue={course.category ?? "Language"} className={selectCls}>
-                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              <select
+                name="category"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className={selectCls}
+              >
+                {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div>
+              {lbl("Subcategory")}
+              <select name="subcategory" defaultValue={course.subcategory ?? ""} className={selectCls}>
+                {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
             </div>
             <div>

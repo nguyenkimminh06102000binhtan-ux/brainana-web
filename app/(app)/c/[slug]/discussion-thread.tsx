@@ -21,14 +21,37 @@ type Post = {
   course_post_votes: { user_id: string }[];
 };
 
+type DiscussionLabels = {
+  title: string;
+  noPosts: string;
+  composerPlaceholder: string;
+  post: string;
+  posting: string;
+  creator: string;
+  pinned: string;
+  edited: string;
+  hide: string;
+  reply: string;
+  pin: string;
+  unpin: string;
+  delete: string;
+  replyPlaceholder: string;
+  replyButton: string;
+  justNow: string;
+  minutesAgo: string;
+  hoursAgo: string;
+  daysAgo: string;
+};
+
 interface DiscussionThreadProps {
   courseId: string;
   courseSlug: string;
   creatorId: string;
   isOwner: boolean;
+  labels: DiscussionLabels;
 }
 
-export default async function DiscussionThread({ courseId, courseSlug, creatorId, isOwner }: DiscussionThreadProps) {
+export default async function DiscussionThread({ courseId, courseSlug, creatorId, isOwner, labels }: DiscussionThreadProps) {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -53,7 +76,7 @@ export default async function DiscussionThread({ courseId, courseSlug, creatorId
     <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
       <div className="mb-5 flex items-center justify-between">
         <h2 className="font-fredoka text-xl font-[700] tracking-tight">
-          Discussion
+          {labels.title}
           {posts.length > 0 && (
             <span className="ml-2 font-manrope text-sm font-[400] text-ink-3">
               {posts.length}
@@ -64,13 +87,17 @@ export default async function DiscussionThread({ courseId, courseSlug, creatorId
 
       {user && (
         <div className="mb-6">
-          <PostComposer courseId={courseId} courseSlug={courseSlug} />
+          <PostComposer
+            courseId={courseId}
+            courseSlug={courseSlug}
+            labels={{ composerPlaceholder: labels.composerPlaceholder, post: labels.post, posting: labels.posting }}
+          />
         </div>
       )}
 
       {posts.length === 0 ? (
         <p className="py-4 text-center font-manrope text-sm text-ink-3">
-          No posts yet. Start the conversation!
+          {labels.noPosts}
         </p>
       ) : (
         <div className="flex flex-col gap-4">
@@ -83,6 +110,7 @@ export default async function DiscussionThread({ courseId, courseSlug, creatorId
               currentUserId={user?.id ?? null}
               creatorId={creatorId}
               isOwner={isOwner}
+              labels={labels}
             />
           ))}
         </div>

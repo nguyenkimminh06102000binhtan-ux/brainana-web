@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
+import { getLocale, t } from "@/utils/i18n";
 
 type CourseCard = {
   id: string;
@@ -44,6 +45,29 @@ export default async function LibraryPage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+
+  const { data: profileData } = await supabase
+    .from("profiles")
+    .select("active_origin_language")
+    .eq("id", user.id)
+    .single();
+  const loc = getLocale((profileData?.active_origin_language as string | null) ?? null);
+
+  const levelLabels: Record<string, string> = {
+    beginner: loc.course.beginner,
+    intermediate: loc.course.intermediate,
+    advanced: loc.course.advanced,
+  };
+  const cardLabels = {
+    cards: loc.common.cards,
+    masteredProgress: loc.library.masteredProgress,
+    notStarted: loc.library.notStarted,
+    due: loc.library.due,
+    upToDate: loc.library.upToDate,
+    study: loc.library.study,
+    categories: loc.categories,
+    levels: levelLabels,
+  };
 
   const [{ data: createdRaw }, { data: enrolledRaw }] = await Promise.all([
     supabase
@@ -97,22 +121,23 @@ export default async function LibraryPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-8 space-y-10">
       <div>
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Library</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.library.eyebrow}</p>
         <h1 className="mt-1 font-fredoka text-4xl font-[700] tracking-tight">
-          Your <span className="text-orange">courses</span>
+          {loc.library.titlePrefix} <span className="text-orange">{loc.library.titleAccent}</span>
         </h1>
       </div>
 
-      <Section title="My Courses" count={created.length} emptyText="You haven't created any courses yet." emptyLink={{ href: "/create", label: "Create a course" }}>
+      <Section title={loc.library.myCourses} count={created.length} emptyText={loc.library.emptyCreated} emptyLink={{ href: "/create", label: loc.library.createCourse }}>
         {created.map((course) => (
-          <CreatedCard key={course.id} course={course} />
+          <CreatedCard key={course.id} course={course} labels={{ cards: loc.common.cards, audio: loc.common.audio, mems: loc.common.mems, study: loc.library.study, edit: loc.library.edit, categories: loc.categories, levels: levelLabels }} />
         ))}
       </Section>
 
-      <Section title="Learning" count={learning.length} emptyText="You haven't studied any course yet.">
+      <Section title={loc.library.learning} count={learning.length} emptyText={loc.library.emptyLearning}>
         {learning.map((course) => (
           <EnrolledCourseCard
             key={course.id}
+            labels={cardLabels}
             course={{
               ...course,
               masteredCount: masteredByCourse[course.id] ?? 0,
@@ -123,10 +148,11 @@ export default async function LibraryPage() {
         ))}
       </Section>
 
-      <Section title="Saved" count={saved.length} emptyText="No saved courses yet. Browse to find one!" emptyLink={{ href: "/browse", label: "Browse courses" }}>
+      <Section title={loc.library.saved} count={saved.length} emptyText={loc.library.emptySaved} emptyLink={{ href: "/browse", label: loc.common.browseCourses }}>
         {saved.map((course) => (
           <EnrolledCourseCard
             key={course.id}
+            labels={cardLabels}
             course={{
               ...course,
               masteredCount: 0,
@@ -179,9 +205,10 @@ function Section({
   );
 }
 
-function CourseCardShell({ course, children }: { course: CourseCard; children: React.ReactNode }) {
+function CourseCardShell({ course, cards, categories, levels, children }: { course: CourseCard; cards: string; categories: Record<string, string>; levels: Record<string, string>; children: React.ReactNode }) {
   const headerBg = LEVEL_HEADER[course.level ?? ""] ?? "bg-blue/20";
   const dotColor = LEVEL_DOT[course.level ?? ""] ?? "#93c5fd";
+  const categoryLabel = course.category ? (categories[course.category] ?? course.category) : null;
 
   return (
     <div className="group overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
@@ -190,7 +217,7 @@ function CourseCardShell({ course, children }: { course: CourseCard; children: R
           <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
         ) : (
           <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
-            [{" "}{[course.category?.toLowerCase(), course.level].filter(Boolean).join(" · ")}{" "}]
+            [{" "}{[categoryLabel?.toLowerCase(), course.level ? (levels[course.level] ?? course.level).toLowerCase() : null].filter(Boolean).join(" · ")}{" "}]
           </span>
         )}
         <span
@@ -213,7 +240,7 @@ function CourseCardShell({ course, children }: { course: CourseCard; children: R
           <Link href={`/c/${course.slug}`} className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange">
             {course.title}
           </Link>
-          <p className="font-mono text-xs text-ink-2">{course.card_count} cards</p>
+          <p className="font-mono text-xs text-ink-2">{t(cards, { count: course.card_count })}</p>
         </div>
         {children}
       </div>
@@ -221,16 +248,16 @@ function CourseCardShell({ course, children }: { course: CourseCard; children: R
   );
 }
 
-function CreatedCard({ course }: { course: CourseCard }) {
+function CreatedCard({ course, labels }: { course: CourseCard; labels: { cards: string; audio: string; mems: string; study: string; edit: string; categories: Record<string, string>; levels: Record<string, string> } }) {
   return (
-    <CourseCardShell course={course}>
+    <CourseCardShell course={course} cards={labels.cards} categories={labels.categories} levels={labels.levels}>
       <div className="flex items-center justify-between">
         <div className="flex gap-1.5">
           {course.has_audio && (
-            <span className="rounded-full border border-ink/15 px-2 py-0.5 font-mono text-xs text-ink-2">audio</span>
+            <span className="rounded-full border border-ink/15 px-2 py-0.5 font-mono text-xs text-ink-2">{labels.audio}</span>
           )}
           {course.mems_count > 0 && (
-            <span className="rounded-full border border-ink/15 px-2 py-0.5 font-mono text-xs text-ink-2">mems</span>
+            <span className="rounded-full border border-ink/15 px-2 py-0.5 font-mono text-xs text-ink-2">{labels.mems}</span>
           )}
         </div>
         <span className="font-mono text-xs text-ink-2">👥 {fmt(course.learner_count)}</span>
@@ -240,13 +267,13 @@ function CreatedCard({ course }: { course: CourseCard }) {
           href={`/study/${course.slug}`}
           className="flex-1 rounded-full bg-orange px-4 py-1.5 text-center font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
         >
-          Study →
+          {labels.study} →
         </Link>
         <Link
           href={`/c/${course.slug}/edit`}
           className="rounded-full bg-paper px-4 py-1.5 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
         >
-          Edit
+          {labels.edit}
         </Link>
       </div>
     </CourseCardShell>

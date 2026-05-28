@@ -4,8 +4,8 @@ import { useActionState, useRef, useState } from "react";
 import { createCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
+import { TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
 
-const CATEGORIES = ["Language", "Science", "History", "Math", "Geography", "Literature", "Music", "Art", "Technology", "Other"];
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -214,6 +214,7 @@ export default function CreateCourseForm() {
   const [state, formAction, pending] = useActionState(createCourse, null);
   const [sections, setSections] = useState<Section[]>([makeSection()]);
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
+  const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]);
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -357,8 +358,20 @@ export default function CreateCourseForm() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               {label("Category")}
-              <select id="category" name="category" defaultValue="Language" className={selectCls}>
-                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              <select
+                id="category"
+                name="category"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className={selectCls}
+              >
+                {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div>
+              {label("Subcategory")}
+              <select id="subcategory" name="subcategory" className={selectCls}>
+                {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
             </div>
             <div>

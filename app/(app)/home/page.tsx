@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import GoalRing from "./goal-ring";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
+import { getLocale, t } from "@/utils/i18n";
 
 function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -110,6 +111,22 @@ export default async function HomePage() {
     .sort((a, b) => (dueByCourse[b.id] ?? 0) - (dueByCourse[a.id] ?? 0))[0] ?? null;
 
   const estMinutes = Math.ceil(totalDue * 0.5);
+  const loc = getLocale(activeOriginLanguage);
+  const levelLabels: Record<string, string> = {
+    beginner: loc.course.beginner,
+    intermediate: loc.course.intermediate,
+    advanced: loc.course.advanced,
+  };
+  const cardLabels = {
+    cards: loc.common.cards,
+    masteredProgress: loc.library.masteredProgress,
+    notStarted: loc.library.notStarted,
+    due: loc.library.due,
+    upToDate: loc.library.upToDate,
+    study: loc.library.study,
+    categories: loc.categories,
+    levels: levelLabels,
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -133,19 +150,19 @@ export default async function HomePage() {
             )}
             <div className="min-w-0 flex-1">
               <h1 className="font-fredoka text-3xl font-[700] leading-tight tracking-tight">
-                Welcome back, {displayName} 🧠
+                {t(loc.home.welcomeBack, { name: displayName })} 🧠
               </h1>
               <p className="font-manrope text-sm text-ink-2">
                 {totalDue > 0
-                  ? `${fmt(totalDue)} cards due · ${coursesInProgress} course${coursesInProgress !== 1 ? "s" : ""} in progress`
-                  : `All caught up · ${coursesInProgress} course${coursesInProgress !== 1 ? "s" : ""} in progress`}
+                  ? t(loc.home.cardsDueProgress, { due: fmt(totalDue), courses: coursesInProgress })
+                  : t(loc.home.allCaughtUpProgress, { courses: coursesInProgress })}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm">
-                  🔥 {streak} day streak
+                  🔥 {t(loc.home.dayStreak, { count: streak })}
                 </span>
                 <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm">
-                  🧠 {fmt(totalMastered)} mastered
+                  🧠 {t(loc.home.mastered, { count: fmt(totalMastered) })}
                 </span>
               </div>
             </div>
@@ -154,49 +171,49 @@ export default async function HomePage() {
           {/* Today's Review card */}
           {totalDue > 0 && topDueCourse ? (
             <section className="rounded-lg bg-red-soft p-5 shadow-hard">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Today&apos;s Review</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
               <div className="mt-2 flex items-center justify-between gap-4">
                 <div>
                   <p className="font-fredoka text-2xl font-[700] leading-tight tracking-tight">
-                    {fmt(totalDue)} cards due
+                    {t(loc.home.cardsDue, { count: fmt(totalDue) })}
                   </p>
                   <p className="font-manrope text-sm text-ink-2">
-                    ~{estMinutes} min · {topDueCourse.title}
+                    {t(loc.home.reviewEstimate, { minutes: estMinutes, course: topDueCourse.title })}
                   </p>
                 </div>
                 <Link
                   href={`/study/${topDueCourse.slug}`}
                   className="shrink-0 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                 >
-                  Start review →
+                  {loc.home.startReview} →
                 </Link>
               </div>
             </section>
           ) : (
             <section className="rounded-lg bg-green-soft p-5 shadow-hard">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Today&apos;s Review</p>
-              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">All caught up! 🎉</p>
-              <p className="mt-1 font-manrope text-sm text-ink-2">No cards due right now. Keep the streak going!</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
+              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp} 🎉</p>
+              <p className="mt-1 font-manrope text-sm text-ink-2">{loc.home.noCardsDue}</p>
             </section>
           )}
 
           {/* Your Courses */}
           <section>
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-fredoka text-2xl font-[700] tracking-tight">Your Courses</h2>
+              <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.yourCourses}</h2>
               <Link href="/library" className="font-mono text-xs text-ink-2 hover:text-orange transition">
-                See all →
+                {loc.common.seeAll} →
               </Link>
             </div>
 
             {enrolledCourses.length === 0 ? (
               <div className="flex items-center gap-4 rounded-xl bg-paper-2 px-6 py-5 shadow-hard-sm">
-                <p className="font-manrope text-sm text-ink-2">No courses yet. Find something to learn!</p>
+                <p className="font-manrope text-sm text-ink-2">{loc.home.noCourses}</p>
                 <Link
                   href="/browse"
                   className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
                 >
-                  Browse courses →
+                  {loc.common.browseCourses} →
                 </Link>
               </div>
             ) : (
@@ -204,6 +221,7 @@ export default async function HomePage() {
                 {enrolledCourses.slice(0, 4).map((course) => (
                   <EnrolledCourseCard
                     key={course.id}
+                    labels={cardLabels}
                     course={{
                       ...course,
                       masteredCount: masteredByCourse[course.id] ?? 0,
@@ -221,11 +239,11 @@ export default async function HomePage() {
             <section>
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <h2 className="font-fredoka text-2xl font-[700] tracking-tight">Discover</h2>
-                  <p className="font-manrope text-xs text-ink-2">Courses from {activeOriginLanguage}</p>
+                  <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.discover}</h2>
+                  <p className="font-manrope text-xs text-ink-2">{t(loc.home.coursesFrom, { language: activeOriginLanguage })}</p>
                 </div>
                 <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="font-mono text-xs text-ink-2 hover:text-orange transition">
-                  See all →
+                  {loc.common.seeAll} →
                 </Link>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -246,7 +264,7 @@ export default async function HomePage() {
                     )}
                     <div className="min-w-0">
                       <p className="truncate font-manrope text-sm font-[800] text-ink">{course.title}</p>
-                      <p className="font-mono text-xs text-ink-2">{course.card_count} cards{course.level ? ` · ${course.level}` : ""}</p>
+                      <p className="font-mono text-xs text-ink-2">{course.card_count} cards{course.level ? ` · ${(levelLabels[course.level] ?? course.level).toLowerCase()}` : ""}</p>
                     </div>
                   </Link>
                 ))}
@@ -262,17 +280,23 @@ export default async function HomePage() {
               studied={studiedToday}
               goal={dailyGoal}
               courseSlug={topDueCourse?.slug ?? (enrolledCourses[0]?.slug ?? null)}
+              labels={{
+                todayGoal: loc.home.todayGoal,
+                goalReached: loc.home.goalReached,
+                continueLearning: loc.home.continueLearning,
+                browseAction: loc.home.browseAction,
+              }}
             />
           </aside>
 
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Quick links</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.quickLinks}</p>
             <div className="flex flex-col gap-2">
               <Link href="/browse" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white">
-                Browse courses <span>→</span>
+                {loc.common.browseCourses} <span>→</span>
               </Link>
               <Link href="/library" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white">
-                My library <span>→</span>
+                {loc.home.myLibrary} <span>→</span>
               </Link>
             </div>
           </aside>

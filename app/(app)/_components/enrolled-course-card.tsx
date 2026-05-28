@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { t } from "@/utils/i18n";
 
 const LEVEL_HEADER: Record<string, string> = {
   beginner: "bg-green-soft",
@@ -29,7 +30,24 @@ export type EnrolledCourseCardData = {
   hasStudied: boolean;
 };
 
-export default function EnrolledCourseCard({ course }: { course: EnrolledCourseCardData }) {
+export type EnrolledCardLabels = {
+  cards: string;
+  masteredProgress: string;
+  notStarted: string;
+  due: string;
+  upToDate: string;
+  study: string;
+  categories: Record<string, string>;
+  levels: Record<string, string>;
+};
+
+export default function EnrolledCourseCard({
+  course,
+  labels,
+}: {
+  course: EnrolledCourseCardData;
+  labels: EnrolledCardLabels;
+}) {
   const pct = course.card_count > 0
     ? Math.round((course.masteredCount / course.card_count) * 100)
     : 0;
@@ -47,7 +65,7 @@ export default function EnrolledCourseCard({ course }: { course: EnrolledCourseC
           <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
         ) : (
           <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
-            [{course.category?.toLowerCase() ?? "course"}{course.level ? ` · ${course.level}` : ""}]
+            [{(labels.categories[course.category ?? ""] ?? course.category)?.toLowerCase() ?? "course"}{course.level ? ` · ${(labels.levels[course.level] ?? course.level).toLowerCase()}` : ""}]
           </span>
         )}
         <span
@@ -64,12 +82,12 @@ export default function EnrolledCourseCard({ course }: { course: EnrolledCourseC
           >
             {course.title}
           </Link>
-          <p className="font-mono text-xs text-ink-2">{course.card_count} cards</p>
+          <p className="font-mono text-xs text-ink-2">{t(labels.cards, { count: course.card_count })}</p>
         </div>
 
         <div className="space-y-1">
           <div className="flex justify-between font-mono text-xs text-ink-2">
-            <span>{course.masteredCount}/{course.card_count} mastered</span>
+            <span>{t(labels.masteredProgress, { mastered: course.masteredCount, total: course.card_count })}</span>
             <span>{pct}%</span>
           </div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-paper">
@@ -79,19 +97,19 @@ export default function EnrolledCourseCard({ course }: { course: EnrolledCourseC
 
         <div className="flex items-center justify-between">
           {!course.hasStudied ? (
-            <span className="font-mono text-xs text-ink-3">not started</span>
+            <span className="font-mono text-xs text-ink-3">{labels.notStarted}</span>
           ) : course.dueCount > 0 ? (
             <span className="rounded-full bg-orange/10 px-2.5 py-0.5 font-mono text-xs font-[700] text-orange">
-              {course.dueCount} due
+              {t(labels.due, { count: course.dueCount })}
             </span>
           ) : (
-            <span className="font-mono text-xs text-ink-3">Up to date ✓</span>
+            <span className="font-mono text-xs text-ink-3">{labels.upToDate} ✓</span>
           )}
           <Link
             href={`/study/${course.slug}`}
             className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
           >
-            Study →
+            {labels.study} →
           </Link>
         </div>
       </div>

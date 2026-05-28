@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Image from "next/image";
+import { t } from "@/utils/t";
 import { toggleVote, togglePin, deletePost, createReply, deleteReply } from "./discussion-actions";
 
 type Reply = {
@@ -22,6 +23,23 @@ type Post = {
   course_post_votes: { user_id: string }[];
 };
 
+type DiscussionLabels = {
+  creator: string;
+  pinned: string;
+  edited: string;
+  hide: string;
+  reply: string;
+  pin: string;
+  unpin: string;
+  delete: string;
+  replyPlaceholder: string;
+  replyButton: string;
+  justNow: string;
+  minutesAgo: string;
+  hoursAgo: string;
+  daysAgo: string;
+};
+
 interface PostCardProps {
   post: Post;
   courseId: string;
@@ -29,25 +47,26 @@ interface PostCardProps {
   currentUserId: string | null;
   creatorId: string;
   isOwner: boolean;
+  labels: DiscussionLabels;
 }
 
-function CreatorBadge() {
+function CreatorBadge({ label }: { label: string }) {
   return (
     <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-[9px] font-[700] uppercase tracking-wider text-white">
-      Creator
+      {label}
     </span>
   );
 }
 
-function timeAgo(iso: string): string {
+function timeAgo(iso: string, labels: DiscussionLabels): string {
   const diff = Date.now() - new Date(iso).getTime();
   const m = Math.floor(diff / 60000);
-  if (m < 1) return "just now";
-  if (m < 60) return `${m}m ago`;
+  if (m < 1) return labels.justNow;
+  if (m < 60) return t(labels.minutesAgo, { count: m });
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h ago`;
+  if (h < 24) return t(labels.hoursAgo, { count: h });
   const d = Math.floor(h / 24);
-  if (d < 30) return `${d}d ago`;
+  if (d < 30) return t(labels.daysAgo, { count: d });
   return new Date(iso).toLocaleDateString();
 }
 
@@ -67,9 +86,9 @@ function Avatar({ profile, size = 8 }: { profile: { username: string; display_na
   );
 }
 
-function ReplyRow({ reply, courseSlug, currentUserId, creatorId }: { reply: Reply; courseSlug: string; currentUserId: string | null; creatorId: string }) {
+function ReplyRow({ reply, courseSlug, currentUserId, creatorId, labels }: { reply: Reply; courseSlug: string; currentUserId: string | null; creatorId: string; labels: DiscussionLabels }) {
   const [pending, startTransition] = useTransition();
-  const handle = reply.profiles?.username ? `@${reply.profiles.username}` : (reply.profiles?.display_name ?? "Unknown");
+  const handle = reply.profiles?.username ? `@${reply.profiles.username}` : (reply.profiles?.display_name ?? "?");
   const canDelete = currentUserId === reply.profiles?.id;
   const isCreator = reply.profiles?.id === creatorId;
 
@@ -79,8 +98,8 @@ function ReplyRow({ reply, courseSlug, currentUserId, creatorId }: { reply: Repl
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-2 flex-wrap">
           <span className="font-manrope text-xs font-[700] text-ink">{handle}</span>
-          {isCreator && <CreatorBadge />}
-          <span className="font-mono text-[10px] text-ink-3">{timeAgo(reply.created_at)}</span>
+          {isCreator && <CreatorBadge label={labels.creator} />}
+          <span className="font-mono text-[10px] text-ink-3">{timeAgo(reply.created_at, labels)}</span>
         </div>
         <p className="mt-0.5 font-manrope text-sm text-ink leading-relaxed">{reply.body}</p>
       </div>
@@ -91,14 +110,14 @@ function ReplyRow({ reply, courseSlug, currentUserId, creatorId }: { reply: Repl
           onClick={() => startTransition(() => deleteReply(reply.id, courseSlug))}
           className="shrink-0 font-mono text-[10px] text-ink-3 hover:text-red-400 disabled:opacity-40"
         >
-          delete
+          {labels.delete}
         </button>
       )}
     </div>
   );
 }
 
-export default function PostCard({ post, courseId, courseSlug, currentUserId, creatorId, isOwner }: PostCardProps) {
+export default function PostCard({ post, courseId, courseSlug, currentUserId, creatorId, isOwner, labels }: PostCardProps) {
   const [pinned, setPinned] = useState(post.pinned);
   const [showReplies, setShowReplies] = useState(post.pinned);
   const [replyBody, setReplyBody] = useState("");
@@ -107,7 +126,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
   const voted = post.course_post_votes.some((v) => v.user_id === currentUserId);
   const voteCount = post.course_post_votes.length;
   const replyCount = post.course_post_replies.length;
-  const handle = post.profiles?.username ? `@${post.profiles.username}` : (post.profiles?.display_name ?? "Unknown");
+  const handle = post.profiles?.username ? `@${post.profiles.username}` : (post.profiles?.display_name ?? "?");
   const isAuthor = currentUserId === post.profiles?.id;
   const isPostCreator = post.profiles?.id === creatorId;
 
@@ -125,7 +144,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
       {/* Pin badge */}
       {pinned && (
         <div className="mb-2 flex items-center gap-1">
-          <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange">📌 Pinned</span>
+          <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange">📌 {labels.pinned}</span>
         </div>
       )}
 
@@ -135,9 +154,9 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="font-manrope text-sm font-[800] text-ink">{handle}</span>
-            {isPostCreator && <CreatorBadge />}
-            <span className="font-mono text-[10px] text-ink-3">{timeAgo(post.created_at)}</span>
-            {post.edited_at && <span className="font-mono text-[10px] text-ink-3">(edited)</span>}
+            {isPostCreator && <CreatorBadge label={labels.creator} />}
+            <span className="font-mono text-[10px] text-ink-3">{timeAgo(post.created_at, labels)}</span>
+            {post.edited_at && <span className="font-mono text-[10px] text-ink-3">{labels.edited}</span>}
           </div>
           <p className="mt-1 font-manrope text-sm text-ink leading-relaxed whitespace-pre-wrap">{post.body}</p>
         </div>
@@ -164,7 +183,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
           onClick={() => setShowReplies((v) => !v)}
           className="font-mono text-xs text-ink-3 hover:text-ink transition"
         >
-          💬 {replyCount > 0 ? replyCount : ""} {showReplies ? "hide" : "reply"}
+          💬 {replyCount > 0 ? replyCount : ""} {showReplies ? labels.hide : labels.reply}
         </button>
 
         {/* Pin (owner only) */}
@@ -178,7 +197,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
             }}
             className={`font-mono text-xs transition disabled:opacity-40 ${pinned ? "text-orange" : "text-ink-3 hover:text-orange"}`}
           >
-            {pinned ? "unpin" : "pin"}
+            {pinned ? labels.unpin : labels.pin}
           </button>
         )}
 
@@ -190,7 +209,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
             onClick={() => startTransition(() => deletePost(post.id, courseSlug))}
             className="ml-auto font-mono text-xs text-ink-3 hover:text-red-400 transition disabled:opacity-40"
           >
-            delete
+            {labels.delete}
           </button>
         )}
       </div>
@@ -199,7 +218,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
       {showReplies && (
         <div className="mt-4 pl-11 flex flex-col gap-3">
           {post.course_post_replies.map((reply) => (
-            <ReplyRow key={reply.id} reply={reply} courseSlug={courseSlug} currentUserId={currentUserId} creatorId={creatorId} />
+            <ReplyRow key={reply.id} reply={reply} courseSlug={courseSlug} currentUserId={currentUserId} creatorId={creatorId} labels={labels} />
           ))}
 
           {currentUserId && (
@@ -209,7 +228,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
                 value={replyBody}
                 onChange={(e) => setReplyBody(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && submitReply()}
-                placeholder="Write a reply…"
+                placeholder={labels.replyPlaceholder}
                 maxLength={1000}
                 className="flex-1 rounded-sm border-2 border-ink/15 bg-ink/5 px-3 py-1.5 font-manrope text-sm text-ink placeholder:text-ink-3 focus:border-orange focus:outline-none"
               />
@@ -219,7 +238,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
                 disabled={!replyBody.trim() || pending}
                 className="cursor-pointer rounded-full bg-ink px-4 py-1.5 font-manrope text-xs font-[800] text-white transition hover:opacity-80 disabled:opacity-40"
               >
-                Reply
+                {labels.replyButton}
               </button>
             </div>
           )}

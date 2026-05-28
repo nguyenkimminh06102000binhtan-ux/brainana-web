@@ -1,0 +1,251 @@
+import "server-only";
+import fs from "fs";
+import path from "path";
+
+export type Locale = {
+  meta: { language: string; locale: string; translated: boolean };
+  app: {
+    brand: string;
+    nav: { home: string; browse: string; library: string; create: string; community: string };
+    searchPlaceholder: string;
+    streakDays: string;
+    avatar: { profile: string; settings: string; logout: string };
+    originLanguage: {
+      setOrigin: string;
+      addLanguage: string;
+      selectLanguage: string;
+      add: string;
+      cancel: string;
+    };
+  };
+  common: {
+    seeAll: string;
+    browseCourses: string;
+    cards: string;
+    courses: string;
+    courseCount: string;
+    by: string;
+    unknown: string;
+    audio: string;
+    mems: string;
+    draft: string;
+    learners: string;
+    clear: string;
+    clearFilters: string;
+    courseSingular: string;
+    coursePlural: string;
+  };
+  home: {
+    welcomeBack: string;
+    cardsDueProgress: string;
+    allCaughtUpProgress: string;
+    dayStreak: string;
+    mastered: string;
+    todaysReview: string;
+    cardsDue: string;
+    reviewEstimate: string;
+    startReview: string;
+    allCaughtUp: string;
+    noCardsDue: string;
+    yourCourses: string;
+    noCourses: string;
+    discover: string;
+    coursesFrom: string;
+    quickLinks: string;
+    myLibrary: string;
+    todayGoal: string;
+    goalReached: string;
+    continueLearning: string;
+    browseAction: string;
+  };
+  browse: {
+    searchPlaceholder: string;
+    category: string;
+    level: string;
+    size: string;
+    has: string;
+    any: string;
+    beginner: string;
+    intermediateShort: string;
+    advancedShort: string;
+    minCards: string;
+    clearAllFilters: string;
+    sort: string;
+    mostLoved: string;
+    topRated: string;
+    newest: string;
+    results: string;
+    result: string;
+    resultsFor: string;
+    noCoursesFound: string;
+    noCoursesFoundHelp: string;
+    resultsForPrefix: string;
+    audio: string;
+    mems: string;
+    images: string;
+  };
+  library: {
+    eyebrow: string;
+    titlePrefix: string;
+    titleAccent: string;
+    myCourses: string;
+    learning: string;
+    saved: string;
+    emptyCreated: string;
+    createCourse: string;
+    emptyLearning: string;
+    emptySaved: string;
+    notStarted: string;
+    due: string;
+    upToDate: string;
+    study: string;
+    edit: string;
+    masteredProgress: string;
+  };
+  course: {
+    beginner: string;
+    intermediate: string;
+    advanced: string;
+    startLearning: string;
+    saved: string;
+    save: string;
+    editCourse: string;
+    about: string;
+    creatorSection: string;
+    statsSection: string;
+    studyWithSection: string;
+    friendsSection: string;
+    courseUnit: string;
+    courseUnits: string;
+    followersUnit: string;
+    cards: string;
+    avgTime: string;
+    avgTimeDays: string;
+    images: string;
+    verified: string;
+    noFriends: string;
+    moreFriends: string;
+    memsBanner: string;
+    preview: string;
+    previewOf: string;
+    flipUp: string;
+    flipDown: string;
+    more: string;
+    flashcard: string;
+    multipleChoice: string;
+    audioType: string;
+    speedMatch: string;
+    typeAnswer: string;
+    savePreferences: string;
+    savedPreferences: string;
+    savingPreferences: string;
+    following: string;
+    follow: string;
+    share: string;
+    copied: string;
+  };
+  study: {
+    allSections: string;
+    howManyWords: string;
+    dueForReview: string;
+    newCards: string;
+    totalCards: string;
+    allCaughtUpPractice: string;
+    allCaughtUpNoDue: string;
+    practiceAgain: string;
+    startStudying: string;
+    backToCourse: string;
+    preparingCards: string;
+    savingProgress: string;
+    brainFed: string;
+    greatSession: string;
+    cardsStudied: string;
+    correctRate: string;
+    xpEarned: string;
+    streak: string;
+    masteredNew: string;
+    masteredCard: string;
+    masteredCards: string;
+    studyMore: string;
+    exitSession: string;
+    exitConfirm: string;
+    exit: string;
+    keepStudying: string;
+    flashcardFlip: string;
+    howWellRemember: string;
+    ratingAgain: string;
+    ratingHard: string;
+    ratingGood: string;
+    ratingEasy: string;
+    noAudio: string;
+    letters: string;
+    startsWith: string;
+    typeAnswerPlaceholder: string;
+    typeWhatYouHear: string;
+    playAudio: string;
+    correctAnswer: string;
+    wrongAnswer: string;
+    submitButton: string;
+    continueButton: string;
+    timesUp: string;
+    speedMatchResult: string;
+    speedMatchQuestion: string;
+    speedMatchBonus: string;
+    speedMatchNo: string;
+    speedMatchYes: string;
+  };
+  discussion: {
+    title: string;
+    noPosts: string;
+    composerPlaceholder: string;
+    post: string;
+    posting: string;
+    creator: string;
+    pinned: string;
+    edited: string;
+    hide: string;
+    reply: string;
+    pin: string;
+    unpin: string;
+    delete: string;
+    replyPlaceholder: string;
+    replyButton: string;
+    justNow: string;
+    minutesAgo: string;
+    hoursAgo: string;
+    daysAgo: string;
+  };
+  categories: Record<string, string>;
+};
+
+const isProd = process.env.NODE_ENV === "production";
+const cache = new Map<string, Locale>();
+
+function languageToLocale(language: string): string {
+  if (language === "English") return "en";
+  return language
+    .replace(/[()]/g, " ")
+    .replace(/\//g, "-")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/-$/, "");
+}
+
+export function getLocale(language: string | null): Locale {
+  const localeName = language ? languageToLocale(language) : "en";
+  if (isProd && cache.has(localeName)) return cache.get(localeName)!;
+
+  try {
+    const filePath = path.join(process.cwd(), "public", "locales", `${localeName}.json`);
+    const data = JSON.parse(fs.readFileSync(filePath, "utf-8")) as Locale;
+    if (isProd) cache.set(localeName, data);
+    return data;
+  } catch {
+    if (localeName !== "en") return getLocale("English");
+    throw new Error("Failed to load English locale");
+  }
+}
+
+export { t } from "./t";

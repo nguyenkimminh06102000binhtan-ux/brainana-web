@@ -10,6 +10,57 @@ import type { QType, StudyCard, SessionStats } from "./types";
 
 type Stage = "setup" | "loading" | "session" | "results";
 
+type StudyLabels = {
+  allSections: string;
+  howManyWords: string;
+  dueForReview: string;
+  newCards: string;
+  totalCards: string;
+  allCaughtUpPractice: string;
+  allCaughtUpNoDue: string;
+  practiceAgain: string;
+  startStudying: string;
+  backToCourse: string;
+  preparingCards: string;
+  savingProgress: string;
+  brainFed: string;
+  greatSession: string;
+  cardsStudied: string;
+  correctRate: string;
+  xpEarned: string;
+  streak: string;
+  masteredNew: string;
+  masteredCard: string;
+  masteredCards: string;
+  studyMore: string;
+  exitSession: string;
+  exitConfirm: string;
+  exit: string;
+  keepStudying: string;
+  flashcardFlip: string;
+  howWellRemember: string;
+  ratingAgain: string;
+  ratingHard: string;
+  ratingGood: string;
+  ratingEasy: string;
+  noAudio: string;
+  letters: string;
+  startsWith: string;
+  typeAnswerPlaceholder: string;
+  typeWhatYouHear: string;
+  playAudio: string;
+  correctAnswer: string;
+  wrongAnswer: string;
+  submitButton: string;
+  continueButton: string;
+  timesUp: string;
+  speedMatchResult: string;
+  speedMatchQuestion: string;
+  speedMatchBonus: string;
+  speedMatchNo: string;
+  speedMatchYes: string;
+};
+
 interface StudyClientProps {
   userId: string;
   courseId: string;
@@ -20,6 +71,7 @@ interface StudyClientProps {
   totalCount: number;
   preferredTypes: QType[];
   showRomanization: boolean;
+  labels: StudyLabels;
 }
 
 export default function StudyClient({
@@ -32,6 +84,7 @@ export default function StudyClient({
   totalCount,
   preferredTypes,
   showRomanization,
+  labels,
 }: StudyClientProps) {
   const available = reviewDue + newCards;
   const sessionLimit = available > 0 ? available : totalCount;
@@ -68,7 +121,7 @@ export default function StudyClient({
   }
 
   if (stage === "loading") {
-    return <PageLoading label="Preparing your cards" />;
+    return <PageLoading label={labels.preparingCards} />;
   }
 
   if (stage === "session") {
@@ -82,6 +135,37 @@ export default function StudyClient({
         showRomanization={showRomanization}
         onComplete={handleSessionComplete}
         onExit={handleExit}
+        labels={{
+          allSections: labels.allSections,
+          savingProgress: labels.savingProgress,
+          exitSession: labels.exitSession,
+          exitConfirm: labels.exitConfirm,
+          exit: labels.exit,
+          keepStudying: labels.keepStudying,
+          flashcardFlip: labels.flashcardFlip,
+          howWellRemember: labels.howWellRemember,
+          ratingAgain: labels.ratingAgain,
+          ratingHard: labels.ratingHard,
+          ratingGood: labels.ratingGood,
+          ratingEasy: labels.ratingEasy,
+          noAudio: labels.noAudio,
+          letters: labels.letters,
+          startsWith: labels.startsWith,
+          typeAnswerPlaceholder: labels.typeAnswerPlaceholder,
+          typeWhatYouHear: labels.typeWhatYouHear,
+          playAudio: labels.playAudio,
+          correctAnswer: labels.correctAnswer,
+          wrongAnswer: labels.wrongAnswer,
+          submitButton: labels.submitButton,
+          continueButton: labels.continueButton,
+          timesUp: labels.timesUp,
+          speedMatchResult: labels.speedMatchResult,
+          speedMatchQuestion: labels.speedMatchQuestion,
+          speedMatchBonus: labels.speedMatchBonus,
+          speedMatchNo: labels.speedMatchNo,
+          speedMatchYes: labels.speedMatchYes,
+          xpEarned: labels.xpEarned,
+        }}
       />
     );
   }
@@ -93,6 +177,19 @@ export default function StudyClient({
         stats={sessionStats}
         totalCards={sessionCards.length}
         onStudyMore={handleStudyMore}
+        labels={{
+          brainFed: labels.brainFed,
+          greatSession: labels.greatSession,
+          cardsStudied: labels.cardsStudied,
+          correctRate: labels.correctRate,
+          xpEarned: labels.xpEarned,
+          streak: labels.streak,
+          masteredNew: labels.masteredNew,
+          masteredCard: labels.masteredCard,
+          masteredCards: labels.masteredCards,
+          studyMore: labels.studyMore,
+          backToCourse: labels.backToCourse,
+        }}
       />
     );
   }
@@ -114,7 +211,7 @@ export default function StudyClient({
     <div className="mx-auto max-w-md px-4 py-10">
       {/* Header */}
       <div className="mb-8 text-center">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-3">All sections</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{labels.allSections}</p>
         <h1 className="mt-1 font-fredoka text-3xl font-[600] text-ink">{courseTitle}</h1>
       </div>
 
@@ -123,7 +220,7 @@ export default function StudyClient({
         <div className="relative mb-8">
           <div className="rounded-md bg-paper px-5 py-4 shadow-hard-sm">
             <p className="font-kalam text-xl leading-snug text-ink">
-              How many words do you want to eat today?
+              {labels.howManyWords}
             </p>
           </div>
           <div className="absolute -bottom-[11px] left-8 h-0 w-0 border-l-[11px] border-r-[11px] border-t-[11px] border-l-transparent border-r-transparent border-t-paper" />
@@ -162,24 +259,24 @@ export default function StudyClient({
               </button>
             </div>
             <p className="font-manrope text-sm text-ink-2">
-              <span className="font-[700] text-ink">{reviewDue}</span> due for review
+              <span className="font-[700] text-ink">{reviewDue}</span> {labels.dueForReview}
               {newCards > 0 && (
                 <>
                   <span className="mx-1.5 text-ink-3">·</span>
-                  <span className="font-[700] text-ink">{newCards}</span> new
+                  <span className="font-[700] text-ink">{newCards}</span> {labels.newCards}
                 </>
               )}
               <span className="mx-1.5 text-ink-3">·</span>
-              <span className="font-[700] text-ink">{totalCount}</span> total
+              <span className="font-[700] text-ink">{totalCount}</span> {labels.totalCards}
             </p>
           </div>
           {isPracticeMode ? (
             <p className="mt-2 font-manrope text-xs text-ink-3">
-              All caught up! You can still practice cards from this course.
+              {labels.allCaughtUpPractice}
             </p>
           ) : available === 0 && (
             <p className="mt-2 font-manrope text-xs text-ink-3">
-              All caught up! No cards are due for review.
+              {labels.allCaughtUpNoDue}
             </p>
           )}
         </div>
@@ -192,13 +289,13 @@ export default function StudyClient({
             disabled={sessionLimit === 0}
             className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isPracticeMode ? "Practice again →" : "Start studying →"}
+            {isPracticeMode ? labels.practiceAgain : labels.startStudying}
           </button>
           <Link
             href={`/c/${courseSlug}`}
             className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink"
           >
-            ← Back to course
+            {labels.backToCourse}
           </Link>
         </div>
       </div>

@@ -7,9 +7,11 @@ type PreviewItem = { id: string; front_text: string; back_text: string };
 export default function PreviewSection({
   items,
   totalCount,
+  labels,
 }: {
   items: PreviewItem[];
   totalCount: number;
+  labels: { preview: string; previewOf: string; flipUp: string; flipDown: string; more: string };
 }) {
   const [flipped, setFlipped] = useState(false);
   const remaining = totalCount - items.length;
@@ -18,14 +20,17 @@ export default function PreviewSection({
     <div className="rounded-lg bg-paper-2 p-6 shadow-hard">
       <div className="mb-4 flex items-center justify-between">
         <p className="font-manrope text-sm font-[800] text-ink">
-          Preview <span className="text-ink-2">· {items.length} of {totalCount}</span>
+          {labels.preview}{" "}
+          <span className="text-ink-2">
+            · {labels.previewOf.replace("{shown}", String(items.length)).replace("{total}", String(totalCount))}
+          </span>
         </p>
         <button
           type="button"
           onClick={() => setFlipped((f) => !f)}
           className="cursor-pointer flex items-center gap-1.5 rounded-full bg-paper px-4 py-1.5 font-mono text-xs font-[700] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none"
         >
-          flip {flipped ? "↑" : "↓"}
+          {flipped ? labels.flipUp : labels.flipDown}
         </button>
       </div>
 
@@ -47,7 +52,7 @@ export default function PreviewSection({
         {remaining > 0 && (
           <div className="flex min-h-[120px] w-36 shrink-0 flex-col items-center justify-center rounded-lg border-2 border-dashed border-ink/20 p-4">
             <p className="font-fredoka text-2xl font-[700] text-ink-2">+{remaining}</p>
-            <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-3">more</p>
+            <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-3">{labels.more}</p>
           </div>
         )}
       </div>

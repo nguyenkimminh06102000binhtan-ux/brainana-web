@@ -29,11 +29,13 @@ export const LANGUAGES = [
 export const DAILY_GOALS = [5, 10, 20, 40] as const;
 export const INTERESTS = [
   "Languages",
-  "GRE",
-  "Science",
-  "History",
-  "Programming",
-  "Geography",
+  "Arts & Literature",
+  "Maths & Science",
+  "The Natural World",
+  "History & Geography",
+  "Memory Training",
+  "Professional & Careers",
+  "Standardised Tests",
   "Trivia",
-  "Med",
+  "Entertainment",
 ] as const;

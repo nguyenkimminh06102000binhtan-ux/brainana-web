@@ -3,12 +3,24 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
+import { t } from "@/utils/t";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
 interface TypeAnswerModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
   showNoAudioNotice?: boolean;
+  labels: {
+    noAudio: string;
+    letters: string;
+    startsWith: string;
+    placeholder: string;
+    playAudio: string;
+    correct: string;
+    wrong: string;
+    submit: string;
+    continueBtn: string;
+  };
 }
 
 function levenshtein(a: string, b: string): number {
@@ -40,6 +52,7 @@ export default function TypeAnswerMode({
   card,
   onAnswer,
   showNoAudioNotice,
+  labels,
 }: TypeAnswerModeProps) {
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -119,7 +132,7 @@ export default function TypeAnswerMode({
     <div className="flex flex-col gap-6 px-4 py-8">
       {showNoAudioNotice && (
         <p className="rounded-sm bg-yellow-soft px-3 py-2 text-center font-manrope text-xs text-ink-2">
-          No audio — showing text instead
+          {labels.noAudio}
         </p>
       )}
 
@@ -144,7 +157,7 @@ export default function TypeAnswerMode({
             onClick={() => new Audio(card.frontAudioUrl!).play()}
             className="mt-3 font-manrope text-xs text-ink-3 underline hover:text-ink"
           >
-            ▶ Play audio
+            {labels.playAudio}
           </button>
         )}
       </div>
@@ -152,11 +165,11 @@ export default function TypeAnswerMode({
       {/* Hint chips */}
       <div className="flex gap-2">
         <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
-          {letterCount} letters
+          {t(labels.letters, { count: letterCount })}
         </span>
         {showFirstLetter && (
           <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange">
-            Starts with "{firstLetter}"
+            {t(labels.startsWith, { letter: firstLetter })}
           </span>
         )}
       </div>
@@ -172,7 +185,7 @@ export default function TypeAnswerMode({
           onCompositionEnd={() => setIsComposing(false)}
           onKeyDown={(e) => e.key === "Enter" && !isComposing && submit()}
           disabled={!!submitted}
-          placeholder="Type your answer…"
+          placeholder={labels.placeholder}
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
               ? submitted.correct
@@ -186,7 +199,7 @@ export default function TypeAnswerMode({
           <div className="mt-2 flex items-center gap-2">
             <span className="text-lg">{submitted.correct ? "✓" : "✗"}</span>
             <span className="font-manrope text-sm text-ink-2">
-              {submitted.correct ? "Correct!" : `Answer: ${card.backText}`}
+              {submitted.correct ? labels.correct : t(labels.wrong, { answer: card.backText })}
             </span>
           </div>
         )}
@@ -198,7 +211,7 @@ export default function TypeAnswerMode({
               onClick={submit}
               className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
-              Submit ↵
+              {labels.submit}
             </button>
           ) : (
             <button
@@ -206,7 +219,7 @@ export default function TypeAnswerMode({
               onClick={advance}
               className="flex-1 cursor-pointer rounded-full bg-ink px-4 py-2.5 font-manrope text-sm font-[800] text-white transition hover:opacity-80 active:translate-y-[1px]"
             >
-              Continue →
+              {labels.continueBtn}
             </button>
           )}
         </div>

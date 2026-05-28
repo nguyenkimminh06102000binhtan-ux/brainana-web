@@ -21,6 +21,37 @@ interface SessionViewProps {
   showRomanization: boolean;
   onComplete: (stats: SessionStats) => void;
   onExit: () => void;
+  labels: {
+    allSections: string;
+    savingProgress: string;
+    exitSession: string;
+    exitConfirm: string;
+    exit: string;
+    keepStudying: string;
+    flashcardFlip: string;
+    howWellRemember: string;
+    ratingAgain: string;
+    ratingHard: string;
+    ratingGood: string;
+    ratingEasy: string;
+    noAudio: string;
+    letters: string;
+    startsWith: string;
+    typeAnswerPlaceholder: string;
+    typeWhatYouHear: string;
+    playAudio: string;
+    correctAnswer: string;
+    wrongAnswer: string;
+    submitButton: string;
+    continueButton: string;
+    timesUp: string;
+    speedMatchResult: string;
+    speedMatchQuestion: string;
+    speedMatchBonus: string;
+    speedMatchNo: string;
+    speedMatchYes: string;
+    xpEarned: string;
+  };
 }
 
 interface SpeedMatchResult {
@@ -38,6 +69,7 @@ export default function SessionView({
   showRomanization,
   onComplete,
   onExit,
+  labels,
 }: SessionViewProps) {
   const speedMatchCards = useMemo(() => cards.filter((c) => c.questionType === "speed_match"), [cards]);
   const regularCards = useMemo(() => cards.filter((c) => c.questionType !== "speed_match"), [cards]);
@@ -204,12 +236,18 @@ export default function SessionView({
   if (phase === "saving") {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="font-manrope text-sm text-ink-2">Saving your progress…</p>
+        <p className="font-manrope text-sm text-ink-2">{labels.savingProgress}</p>
       </div>
     );
   }
 
   const currentRegularCard = regularCards[regularIndex];
+  const topBarLabels = { allSections: labels.allSections };
+  const exitLabels = { exitSession: labels.exitSession, exitConfirm: labels.exitConfirm, exit: labels.exit, keepStudying: labels.keepStudying };
+  const flashcardLabels = { flip: labels.flashcardFlip, howWellRemember: labels.howWellRemember, ratingAgain: labels.ratingAgain, ratingHard: labels.ratingHard, ratingGood: labels.ratingGood, ratingEasy: labels.ratingEasy };
+  const typeAnswerLabels = { noAudio: labels.noAudio, letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeAnswerPlaceholder, playAudio: labels.playAudio, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton };
+  const audioTypeLabels = { letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeWhatYouHear, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, noAudio: labels.noAudio, playAudio: labels.playAudio };
+  const speedMatchLabels = { timesUp: labels.timesUp, xpEarned: labels.xpEarned, result: labels.speedMatchResult, question: labels.speedMatchQuestion, bonus: labels.speedMatchBonus, no: labels.speedMatchNo, yes: labels.speedMatchYes, continueBtn: labels.continueButton };
 
   return (
     <div className="min-h-screen">
@@ -220,8 +258,9 @@ export default function SessionView({
             current={0}
             total={speedMatchCards.length}
             onClose={() => setShowExitConfirm(true)}
+            labels={topBarLabels}
           />
-          <SpeedMatchMode cards={speedMatchCards} onComplete={handleSpeedMatchComplete} />
+          <SpeedMatchMode cards={speedMatchCards} onComplete={handleSpeedMatchComplete} labels={speedMatchLabels} />
         </>
       ) : currentRegularCard ? (
         <>
@@ -230,19 +269,20 @@ export default function SessionView({
             current={regularIndex}
             total={regularCards.length}
             onClose={() => setShowExitConfirm(true)}
+            labels={topBarLabels}
           />
           <div className="mx-auto max-w-lg">
             {currentRegularCard.questionType === "flashcard" && (
-              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} />
+              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
               <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
-              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
+              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={typeAnswerLabels} />
             )}
             {currentRegularCard.questionType === "audio_type" && (
-              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
+              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={audioTypeLabels} />
             )}
           </div>
         </>
@@ -252,6 +292,7 @@ export default function SessionView({
         <ExitConfirm
           onConfirm={handleExit}
           onCancel={() => setShowExitConfirm(false)}
+          labels={exitLabels}
         />
       )}
     </div>

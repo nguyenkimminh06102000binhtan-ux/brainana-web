@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { t } from "@/utils/t";
 import type { StudyCard } from "./types";
 
 interface SpeedMatchResult {
@@ -12,6 +13,16 @@ interface SpeedMatchResult {
 interface SpeedMatchModeProps {
   cards: StudyCard[];
   onComplete: (result: SpeedMatchResult) => void;
+  labels: {
+    timesUp: string;
+    xpEarned: string;
+    result: string;
+    question: string;
+    bonus: string;
+    no: string;
+    yes: string;
+    continueBtn: string;
+  };
 }
 
 interface Pairing {
@@ -43,7 +54,7 @@ function buildPairings(cards: StudyCard[]): Pairing[] {
   return pairings.sort(() => Math.random() - 0.5);
 }
 
-export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProps) {
+export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatchModeProps) {
   const pairings = useMemo(() => buildPairings(cards), []); // eslint-disable-line react-hooks/exhaustive-deps
   const [index, setIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
@@ -115,12 +126,12 @@ export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProp
   if (done) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4">
-        <p className="font-fredoka text-4xl font-[600] text-ink">Time's up!</p>
+        <p className="font-fredoka text-4xl font-[600] text-ink">{labels.timesUp}</p>
         <div className="rounded-lg bg-paper-2 p-6 shadow-hard text-center">
           <p className="font-mono text-5xl font-[700] text-orange">{xpRef.current}</p>
-          <p className="mt-1 font-manrope text-sm text-ink-2">XP earned</p>
+          <p className="mt-1 font-manrope text-sm text-ink-2">{labels.xpEarned}</p>
           <p className="mt-4 font-manrope text-sm text-ink-2">
-            {correct} correct · {totalRef.current - correct} wrong
+            {t(labels.result, { correct, wrong: totalRef.current - correct })}
           </p>
         </div>
         <button
@@ -128,7 +139,7 @@ export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProp
           onClick={() => onComplete({ correct, total: totalRef.current, xp: xpRef.current })}
           className="w-full max-w-sm cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
         >
-          Continue →
+          {labels.continueBtn}
         </button>
       </div>
     );
@@ -183,7 +194,7 @@ export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProp
         </div>
 
         <p className="font-manrope text-xs text-ink-3">
-          Does the translation match the word?
+          {labels.question}
         </p>
 
         {/* Buttons */}
@@ -193,7 +204,7 @@ export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProp
             onClick={() => answer(false)}
             className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 border-red-soft bg-red-soft py-4 font-manrope text-base font-[800] text-ink transition hover:opacity-80 active:scale-95"
           >
-            <span>✗ No</span>
+            <span>{labels.no}</span>
             <span className="font-mono text-xs text-ink-3">←</span>
           </button>
           <button
@@ -202,13 +213,13 @@ export default function SpeedMatchMode({ cards, onComplete }: SpeedMatchModeProp
             className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 border-green-soft bg-green-soft py-4 font-manrope text-base font-[800] text-ink transition hover:opacity-80 active:scale-95"
           >
             <span className="font-mono text-xs text-ink-3">→</span>
-            <span>Yes ✓</span>
+            <span>{labels.yes}</span>
           </button>
         </div>
 
         {streakCelebration && (
           <p className="animate-bounce font-fredoka text-xl font-[600] text-orange motion-reduce:animate-none">
-            +{TIMER_BONUS_SECONDS}s bonus! 🎉
+            {t(labels.bonus, { seconds: TIMER_BONUS_SECONDS })}
           </p>
         )}
       </div>

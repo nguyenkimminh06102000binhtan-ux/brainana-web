@@ -4,9 +4,10 @@ interface GoalRingProps {
   studied: number;
   goal: number;
   courseSlug: string | null;
+  labels: { todayGoal: string; goalReached: string; continueLearning: string; browseAction: string };
 }
 
-export default function GoalRing({ studied, goal, courseSlug }: GoalRingProps) {
+export default function GoalRing({ studied, goal, courseSlug, labels }: GoalRingProps) {
   const pct = goal > 0 ? Math.min(studied / goal, 1) : 0;
   const radius = 44;
   const circumference = 2 * Math.PI * radius;
@@ -16,7 +17,7 @@ export default function GoalRing({ studied, goal, courseSlug }: GoalRingProps) {
   return (
     <div className="flex flex-col items-center gap-4">
       <p className="font-mono text-[10px] uppercase tracking-widest text-ink-2">
-        Today · Goal {goal}
+        {labels.todayGoal.replace("{goal}", String(goal))}
       </p>
 
       <div className="relative h-28 w-28">
@@ -43,20 +44,20 @@ export default function GoalRing({ studied, goal, courseSlug }: GoalRingProps) {
       </div>
 
       {done ? (
-        <p className="font-manrope text-sm font-[700] text-green-600">Goal reached! 🎉</p>
+        <p className="font-manrope text-sm font-[700] text-green-600">{labels.goalReached} 🎉</p>
       ) : courseSlug ? (
         <a
           href={`/study/${courseSlug}`}
           className="rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
         >
-          Continue →
+          {labels.continueLearning} →
         </a>
       ) : (
         <a
           href="/browse"
           className="rounded-full bg-paper px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
         >
-          Browse →
+          {labels.browseAction} →
         </a>
       )}
     </div>

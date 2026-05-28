@@ -5,9 +5,10 @@ interface TopBarProps {
   current: number;
   total: number;
   onClose: () => void;
+  labels: { allSections: string };
 }
 
-export default function TopBar({ courseTitle, current, total, onClose }: TopBarProps) {
+export default function TopBar({ courseTitle, current, total, onClose, labels }: TopBarProps) {
   const pct = total > 0 ? (current / total) * 100 : 0;
 
   return (
@@ -17,7 +18,7 @@ export default function TopBar({ courseTitle, current, total, onClose }: TopBarP
           <p className="truncate font-manrope text-xs font-[600] text-ink-3 uppercase tracking-wider">
             {courseTitle}
           </p>
-          <p className="font-mono text-xs text-ink-3">All sections</p>
+          <p className="font-mono text-xs text-ink-3">{labels.allSections}</p>
         </div>
         <p className="font-mono text-sm font-[600] text-ink shrink-0">
           {current} / {total}

@@ -2,14 +2,20 @@
 
 import { useRouter } from "next/navigation";
 
-const OPTIONS = [
-  { value: "learner_count", label: "Most loved" },
-  { value: "rating",        label: "Top rated"  },
-  { value: "newest",        label: "Newest"     },
-];
-
-export default function BrowseSort({ value }: { value: string }) {
+export default function BrowseSort({
+  value,
+  labels,
+}: {
+  value: string;
+  labels: { sort: string; mostLoved: string; topRated: string; newest: string };
+}) {
   const router = useRouter();
+
+  const OPTIONS = [
+    { value: "learner_count", label: labels.mostLoved },
+    { value: "rating",        label: labels.topRated  },
+    { value: "newest",        label: labels.newest    },
+  ];
 
   function setSort(sort: string) {
     const params = new URLSearchParams(window.location.search);
@@ -19,7 +25,7 @@ export default function BrowseSort({ value }: { value: string }) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="font-mono text-xs uppercase tracking-widest text-ink-2">Sort:</span>
+      <span className="font-mono text-xs uppercase tracking-widest text-ink-2">{labels.sort}</span>
       <div className="flex gap-1.5">
         {OPTIONS.map((opt) => (
           <button

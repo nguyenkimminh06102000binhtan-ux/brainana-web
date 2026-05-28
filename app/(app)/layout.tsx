@@ -4,25 +4,11 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import AvatarMenu from "./_components/avatar-menu";
 import OriginLanguageSwitcher from "@/components/origin-language-switcher";
+import { getLocale, t } from "@/utils/i18n";
 
-const navItems = [
-  { label: "Home", href: "/home" },
-  { label: "Browse", href: "/browse" },
-  { label: "Library", href: "/library" },
-  { label: "Create", href: "/create" },
-  { label: "Community", href: "/community" },
-];
-
-export default async function AppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient(await cookies());
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
   const { data: profile } = await supabase
@@ -31,8 +17,7 @@ export default async function AppLayout({
     .eq("id", user.id)
     .single();
 
-  const displayName =
-    profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
+  const displayName = profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
   const initial = displayName[0].toUpperCase();
   const currentStreak = profile?.current_streak ?? 0;
 
@@ -50,6 +35,16 @@ export default async function AppLayout({
     activeOriginLanguage = nativeLanguage;
   }
 
+  const loc = getLocale(activeOriginLanguage);
+
+  const navItems = [
+    { label: loc.app.nav.home,      href: "/home" },
+    { label: loc.app.nav.browse,    href: "/browse" },
+    { label: loc.app.nav.library,   href: "/library" },
+    { label: loc.app.nav.create,    href: "/create" },
+    { label: loc.app.nav.community, href: "/community" },
+  ];
+
   return (
     <div className="flex min-h-screen bg-paper text-ink">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -58,7 +53,7 @@ export default async function AppLayout({
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-ink">
               B
             </span>
-            Brainana
+            {loc.app.brand}
           </Link>
 
           <nav className="flex flex-1 flex-wrap items-center gap-2">
@@ -76,24 +71,26 @@ export default async function AppLayout({
           <form action="/browse" className="hidden min-w-48 sm:block">
             <input
               name="q"
-              placeholder="Search"
+              placeholder={loc.app.searchPlaceholder}
               className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
             />
           </form>
 
           <div className="rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean">
-            🔥 {currentStreak} days
+            🔥 {t(loc.app.streakDays, { count: currentStreak })}
           </div>
 
           <OriginLanguageSwitcher
             originLanguages={originLanguages}
             activeOriginLanguage={activeOriginLanguage}
+            labels={loc.app.originLanguage}
           />
 
           <AvatarMenu
             avatarUrl={profile?.avatar_url ?? null}
             initial={initial}
             username={profile?.username ?? ""}
+            labels={loc.app.avatar}
           />
         </header>
 

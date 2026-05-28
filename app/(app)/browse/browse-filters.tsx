@@ -2,36 +2,57 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-const ALL_CATEGORIES = [
-  "Language", "Science", "History", "Math",
-  "Geography", "Literature", "Music", "Art", "Technology",
-];
-
-const LEVELS = [
-  { value: "", label: "Any" },
-  { value: "beginner", label: "Beginner" },
-  { value: "intermediate", label: "Inter" },
-  { value: "advanced", label: "Adv" },
-];
+import { CATEGORY_TREE } from "@/app/constants/categories";
 
 export default function BrowseFilters({
   initialQ,
-  selectedCategories,
+  selectedSubcategories,
   level,
   minCards,
   hasAudio,
   hasMems,
   hasImages,
+  labels,
 }: {
   initialQ: string;
-  selectedCategories: string[];
+  selectedSubcategories: string[];
   level: string;
   minCards: number;
   hasAudio: boolean;
   hasMems: boolean;
   hasImages: boolean;
+  labels: {
+    searchPlaceholder: string;
+    category: string;
+    level: string;
+    size: string;
+    has: string;
+    any: string;
+    beginner: string;
+    intermediate: string;
+    advanced: string;
+    audio: string;
+    mems: string;
+    images: string;
+    clearAllFilters: string;
+    categoryLabels: Record<string, string>;
+  };
 }) {
+  const categoriesWithSubs = new Set(
+    CATEGORY_TREE
+      .filter((g) => g.items.some((i) => selectedSubcategories.includes(i)))
+      .map((g) => g.label)
+  );
+
+  const [expanded, setExpanded] = useState<Set<string>>(categoriesWithSubs);
+
+  const LEVELS = [
+    { value: "", label: labels.any },
+    { value: "beginner", label: labels.beginner },
+    { value: "intermediate", label: labels.intermediate },
+    { value: "advanced", label: labels.advanced },
+  ];
+
   const router = useRouter();
   const [sliderValue, setSliderValue] = useState(minCards);
 
@@ -44,15 +65,23 @@ export default function BrowseFilters({
     router.replace(`/browse?${params.toString()}`);
   }
 
-  function toggleCategory(cat: string) {
-    const next = selectedCategories.includes(cat)
-      ? selectedCategories.filter((c) => c !== cat)
-      : [...selectedCategories, cat];
-    update({ categories: next.length > 0 ? next.join(",") : null });
+  function toggleExpanded(cat: string) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
   }
 
-  const hasAnyFilter =
-    selectedCategories.length > 0 || level || minCards > 0 || hasAudio || hasMems || hasImages;
+  function toggleSubcategory(item: string) {
+    const next = selectedSubcategories.includes(item)
+      ? selectedSubcategories.filter((s) => s !== item)
+      : [...selectedSubcategories, item];
+    update({ subcategories: next.length > 0 ? next.join(",") : null });
+  }
+
+  const hasAnyFilter = selectedSubcategories.length > 0 || level || minCards > 0 || hasAudio || hasMems || hasImages;
 
   return (
     <aside className="flex flex-col gap-6 rounded-xl bg-paper-2 p-5 shadow-hard">
@@ -69,36 +98,69 @@ export default function BrowseFilters({
           <input
             name="q"
             defaultValue={initialQ}
-            placeholder="Search courses..."
+            placeholder={labels.searchPlaceholder}
             autoComplete="off"
             className="w-full rounded-full border-2 border-dashed border-ink/20 bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:border-orange"
           />
         </div>
       </form>
 
-      {/* Category */}
+      {/* Category accordion */}
       <section>
-        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">Category</p>
-        <div className="flex flex-col gap-2">
-          {ALL_CATEGORIES.map((cat) => {
-            const checked = selectedCategories.includes(cat);
+        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">{labels.category}</p>
+        <div className="flex flex-col gap-0.5">
+          {CATEGORY_TREE.map((group) => {
+            const isExpanded = expanded.has(group.label);
+            const selectedInGroup = group.items.filter((i) => selectedSubcategories.includes(i));
+            const translatedLabel = labels.categoryLabels[group.label] ?? group.label;
+
             return (
-              <label key={cat} className="flex cursor-pointer items-center gap-2.5">
-                <span
-                  onClick={() => toggleCategory(cat)}
-                  className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition ${
-                    checked ? "border-orange bg-orange" : "border-ink/25 bg-paper"
-                  }`}
+              <div key={group.label}>
+                <button
+                  type="button"
+                  onClick={() => toggleExpanded(group.label)}
+                  className="flex w-full items-center justify-between rounded-md px-2 py-1.5 transition hover:bg-paper"
                 >
-                  {checked && <span className="font-mono text-[9px] font-[900] text-white">✓</span>}
-                </span>
-                <span
-                  onClick={() => toggleCategory(cat)}
-                  className={`font-manrope text-sm transition ${checked ? "font-[700] text-ink" : "text-ink-2"}`}
-                >
-                  {cat}
-                </span>
-              </label>
+                  <span className={`font-manrope text-sm ${selectedInGroup.length > 0 ? "font-[700] text-ink" : "text-ink-2"}`}>
+                    {translatedLabel}
+                    {selectedInGroup.length > 0 && (
+                      <span className="ml-1.5 rounded-full bg-orange px-1.5 py-0.5 font-mono text-[10px] leading-none text-white">
+                        {selectedInGroup.length}
+                      </span>
+                    )}
+                  </span>
+                  <span className={`shrink-0 font-mono text-[9px] text-ink-3 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`}>
+                    ▶
+                  </span>
+                </button>
+
+                {isExpanded && (
+                  <div className="mb-1.5 ml-2 mt-0.5 flex flex-col gap-1 border-l-2 border-ink/10 pl-3">
+                    {group.items.map((item) => {
+                      const checked = selectedSubcategories.includes(item);
+                      const translatedItem = labels.categoryLabels[item] ?? item;
+                      return (
+                        <label key={item} className="flex cursor-pointer items-center gap-2">
+                          <span
+                            onClick={() => toggleSubcategory(item)}
+                            className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border-2 transition ${
+                              checked ? "border-orange bg-orange" : "border-ink/25 bg-paper"
+                            }`}
+                          >
+                            {checked && <span className="font-mono text-[8px] font-[900] text-white">✓</span>}
+                          </span>
+                          <span
+                            onClick={() => toggleSubcategory(item)}
+                            className={`font-manrope text-xs transition ${checked ? "font-[700] text-ink" : "text-ink-2"}`}
+                          >
+                            {translatedItem}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -106,7 +168,7 @@ export default function BrowseFilters({
 
       {/* Level */}
       <section>
-        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">Level</p>
+        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">{labels.level}</p>
         <div className="flex flex-wrap gap-1.5">
           {LEVELS.map(({ value, label }) => (
             <button
@@ -127,7 +189,7 @@ export default function BrowseFilters({
 
       {/* Size */}
       <section>
-        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">Size</p>
+        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">{labels.size}</p>
         <input
           type="range"
           min={0}
@@ -150,11 +212,11 @@ export default function BrowseFilters({
 
       {/* Has */}
       <section>
-        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">Has</p>
+        <p className="mb-2.5 font-mono text-xs uppercase tracking-widest text-ink-2">{labels.has}</p>
         <div className="flex flex-col gap-2.5">
-          <Toggle label="Audio"  active={hasAudio}  onToggle={() => update({ has_audio:  hasAudio  ? null : "1" })} />
-          <Toggle label="Mems"   active={hasMems}   onToggle={() => update({ has_mems:   hasMems   ? null : "1" })} />
-          <Toggle label="Images" active={hasImages} onToggle={() => update({ has_images: hasImages ? null : "1" })} />
+          <Toggle label={labels.audio}  active={hasAudio}  onToggle={() => update({ has_audio:  hasAudio  ? null : "1" })} />
+          <Toggle label={labels.mems}   active={hasMems}   onToggle={() => update({ has_mems:   hasMems   ? null : "1" })} />
+          <Toggle label={labels.images} active={hasImages} onToggle={() => update({ has_images: hasImages ? null : "1" })} />
         </div>
       </section>
 
@@ -165,7 +227,7 @@ export default function BrowseFilters({
           onClick={() => { setSliderValue(0); router.replace("/browse"); }}
           className="cursor-pointer rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink-2 shadow-hard-sm transition hover:text-orange"
         >
-          Clear all filters
+          {labels.clearAllFilters}
         </button>
       )}
     </aside>

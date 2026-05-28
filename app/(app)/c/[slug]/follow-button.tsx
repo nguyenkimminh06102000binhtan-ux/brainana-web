@@ -7,10 +7,12 @@ export default function FollowButton({
   isFollowing,
   creatorId,
   slug,
+  labels,
 }: {
   isFollowing: boolean;
   creatorId: string;
   slug: string;
+  labels: { following: string; follow: string };
 }) {
   const [optimisticFollowing, setOptimisticFollowing] = useOptimistic(isFollowing);
   const [, startTransition] = useTransition();
@@ -34,7 +36,7 @@ export default function FollowButton({
             : "bg-paper text-ink hover:bg-orange hover:text-white"
         }`}
       >
-        {optimisticFollowing ? "Following" : "+ Follow"}
+        {optimisticFollowing ? labels.following : labels.follow}
       </button>
     </form>
   );

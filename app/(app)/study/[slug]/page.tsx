@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 import StudyClient from "./study-client";
 
 type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
@@ -41,7 +42,7 @@ export default async function StudyPage({
       .maybeSingle(),
     supabase
       .from("profiles")
-      .select("show_romanization")
+      .select("show_romanization, active_origin_language")
       .eq("id", user.id)
       .single(),
     supabase
@@ -60,6 +61,8 @@ export default async function StudyPage({
       .eq("user_id", user.id)
       .eq("course_id", course.id),
   ]);
+
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
 
   const total = totalCount ?? 0;
   const reviewDue = progressDueCount ?? 0;
@@ -81,6 +84,7 @@ export default async function StudyPage({
       totalCount={total}
       preferredTypes={preferredTypes}
       showRomanization={profile?.show_romanization ?? true}
+      labels={loc.study}
     />
   );
 }

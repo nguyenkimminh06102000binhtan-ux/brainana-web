@@ -5,23 +5,34 @@ import { updateQuestionTypes } from "./actions";
 
 type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
 
-const OPTIONS: { value: QType; label: string; icon: string }[] = [
-  { value: "flashcard",       label: "Flashcard",       icon: "🃏" },
-  { value: "multiple_choice", label: "Multiple choice", icon: "☑️" },
-  { value: "audio_type",      label: "Audio type",      icon: "🎧" },
-  { value: "speed_match",     label: "Speed match",     icon: "⚡" },
-  { value: "type_answer",     label: "Type answer",     icon: "⌨️" },
-];
-
 export default function QuestionTypeSelector({
   courseId,
   initial,
   hasAudio,
+  labels,
 }: {
   courseId: string;
   initial: QType[];
   hasAudio: boolean;
+  labels: {
+    flashcard: string;
+    multipleChoice: string;
+    audioType: string;
+    speedMatch: string;
+    typeAnswer: string;
+    savePreferences: string;
+    savedPreferences: string;
+    savingPreferences: string;
+  };
 }) {
+  const options: { value: QType; label: string; icon: string }[] = [
+    { value: "flashcard",       label: labels.flashcard,       icon: "🃏" },
+    { value: "multiple_choice", label: labels.multipleChoice,  icon: "☑️" },
+    { value: "audio_type",      label: labels.audioType,       icon: "🎧" },
+    { value: "speed_match",     label: labels.speedMatch,      icon: "⚡" },
+    { value: "type_answer",     label: labels.typeAnswer,      icon: "⌨️" },
+  ];
+
   const [selected, setSelected] = useState<QType[]>(initial);
   const [saved, setSaved] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -47,7 +58,7 @@ export default function QuestionTypeSelector({
   return (
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-2">
-        {OPTIONS.filter((o) => o.value !== "audio_type" || hasAudio).map(({ value, label, icon }) => {
+        {options.filter((o) => o.value !== "audio_type" || hasAudio).map(({ value, label, icon }) => {
           const active = selected.includes(value);
           return (
             <button
@@ -72,7 +83,7 @@ export default function QuestionTypeSelector({
         disabled={pending}
         className="cursor-pointer w-full rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-50"
       >
-        {saved ? "Saved ✓" : pending ? "Saving…" : "Save preferences"}
+        {saved ? labels.savedPreferences : pending ? labels.savingPreferences : labels.savePreferences}
       </button>
     </div>
   );

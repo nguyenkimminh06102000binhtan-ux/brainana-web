@@ -3,18 +3,13 @@ import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale, t } from "@/utils/i18n";
 import PreviewSection from "./preview";
 import FollowButton from "./follow-button";
 import ShareButton from "./share-button";
 import QuestionTypeSelector from "./question-type-selector";
 import DiscussionThread from "./discussion-thread";
 import { toggleEnroll } from "./actions";
-
-const LEVEL_LABEL: Record<string, string> = {
-  beginner: "Beginner",
-  intermediate: "Intermediate",
-  advanced: "Advanced",
-};
 
 function formatCount(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -59,6 +54,7 @@ export default async function CourseDetailPage({
     { data: followingList },
     { count: courseLearnerCount },
     { count: creatorFollowerCount },
+    { data: profile },
   ] = await Promise.all([
     supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
@@ -69,7 +65,11 @@ export default async function CourseDetailPage({
     supabase.from("follows").select("following_id").eq("follower_id", user.id),
     supabase.from("user_courses").select("*", { count: "exact", head: true }).eq("course_id", course.id),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
+    supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
   ]);
+
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const cl = loc.course;
 
   const isEnrolled = Boolean(enrollmentData);
   type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
@@ -77,7 +77,7 @@ export default async function CourseDetailPage({
   const isFollowing = Boolean(followData);
   const followingIds = (followingList ?? []).map((f) => f.following_id);
 
-  // Creator total learners — count from user_courses for all the creator's published courses
+  // Creator total learners
   const creatorCourseIds = (creatorCoursesData ?? []).map((c) => c.id);
   const { count: creatorLearnersCount } = creatorCourseIds.length > 0
     ? await supabase
@@ -106,6 +106,12 @@ export default async function CourseDetailPage({
   const creatorTotalLearners = creatorLearnersCount ?? 0;
   const creatorFollowers = creatorFollowerCount ?? 0;
 
+  const levelLabel: Record<string, string> = {
+    beginner: cl.beginner,
+    intermediate: cl.intermediate,
+    advanced: cl.advanced,
+  };
+
   const accentColors = ["bg-green-soft", "bg-yellow-soft", "bg-red-soft", "bg-blue/30"];
 
   return (
@@ -125,7 +131,7 @@ export default async function CourseDetailPage({
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center p-3">
                     <span className="text-center font-mono text-xs uppercase tracking-widest text-ocean opacity-70">
-                      [ {course.category ?? "course"} {course.level ? `· ${course.level}` : ""} ]
+                      [ {(course.category ? (loc.categories[course.category] ?? course.category) : "course")} {course.level ? `· ${levelLabel[course.level] ?? course.level}` : ""} ]
                     </span>
                   </div>
                 )}
@@ -134,25 +140,25 @@ export default async function CourseDetailPage({
               {/* Meta */}
               <div className="min-w-0 flex-1">
                 <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
-                  {[course.category, course.level ? LEVEL_LABEL[course.level] : null].filter(Boolean).join(" · ")}
+                  {[(course.category ? (loc.categories[course.category] ?? course.category) : null), course.level ? levelLabel[course.level] : null].filter(Boolean).join(" · ")}
                 </p>
                 <h1 className="mt-1 font-fredoka text-3xl font-[700] leading-tight tracking-tight">
                   {course.title}
                 </h1>
                 <p className="mt-1 font-manrope text-sm text-ink-2">
-                  by <span className="font-[800] text-ink">{creatorHandle}</span>
+                  {t(loc.common.by, { name: creatorHandle })}
                   {course.rating > 0 && (
                     <> · <span className="text-yellow">★</span> {course.rating.toFixed(1)} ({formatCount(course.rating_count)})</>
                   )}
-                  {" · "}{formatCount(learnerCount)} learners
+                  {" · "}{t(loc.common.learners, { count: formatCount(learnerCount) })}
                 </p>
 
                 {/* Feature badges */}
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {course.has_audio && <Badge>audio</Badge>}
-                  {(course.mems_count ?? 0) > 0 && <Badge>mems</Badge>}
-                  {course.has_images && <Badge>images</Badge>}
-                  {course.verified && <Badge accent>verified</Badge>}
+                  {course.has_audio && <Badge>{loc.common.audio}</Badge>}
+                  {(course.mems_count ?? 0) > 0 && <Badge>{loc.common.mems}</Badge>}
+                  {course.has_images && <Badge>{cl.images}</Badge>}
+                  {course.verified && <Badge accent>{cl.verified}</Badge>}
                   {course.visibility !== "public" && (
                     <span className="rounded-full bg-red-soft px-3 py-1 font-mono text-xs font-[700] uppercase tracking-wider text-ink-2">
                       {course.visibility}
@@ -166,7 +172,7 @@ export default async function CourseDetailPage({
                     href={`/study/${course.slug}`}
                     className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                   >
-                    Start learning →
+                    {cl.startLearning}
                   </Link>
 
                   {!isOwner && (
@@ -181,7 +187,7 @@ export default async function CourseDetailPage({
                             : "bg-paper text-ink hover:bg-paper"
                         }`}
                       >
-                        {isEnrolled ? "Saved" : "+ Save"}
+                        {isEnrolled ? cl.saved : cl.save}
                       </button>
                     </form>
                   )}
@@ -191,11 +197,11 @@ export default async function CourseDetailPage({
                       href={`/c/${course.slug}/edit`}
                       className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px] active:shadow-none"
                     >
-                      Edit course
+                      {cl.editCourse}
                     </Link>
                   )}
 
-                  <ShareButton title={course.title} slug={course.slug} />
+                  <ShareButton title={course.title} slug={course.slug} labels={{ share: cl.share, copied: cl.copied }} />
                 </div>
               </div>
             </div>
@@ -204,7 +210,7 @@ export default async function CourseDetailPage({
           {/* About */}
           {course.description && (
             <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
-              <p className="mb-2 font-mono text-xs uppercase tracking-widest text-ink-2">About</p>
+              <p className="mb-2 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.about}</p>
               <p className="font-manrope text-sm leading-relaxed text-ink">{course.description}</p>
             </section>
           )}
@@ -214,6 +220,7 @@ export default async function CourseDetailPage({
             <PreviewSection
               items={previewItems ?? []}
               totalCount={course.card_count}
+              labels={{ preview: cl.preview, previewOf: cl.previewOf, flipUp: cl.flipUp, flipDown: cl.flipDown, more: cl.more }}
             />
           )}
 
@@ -221,12 +228,12 @@ export default async function CourseDetailPage({
           <div className="flex items-center gap-4 rounded-lg bg-yellow-soft px-6 py-4 shadow-hard-sm">
             <span className="text-2xl">🧠</span>
             <p className="font-manrope text-sm text-ink">
-              This course has <strong>{formatCount(course.mems_count ?? 0)} community mems</strong> — mnemonic hints from other learners. Tap any card to see them.
+              {t(cl.memsBanner, { count: formatCount(course.mems_count ?? 0) })}
             </p>
           </div>
 
           {/* Discussion */}
-          <DiscussionThread courseId={course.id} courseSlug={course.slug} creatorId={course.creator_id} isOwner={isOwner} />
+          <DiscussionThread courseId={course.id} courseSlug={course.slug} creatorId={course.creator_id} isOwner={isOwner} labels={loc.discussion} />
         </div>
 
         {/* ── RIGHT SIDEBAR ── */}
@@ -234,7 +241,7 @@ export default async function CourseDetailPage({
 
           {/* Creator card */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Creator</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.creatorSection}</p>
             <div className="flex items-center gap-3">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-blue">
                 {creator?.avatar_url ? (
@@ -248,47 +255,64 @@ export default async function CourseDetailPage({
               <div>
                 <p className="font-manrope text-sm font-[800] text-ink">{creatorHandle}</p>
                 <p className="font-mono text-xs text-ink-2">
-                  {creatorCourseCount} course{creatorCourseCount !== 1 ? "s" : ""} · {formatCount(creatorTotalLearners)} learners · {formatCount(creatorFollowers)} followers
+                  {creatorCourseCount} {creatorCourseCount !== 1 ? cl.courseUnits : cl.courseUnit}
+                  {" · "}{t(loc.common.learners, { count: formatCount(creatorTotalLearners) })}
+                  {" · "}{formatCount(creatorFollowers)} {cl.followersUnit}
                 </p>
               </div>
             </div>
 
             {!isOwner && (
               <div className="mt-4">
-                <FollowButton isFollowing={isFollowing} creatorId={course.creator_id} slug={course.slug} />
+                <FollowButton
+                  isFollowing={isFollowing}
+                  creatorId={course.creator_id}
+                  slug={course.slug}
+                  labels={{ following: cl.following, follow: cl.follow }}
+                />
               </div>
             )}
           </aside>
 
           {/* Stats card */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Stats</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.statsSection}</p>
             <div className="flex flex-col gap-2">
-              <StatRow label="Cards" value={String(course.card_count)} />
+              <StatRow label={cl.cards} value={String(course.card_count)} />
               {course.avg_completion_days != null && (
-                <StatRow label="Avg time" value={`${course.avg_completion_days} days`} />
+                <StatRow label={cl.avgTime} value={t(cl.avgTimeDays, { count: course.avg_completion_days })} />
               )}
-              <StatRow label="Audio" value={`${audioCount ?? 0}/${course.card_count}`} />
-              <StatRow label="Images" value={`${imageCount ?? 0}/${course.card_count}`} />
-              <StatRow label="Mems" value={formatCount(course.mems_count ?? 0)} />
+              <StatRow label={loc.common.audio} value={`${audioCount ?? 0}/${course.card_count}`} />
+              <StatRow label={cl.images} value={`${imageCount ?? 0}/${course.card_count}`} />
+              <StatRow label={loc.common.mems} value={formatCount(course.mems_count ?? 0)} />
             </div>
           </aside>
 
           {/* Question types */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Study with</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.studyWithSection}</p>
             <QuestionTypeSelector
               courseId={course.id}
               initial={preferredTypes}
               hasAudio={course.has_audio ?? false}
+              labels={{
+                flashcard: cl.flashcard,
+                multipleChoice: cl.multipleChoice,
+                audioType: cl.audioType,
+                speedMatch: cl.speedMatch,
+                typeAnswer: cl.typeAnswer,
+                savePreferences: cl.savePreferences,
+                savedPreferences: cl.savedPreferences,
+                savingPreferences: cl.savingPreferences,
+              }}
             />
           </aside>
 
           {/* Friends learning */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Friends learning</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.friendsSection}</p>
             {friends.length === 0 ? (
-              <p className="font-manrope text-sm text-ink-2">None of your friends are learning this yet.</p>
+              <p className="font-manrope text-sm text-ink-2">{cl.noFriends}</p>
             ) : (
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
@@ -308,7 +332,7 @@ export default async function CourseDetailPage({
                   ))}
                 </div>
                 {totalFriendsLearning > 4 && (
-                  <p className="font-manrope text-sm text-ink-2">+{totalFriendsLearning - 4} more</p>
+                  <p className="font-manrope text-sm text-ink-2">{t(cl.moreFriends, { count: totalFriendsLearning - 4 })}</p>
                 )}
               </div>
             )}
