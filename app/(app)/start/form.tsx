@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { saveOnboarding, type OnboardingState } from "./actions";
-import { PURPOSES, DAILY_GOALS, INTERESTS } from "./constants";
+import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 import AvatarPicker from "@/components/avatar-picker";
 
 export default function OnboardingForm({ userId }: { userId: string }) {
@@ -138,6 +138,27 @@ export default function OnboardingForm({ userId }: { userId: string }) {
                 </label>
               ))}
             </div>
+          </section>
+
+          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+            <label
+              htmlFor="native_language"
+              className="font-mono text-xs uppercase tracking-widest text-ink-2"
+            >
+              06 · Mother tongue
+            </label>
+            <select
+              id="native_language"
+              name="native_language"
+              required
+              defaultValue=""
+              className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-yellow"
+            >
+              <option value="" disabled>Select your native language…</option>
+              {LANGUAGES.map((lang) => (
+                <option key={lang} value={lang}>{lang}</option>
+              ))}
+            </select>
           </section>
 
           <div className="flex justify-end pt-3">
