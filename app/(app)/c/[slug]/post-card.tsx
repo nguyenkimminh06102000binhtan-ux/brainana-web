@@ -27,7 +27,16 @@ interface PostCardProps {
   courseId: string;
   courseSlug: string;
   currentUserId: string | null;
+  creatorId: string;
   isOwner: boolean;
+}
+
+function CreatorBadge() {
+  return (
+    <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-[9px] font-[700] uppercase tracking-wider text-white">
+      Creator
+    </span>
+  );
 }
 
 function timeAgo(iso: string): string {
@@ -58,10 +67,11 @@ function Avatar({ profile, size = 8 }: { profile: { username: string; display_na
   );
 }
 
-function ReplyRow({ reply, courseSlug, currentUserId }: { reply: Reply; courseSlug: string; currentUserId: string | null }) {
+function ReplyRow({ reply, courseSlug, currentUserId, creatorId }: { reply: Reply; courseSlug: string; currentUserId: string | null; creatorId: string }) {
   const [pending, startTransition] = useTransition();
   const handle = reply.profiles?.username ? `@${reply.profiles.username}` : (reply.profiles?.display_name ?? "Unknown");
   const canDelete = currentUserId === reply.profiles?.id;
+  const isCreator = reply.profiles?.id === creatorId;
 
   return (
     <div className="flex gap-2.5">
@@ -69,6 +79,7 @@ function ReplyRow({ reply, courseSlug, currentUserId }: { reply: Reply; courseSl
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-2 flex-wrap">
           <span className="font-manrope text-xs font-[700] text-ink">{handle}</span>
+          {isCreator && <CreatorBadge />}
           <span className="font-mono text-[10px] text-ink-3">{timeAgo(reply.created_at)}</span>
         </div>
         <p className="mt-0.5 font-manrope text-sm text-ink leading-relaxed">{reply.body}</p>
@@ -87,7 +98,7 @@ function ReplyRow({ reply, courseSlug, currentUserId }: { reply: Reply; courseSl
   );
 }
 
-export default function PostCard({ post, courseId, courseSlug, currentUserId, isOwner }: PostCardProps) {
+export default function PostCard({ post, courseId, courseSlug, currentUserId, creatorId, isOwner }: PostCardProps) {
   const [showReplies, setShowReplies] = useState(post.pinned);
   const [replyBody, setReplyBody] = useState("");
   const [pending, startTransition] = useTransition();
@@ -97,6 +108,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, is
   const replyCount = post.course_post_replies.length;
   const handle = post.profiles?.username ? `@${post.profiles.username}` : (post.profiles?.display_name ?? "Unknown");
   const isAuthor = currentUserId === post.profiles?.id;
+  const isPostCreator = post.profiles?.id === creatorId;
 
   function submitReply() {
     const trimmed = replyBody.trim();
@@ -122,6 +134,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, is
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="font-manrope text-sm font-[800] text-ink">{handle}</span>
+            {isPostCreator && <CreatorBadge />}
             <span className="font-mono text-[10px] text-ink-3">{timeAgo(post.created_at)}</span>
             {post.edited_at && <span className="font-mono text-[10px] text-ink-3">(edited)</span>}
           </div>
@@ -182,7 +195,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, is
       {showReplies && (
         <div className="mt-4 pl-11 flex flex-col gap-3">
           {post.course_post_replies.map((reply) => (
-            <ReplyRow key={reply.id} reply={reply} courseSlug={courseSlug} currentUserId={currentUserId} />
+            <ReplyRow key={reply.id} reply={reply} courseSlug={courseSlug} currentUserId={currentUserId} creatorId={creatorId} />
           ))}
 
           {currentUserId && (

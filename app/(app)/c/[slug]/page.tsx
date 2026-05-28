@@ -226,7 +226,7 @@ export default async function CourseDetailPage({
           </div>
 
           {/* Discussion */}
-          <DiscussionThread courseId={course.id} courseSlug={course.slug} isOwner={isOwner} />
+          <DiscussionThread courseId={course.id} courseSlug={course.slug} creatorId={course.creator_id} isOwner={isOwner} />
         </div>
 
         {/* ── RIGHT SIDEBAR ── */}

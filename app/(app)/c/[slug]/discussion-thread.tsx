@@ -24,10 +24,11 @@ type Post = {
 interface DiscussionThreadProps {
   courseId: string;
   courseSlug: string;
+  creatorId: string;
   isOwner: boolean;
 }
 
-export default async function DiscussionThread({ courseId, courseSlug, isOwner }: DiscussionThreadProps) {
+export default async function DiscussionThread({ courseId, courseSlug, creatorId, isOwner }: DiscussionThreadProps) {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -80,6 +81,7 @@ export default async function DiscussionThread({ courseId, courseSlug, isOwner }
               courseId={courseId}
               courseSlug={courseSlug}
               currentUserId={user?.id ?? null}
+              creatorId={creatorId}
               isOwner={isOwner}
             />
           ))}
