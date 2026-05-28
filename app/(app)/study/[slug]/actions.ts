@@ -102,6 +102,21 @@ export async function fetchStudyCards(
     newItems = data ?? [];
   }
 
+  let practiceRows: typeof overdueRows = [];
+  if (overdue.length === 0 && newItems.length === 0 && count > 0) {
+    const { data } = await supabase
+      .from("item_progress")
+      .select(
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+      )
+      .eq("user_id", user.id)
+      .eq("course_id", courseId)
+      .order("last_reviewed_at", { ascending: true, nullsFirst: false })
+      .limit(count);
+
+    practiceRows = data ?? [];
+  }
+
   // Fetch all back_text for distractor pool
   const { data: allItemsRaw } = await supabase
     .from("items")
@@ -113,6 +128,31 @@ export async function fetchStudyCards(
   const cards: StudyCard[] = [];
 
   for (const row of overdue) {
+    const item = row.items as unknown as typeof newItems[number];
+    if (!item) continue;
+    const questionType = assignQuestionType(row.last_question_type, selectedTypes);
+    cards.push({
+      itemId: row.item_id,
+      courseId,
+      frontText: item.front_text,
+      backText: item.back_text,
+      frontAudioUrl: item.front_audio_url,
+      backAudioUrl: item.back_audio_url,
+      romanization: item.romanization,
+      acceptedAnswers: item.accepted_answers ?? [],
+      distractors: pickDistractors(item.back_text, allBackTexts, item.distractors),
+      questionType,
+      progress: {
+        easeFactor: row.ease_factor,
+        intervalDays: row.interval_days,
+        repetitions: row.repetitions,
+        correctCount: row.correct_count,
+        incorrectCount: row.incorrect_count,
+      },
+    });
+  }
+
+  for (const row of practiceRows ?? []) {
     const item = row.items as unknown as typeof newItems[number];
     if (!item) continue;
     const questionType = assignQuestionType(row.last_question_type, selectedTypes);

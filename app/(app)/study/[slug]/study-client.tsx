@@ -34,10 +34,12 @@ export default function StudyClient({
   showRomanization,
 }: StudyClientProps) {
   const available = reviewDue + newCards;
+  const sessionLimit = available > 0 ? available : totalCount;
+  const isPracticeMode = available === 0 && totalCount > 0;
   const [stage, setStage] = useState<Stage>("setup");
   const [sessionCards, setSessionCards] = useState<StudyCard[]>([]);
   const [sessionStats, setSessionStats] = useState<SessionStats | null>(null);
-  const [count, setCount] = useState(available > 0 ? Math.min(10, available) : 0);
+  const [count, setCount] = useState(sessionLimit > 0 ? Math.min(10, sessionLimit) : 0);
 
   async function handleStart() {
     setStage("loading");
@@ -98,13 +100,13 @@ export default function StudyClient({
   // ─── Setup screen ─────────────────────────────────────────────────────────
 
   function adjustCount(delta: number) {
-    setCount((prev) => Math.min(available, Math.max(1, prev + delta)));
+    setCount((prev) => Math.min(sessionLimit, Math.max(1, prev + delta)));
   }
 
   function handleCountInput(e: React.ChangeEvent<HTMLInputElement>) {
     const val = Number(e.target.value);
     if (!Number.isNaN(val)) {
-      setCount(Math.min(available, Math.max(1, val)));
+      setCount(Math.min(sessionLimit, Math.max(1, val)));
     }
   }
 
@@ -134,7 +136,7 @@ export default function StudyClient({
               <button
                 type="button"
                 onClick={() => adjustCount(-1)}
-                disabled={count <= 1 || available === 0}
+                disabled={count <= 1 || sessionLimit === 0}
                 className="px-3 py-2 font-fredoka text-2xl text-ink-2 transition hover:text-ink disabled:opacity-30"
                 aria-label="Decrease"
               >
@@ -143,16 +145,16 @@ export default function StudyClient({
               <input
                 type="number"
                 min={1}
-                max={available}
+                max={sessionLimit}
                 value={count}
                 onChange={handleCountInput}
-                disabled={available === 0}
+                disabled={sessionLimit === 0}
                 className="w-16 bg-transparent py-2 text-center font-fredoka text-3xl font-[600] text-ink focus:outline-none disabled:opacity-40 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
               <button
                 type="button"
                 onClick={() => adjustCount(1)}
-                disabled={count >= available || available === 0}
+                disabled={count >= sessionLimit || sessionLimit === 0}
                 className="px-3 py-2 font-fredoka text-2xl text-ink-2 transition hover:text-ink disabled:opacity-30"
                 aria-label="Increase"
               >
@@ -171,7 +173,11 @@ export default function StudyClient({
               <span className="font-[700] text-ink">{totalCount}</span> total
             </p>
           </div>
-          {available === 0 && (
+          {isPracticeMode ? (
+            <p className="mt-2 font-manrope text-xs text-ink-3">
+              All caught up! You can still practice cards from this course.
+            </p>
+          ) : available === 0 && (
             <p className="mt-2 font-manrope text-xs text-ink-3">
               All caught up! No cards are due for review.
             </p>
@@ -183,10 +189,10 @@ export default function StudyClient({
           <button
             type="button"
             onClick={handleStart}
-            disabled={available === 0}
+            disabled={sessionLimit === 0}
             className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Start studying →
+            {isPracticeMode ? "Practice again →" : "Start studying →"}
           </button>
           <Link
             href={`/c/${courseSlug}`}
