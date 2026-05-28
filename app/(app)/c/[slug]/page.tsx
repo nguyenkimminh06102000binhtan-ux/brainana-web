@@ -57,6 +57,7 @@ export default async function CourseDetailPage({
     { data: followData },
     { data: followingList },
     { count: courseLearnerCount },
+    { count: creatorFollowerCount },
   ] = await Promise.all([
     supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
@@ -66,6 +67,7 @@ export default async function CourseDetailPage({
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("following_id").eq("follower_id", user.id),
     supabase.from("user_courses").select("*", { count: "exact", head: true }).eq("course_id", course.id),
+    supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
   ]);
 
   const isEnrolled = Boolean(enrollmentData);
@@ -101,6 +103,7 @@ export default async function CourseDetailPage({
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
   const learnerCount = courseLearnerCount ?? 0;
   const creatorTotalLearners = creatorLearnersCount ?? 0;
+  const creatorFollowers = creatorFollowerCount ?? 0;
 
   const accentColors = ["bg-green-soft", "bg-yellow-soft", "bg-red-soft", "bg-blue/30"];
 
@@ -241,7 +244,7 @@ export default async function CourseDetailPage({
               <div>
                 <p className="font-manrope text-sm font-[800] text-ink">{creatorHandle}</p>
                 <p className="font-mono text-xs text-ink-2">
-                  {creatorCourseCount} course{creatorCourseCount !== 1 ? "s" : ""} · {formatCount(creatorTotalLearners)} learners
+                  {creatorCourseCount} course{creatorCourseCount !== 1 ? "s" : ""} · {formatCount(creatorTotalLearners)} learners · {formatCount(creatorFollowers)} followers
                 </p>
               </div>
             </div>
