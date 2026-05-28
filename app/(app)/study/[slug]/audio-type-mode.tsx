@@ -92,6 +92,15 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
     return levenshtein(a, b) <= threshold;
   }
 
+  useEffect(() => {
+    if (!submitted) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Enter") advance();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [submitted]); // eslint-disable-line react-hooks/exhaustive-deps
+
   function submit() {
     if (submitted) { advance(); return; }
     if (!value.trim()) return;
