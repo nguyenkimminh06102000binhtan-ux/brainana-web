@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { fetchStudyCards } from "./actions";
+import PageLoading from "../../_components/page-loading";
 import SessionView from "./session-view";
 import ResultsScreen from "./results-screen";
 import type { QType, StudyCard, SessionStats } from "./types";
@@ -18,6 +19,7 @@ interface StudyClientProps {
   newCards: number;
   totalCount: number;
   preferredTypes: QType[];
+  showRomanization: boolean;
 }
 
 export default function StudyClient({
@@ -29,6 +31,7 @@ export default function StudyClient({
   newCards,
   totalCount,
   preferredTypes,
+  showRomanization,
 }: StudyClientProps) {
   const available = reviewDue + newCards;
   const [stage, setStage] = useState<Stage>("setup");
@@ -63,11 +66,7 @@ export default function StudyClient({
   }
 
   if (stage === "loading") {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="font-manrope text-sm text-ink-2">Preparing your cards…</p>
-      </div>
-    );
+    return <PageLoading label="Preparing your cards" />;
   }
 
   if (stage === "session") {
@@ -78,6 +77,7 @@ export default function StudyClient({
         courseTitle={courseTitle}
         courseSlug={courseSlug}
         cards={sessionCards}
+        showRomanization={showRomanization}
         onComplete={handleSessionComplete}
         onExit={handleExit}
       />

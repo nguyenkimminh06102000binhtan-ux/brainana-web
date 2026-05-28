@@ -5,6 +5,8 @@ import { createClient } from "@/utils/supabase/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
+  const next = searchParams.get("next");
+  const nextPath = next?.startsWith("/") && !next.startsWith("//") ? next : "/home";
 
   if (code) {
     const supabase = createClient(await cookies());
@@ -21,7 +23,7 @@ export async function GET(request: Request) {
         return NextResponse.redirect(new URL("/start", request.url));
       }
 
-      return NextResponse.redirect(new URL("/home", request.url));
+      return NextResponse.redirect(new URL(nextPath, request.url));
     }
   }
 

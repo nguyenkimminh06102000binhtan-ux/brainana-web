@@ -6,6 +6,7 @@ import type { StudyCard, CardAnswer } from "./types";
 
 interface FlashcardModeProps {
   card: StudyCard;
+  showRomanization: boolean;
   onAnswer: (answer: CardAnswer) => void;
 }
 
@@ -16,7 +17,7 @@ const RATINGS = [
   { label: "Easy",  quality: 5 },
 ] as const;
 
-export default function FlashcardMode({ card, onAnswer }: FlashcardModeProps) {
+export default function FlashcardMode({ card, showRomanization, onAnswer }: FlashcardModeProps) {
   const [flipped, setFlipped] = useState(false);
 
   const ef = card.progress?.easeFactor ?? 2.5;
@@ -86,7 +87,7 @@ export default function FlashcardMode({ card, onAnswer }: FlashcardModeProps) {
             <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
               {card.backText}
             </p>
-            {card.romanization && (
+            {showRomanization && card.romanization && (
               <p className="mt-2 font-kalam text-lg text-ink-2">{card.romanization}</p>
             )}
           </div>

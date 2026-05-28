@@ -28,6 +28,7 @@ export default async function StudyPage({
 
   const [
     { data: enrollment },
+    { data: profile },
     { count: totalCount },
     { count: progressDueCount },
     { count: progressTotalCount },
@@ -38,6 +39,11 @@ export default async function StudyPage({
       .eq("user_id", user.id)
       .eq("course_id", course.id)
       .maybeSingle(),
+    supabase
+      .from("profiles")
+      .select("show_romanization")
+      .eq("id", user.id)
+      .single(),
     supabase
       .from("items")
       .select("*", { count: "exact", head: true })
@@ -74,6 +80,7 @@ export default async function StudyPage({
       newCards={newCards}
       totalCount={total}
       preferredTypes={preferredTypes}
+      showRomanization={profile?.show_romanization ?? true}
     />
   );
 }

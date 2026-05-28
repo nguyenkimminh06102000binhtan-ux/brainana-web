@@ -280,7 +280,8 @@ alter table profiles
   add column if not exists onboarding_completed boolean not null default false,
   add column if not exists level integer not null default 1,
   add column if not exists website_url text,
-  add column if not exists twitter_handle text;
+  add column if not exists twitter_handle text,
+  add column if not exists show_romanization boolean not null default true;
 
 -- =====================
 -- STEP 2: UPDATE COURSES

@@ -18,6 +18,7 @@ interface SessionViewProps {
   courseTitle: string;
   courseSlug: string;
   cards: StudyCard[];
+  showRomanization: boolean;
   onComplete: (stats: SessionStats) => void;
   onExit: () => void;
 }
@@ -34,6 +35,7 @@ export default function SessionView({
   courseTitle,
   courseSlug,
   cards,
+  showRomanization,
   onComplete,
   onExit,
 }: SessionViewProps) {
@@ -231,7 +233,7 @@ export default function SessionView({
           />
           <div className="mx-auto max-w-lg">
             {currentRegularCard.questionType === "flashcard" && (
-              <FlashcardMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
+              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
               <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
