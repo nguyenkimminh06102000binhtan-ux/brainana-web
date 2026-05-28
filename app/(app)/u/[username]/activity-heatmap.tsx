@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 
 interface ActivityHeatmapProps {
   data: Record<string, number>;
   totalReviewed: number;
 }
 
-function cellColor(count: number): string {
-  if (count === 0) return "bg-paper border border-ink/10";
-  if (count < 10) return "bg-yellow-soft";
-  if (count < 25) return "bg-red-soft";
-  return "bg-green-soft";
+function cellStyle(count: number): { className: string; style?: CSSProperties } {
+  if (count === 0) return { className: "bg-ink/10" };
+  if (count < 10) return { className: "bg-yellow" };
+  if (count < 25) return { className: "bg-orange" };
+  return { className: "", style: { backgroundColor: "#b45309" } };
 }
 
 export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmapProps) {
@@ -46,14 +47,18 @@ export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmap
       <div className="flex gap-1 overflow-x-auto pb-1">
         {weeks.map((week, wIdx) => (
           <div key={wIdx} className="flex flex-col gap-1">
-            {week.map((cell) => (
-              <div
-                key={cell.date}
-                className={`h-7 w-7 shrink-0 rounded-sm ${cellColor(cell.count)} cursor-default transition-opacity hover:opacity-70`}
-                onMouseEnter={() => setHovered(cell)}
-                onMouseLeave={() => setHovered(null)}
-              />
-            ))}
+            {week.map((cell) => {
+              const { className, style } = cellStyle(cell.count);
+              return (
+                <div
+                  key={cell.date}
+                  className={`h-7 w-7 shrink-0 rounded-sm ${className} cursor-default transition-opacity hover:opacity-70`}
+                  style={style}
+                  onMouseEnter={() => setHovered(cell)}
+                  onMouseLeave={() => setHovered(null)}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
