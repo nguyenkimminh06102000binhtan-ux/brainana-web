@@ -25,8 +25,10 @@
       "addLanguage": "Pievienojiet valodu",
       "selectLanguage": "Izvēlieties valodu...",
       "add": "Pievienot",
-      "cancel": "Atcelt"
-    }
+      "cancel": "Atcelt",
+      "loading": "Notiek valodas atjaunināšana..."
+    },
+    "loadingPage": "Notiek lapas ielāde"
   },
   "common": {
     "seeAll": "Skatīt visu",

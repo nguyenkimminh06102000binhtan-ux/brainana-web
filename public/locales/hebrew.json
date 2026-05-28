@@ -25,8 +25,10 @@
       "addLanguage": "הוסף שפה",
       "selectLanguage": "בחר שפה...",
       "add": "לְהוֹסִיף",
-      "cancel": "לְבַטֵל"
-    }
+      "cancel": "לְבַטֵל",
+      "loading": "מעדכן את השפה..."
+    },
+    "loadingPage": "טוען עמוד"
   },
   "common": {
     "seeAll": "ראה הכל",

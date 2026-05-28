@@ -25,8 +25,10 @@
       "addLanguage": "Pridajte jazyk",
       "selectLanguage": "Vyberte jazyk...",
       "add": "Pridať",
-      "cancel": "Zrušiť"
-    }
+      "cancel": "Zrušiť",
+      "loading": "Aktualizuje sa jazyk..."
+    },
+    "loadingPage": "Načítava sa stránka"
   },
   "common": {
     "seeAll": "Zobraziť všetky",

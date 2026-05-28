@@ -25,8 +25,10 @@
       "addLanguage": "Gehitu hizkuntza bat",
       "selectLanguage": "Hautatu hizkuntza...",
       "add": "Gehitu",
-      "cancel": "Utzi"
-    }
+      "cancel": "Utzi",
+      "loading": "Hizkuntza eguneratzen..."
+    },
+    "loadingPage": "Orria kargatzen"
   },
   "common": {
     "seeAll": "Ikusi guztiak",

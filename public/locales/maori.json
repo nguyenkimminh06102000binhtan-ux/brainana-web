@@ -25,8 +25,10 @@
       "addLanguage": "Tāpirihia he reo",
       "selectLanguage": "Tīpakohia te reo...",
       "add": "Tāpiri",
-      "cancel": "Whakakore"
-    }
+      "cancel": "Whakakore",
+      "loading": "Whakahōu ana i te reo..."
+    },
+    "loadingPage": "Te uta i te wharangi"
   },
   "common": {
     "seeAll": "Tirohia katoa",

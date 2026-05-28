@@ -25,8 +25,10 @@
       "addLanguage": "加一種語言",
       "selectLanguage": "選擇語言 …",
       "add": "加",
-      "cancel": "取消"
-    }
+      "cancel": "取消",
+      "loading": "更新緊語言 ..."
+    },
+    "loadingPage": "載入緊頁面"
   },
   "common": {
     "seeAll": "睇晒",

@@ -25,8 +25,10 @@
       "addLanguage": "Lägg till ett språk",
       "selectLanguage": "Välj språk...",
       "add": "Tillägga",
-      "cancel": "Avboka"
-    }
+      "cancel": "Avboka",
+      "loading": "Uppdaterar språk..."
+    },
+    "loadingPage": "Laddar sida"
   },
   "common": {
     "seeAll": "Se alla",

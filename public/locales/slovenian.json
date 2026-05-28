@@ -25,8 +25,10 @@
       "addLanguage": "Dodajte jezik",
       "selectLanguage": "Izberite jezik ...",
       "add": "Dodaj",
-      "cancel": "Prekliči"
-    }
+      "cancel": "Prekliči",
+      "loading": "Posodabljanje jezika ..."
+    },
+    "loadingPage": "Nalaganje strani"
   },
   "common": {
     "seeAll": "Glej vse",

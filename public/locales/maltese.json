@@ -25,8 +25,10 @@
       "addLanguage": "Żid lingwa",
       "selectLanguage": "Agħżel il-lingwa...",
       "add": "Żid",
-      "cancel": "Ikkanċella"
-    }
+      "cancel": "Ikkanċella",
+      "loading": "Naġġorna l-lingwa..."
+    },
+    "loadingPage": "Tagħbija tal-paġna"
   },
   "common": {
     "seeAll": "Ara kollha",

@@ -25,8 +25,10 @@
       "addLanguage": "एक भाषा जोड़ें",
       "selectLanguage": "भाषा चुने...",
       "add": "जोड़ना",
-      "cancel": "रद्द करना"
-    }
+      "cancel": "रद्द करना",
+      "loading": "भाषा अपडेट हो रही है..."
+    },
+    "loadingPage": "लोडिंग पृष्ठ"
   },
   "common": {
     "seeAll": "सभी देखें",

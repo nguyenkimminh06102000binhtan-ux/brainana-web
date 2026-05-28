@@ -6,7 +6,8 @@ import { createClient } from "@/utils/supabase/server";
 import { LANGUAGES } from "@/app/(app)/start/constants";
 
 export async function switchOriginLanguage(language: string) {
-  const supabase = createClient(await cookies());
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
 
@@ -15,13 +16,20 @@ export async function switchOriginLanguage(language: string) {
     .update({ active_origin_language: language })
     .eq("id", user.id);
 
+  cookieStore.set("brainana_active_origin_language", language, {
+    path: "/",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 365,
+  });
+
   revalidatePath("/", "layout");
 }
 
 export async function addOriginLanguage(language: string) {
   if (!(LANGUAGES as readonly string[]).includes(language)) return;
 
-  const supabase = createClient(await cookies());
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
 
@@ -46,6 +54,12 @@ export async function addOriginLanguage(language: string) {
       })
       .eq("id", user.id);
   }
+
+  cookieStore.set("brainana_active_origin_language", language, {
+    path: "/",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 365,
+  });
 
   revalidatePath("/", "layout");
 }

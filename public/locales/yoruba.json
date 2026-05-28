@@ -25,8 +25,10 @@
       "addLanguage": "Fi ede kan kun",
       "selectLanguage": "Yan ede...",
       "add": "Fi kun",
-      "cancel": "Fagilee"
-    }
+      "cancel": "Fagilee",
+      "loading": "Nmu ede dojuiwọn..."
+    },
+    "loadingPage": "Oju-iwe ikojọpọ"
   },
   "common": {
     "seeAll": "Wo gbogbo",

@@ -25,8 +25,10 @@
       "addLanguage": "Dil ekle",
       "selectLanguage": "Dil seçin...",
       "add": "Eklemek",
-      "cancel": "İptal etmek"
-    }
+      "cancel": "İptal etmek",
+      "loading": "Dil güncelleniyor..."
+    },
+    "loadingPage": "Sayfa yükleniyor"
   },
   "common": {
     "seeAll": "Tümünü gör",

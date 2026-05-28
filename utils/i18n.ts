@@ -8,6 +8,7 @@ export type Locale = {
     brand: string;
     nav: { home: string; browse: string; library: string; create: string; community: string };
     searchPlaceholder: string;
+    loadingPage: string;
     streakDays: string;
     avatar: { profile: string; settings: string; logout: string };
     originLanguage: {
@@ -16,6 +17,7 @@ export type Locale = {
       selectLanguage: string;
       add: string;
       cancel: string;
+      loading: string;
     };
   };
   common: {

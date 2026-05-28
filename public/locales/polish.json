@@ -25,8 +25,10 @@
       "addLanguage": "Dodaj język",
       "selectLanguage": "Wybierz język...",
       "add": "Dodać",
-      "cancel": "Anulować"
-    }
+      "cancel": "Anulować",
+      "loading": "Aktualizuję język..."
+    },
+    "loadingPage": "Ładowanie strony"
   },
   "common": {
     "seeAll": "Zobacz wszystko",

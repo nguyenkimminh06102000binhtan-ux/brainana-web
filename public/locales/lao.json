@@ -25,8 +25,10 @@
       "addLanguage": "ເພີ່ມພາສາ",
       "selectLanguage": "ເລືອກພາສາ...",
       "add": "ຕື່ມ",
-      "cancel": "ຍົກເລີກ"
-    }
+      "cancel": "ຍົກເລີກ",
+      "loading": "ກຳລັງອັບເດດພາສາ..."
+    },
+    "loadingPage": "ກຳລັງໂຫຼດໜ້າ"
   },
   "common": {
     "seeAll": "ເບິ່ງທັງຫມົດ",

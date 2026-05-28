@@ -25,8 +25,10 @@
       "addLanguage": "Af ku dar",
       "selectLanguage": "Dooro luqadda...",
       "add": "Ku dar",
-      "cancel": "Jooji"
-    }
+      "cancel": "Jooji",
+      "loading": "Cusbooneysiinta luqadda..."
+    },
+    "loadingPage": "Soodejinaya bogga"
   },
   "common": {
     "seeAll": "Dhammaan arag",

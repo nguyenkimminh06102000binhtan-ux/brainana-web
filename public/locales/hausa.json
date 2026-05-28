@@ -25,8 +25,10 @@
       "addLanguage": "Ƙara harshe",
       "selectLanguage": "Zaɓi harshe...",
       "add": "Ƙara",
-      "cancel": "Soke"
-    }
+      "cancel": "Soke",
+      "loading": "Ana sabunta harshe..."
+    },
+    "loadingPage": "Ana lodawa shafi"
   },
   "common": {
     "seeAll": "Duba duka",

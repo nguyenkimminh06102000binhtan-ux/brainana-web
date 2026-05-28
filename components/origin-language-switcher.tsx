@@ -12,7 +12,7 @@ export default function OriginLanguageSwitcher({
 }: {
   originLanguages: string[];
   activeOriginLanguage: string | null;
-  labels: { setOrigin: string; addLanguage: string; selectLanguage: string; add: string; cancel: string };
+  labels: { setOrigin: string; addLanguage: string; selectLanguage: string; add: string; cancel: string; loading?: string };
 }) {
   const [open, setOpen] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -23,6 +23,7 @@ export default function OriginLanguageSwitcher({
 
   const active = activeOriginLanguage ?? originLanguages[0] ?? null;
   const available = (LANGUAGES as readonly string[]).filter((l) => !originLanguages.includes(l));
+  const loadingLabel = labels.loading ?? "Updating language...";
 
   function close() {
     setOpen(false);
@@ -49,6 +50,23 @@ export default function OriginLanguageSwitcher({
 
   return (
     <div ref={containerRef} className="relative">
+      {isPending && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-paper/80 px-4 backdrop-blur-sm"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="flex items-center gap-3 rounded-full bg-paper-2 px-5 py-3 shadow-hard">
+            <span className="relative inline-flex h-8 w-8 items-center justify-center" aria-hidden="true">
+              <span className="absolute h-8 w-8 rounded-full border-4 border-orange/20" />
+              <span className="absolute h-8 w-8 animate-spin rounded-full border-4 border-transparent border-t-orange" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow" />
+            </span>
+            <span className="font-manrope text-sm font-[800] text-ink-2">{loadingLabel}</span>
+          </div>
+        </div>
+      )}
+
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -72,6 +90,7 @@ export default function OriginLanguageSwitcher({
                     key={lang}
                     type="button"
                     onClick={() => handleSwitch(lang)}
+                    disabled={isPending}
                     className="flex w-full items-center gap-2 px-4 py-2.5 text-left font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
                   >
                     <span className="w-4 shrink-0 text-center text-xs">
@@ -88,6 +107,7 @@ export default function OriginLanguageSwitcher({
                 <button
                   type="button"
                   onClick={() => setAdding(true)}
+                  disabled={isPending}
                   className="flex w-full items-center gap-2 px-4 py-2.5 text-left font-manrope text-sm font-[700] text-ink-2 transition hover:bg-blue hover:text-ocean"
                 >
                   <span className="w-4 shrink-0 text-center text-xs">+</span>
@@ -110,7 +130,7 @@ export default function OriginLanguageSwitcher({
                     <button
                       type="button"
                       onClick={handleAdd}
-                      disabled={!selectedNew}
+                      disabled={!selectedNew || isPending}
                       className="flex-1 rounded-full bg-orange px-3 py-1.5 font-manrope text-xs font-[800] text-white shadow-hard-sm transition disabled:opacity-50"
                     >
                       {labels.add}
@@ -118,6 +138,7 @@ export default function OriginLanguageSwitcher({
                     <button
                       type="button"
                       onClick={() => { setAdding(false); setSelectedNew(""); }}
+                      disabled={isPending}
                       className="rounded-full bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink shadow-hard-sm transition"
                     >
                       {labels.cancel}

@@ -25,8 +25,10 @@
       "addLanguage": "언어 추가",
       "selectLanguage": "언어 선택...",
       "add": "추가하다",
-      "cancel": "취소"
-    }
+      "cancel": "취소",
+      "loading": "언어 업데이트 중..."
+    },
+    "loadingPage": "페이지 로드 중"
   },
   "common": {
     "seeAll": "모두 보기",

@@ -25,8 +25,10 @@
       "addLanguage": "Fügen Sie eine Sprache hinzu",
       "selectLanguage": "Sprache auswählen...",
       "add": "Hinzufügen",
-      "cancel": "Stornieren"
-    }
+      "cancel": "Stornieren",
+      "loading": "Sprache wird aktualisiert..."
+    },
+    "loadingPage": "Seite wird geladen"
   },
   "common": {
     "seeAll": "Alle anzeigen",
