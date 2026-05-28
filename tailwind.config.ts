@@ -27,7 +27,8 @@ const config = {
       fredoka: ["Fredoka", "sans-serif"],
       manrope: ["Manrope", "sans-serif"],
       kalam: ["Kalam", "cursive"],
-      mono: ["JetBrains Mono", "monospace"],
+      mono: ["Young Typeface", "sans-serif"],
+      young: ["Young Typeface Display", "sans-serif"],
     },
     borderWidth: {
       DEFAULT: "1.5px",

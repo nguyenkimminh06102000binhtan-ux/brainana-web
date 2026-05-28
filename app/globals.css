@@ -1,4 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Kalam:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: "Young Typeface";
+  src: url("/fonts/Young Typeface.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Young Typeface Display";
+  src: url("/fonts/Young Typeface - Bold Display.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
@@ -26,7 +42,8 @@
   --font-fredoka: "Fredoka", sans-serif;
   --font-manrope: "Manrope", sans-serif;
   --font-kalam: "Kalam", cursive;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: "Young Typeface", sans-serif;
+  --font-young: "Young Typeface Display", sans-serif;
   --brainana-shadow-hard: 0 18px 40px #19244E24;
   --brainana-shadow-hard-sm: 0 10px 24px #19244E1F;
   --brainana-shadow-hard-red: 0 18px 36px #F36B2E40;
@@ -75,7 +92,8 @@
   --font-fredoka: "Fredoka", sans-serif;
   --font-manrope: "Manrope", sans-serif;
   --font-kalam: "Kalam", cursive;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: "Young Typeface", sans-serif;
+  --font-young: "Young Typeface Display", sans-serif;
   --shadow-hard: var(--brainana-shadow-hard);
   --shadow-hard-sm: var(--brainana-shadow-hard-sm);
   --shadow-hard-red: var(--brainana-shadow-hard-red);
