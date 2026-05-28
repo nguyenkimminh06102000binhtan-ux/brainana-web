@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
@@ -72,6 +73,17 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
   return (
     <div className="flex flex-col gap-6 px-4 py-8">
       <div className="rounded-lg bg-paper-2 p-6 shadow-hard-sm text-center">
+        {card.imageUrl && (
+          <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
+            <Image
+              src={card.imageUrl}
+              alt={card.frontText}
+              fill
+              className="object-contain"
+              sizes="(max-width: 448px) 100vw, 448px"
+            />
+          </div>
+        )}
         <p className="font-fredoka text-3xl font-[600] text-ink leading-snug">
           {card.frontText}
         </p>

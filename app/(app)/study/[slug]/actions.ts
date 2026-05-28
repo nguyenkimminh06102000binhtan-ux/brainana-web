@@ -64,7 +64,7 @@ export async function fetchStudyCards(
   const { data: overdueRows } = await supabase
     .from("item_progress")
     .select(
-      "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+      "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
     )
     .eq("user_id", user.id)
     .eq("course_id", courseId)
@@ -76,7 +76,7 @@ export async function fetchStudyCards(
 
   // Fetch new items if we need more
   const needed = count - overdue.length;
-  let newItems: { id: string; front_text: string; back_text: string; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null }[] = [];
+  let newItems: { id: string; front_text: string; back_text: string; image_url: string | null; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null }[] = [];
 
   if (needed > 0) {
     const { data: allProgressIds } = await supabase
@@ -89,7 +89,7 @@ export async function fetchStudyCards(
 
     let q = supabase
       .from("items")
-      .select("id, front_text, back_text, front_audio_url, back_audio_url, romanization, accepted_answers, distractors")
+      .select("id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors")
       .eq("course_id", courseId)
       .order("position")
       .limit(needed);
@@ -107,7 +107,7 @@ export async function fetchStudyCards(
     const { data } = await supabase
       .from("item_progress")
       .select(
-        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
@@ -136,6 +136,7 @@ export async function fetchStudyCards(
       courseId,
       frontText: item.front_text,
       backText: item.back_text,
+      imageUrl: item.image_url,
       frontAudioUrl: item.front_audio_url,
       backAudioUrl: item.back_audio_url,
       romanization: item.romanization,
@@ -161,6 +162,7 @@ export async function fetchStudyCards(
       courseId,
       frontText: item.front_text,
       backText: item.back_text,
+      imageUrl: item.image_url,
       frontAudioUrl: item.front_audio_url,
       backAudioUrl: item.back_audio_url,
       romanization: item.romanization,
@@ -184,6 +186,7 @@ export async function fetchStudyCards(
       courseId,
       frontText: item.front_text,
       backText: item.back_text,
+      imageUrl: item.image_url,
       frontAudioUrl: item.front_audio_url,
       backAudioUrl: item.back_audio_url,
       romanization: item.romanization,
