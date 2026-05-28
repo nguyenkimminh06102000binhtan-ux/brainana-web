@@ -206,9 +206,20 @@ function ItemCard({ item, index, isOnly, onUpdate, onRemove, onUpload, onClearUr
   );
 }
 
+const COLLAPSE_THRESHOLD = 5;
+
 export default function CreateCourseForm() {
   const [state, formAction, pending] = useActionState(createCourse, null);
   const [sections, setSections] = useState<Section[]>([makeSection()]);
+  const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
+
+  function toggleCollapse(id: number) {
+    setCollapsed((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
 
   function updateSection(id: number, field: "title" | "description", value: string) {
     setSections((prev) => prev.map((s) => s.id === id ? { ...s, [field]: value } : s));
@@ -292,6 +303,9 @@ export default function CreateCourseForm() {
           items: hasContent ? [...s.items, ...newItems] : newItems,
         };
       }));
+      if (newItems.length > COLLAPSE_THRESHOLD) {
+        setCollapsed((prev) => new Set([...prev, sectionId]));
+      }
     };
     reader.readAsText(file);
   }
@@ -408,34 +422,43 @@ export default function CreateCourseForm() {
           {/* Items nested inside section */}
           <div className="border-t border-ink/10 px-6 pb-6 pt-4">
             <div className="mb-3 flex items-center justify-between">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
+              <button
+                type="button"
+                onClick={() => toggleCollapse(section.id)}
+                className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition hover:text-ink"
+              >
+                <span className="text-[10px]">{collapsed.has(section.id) ? "▶" : "▼"}</span>
                 Cards — {section.items.length}
-              </p>
+              </button>
               <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
                 Import CSV
                 <input type="file" accept=".csv,text/csv" className="hidden"
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
               </label>
             </div>
-            <div className="flex flex-col gap-3">
-              {section.items.map((item, iIdx) => (
-                <ItemCard
-                  key={item.id}
-                  item={item}
-                  index={iIdx}
-                  isOnly={section.items.length === 1}
-                  onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
-                  onRemove={() => removeItem(section.id, item.id)}
-                  onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
-                  onClearUrl={(field) => clearUrl(section.id, item.id, field)}
-                />
-              ))}
-            </div>
 
-            <button type="button" onClick={() => addItem(section.id)}
-              className="mt-3 w-full rounded-md border-2 border-dashed border-ink/20 py-3 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
-              + Add card
-            </button>
+            {!collapsed.has(section.id) && (
+              <>
+                <div className="flex flex-col gap-3">
+                  {section.items.map((item, iIdx) => (
+                    <ItemCard
+                      key={item.id}
+                      item={item}
+                      index={iIdx}
+                      isOnly={section.items.length === 1}
+                      onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
+                      onRemove={() => removeItem(section.id, item.id)}
+                      onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
+                      onClearUrl={(field) => clearUrl(section.id, item.id, field)}
+                    />
+                  ))}
+                </div>
+                <button type="button" onClick={() => addItem(section.id)}
+                  className="mt-3 w-full rounded-md border-2 border-dashed border-ink/20 py-3 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
+                  + Add card
+                </button>
+              </>
+            )}
           </div>
         </section>
       ))}
