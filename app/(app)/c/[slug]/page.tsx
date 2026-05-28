@@ -56,14 +56,16 @@ export default async function CourseDetailPage({
     { data: enrollmentData },
     { data: followData },
     { data: followingList },
+    { count: courseLearnerCount },
   ] = await Promise.all([
     supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).not("image_url", "is", null),
-    supabase.from("courses").select("learner_count").eq("creator_id", course.creator_id).eq("is_published", true),
+    supabase.from("courses").select("id").eq("creator_id", course.creator_id).eq("is_published", true),
     supabase.from("user_courses").select("id, preferred_question_types").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("following_id").eq("follower_id", user.id),
+    supabase.from("user_courses").select("*", { count: "exact", head: true }).eq("course_id", course.id),
   ]);
 
   const isEnrolled = Boolean(enrollmentData);
@@ -71,6 +73,15 @@ export default async function CourseDetailPage({
   const preferredTypes = (enrollmentData?.preferred_question_types ?? ["flashcard"]) as QType[];
   const isFollowing = Boolean(followData);
   const followingIds = (followingList ?? []).map((f) => f.following_id);
+
+  // Creator total learners — count from user_courses for all the creator's published courses
+  const creatorCourseIds = (creatorCoursesData ?? []).map((c) => c.id);
+  const { count: creatorLearnersCount } = creatorCourseIds.length > 0
+    ? await supabase
+        .from("user_courses")
+        .select("*", { count: "exact", head: true })
+        .in("course_id", creatorCourseIds)
+    : { count: 0 };
 
   // Friends learning this course
   const { data: friendsLearning } = followingIds.length > 0
@@ -88,7 +99,8 @@ export default async function CourseDetailPage({
 
   const totalFriendsLearning = friends.length;
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
-  const creatorTotalLearners = (creatorCoursesData ?? []).reduce((sum, c) => sum + c.learner_count, 0);
+  const learnerCount = courseLearnerCount ?? 0;
+  const creatorTotalLearners = creatorLearnersCount ?? 0;
 
   const accentColors = ["bg-green-soft", "bg-yellow-soft", "bg-red-soft", "bg-blue/30"];
 
@@ -128,7 +140,7 @@ export default async function CourseDetailPage({
                   {course.rating > 0 && (
                     <> · <span className="text-yellow">★</span> {course.rating.toFixed(1)} ({formatCount(course.rating_count)})</>
                   )}
-                  {" · "}{formatCount(course.learner_count)} learners
+                  {" · "}{formatCount(learnerCount)} learners
                 </p>
 
                 {/* Feature badges */}
