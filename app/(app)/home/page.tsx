@@ -69,6 +69,7 @@ export default async function HomePage() {
       .from("item_progress")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
+      .eq("mastered", false)
       .lte("next_review_at", new Date().toISOString()),
 
     supabase
@@ -108,6 +109,7 @@ export default async function HomePage() {
         .from("item_progress")
         .select("course_id")
         .eq("user_id", user.id)
+        .eq("mastered", false)
         .lte("next_review_at", now)
         .in("course_id", courseIds)
     : { data: [] };
