@@ -99,6 +99,7 @@ function ReplyRow({ reply, courseSlug, currentUserId, creatorId }: { reply: Repl
 }
 
 export default function PostCard({ post, courseId, courseSlug, currentUserId, creatorId, isOwner }: PostCardProps) {
+  const [pinned, setPinned] = useState(post.pinned);
   const [showReplies, setShowReplies] = useState(post.pinned);
   const [replyBody, setReplyBody] = useState("");
   const [pending, startTransition] = useTransition();
@@ -120,9 +121,9 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
   }
 
   return (
-    <div className={`rounded-lg border-2 p-4 ${post.pinned ? "border-orange/40 bg-orange/5" : "border-ink/10 bg-paper"}`}>
+    <div className={`rounded-lg border-2 p-4 ${pinned ? "border-orange/40 bg-orange/5" : "border-ink/10 bg-paper"}`}>
       {/* Pin badge */}
-      {post.pinned && (
+      {pinned && (
         <div className="mb-2 flex items-center gap-1">
           <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange">📌 Pinned</span>
         </div>
@@ -171,10 +172,13 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
           <button
             type="button"
             disabled={pending}
-            onClick={() => startTransition(() => togglePin(post.id, courseSlug, courseId, post.pinned))}
-            className={`font-mono text-xs transition disabled:opacity-40 ${post.pinned ? "text-orange" : "text-ink-3 hover:text-orange"}`}
+            onClick={() => {
+              setPinned((p) => !p);
+              startTransition(() => togglePin(post.id, courseSlug, courseId, pinned));
+            }}
+            className={`font-mono text-xs transition disabled:opacity-40 ${pinned ? "text-orange" : "text-ink-3 hover:text-orange"}`}
           >
-            {post.pinned ? "unpin" : "pin"}
+            {pinned ? "unpin" : "pin"}
           </button>
         )}
 
