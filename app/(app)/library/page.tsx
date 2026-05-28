@@ -90,8 +90,21 @@ export default async function LibraryPage() {
       last_studied_at: row.last_studied_at,
     })) as EnrolledCourse[];
 
-  const learning = allEnrolled.filter((c) => c.last_studied_at !== null);
-  const saved    = allEnrolled.filter((c) => c.last_studied_at === null);
+  // Determine which courses have been studied by checking item_progress
+  const enrolledCourseIds = allEnrolled.map((c) => c.id);
+  const { data: studiedRows } = enrolledCourseIds.length > 0
+    ? await supabase
+        .from("item_progress")
+        .select("course_id")
+        .eq("user_id", user.id)
+        .in("course_id", enrolledCourseIds)
+        .limit(1000)
+    : { data: [] };
+
+  const studiedCourseIds = new Set((studiedRows ?? []).map((r) => r.course_id));
+
+  const learning = allEnrolled.filter((c) => studiedCourseIds.has(c.id));
+  const saved    = allEnrolled.filter((c) => !studiedCourseIds.has(c.id));
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8 space-y-10">
