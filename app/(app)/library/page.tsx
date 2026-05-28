@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import EnrolledCourseCard from "../_components/enrolled-course-card";
 
 type CourseCard = {
   id: string;
@@ -18,11 +19,6 @@ type CourseCard = {
   mems_count: number;
   is_published: boolean;
   visibility: string;
-};
-
-type EnrolledCourse = CourseCard & {
-  completed_items: number;
-  last_studied_at: string | null;
 };
 
 const LEVEL_HEADER: Record<string, string> = {
@@ -44,25 +40,12 @@ function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 }
 
-function timeAgo(iso: string) {
-  const diff = Date.now() - new Date(iso).getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days === 0) return "today";
-  if (days === 1) return "yesterday";
-  if (days < 30) return `${days}d ago`;
-  if (days < 365) return `${Math.floor(days / 30)}mo ago`;
-  return `${Math.floor(days / 365)}y ago`;
-}
-
 export default async function LibraryPage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [
-    { data: createdRaw },
-    { data: enrolledRaw },
-  ] = await Promise.all([
+  const [{ data: createdRaw }, { data: enrolledRaw }] = await Promise.all([
     supabase
       .from("courses")
       .select("id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility")
@@ -71,37 +54,42 @@ export default async function LibraryPage() {
 
     supabase
       .from("user_courses")
-      .select("completed_items, last_studied_at, courses!course_id (id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility, creator_id)")
-      .eq("user_id", user.id)
-      .order("last_studied_at", { ascending: false, nullsFirst: false }),
+      .select("courses!course_id (id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility, creator_id)")
+      .eq("user_id", user.id),
   ]);
 
   const created = (createdRaw ?? []) as CourseCard[];
 
   const allEnrolled = ((enrolledRaw ?? []) as unknown as {
-    completed_items: number;
-    last_studied_at: string | null;
     courses: CourseCard & { creator_id: string };
   }[])
-    .filter((row) => row.courses.creator_id !== user.id) // own courses live in My Courses only
-    .map((row) => ({
-      ...row.courses,
-      completed_items: row.completed_items,
-      last_studied_at: row.last_studied_at,
-    })) as EnrolledCourse[];
+    .filter((row) => row.courses.creator_id !== user.id)
+    .map((row) => row.courses) as (CourseCard & { creator_id: string })[];
 
-  // Determine which courses have been studied by checking item_progress
+  // Single query for all progress data across enrolled courses
   const enrolledCourseIds = allEnrolled.map((c) => c.id);
-  const { data: studiedRows } = enrolledCourseIds.length > 0
+  const now = new Date().toISOString();
+
+  const { data: progressRows } = enrolledCourseIds.length > 0
     ? await supabase
         .from("item_progress")
-        .select("course_id")
+        .select("course_id, mastered, next_review_at")
         .eq("user_id", user.id)
         .in("course_id", enrolledCourseIds)
-        .limit(1000)
     : { data: [] };
 
-  const studiedCourseIds = new Set((studiedRows ?? []).map((r) => r.course_id));
+  const studiedCourseIds = new Set<string>();
+  const masteredByCourse: Record<string, number> = {};
+  const dueByCourse: Record<string, number> = {};
+
+  for (const row of progressRows ?? []) {
+    studiedCourseIds.add(row.course_id);
+    if (row.mastered) {
+      masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
+    } else if (row.next_review_at <= now) {
+      dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
+    }
+  }
 
   const learning = allEnrolled.filter((c) => studiedCourseIds.has(c.id));
   const saved    = allEnrolled.filter((c) => !studiedCourseIds.has(c.id));
@@ -123,13 +111,29 @@ export default async function LibraryPage() {
 
       <Section title="Learning" count={learning.length} emptyText="You haven't studied any course yet.">
         {learning.map((course) => (
-          <EnrolledCard key={course.id} course={course} />
+          <EnrolledCourseCard
+            key={course.id}
+            course={{
+              ...course,
+              masteredCount: masteredByCourse[course.id] ?? 0,
+              dueCount: dueByCourse[course.id] ?? 0,
+              hasStudied: true,
+            }}
+          />
         ))}
       </Section>
 
       <Section title="Saved" count={saved.length} emptyText="No saved courses yet. Browse to find one!" emptyLink={{ href: "/browse", label: "Browse courses" }}>
         {saved.map((course) => (
-          <EnrolledCard key={course.id} course={course} />
+          <EnrolledCourseCard
+            key={course.id}
+            course={{
+              ...course,
+              masteredCount: 0,
+              dueCount: 0,
+              hasStudied: false,
+            }}
+          />
         ))}
       </Section>
     </div>
@@ -181,7 +185,6 @@ function CourseCardShell({ course, children }: { course: CourseCard; children: R
 
   return (
     <div className="group overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
-      {/* Clickable header → course detail */}
       <Link href={`/c/${course.slug}`} className={`relative flex h-20 items-end px-4 pb-3 ${headerBg} block`} style={STRIPE}>
         {course.cover_image_url ? (
           <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
@@ -205,7 +208,6 @@ function CourseCardShell({ course, children }: { course: CourseCard; children: R
           </span>
         )}
       </Link>
-
       <div className="flex flex-col gap-2 p-4">
         <div>
           <Link href={`/c/${course.slug}`} className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange">
@@ -245,41 +247,6 @@ function CreatedCard({ course }: { course: CourseCard }) {
           className="rounded-full bg-paper px-4 py-1.5 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
         >
           Edit
-        </Link>
-      </div>
-    </CourseCardShell>
-  );
-}
-
-function EnrolledCard({ course }: { course: EnrolledCourse }) {
-  const pct = course.card_count > 0
-    ? Math.round((course.completed_items / course.card_count) * 100)
-    : 0;
-
-  return (
-    <CourseCardShell course={course}>
-      {/* Progress bar */}
-      <div className="space-y-1">
-        <div className="flex justify-between font-mono text-xs text-ink-2">
-          <span>{course.completed_items}/{course.card_count} cards</span>
-          <span>{pct}%</span>
-        </div>
-        <div className="h-1.5 w-full overflow-hidden rounded-full bg-paper">
-          <div className="h-full rounded-full bg-orange transition-all" style={{ width: `${pct}%` }} />
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between">
-        {course.last_studied_at ? (
-          <span className="font-mono text-xs text-ink-2">studied {timeAgo(course.last_studied_at)}</span>
-        ) : (
-          <span className="font-mono text-xs text-ink-2">not started</span>
-        )}
-        <Link
-          href={`/study/${course.slug}`}
-          className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
-        >
-          Study →
         </Link>
       </div>
     </CourseCardShell>

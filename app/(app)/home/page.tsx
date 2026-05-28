@@ -4,16 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import GoalRing from "./goal-ring";
-
-const LEVEL_HEADER: Record<string, string> = {
-  beginner: "bg-green-soft",
-  intermediate: "bg-yellow-soft",
-  advanced: "bg-red-soft",
-};
-const STRIPE = {
-  backgroundImage:
-    "repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(0,0,0,0.04) 8px,rgba(0,0,0,0.04) 9px)",
-};
+import EnrolledCourseCard from "../_components/enrolled-course-card";
 
 function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -27,8 +18,6 @@ type CourseRow = {
   cover_image_url: string | null;
   level: string | null;
   card_count: number;
-  completed_items: number;
-  last_studied_at: string | null;
 };
 
 export default async function HomePage() {
@@ -36,7 +25,6 @@ export default async function HomePage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // Profile + streak + goal
   const { data: profile } = await supabase
     .from("profiles")
     .select("display_name, avatar_url, current_streak, daily_goal, onboarding_completed")
@@ -49,29 +37,10 @@ export default async function HomePage() {
   const streak: number = profile?.current_streak ?? 0;
   const displayName = profile?.display_name ?? "there";
 
-  // Today's start (UTC midnight)
   const todayStart = new Date();
   todayStart.setUTCHours(0, 0, 0, 0);
 
-  const [
-    { count: totalMastered },
-    { count: totalDue },
-    { data: sessionsToday },
-    { data: enrolledRaw },
-  ] = await Promise.all([
-    supabase
-      .from("item_progress")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", user.id)
-      .eq("mastered", true),
-
-    supabase
-      .from("item_progress")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", user.id)
-      .eq("mastered", false)
-      .lte("next_review_at", new Date().toISOString()),
-
+  const [{ data: sessionsToday }, { data: enrolledRaw }] = await Promise.all([
     supabase
       .from("study_sessions")
       .select("items_studied")
@@ -80,54 +49,52 @@ export default async function HomePage() {
 
     supabase
       .from("user_courses")
-      .select("completed_items, last_studied_at, courses!course_id (id, slug, title, category, cover_image_url, level, card_count, creator_id)")
-      .eq("user_id", user.id)
-      .order("last_studied_at", { ascending: false, nullsFirst: false }),
+      .select("courses!course_id (id, slug, title, category, cover_image_url, level, card_count)")
+      .eq("user_id", user.id),
   ]);
 
   const studiedToday = (sessionsToday ?? []).reduce((sum, s) => sum + (s.items_studied ?? 0), 0);
-  const dueCount = totalDue ?? 0;
-  const masteredCount = totalMastered ?? 0;
 
-  // Build enrolled courses list
   const enrolledCourses = ((enrolledRaw ?? []) as unknown as {
-    completed_items: number;
-    last_studied_at: string | null;
-    courses: CourseRow & { creator_id: string };
-  }[]).map((row) => ({
-    ...row.courses,
-    completed_items: row.completed_items,
-    last_studied_at: row.last_studied_at,
-  })) as CourseRow[];
+    courses: CourseRow;
+  }[]).map((row) => row.courses) as CourseRow[];
 
-  // Per-course due counts from item_progress
+  // Single item_progress query for all per-course + global stats
   const courseIds = enrolledCourses.map((c) => c.id);
   const now = new Date().toISOString();
 
-  const { data: dueRows } = courseIds.length > 0
+  const { data: progressRows } = courseIds.length > 0
     ? await supabase
         .from("item_progress")
-        .select("course_id")
+        .select("course_id, mastered, next_review_at")
         .eq("user_id", user.id)
-        .eq("mastered", false)
-        .lte("next_review_at", now)
         .in("course_id", courseIds)
     : { data: [] };
 
+  let totalMastered = 0;
+  let totalDue = 0;
+  const studiedCourseIds = new Set<string>();
+  const masteredByCourse: Record<string, number> = {};
   const dueByCourse: Record<string, number> = {};
-  for (const row of dueRows ?? []) {
-    dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
+
+  for (const row of progressRows ?? []) {
+    studiedCourseIds.add(row.course_id);
+    if (row.mastered) {
+      totalMastered++;
+      masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
+    } else if (row.next_review_at <= now) {
+      totalDue++;
+      dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
+    }
   }
 
-  // Course with most due items → used for goal ring CTA + review card
+  const coursesInProgress = enrolledCourses.filter((c) => studiedCourseIds.has(c.id)).length;
+
   const topDueCourse = enrolledCourses
     .filter((c) => (dueByCourse[c.id] ?? 0) > 0)
     .sort((a, b) => (dueByCourse[b.id] ?? 0) - (dueByCourse[a.id] ?? 0))[0] ?? null;
 
-  const inProgressCourses = enrolledCourses.filter((c) => c.last_studied_at !== null);
-  const coursesInProgress = inProgressCourses.length;
-
-  const estMinutes = Math.ceil(dueCount * 0.5);
+  const estMinutes = Math.ceil(totalDue * 0.5);
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -154,8 +121,8 @@ export default async function HomePage() {
                 Welcome back, {displayName} 🧠
               </h1>
               <p className="font-manrope text-sm text-ink-2">
-                {dueCount > 0
-                  ? `${fmt(dueCount)} cards due · ${coursesInProgress} course${coursesInProgress !== 1 ? "s" : ""} in progress`
+                {totalDue > 0
+                  ? `${fmt(totalDue)} cards due · ${coursesInProgress} course${coursesInProgress !== 1 ? "s" : ""} in progress`
                   : `All caught up · ${coursesInProgress} course${coursesInProgress !== 1 ? "s" : ""} in progress`}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
@@ -163,20 +130,20 @@ export default async function HomePage() {
                   🔥 {streak} day streak
                 </span>
                 <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm">
-                  🧠 {fmt(masteredCount)} mastered
+                  🧠 {fmt(totalMastered)} mastered
                 </span>
               </div>
             </div>
           </section>
 
           {/* Today's Review card */}
-          {dueCount > 0 && topDueCourse ? (
+          {totalDue > 0 && topDueCourse ? (
             <section className="rounded-lg bg-red-soft p-5 shadow-hard">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Today&apos;s Review</p>
               <div className="mt-2 flex items-center justify-between gap-4">
                 <div>
                   <p className="font-fredoka text-2xl font-[700] leading-tight tracking-tight">
-                    {fmt(dueCount)} cards due
+                    {fmt(totalDue)} cards due
                   </p>
                   <p className="font-manrope text-sm text-ink-2">
                     ~{estMinutes} min · {topDueCourse.title}
@@ -219,65 +186,17 @@ export default async function HomePage() {
               </div>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2">
-                {enrolledCourses.slice(0, 4).map((course) => {
-                  const pct = course.card_count > 0
-                    ? Math.round((course.completed_items / course.card_count) * 100)
-                    : 0;
-                  const due = dueByCourse[course.id] ?? 0;
-                  const headerBg = LEVEL_HEADER[course.level ?? ""] ?? "bg-blue/20";
-
-                  return (
-                    <div key={course.id} className="overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
-                      {/* Card header */}
-                      <Link href={`/c/${course.slug}`} className={`relative flex h-16 items-end px-4 pb-2.5 ${headerBg} block`} style={STRIPE}>
-                        {course.cover_image_url ? (
-                          <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
-                        ) : (
-                          <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
-                            [{course.category?.toLowerCase() ?? "course"}{course.level ? ` · ${course.level}` : ""}]
-                          </span>
-                        )}
-                      </Link>
-
-                      <div className="flex flex-col gap-2 p-4">
-                        <div>
-                          <Link href={`/c/${course.slug}`} className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange">
-                            {course.title}
-                          </Link>
-                          <p className="font-mono text-xs text-ink-2">{course.card_count} cards</p>
-                        </div>
-
-                        {/* Progress bar */}
-                        <div className="space-y-1">
-                          <div className="flex justify-between font-mono text-xs text-ink-2">
-                            <span>{course.completed_items}/{course.card_count} mastered</span>
-                            <span>{pct}%</span>
-                          </div>
-                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-paper">
-                            <div className="h-full rounded-full bg-orange transition-all" style={{ width: `${pct}%` }} />
-                          </div>
-                        </div>
-
-                        {/* Due badge + study button */}
-                        <div className="flex items-center justify-between">
-                          {due > 0 ? (
-                            <span className="rounded-full bg-orange/10 px-2.5 py-0.5 font-mono text-xs font-[700] text-orange">
-                              {due} due
-                            </span>
-                          ) : (
-                            <span className="font-mono text-xs text-ink-3">Up to date ✓</span>
-                          )}
-                          <Link
-                            href={`/study/${course.slug}`}
-                            className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
-                          >
-                            Study →
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                {enrolledCourses.slice(0, 4).map((course) => (
+                  <EnrolledCourseCard
+                    key={course.id}
+                    course={{
+                      ...course,
+                      masteredCount: masteredByCourse[course.id] ?? 0,
+                      dueCount: dueByCourse[course.id] ?? 0,
+                      hasStudied: studiedCourseIds.has(course.id),
+                    }}
+                  />
+                ))}
               </div>
             )}
           </section>
@@ -285,7 +204,6 @@ export default async function HomePage() {
 
         {/* ── RIGHT SIDEBAR ── */}
         <div className="flex flex-col gap-4">
-          {/* Goal Ring card */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard flex flex-col items-center">
             <GoalRing
               studied={studiedToday}
@@ -294,7 +212,6 @@ export default async function HomePage() {
             />
           </aside>
 
-          {/* Quick links */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Quick links</p>
             <div className="flex flex-col gap-2">
