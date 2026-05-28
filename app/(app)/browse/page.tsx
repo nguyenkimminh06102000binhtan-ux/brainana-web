@@ -55,6 +55,7 @@ export default async function BrowsePage({
   const hasAudio          = p.has_audio === "1";
   const hasMems           = p.has_mems  === "1";
   const hasImages         = p.has_images === "1";
+  const sourceLanguage    = p.source_language ?? "";
   const sortBy            = p.sort ?? "learner_count";
 
   const supabase = createClient(await cookies());
@@ -92,6 +93,7 @@ export default async function BrowsePage({
   if (level)                     query = query.eq("level", level);
   if (minCards > 0)              query = query.gte("card_count", minCards);
   if (hasMems)                   query = query.gt("mems_count", 0);
+  if (sourceLanguage)            query = query.eq("source_language", sourceLanguage);
   if (imageCourseIds)            query = query.in("id", imageCourseIds);
   if (audioCourseIds)            query = query.in("id", audioCourseIds);
 

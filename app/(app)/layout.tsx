@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import AvatarMenu from "./_components/avatar-menu";
+import OriginLanguageSwitcher from "@/components/origin-language-switcher";
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -26,7 +27,7 @@ export default async function AppLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("display_name, username, avatar_url, current_streak")
+    .select("display_name, username, avatar_url, current_streak, native_language, origin_languages, active_origin_language")
     .eq("id", user.id)
     .single();
 
@@ -34,6 +35,20 @@ export default async function AppLayout({
     profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
   const initial = displayName[0].toUpperCase();
   const currentStreak = profile?.current_streak ?? 0;
+
+  let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
+  let activeOriginLanguage = (profile?.active_origin_language as string | null) ?? null;
+  const nativeLanguage = (profile?.native_language as string | null) ?? null;
+
+  // Auto-seed origin_languages from native_language if the column is still empty
+  if (originLanguages.length === 0 && nativeLanguage) {
+    await supabase
+      .from("profiles")
+      .update({ origin_languages: [nativeLanguage], active_origin_language: nativeLanguage })
+      .eq("id", user.id);
+    originLanguages = [nativeLanguage];
+    activeOriginLanguage = nativeLanguage;
+  }
 
   return (
     <div className="flex min-h-screen bg-paper text-ink">
@@ -69,6 +84,11 @@ export default async function AppLayout({
           <div className="rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean">
             🔥 {currentStreak} days
           </div>
+
+          <OriginLanguageSwitcher
+            originLanguages={originLanguages}
+            activeOriginLanguage={activeOriginLanguage}
+          />
 
           <AvatarMenu
             avatarUrl={profile?.avatar_url ?? null}
