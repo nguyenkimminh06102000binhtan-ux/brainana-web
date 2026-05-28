@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
@@ -114,6 +115,17 @@ export default function TypeAnswerMode({
       )}
 
       <div className="rounded-lg bg-paper-2 p-6 shadow-hard-sm text-center">
+        {card.imageUrl && (
+          <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
+            <Image
+              src={card.imageUrl}
+              alt={card.frontText}
+              fill
+              className="object-contain"
+              sizes="(max-width: 448px) 100vw, 448px"
+            />
+          </div>
+        )}
         <p className="font-fredoka text-3xl font-[600] text-ink leading-snug">
           {card.frontText}
         </p>

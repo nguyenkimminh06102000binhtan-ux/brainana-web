@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import TypeAnswerMode from "./type-answer-mode";
 import type { StudyCard, CardAnswer } from "./types";
@@ -127,6 +128,17 @@ function AudioTypePlayer({ card, onAnswer }: { card: StudyCard; onAnswer: (a: Ca
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8">
+      {card.imageUrl && (
+        <div className="relative h-32 w-full overflow-hidden rounded-md">
+          <Image
+            src={card.imageUrl}
+            alt={card.frontText}
+            fill
+            className="object-contain"
+            sizes="(max-width: 448px) 100vw, 448px"
+          />
+        </div>
+      )}
       {/* Play button */}
       <div className="flex flex-col items-center gap-3">
         <button

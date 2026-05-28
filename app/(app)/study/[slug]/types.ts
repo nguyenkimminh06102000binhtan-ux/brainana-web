@@ -6,6 +6,7 @@ export interface StudyCard {
   courseId: string;
   frontText: string;
   backText: string;
+  imageUrl: string | null;
   frontAudioUrl: string | null;
   backAudioUrl: string | null;
   romanization: string | null;

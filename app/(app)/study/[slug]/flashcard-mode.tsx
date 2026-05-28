@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { calculateSM2, formatInterval } from "@/utils/sm2";
 import type { StudyCard, CardAnswer } from "./types";
 
@@ -75,6 +76,17 @@ export default function FlashcardMode({ card, showRomanization, onAnswer }: Flas
         >
           {/* Front */}
           <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden]">
+            {card.imageUrl && (
+              <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
+                <Image
+                  src={card.imageUrl}
+                  alt={card.frontText}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 448px) 100vw, 448px"
+                />
+              </div>
+            )}
             <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
               {card.frontText}
             </p>
