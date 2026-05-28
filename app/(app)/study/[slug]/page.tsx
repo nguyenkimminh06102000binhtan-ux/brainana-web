@@ -59,9 +59,10 @@ export default async function StudyPage({
   const reviewDue = progressDueCount ?? 0;
   const newCards = Math.max(0, total - (progressTotalCount ?? 0));
   const hasAudio = course.has_audio ?? false;
-  const preferredTypes = (
+  const preferredTypesRaw = (
     (enrollment?.preferred_question_types ?? ["flashcard"]) as QType[]
   ).filter((t) => t !== "audio_type" || hasAudio);
+  const preferredTypes = preferredTypesRaw.length > 0 ? preferredTypesRaw : (["flashcard"] as QType[]);
 
   return (
     <StudyClient

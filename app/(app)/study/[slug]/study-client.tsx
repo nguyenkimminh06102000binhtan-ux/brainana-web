@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { fetchStudyCards } from "./actions";
+import { fetchStudyCards, savePreferredTypes } from "./actions";
 import SessionView from "./session-view";
 import ResultsScreen from "./results-screen";
 import type { QType, StudyCard, SessionConfig, SessionStats } from "./types";
@@ -52,7 +52,10 @@ export default function StudyClient({
   async function handleStart() {
     setStage("loading");
     try {
-      const cards = await fetchStudyCards(courseId, config.count, config.types);
+      const [cards] = await Promise.all([
+        fetchStudyCards(courseId, config.count, config.types),
+        savePreferredTypes(courseId, config.types),
+      ]);
       setSessionCards(cards);
       setStage("session");
     } catch {

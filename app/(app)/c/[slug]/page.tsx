@@ -256,16 +256,14 @@ export default async function CourseDetailPage({
           </aside>
 
           {/* Question types */}
-          {(isOwner || isEnrolled) && (
-            <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Study with</p>
-              <QuestionTypeSelector
-                courseId={course.id}
-                initial={preferredTypes}
-                hasAudio={course.has_audio ?? false}
-              />
-            </aside>
-          )}
+          <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">Study with</p>
+            <QuestionTypeSelector
+              courseId={course.id}
+              initial={preferredTypes}
+              hasAudio={course.has_audio ?? false}
+            />
+          </aside>
 
           {/* Friends learning */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
