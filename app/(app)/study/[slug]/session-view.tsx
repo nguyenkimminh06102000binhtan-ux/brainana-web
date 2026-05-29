@@ -19,6 +19,7 @@ interface SessionViewProps {
   courseSlug: string;
   cards: StudyCard[];
   showRomanization: boolean;
+  audioOnlyMode: boolean;
   onComplete: (stats: SessionStats) => void;
   onExit: () => void;
   labels: {
@@ -69,6 +70,7 @@ export default function SessionView({
   courseSlug,
   cards,
   showRomanization,
+  audioOnlyMode,
   onComplete,
   onExit,
   labels,
@@ -284,7 +286,7 @@ export default function SessionView({
               <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={typeAnswerLabels} />
             )}
             {currentRegularCard.questionType === "audio_type" && (
-              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={audioTypeLabels} />
+              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} />
             )}
           </div>
         </>
