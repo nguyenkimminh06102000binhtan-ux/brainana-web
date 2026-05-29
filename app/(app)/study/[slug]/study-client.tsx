@@ -67,6 +67,8 @@ type StudyLabels = {
   typeAnswer: string;
   savingPreferences: string;
   preferencesSaveError: string;
+  feedbackCorrect: string[];
+  feedbackWrong: string[];
 };
 
 interface StudyClientProps {
@@ -197,6 +199,8 @@ export default function StudyClient({
           speedMatchNo: labels.speedMatchNo,
           speedMatchYes: labels.speedMatchYes,
           xpEarned: labels.xpEarned,
+          feedbackCorrect: labels.feedbackCorrect,
+          feedbackWrong: labels.feedbackWrong,
         }}
       />
     );

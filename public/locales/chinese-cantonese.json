@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ 唔係",
     "speedMatchYes": "係呀 ✓",
     "savingPreferences": "儲存偏好設定 …",
-    "preferencesSaveError": "儲存唔到偏好設定。檢查你嘅連線。"
+    "preferencesSaveError": "儲存唔到偏好設定。檢查你嘅連線。",
+    "feedbackCorrect": [
+      "啱晒！",
+      "你答啱咗！",
+      "叻！",
+      "就係咁！",
+      "完美！"
+    ],
+    "feedbackWrong": [
+      "未啱晒 — 繼續努力！",
+      "差少少！",
+      "唔好放棄！",
+      "下次一定得！",
+      "繼續練習！"
+    ]
   },
   "discussion": {
     "title": "討論",

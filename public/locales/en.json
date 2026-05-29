@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ No",
     "speedMatchYes": "Yes ✓",
     "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "preferencesSaveError": "Couldn't save preferences. Check your connection.",
+    "feedbackCorrect": [
+      "Nailed it!",
+      "You got it!",
+      "Brilliant!",
+      "That's right!",
+      "Perfect!"
+    ],
+    "feedbackWrong": [
+      "Not quite — keep going!",
+      "Almost there!",
+      "Don't give up!",
+      "You'll get it next time!",
+      "Keep practicing!"
+    ]
   },
   "discussion": {
     "title": "Discussion",

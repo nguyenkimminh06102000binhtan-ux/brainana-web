@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import { t } from "@/utils/t";
+import { playCorrectSound, playWrongSound } from "@/utils/answer-audio";
+import AnswerFeedback from "./answer-feedback";
 import TypeAnswerMode from "./type-answer-mode";
 import type { StudyCard, CardAnswer } from "./types";
 
@@ -17,6 +19,8 @@ interface AudioTypeModeLabels {
   continueBtn: string;
   noAudio: string;
   playAudio: string;
+  feedbackCorrect: string[];
+  feedbackWrong: string[];
 }
 
 interface AudioTypeModeProps {
@@ -135,6 +139,10 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
       return;
     }
     const hesitant = !correct ? false : attempts > 0 || Date.now() - startedAt.current > 10_000;
+
+    if (correct) playCorrectSound();
+    else playWrongSound();
+
     setSubmitted({ correct, hesitant });
   }
 
@@ -160,7 +168,16 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8">
+    <div className="flex flex-col gap-6">
+      {submitted && (
+        <AnswerFeedback
+          key={card.itemId}
+          outcome={submitted.correct ? "correct" : "incorrect"}
+          correctMessages={labels.feedbackCorrect}
+          wrongMessages={labels.feedbackWrong}
+        />
+      )}
+      <div className="flex flex-col items-center gap-6 px-4 py-8">
       {card.imageUrl && (
         <div className="relative h-32 w-full overflow-hidden rounded-md">
           <Image
@@ -217,7 +234,7 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
           placeholder={labels.placeholder}
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
-              ? submitted.correct ? "border-green bg-green-soft" : "border-red-soft bg-red-soft"
+              ? submitted.correct ? "border-acid-green bg-acid-green/20" : "border-electric-pink bg-electric-pink/20"
               : "border-ink/20 bg-ink/5 focus:border-orange"
           }`}
         />
@@ -248,6 +265,8 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
             </button>
           )}
         </div>
+      </div>
+
       </div>
     </div>
   );

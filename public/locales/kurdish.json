@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Na",
     "speedMatchYes": "Erê ✓",
     "savingPreferences": "Hilbijartinên tercihan tên tomarkirin…",
-    "preferencesSaveError": "Vebijêrkan nehat tomarkirin. Têkiliya xwe kontrol bikin."
+    "preferencesSaveError": "Vebijêrkan nehat tomarkirin. Têkiliya xwe kontrol bikin.",
+    "feedbackCorrect": [
+      "Rast e!",
+      "Te kir!",
+      "Zor baş!",
+      "Ew rast e!",
+      "Temam!"
+    ],
+    "feedbackWrong": [
+      "Ne bi tevahî — berdewam be!",
+      "Hema hema!",
+      "Dest jê bernede!",
+      "Cara bê te dê bike!",
+      "Berdewam rahêne!"
+    ]
   },
   "discussion": {
     "title": "Nîqaş",

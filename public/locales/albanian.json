@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Jo",
     "speedMatchYes": "Po ✓",
     "savingPreferences": "Po ruan preferencat…",
-    "preferencesSaveError": "Preferencat nuk mund të ruheshin. Kontrolloni lidhjen tuaj."
+    "preferencesSaveError": "Preferencat nuk mund të ruheshin. Kontrolloni lidhjen tuaj.",
+    "feedbackCorrect": [
+      "Saktë!",
+      "Ia dole!",
+      "Shkëlqyeshëm!",
+      "Kjo është e drejtë!",
+      "Perfekt!"
+    ],
+    "feedbackWrong": [
+      "Jo krejt — vazhdo!",
+      "Gati aty!",
+      "Mos u dorëzo!",
+      "Do ta arrish herën tjetër!",
+      "Vazhdo të praktikohesh!"
+    ]
   },
   "discussion": {
     "title": "Diskutim",

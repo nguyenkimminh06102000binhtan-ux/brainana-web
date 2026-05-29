@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nie",
     "speedMatchYes": "Áno ✓",
     "savingPreferences": "Ukladajú sa predvoľby…",
-    "preferencesSaveError": "Predvoľby sa nepodarilo uložiť. Skontrolujte pripojenie."
+    "preferencesSaveError": "Predvoľby sa nepodarilo uložiť. Skontrolujte pripojenie.",
+    "feedbackCorrect": [
+      "Správne!",
+      "Máš to!",
+      "Výborne!",
+      "Presne tak!",
+      "Perfektné!"
+    ],
+    "feedbackWrong": [
+      "Nie celkom — pokračuj!",
+      "Už si skoro tam!",
+      "Nevzdávaj sa!",
+      "Nabudúce sa ti to podarí!",
+      "Pokračuj v precvičovaní!"
+    ]
   },
   "discussion": {
     "title": "Diskusia",

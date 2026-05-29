@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nē",
     "speedMatchYes": "Jā ✓",
     "savingPreferences": "Notiek preferenču saglabāšana…",
-    "preferencesSaveError": "Nevarēja saglabāt preferences. Pārbaudiet savienojumu."
+    "preferencesSaveError": "Nevarēja saglabāt preferences. Pārbaudiet savienojumu.",
+    "feedbackCorrect": [
+      "Pareizi!",
+      "Tev izdevās!",
+      "Lieliski!",
+      "Tieši tā!",
+      "Perfekti!"
+    ],
+    "feedbackWrong": [
+      "Ne gluži — turpini!",
+      "Gandrīz!",
+      "Nepadodies!",
+      "Nākamreiz izdosies!",
+      "Turpini trenēties!"
+    ]
   },
   "discussion": {
     "title": "Diskusija",

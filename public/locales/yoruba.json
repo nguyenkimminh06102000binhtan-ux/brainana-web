@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Bẹẹkọ",
     "speedMatchYes": "Bẹẹni ✓",
     "savingPreferences": "Nfipamọ awọn ayanfẹ…",
-    "preferencesSaveError": "Ko le fi awọn ayanfẹ pamọ. Ṣayẹwo asopọ rẹ."
+    "preferencesSaveError": "Ko le fi awọn ayanfẹ pamọ. Ṣayẹwo asopọ rẹ.",
+    "feedbackCorrect": [
+      "Ó tọ́!",
+      "O ṣe é!",
+      "O tayọ!",
+      "Bẹ́ẹ̀ ni!",
+      "Pípé!"
+    ],
+    "feedbackWrong": [
+      "Kò tíì pé — tẹ̀síwájú!",
+      "Ó fẹ́rẹ̀ẹ́ tó!",
+      "Má ṣe juwọ́ sílẹ̀!",
+      "Ìgbà tó ń bọ̀ wàá rí i!",
+      "Máa tẹ̀síwájú nínú ìdánwò!"
+    ]
   },
   "discussion": {
     "title": "Ifọrọwanilẹnuwo",

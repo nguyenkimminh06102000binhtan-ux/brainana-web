@@ -414,7 +414,21 @@
     "speedMatchNo": "Maya",
     "speedMatchYes": "Haa ✓",
     "savingPreferences": "Kaydinta dookhyada…",
-    "preferencesSaveError": "Ma keydin karin dookhyada Hubi xidhiidhkaaga"
+    "preferencesSaveError": "Ma keydin karin dookhyada Hubi xidhiidhkaaga",
+    "feedbackCorrect": [
+      "Sax!",
+      "Waad heshay!",
+      "Cajiib!",
+      "Taasi waa sax!",
+      "Dhammeystiran!"
+    ],
+    "feedbackWrong": [
+      "Weli ma aha — sii wad!",
+      "Ku dhowaad!",
+      "Ha quusan!",
+      "Marka xigta waad heli doontaa!",
+      "Sii wad tababarka!"
+    ]
   },
   "discussion": {
     "title": "Dood",

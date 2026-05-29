@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ní hea",
     "speedMatchYes": "Tá ✓",
     "savingPreferences": "Sainroghanna á sábháil…",
-    "preferencesSaveError": "Níorbh fhéidir na sainroghanna a shábháil. Seiceáil do cheangal."
+    "preferencesSaveError": "Níorbh fhéidir na sainroghanna a shábháil. Seiceáil do cheangal.",
+    "feedbackCorrect": [
+      "Ceart!",
+      "D’éirigh leat!",
+      "Iontach!",
+      "Sin é!",
+      "Foirfe!"
+    ],
+    "feedbackWrong": [
+      "Ní hamhlaidh go hiomlán — lean ort!",
+      "Beagnach ann!",
+      "Ná géill!",
+      "Éireoidh leat an chéad uair eile!",
+      "Lean ort ag cleachtadh!"
+    ]
   },
   "discussion": {
     "title": "Plé",

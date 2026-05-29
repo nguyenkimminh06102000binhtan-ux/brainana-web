@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nej",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Gemmer præferencer...",
-    "preferencesSaveError": "Kunne ikke gemme præferencer. Tjek din forbindelse."
+    "preferencesSaveError": "Kunne ikke gemme præferencer. Tjek din forbindelse.",
+    "feedbackCorrect": [
+      "Rigtigt!",
+      "Du har den!",
+      "Strålende!",
+      "Det er rigtigt!",
+      "Perfekt!"
+    ],
+    "feedbackWrong": [
+      "Ikke helt — fortsæt!",
+      "Næsten der!",
+      "Giv ikke op!",
+      "Du klarer den næste gang!",
+      "Bliv ved med at øve!"
+    ]
   },
   "discussion": {
     "title": "Diskussion",

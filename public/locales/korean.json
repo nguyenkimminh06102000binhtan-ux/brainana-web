@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ 아니요",
     "speedMatchYes": "예 ✓",
     "savingPreferences": "환경설정 저장 중…",
-    "preferencesSaveError": "환경설정을 저장할 수 없습니다. 연결을 확인하세요."
+    "preferencesSaveError": "환경설정을 저장할 수 없습니다. 연결을 확인하세요.",
+    "feedbackCorrect": [
+      "정답이에요!",
+      "해냈어요!",
+      "훌륭해요!",
+      "맞아요!",
+      "완벽해요!"
+    ],
+    "feedbackWrong": [
+      "아직 아니에요 — 계속해요!",
+      "거의 다 왔어요!",
+      "포기하지 마세요!",
+      "다음엔 꼭 될 거예요!",
+      "계속 연습해요!"
+    ]
   },
   "discussion": {
     "title": "논의",

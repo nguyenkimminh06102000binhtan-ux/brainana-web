@@ -14,6 +14,8 @@ const config = {
       red: "#F36B2E",
       yellow: "#F59A1E",
       green: "#C4E7E5",
+      "electric-pink": "#FF0054",
+      "acid-green": "#9EFF00",
       ink: "#19244E",
       paper: "#C4E7E5",
       "paper-2": "#E7F6F5",

@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ 没有",
     "speedMatchYes": "是 ✓",
     "savingPreferences": "正在保存首选项...",
-    "preferencesSaveError": "无法保存偏好设置。检查您的连接。"
+    "preferencesSaveError": "无法保存偏好设置。检查您的连接。",
+    "feedbackCorrect": [
+      "正确！",
+      "答对了！",
+      "太棒了！",
+      "就是这样！",
+      "完美！"
+    ],
+    "feedbackWrong": [
+      "还不太对 — 继续加油！",
+      "差一点！",
+      "别放弃！",
+      "下次一定行！",
+      "继续练习！"
+    ]
   },
   "discussion": {
     "title": "讨论",

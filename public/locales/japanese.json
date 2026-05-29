@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ いいえ",
     "speedMatchYes": "はい ✓",
     "savingPreferences": "設定を保存中…",
-    "preferencesSaveError": "設定を保存できませんでした。接続を確認してください。"
+    "preferencesSaveError": "設定を保存できませんでした。接続を確認してください。",
+    "feedbackCorrect": [
+      "正解！",
+      "できたね！",
+      "すばらしい！",
+      "その通り！",
+      "完璧！"
+    ],
+    "feedbackWrong": [
+      "ちょっと違うよ — 続けよう！",
+      "もう少し！",
+      "あきらめないで！",
+      "次はきっとできる！",
+      "練習を続けよう！"
+    ]
   },
   "discussion": {
     "title": "議論",

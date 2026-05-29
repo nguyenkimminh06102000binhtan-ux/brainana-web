@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ora",
     "speedMatchYes": "Ya wis ✓",
     "savingPreferences": "Nyimpen preferensi…",
-    "preferencesSaveError": "Ora bisa nyimpen preferensi. Priksa sambungan sampeyan."
+    "preferencesSaveError": "Ora bisa nyimpen preferensi. Priksa sambungan sampeyan.",
+    "feedbackCorrect": [
+      "Bener!",
+      "Kowe bisa!",
+      "Apik banget!",
+      "Ya ngono kuwi!",
+      "Sampurna!"
+    ],
+    "feedbackWrong": [
+      "Durung pas — terusna!",
+      "Meh tekan!",
+      "Aja nyerah!",
+      "Mengko sabanjure mesthi bisa!",
+      "Terus latihan!"
+    ]
   },
   "discussion": {
     "title": "rembugan",

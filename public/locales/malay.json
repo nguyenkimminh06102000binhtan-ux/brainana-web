@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Tidak",
     "speedMatchYes": "Ya ✓",
     "savingPreferences": "Menyimpan pilihan…",
-    "preferencesSaveError": "Tidak dapat menyimpan pilihan. Semak sambungan anda."
+    "preferencesSaveError": "Tidak dapat menyimpan pilihan. Semak sambungan anda.",
+    "feedbackCorrect": [
+      "Betul!",
+      "Kamu berjaya!",
+      "Cemerlang!",
+      "Tepat sekali!",
+      "Sempurna!"
+    ],
+    "feedbackWrong": [
+      "Belum tepat — teruskan!",
+      "Hampir sampai!",
+      "Jangan berputus asa!",
+      "Kamu akan berjaya lain kali!",
+      "Teruskan berlatih!"
+    ]
   },
   "discussion": {
     "title": "Perbincangan",

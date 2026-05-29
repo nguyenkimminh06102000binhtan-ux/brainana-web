@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nem",
     "speedMatchYes": "Igen ✓",
     "savingPreferences": "Beállítások mentése…",
-    "preferencesSaveError": "Nem sikerült menteni a beállításokat. Ellenőrizze a kapcsolatot."
+    "preferencesSaveError": "Nem sikerült menteni a beállításokat. Ellenőrizze a kapcsolatot.",
+    "feedbackCorrect": [
+      "Helyes!",
+      "Megvan!",
+      "Briliáns!",
+      "Ez az!",
+      "Tökéletes!"
+    ],
+    "feedbackWrong": [
+      "Nem egészen — folytasd!",
+      "Majdnem megvan!",
+      "Ne add fel!",
+      "Legközelebb sikerülni fog!",
+      "Gyakorolj tovább!"
+    ]
   },
   "discussion": {
     "title": "Vita",

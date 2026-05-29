@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nu",
     "speedMatchYes": "Da ✓",
     "savingPreferences": "Se salvează preferințele…",
-    "preferencesSaveError": "Nu s-au putut salva preferințele. Verificați-vă conexiunea."
+    "preferencesSaveError": "Nu s-au putut salva preferințele. Verificați-vă conexiunea.",
+    "feedbackCorrect": [
+      "Corect!",
+      "Ai reușit!",
+      "Excelent!",
+      "Așa este!",
+      "Perfect!"
+    ],
+    "feedbackWrong": [
+      "Nu chiar — continuă!",
+      "Aproape ai ajuns!",
+      "Nu renunța!",
+      "Îți va ieși data viitoare!",
+      "Continuă să exersezi!"
+    ]
   },
   "discussion": {
     "title": "Discuţie",

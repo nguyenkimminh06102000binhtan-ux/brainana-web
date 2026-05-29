@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nee",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Stoor tans voorkeure …",
-    "preferencesSaveError": "Kon nie voorkeure stoor nie. Gaan jou verbinding na."
+    "preferencesSaveError": "Kon nie voorkeure stoor nie. Gaan jou verbinding na.",
+    "feedbackCorrect": [
+      "Reg!",
+      "Jy het dit!",
+      "Skitterend!",
+      "Dis reg!",
+      "Perfek!"
+    ],
+    "feedbackWrong": [
+      "Nie heeltemal nie — hou aan!",
+      "Amper daar!",
+      "Moenie opgee nie!",
+      "Jy sal dit volgende keer kry!",
+      "Hou aan oefen!"
+    ]
   },
   "discussion": {
     "title": "Bespreking",

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import { t } from "@/utils/t";
+import { playCorrectSound, playWrongSound } from "@/utils/answer-audio";
+import AnswerFeedback from "./answer-feedback";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
 interface TypeAnswerModeProps {
@@ -20,6 +22,8 @@ interface TypeAnswerModeProps {
     wrong: string;
     submit: string;
     continueBtn: string;
+    feedbackCorrect: string[];
+    feedbackWrong: string[];
   };
 }
 
@@ -109,6 +113,10 @@ export default function TypeAnswerMode({
 
     const hesitant =
       !correct ? false : attempts > 0 || Date.now() - startedAt.current > 10_000;
+
+    if (correct) playCorrectSound();
+    else playWrongSound();
+
     setSubmitted({ correct, hesitant });
   }
 
@@ -138,8 +146,17 @@ export default function TypeAnswerMode({
   }
 
   return (
-    <div className="flex flex-col gap-6 px-4 py-8">
-      {showNoAudioNotice && (
+    <div className="flex flex-col gap-6">
+      {submitted && (
+        <AnswerFeedback
+          key={card.itemId}
+          outcome={submitted.correct ? "correct" : "incorrect"}
+          correctMessages={labels.feedbackCorrect}
+          wrongMessages={labels.feedbackWrong}
+        />
+      )}
+      <div className="flex flex-col gap-6 px-4 py-8">
+        {showNoAudioNotice && (
         <p className="rounded-sm bg-yellow-soft px-3 py-2 text-center font-manrope text-xs text-ink-2">
           {labels.noAudio}
         </p>
@@ -198,8 +215,8 @@ export default function TypeAnswerMode({
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
               ? submitted.correct
-                ? "border-green bg-green-soft"
-                : "border-red-soft bg-red-soft"
+                ? "border-acid-green bg-acid-green/20"
+                : "border-electric-pink bg-electric-pink/20"
               : "border-ink/20 bg-ink/5 focus:border-orange"
           }`}
         />
@@ -232,6 +249,8 @@ export default function TypeAnswerMode({
             </button>
           )}
         </div>
+      </div>
+
       </div>
     </div>
   );
