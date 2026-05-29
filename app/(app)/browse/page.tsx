@@ -119,17 +119,6 @@ export default async function BrowsePage({
   if (coursesError) console.error("[browse] courses query error:", JSON.stringify(coursesError));
   const courses = (coursesRaw ?? []) as unknown as Course[];
 
-  // Fetch live learner counts from user_courses (learner_count column can be stale)
-  const courseIds = courses.map((c) => c.id);
-  const { data: learnerRows } = courseIds.length > 0
-    ? await supabase.from("user_courses").select("course_id").in("course_id", courseIds)
-    : { data: [] };
-  const learnerCountMap: Record<string, number> = {};
-  for (const row of learnerRows ?? []) {
-    const id = (row as { course_id: string }).course_id;
-    learnerCountMap[id] = (learnerCountMap[id] ?? 0) + 1;
-  }
-
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
@@ -251,7 +240,7 @@ export default async function BrowsePage({
 
                       {/* Stats */}
                       <div className="flex items-center gap-4 font-mono text-xs text-ink-2">
-                        <span>👥 {fmt(learnerCountMap[course.id] ?? course.learner_count)}</span>
+                        <span>👥 {fmt(course.learner_count)}</span>
                         <span>📚 {t(loc.common.cards, { count: course.card_count })}</span>
                       </div>
                     </div>
