@@ -51,18 +51,16 @@ export default async function CourseDetailPage({
     { data: enrollmentData },
     { data: followData },
     { data: followingList },
-    { count: courseLearnerCount },
     { count: creatorFollowerCount },
     { data: profile },
   ] = await Promise.all([
     supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).not("image_url", "is", null),
-    supabase.from("courses").select("id").eq("creator_id", course.creator_id).eq("is_published", true),
+    supabase.from("courses").select("id, learner_count").eq("creator_id", course.creator_id).eq("is_published", true),
     supabase.from("user_courses").select("id, preferred_question_types").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("following_id").eq("follower_id", user.id),
-    supabase.from("user_courses").select("*", { count: "exact", head: true }).eq("course_id", course.id),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
   ]);
@@ -73,15 +71,6 @@ export default async function CourseDetailPage({
   const isEnrolled = Boolean(enrollmentData);
   const isFollowing = Boolean(followData);
   const followingIds = (followingList ?? []).map((f) => f.following_id);
-
-  // Creator total learners
-  const creatorCourseIds = (creatorCoursesData ?? []).map((c) => c.id);
-  const { count: creatorLearnersCount } = creatorCourseIds.length > 0
-    ? await supabase
-        .from("user_courses")
-        .select("*", { count: "exact", head: true })
-        .in("course_id", creatorCourseIds)
-    : { count: 0 };
 
   // Friends learning this course
   const { data: friendsLearning } = followingIds.length > 0
@@ -99,8 +88,8 @@ export default async function CourseDetailPage({
 
   const totalFriendsLearning = friends.length;
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
-  const learnerCount = courseLearnerCount ?? 0;
-  const creatorTotalLearners = creatorLearnersCount ?? 0;
+  const learnerCount = course.learner_count ?? 0;
+  const creatorTotalLearners = (creatorCoursesData ?? []).reduce((sum, c) => sum + ((c as { learner_count: number }).learner_count ?? 0), 0);
   const creatorFollowers = creatorFollowerCount ?? 0;
 
   const levelLabel: Record<string, string> = {
