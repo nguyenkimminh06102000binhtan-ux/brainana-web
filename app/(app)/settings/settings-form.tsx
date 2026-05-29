@@ -278,7 +278,7 @@ export default function SettingsForm({
             <button
               type="submit"
               disabled={profilePending || usernameStatus === "taken" || usernameStatus === "invalid"}
-              className="cursor-pointer rounded-full bg-orange px-7 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-full bg-orange px-7 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:opacity-50"
             >
               {profilePending ? "Saving..." : "Save changes"}
             </button>
@@ -340,7 +340,7 @@ export default function SettingsForm({
                 </button>
               </div>
               {identityError && (
-                <p className="mt-3 font-manrope text-xs font-[700] text-orange">{identityError}</p>
+                <p className="mt-3 font-manrope text-xs font-[700] text-orange-text">{identityError}</p>
               )}
             </div>
           </section>
@@ -383,9 +383,9 @@ function Field({
 }) {
   const helpClassName =
     tone === "available"
-      ? "text-blue"
+      ? "text-blue-text"
       : tone === "taken" || tone === "invalid"
-        ? "text-orange"
+        ? "text-orange-text"
         : "text-ink-3";
 
   return (

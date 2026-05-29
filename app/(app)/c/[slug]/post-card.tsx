@@ -52,7 +52,7 @@ interface PostCardProps {
 
 function CreatorBadge({ label }: { label: string }) {
   return (
-    <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-[9px] font-[700] uppercase tracking-wider text-white">
+    <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-[9px] font-[700] uppercase tracking-wider text-on-bright">
       {label}
     </span>
   );
@@ -144,7 +144,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
       {/* Pin badge */}
       {pinned && (
         <div className="mb-2 flex items-center gap-1">
-          <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange">📌 {labels.pinned}</span>
+          <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange-text">📌 {labels.pinned}</span>
         </div>
       )}
 
@@ -170,7 +170,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
           disabled={!currentUserId || pending}
           onClick={() => startTransition(() => toggleVote(post.id, courseSlug, voted))}
           className={`flex items-center gap-1 font-mono text-xs transition disabled:opacity-50 ${
-            voted ? "text-orange" : "text-ink-3 hover:text-ink"
+            voted ? "text-orange-text" : "text-ink-3 hover:text-ink"
           }`}
         >
           <span>{voted ? "❤️" : "🤍"}</span>
@@ -195,7 +195,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
               setPinned((p) => !p);
               startTransition(() => togglePin(post.id, courseSlug, courseId, pinned));
             }}
-            className={`font-mono text-xs transition disabled:opacity-40 ${pinned ? "text-orange" : "text-ink-3 hover:text-orange"}`}
+            className={`font-mono text-xs transition disabled:opacity-40 ${pinned ? "text-orange-text" : "text-ink-3 hover:text-orange-text"}`}
           >
             {pinned ? labels.unpin : labels.pin}
           </button>
@@ -236,7 +236,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
                 type="button"
                 onClick={submitReply}
                 disabled={!replyBody.trim() || pending}
-                className="cursor-pointer rounded-full bg-ink px-4 py-1.5 font-manrope text-xs font-[800] text-white transition hover:opacity-80 disabled:opacity-40"
+                className="cursor-pointer rounded-full bg-ink px-4 py-1.5 font-manrope text-xs font-[800] text-on-ink transition hover:opacity-80 disabled:opacity-40"
               >
                 {labels.replyButton}
               </button>

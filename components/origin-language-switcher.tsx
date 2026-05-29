@@ -128,7 +128,7 @@ export default function OriginLanguageSwitcher({
                       type="button"
                       onClick={handleAdd}
                       disabled={!selectedNew || isPending}
-                      className="flex-1 rounded-full bg-orange px-3 py-1.5 font-manrope text-xs font-[800] text-white shadow-hard-sm transition disabled:opacity-50"
+                      className="flex-1 rounded-full bg-orange px-3 py-1.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-sm transition disabled:opacity-50"
                     >
                       {labels.add}
                     </button>

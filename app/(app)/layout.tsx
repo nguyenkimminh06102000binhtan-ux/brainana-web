@@ -52,7 +52,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-4">
             <div className="flex min-w-0 items-center gap-3 xl:contents">
               <Link href="/home" className="flex min-w-0 shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-ink">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright">
                   B
                 </span>
                 <span className="hidden truncate sm:inline">{loc.app.brand}</span>

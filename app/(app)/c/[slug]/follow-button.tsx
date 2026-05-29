@@ -32,8 +32,8 @@ export default function FollowButton({
         type="submit"
         className={`w-full rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] active:shadow-none ${
           optimisticFollowing
-            ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange"
-            : "bg-paper text-ink hover:bg-orange hover:text-white"
+            ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange-text"
+            : "bg-paper text-ink hover:bg-orange hover:text-on-bright"
         }`}
       >
         {optimisticFollowing ? labels.following : labels.follow}

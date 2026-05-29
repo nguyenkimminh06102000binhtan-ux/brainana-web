@@ -199,14 +199,14 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           type="button"
           onClick={replay}
           aria-label="Play audio"
-          className={`flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-4 border-orange text-3xl shadow-hard-red transition active:scale-95 ${playing ? "bg-orange text-white" : "bg-ink/5 text-orange hover:bg-orange/10"}`}
+          className={`flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-4 border-orange text-3xl shadow-hard-red transition active:scale-95 ${playing ? "bg-orange text-on-bright" : "bg-ink/5 text-orange-text hover:bg-orange/10"}`}
         >
           {playing ? "◼" : "▶"}
         </button>
         <button
           type="button"
           onClick={toggleSpeed}
-          className={`rounded-full border-2 px-3 py-1 font-mono text-xs transition ${isSlowSpeed ? "border-orange bg-orange/10 text-orange" : "border-ink/20 text-ink-3 hover:border-ink/40"}`}
+          className={`rounded-full border-2 px-3 py-1 font-mono text-xs transition ${isSlowSpeed ? "border-orange bg-orange/10 text-orange-text" : "border-ink/20 text-ink-3 hover:border-ink/40"}`}
         >
           0.75×
         </button>
@@ -218,7 +218,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           {t(labels.letters, { count: card.backText.length })}
         </span>
         {showFirstLetter && (
-          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange">
+          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
             {t(labels.startsWith, { letter: card.backText[0] ?? "" })}
           </span>
         )}
@@ -238,7 +238,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           placeholder={labels.placeholder}
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
-              ? submitted.correct ? "border-acid-green bg-acid-green" : "border-electric-pink bg-electric-pink text-white"
+              ? submitted.correct ? "border-acid-green bg-acid-green text-on-bright" : "border-electric-pink bg-electric-pink text-on-bright"
               : "border-ink/20 bg-ink/5 focus:border-orange"
           }`}
         />
@@ -254,7 +254,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
             <button
               type="button"
               onClick={submit}
-              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.submit}
             </button>
@@ -262,7 +262,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
             <button
               type="button"
               onClick={advance}
-              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>

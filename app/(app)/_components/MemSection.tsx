@@ -159,7 +159,7 @@ export default function MemSection({ cardId, currentUserId, labels }: Props) {
       {hasMore && !expanded && (
         <button
           onClick={() => setExpanded(true)}
-          className="self-start font-mono text-xs text-orange hover:underline"
+          className="self-start font-mono text-xs text-orange-text hover:underline"
         >
           {interpolate(labels.seeAll, { count: totalCount })}
         </button>
@@ -182,7 +182,7 @@ export default function MemSection({ cardId, currentUserId, labels }: Props) {
             <button
               onClick={handleSubmit}
               disabled={submitting || !draft.trim()}
-              className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-white disabled:opacity-50"
+              className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-on-bright disabled:opacity-50"
             >
               {labels.submit}
             </button>

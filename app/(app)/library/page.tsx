@@ -123,7 +123,7 @@ export default async function LibraryPage() {
       <div>
         <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.library.eyebrow}</p>
         <h1 className="mt-1 font-fredoka text-4xl font-[700] tracking-tight">
-          {loc.library.titlePrefix} <span className="text-orange">{loc.library.titleAccent}</span>
+          {loc.library.titlePrefix} <span className="text-orange-text">{loc.library.titleAccent}</span>
         </h1>
       </div>
 
@@ -190,7 +190,7 @@ function Section({
           {emptyLink && (
             <Link
               href={emptyLink.href}
-              className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+              className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
             >
               {emptyLink.label} →
             </Link>
@@ -237,7 +237,7 @@ function CourseCardShell({ course, cards, categories, levels, children }: { cour
       </Link>
       <div className="flex flex-col gap-2 p-4">
         <div>
-          <Link href={`/c/${course.slug}`} className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange">
+          <Link href={`/c/${course.slug}`} className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange-text">
             {course.title}
           </Link>
           <p className="font-mono text-xs text-ink-2">{t(cards, { count: course.card_count })}</p>
@@ -265,13 +265,13 @@ function CreatedCard({ course, labels }: { course: CourseCard; labels: { cards: 
       <div className="mt-1 flex gap-2">
         <Link
           href={`/study/${course.slug}`}
-          className="flex-1 rounded-full bg-orange px-4 py-1.5 text-center font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+          className="flex-1 rounded-full bg-orange px-4 py-1.5 text-center font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
         >
           {labels.study} →
         </Link>
         <Link
           href={`/c/${course.slug}/edit`}
-          className="rounded-full bg-paper px-4 py-1.5 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
+          className="rounded-full bg-paper px-4 py-1.5 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px]"
         >
           {labels.edit}
         </Link>

@@ -218,7 +218,7 @@ function UploadButton({ label, labels, accept, uploading, compressing, error, on
         {compressing ? labels.processing : uploading ? labels.uploading : label}
       </button>
       {compressing && <p className="mt-1 font-manrope text-xs text-ink-2">{labels.compressingImage}</p>}
-      {error && <p className="mt-1 font-manrope text-xs text-orange">{error}</p>}
+      {error && <p className="mt-1 font-manrope text-xs text-orange-text">{error}</p>}
     </div>
   );
 }
@@ -227,7 +227,7 @@ function AudioPreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   return (
     <div className="mt-1.5 flex items-center gap-2">
       <audio src={url} controls className="h-8 min-w-0 flex-1" />
-      <button type="button" onClick={onRemove} className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange">{removeLabel}</button>
+      <button type="button" onClick={onRemove} className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text">{removeLabel}</button>
     </div>
   );
 }
@@ -237,7 +237,7 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
     <div className="mt-1.5 flex items-start gap-2">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={url} alt="" className="h-20 w-20 rounded-md object-cover shadow-hard-sm" />
-      <button type="button" onClick={onRemove} className="font-manrope text-xs font-[800] text-ink-3 hover:text-orange">{removeLabel}</button>
+      <button type="button" onClick={onRemove} className="font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text">{removeLabel}</button>
     </div>
   );
 }
@@ -256,7 +256,7 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
         <span className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">{t(labels.cardLabel, { number: index + 1 })}</span>
         {!isOnly && (
           <button type="button" onClick={onRemove}
-            className="font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange">
+            className="font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange-text">
             {labels.remove}
           </button>
         )}
@@ -543,7 +543,7 @@ export default function EditCourseForm({
             </div>
             {sections.length > 1 && (
               <button type="button" onClick={() => removeSection(section.id)}
-                className="mt-5 shrink-0 rounded-md px-3 py-2 font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange">
+                className="mt-5 shrink-0 rounded-md px-3 py-2 font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange-text">
                 {labels.removeSection}
               </button>
             )}
@@ -578,7 +578,7 @@ export default function EditCourseForm({
                   ))}
                 </div>
                 <button type="button" onClick={() => addItem(section.id)}
-                  className="mt-3 w-full rounded-md border-2 border-dashed border-ink/20 py-3 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
+                  className="mt-3 w-full rounded-md border-2 border-dashed border-ink/20 py-3 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange-text">
                   {labels.addCard}
                 </button>
               </>
@@ -588,7 +588,7 @@ export default function EditCourseForm({
       ))}
 
       <button type="button" onClick={addSection}
-        className="rounded-lg border-2 border-dashed border-ink/20 py-4 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange">
+        className="rounded-lg border-2 border-dashed border-ink/20 py-4 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange-text">
         {labels.addSection}
       </button>
 
@@ -615,7 +615,7 @@ export default function EditCourseForm({
           </p>
         </div>
         <button type="submit" disabled={!hasValidItem || pending || isUploading}
-          className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none">
+          className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none">
           {pending ? labels.saving : labels.saveChanges}
         </button>
       </div>

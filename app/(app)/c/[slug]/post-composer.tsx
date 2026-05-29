@@ -45,7 +45,7 @@ export default function PostComposer({ courseId, courseSlug, labels }: PostCompo
           type="button"
           onClick={handleSubmit}
           disabled={!body.trim() || pending}
-          className="cursor-pointer rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
+          className="cursor-pointer rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
         >
           {pending ? labels.posting : labels.post}
         </button>

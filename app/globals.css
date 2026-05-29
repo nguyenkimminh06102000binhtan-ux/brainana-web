@@ -33,7 +33,11 @@
   --brainana-yellow-soft: #FFE3A6;
   --brainana-green-soft: #DDF1EF;
   --brainana-ink-2: #3D4B72;
-  --brainana-ink-3: #7890A0;
+  --brainana-ink-3: #4F6270;
+  --brainana-orange-text: #8A3000;
+  --brainana-danger-text: #B0003A;
+  --brainana-blue-text: #253C96;
+  --brainana-on-ink: #FFF9E8;
   --background-glow-1: #F59A1E45;
   --background-glow-2: #F36B2E38;
   --background-glow-3: #253C9620;
@@ -60,7 +64,11 @@
   --brainana-yellow-soft: #4E4021;
   --brainana-green-soft: #28495A;
   --brainana-ink-2: #C9D2E8;
-  --brainana-ink-3: #8390B7;
+  --brainana-ink-3: #AEB9D8;
+  --brainana-orange-text: #FFB46F;
+  --brainana-danger-text: #FFA0BC;
+  --brainana-blue-text: #C4E7E5;
+  --brainana-on-ink: #19244E;
   --background-glow-1: #F59A1E40;
   --background-glow-2: #F36B2E45;
   --background-glow-3: #253C9680;
@@ -89,6 +97,11 @@
   --color-green-soft: var(--brainana-green-soft);
   --color-ink-2: var(--brainana-ink-2);
   --color-ink-3: var(--brainana-ink-3);
+  --color-orange-text: var(--brainana-orange-text);
+  --color-danger-text: var(--brainana-danger-text);
+  --color-blue-text: var(--brainana-blue-text);
+  --color-on-bright: #070B1F;
+  --color-on-ink: var(--brainana-on-ink);
   --font-fredoka: "Young Typeface", sans-serif;
   --font-manrope: "Young Typeface", sans-serif;
   --font-kalam: "Young Typeface", sans-serif;

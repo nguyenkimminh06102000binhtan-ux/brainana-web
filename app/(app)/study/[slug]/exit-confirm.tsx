@@ -18,7 +18,7 @@ export default function ExitConfirm({ onConfirm, onCancel, labels }: ExitConfirm
           <button
             type="button"
             onClick={onConfirm}
-            className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+            className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
           >
             {labels.exit}
           </button>

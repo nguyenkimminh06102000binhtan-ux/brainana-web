@@ -81,11 +81,11 @@ export default function OnboardingForm({
             href="/home"
             className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight"
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-ink shadow-hard-sm">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
               B
             </span>
             <span>
-              <span className="text-orange">brainana</span>.app
+              <span className="text-orange-text">brainana</span>.app
             </span>
           </Link>
           <p className="font-manrope text-sm font-[800] text-ink-2">{labels.estimatedTime}</p>
@@ -131,7 +131,7 @@ export default function OnboardingForm({
                 type="button"
                 disabled={!nativeLanguageSaved || savingNativeLanguage}
                 onClick={() => setStep(2)}
-                className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none"
+                className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
               >
                 {savingNativeLanguage ? labels.savingLanguage : labels.next}
               </button>
@@ -250,7 +250,7 @@ export default function OnboardingForm({
             <button
               type="submit"
               disabled={pending}
-              className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-60"
+              className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-60"
             >
               {pending ? labels.saving : labels.takeMeHome}
             </button>

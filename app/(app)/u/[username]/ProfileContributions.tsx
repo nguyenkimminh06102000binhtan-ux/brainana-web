@@ -141,7 +141,7 @@ function MemContributionCard({
         {courseSlug && (
           <>
             {" · "}
-            <Link href={`/c/${courseSlug}`} className="hover:text-orange transition">
+            <Link href={`/c/${courseSlug}`} className="hover:text-orange-text transition">
               {interpolate(labels.inCourse, { course: courseTitle })}
             </Link>
           </>
@@ -164,7 +164,7 @@ function MemContributionCard({
               <button onClick={() => { setEditing(false); setEditText(mem.text); }} className="rounded-full px-3 py-1 font-mono text-xs text-ink-2 hover:bg-paper-2">
                 {labels.cancel}
               </button>
-              <button onClick={handleSave} disabled={saving || !editText.trim()} className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-white disabled:opacity-50">
+              <button onClick={handleSave} disabled={saving || !editText.trim()} className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-on-bright disabled:opacity-50">
                 {labels.submit}
               </button>
             </div>
@@ -177,10 +177,10 @@ function MemContributionCard({
             <span className="font-mono text-xs text-ink-2">▲ {interpolate(labels.helpful, { count: mem.helpful_count })}</span>
             {isOwnProfile && !confirmDelete && (
               <div className="flex gap-2">
-                <button onClick={() => setEditing(true)} className="font-mono text-xs text-ink-2 hover:text-orange">
+                <button onClick={() => setEditing(true)} className="font-mono text-xs text-ink-2 hover:text-orange-text">
                   {labels.editLabel}
                 </button>
-                <button onClick={() => setConfirmDelete(true)} className="font-mono text-xs text-ink-2 hover:text-electric-pink">
+                <button onClick={() => setConfirmDelete(true)} className="font-mono text-xs text-ink-2 hover:text-danger-text">
                   {labels.delete}
                 </button>
               </div>
@@ -188,7 +188,7 @@ function MemContributionCard({
             {confirmDelete && (
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs text-ink-2">{labels.deleteConfirm}</span>
-                <button onClick={handleDelete} className="font-mono text-xs text-electric-pink">{labels.delete}</button>
+                <button onClick={handleDelete} className="font-mono text-xs text-danger-text">{labels.delete}</button>
                 <button onClick={() => setConfirmDelete(false)} className="font-mono text-xs text-ink-2">{labels.cancel}</button>
               </div>
             )}

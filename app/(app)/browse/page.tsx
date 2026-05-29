@@ -158,9 +158,9 @@ export default async function BrowsePage({
           {/* Header row */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <p className="font-fredoka text-2xl font-[700]">
-              <span className="text-orange">{courses.length}</span>{" "}
+              <span className="text-orange-text">{courses.length}</span>{" "}
               {courses.length !== 1 ? loc.common.coursePlural : loc.common.courseSingular}
-              {q && <> {loc.browse.resultsForPrefix} <span className="text-orange">&ldquo;{q}&rdquo;</span></>}
+              {q && <> {loc.browse.resultsForPrefix} <span className="text-orange-text">&ldquo;{q}&rdquo;</span></>}
             </p>
             <BrowseSort value={sortBy} labels={{ sort: loc.browse.sort, mostLoved: loc.browse.mostLoved, topRated: loc.browse.topRated, newest: loc.browse.newest }} />
           </div>
@@ -209,7 +209,7 @@ export default async function BrowsePage({
                     {/* Card body */}
                     <div className="flex flex-col gap-2.5 p-4">
                       <div>
-                        <h2 className="font-fredoka text-xl font-[700] leading-tight tracking-tight group-hover:text-orange">
+                        <h2 className="font-fredoka text-xl font-[700] leading-tight tracking-tight group-hover:text-orange-text">
                           {course.title}
                         </h2>
                         <p className="font-mono text-xs text-ink-2">{t(loc.common.by, { name: handle })}</p>

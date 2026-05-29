@@ -33,7 +33,7 @@ export default async function VerifyEmailPage({
             <input type="hidden" name="email" value={email} />
             <button
               type="submit"
-              className="w-full rounded-full bg-yellow px-5 py-3 font-manrope text-base font-[800] text-ink shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="w-full rounded-full bg-yellow px-5 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Resend email
             </button>

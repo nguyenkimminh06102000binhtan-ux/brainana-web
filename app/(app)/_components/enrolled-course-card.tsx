@@ -78,7 +78,7 @@ export default function EnrolledCourseCard({
         <div>
           <Link
             href={`/c/${course.slug}`}
-            className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange"
+            className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange-text"
           >
             {course.title}
           </Link>
@@ -99,7 +99,7 @@ export default function EnrolledCourseCard({
           {!course.hasStudied ? (
             <span className="font-mono text-xs text-ink-3">{labels.notStarted}</span>
           ) : course.dueCount > 0 ? (
-            <span className="rounded-full bg-orange/10 px-2.5 py-0.5 font-mono text-xs font-[700] text-orange">
+            <span className="rounded-full bg-orange/10 px-2.5 py-0.5 font-mono text-xs font-[700] text-orange-text">
               {t(labels.due, { count: course.dueCount })}
             </span>
           ) : (
@@ -107,7 +107,7 @@ export default function EnrolledCourseCard({
           )}
           <Link
             href={`/study/${course.slug}`}
-            className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+            className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
           >
             {labels.study} →
           </Link>

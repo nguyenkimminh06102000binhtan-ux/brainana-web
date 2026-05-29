@@ -48,14 +48,14 @@ export default function GoalRing({ studied, goal, courseSlug, labels }: GoalRing
       ) : courseSlug ? (
         <a
           href={`/study/${courseSlug}`}
-          className="rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+          className="rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
         >
           {labels.continueLearning} →
         </a>
       ) : (
         <a
           href="/browse"
-          className="rounded-full bg-paper px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
+          className="rounded-full bg-paper px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px]"
         >
           {labels.browseAction} →
         </a>

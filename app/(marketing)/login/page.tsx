@@ -23,13 +23,13 @@ function BrandPanel() {
           B
         </span>
         <span>
-          <span className="text-orange">brainana</span>.app
+          <span className="text-orange-text">brainana</span>.app
         </span>
       </Link>
 
       <div>
         <h1 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-6xl">
-          welcome back, <span className="text-orange">keep</span> your streak alive.
+          welcome back, <span className="text-orange-text">keep</span> your streak alive.
         </h1>
         <p className="mt-6 max-w-xl font-manrope text-lg leading-8 text-ink-2">
           Your courses, saved mems, and next review are ready when you are.
@@ -96,7 +96,7 @@ export default function LoginPage() {
               <h1 className="font-fredoka text-5xl font-[700] tracking-tight">Hey, welcome back</h1>
               <p className="mt-2 font-manrope text-sm font-[800] text-ink-2">
                 Log in to continue your streak, or{" "}
-                <Link href="/signup" className="text-orange">
+                <Link href="/signup" className="text-orange-text">
                   create an account
                 </Link>
               </p>
@@ -139,7 +139,7 @@ export default function LoginPage() {
                   className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
                 />
                 {emailTouched && emailError && (
-                  <p className="mt-2 font-manrope text-sm font-[700] text-orange">{emailError}</p>
+                  <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{emailError}</p>
                 )}
               </div>
               <div>
@@ -166,7 +166,7 @@ export default function LoginPage() {
               )}
 
               <div className="flex justify-end font-manrope text-sm font-[800] text-ink-2">
-                <Link href="/login" className="text-orange">
+                <Link href="/login" className="text-orange-text">
                   Forgot password?
                 </Link>
               </div>
@@ -174,7 +174,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="mt-1 w-full cursor-pointer rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none"
+                className="mt-1 w-full cursor-pointer rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
               >
                 {pending ? "Logging in..." : "Log in"}
               </button>

@@ -197,7 +197,7 @@ export default function TypeAnswerMode({
           {t(labels.letters, { count: letterCount })}
         </span>
         {showFirstLetter && (
-          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange">
+          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
             {t(labels.startsWith, { letter: firstLetter })}
           </span>
         )}
@@ -218,8 +218,8 @@ export default function TypeAnswerMode({
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
               ? submitted.correct
-                ? "border-acid-green bg-acid-green"
-                : "border-electric-pink bg-electric-pink text-white"
+                ? "border-acid-green bg-acid-green text-on-bright"
+                : "border-electric-pink bg-electric-pink text-on-bright"
               : "border-ink/20 bg-ink/5 focus:border-orange"
           }`}
         />
@@ -237,7 +237,7 @@ export default function TypeAnswerMode({
             <button
               type="button"
               onClick={submit}
-              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.submit}
             </button>
@@ -245,7 +245,7 @@ export default function TypeAnswerMode({
             <button
               type="button"
               onClick={advance}
-              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>

@@ -160,7 +160,7 @@ export default async function PublicProfilePage({
             </div>
             {/* Level badge */}
             <div className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-orange shadow-hard-sm">
-              <span className="font-mono text-xs font-[700] text-white">L{level}</span>
+              <span className="font-mono text-xs font-[700] text-on-bright">L{level}</span>
             </div>
           </div>
 
@@ -177,7 +177,7 @@ export default async function PublicProfilePage({
             {isOwnProfile ? (
               <Link
                 href="/settings"
-                className="rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px]"
+                className="rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px]"
               >
                 Edit profile
               </Link>
@@ -189,7 +189,7 @@ export default async function PublicProfilePage({
                   className={`rounded-full px-5 py-2 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] ${
                     isFollowing
                       ? "bg-paper-2 text-ink hover:bg-red-soft"
-                      : "bg-orange text-white hover:opacity-90"
+                      : "bg-orange text-on-bright hover:opacity-90"
                   }`}
                 >
                   {isFollowing ? "Following" : "Follow"}
@@ -198,7 +198,7 @@ export default async function PublicProfilePage({
             ) : (
               <Link
                 href="/login"
-                className="rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90"
+                className="rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90"
               >
                 Follow
               </Link>
@@ -279,7 +279,7 @@ export default async function PublicProfilePage({
                     return (
                       <div key={course.id} className="flex items-center gap-4">
                         <div className="min-w-0 flex-1">
-                          <Link href={`/c/${course.slug}`} className="font-manrope text-sm font-[700] text-ink hover:text-orange transition truncate block">
+                          <Link href={`/c/${course.slug}`} className="font-manrope text-sm font-[700] text-ink hover:text-orange-text transition truncate block">
                             {course.title}
                           </Link>
                           <div className="mt-1 flex items-center gap-2">
@@ -291,7 +291,7 @@ export default async function PublicProfilePage({
                         </div>
                         <Link
                           href={`/study/${course.slug}`}
-                          className="shrink-0 rounded-full bg-orange px-3 py-1 font-manrope text-xs font-[800] text-white shadow-hard-sm transition hover:opacity-90"
+                          className="shrink-0 rounded-full bg-orange px-3 py-1 font-manrope text-xs font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90"
                         >
                           Study →
                         </Link>

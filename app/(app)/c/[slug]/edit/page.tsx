@@ -68,7 +68,7 @@ export default async function EditCoursePage({
       <div className="mb-6">
         <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.createEdit.editEyebrow}</p>
         <h1 className="mt-1 font-fredoka text-4xl font-[700] tracking-tight">
-          {loc.createEdit.editTitlePrefix} <span className="text-orange">{loc.createEdit.editTitleAccent}</span>
+          {loc.createEdit.editTitlePrefix} <span className="text-orange-text">{loc.createEdit.editTitleAccent}</span>
         </h1>
         <p className="mt-2 font-manrope text-sm text-ink-2">
           {loc.createEdit.editIntro}

@@ -125,9 +125,9 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
               disabled={selected !== null}
               className={`flex cursor-pointer items-center gap-3 rounded-sm border-2 px-4 py-3 text-left font-manrope text-sm font-[600] transition active:translate-y-[1px] disabled:cursor-default ${
                 showCorrect
-                  ? "border-acid-green bg-acid-green text-ink"
+                  ? "border-acid-green bg-acid-green text-on-bright"
                   : showWrong
-                    ? "border-electric-pink bg-electric-pink text-white"
+                    ? "border-electric-pink bg-electric-pink text-on-bright"
                     : "border-ink/15 bg-ink/5 text-ink hover:border-ink/30 hover:bg-ink/10"
               }`}
             >
@@ -145,7 +145,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
           <button
             type="button"
             onClick={() => onAnswer(pendingAnswer)}
-            className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+            className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
           >
             {continueLabel}
           </button>

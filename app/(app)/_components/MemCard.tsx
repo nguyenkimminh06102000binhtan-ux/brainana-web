@@ -99,7 +99,7 @@ export default function MemCard({ mem, currentUserId, hasVoted: initialVoted, la
             <button
               onClick={handleSave}
               disabled={saving || !editText.trim()}
-              className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-white disabled:opacity-50"
+              className="rounded-full bg-orange px-3 py-1 font-mono text-xs text-on-bright disabled:opacity-50"
             >
               {labels.submit}
             </button>
@@ -119,13 +119,13 @@ export default function MemCard({ mem, currentUserId, hasVoted: initialVoted, la
             <>
               <button
                 onClick={() => setEditing(true)}
-                className="font-mono text-xs text-ink-2 hover:text-orange"
+                className="font-mono text-xs text-ink-2 hover:text-orange-text"
               >
                 {labels.editLabel}
               </button>
               <button
                 onClick={() => setConfirmDelete(true)}
-                className="font-mono text-xs text-ink-2 hover:text-electric-pink"
+                className="font-mono text-xs text-ink-2 hover:text-danger-text"
               >
                 {labels.delete}
               </button>
@@ -134,7 +134,7 @@ export default function MemCard({ mem, currentUserId, hasVoted: initialVoted, la
           {confirmDelete && (
             <>
               <span className="font-mono text-xs text-ink-2">{labels.deleteConfirm}</span>
-              <button onClick={handleDelete} className="font-mono text-xs text-electric-pink">
+              <button onClick={handleDelete} className="font-mono text-xs text-danger-text">
                 {labels.delete}
               </button>
               <button onClick={() => setConfirmDelete(false)} className="font-mono text-xs text-ink-2">
@@ -147,8 +147,8 @@ export default function MemCard({ mem, currentUserId, hasVoted: initialVoted, la
             disabled={!currentUserId}
             className={`flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-xs transition ${
               voted
-                ? "border-orange bg-orange/10 text-orange"
-                : "border-ink/20 text-ink-2 hover:border-orange hover:text-orange"
+                ? "border-orange bg-orange/10 text-orange-text"
+                : "border-ink/20 text-ink-2 hover:border-orange hover:text-orange-text"
             } disabled:cursor-default disabled:opacity-50`}
           >
             <span>▲</span>

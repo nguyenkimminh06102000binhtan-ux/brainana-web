@@ -60,7 +60,7 @@ export default function LandingPage() {
       <header className="mx-auto max-w-6xl rounded-full bg-paper-2 px-6 py-4 shadow-hard">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-ink shadow-hard-sm">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
               B
             </span>
             <span>Brainana</span>
@@ -79,7 +79,7 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/signup"
-              className="rounded-full bg-orange px-6 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-6 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Try free
             </Link>
@@ -93,7 +93,7 @@ export default function LandingPage() {
             what's new this week
           </p>
           <h1 className="font-fredoka text-6xl font-[700] leading-[0.98] tracking-tight sm:text-7xl">
-            the <span className="text-orange">community</span> is your textbook.
+            the <span className="text-orange-text">community</span> is your textbook.
           </h1>
           <p className="mt-8 max-w-2xl font-manrope text-xl leading-9 text-ink-2">
             Real teachers, real learners, real mems. Pick a course someone built, or build your own.
@@ -101,7 +101,7 @@ export default function LandingPage() {
           <div className="mt-10 flex flex-wrap gap-5">
             <Link
               href="/courses"
-              className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
               Browse all courses
             </Link>

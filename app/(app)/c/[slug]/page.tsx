@@ -159,7 +159,7 @@ export default async function CourseDetailPage({
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link
                     href={`/study/${course.slug}`}
-                    className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                    className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                   >
                     {cl.startLearning}
                   </Link>
@@ -172,7 +172,7 @@ export default async function CourseDetailPage({
                         type="submit"
                         className={`cursor-pointer rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] active:shadow-none ${
                           isEnrolled
-                            ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange"
+                            ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange-text"
                             : "bg-paper text-ink hover:bg-paper"
                         }`}
                       >
@@ -184,7 +184,7 @@ export default async function CourseDetailPage({
                   {isOwner && (
                     <Link
                       href={`/c/${course.slug}/edit`}
-                      className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white active:translate-y-[1px] active:shadow-none"
+                      className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px] active:shadow-none"
                     >
                       {cl.editCourse}
                     </Link>

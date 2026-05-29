@@ -23,13 +23,13 @@ function BrandPanel() {
           B
         </span>
         <span>
-          <span className="text-orange">brainana</span>.app
+          <span className="text-orange-text">brainana</span>.app
         </span>
       </Link>
 
       <div>
         <h1 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-6xl">
-          learn anything, <span className="text-orange">remember</span> forever.
+          learn anything, <span className="text-orange-text">remember</span> forever.
         </h1>
         <p className="mt-6 max-w-xl font-manrope text-lg leading-8 text-ink-2">
           Start your streak today - your courses, your mems, and your next win are waiting.
@@ -149,7 +149,7 @@ export default function SignupPage() {
                   className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
                 />
                 {emailTouched && emailError && (
-                  <p className="mt-2 font-manrope text-sm font-[700] text-orange">{emailError}</p>
+                  <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{emailError}</p>
                 )}
               </div>
               <div>
@@ -175,7 +175,7 @@ export default function SignupPage() {
                 {passwordTouched && (
                   <ul className="mt-2 space-y-1 font-manrope text-xs font-[700] text-ink-2">
                     {passwordRequirements.map((requirement) => (
-                      <li key={requirement.label} className={requirement.met ? "text-ink-2" : "text-orange"}>
+                      <li key={requirement.label} className={requirement.met ? "text-ink-2" : "text-orange-text"}>
                         {requirement.met ? "OK" : "Needs"} {requirement.label.toLowerCase()}
                       </li>
                     ))}
@@ -198,7 +198,7 @@ export default function SignupPage() {
                   className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
                 />
                 {confirmPasswordError && (
-                  <p className="mt-2 font-manrope text-sm font-[700] text-orange">{confirmPasswordError}</p>
+                  <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{confirmPasswordError}</p>
                 )}
               </div>
 
@@ -218,14 +218,14 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="mt-1 w-full cursor-pointer rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-white shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:shadow-none"
+                className="mt-1 w-full cursor-pointer rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
               >
                 {pending ? "Creating account..." : "Create account"}
               </button>
 
               <p className="text-center font-manrope text-base font-[800] text-ink-2">
                 Already have an account?{" "}
-                <Link href="/login" className="text-orange underline-offset-4 hover:underline">
+                <Link href="/login" className="text-orange-text underline-offset-4 hover:underline">
                   Log in
                 </Link>
               </p>

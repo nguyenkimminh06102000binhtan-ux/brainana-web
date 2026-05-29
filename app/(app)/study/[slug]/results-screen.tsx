@@ -80,7 +80,7 @@ export default function ResultsScreen({
         <button
           type="button"
           onClick={onStudyMore}
-          className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+          className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
         >
           {labels.studyMore}
         </button>

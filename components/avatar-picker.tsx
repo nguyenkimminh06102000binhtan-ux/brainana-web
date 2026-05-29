@@ -91,7 +91,7 @@ export default function AvatarPicker({ userId, value, onChange }: AvatarPickerPr
             <p className="mt-1 font-manrope text-xs text-ink-2">Image is large — compressing before upload, please wait…</p>
           )}
           {uploadError && (
-            <p className="mt-1 font-manrope text-xs text-orange">{uploadError}</p>
+            <p className="mt-1 font-manrope text-xs text-orange-text">{uploadError}</p>
           )}
         </div>
 

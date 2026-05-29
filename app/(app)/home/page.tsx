@@ -183,7 +183,7 @@ export default async function HomePage() {
                 </div>
                 <Link
                   href={`/study/${topDueCourse.slug}`}
-                  className="shrink-0 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                  className="shrink-0 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                 >
                   {loc.home.startReview} →
                 </Link>
@@ -201,7 +201,7 @@ export default async function HomePage() {
           <section>
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.yourCourses}</h2>
-              <Link href="/library" className="font-mono text-xs text-ink-2 hover:text-orange transition">
+              <Link href="/library" className="font-mono text-xs text-ink-2 hover:text-orange-text transition">
                 {loc.common.seeAll} →
               </Link>
             </div>
@@ -211,7 +211,7 @@ export default async function HomePage() {
                 <p className="font-manrope text-sm text-ink-2">{loc.home.noCourses}</p>
                 <Link
                   href="/browse"
-                  className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+                  className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
                 >
                   {loc.common.browseCourses} →
                 </Link>
@@ -242,7 +242,7 @@ export default async function HomePage() {
                   <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.discover}</h2>
                   <p className="font-manrope text-xs text-ink-2">{t(loc.home.coursesFrom, { language: activeOriginLanguage })}</p>
                 </div>
-                <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="font-mono text-xs text-ink-2 hover:text-orange transition">
+                <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="font-mono text-xs text-ink-2 hover:text-orange-text transition">
                   {loc.common.seeAll} →
                 </Link>
               </div>
@@ -292,10 +292,10 @@ export default async function HomePage() {
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.quickLinks}</p>
             <div className="flex flex-col gap-2">
-              <Link href="/browse" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white">
+              <Link href="/browse" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
                 {loc.common.browseCourses} <span>→</span>
               </Link>
-              <Link href="/library" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-white">
+              <Link href="/library" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
                 {loc.home.myLibrary} <span>→</span>
               </Link>
             </div>

@@ -128,7 +128,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4">
         <p className="font-fredoka text-4xl font-[600] text-ink">{labels.timesUp}</p>
         <div className="rounded-lg bg-paper-2 p-6 shadow-hard text-center">
-          <p className="font-mono text-5xl font-[700] text-orange">{xpRef.current}</p>
+          <p className="font-mono text-5xl font-[700] text-orange-text">{xpRef.current}</p>
           <p className="mt-1 font-manrope text-sm text-ink-2">{labels.xpEarned}</p>
           <p className="mt-4 font-manrope text-sm text-ink-2">
             {t(labels.result, { correct, wrong: totalRef.current - correct })}
@@ -137,7 +137,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
         <button
           type="button"
           onClick={() => onComplete({ correct, total: totalRef.current, xp: xpRef.current })}
-          className="w-full max-w-sm cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+          className="w-full max-w-sm cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
         >
           {labels.continueBtn}
         </button>
@@ -175,7 +175,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
           </span>
           <span
             className={`font-mono text-2xl font-[700] transition-transform duration-150 ${
-              streakCelebration ? "scale-125 text-orange" : "text-ink"
+              streakCelebration ? "scale-125 text-orange-text" : "text-ink"
             }`}
           >
             🔥 {streak}
@@ -218,7 +218,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
         </div>
 
         {streakCelebration && (
-          <p className="animate-bounce font-fredoka text-xl font-[600] text-orange motion-reduce:animate-none">
+          <p className="animate-bounce font-fredoka text-xl font-[600] text-orange-text motion-reduce:animate-none">
             {t(labels.bonus, { seconds: TIMER_BONUS_SECONDS })}
           </p>
         )}

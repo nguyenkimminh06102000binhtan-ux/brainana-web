@@ -31,7 +31,7 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-yellow font-mono text-sm font-[800] text-ink transition hover:ring-2 hover:ring-orange"
+        className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-yellow font-mono text-sm font-[800] text-on-bright transition hover:ring-2 hover:ring-orange"
       >
         {avatarUrl ? (
           <Image src={avatarUrl} alt={initial} width={40} height={40} className="h-full w-full object-cover" />
@@ -60,7 +60,7 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
           <form action={logout}>
             <button
               type="submit"
-              className="flex w-full items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-orange transition hover:bg-red-soft"
+              className="flex w-full items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-orange-text transition hover:bg-red-soft"
             >
               <span>🚪</span> {labels.logout}
             </button>

@@ -47,7 +47,7 @@ export default async function CommunityPage() {
                 {mem.items?.courses && (
                   <>
                     {" · "}
-                    <Link href={`/c/${mem.items.courses.slug}`} className="hover:text-orange transition">
+                    <Link href={`/c/${mem.items.courses.slug}`} className="hover:text-orange-text transition">
                       {loc.mems.inCourse.replace("{course}", mem.items.courses.title)}
                     </Link>
                   </>
@@ -58,7 +58,7 @@ export default async function CommunityPage() {
                 <span className="font-mono text-xs text-ink-2">
                   @{mem.profiles?.username ?? "anonymous"}
                 </span>
-                <span className="flex items-center gap-1.5 rounded-full border border-orange/40 bg-orange/10 px-3 py-1 font-mono text-xs text-orange">
+                <span className="flex items-center gap-1.5 rounded-full border border-orange/40 bg-orange/10 px-3 py-1 font-mono text-xs text-orange-text">
                   ▲ {loc.mems.helpful.replace("{count}", String(mem.helpful_count))}
                 </span>
               </div>

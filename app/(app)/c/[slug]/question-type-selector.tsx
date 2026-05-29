@@ -81,7 +81,7 @@ export default function QuestionTypeSelector({
         type="button"
         onClick={handleSave}
         disabled={pending}
-        className="cursor-pointer w-full rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-white shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-50"
+        className="cursor-pointer w-full rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-50"
       >
         {saved ? labels.savedPreferences : pending ? labels.savingPreferences : labels.savePreferences}
       </button>

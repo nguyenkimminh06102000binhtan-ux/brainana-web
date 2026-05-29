@@ -124,7 +124,7 @@ export default function BrowseFilters({
                   <span className={`font-manrope text-sm ${selectedInGroup.length > 0 ? "font-[700] text-ink" : "text-ink-2"}`}>
                     {translatedLabel}
                     {selectedInGroup.length > 0 && (
-                      <span className="ml-1.5 rounded-full bg-orange px-1.5 py-0.5 font-mono text-[10px] leading-none text-white">
+                      <span className="ml-1.5 rounded-full bg-orange px-1.5 py-0.5 font-mono text-[10px] leading-none text-on-bright">
                         {selectedInGroup.length}
                       </span>
                     )}
@@ -175,8 +175,8 @@ export default function BrowseFilters({
               onClick={() => update({ level: value || null })}
               className={`cursor-pointer rounded-full px-3.5 py-1.5 font-manrope text-sm font-[700] shadow-hard-sm transition active:translate-y-[1px] ${
                 level === value
-                  ? "bg-orange text-white"
-                  : "bg-paper text-ink hover:bg-orange hover:text-white"
+                  ? "bg-orange text-on-bright"
+                  : "bg-paper text-ink hover:bg-orange hover:text-on-bright"
               }`}
             >
               {label}
@@ -223,7 +223,7 @@ export default function BrowseFilters({
         <button
           type="button"
           onClick={() => { setSliderValue(0); router.replace("/browse"); }}
-          className="cursor-pointer rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink-2 shadow-hard-sm transition hover:text-orange"
+          className="cursor-pointer rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink-2 shadow-hard-sm transition hover:text-orange-text"
         >
           {labels.clearAllFilters}
         </button>
