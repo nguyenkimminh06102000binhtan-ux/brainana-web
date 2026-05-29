@@ -74,9 +74,9 @@ function label(text: string, optional?: boolean, optionalLabel = "optional") {
 const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow";
 const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-yellow appearance-none";
 
-function parseCsv(text: string): Array<[string, string]> {
+function parseCsv(text: string): Array<[string, string, string]> {
   const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
-  const results: Array<[string, string]> = [];
+  const results: Array<[string, string, string]> = [];
 
   function parseRow(line: string): string[] {
     const cols: string[] = [];
@@ -106,7 +106,8 @@ function parseCsv(text: string): Array<[string, string]> {
     const cols = parseRow(line);
     const front = cols[0]?.trim() ?? "";
     const back = cols[1]?.trim() ?? "";
-    if (front && back) results.push([front, back]);
+    const romanization = cols[2]?.trim() ?? "";
+    if (front && back) results.push([front, back, romanization]);
   }
   return results;
 }
@@ -430,7 +431,7 @@ export default function CreateCourseForm({
       const text = e.target?.result as string;
       const rows = parseCsv(text);
       if (rows.length === 0) return;
-      const newItems = rows.map(([front, back]) => ({ ...makeItem(), front, back }));
+      const newItems = rows.map(([front, back, romanization]) => ({ ...makeItem(), front, back, romanization }));
       setSections((prev) => prev.map((s) => {
         if (s.id !== sectionId) return s;
         const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
