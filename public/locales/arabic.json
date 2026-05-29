@@ -430,7 +430,7 @@
       "ستنجح في المرة القادمة!",
       "واصل التدريب!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "إظهار الكتابة بالحروف اللاتينية"
   },
   "discussion": {
     "title": "مناقشة",
@@ -517,12 +517,12 @@
     "saveChanges": "حفظ التغييرات",
     "createCourse": "إنشاء دورة",
     "sectionUnits": "أقسام",
-    "romanization": "Romanization ({system})",
+    "romanization": "الكتابة بالحروف اللاتينية ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "الإنشاء التلقائي للحروف اللاتينية المفقودة",
+    "bulkGeneratingRomanization": "جارٍ إنشاء الكتابة بالحروف اللاتينية ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "تم - تم إنشاء الحروف اللاتينية{count}",
     "aiImportButton": "استيراد AI",
     "aiImportTitle": "إنشاء بطاقات بالذكاء الاصطناعي",
     "aiImportCardStyle": "نمط البطاقة",

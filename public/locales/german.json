@@ -430,7 +430,7 @@
       "Beim nächsten Mal klappt es!",
       "Übe weiter!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Romanisierung anzeigen"
   },
   "discussion": {
     "title": "Diskussion",
@@ -517,12 +517,12 @@
     "creating": "Erstellen...",
     "createCourse": "Kurs erstellen",
     "sectionUnits": "Abschnitte",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanisierung ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Fehlende Umschriften automatisch generieren",
+    "bulkGeneratingRomanization": "Romanisierung wird generiert ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Fertig –{count}-Umschrift generiert",
     "aiImportButton": "KI-Import",
     "aiImportTitle": "Karten mit KI generieren",
     "aiImportCardStyle": "Kartenstil",
@@ -606,6 +606,6 @@
     "forCard": "für: {front}",
     "memOfWeek": "Tipp der Woche",
     "memOfWeekEmpty": "Noch keine Tipps diese Woche.",
-    "inCourse": "in {course}"
+    "inCourse": "in{course}"
   }
 }

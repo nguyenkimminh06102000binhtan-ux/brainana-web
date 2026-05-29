@@ -430,7 +430,7 @@
       "Bir dahaki sefere olacak!",
       "Pratik yapmaya devam et!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Latin alfabesini göster"
   },
   "discussion": {
     "title": "Tartışma",
@@ -517,12 +517,12 @@
     "creating": "Oluşturuluyor...",
     "saveChanges": "Değişiklikleri kaydet",
     "createCourse": "Kurs oluştur",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanizasyon ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Eksik romanizasyonları otomatik olarak oluştur",
+    "bulkGeneratingRomanization": "Romanizasyon oluşturuluyor ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Bitti —{count}romanizasyonlar oluşturuldu",
     "aiImportButton": "AI İçe Aktar",
     "aiImportTitle": "AI ile Kart Oluştur",
     "aiImportCardStyle": "Kart stili",

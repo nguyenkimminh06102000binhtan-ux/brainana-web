@@ -430,7 +430,7 @@
       "下次一定行！",
       "继续练习！"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "显示罗马化"
   },
   "discussion": {
     "title": "讨论",
@@ -517,12 +517,12 @@
     "saving": "保存...",
     "saveChanges": "保存更改",
     "createCourse": "创建课程",
-    "romanization": "Romanization ({system})",
+    "romanization": "罗马化 ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "自动生成缺失的罗马字母",
+    "bulkGeneratingRomanization": "生成罗马化 ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "完成 — 生成{count}罗马字",
     "aiImportButton": "AI 导入",
     "aiImportTitle": "用AI生成卡片",
     "aiImportCardStyle": "卡片样式",

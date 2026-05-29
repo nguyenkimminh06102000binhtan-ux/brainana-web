@@ -430,7 +430,7 @@
       "Volgende keer lukt het!",
       "Blijf oefenen!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Romanisering tonen"
   },
   "discussion": {
     "title": "Discussie",
@@ -517,12 +517,12 @@
     "saveChanges": "Wijzigingen opslaan",
     "sectionUnits": "secties",
     "createCourse": "Cursus maken",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanisering ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Genereer automatisch ontbrekende romanisaties",
+    "bulkGeneratingRomanization": "Romanisering genereren ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Klaar -{count}-romanisaties gegenereerd",
     "aiImportButton": "AI Importeren",
     "aiImportTitle": "Kaarten genereren met AI",
     "aiImportCardStyle": "Kaartstijl",
@@ -539,7 +539,7 @@
     "aiImportPasteText": "Of plak tekst hieronder",
     "aiImportPastePlaceholder": "Plak woordenlijst, artikel of willekeurige tekst hier…",
     "aiImportEstimatedCost": "Geschatte kosten",
-    "aiImportCredits": "credits",
+    "aiImportCredits": "tegoeden",
     "aiImportCreditNote": "(prijzen nog niet actief)",
     "aiImportCancel": "Annuleren",
     "aiImportGenerate": "Genereren",
@@ -606,6 +606,6 @@
     "forCard": "voor: {front}",
     "memOfWeek": "Hint van de week",
     "memOfWeekEmpty": "Nog geen hints deze week.",
-    "inCourse": "in {course}"
+    "inCourse": "in{course}"
   }
 }

@@ -430,7 +430,7 @@
       "次はきっとできる！",
       "練習を続けよう！"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "ローマ字表記を表示"
   },
   "discussion": {
     "title": "議論",
@@ -517,19 +517,19 @@
     "saving": "保存中...",
     "saveChanges": "変更を保存する",
     "createCourse": "コースの作成",
-    "romanization": "Romanization ({system})",
+    "romanization": "ローマ字表記 ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "不足しているローマ字を自動生成",
+    "bulkGeneratingRomanization": "ローマ字を生成中 ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "完了 —{count}ローマ字表記が生成されました",
     "aiImportButton": "AI インポート",
     "aiImportTitle": "AIでカードを生成",
     "aiImportCardStyle": "カードスタイル",
     "aiImportVocabulary": "語彙",
     "aiImportPhrases": "フレーズ",
     "aiImportDefinitions": "定義",
-    "aiImportQA": "Q&A",
+    "aiImportQA": "質問と回答",
     "aiImportTranslation": "翻訳",
     "aiImportCount": "カード枚数",
     "aiImportFocus": "フォーカス指示",

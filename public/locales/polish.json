@@ -430,7 +430,7 @@
       "Następnym razem się uda!",
       "Ćwicz dalej!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Pokaż latynizację"
   },
   "discussion": {
     "title": "Dyskusja",
@@ -517,12 +517,12 @@
     "sectionUnits": "sekcje",
     "uploadingFiles": "Przesyłanie plików...",
     "creating": "Tworzenie...",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanizacja ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Automatycznie generuj brakujące latynizacje",
+    "bulkGeneratingRomanization": "Generowanie latynizacji ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Gotowe — wygenerowano latynizacje{count}",
     "aiImportButton": "Import AI",
     "aiImportTitle": "Generuj karty z AI",
     "aiImportCardStyle": "Styl karty",

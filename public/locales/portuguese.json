@@ -430,7 +430,7 @@
       "Você vai conseguir da próxima vez!",
       "Continue praticando!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Mostrar romanização"
   },
   "discussion": {
     "title": "Discussão",
@@ -517,12 +517,12 @@
     "saveChanges": "Salvar alterações",
     "saving": "Salvando...",
     "sectionUnits": "seções",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanização ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Gerar automaticamente romanizações ausentes",
+    "bulkGeneratingRomanization": "Gerando romanização ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Concluído — romanizações{count}geradas",
     "aiImportButton": "Importar IA",
     "aiImportTitle": "Gerar cartões com IA",
     "aiImportCardStyle": "Estilo de cartão",

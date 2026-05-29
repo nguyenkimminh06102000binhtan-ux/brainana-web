@@ -430,7 +430,7 @@
       "La prossima volta ce la farai!",
       "Continua a esercitarti!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Mostra romanizzazione"
   },
   "discussion": {
     "title": "Discussione",
@@ -517,12 +517,12 @@
     "addAtLeastOneCard": "Aggiungi almeno una carta per continuare",
     "createCourse": "Crea corso",
     "saveChanges": "Salva modifiche",
-    "romanization": "Romanization ({system})",
+    "romanization": "Romanizzazione ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Genera automaticamente le romanizzazioni mancanti",
+    "bulkGeneratingRomanization": "Generazione romanizzazione ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Fatto: romanizzazioni{count}generate",
     "aiImportButton": "Importa IA",
     "aiImportTitle": "Genera schede con IA",
     "aiImportCardStyle": "Stile scheda",
@@ -606,6 +606,6 @@
     "forCard": "per: {front}",
     "memOfWeek": "Suggerimento della settimana",
     "memOfWeekEmpty": "Nessun suggerimento questa settimana.",
-    "inCourse": "in {course}"
+    "inCourse": "in{course}"
   }
 }

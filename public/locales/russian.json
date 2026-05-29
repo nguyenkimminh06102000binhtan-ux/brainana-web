@@ -430,7 +430,7 @@
       "В следующий раз получится!",
       "Продолжай практиковаться!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "Показать латинизацию"
   },
   "discussion": {
     "title": "Обсуждение",
@@ -517,12 +517,12 @@
     "createCourse": "Создать курс",
     "saveChanges": "Сохранить изменения",
     "saving": "Сохранение...",
-    "romanization": "Romanization ({system})",
+    "romanization": "Романизация ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "Автоматически генерировать недостающую латинизацию",
+    "bulkGeneratingRomanization": "Генерация латинизации ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Готово — сгенерированы латинизации{count}.",
     "aiImportButton": "Импорт ИИ",
     "aiImportTitle": "Создать карточки с помощью ИИ",
     "aiImportCardStyle": "Стиль карточки",

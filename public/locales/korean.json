@@ -430,7 +430,7 @@
       "다음엔 꼭 될 거예요!",
       "계속 연습해요!"
     ],
-    "showRomanization": "Show romanization"
+    "showRomanization": "로마자 표시"
   },
   "discussion": {
     "title": "논의",
@@ -517,19 +517,19 @@
     "saveChanges": "변경사항 저장",
     "sectionUnits": "섹션",
     "untitledSection": "제목 없는 섹션",
-    "romanization": "Romanization ({system})",
+    "romanization": "로마자 표기 ({system})",
     "autoGenerate": "Auto",
     "generating": "Generating…",
-    "bulkGenerateRomanization": "Auto-generate missing romanizations",
-    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
-    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated",
+    "bulkGenerateRomanization": "누락된 로마자 표기 자동 생성",
+    "bulkGeneratingRomanization": "로마자 표기 생성 중({done}/{total})…",
+    "bulkGenerateDoneRomanization": "완료 —{count}로마자 표기가 생성되었습니다.",
     "aiImportButton": "AI 가져오기",
     "aiImportTitle": "AI로 카드 생성",
     "aiImportCardStyle": "카드 스타일",
     "aiImportVocabulary": "어휘",
     "aiImportPhrases": "구문",
     "aiImportDefinitions": "정의",
-    "aiImportQA": "Q&A",
+    "aiImportQA": "질문과 답변",
     "aiImportTranslation": "번역",
     "aiImportCount": "카드 수",
     "aiImportFocus": "집중 지시사항",
