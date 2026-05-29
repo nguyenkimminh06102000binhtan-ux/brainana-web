@@ -167,6 +167,7 @@ export default function StudyClient({
         courseSlug={courseSlug}
         cards={sessionCards}
         showRomanization={showRomanization}
+        audioOnlyMode={selectedTypes.length === 1 && selectedTypes[0] === "audio_type"}
         onComplete={handleSessionComplete}
         onExit={handleExit}
         labels={{

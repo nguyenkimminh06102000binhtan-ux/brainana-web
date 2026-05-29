@@ -27,15 +27,16 @@ interface AudioTypeModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
   labels: AudioTypeModeLabels;
+  showFallbackNotice: boolean;
 }
 
-export default function AudioTypeMode({ card, onAnswer, labels }: AudioTypeModeProps) {
+export default function AudioTypeMode({ card, onAnswer, labels, showFallbackNotice }: AudioTypeModeProps) {
   if (!card.frontAudioUrl) {
     return (
       <TypeAnswerMode
         card={card}
         onAnswer={(a) => onAnswer({ ...a, questionType: "audio_type" })}
-        showNoAudioNotice
+        showNoAudioNotice={showFallbackNotice}
         labels={labels}
       />
     );
