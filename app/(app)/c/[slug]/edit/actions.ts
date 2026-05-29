@@ -10,9 +10,9 @@ type ItemPayload = {
   dbId: string | null;
   front: string;
   back: string;
-  imageUrl: string;
-  frontAudioUrl: string;
-  backAudioUrl: string;
+  imagePath: string;
+  frontAudioPath: string;
+  backAudioPath: string;
 };
 
 type SectionPayload = {
@@ -140,9 +140,9 @@ export async function updateCourse(
       const payload = {
         front_text: item.front,
         back_text: item.back,
-        image_url: item.imageUrl || null,
-        front_audio_url: item.frontAudioUrl || null,
-        back_audio_url: item.backAudioUrl || null,
+        image_url: item.imagePath || null,
+        front_audio_url: item.frontAudioPath || null,
+        back_audio_url: item.backAudioPath || null,
         position: iIdx,
       };
 
@@ -158,8 +158,8 @@ export async function updateCourse(
 
   // 4. Sync card_count, has_images, has_audio
   const allValidItems = sections.flatMap((s) => s.items.filter((i) => i.front.trim() && i.back.trim()));
-  const hasImages = allValidItems.some((i) => i.imageUrl);
-  const hasAudio  = allValidItems.some((i) => i.frontAudioUrl || i.backAudioUrl);
+  const hasImages = allValidItems.some((i) => i.imagePath);
+  const hasAudio  = allValidItems.some((i) => i.frontAudioPath || i.backAudioPath);
   await supabase
     .from("courses")
     .update({ card_count: totalCards, has_images: hasImages, has_audio: hasAudio })

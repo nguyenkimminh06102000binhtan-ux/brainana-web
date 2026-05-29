@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
 import { t } from "@/utils/t";
+import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
 
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
@@ -21,9 +22,12 @@ type Item = {
   id: number;
   front: string;
   back: string;
-  imageUrl: string;
-  frontAudioUrl: string;
-  backAudioUrl: string;
+  imagePath: string;
+  imageDisplayUrl: string;
+  frontAudioPath: string;
+  frontAudioDisplayUrl: string;
+  backAudioPath: string;
+  backAudioDisplayUrl: string;
   uploads: Record<UploadField, UploadState>;
 };
 
@@ -40,7 +44,18 @@ const freshUpload = (): Record<UploadField, UploadState> => ({
   frontAudio: { uploading: false, compressing: false, error: null },
   backAudio: { uploading: false, compressing: false, error: null },
 });
-const makeItem = (): Item => ({ id: uid++, front: "", back: "", imageUrl: "", frontAudioUrl: "", backAudioUrl: "", uploads: freshUpload() });
+const makeItem = (): Item => ({
+  id: uid++,
+  front: "",
+  back: "",
+  imagePath: "",
+  imageDisplayUrl: "",
+  frontAudioPath: "",
+  frontAudioDisplayUrl: "",
+  backAudioPath: "",
+  backAudioDisplayUrl: "",
+  uploads: freshUpload(),
+});
 const makeSection = (): Section => ({ id: uid++, title: "", description: "", items: [makeItem()] });
 
 type CreateEditLabels = Record<string, string>;
@@ -94,7 +109,12 @@ function parseCsv(text: string): Array<[string, string]> {
   return results;
 }
 
-async function uploadToStorage(file: File, labels: CreateEditLabels): Promise<string> {
+async function uploadToStorage(
+  file: File,
+  labels: CreateEditLabels,
+  courseId: string,
+  visibility: string,
+): Promise<{ storagePath: string; displayUrl: string }> {
   const isImage = IMAGE_TYPES.includes(file.type);
   const isAudio = AUDIO_TYPES.includes(file.type);
   if (!isImage && !isAudio) throw new Error(labels.unsupportedFileType);
@@ -103,11 +123,26 @@ async function uploadToStorage(file: File, labels: CreateEditLabels): Promise<st
   const fileToUpload = isImage ? await compressImage(file, IMAGE_MAX) : file;
   const supabase = createClient();
   const ext = fileToUpload.name.split(".").pop();
-  const path = `items/${crypto.randomUUID()}.${ext}`;
-  const { data, error } = await supabase.storage.from("course-media").upload(path, fileToUpload, { contentType: fileToUpload.type });
+  const objectPath = `courses/${courseId}/items/${crypto.randomUUID()}.${ext}`;
+  const bucket = bucketForVisibility(visibility);
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .upload(objectPath, fileToUpload, { contentType: fileToUpload.type });
   if (error) throw new Error(error.message);
-  const { data: { publicUrl } } = supabase.storage.from("course-media").getPublicUrl(data.path);
-  return publicUrl;
+
+  let displayUrl: string;
+  if (bucket === PUBLIC_BUCKET) {
+    displayUrl = supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl;
+  } else {
+    const { data: signData, error: signError } = await supabase.storage
+      .from(bucket)
+      .createSignedUrl(data.path, 3600);
+    if (signError || !signData?.signedUrl) throw new Error("Failed to get preview URL");
+    displayUrl = signData.signedUrl;
+  }
+
+  return { storagePath: buildStoragePath(bucket, data.path), displayUrl };
 }
 
 function UploadButton({ label: lbl, labels, accept, uploading, compressing, error, onFile }: {
@@ -155,7 +190,7 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
   onUpdate: (field: "front" | "back", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
-  onClearUrl: (field: "imageUrl" | "frontAudioUrl" | "backAudioUrl") => void;
+  onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
 }) {
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
@@ -177,8 +212,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
             {label(labels.frontAudio, true, labels.optional)}
-            {item.frontAudioUrl
-              ? <AudioPreview url={item.frontAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioUrl")} />
+            {item.frontAudioDisplayUrl
+              ? <AudioPreview url={item.frontAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioPath")} />
               : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
                   onFile={(f) => onUpload("frontAudio", f)} />}
@@ -192,8 +227,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
             {label(labels.backAudio, true, labels.optional)}
-            {item.backAudioUrl
-              ? <AudioPreview url={item.backAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioUrl")} />
+            {item.backAudioDisplayUrl
+              ? <AudioPreview url={item.backAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioPath")} />
               : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
                   onFile={(f) => onUpload("backAudio", f)} />}
@@ -203,8 +238,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
 
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
         {label(labels.image, true, labels.optional)}
-        {item.imageUrl
-          ? <ImagePreview url={item.imageUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("imageUrl")} />
+        {item.imageDisplayUrl
+          ? <ImagePreview url={item.imageDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("imagePath")} />
           : <UploadButton label={labels.uploadImage} labels={labels} accept="image/jpeg,image/png,image/webp"
               uploading={item.uploads.image.uploading} compressing={item.uploads.image.compressing} error={item.uploads.image.error}
               onFile={(f) => onUpload("image", f)} />}
@@ -228,6 +263,8 @@ export default function CreateCourseForm({
   const [sections, setSections] = useState<Section[]>([makeSection()]);
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]);
+  const [selectedVisibility, setSelectedVisibility] = useState("public");
+  const prospectiveCourseId = useRef(crypto.randomUUID());
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -267,16 +304,22 @@ export default function CreateCourseForm({
     ));
   }
 
-  function clearUrl(sectionId: number, itemId: number, field: "imageUrl" | "frontAudioUrl" | "backAudioUrl") {
+  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "frontAudioPath" | "backAudioPath") {
+    const displayField = field === "imagePath"
+      ? "imageDisplayUrl"
+      : field === "frontAudioPath"
+        ? "frontAudioDisplayUrl"
+        : "backAudioDisplayUrl";
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
-        ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: "" } : item) }
+        ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: "", [displayField]: "" } : item) }
         : s
     ));
   }
 
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
-    const urlField = field === "image" ? "imageUrl" : field === "frontAudio" ? "frontAudioUrl" : "backAudioUrl";
+    const pathField = field === "image" ? "imagePath" : field === "frontAudio" ? "frontAudioPath" : "backAudioPath";
+    const displayField = field === "image" ? "imageDisplayUrl" : field === "frontAudio" ? "frontAudioDisplayUrl" : "backAudioDisplayUrl";
     const willCompress = field === "image" && IMAGE_TYPES.includes(file.type) && file.size > IMAGE_MAX;
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
@@ -286,11 +329,18 @@ export default function CreateCourseForm({
         : s
     ));
     try {
-      const url = await uploadToStorage(file, labels);
+      const { storagePath, displayUrl } = await uploadToStorage(
+        file,
+        labels,
+        prospectiveCourseId.current,
+        selectedVisibility,
+      );
       setSections((prev) => prev.map((s) =>
         s.id === sectionId
           ? { ...s, items: s.items.map((item) =>
-              item.id === itemId ? { ...item, [urlField]: url, uploads: { ...item.uploads, [field]: { uploading: false, compressing: false, error: null } } } : item
+              item.id === itemId
+                ? { ...item, [pathField]: storagePath, [displayField]: displayUrl, uploads: { ...item.uploads, [field]: { uploading: false, compressing: false, error: null } } }
+                : item
             )}
           : s
       ));
@@ -338,9 +388,9 @@ export default function CreateCourseForm({
       items: s.items.map((i) => ({
         front: i.front,
         back: i.back,
-        imageUrl: i.imageUrl,
-        frontAudioUrl: i.frontAudioUrl,
-        backAudioUrl: i.backAudioUrl,
+        imagePath: i.imagePath,
+        frontAudioPath: i.frontAudioPath,
+        backAudioPath: i.backAudioPath,
       })),
     }))
   );
@@ -348,6 +398,7 @@ export default function CreateCourseForm({
   return (
     <form action={formAction} className="flex flex-col gap-6">
       <input type="hidden" name="sections_data" value={sectionsPayload} />
+      <input type="hidden" name="prospective_course_id" value={prospectiveCourseId.current} />
 
       {/* Course info */}
       <section className="rounded-lg bg-paper-2 p-8 shadow-hard">
@@ -398,7 +449,13 @@ export default function CreateCourseForm({
             </div>
             <div>
               {label(labels.visibility)}
-              <select id="visibility" name="visibility" defaultValue="public" className={selectCls}>
+              <select
+                id="visibility"
+                name="visibility"
+                value={selectedVisibility}
+                onChange={(e) => setSelectedVisibility(e.target.value)}
+                className={selectCls}
+              >
                 <option value="public">{labels.public}</option>
                 <option value="unlisted">{labels.unlisted}</option>
                 <option value="private">{labels.private}</option>

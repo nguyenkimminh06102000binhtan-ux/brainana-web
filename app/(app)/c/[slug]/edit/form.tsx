@@ -7,6 +7,8 @@ import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { TOP_LEVEL_CATEGORIES, getCategoryItems, getCategoryForItem } from "@/app/constants/categories";
 import { t } from "@/utils/t";
+import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
+
 const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -22,9 +24,12 @@ type Item = {
   dbId: string | null;
   front: string;
   back: string;
-  imageUrl: string;
-  frontAudioUrl: string;
-  backAudioUrl: string;
+  imagePath: string;
+  imageDisplayUrl: string;
+  frontAudioPath: string;
+  frontAudioDisplayUrl: string;
+  backAudioPath: string;
+  backAudioDisplayUrl: string;
   uploads: Record<UploadField, UploadState>;
 };
 
@@ -46,8 +51,11 @@ type DbSection = {
     front_text: string;
     back_text: string;
     image_url: string | null;
+    image_display_url: string | null;
     front_audio_url: string | null;
+    front_audio_display_url: string | null;
     back_audio_url: string | null;
+    back_audio_display_url: string | null;
     position: number;
   }[];
 };
@@ -74,7 +82,19 @@ const freshUpload = (): Record<UploadField, UploadState> => ({
   frontAudio: { uploading: false, compressing: false, error: null },
   backAudio: { uploading: false, compressing: false, error: null },
 });
-const makeItem = (): Item => ({ id: uid++, dbId: null, front: "", back: "", imageUrl: "", frontAudioUrl: "", backAudioUrl: "", uploads: freshUpload() });
+const makeItem = (): Item => ({
+  id: uid++,
+  dbId: null,
+  front: "",
+  back: "",
+  imagePath: "",
+  imageDisplayUrl: "",
+  frontAudioPath: "",
+  frontAudioDisplayUrl: "",
+  backAudioPath: "",
+  backAudioDisplayUrl: "",
+  uploads: freshUpload(),
+});
 const makeSection = (): Section => ({ id: uid++, dbId: null, title: "", description: "", items: [makeItem()] });
 
 function fromDb(dbSections: DbSection[]): Section[] {
@@ -89,9 +109,12 @@ function fromDb(dbSections: DbSection[]): Section[] {
           dbId: i.id,
           front: i.front_text,
           back: i.back_text,
-          imageUrl: i.image_url ?? "",
-          frontAudioUrl: i.front_audio_url ?? "",
-          backAudioUrl: i.back_audio_url ?? "",
+          imagePath: i.image_url ?? "",
+          imageDisplayUrl: i.image_display_url ?? "",
+          frontAudioPath: i.front_audio_url ?? "",
+          frontAudioDisplayUrl: i.front_audio_display_url ?? "",
+          backAudioPath: i.back_audio_url ?? "",
+          backAudioDisplayUrl: i.back_audio_display_url ?? "",
           uploads: freshUpload(),
         }))
       : [makeItem()],
@@ -135,7 +158,12 @@ function parseCsv(text: string): Array<[string, string]> {
   return results;
 }
 
-async function uploadToStorage(file: File, labels: CreateEditLabels): Promise<string> {
+async function uploadToStorage(
+  file: File,
+  labels: CreateEditLabels,
+  courseId: string,
+  visibility: string,
+): Promise<{ storagePath: string; displayUrl: string }> {
   const isImage = IMAGE_TYPES.includes(file.type);
   const isAudio = AUDIO_TYPES.includes(file.type);
   if (!isImage && !isAudio) throw new Error(labels.unsupportedFileType);
@@ -144,11 +172,26 @@ async function uploadToStorage(file: File, labels: CreateEditLabels): Promise<st
   const fileToUpload = isImage ? await compressImage(file, IMAGE_MAX) : file;
   const supabase = createClient();
   const ext = fileToUpload.name.split(".").pop();
-  const path = `items/${crypto.randomUUID()}.${ext}`;
-  const { data, error } = await supabase.storage.from("course-media").upload(path, fileToUpload, { contentType: fileToUpload.type });
+  const objectPath = `courses/${courseId}/items/${crypto.randomUUID()}.${ext}`;
+  const bucket = bucketForVisibility(visibility);
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .upload(objectPath, fileToUpload, { contentType: fileToUpload.type });
   if (error) throw new Error(error.message);
-  const { data: { publicUrl } } = supabase.storage.from("course-media").getPublicUrl(data.path);
-  return publicUrl;
+
+  let displayUrl: string;
+  if (bucket === PUBLIC_BUCKET) {
+    displayUrl = supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl;
+  } else {
+    const { data: signData, error: signError } = await supabase.storage
+      .from(bucket)
+      .createSignedUrl(data.path, 3600);
+    if (signError || !signData?.signedUrl) throw new Error("Failed to get preview URL");
+    displayUrl = signData.signedUrl;
+  }
+
+  return { storagePath: buildStoragePath(bucket, data.path), displayUrl };
 }
 
 function lbl(text: string, optional?: boolean, optionalLabel = "optional") {
@@ -205,7 +248,7 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
   onUpdate: (field: "front" | "back", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
-  onClearUrl: (field: "imageUrl" | "frontAudioUrl" | "backAudioUrl") => void;
+  onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
 }) {
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
@@ -226,8 +269,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
             {lbl(labels.frontAudio, true, labels.optional)}
-            {item.frontAudioUrl
-              ? <AudioPreview url={item.frontAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioUrl")} />
+            {item.frontAudioDisplayUrl
+              ? <AudioPreview url={item.frontAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioPath")} />
               : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
                   onFile={(f) => onUpload("frontAudio", f)} />}
@@ -240,8 +283,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
             {lbl(labels.backAudio, true, labels.optional)}
-            {item.backAudioUrl
-              ? <AudioPreview url={item.backAudioUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioUrl")} />
+            {item.backAudioDisplayUrl
+              ? <AudioPreview url={item.backAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioPath")} />
               : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
                   uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
                   onFile={(f) => onUpload("backAudio", f)} />}
@@ -250,8 +293,8 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
       </div>
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
         {lbl(labels.image, true, labels.optional)}
-        {item.imageUrl
-          ? <ImagePreview url={item.imageUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("imageUrl")} />
+        {item.imageDisplayUrl
+          ? <ImagePreview url={item.imageDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("imagePath")} />
           : <UploadButton label={labels.uploadImage} labels={labels} accept="image/jpeg,image/png,image/webp"
               uploading={item.uploads.image.uploading} compressing={item.uploads.image.compressing} error={item.uploads.image.error}
               onFile={(f) => onUpload("image", f)} />}
@@ -288,6 +331,7 @@ export default function EditCourseForm({
     (course.subcategory ? getCategoryForItem(course.subcategory) : null) ??
     TOP_LEVEL_CATEGORIES[0];
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [selectedVisibility, setSelectedVisibility] = useState(course.visibility);
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -319,13 +363,21 @@ export default function EditCourseForm({
       s.id === sectionId ? { ...s, items: s.items.filter((i) => i.id !== itemId) } : s
     ));
   }
-  function clearUrl(sectionId: number, itemId: number, field: "imageUrl" | "frontAudioUrl" | "backAudioUrl") {
+  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "frontAudioPath" | "backAudioPath") {
+    const displayField = field === "imagePath"
+      ? "imageDisplayUrl"
+      : field === "frontAudioPath"
+        ? "frontAudioDisplayUrl"
+        : "backAudioDisplayUrl";
     setSections((prev) => prev.map((s) =>
-      s.id === sectionId ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, [field]: "" } : i) } : s
+      s.id === sectionId
+        ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, [field]: "", [displayField]: "" } : i) }
+        : s
     ));
   }
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
-    const urlField = field === "image" ? "imageUrl" : field === "frontAudio" ? "frontAudioUrl" : "backAudioUrl";
+    const pathField = field === "image" ? "imagePath" : field === "frontAudio" ? "frontAudioPath" : "backAudioPath";
+    const displayField = field === "image" ? "imageDisplayUrl" : field === "frontAudio" ? "frontAudioDisplayUrl" : "backAudioDisplayUrl";
     const willCompress = field === "image" && IMAGE_TYPES.includes(file.type) && file.size > IMAGE_MAX;
     setSections((prev) => prev.map((s) =>
       s.id === sectionId ? { ...s, items: s.items.map((i) =>
@@ -333,10 +385,17 @@ export default function EditCourseForm({
       )} : s
     ));
     try {
-      const url = await uploadToStorage(file, labels);
+      const { storagePath, displayUrl } = await uploadToStorage(
+        file,
+        labels,
+        course.id,
+        selectedVisibility,
+      );
       setSections((prev) => prev.map((s) =>
         s.id === sectionId ? { ...s, items: s.items.map((i) =>
-          i.id === itemId ? { ...i, [urlField]: url, uploads: { ...i.uploads, [field]: { uploading: false, compressing: false, error: null } } } : i
+          i.id === itemId
+            ? { ...i, [pathField]: storagePath, [displayField]: displayUrl, uploads: { ...i.uploads, [field]: { uploading: false, compressing: false, error: null } } }
+            : i
         )} : s
       ));
     } catch (err) {
@@ -379,9 +438,9 @@ export default function EditCourseForm({
         dbId: i.dbId,
         front: i.front,
         back: i.back,
-        imageUrl: i.imageUrl,
-        frontAudioUrl: i.frontAudioUrl,
-        backAudioUrl: i.backAudioUrl,
+        imagePath: i.imagePath,
+        frontAudioPath: i.frontAudioPath,
+        backAudioPath: i.backAudioPath,
       })),
     }))
   );
@@ -436,7 +495,12 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.visibility)}
-              <select name="visibility" defaultValue={course.visibility} className={selectCls}>
+              <select
+                name="visibility"
+                value={selectedVisibility}
+                onChange={(e) => setSelectedVisibility(e.target.value)}
+                className={selectCls}
+              >
                 <option value="public">{labels.public}</option>
                 <option value="unlisted">{labels.unlisted}</option>
                 <option value="private">{labels.private}</option>
