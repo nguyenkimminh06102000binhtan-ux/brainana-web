@@ -2,16 +2,15 @@
  * Migrates item media from the old flat `course-media` bucket to the new
  * per-visibility buckets: `course-media-public` and `course-media-private`.
  *
- * Run with:
- *   SUPABASE_SERVICE_ROLE_KEY=<key> ts-node --project tsconfig.json scripts/migrate-storage.ts
+ * Before running, add your Supabase service role key to .env.local:
+ *   SUPABASE_SERVICE_ROLE_KEY=eyJ...
+ * (Find it in Supabase dashboard → Settings → API → service_role key)
  *
- * Or with tsx:
- *   SUPABASE_SERVICE_ROLE_KEY=<key> npx tsx scripts/migrate-storage.ts
- *
- * Requires NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.
- * Uses the service role key so it can bypass RLS and access all buckets.
+ * Run from the project root:
+ *   node --env-file=.env.local scripts/migrate-storage.mjs
  *
  * The script is idempotent — items already migrated (non-https URLs) are skipped.
+ * Old files in course-media are preserved after migration so you can verify first.
  */
 
 import { createClient } from "@supabase/supabase-js";
@@ -20,46 +19,43 @@ const OLD_BUCKET = "course-media";
 const PUBLIC_BUCKET = "course-media-public";
 const PRIVATE_BUCKET = "course-media-private";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !serviceRoleKey) {
-  console.error("Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+  console.error("Missing env vars. Make sure .env.local has:");
+  console.error("  NEXT_PUBLIC_SUPABASE_URL=...");
+  console.error("  SUPABASE_SERVICE_ROLE_KEY=...");
   process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-function bucketForVisibility(visibility: string): string {
+function bucketForVisibility(visibility) {
   return visibility === "private" ? PRIVATE_BUCKET : PUBLIC_BUCKET;
 }
 
-function buildStoragePath(bucket: string, objectPath: string): string {
+function buildStoragePath(bucket, objectPath) {
   return `${bucket}:${objectPath}`;
 }
 
 // Extract the object path from a legacy public URL
 // e.g. https://<project>.supabase.co/storage/v1/object/public/course-media/items/xxx.jpg
 //   -> items/xxx.jpg
-function extractObjectPath(publicUrl: string, bucket: string): string | null {
+function extractObjectPath(publicUrl, bucket) {
   const marker = `/object/public/${bucket}/`;
   const idx = publicUrl.indexOf(marker);
   if (idx === -1) return null;
   return publicUrl.slice(idx + marker.length);
 }
 
-async function migrateUrl(
-  publicUrl: string,
-  courseId: string,
-  visibility: string,
-): Promise<string | null> {
+async function migrateUrl(publicUrl, courseId, visibility) {
   const oldPath = extractObjectPath(publicUrl, OLD_BUCKET);
   if (!oldPath) {
     console.warn(`  Could not parse path from URL: ${publicUrl}`);
     return null;
   }
 
-  // Download from old bucket
   const { data: fileData, error: downloadError } = await supabase.storage
     .from(OLD_BUCKET)
     .download(oldPath);
@@ -68,13 +64,11 @@ async function migrateUrl(
     return null;
   }
 
-  // New path under organized structure
   const ext = oldPath.split(".").pop() ?? "bin";
   const fileId = oldPath.split("/").pop()?.replace(`.${ext}`, "") ?? crypto.randomUUID();
   const newObjectPath = `courses/${courseId}/items/${fileId}.${ext}`;
   const targetBucket = bucketForVisibility(visibility);
 
-  // Upload to new bucket
   const { error: uploadError } = await supabase.storage
     .from(targetBucket)
     .upload(newObjectPath, fileData, { contentType: fileData.type, upsert: true });
@@ -97,10 +91,9 @@ async function main() {
     process.exit(1);
   }
 
-  const visibilityMap = new Map(courses.map((c) => [c.id, c.visibility as string]));
+  const visibilityMap = new Map(courses.map((c) => [c.id, c.visibility]));
   console.log(`Found ${courses.length} courses.`);
 
-  // Fetch all items that still have legacy URLs (https://...)
   const { data: items, error: itemsError } = await supabase
     .from("items")
     .select("id, course_id, image_url, front_audio_url, back_audio_url");
@@ -118,47 +111,36 @@ async function main() {
   );
 
   console.log(`Found ${legacyItems.length} items with legacy URLs to migrate.`);
+  if (legacyItems.length === 0) {
+    console.log("Nothing to do.");
+    return;
+  }
 
   let migrated = 0;
   let failed = 0;
 
   for (const item of legacyItems) {
     const visibility = visibilityMap.get(item.course_id) ?? "public";
-    console.log(`\nMigrating item ${item.id} (course ${item.course_id}, ${visibility})...`);
+    console.log(`\nMigrating item ${item.id} (${visibility})...`);
 
-    const updates: Record<string, string | null> = {};
+    const updates = {};
 
     if (item.image_url?.startsWith("https://")) {
-      console.log(`  image_url: ${item.image_url.slice(-40)}`);
       const newPath = await migrateUrl(item.image_url, item.course_id, visibility);
-      if (newPath) {
-        updates.image_url = newPath;
-        console.log(`  -> ${newPath}`);
-      } else {
-        failed++;
-      }
+      if (newPath) { updates.image_url = newPath; console.log(`  image -> ${newPath}`); }
+      else failed++;
     }
 
     if (item.front_audio_url?.startsWith("https://")) {
-      console.log(`  front_audio_url: ${item.front_audio_url.slice(-40)}`);
       const newPath = await migrateUrl(item.front_audio_url, item.course_id, visibility);
-      if (newPath) {
-        updates.front_audio_url = newPath;
-        console.log(`  -> ${newPath}`);
-      } else {
-        failed++;
-      }
+      if (newPath) { updates.front_audio_url = newPath; console.log(`  front_audio -> ${newPath}`); }
+      else failed++;
     }
 
     if (item.back_audio_url?.startsWith("https://")) {
-      console.log(`  back_audio_url: ${item.back_audio_url.slice(-40)}`);
       const newPath = await migrateUrl(item.back_audio_url, item.course_id, visibility);
-      if (newPath) {
-        updates.back_audio_url = newPath;
-        console.log(`  -> ${newPath}`);
-      } else {
-        failed++;
-      }
+      if (newPath) { updates.back_audio_url = newPath; console.log(`  back_audio -> ${newPath}`); }
+      else failed++;
     }
 
     if (Object.keys(updates).length > 0) {
@@ -175,8 +157,8 @@ async function main() {
     }
   }
 
-  console.log(`\nDone. Migrated: ${migrated}, Failed: ${failed}`);
-  console.log("Note: old files in course-media are preserved. Delete manually once verified.");
+  console.log(`\nDone. Migrated: ${migrated} items, Failed: ${failed} files.`);
+  console.log("Old files in course-media are preserved. Delete them manually once verified.");
 }
 
 main().catch((err) => {
