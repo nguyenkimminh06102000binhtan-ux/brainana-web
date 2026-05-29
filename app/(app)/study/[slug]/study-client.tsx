@@ -71,6 +71,22 @@ type StudyLabels = {
   feedbackWrong: string[];
 };
 
+type MemsLabels = {
+  memoryHints: string;
+  writeYourOwn: string;
+  editYourMem: string;
+  placeholder: string;
+  submit: string;
+  cancel: string;
+  delete: string;
+  deleteConfirm: string;
+  seeAll: string;
+  helpful: string;
+  editLabel: string;
+  charsLeft: string;
+  noHints: string;
+};
+
 interface StudyClientProps {
   userId: string;
   courseId: string;
@@ -83,6 +99,7 @@ interface StudyClientProps {
   hasAudio: boolean;
   showRomanization: boolean;
   labels: StudyLabels;
+  memsLabels: MemsLabels;
 }
 
 export default function StudyClient({
@@ -97,6 +114,7 @@ export default function StudyClient({
   hasAudio,
   showRomanization,
   labels,
+  memsLabels,
 }: StudyClientProps) {
   const available = reviewDue + newCards;
   const sessionLimit = available > 0 ? available : totalCount;
@@ -168,6 +186,7 @@ export default function StudyClient({
         cards={sessionCards}
         showRomanization={showRomanization}
         audioOnlyMode={selectedTypes.length === 1 && selectedTypes[0] === "audio_type"}
+        memsLabels={memsLabels}
         onComplete={handleSessionComplete}
         onExit={handleExit}
         labels={{

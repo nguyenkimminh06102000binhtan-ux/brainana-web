@@ -548,5 +548,29 @@
       "My kid": "내 아이"
     },
     "validationProfileNotFound": "프로필을 찾을 수 없습니다. 로그아웃한 후 다시 시도해 주세요."
+  },
+  "mems": {
+    "memoryHints": "암기 힌트",
+    "writeYourOwn": "나만의 힌트 작성",
+    "editYourMem": "힌트 수정",
+    "placeholder": "이것을 어떻게 기억하는지 적어보세요…",
+    "submit": "제출",
+    "cancel": "취소",
+    "delete": "삭제",
+    "deleteConfirm": "이 힌트를 삭제하시겠습니까?",
+    "seeAll": "힌트 {count}개 모두 보기",
+    "helpful": "{count}명 도움됨",
+    "editLabel": "수정",
+    "charsLeft": "{count}자 남음",
+    "noHints": "아직 힌트가 없습니다 — 첫 번째로 작성해 보세요!",
+    "topHints": "인기 암기 힌트",
+    "topHintsEmpty": "이 강좌에는 아직 암기 힌트가 없습니다.",
+    "contributions": "기여",
+    "contributionsEmpty": "아직 힌트가 없습니다.",
+    "totalHelpful": "총 {count}개의 도움됨 투표",
+    "forCard": "카드: {front}",
+    "memOfWeek": "이번 주 암기 힌트",
+    "memOfWeekEmpty": "이번 주 힌트가 아직 없습니다.",
+    "inCourse": "{course} 에서"
   }
 }

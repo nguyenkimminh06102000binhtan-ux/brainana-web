@@ -548,5 +548,29 @@
       "My kid": "мій малюк"
     },
     "validationProfileNotFound": "Профіль не знайдено. Вийдіть і повторіть спробу."
+  },
+  "mems": {
+    "memoryHints": "Мнемонічні підказки",
+    "writeYourOwn": "Напишіть свою підказку",
+    "editYourMem": "Редагувати підказку",
+    "placeholder": "Запишіть, як ви це запам'ятовуєте…",
+    "submit": "Надіслати",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "deleteConfirm": "Видалити цю підказку?",
+    "seeAll": "Показати всі {count} підказки",
+    "helpful": "{count} корисних",
+    "editLabel": "Редагувати",
+    "charsLeft": "Залишилось {count}",
+    "noHints": "Поки немає підказок — будьте першим!",
+    "topHints": "Найкращі мнемонічні підказки",
+    "topHintsEmpty": "Поки немає підказок для цього курсу.",
+    "contributions": "Внески",
+    "contributionsEmpty": "Поки немає підказок.",
+    "totalHelpful": "Всього {count} корисних голосів",
+    "forCard": "для: {front}",
+    "memOfWeek": "Підказка тижня",
+    "memOfWeekEmpty": "Поки немає підказок цього тижня.",
+    "inCourse": "у {course}"
   }
 }

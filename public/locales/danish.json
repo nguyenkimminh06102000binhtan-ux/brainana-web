@@ -548,5 +548,29 @@
       "My kid": "Mit barn"
     },
     "validationProfileNotFound": "Profil ikke fundet. Log venligst ud og prøv igen."
+  },
+  "mems": {
+    "memoryHints": "Hukommelsestips",
+    "writeYourOwn": "Skriv dit eget tip",
+    "editYourMem": "Rediger dit tip",
+    "placeholder": "Skriv ned, hvordan du husker dette…",
+    "submit": "Send",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "deleteConfirm": "Slet dette tip?",
+    "seeAll": "Se alle {count} tips",
+    "helpful": "{count} nyttige",
+    "editLabel": "Rediger",
+    "charsLeft": "{count} tilbage",
+    "noHints": "Ingen tips endnu — vær den første!",
+    "topHints": "Top hukommelsestips",
+    "topHintsEmpty": "Ingen hukommelsestips for dette kursus endnu.",
+    "contributions": "Bidrag",
+    "contributionsEmpty": "Ingen tips endnu.",
+    "totalHelpful": "{count} nyttige stemmer i alt",
+    "forCard": "for: {front}",
+    "memOfWeek": "Tip af ugen",
+    "memOfWeekEmpty": "Ingen tips denne uge endnu.",
+    "inCourse": "i {course}"
   }
 }

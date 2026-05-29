@@ -548,5 +548,29 @@
       "My kid": "Meu filho"
     },
     "validationProfileNotFound": "Perfil não encontrado. Saia e tente novamente."
+  },
+  "mems": {
+    "memoryHints": "Dicas de memória",
+    "writeYourOwn": "Escreva sua própria dica",
+    "editYourMem": "Editar sua dica",
+    "placeholder": "Anote como você se lembra disso…",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "deleteConfirm": "Excluir esta dica?",
+    "seeAll": "Ver todas as {count} dicas",
+    "helpful": "{count} útil",
+    "editLabel": "Editar",
+    "charsLeft": "{count} restantes",
+    "noHints": "Nenhuma dica ainda — seja o primeiro!",
+    "topHints": "Melhores dicas de memória",
+    "topHintsEmpty": "Ainda não há dicas de memória para este curso.",
+    "contributions": "Contribuições",
+    "contributionsEmpty": "Nenhuma dica ainda.",
+    "totalHelpful": "{count} votos úteis no total",
+    "forCard": "para: {front}",
+    "memOfWeek": "Dica da semana",
+    "memOfWeekEmpty": "Nenhuma dica esta semana ainda.",
+    "inCourse": "em {course}"
   }
 }

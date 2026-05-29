@@ -548,5 +548,29 @@
       "My kid": "我的孩子"
     },
     "validationProfileNotFound": "未找到个人资料。请退出并重试。"
+  },
+  "mems": {
+    "memoryHints": "记忆提示",
+    "writeYourOwn": "写下你自己的提示",
+    "editYourMem": "编辑你的提示",
+    "placeholder": "记下你如何记住这个…",
+    "submit": "提交",
+    "cancel": "取消",
+    "delete": "删除",
+    "deleteConfirm": "删除这条提示？",
+    "seeAll": "查看全部 {count} 条提示",
+    "helpful": "{count} 人觉得有帮助",
+    "editLabel": "编辑",
+    "charsLeft": "剩余 {count} 字",
+    "noHints": "还没有提示——成为第一个！",
+    "topHints": "热门记忆提示",
+    "topHintsEmpty": "本课程还没有记忆提示。",
+    "contributions": "贡献",
+    "contributionsEmpty": "还没有提示。",
+    "totalHelpful": "共 {count} 个有帮助的投票",
+    "forCard": "卡片：{front}",
+    "memOfWeek": "本周记忆提示",
+    "memOfWeekEmpty": "本周还没有提示。",
+    "inCourse": "在 {course} 中"
   }
 }

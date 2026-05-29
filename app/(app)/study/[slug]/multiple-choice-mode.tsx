@@ -10,14 +10,17 @@ import type { StudyCard, CardAnswer, Outcome } from "./types";
 interface MCModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
+  onReveal?: () => void;
   feedbackCorrect: string[];
   feedbackWrong: string[];
+  continueLabel: string;
 }
 
-export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, feedbackWrong }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
+  const [pendingAnswer, setPendingAnswer] = useState<CardAnswer | null>(null);
 
   const options = useMemo(() => {
     const pool = [card.backText, ...card.distractors.slice(0, 3)];
@@ -31,18 +34,21 @@ export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, fe
     startedAt.current = Date.now();
     setSelected(null);
     setOutcome(null);
+    setPendingAnswer(null);
   }, [card.itemId]);
 
   useEffect(() => {
-    if (selected === null) {
-      function onKey(e: KeyboardEvent) {
+    function onKey(e: KeyboardEvent) {
+      if (selected === null) {
         const idx = ["1", "2", "3", "4"].indexOf(e.key);
         if (idx !== -1 && idx < options.length) choose(idx);
+      } else if (e.key === "Enter" && pendingAnswer) {
+        onAnswer(pendingAnswer);
       }
-      window.addEventListener("keydown", onKey);
-      return () => window.removeEventListener("keydown", onKey);
     }
-  }, [selected, options]); // eslint-disable-line react-hooks/exhaustive-deps
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected, options, pendingAnswer]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function choose(idx: number) {
     if (selected !== null) return;
@@ -56,6 +62,7 @@ export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, fe
     if (isCorrect) playCorrectSound();
     else playWrongSound();
     setOutcome(isCorrect ? "correct" : "incorrect");
+    onReveal?.();
 
     const ef = card.progress?.easeFactor ?? 2.5;
     const iv = card.progress?.intervalDays ?? 1;
@@ -64,7 +71,7 @@ export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, fe
     const wasMastered = rp >= 5 && ef >= 2.5;
     const nowMastered = result.repetitions >= 5 && result.easeFactor >= 2.5;
 
-    const answer: CardAnswer = {
+    setPendingAnswer({
       itemId: card.itemId,
       outcome: cardOutcome,
       quality,
@@ -74,10 +81,7 @@ export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, fe
       newInterval: result.interval,
       newRepetitions: result.repetitions,
       newlyMastered: !wasMastered && nowMastered,
-    };
-
-    // Auto-advance — longer delay on wrong so user can read the correct answer
-    setTimeout(() => onAnswer(answer), isCorrect ? 1000 : 3000);
+    });
   }
 
   return (
@@ -136,6 +140,17 @@ export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, fe
         })}
       </div>
 
+      {pendingAnswer && (
+        <div className="px-4">
+          <button
+            type="button"
+            onClick={() => onAnswer(pendingAnswer)}
+            className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+          >
+            {continueLabel}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -313,6 +313,30 @@ export type Locale = {
     daysAgo: string;
   };
   categories: Record<string, string>;
+  mems: {
+    memoryHints: string;
+    writeYourOwn: string;
+    editYourMem: string;
+    placeholder: string;
+    submit: string;
+    cancel: string;
+    delete: string;
+    deleteConfirm: string;
+    seeAll: string;
+    helpful: string;
+    editLabel: string;
+    charsLeft: string;
+    noHints: string;
+    topHints: string;
+    topHintsEmpty: string;
+    contributions: string;
+    contributionsEmpty: string;
+    totalHelpful: string;
+    forCard: string;
+    memOfWeek: string;
+    memOfWeekEmpty: string;
+    inCourse: string;
+  };
 };
 
 const isProd = process.env.NODE_ENV === "production";

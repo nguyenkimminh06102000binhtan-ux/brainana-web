@@ -548,5 +548,29 @@
       "My kid": "My kind"
     },
     "validationProfileNotFound": "Profiel nie gevind nie. Meld asseblief af en probeer weer."
+  },
+  "mems": {
+    "memoryHints": "Geheuewenke",
+    "writeYourOwn": "Skryf jou eie wenk",
+    "editYourMem": "Wysig jou wenk",
+    "placeholder": "Skryf neer hoe jy dit onthou…",
+    "submit": "Dien in",
+    "cancel": "Kanselleer",
+    "delete": "Verwyder",
+    "deleteConfirm": "Verwyder hierdie wenk?",
+    "seeAll": "Sien alle {count} wenke",
+    "helpful": "{count} nuttig",
+    "editLabel": "Wysig",
+    "charsLeft": "{count} oor",
+    "noHints": "Nog geen wenke nie — wees die eerste!",
+    "topHints": "Top Geheuewenke",
+    "topHintsEmpty": "Nog geen geheuewenke vir hierdie kursus nie.",
+    "contributions": "Bydraes",
+    "contributionsEmpty": "Nog geen wenke nie.",
+    "totalHelpful": "{count} nuttige stemme totaal",
+    "forCard": "vir: {front}",
+    "memOfWeek": "Geheuewenk van die Week",
+    "memOfWeekEmpty": "Nog geen wenke hierdie week nie.",
+    "inCourse": "in {course}"
   }
 }

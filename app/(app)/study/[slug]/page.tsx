@@ -85,6 +85,7 @@ export default async function StudyPage({
       preferredTypes={preferredTypes}
       hasAudio={hasAudio}
       showRomanization={profile?.show_romanization ?? true}
+      memsLabels={loc.mems}
       labels={{
         ...loc.study,
         studyWith: loc.course.studyWithSection,

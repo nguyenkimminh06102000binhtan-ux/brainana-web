@@ -548,5 +548,29 @@
       "My kid": "Moje dijete"
     },
     "validationProfileNotFound": "Profil nije pronađen. Odjavite se i pokušajte ponovo."
+  },
+  "mems": {
+    "memoryHints": "Mnemotehničke napomene",
+    "writeYourOwn": "Napiši svoju napomenu",
+    "editYourMem": "Uredi svoju napomenu",
+    "placeholder": "Zapiši kako pamtiš ovo…",
+    "submit": "Pošalji",
+    "cancel": "Odustani",
+    "delete": "Izbriši",
+    "deleteConfirm": "Izbrisati ovu napomenu?",
+    "seeAll": "Prikaži svih {count} napomena",
+    "helpful": "{count} korisno",
+    "editLabel": "Uredi",
+    "charsLeft": "Još {count}",
+    "noHints": "Još nema napomena — budi prvi!",
+    "topHints": "Najbolje mnemotehničke napomene",
+    "topHintsEmpty": "Još nema napomena za ovaj tečaj.",
+    "contributions": "Doprinosi",
+    "contributionsEmpty": "Još nema napomena.",
+    "totalHelpful": "Ukupno {count} korisnih glasova",
+    "forCard": "za: {front}",
+    "memOfWeek": "Napomena tjedna",
+    "memOfWeekEmpty": "Još nema napomena ovog tjedna.",
+    "inCourse": "u {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Mon enfant"
     },
     "validationProfileNotFound": "Profil introuvable. Veuillez vous déconnecter et réessayer."
+  },
+  "mems": {
+    "memoryHints": "Astuces mnémotechniques",
+    "writeYourOwn": "Écrire votre propre astuce",
+    "editYourMem": "Modifier votre astuce",
+    "placeholder": "Notez comment vous vous en souvenez…",
+    "submit": "Envoyer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "deleteConfirm": "Supprimer cette astuce ?",
+    "seeAll": "Voir les {count} astuces",
+    "helpful": "{count} utile",
+    "editLabel": "Modifier",
+    "charsLeft": "{count} restants",
+    "noHints": "Pas encore d'astuces — soyez le premier !",
+    "topHints": "Meilleures astuces mnémotechniques",
+    "topHintsEmpty": "Pas encore d'astuces pour ce cours.",
+    "contributions": "Contributions",
+    "contributionsEmpty": "Pas encore d'astuces.",
+    "totalHelpful": "{count} votes utiles au total",
+    "forCard": "pour : {front}",
+    "memOfWeek": "Astuce de la semaine",
+    "memOfWeekEmpty": "Pas d'astuces cette semaine.",
+    "inCourse": "dans {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Mijn kind"
     },
     "validationProfileNotFound": "Profiel niet gevonden. Meld u af en probeer het opnieuw."
+  },
+  "mems": {
+    "memoryHints": "Geheugensteuntjes",
+    "writeYourOwn": "Schrijf je eigen hint",
+    "editYourMem": "Bewerk je hint",
+    "placeholder": "Noteer hoe je dit onthoudt…",
+    "submit": "Versturen",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "deleteConfirm": "Deze hint verwijderen?",
+    "seeAll": "Bekijk alle {count} hints",
+    "helpful": "{count} nuttig",
+    "editLabel": "Bewerken",
+    "charsLeft": "{count} over",
+    "noHints": "Nog geen hints — wees de eerste!",
+    "topHints": "Beste geheugensteuntjes",
+    "topHintsEmpty": "Nog geen geheugensteuntjes voor deze cursus.",
+    "contributions": "Bijdragen",
+    "contributionsEmpty": "Nog geen hints.",
+    "totalHelpful": "{count} nuttige stemmen totaal",
+    "forCard": "voor: {front}",
+    "memOfWeek": "Hint van de week",
+    "memOfWeekEmpty": "Nog geen hints deze week.",
+    "inCourse": "in {course}"
   }
 }

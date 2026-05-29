@@ -10,7 +10,24 @@ import MultipleChoiceMode from "./multiple-choice-mode";
 import TypeAnswerMode from "./type-answer-mode";
 import AudioTypeMode from "./audio-type-mode";
 import SpeedMatchMode from "./speed-match-mode";
+import MemSection from "../../_components/MemSection";
 import type { StudyCard, CardAnswer, SessionStats } from "./types";
+
+interface MemsLabels {
+  memoryHints: string;
+  writeYourOwn: string;
+  editYourMem: string;
+  placeholder: string;
+  submit: string;
+  cancel: string;
+  delete: string;
+  deleteConfirm: string;
+  seeAll: string;
+  helpful: string;
+  editLabel: string;
+  charsLeft: string;
+  noHints: string;
+}
 
 interface SessionViewProps {
   userId: string;
@@ -20,6 +37,7 @@ interface SessionViewProps {
   cards: StudyCard[];
   showRomanization: boolean;
   audioOnlyMode: boolean;
+  memsLabels: MemsLabels;
   onComplete: (stats: SessionStats) => void;
   onExit: () => void;
   labels: {
@@ -71,6 +89,7 @@ export default function SessionView({
   cards,
   showRomanization,
   audioOnlyMode,
+  memsLabels,
   onComplete,
   onExit,
   labels,
@@ -85,6 +104,7 @@ export default function SessionView({
   const [answers, setAnswers] = useState<CardAnswer[]>([]);
   const [speedMatchXp, setSpeedMatchXp] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
 
   // Total for progress bar: speed match phase shows SM card count, regular shows all regular
   const totalForProgress =
@@ -135,6 +155,7 @@ export default function SessionView({
     if (next >= regularCards.length) {
       finishSession(updated, speedMatchXp);
     } else {
+      setRevealedCardId(null);
       setRegularIndex(next);
     }
   }
@@ -277,16 +298,21 @@ export default function SessionView({
           />
           <div className="mx-auto max-w-lg">
             {currentRegularCard.questionType === "flashcard" && (
-              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} labels={flashcardLabels} />
+              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
-              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} />
+              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
-              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={typeAnswerLabels} />
+              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} />
             )}
             {currentRegularCard.questionType === "audio_type" && (
-              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} />
+              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} />
+            )}
+            {revealedCardId === currentRegularCard.itemId && (
+              <div className="px-4 pb-6">
+                <MemSection cardId={currentRegularCard.itemId} currentUserId={userId} labels={memsLabels} />
+              </div>
             )}
           </div>
         </>

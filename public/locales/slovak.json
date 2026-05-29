@@ -548,5 +548,29 @@
       "My kid": "Moje dieťa"
     },
     "validationProfileNotFound": "Profil sa nenašiel. Odhláste sa a skúste to znova."
+  },
+  "mems": {
+    "memoryHints": "Mnemotechnické tipy",
+    "writeYourOwn": "Napíšte vlastný tip",
+    "editYourMem": "Upraviť tip",
+    "placeholder": "Zapíšte, ako si to pamätáte…",
+    "submit": "Odoslať",
+    "cancel": "Zrušiť",
+    "delete": "Vymazať",
+    "deleteConfirm": "Vymazať tento tip?",
+    "seeAll": "Zobraziť všetkých {count} tipov",
+    "helpful": "{count} užitočných",
+    "editLabel": "Upraviť",
+    "charsLeft": "Zostáva {count}",
+    "noHints": "Zatiaľ žiadne tipy — buďte prvý!",
+    "topHints": "Najlepšie mnemotechnické tipy",
+    "topHintsEmpty": "Zatiaľ žiadne tipy pre tento kurz.",
+    "contributions": "Príspevky",
+    "contributionsEmpty": "Zatiaľ žiadne tipy.",
+    "totalHelpful": "Celkovo {count} užitočných hlasov",
+    "forCard": "pre: {front}",
+    "memOfWeek": "Tip týždňa",
+    "memOfWeekEmpty": "Zatiaľ žiadne tipy tento týždeň.",
+    "inCourse": "v {course}"
   }
 }

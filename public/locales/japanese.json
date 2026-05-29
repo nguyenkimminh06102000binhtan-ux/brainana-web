@@ -548,5 +548,29 @@
       "My kid": "うちの子"
     },
     "validationProfileNotFound": "プロフィールが見つかりません。サインアウトして、もう一度試してください。"
+  },
+  "mems": {
+    "memoryHints": "記憶ヒント",
+    "writeYourOwn": "自分のヒントを書く",
+    "editYourMem": "ヒントを編集",
+    "placeholder": "どうやって覚えたか書き留めよう…",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "deleteConfirm": "このヒントを削除しますか？",
+    "seeAll": "すべての{count}件のヒントを見る",
+    "helpful": "{count}人が役立つと評価",
+    "editLabel": "編集",
+    "charsLeft": "残り{count}文字",
+    "noHints": "まだヒントはありません — 最初に投稿しよう！",
+    "topHints": "トップ記憶ヒント",
+    "topHintsEmpty": "このコースにはまだ記憶ヒントがありません。",
+    "contributions": "コントリビューション",
+    "contributionsEmpty": "まだヒントはありません。",
+    "totalHelpful": "合計{count}件の役立つ投票",
+    "forCard": "カード：{front}",
+    "memOfWeek": "今週の記憶ヒント",
+    "memOfWeekEmpty": "今週はまだヒントがありません。",
+    "inCourse": "{course} で"
   }
 }

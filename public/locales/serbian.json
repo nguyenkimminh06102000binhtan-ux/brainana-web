@@ -548,5 +548,29 @@
       "My kid": "Моје дете"
     },
     "validationProfileNotFound": "Профил није пронађен. Одјавите се и покушајте поново."
+  },
+  "mems": {
+    "memoryHints": "Мнемонички савети",
+    "writeYourOwn": "Напиши свој савет",
+    "editYourMem": "Уреди свој савет",
+    "placeholder": "Запиши како памтиш ово…",
+    "submit": "Пошаљи",
+    "cancel": "Откажи",
+    "delete": "Обриши",
+    "deleteConfirm": "Обрисати овај савет?",
+    "seeAll": "Прикажи свих {count} савета",
+    "helpful": "{count} корисних",
+    "editLabel": "Уреди",
+    "charsLeft": "Преостало {count}",
+    "noHints": "Нема савета — буди прв(а)!",
+    "topHints": "Најбољи мнемонички савети",
+    "topHintsEmpty": "Нема мнемоничких савета за овај курс.",
+    "contributions": "Доприноси",
+    "contributionsEmpty": "Нема савета.",
+    "totalHelpful": "Укупно {count} корисних гласова",
+    "forCard": "за: {front}",
+    "memOfWeek": "Савет недеље",
+    "memOfWeekEmpty": "Нема савета ове недеље.",
+    "inCourse": "у {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "El meu fill"
     },
     "validationProfileNotFound": "No s'ha trobat el perfil. Tanqueu la sessió i torneu-ho a provar."
+  },
+  "mems": {
+    "memoryHints": "Consells de memòria",
+    "writeYourOwn": "Escriu el teu propi consell",
+    "editYourMem": "Edita el teu consell",
+    "placeholder": "Apunta com recordes això…",
+    "submit": "Enviar",
+    "cancel": "Cancel·lar",
+    "delete": "Eliminar",
+    "deleteConfirm": "Eliminar aquest consell?",
+    "seeAll": "Veure tots els {count} consells",
+    "helpful": "{count} útil",
+    "editLabel": "Editar",
+    "charsLeft": "{count} restants",
+    "noHints": "Cap consell encara — sigues el primer!",
+    "topHints": "Millors consells de memòria",
+    "topHintsEmpty": "Encara no hi ha consells de memòria per a aquest curs.",
+    "contributions": "Contribucions",
+    "contributionsEmpty": "Cap consell encara.",
+    "totalHelpful": "{count} vots útils en total",
+    "forCard": "per a: {front}",
+    "memOfWeek": "Consell de la setmana",
+    "memOfWeekEmpty": "Cap consell aquesta setmana.",
+    "inCourse": "a {course}"
   }
 }

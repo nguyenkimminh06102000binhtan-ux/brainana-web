@@ -548,5 +548,29 @@
       "My kid": "a gyerekem"
     },
     "validationProfileNotFound": "A profil nem található. Kérjük, jelentkezzen ki, és próbálja újra."
+  },
+  "mems": {
+    "memoryHints": "Memória tippek",
+    "writeYourOwn": "Írd meg a saját tipped",
+    "editYourMem": "Tipp szerkesztése",
+    "placeholder": "Jegyezd le, hogyan emlékezel erre…",
+    "submit": "Küldés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "deleteConfirm": "Törölni ezt a tippet?",
+    "seeAll": "Összes {count} tipp megtekintése",
+    "helpful": "{count} hasznos",
+    "editLabel": "Szerkesztés",
+    "charsLeft": "{count} maradt",
+    "noHints": "Még nincs tipp — légy az első!",
+    "topHints": "Legjobb memória tippek",
+    "topHintsEmpty": "Még nincsenek memória tippek ehhez a kurzushoz.",
+    "contributions": "Hozzájárulások",
+    "contributionsEmpty": "Még nincs tipp.",
+    "totalHelpful": "{count} hasznos szavazat összesen",
+    "forCard": "kártyához: {front}",
+    "memOfWeek": "Hét tippje",
+    "memOfWeekEmpty": "Még nincs tipp ezen a héten.",
+    "inCourse": "{course} kurzusban"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Min gutt"
     },
     "validationProfileNotFound": "Finner ikke profil. Logg av og prøv igjen."
+  },
+  "mems": {
+    "memoryHints": "Husketips",
+    "writeYourOwn": "Skriv ditt eget tips",
+    "editYourMem": "Rediger tipset ditt",
+    "placeholder": "Skriv ned hvordan du husker dette…",
+    "submit": "Send",
+    "cancel": "Avbryt",
+    "delete": "Slett",
+    "deleteConfirm": "Slette dette tipset?",
+    "seeAll": "Se alle {count} tips",
+    "helpful": "{count} nyttige",
+    "editLabel": "Rediger",
+    "charsLeft": "{count} igjen",
+    "noHints": "Ingen tips ennå — vær den første!",
+    "topHints": "Beste husketips",
+    "topHintsEmpty": "Ingen husketips for dette kurset ennå.",
+    "contributions": "Bidrag",
+    "contributionsEmpty": "Ingen tips ennå.",
+    "totalHelpful": "{count} nyttige stemmer totalt",
+    "forCard": "for: {front}",
+    "memOfWeek": "Tips i uken",
+    "memOfWeekEmpty": "Ingen tips denne uken ennå.",
+    "inCourse": "i {course}"
   }
 }

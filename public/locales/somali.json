@@ -548,5 +548,29 @@
       "My kid": "Ilmahayga"
     },
     "validationProfileNotFound": "Profile lama helin Fadlan ka bax oo isku day markale."
+  },
+  "mems": {
+    "memoryHints": "Memory Hints",
+    "writeYourOwn": "Write your own hint",
+    "editYourMem": "Edit your hint",
+    "placeholder": "Jot down how you remember this…",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this hint?",
+    "seeAll": "See all {count} hints",
+    "helpful": "{count} helpful",
+    "editLabel": "Edit",
+    "charsLeft": "{count} left",
+    "noHints": "No hints yet — be the first!",
+    "topHints": "Top Memory Hints",
+    "topHintsEmpty": "No memory hints yet for this course.",
+    "contributions": "Contributions",
+    "contributionsEmpty": "No hints yet.",
+    "totalHelpful": "{count} helpful votes total",
+    "forCard": "for: {front}",
+    "memOfWeek": "Mem of the Week",
+    "memOfWeekEmpty": "No mems this week yet.",
+    "inCourse": "in {course}"
   }
 }

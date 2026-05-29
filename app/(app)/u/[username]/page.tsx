@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 import ActivityHeatmap from "./activity-heatmap";
+import ProfileContributions from "./ProfileContributions";
+import type { ProfileMem } from "./ProfileContributions";
 
 // XP thresholds for each level (index 0 = L1)
 const XP_LEVELS = [0, 300, 800, 1800, 3500, 6000, 10000, 16000, 25000, 40000];
@@ -89,11 +92,18 @@ export default async function PublicProfilePage({
     { count: masteredCount },
     { data: sessionRows },
     { data: enrolledRaw },
+    { data: viewerProfile },
+    { data: memsRaw },
   ] = await Promise.all([
     supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", profile.id).eq("mastered", true),
     supabase.from("study_sessions").select("started_at, items_studied").eq("user_id", profile.id).gte("started_at", twelveWeeksAgo.toISOString()),
     supabase.from("user_courses").select("courses!course_id(id, slug, title, category, level, card_count)").eq("user_id", profile.id),
+    user ? supabase.from("profiles").select("active_origin_language").eq("id", user.id).single() : Promise.resolve({ data: null }),
+    supabase.from("mems").select("id, text, helpful_count, card_id, author_id, items!card_id(front_text, courses!course_id(title, slug))").eq("author_id", profile.id).order("helpful_count", { ascending: false }),
   ]);
+
+  const loc = getLocale((viewerProfile?.active_origin_language as string | null) ?? null);
+  const profileMems = (memsRaw ?? []) as unknown as ProfileMem[];
 
   // Build heatmap data
   const heatmapData: Record<string, number> = {};
@@ -314,6 +324,29 @@ export default async function PublicProfilePage({
               </div>
             )}
           </section>
+
+          {/* Contributions */}
+          <ProfileContributions
+            initialMems={profileMems}
+            currentUserId={user?.id ?? null}
+            isOwnProfile={isOwnProfile}
+            labels={{
+              contributions: loc.mems.contributions,
+              contributionsEmpty: loc.mems.contributionsEmpty,
+              totalHelpful: loc.mems.totalHelpful,
+              forCard: loc.mems.forCard,
+              inCourse: loc.mems.inCourse,
+              editLabel: loc.mems.editLabel,
+              delete: loc.mems.delete,
+              deleteConfirm: loc.mems.deleteConfirm,
+              editYourMem: loc.mems.editYourMem,
+              placeholder: loc.mems.placeholder,
+              submit: loc.mems.submit,
+              cancel: loc.mems.cancel,
+              charsLeft: loc.mems.charsLeft,
+              helpful: loc.mems.helpful,
+            }}
+          />
         </div>
       </div>
     </div>

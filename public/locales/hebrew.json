@@ -548,5 +548,29 @@
       "My kid": "הילד שלי"
     },
     "validationProfileNotFound": "הפרופיל לא נמצא. אנא צא ונסה שוב."
+  },
+  "mems": {
+    "memoryHints": "טיפים לשינון",
+    "writeYourOwn": "כתוב את הטיפ שלך",
+    "editYourMem": "ערוך את הטיפ שלך",
+    "placeholder": "רשום איך אתה זוכר את זה…",
+    "submit": "שלח",
+    "cancel": "ביטול",
+    "delete": "מחק",
+    "deleteConfirm": "למחוק את הטיפ הזה?",
+    "seeAll": "ראה את כל {count} הטיפים",
+    "helpful": "{count} שימושי",
+    "editLabel": "ערוך",
+    "charsLeft": "נותרו {count}",
+    "noHints": "אין טיפים עדיין — היה הראשון!",
+    "topHints": "הטיפים הטובים ביותר לשינון",
+    "topHintsEmpty": "אין עדיין טיפים לשינון לקורס זה.",
+    "contributions": "תרומות",
+    "contributionsEmpty": "אין טיפים עדיין.",
+    "totalHelpful": "סה\"כ {count} קולות שימושיים",
+    "forCard": "עבור: {front}",
+    "memOfWeek": "טיפ השבוע",
+    "memOfWeekEmpty": "אין טיפים השבוע עדיין.",
+    "inCourse": "בקורס {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "anak saya"
     },
     "validationProfileNotFound": "Profil tidak ditemui. Sila log keluar dan cuba lagi."
+  },
+  "mems": {
+    "memoryHints": "Petua Ingatan",
+    "writeYourOwn": "Tulis petua anda sendiri",
+    "editYourMem": "Edit petua anda",
+    "placeholder": "Catat cara anda mengingati ini…",
+    "submit": "Hantar",
+    "cancel": "Batal",
+    "delete": "Padam",
+    "deleteConfirm": "Padam petua ini?",
+    "seeAll": "Lihat semua {count} petua",
+    "helpful": "{count} berguna",
+    "editLabel": "Edit",
+    "charsLeft": "{count} tinggal",
+    "noHints": "Tiada petua lagi — jadilah yang pertama!",
+    "topHints": "Petua Ingatan Terbaik",
+    "topHintsEmpty": "Tiada petua ingatan untuk kursus ini lagi.",
+    "contributions": "Sumbangan",
+    "contributionsEmpty": "Tiada petua lagi.",
+    "totalHelpful": "{count} undi berguna jumlah",
+    "forCard": "untuk: {front}",
+    "memOfWeek": "Petua Minggu Ini",
+    "memOfWeekEmpty": "Tiada petua minggu ini lagi.",
+    "inCourse": "dalam {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Mitt barn"
     },
     "validationProfileNotFound": "Profilen hittades inte. Logga ut och försök igen."
+  },
+  "mems": {
+    "memoryHints": "Minnestips",
+    "writeYourOwn": "Skriv ditt eget tips",
+    "editYourMem": "Redigera ditt tips",
+    "placeholder": "Anteckna hur du kommer ihåg detta…",
+    "submit": "Skicka",
+    "cancel": "Avbryt",
+    "delete": "Radera",
+    "deleteConfirm": "Radera det här tipset?",
+    "seeAll": "Se alla {count} tips",
+    "helpful": "{count} hjälpsamma",
+    "editLabel": "Redigera",
+    "charsLeft": "{count} kvar",
+    "noHints": "Inga tips ännu — var den första!",
+    "topHints": "Bästa minnestips",
+    "topHintsEmpty": "Inga minnestips för den här kursen ännu.",
+    "contributions": "Bidrag",
+    "contributionsEmpty": "Inga tips ännu.",
+    "totalHelpful": "{count} hjälpsamma röster totalt",
+    "forCard": "för: {front}",
+    "memOfWeek": "Veckans minnestips",
+    "memOfWeekEmpty": "Inga tips den här veckan ännu.",
+    "inCourse": "i {course}"
   }
 }

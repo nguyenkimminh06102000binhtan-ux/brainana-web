@@ -548,5 +548,29 @@
       "My kid": "Copilul meu"
     },
     "validationProfileNotFound": "Profilul nu a fost găsit. Deconectați-vă și încercați din nou."
+  },
+  "mems": {
+    "memoryHints": "Sfaturi mnemonice",
+    "writeYourOwn": "Scrie propriul tău sfat",
+    "editYourMem": "Editează sfatul tău",
+    "placeholder": "Notează cum îți amintești asta…",
+    "submit": "Trimite",
+    "cancel": "Anulare",
+    "delete": "Șterge",
+    "deleteConfirm": "Ștergi acest sfat?",
+    "seeAll": "Vezi toate cele {count} sfaturi",
+    "helpful": "{count} util",
+    "editLabel": "Editează",
+    "charsLeft": "{count} rămase",
+    "noHints": "Niciun sfat deocamdată — fii primul!",
+    "topHints": "Cele mai bune sfaturi mnemonice",
+    "topHintsEmpty": "Nu există încă sfaturi mnemonice pentru acest curs.",
+    "contributions": "Contribuții",
+    "contributionsEmpty": "Niciun sfat deocamdată.",
+    "totalHelpful": "{count} voturi utile în total",
+    "forCard": "pentru: {front}",
+    "memOfWeek": "Sfatul săptămânii",
+    "memOfWeekEmpty": "Niciun sfat săptămâna aceasta.",
+    "inCourse": "în {course}"
   }
 }

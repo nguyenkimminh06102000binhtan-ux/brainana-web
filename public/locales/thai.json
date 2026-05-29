@@ -548,5 +548,29 @@
       "My kid": "ลูกของฉัน"
     },
     "validationProfileNotFound": "ไม่พบโปรไฟล์ กรุณาออกจากระบบและลองอีกครั้ง"
+  },
+  "mems": {
+    "memoryHints": "คำแนะนำช่วยจำ",
+    "writeYourOwn": "เขียนคำแนะนำของคุณเอง",
+    "editYourMem": "แก้ไขคำแนะนำของคุณ",
+    "placeholder": "จดวิธีที่คุณจำสิ่งนี้…",
+    "submit": "ส่ง",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "deleteConfirm": "ลบคำแนะนำนี้?",
+    "seeAll": "ดูทั้งหมด {count} คำแนะนำ",
+    "helpful": "{count} ว่ามีประโยชน์",
+    "editLabel": "แก้ไข",
+    "charsLeft": "เหลือ {count}",
+    "noHints": "ยังไม่มีคำแนะนำ — เป็นคนแรก!",
+    "topHints": "คำแนะนำช่วยจำยอดนิยม",
+    "topHintsEmpty": "ยังไม่มีคำแนะนำช่วยจำสำหรับคอร์สนี้",
+    "contributions": "การมีส่วนร่วม",
+    "contributionsEmpty": "ยังไม่มีคำแนะนำ",
+    "totalHelpful": "รวม {count} โหวตว่ามีประโยชน์",
+    "forCard": "สำหรับ: {front}",
+    "memOfWeek": "คำแนะนำช่วยจำแห่งสัปดาห์",
+    "memOfWeekEmpty": "ยังไม่มีคำแนะนำในสัปดาห์นี้",
+    "inCourse": "ใน {course}"
   }
 }

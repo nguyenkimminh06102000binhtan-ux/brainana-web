@@ -548,5 +548,29 @@
       "My kid": "Mein Kind"
     },
     "validationProfileNotFound": "Profil nicht gefunden. Bitte melden Sie sich ab und versuchen Sie es erneut."
+  },
+  "mems": {
+    "memoryHints": "Gedächtnistipps",
+    "writeYourOwn": "Schreib deinen eigenen Tipp",
+    "editYourMem": "Tipp bearbeiten",
+    "placeholder": "Notiere, wie du dir das merkst…",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "deleteConfirm": "Diesen Tipp löschen?",
+    "seeAll": "Alle {count} Tipps anzeigen",
+    "helpful": "{count} hilfreich",
+    "editLabel": "Bearbeiten",
+    "charsLeft": "Noch {count}",
+    "noHints": "Noch keine Tipps — sei der Erste!",
+    "topHints": "Beste Gedächtnistipps",
+    "topHintsEmpty": "Noch keine Gedächtnistipps für diesen Kurs.",
+    "contributions": "Beiträge",
+    "contributionsEmpty": "Noch keine Tipps.",
+    "totalHelpful": "{count} hilfreiche Stimmen insgesamt",
+    "forCard": "für: {front}",
+    "memOfWeek": "Tipp der Woche",
+    "memOfWeekEmpty": "Noch keine Tipps diese Woche.",
+    "inCourse": "in {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Moje dziecko"
     },
     "validationProfileNotFound": "Nie znaleziono profilu. Wyloguj się i spróbuj ponownie."
+  },
+  "mems": {
+    "memoryHints": "Wskazówki mnemoniczne",
+    "writeYourOwn": "Napisz własną wskazówkę",
+    "editYourMem": "Edytuj swoją wskazówkę",
+    "placeholder": "Zapisz, jak to zapamiętałeś…",
+    "submit": "Wyślij",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "deleteConfirm": "Usunąć tę wskazówkę?",
+    "seeAll": "Zobacz wszystkie {count} wskazówki",
+    "helpful": "{count} pomocne",
+    "editLabel": "Edytuj",
+    "charsLeft": "Zostało {count}",
+    "noHints": "Brak wskazówek — bądź pierwszy!",
+    "topHints": "Najlepsze wskazówki mnemoniczne",
+    "topHintsEmpty": "Brak wskazówek mnemonicznych dla tego kursu.",
+    "contributions": "Wkłady",
+    "contributionsEmpty": "Brak wskazówek.",
+    "totalHelpful": "{count} pomocnych głosów łącznie",
+    "forCard": "dla: {front}",
+    "memOfWeek": "Wskazówka tygodnia",
+    "memOfWeekEmpty": "Brak wskazówek w tym tygodniu.",
+    "inCourse": "w {course}"
   }
 }

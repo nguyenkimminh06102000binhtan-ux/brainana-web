@@ -14,6 +14,15 @@ function formatCount(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 }
 
+type TopMem = {
+  id: string;
+  text: string;
+  helpful_count: number;
+  card_id: string;
+  profiles: { username: string; display_name: string | null } | null;
+  items: { front_text: string } | null;
+};
+
 export default async function CourseDetailPage({
   params,
 }: {
@@ -52,6 +61,7 @@ export default async function CourseDetailPage({
     { data: followData },
     { count: creatorFollowerCount },
     { data: profile },
+    topMems,
   ] = await Promise.all([
     supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
@@ -61,6 +71,18 @@ export default async function CourseDetailPage({
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
+    (async (): Promise<TopMem[]> => {
+      const { data: itemRows } = await supabase.from("items").select("id").eq("course_id", course.id);
+      const ids = (itemRows ?? []).map((r) => r.id as string);
+      if (!ids.length) return [];
+      const { data } = await supabase
+        .from("mems")
+        .select("id, text, helpful_count, card_id, profiles!author_id(username, display_name), items!card_id(front_text)")
+        .in("card_id", ids)
+        .order("helpful_count", { ascending: false })
+        .limit(5);
+      return (data ?? []) as unknown as TopMem[];
+    })(),
   ]);
 
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
@@ -198,6 +220,29 @@ export default async function CourseDetailPage({
               {t(cl.memsBanner, { count: formatCount(course.mems_count ?? 0) })}
             </p>
           </div>
+
+          {/* Top Memory Hints */}
+          <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
+            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-2">💡 {loc.mems.topHints}</p>
+            {topMems.length === 0 ? (
+              <p className="font-manrope text-sm text-ink-2">{loc.mems.topHintsEmpty}</p>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {topMems.map((mem) => (
+                  <div key={mem.id} className="rounded-lg border border-ink/10 bg-paper p-3">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-ink-2 mb-1">
+                      {loc.mems.forCard.replace("{front}", mem.items?.front_text ?? "")}
+                    </p>
+                    <p className="font-kalam text-sm leading-relaxed text-ink">{mem.text}</p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <span className="font-mono text-xs text-ink-2">@{mem.profiles?.username ?? "anonymous"}</span>
+                      <span className="font-mono text-xs text-ink-2">▲ {mem.helpful_count}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
 
           {/* Discussion */}
           <DiscussionThread courseId={course.id} courseSlug={course.slug} creatorId={course.creator_id} isOwner={isOwner} labels={loc.discussion} />

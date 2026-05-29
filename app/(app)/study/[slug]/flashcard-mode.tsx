@@ -9,6 +9,7 @@ interface FlashcardModeProps {
   card: StudyCard;
   showRomanization: boolean;
   onAnswer: (answer: CardAnswer) => void;
+  onReveal?: () => void;
   labels: {
     flip: string;
     howWellRemember: string;
@@ -21,7 +22,7 @@ interface FlashcardModeProps {
 
 const QUALITIES = [1, 3, 4, 5] as const;
 
-export default function FlashcardMode({ card, showRomanization, onAnswer, labels }: FlashcardModeProps) {
+export default function FlashcardMode({ card, showRomanization, onAnswer, onReveal, labels }: FlashcardModeProps) {
   const ratingButtons = [
     { label: labels.ratingAgain, quality: QUALITIES[0] },
     { label: labels.ratingHard,  quality: QUALITIES[1] },
@@ -42,6 +43,7 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, labels
     function onKey(e: KeyboardEvent) {
       if (e.key === " ") {
         e.preventDefault();
+        if (!flipped) onReveal?.();
         setFlipped((f) => !f);
       }
       if (!flipped) return;
@@ -74,10 +76,10 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, labels
       {/* Card */}
       <div
         className="perspective-[1000px] w-full max-w-md cursor-pointer"
-        onClick={() => setFlipped((f) => !f)}
+        onClick={() => { if (!flipped) onReveal?.(); setFlipped((f) => !f); }}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setFlipped((f) => !f)}
+        onKeyDown={(e) => { if (e.key === "Enter") { if (!flipped) onReveal?.(); setFlipped((f) => !f); } }}
         aria-label={flipped ? "Card back — click to flip back" : "Card front — press Space or click to flip"}
       >
         <div

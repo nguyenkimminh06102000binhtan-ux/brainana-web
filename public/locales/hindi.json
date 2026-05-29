@@ -548,5 +548,29 @@
       "My kid": "मेरा बच्चा"
     },
     "validationProfileNotFound": "प्रोफ़ाइल नहीं मिला। कृपया साइन आउट करें और पुनः प्रयास करें।"
+  },
+  "mems": {
+    "memoryHints": "स्मृति संकेत",
+    "writeYourOwn": "अपना संकेत लिखें",
+    "editYourMem": "अपना संकेत संपादित करें",
+    "placeholder": "लिखें कि आप इसे कैसे याद करते हैं…",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं",
+    "deleteConfirm": "इस संकेत को हटाएं?",
+    "seeAll": "सभी {count} संकेत देखें",
+    "helpful": "{count} सहायक",
+    "editLabel": "संपादित करें",
+    "charsLeft": "{count} बचे",
+    "noHints": "अभी कोई संकेत नहीं — पहले बनें!",
+    "topHints": "शीर्ष स्मृति संकेत",
+    "topHintsEmpty": "इस पाठ्यक्रम के लिए अभी कोई स्मृति संकेत नहीं।",
+    "contributions": "योगदान",
+    "contributionsEmpty": "अभी कोई संकेत नहीं।",
+    "totalHelpful": "कुल {count} सहायक वोट",
+    "forCard": "कार्ड: {front}",
+    "memOfWeek": "सप्ताह का संकेत",
+    "memOfWeekEmpty": "इस सप्ताह अभी कोई संकेत नहीं।",
+    "inCourse": "{course} में"
   }
 }

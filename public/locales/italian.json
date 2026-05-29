@@ -548,5 +548,29 @@
       "My kid": "Mio figlio"
     },
     "validationProfileNotFound": "Profilo non trovato. Esci e riprova."
+  },
+  "mems": {
+    "memoryHints": "Suggerimenti mnemonici",
+    "writeYourOwn": "Scrivi il tuo suggerimento",
+    "editYourMem": "Modifica il tuo suggerimento",
+    "placeholder": "Annota come lo ricordi…",
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "deleteConfirm": "Eliminare questo suggerimento?",
+    "seeAll": "Vedi tutti i {count} suggerimenti",
+    "helpful": "{count} utile",
+    "editLabel": "Modifica",
+    "charsLeft": "{count} rimasti",
+    "noHints": "Ancora nessun suggerimento — sii il primo!",
+    "topHints": "Migliori suggerimenti mnemonici",
+    "topHintsEmpty": "Ancora nessun suggerimento per questo corso.",
+    "contributions": "Contributi",
+    "contributionsEmpty": "Ancora nessun suggerimento.",
+    "totalHelpful": "{count} voti utili in totale",
+    "forCard": "per: {front}",
+    "memOfWeek": "Suggerimento della settimana",
+    "memOfWeekEmpty": "Nessun suggerimento questa settimana.",
+    "inCourse": "in {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Детето ми"
     },
     "validationProfileNotFound": "Профилът не е намерен. Моля, излезте и опитайте отново."
+  },
+  "mems": {
+    "memoryHints": "Мнемонични подсказки",
+    "writeYourOwn": "Напишете своя подсказка",
+    "editYourMem": "Редактиране на подсказката",
+    "placeholder": "Запишете как запомняте това…",
+    "submit": "Изпрати",
+    "cancel": "Отказ",
+    "delete": "Изтрий",
+    "deleteConfirm": "Изтриване на тази подсказка?",
+    "seeAll": "Виж всички {count} подсказки",
+    "helpful": "{count} полезни",
+    "editLabel": "Редактирай",
+    "charsLeft": "Остават {count}",
+    "noHints": "Все още няма подсказки — бъди първи!",
+    "topHints": "Топ мнемонични подсказки",
+    "topHintsEmpty": "Все още няма подсказки за този курс.",
+    "contributions": "Приноси",
+    "contributionsEmpty": "Все още няма подсказки.",
+    "totalHelpful": "Общо {count} полезни гласа",
+    "forCard": "за: {front}",
+    "memOfWeek": "Подсказка на седмицата",
+    "memOfWeekEmpty": "Все още няма подсказки тази седмица.",
+    "inCourse": "в {course}"
   }
 }

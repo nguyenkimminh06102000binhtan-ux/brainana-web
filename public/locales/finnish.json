@@ -548,5 +548,29 @@
       "My kid": "Lapseni"
     },
     "validationProfileNotFound": "Profiilia ei löydy. Kirjaudu ulos ja yritä uudelleen."
+  },
+  "mems": {
+    "memoryHints": "Muistivihjeet",
+    "writeYourOwn": "Kirjoita oma vihjeesi",
+    "editYourMem": "Muokkaa vihjeesi",
+    "placeholder": "Kirjoita, miten muistat tämän…",
+    "submit": "Lähetä",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "deleteConfirm": "Poista tämä vihje?",
+    "seeAll": "Näytä kaikki {count} vihjettä",
+    "helpful": "{count} hyödyllistä",
+    "editLabel": "Muokkaa",
+    "charsLeft": "{count} jäljellä",
+    "noHints": "Ei vihjeitä vielä — ole ensimmäinen!",
+    "topHints": "Parhaat muistivihjeet",
+    "topHintsEmpty": "Ei muistivihjeitä vielä tälle kurssille.",
+    "contributions": "Osallistumiset",
+    "contributionsEmpty": "Ei vihjeitä vielä.",
+    "totalHelpful": "{count} hyödyllistä ääntä yhteensä",
+    "forCard": "kortille: {front}",
+    "memOfWeek": "Viikon muistivihje",
+    "memOfWeekEmpty": "Ei vihjeitä tällä viikolla vielä.",
+    "inCourse": "kurssilla {course}"
   }
 }

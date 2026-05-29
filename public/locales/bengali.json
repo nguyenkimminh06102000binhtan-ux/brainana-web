@@ -548,5 +548,29 @@
       "My kid": "আমার বাচ্চা"
     },
     "validationProfileNotFound": "প্রোফাইল পাওয়া যায়নি. অনুগ্রহ করে সাইন আউট করুন এবং আবার চেষ্টা করুন।"
+  },
+  "mems": {
+    "memoryHints": "স্মৃতি টিপস",
+    "writeYourOwn": "আপনার নিজস্ব টিপ লিখুন",
+    "editYourMem": "আপনার টিপ সম্পাদনা করুন",
+    "placeholder": "কীভাবে মনে রাখেন তা লিখুন…",
+    "submit": "জমা দিন",
+    "cancel": "বাতিল",
+    "delete": "মুছুন",
+    "deleteConfirm": "এই টিপটি মুছবেন?",
+    "seeAll": "সব {count}টি টিপ দেখুন",
+    "helpful": "{count}টি সহায়ক",
+    "editLabel": "সম্পাদনা",
+    "charsLeft": "{count} বাকি",
+    "noHints": "এখনও কোনো টিপ নেই — প্রথম হন!",
+    "topHints": "শীর্ষ স্মৃতি টিপস",
+    "topHintsEmpty": "এই কোর্সের জন্য এখনও কোনো স্মৃতি টিপস নেই।",
+    "contributions": "অবদান",
+    "contributionsEmpty": "এখনও কোনো টিপ নেই।",
+    "totalHelpful": "মোট {count}টি সহায়ক ভোট",
+    "forCard": "কার্ড: {front}",
+    "memOfWeek": "সপ্তাহের টিপ",
+    "memOfWeekEmpty": "এই সপ্তাহে এখনও কোনো টিপ নেই।",
+    "inCourse": "{course}-এ"
   }
 }

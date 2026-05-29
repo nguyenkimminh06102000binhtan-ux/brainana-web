@@ -548,5 +548,29 @@
       "My kid": "我個仔"
     },
     "validationProfileNotFound": "搵唔到個人檔案。請登出，然後再試一次。"
+  },
+  "mems": {
+    "memoryHints": "記憶提示",
+    "writeYourOwn": "寫下你自己嘅提示",
+    "editYourMem": "編輯你嘅提示",
+    "placeholder": "記低你點記住呢個…",
+    "submit": "提交",
+    "cancel": "取消",
+    "delete": "刪除",
+    "deleteConfirm": "刪除呢條提示？",
+    "seeAll": "睇晒 {count} 條提示",
+    "helpful": "{count} 人覺得有用",
+    "editLabel": "編輯",
+    "charsLeft": "剩 {count} 字",
+    "noHints": "仲未有提示——做第一個！",
+    "topHints": "熱門記憶提示",
+    "topHintsEmpty": "呢個課程仲未有記憶提示。",
+    "contributions": "貢獻",
+    "contributionsEmpty": "仲未有提示。",
+    "totalHelpful": "共 {count} 個有用投票",
+    "forCard": "卡片：{front}",
+    "memOfWeek": "本週記憶提示",
+    "memOfWeekEmpty": "本週仲未有提示。",
+    "inCourse": "喺 {course} 入面"
   }
 }

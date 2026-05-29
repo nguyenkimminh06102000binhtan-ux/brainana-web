@@ -11,6 +11,7 @@ import type { StudyCard, CardAnswer, Outcome } from "./types";
 interface TypeAnswerModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
+  onReveal?: () => void;
   showNoAudioNotice?: boolean;
   labels: {
     noAudio: string;
@@ -55,6 +56,7 @@ function isClose(input: string, answer: string): boolean {
 export default function TypeAnswerMode({
   card,
   onAnswer,
+  onReveal,
   showNoAudioNotice,
   labels,
 }: TypeAnswerModeProps) {
@@ -118,6 +120,7 @@ export default function TypeAnswerMode({
     else playWrongSound();
 
     setSubmitted({ correct, hesitant });
+    onReveal?.();
   }
 
   function advance() {
@@ -243,7 +246,7 @@ export default function TypeAnswerMode({
             <button
               type="button"
               onClick={advance}
-              className="flex-1 cursor-pointer rounded-full bg-ink px-4 py-2.5 font-manrope text-sm font-[800] text-white transition hover:opacity-80 active:translate-y-[1px]"
+              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>

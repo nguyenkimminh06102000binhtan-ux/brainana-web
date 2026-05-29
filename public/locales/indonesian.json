@@ -548,5 +548,29 @@
       "My kid": "Anakku"
     },
     "validationProfileNotFound": "Profil tidak ditemukan. Silakan keluar dan coba lagi."
+  },
+  "mems": {
+    "memoryHints": "Petunjuk Memori",
+    "writeYourOwn": "Tulis petunjuk sendiri",
+    "editYourMem": "Edit petunjukmu",
+    "placeholder": "Catat cara kamu mengingat ini…",
+    "submit": "Kirim",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "deleteConfirm": "Hapus petunjuk ini?",
+    "seeAll": "Lihat semua {count} petunjuk",
+    "helpful": "{count} membantu",
+    "editLabel": "Edit",
+    "charsLeft": "{count} tersisa",
+    "noHints": "Belum ada petunjuk — jadilah yang pertama!",
+    "topHints": "Petunjuk Memori Terbaik",
+    "topHintsEmpty": "Belum ada petunjuk memori untuk kursus ini.",
+    "contributions": "Kontribusi",
+    "contributionsEmpty": "Belum ada petunjuk.",
+    "totalHelpful": "{count} suara membantu total",
+    "forCard": "untuk: {front}",
+    "memOfWeek": "Petunjuk Minggu Ini",
+    "memOfWeekEmpty": "Belum ada petunjuk minggu ini.",
+    "inCourse": "di {course}"
   }
 }

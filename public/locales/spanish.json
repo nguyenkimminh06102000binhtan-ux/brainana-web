@@ -548,5 +548,29 @@
       "My kid": "mi hijo"
     },
     "validationProfileNotFound": "Perfil no encontrado. Por favor, cierra sesión e inténtalo de nuevo."
+  },
+  "mems": {
+    "memoryHints": "Consejos mnemotécnicos",
+    "writeYourOwn": "Escribe tu propio consejo",
+    "editYourMem": "Editar tu consejo",
+    "placeholder": "Anota cómo lo recuerdas…",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Eliminar este consejo?",
+    "seeAll": "Ver los {count} consejos",
+    "helpful": "{count} útil",
+    "editLabel": "Editar",
+    "charsLeft": "{count} restantes",
+    "noHints": "Sin consejos aún — ¡sé el primero!",
+    "topHints": "Mejores consejos mnemotécnicos",
+    "topHintsEmpty": "Aún no hay consejos de memoria para este curso.",
+    "contributions": "Contribuciones",
+    "contributionsEmpty": "Sin consejos aún.",
+    "totalHelpful": "{count} votos útiles en total",
+    "forCard": "para: {front}",
+    "memOfWeek": "Consejo de la semana",
+    "memOfWeekEmpty": "Sin consejos esta semana.",
+    "inCourse": "en {course}"
   }
 }

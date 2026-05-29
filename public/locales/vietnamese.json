@@ -548,5 +548,29 @@
       "My kid": "Con tôi"
     },
     "validationProfileNotFound": "Không tìm thấy hồ sơ. Vui lòng đăng xuất và thử lại."
+  },
+  "mems": {
+    "memoryHints": "Gợi ý ghi nhớ",
+    "writeYourOwn": "Viết gợi ý của bạn",
+    "editYourMem": "Chỉnh sửa gợi ý",
+    "placeholder": "Ghi lại cách bạn nhớ điều này…",
+    "submit": "Gửi",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "deleteConfirm": "Xóa gợi ý này?",
+    "seeAll": "Xem tất cả {count} gợi ý",
+    "helpful": "{count} hữu ích",
+    "editLabel": "Chỉnh sửa",
+    "charsLeft": "Còn {count} ký tự",
+    "noHints": "Chưa có gợi ý — hãy là người đầu tiên!",
+    "topHints": "Gợi ý ghi nhớ hàng đầu",
+    "topHintsEmpty": "Chưa có gợi ý ghi nhớ nào cho khóa học này.",
+    "contributions": "Đóng góp",
+    "contributionsEmpty": "Chưa có gợi ý.",
+    "totalHelpful": "Tổng {count} lượt bình chọn hữu ích",
+    "forCard": "cho: {front}",
+    "memOfWeek": "Gợi ý tuần này",
+    "memOfWeekEmpty": "Chưa có gợi ý trong tuần này.",
+    "inCourse": "trong {course}"
   }
 }

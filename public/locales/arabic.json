@@ -548,5 +548,29 @@
       "My kid": "طفلي"
     },
     "validationProfileNotFound": "لم يتم العثور على الملف الشخصي. الرجاء تسجيل الخروج والمحاولة مرة أخرى."
+  },
+  "mems": {
+    "memoryHints": "تلميحات الحفظ",
+    "writeYourOwn": "اكتب تلميحك الخاص",
+    "editYourMem": "تعديل تلميحك",
+    "placeholder": "دوّن كيف تتذكر هذا…",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "deleteConfirm": "هل تريد حذف هذا التلميح؟",
+    "seeAll": "عرض جميع {count} تلميحات",
+    "helpful": "{count} مفيد",
+    "editLabel": "تعديل",
+    "charsLeft": "{count} متبقية",
+    "noHints": "لا توجد تلميحات بعد — كن الأول!",
+    "topHints": "أفضل تلميحات الحفظ",
+    "topHintsEmpty": "لا توجد تلميحات حفظ لهذه الدورة بعد.",
+    "contributions": "المساهمات",
+    "contributionsEmpty": "لا توجد تلميحات بعد.",
+    "totalHelpful": "{count} صوت مفيد إجمالاً",
+    "forCard": "لـ: {front}",
+    "memOfWeek": "تلميح الأسبوع",
+    "memOfWeekEmpty": "لا توجد تلميحات هذا الأسبوع بعد.",
+    "inCourse": "في {course}"
   }
 }

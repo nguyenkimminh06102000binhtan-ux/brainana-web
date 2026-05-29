@@ -548,5 +548,29 @@
       "My kid": "Мой ребенок"
     },
     "validationProfileNotFound": "Профиль не найден. Пожалуйста, выйдите из системы и повторите попытку."
+  },
+  "mems": {
+    "memoryHints": "Мнемонические подсказки",
+    "writeYourOwn": "Напишите свою подсказку",
+    "editYourMem": "Редактировать подсказку",
+    "placeholder": "Запишите, как вы это запоминаете…",
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "deleteConfirm": "Удалить эту подсказку?",
+    "seeAll": "Показать все {count} подсказки",
+    "helpful": "{count} полезно",
+    "editLabel": "Редактировать",
+    "charsLeft": "Осталось {count}",
+    "noHints": "Пока нет подсказок — будьте первым!",
+    "topHints": "Лучшие мнемонические подсказки",
+    "topHintsEmpty": "Пока нет подсказок для этого курса.",
+    "contributions": "Вклады",
+    "contributionsEmpty": "Пока нет подсказок.",
+    "totalHelpful": "Всего {count} полезных голосов",
+    "forCard": "для: {front}",
+    "memOfWeek": "Подсказка недели",
+    "memOfWeekEmpty": "Пока нет подсказок на этой неделе.",
+    "inCourse": "в {course}"
   }
 }

@@ -548,5 +548,29 @@
       "My kid": "Moje dítě"
     },
     "validationProfileNotFound": "Profil nenalezen. Odhlaste se prosím a zkuste to znovu."
+  },
+  "mems": {
+    "memoryHints": "Mnemotechnické tipy",
+    "writeYourOwn": "Napište svůj vlastní tip",
+    "editYourMem": "Upravit svůj tip",
+    "placeholder": "Napište, jak si to pamatujete…",
+    "submit": "Odeslat",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "deleteConfirm": "Smazat tento tip?",
+    "seeAll": "Zobrazit všechny {count} tipy",
+    "helpful": "{count} užitečné",
+    "editLabel": "Upravit",
+    "charsLeft": "Zbývá {count}",
+    "noHints": "Zatím žádné tipy — buďte první!",
+    "topHints": "Nejlepší mnemotechnické tipy",
+    "topHintsEmpty": "Zatím žádné tipy pro tento kurz.",
+    "contributions": "Příspěvky",
+    "contributionsEmpty": "Zatím žádné tipy.",
+    "totalHelpful": "Celkem {count} užitečných hlasů",
+    "forCard": "pro: {front}",
+    "memOfWeek": "Tip týdne",
+    "memOfWeekEmpty": "Zatím žádné tipy tento týden.",
+    "inCourse": "v {course}"
   }
 }

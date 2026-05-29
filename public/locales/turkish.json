@@ -548,5 +548,29 @@
       "My kid": "Çocuğum"
     },
     "validationProfileNotFound": "Profil bulunamadı. Lütfen oturumu kapatıp tekrar deneyin."
+  },
+  "mems": {
+    "memoryHints": "Hafıza İpuçları",
+    "writeYourOwn": "Kendi ipucunu yaz",
+    "editYourMem": "İpucunu düzenle",
+    "placeholder": "Bunu nasıl hatırladığını yaz…",
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "deleteConfirm": "Bu ipucunu silelim mi?",
+    "seeAll": "Tüm {count} ipucunu gör",
+    "helpful": "{count} yararlı",
+    "editLabel": "Düzenle",
+    "charsLeft": "{count} kaldı",
+    "noHints": "Henüz ipucu yok — ilk sen ol!",
+    "topHints": "En İyi Hafıza İpuçları",
+    "topHintsEmpty": "Bu kurs için henüz hafıza ipucu yok.",
+    "contributions": "Katkılar",
+    "contributionsEmpty": "Henüz ipucu yok.",
+    "totalHelpful": "Toplam {count} yararlı oy",
+    "forCard": "kart için: {front}",
+    "memOfWeek": "Haftanın Hafıza İpucu",
+    "memOfWeekEmpty": "Bu hafta henüz ipucu yok.",
+    "inCourse": "{course} içinde"
   }
 }

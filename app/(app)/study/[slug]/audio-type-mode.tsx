@@ -26,26 +26,28 @@ interface AudioTypeModeLabels {
 interface AudioTypeModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
+  onReveal?: () => void;
   labels: AudioTypeModeLabels;
   showFallbackNotice: boolean;
 }
 
-export default function AudioTypeMode({ card, onAnswer, labels, showFallbackNotice }: AudioTypeModeProps) {
+export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFallbackNotice }: AudioTypeModeProps) {
   if (!card.frontAudioUrl) {
     return (
       <TypeAnswerMode
         card={card}
         onAnswer={(a) => onAnswer({ ...a, questionType: "audio_type" })}
+        onReveal={onReveal}
         showNoAudioNotice={showFallbackNotice}
         labels={labels}
       />
     );
   }
 
-  return <AudioTypePlayer card={card} onAnswer={onAnswer} labels={labels} />;
+  return <AudioTypePlayer card={card} onAnswer={onAnswer} onReveal={onReveal} labels={labels} />;
 }
 
-function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; labels: AudioTypeModeLabels }) {
+function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; onReveal?: () => void; labels: AudioTypeModeLabels }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -145,6 +147,7 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
     else playWrongSound();
 
     setSubmitted({ correct, hesitant });
+    onReveal?.();
   }
 
   function advance() {
@@ -260,7 +263,7 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
             <button
               type="button"
               onClick={advance}
-              className="w-full cursor-pointer rounded-full bg-ink px-4 py-2.5 font-manrope text-sm font-[800] text-white transition hover:opacity-80 active:translate-y-[1px]"
+              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>
