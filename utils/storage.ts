@@ -1,5 +1,5 @@
-export const PUBLIC_BUCKET = "course-media-public";
-export const PRIVATE_BUCKET = "course-media-private";
+export const PUBLIC_BUCKET = "public-course-assets";
+export const PRIVATE_BUCKET = "private-course-assets";
 
 export function bucketForVisibility(visibility: string): string {
   return visibility === "private" ? PRIVATE_BUCKET : PUBLIC_BUCKET;

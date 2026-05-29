@@ -16,8 +16,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 const OLD_BUCKET = "course-media";
-const PUBLIC_BUCKET = "course-media-public";
-const PRIVATE_BUCKET = "course-media-private";
+const PUBLIC_BUCKET = "public-course-assets";
+const PRIVATE_BUCKET = "private-course-assets";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
