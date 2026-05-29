@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}ໂບນັດ! 🎉",
     "speedMatchNo": "✗ ບໍ່",
     "speedMatchYes": "ແມ່ນ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "ກຳລັງບັນທຶກການຕັ້ງຄ່າ...",
+    "preferencesSaveError": "ບໍ່ສາມາດບັນທຶກການຕັ້ງຄ່າໄດ້. ກວດເບິ່ງການເຊື່ອມຕໍ່ຂອງທ່ານ."
   },
   "discussion": {
     "title": "ສົນທະນາ",

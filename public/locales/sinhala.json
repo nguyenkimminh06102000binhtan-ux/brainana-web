@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}ප්‍රසාද දීමනාව! 🎉",
     "speedMatchNo": "✗ නැත",
     "speedMatchYes": "ඔව් ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "මනාප සුරකිමින්...",
+    "preferencesSaveError": "මනාප සුරැකීමට නොහැකි විය. ඔබගේ සම්බන්ධතාවය පරීක්ෂා කරන්න."
   },
   "discussion": {
     "title": "සාකච්ඡාව",

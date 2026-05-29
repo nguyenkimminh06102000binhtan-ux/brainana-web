@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s Bonus! 🎉",
     "speedMatchNo": "✗ Nein",
     "speedMatchYes": "Ja ✓",
-    "savingPreferences": "Einstellungen werden gespeichert…",
-    "preferencesSaveError": "Einstellungen konnten nicht gespeichert werden. Verbindung prüfen."
+    "savingPreferences": "Einstellungen speichern…",
+    "preferencesSaveError": "Einstellungen konnten nicht gespeichert werden. Überprüfen Sie Ihre Verbindung."
   },
   "discussion": {
     "title": "Diskussion",

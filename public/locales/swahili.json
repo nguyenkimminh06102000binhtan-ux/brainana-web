@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s ziada! 🎉",
     "speedMatchNo": "✗ Hapana",
     "speedMatchYes": "Ndiyo ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Inahifadhi mapendeleo...",
+    "preferencesSaveError": "Haikuweza kuhifadhi mapendeleo. Angalia muunganisho wako."
   },
   "discussion": {
     "title": "Majadiliano",

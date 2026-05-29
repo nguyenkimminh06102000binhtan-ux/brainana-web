@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}보너스! 🎉",
     "speedMatchNo": "✗ 아니요",
     "speedMatchYes": "예 ✓",
-    "savingPreferences": "설정 저장 중…",
-    "preferencesSaveError": "설정을 저장할 수 없습니다. 연결을 확인하세요."
+    "savingPreferences": "환경설정 저장 중…",
+    "preferencesSaveError": "환경설정을 저장할 수 없습니다. 연결을 확인하세요."
   },
   "discussion": {
     "title": "논의",

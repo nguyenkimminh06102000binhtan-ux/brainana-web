@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Nej",
     "speedMatchYes": "Ja ✓",
-    "savingPreferences": "Sparar inställningar…",
-    "preferencesSaveError": "Det gick inte att spara inställningar. Kontrollera anslutningen."
+    "savingPreferences": "Sparar inställningar...",
+    "preferencesSaveError": "Det gick inte att spara inställningarna. Kontrollera din anslutning."
   },
   "discussion": {
     "title": "Diskussion",

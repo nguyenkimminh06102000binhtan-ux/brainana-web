@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}gunno! 🎉",
     "speedMatchNo": "Maya",
     "speedMatchYes": "Haa ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Kaydinta dookhyada…",
+    "preferencesSaveError": "Ma keydin karin dookhyada Hubi xidhiidhkaaga"
   },
   "discussion": {
     "title": "Dood",

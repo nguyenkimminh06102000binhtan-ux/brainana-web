@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}奖金！ 🎉",
     "speedMatchNo": "✗ 没有",
     "speedMatchYes": "是 ✓",
-    "savingPreferences": "正在保存偏好设置…",
-    "preferencesSaveError": "无法保存偏好设置。请检查网络连接。"
+    "savingPreferences": "正在保存首选项...",
+    "preferencesSaveError": "无法保存偏好设置。检查您的连接。"
   },
   "discussion": {
     "title": "讨论",

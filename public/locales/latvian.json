@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonuss! 🎉",
     "speedMatchNo": "✗ Nē",
     "speedMatchYes": "Jā ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Notiek preferenču saglabāšana…",
+    "preferencesSaveError": "Nevarēja saglabāt preferences. Pārbaudiet savienojumu."
   },
   "discussion": {
     "title": "Diskusija",

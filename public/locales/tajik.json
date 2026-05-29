@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}с бонус! 🎉",
     "speedMatchNo": "✗ Не",
     "speedMatchYes": "Ҳа ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Нигоҳ доштани афзалиятҳо…",
+    "preferencesSaveError": "Афзалиятҳоро захира кардан муяссар нашуд. Пайвастагии худро санҷед."
   },
   "discussion": {
     "title": "Муҳокима",

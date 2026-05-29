@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Nej",
     "speedMatchYes": "Ja ✓",
-    "savingPreferences": "Gemmer indstillinger…",
-    "preferencesSaveError": "Kunne ikke gemme indstillinger. Tjek din forbindelse."
+    "savingPreferences": "Gemmer præferencer...",
+    "preferencesSaveError": "Kunne ikke gemme præferencer. Tjek din forbindelse."
   },
   "discussion": {
     "title": "Diskussion",

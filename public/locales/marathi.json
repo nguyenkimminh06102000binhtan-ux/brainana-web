@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s बोनस! 🎉",
     "speedMatchNo": "✗ नाही",
     "speedMatchYes": "होय ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "प्राधान्ये जतन करत आहे...",
+    "preferencesSaveError": "प्राधान्ये जतन करू शकलो नाही. तुमचे कनेक्शन तपासा."
   },
   "discussion": {
     "title": "चर्चा",

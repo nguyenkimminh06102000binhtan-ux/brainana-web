@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}বোনাস! 🎉",
     "speedMatchNo": "✗ না",
     "speedMatchYes": "হ্যাঁ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "পছন্দ সংরক্ষণ করা হচ্ছে...",
+    "preferencesSaveError": "পছন্দগুলি সংরক্ষণ করা যায়নি৷ আপনার সংযোগ পরীক্ষা করুন."
   },
   "discussion": {
     "title": "আলোচনা",

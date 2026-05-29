@@ -414,7 +414,7 @@
     "speedMatchNo": "✗ Nee",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Voorkeuren opslaan…",
-    "preferencesSaveError": "Voorkeuren konden niet worden opgeslagen. Controleer uw verbinding."
+    "preferencesSaveError": "Kan voorkeuren niet opslaan. Controleer uw verbinding."
   },
   "discussion": {
     "title": "Discussie",

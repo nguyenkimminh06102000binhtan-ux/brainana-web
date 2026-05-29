@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bónus! 🎉",
     "speedMatchNo": "✗ Nei",
     "speedMatchYes": "Já ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Vistar kjörstillingar...",
+    "preferencesSaveError": "Ekki tókst að vista kjörstillingar. Athugaðu tenginguna þína."
   },
   "discussion": {
     "title": "Umræða",

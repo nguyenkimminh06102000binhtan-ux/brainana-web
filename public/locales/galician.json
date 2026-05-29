@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}bonificación s! 🎉",
     "speedMatchNo": "✗ Non",
     "speedMatchYes": "Si ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Gardando preferencias…",
+    "preferencesSaveError": "Non se puideron gardar as preferencias. Comproba a túa conexión."
   },
   "discussion": {
     "title": "Discusión",

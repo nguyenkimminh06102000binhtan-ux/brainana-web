@@ -414,7 +414,7 @@
     "speedMatchNo": "✗ Όχι",
     "speedMatchYes": "Ναι ✓",
     "savingPreferences": "Αποθήκευση προτιμήσεων…",
-    "preferencesSaveError": "Αδυναμία αποθήκευσης προτιμήσεων. Ελέγξτε τη σύνδεσή σας."
+    "preferencesSaveError": "Δεν ήταν δυνατή η αποθήκευση των προτιμήσεων. Ελέγξτε τη σύνδεσή σας."
   },
   "discussion": {
     "title": "Συζήτηση",

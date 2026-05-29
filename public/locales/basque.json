@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Ez",
     "speedMatchYes": "Bai ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Hobespenak gordetzen…",
+    "preferencesSaveError": "Ezin izan dira hobespenak gorde. Egiaztatu zure konexioa."
   },
   "discussion": {
     "title": "Eztabaida",

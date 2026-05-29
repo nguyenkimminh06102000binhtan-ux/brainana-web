@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}бонус! 🎉",
     "speedMatchNo": "✗ Не",
     "speedMatchYes": "Так ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Захаванне налад...",
+    "preferencesSaveError": "Не ўдалося захаваць налады. Праверце падключэнне."
   },
   "discussion": {
     "title": "Дыскусія",

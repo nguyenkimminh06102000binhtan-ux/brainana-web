@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}bonus! 🎉",
     "speedMatchNo": "✗ Št",
     "speedMatchYes": "Da ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Shranjevanje nastavitev ...",
+    "preferencesSaveError": "Nastavitve ni bilo mogoče shraniti. Preverite povezavo."
   },
   "discussion": {
     "title": "Razprava",

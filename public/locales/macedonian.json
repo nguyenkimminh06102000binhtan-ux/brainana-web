@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}бонус! 🎉",
     "speedMatchNo": "✗ Не",
     "speedMatchYes": "Да ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Се зачувуваат поставките…",
+    "preferencesSaveError": "Не може да се зачуваат поставките. Проверете ја вашата врска."
   },
   "discussion": {
     "title": "Дискусија",

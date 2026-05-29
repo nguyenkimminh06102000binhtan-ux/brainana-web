@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Le",
     "speedMatchYes": "Iva ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Nissejvja l-preferenzi...",
+    "preferencesSaveError": "Ma setgħetx issalva l-preferenzi. Iċċekkja l-konnessjoni tiegħek."
   },
   "discussion": {
     "title": "Diskussjoni",

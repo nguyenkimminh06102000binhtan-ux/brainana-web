@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}ബോണസ്! 🎉",
     "speedMatchNo": "✗ നമ്പർ",
     "speedMatchYes": "അതെ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "മുൻഗണനകൾ സംരക്ഷിക്കുന്നു...",
+    "preferencesSaveError": "മുൻഗണനകൾ സംരക്ഷിക്കാനായില്ല. നിങ്ങളുടെ കണക്ഷൻ പരിശോധിക്കുക."
   },
   "discussion": {
     "title": "ചർച്ച",

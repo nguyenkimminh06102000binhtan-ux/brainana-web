@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonws! 🎉",
     "speedMatchNo": "✗ Nac ydy",
     "speedMatchYes": "Ydy ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Wrthi'n cadw dewisiadau…",
+    "preferencesSaveError": "Ni fu modd cadw'r dewisiadau. Gwiriwch eich cysylltiad."
   },
   "discussion": {
     "title": "Trafodaeth",

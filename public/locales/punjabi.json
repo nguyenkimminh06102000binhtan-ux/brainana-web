@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s ਬੋਨਸ! 🎉",
     "speedMatchNo": "✗ ਨੰ",
     "speedMatchYes": "ਹਾਂ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "ਤਰਜੀਹਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "preferencesSaveError": "ਤਰਜੀਹਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ। ਆਪਣੇ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ।"
   },
   "discussion": {
     "title": "ਚਰਚਾ",

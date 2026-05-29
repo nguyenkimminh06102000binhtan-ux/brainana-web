@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s بونس! 🎉",
     "speedMatchNo": "✗ نہیں",
     "speedMatchYes": "ہاں ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "ترجیحات کو محفوظ کیا جا رہا ہے…",
+    "preferencesSaveError": "ترجیحات کو محفوظ نہیں کیا جا سکا۔ اپنا کنکشن چیک کریں۔"
   },
   "discussion": {
     "title": "بحث",

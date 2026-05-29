@@ -413,7 +413,7 @@
     "speedMatchBonus": "+{seconds}C'est un bonus ! 🎉",
     "speedMatchNo": "✗ Non",
     "speedMatchYes": "Oui ✓",
-    "savingPreferences": "Enregistrement des préférences…",
+    "savingPreferences": "Sauvegarde des préférences…",
     "preferencesSaveError": "Impossible d'enregistrer les préférences. Vérifiez votre connexion."
   },
   "discussion": {

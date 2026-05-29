@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s बोनस! 🎉",
     "speedMatchNo": "✗ छैन",
     "speedMatchYes": "हो ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "प्राथमिकताहरू सुरक्षित गर्दै...",
+    "preferencesSaveError": "प्राथमिकताहरू सुरक्षित गर्न सकिएन। आफ्नो जडान जाँच गर्नुहोस्।"
   },
   "discussion": {
     "title": "छलफल",

@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s બોનસ! 🎉",
     "speedMatchNo": "✗ ના",
     "speedMatchYes": "હા ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "પસંદગીઓ સાચવી રહ્યાં છીએ...",
+    "preferencesSaveError": "પસંદગીઓ સાચવી શકાઈ નથી. તમારું કનેક્શન તપાસો."
   },
   "discussion": {
     "title": "ચર્ચા",

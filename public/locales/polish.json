@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}bonus! 🎉",
     "speedMatchNo": "✗ Nie",
     "speedMatchYes": "Tak ✓",
-    "savingPreferences": "Zapisywanie preferencji…",
-    "preferencesSaveError": "Nie udało się zapisać preferencji. Sprawdź połączenie."
+    "savingPreferences": "Zapisuję preferencje…",
+    "preferencesSaveError": "Nie udało się zapisać preferencji. Sprawdź swoje połączenie."
   },
   "discussion": {
     "title": "Dyskusja",

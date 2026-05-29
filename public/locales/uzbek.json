@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Yo'q",
     "speedMatchYes": "Ha ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Parametrlar saqlanmoqda…",
+    "preferencesSaveError": "Parametrlarni saqlab bo‘lmadi. Ulanishingizni tekshiring."
   },
   "discussion": {
     "title": "Munozara",

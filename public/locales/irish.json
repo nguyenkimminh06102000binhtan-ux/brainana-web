@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bónas! 🎉",
     "speedMatchNo": "✗ Ní hea",
     "speedMatchYes": "Tá ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Sainroghanna á sábháil…",
+    "preferencesSaveError": "Níorbh fhéidir na sainroghanna a shábháil. Seiceáil do cheangal."
   },
   "discussion": {
     "title": "Plé",

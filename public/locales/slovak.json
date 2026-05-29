@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonusom! 🎉",
     "speedMatchNo": "✗ Nie",
     "speedMatchYes": "Áno ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Ukladajú sa predvoľby…",
+    "preferencesSaveError": "Predvoľby sa nepodarilo uložiť. Skontrolujte pripojenie."
   },
   "discussion": {
     "title": "Diskusia",

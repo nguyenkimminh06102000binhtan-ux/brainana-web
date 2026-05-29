@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}Questo è il vantaggio! 🎉",
     "speedMatchNo": "✗No",
     "speedMatchYes": "Sì ✓",
-    "savingPreferences": "Salvataggio preferenze…",
-    "preferencesSaveError": "Impossibile salvare le preferenze. Controlla la connessione."
+    "savingPreferences": "Salvataggio delle preferenze...",
+    "preferencesSaveError": "Impossibile salvare le preferenze. Controlla la tua connessione."
   },
   "discussion": {
     "title": "Discussione",

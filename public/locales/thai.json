@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}โบนัส! 🎉",
     "speedMatchNo": "✗ ไม่",
     "speedMatchYes": "ใช่ ✓",
-    "savingPreferences": "กำลังบันทึกการตั้งค่า…",
-    "preferencesSaveError": "ไม่สามารถบันทึกการตั้งค่า กรุณาตรวจสอบการเชื่อมต่อ"
+    "savingPreferences": "กำลังบันทึกค่ากำหนด...",
+    "preferencesSaveError": "ไม่สามารถบันทึกค่ากำหนดได้ ตรวจสอบการเชื่อมต่อของคุณ"
   },
   "discussion": {
     "title": "การอภิปราย",

@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Hindi",
     "speedMatchYes": "Oo ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Sine-save ang mga kagustuhan...",
+    "preferencesSaveError": "Hindi ma-save ang mga kagustuhan. Suriin ang iyong koneksyon."
   },
   "discussion": {
     "title": "Pagtalakay",

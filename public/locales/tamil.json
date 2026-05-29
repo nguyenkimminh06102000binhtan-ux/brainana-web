@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}கள் போனஸ்! 🎉",
     "speedMatchNo": "✗ எண்",
     "speedMatchYes": "ஆம் ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "விருப்பங்களைச் சேமிக்கிறது…",
+    "preferencesSaveError": "விருப்பங்களைச் சேமிக்க முடியவில்லை. உங்கள் இணைப்பைச் சரிபார்க்கவும்."
   },
   "discussion": {
     "title": "கலந்துரையாடல்",

@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s ប្រាក់រង្វាន់! 🎉",
     "speedMatchNo": "✗ ទេ។",
     "speedMatchYes": "បាទ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "កំពុងរក្សាទុកចំណូលចិត្ត...",
+    "preferencesSaveError": "មិនអាចរក្សាទុកចំណូលចិត្តបានទេ។ ពិនិត្យការតភ្ជាប់របស់អ្នក។"
   },
   "discussion": {
     "title": "ការពិភាក្សា",

@@ -414,7 +414,7 @@
     "speedMatchNo": "✗ Nem",
     "speedMatchYes": "Igen ✓",
     "savingPreferences": "Beállítások mentése…",
-    "preferencesSaveError": "A beállításokat nem sikerült menteni. Ellenőrizze a kapcsolatot."
+    "preferencesSaveError": "Nem sikerült menteni a beállításokat. Ellenőrizze a kapcsolatot."
   },
   "discussion": {
     "title": "Vita",

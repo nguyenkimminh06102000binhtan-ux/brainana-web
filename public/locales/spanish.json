@@ -414,7 +414,7 @@
     "speedMatchNo": "✗No",
     "speedMatchYes": "Sí ✓",
     "savingPreferences": "Guardando preferencias…",
-    "preferencesSaveError": "No se pudieron guardar las preferencias. Revise su conexión."
+    "preferencesSaveError": "No se pudieron guardar las preferencias. Comprueba tu conexión."
   },
   "discussion": {
     "title": "Discusión",

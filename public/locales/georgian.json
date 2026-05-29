@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}ბონუსი! 🎉",
     "speedMatchNo": "✗ არა",
     "speedMatchYes": "დიახ ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "მიმდინარეობს პარამეტრების შენახვა…",
+    "preferencesSaveError": "პარამეტრების შენახვა ვერ მოხერხდა. შეამოწმეთ თქვენი კავშირი."
   },
   "discussion": {
     "title": "დისკუსია",

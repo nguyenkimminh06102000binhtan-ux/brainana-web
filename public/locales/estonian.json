@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}s boonus! 🎉",
     "speedMatchNo": "✗ Ei",
     "speedMatchYes": "Jah ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "Eelistuste salvestamine…",
+    "preferencesSaveError": "Eelistusi ei saanud salvestada. Kontrollige ühendust."
   },
   "discussion": {
     "title": "Arutelu",

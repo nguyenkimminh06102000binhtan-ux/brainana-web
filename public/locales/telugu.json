@@ -413,8 +413,8 @@
     "speedMatchBonus": "+{seconds}లు బోనస్! 🎉",
     "speedMatchNo": "✗ నం",
     "speedMatchYes": "అవును ✓",
-    "savingPreferences": "Saving preferences…",
-    "preferencesSaveError": "Couldn't save preferences. Check your connection."
+    "savingPreferences": "ప్రాధాన్యతలను సేవ్ చేస్తోంది...",
+    "preferencesSaveError": "ప్రాధాన్యతలను సేవ్ చేయడం సాధ్యపడలేదు. మీ కనెక్షన్‌ని తనిఖీ చేయండి."
   },
   "discussion": {
     "title": "చర్చ",
