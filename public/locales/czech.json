@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Odpovídá překlad slovu?",
     "speedMatchBonus": "+{seconds}s bonusem! 🎉",
     "speedMatchNo": "✗ Ne",
-    "speedMatchYes": "Ano ✓"
+    "speedMatchYes": "Ano ✓",
+    "savingPreferences": "Ukládání předvoleb…",
+    "preferencesSaveError": "Předvolby se nepodařilo uložit. Zkontrolujte připojení."
   },
   "discussion": {
     "title": "Diskuse",

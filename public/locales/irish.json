@@ -412,7 +412,9 @@
     "speedMatchQuestion": "An meaitseálann an t-aistriúchán leis an bhfocal?",
     "speedMatchBonus": "+{seconds}s bónas! 🎉",
     "speedMatchNo": "✗ Ní hea",
-    "speedMatchYes": "Tá ✓"
+    "speedMatchYes": "Tá ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Plé",

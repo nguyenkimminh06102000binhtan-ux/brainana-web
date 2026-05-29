@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Tərcümə sözə uyğun gəlirmi?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Xeyr",
-    "speedMatchYes": "Bəli ✓"
+    "speedMatchYes": "Bəli ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Müzakirə",

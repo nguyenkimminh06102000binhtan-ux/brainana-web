@@ -412,7 +412,9 @@
     "speedMatchQuestion": "అనువాదం పదానికి సరిపోతుందా?",
     "speedMatchBonus": "+{seconds}లు బోనస్! 🎉",
     "speedMatchNo": "✗ నం",
-    "speedMatchYes": "అవును ✓"
+    "speedMatchYes": "అవును ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "చర్చ",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "翻译与单词相符吗？",
     "speedMatchBonus": "+{seconds}奖金！ 🎉",
     "speedMatchNo": "✗ 没有",
-    "speedMatchYes": "是 ✓"
+    "speedMatchYes": "是 ✓",
+    "savingPreferences": "正在保存偏好设置…",
+    "preferencesSaveError": "无法保存偏好设置。请检查网络连接。"
   },
   "discussion": {
     "title": "讨论",

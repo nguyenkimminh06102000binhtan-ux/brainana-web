@@ -5,6 +5,27 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import type { StudyCard, QType } from "./types";
 
+const VALID_TYPES = new Set<QType>(["flashcard", "multiple_choice", "audio_type", "speed_match", "type_answer"]);
+
+export async function updateQuestionTypes(formData: FormData) {
+  const courseId = String(formData.get("course_id") ?? "");
+  const raw = formData.getAll("question_types") as string[];
+  const types = raw.filter((t): t is QType => VALID_TYPES.has(t as QType));
+  if (types.length === 0) return;
+
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { error } = await supabase
+    .from("user_courses")
+    .upsert(
+      { user_id: user.id, course_id: courseId, preferred_question_types: types },
+      { onConflict: "user_id,course_id" }
+    );
+  if (error) throw new Error(error.message);
+}
+
 const ESCALATION: Record<string, QType> = {
   speed_match: "multiple_choice",
   multiple_choice: "type_answer",
@@ -21,6 +42,13 @@ function assignQuestionType(lastType: string | null, selectedTypes: QType[]): QT
 
   // Card with history: escalate to the next difficulty level
   const target: QType = ESCALATION[lastType] ?? "flashcard";
+
+  // At the top of the escalation ladder (target === lastType), randomly pick
+  // from all selected types so the user sees variety across sessions.
+  if (target === lastType) {
+    return types[Math.floor(Math.random() * types.length)]!;
+  }
+
   if (types.includes(target)) return target;
 
   // Target not in selected types — find nearest available in the ladder

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "It-traduzzjoni taqbel mal-kelma?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Le",
-    "speedMatchYes": "Iva ✓"
+    "speedMatchYes": "Iva ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Diskussjoni",

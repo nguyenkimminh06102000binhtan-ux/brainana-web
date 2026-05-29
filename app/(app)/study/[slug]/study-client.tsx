@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { fetchStudyCards } from "./actions";
+import { fetchStudyCards, updateQuestionTypes } from "./actions";
 import PageLoading from "../../_components/page-loading";
 import SessionView from "./session-view";
 import ResultsScreen from "./results-screen";
@@ -59,6 +59,14 @@ type StudyLabels = {
   speedMatchBonus: string;
   speedMatchNo: string;
   speedMatchYes: string;
+  studyWith: string;
+  flashcard: string;
+  multipleChoice: string;
+  audioType: string;
+  speedMatch: string;
+  typeAnswer: string;
+  savingPreferences: string;
+  preferencesSaveError: string;
 };
 
 interface StudyClientProps {
@@ -70,6 +78,7 @@ interface StudyClientProps {
   newCards: number;
   totalCount: number;
   preferredTypes: QType[];
+  hasAudio: boolean;
   showRomanization: boolean;
   labels: StudyLabels;
 }
@@ -83,6 +92,7 @@ export default function StudyClient({
   newCards,
   totalCount,
   preferredTypes,
+  hasAudio,
   showRomanization,
   labels,
 }: StudyClientProps) {
@@ -93,11 +103,33 @@ export default function StudyClient({
   const [sessionCards, setSessionCards] = useState<StudyCard[]>([]);
   const [sessionStats, setSessionStats] = useState<SessionStats | null>(null);
   const [count, setCount] = useState(sessionLimit > 0 ? Math.min(10, sessionLimit) : 0);
+  const [selectedTypes, setSelectedTypes] = useState<QType[]>(preferredTypes);
+  const [isSaving, startSaveTransition] = useTransition();
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  function toggleType(type: QType) {
+    const next = selectedTypes.includes(type)
+      ? selectedTypes.filter((t) => t !== type)
+      : [...selectedTypes, type];
+    if (next.length === 0) return;
+    setSelectedTypes(next);
+    setSaveError(null);
+    startSaveTransition(async () => {
+      try {
+        const fd = new FormData();
+        fd.append("course_id", courseId);
+        next.forEach((t) => fd.append("question_types", t));
+        await updateQuestionTypes(fd);
+      } catch {
+        setSaveError(labels.preferencesSaveError);
+      }
+    });
+  }
 
   async function handleStart() {
     setStage("loading");
     try {
-      const cards = await fetchStudyCards(courseId, count, preferredTypes);
+      const cards = await fetchStudyCards(courseId, count, selectedTypes);
       setSessionCards(cards);
       setStage("session");
     } catch {
@@ -281,15 +313,57 @@ export default function StudyClient({
           )}
         </div>
 
+        {/* Question type selector */}
+        <div className="mb-6">
+          <p className="mb-2 font-mono text-xs uppercase tracking-widest text-ink-3">{labels.studyWith}</p>
+          <div className="grid grid-cols-2 gap-2">
+            {(
+              [
+                { value: "flashcard" as QType,       label: labels.flashcard,       icon: "🃏" },
+                { value: "multiple_choice" as QType, label: labels.multipleChoice,  icon: "☑️" },
+                { value: "speed_match" as QType,     label: labels.speedMatch,      icon: "⚡" },
+                { value: "type_answer" as QType,     label: labels.typeAnswer,      icon: "⌨️" },
+                ...(hasAudio ? [{ value: "audio_type" as QType, label: labels.audioType, icon: "🎧" }] : []),
+              ] as { value: QType; label: string; icon: string }[]
+            ).map(({ value, label, icon }) => {
+              const active = selectedTypes.includes(value);
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => toggleType(value)}
+                  className={`flex cursor-pointer items-center gap-2 rounded-lg border-2 px-3 py-2.5 font-manrope text-sm font-[700] transition active:translate-y-[1px] ${
+                    active
+                      ? "border-orange bg-orange/10 text-ink"
+                      : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
+                  }`}
+                >
+                  <span>{icon}</span>
+                  <span>{label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Buttons */}
+        {saveError && (
+          <p className="mb-3 rounded-sm bg-red-soft px-3 py-2 text-center font-manrope text-xs text-ink">
+            {saveError}
+          </p>
+        )}
         <div className="flex flex-col gap-2">
           <button
             type="button"
             onClick={handleStart}
-            disabled={sessionLimit === 0}
+            disabled={sessionLimit === 0 || isSaving}
             className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-white shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isPracticeMode ? labels.practiceAgain : labels.startStudying}
+            {isSaving
+              ? labels.savingPreferences
+              : isPracticeMode
+                ? labels.practiceAgain
+                : labels.startStudying}
           </button>
           <Link
             href={`/c/${courseSlug}`}

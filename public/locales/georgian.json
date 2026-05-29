@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ემთხვევა თუ არა თარგმანი სიტყვას?",
     "speedMatchBonus": "+{seconds}ბონუსი! 🎉",
     "speedMatchNo": "✗ არა",
-    "speedMatchYes": "დიახ ✓"
+    "speedMatchYes": "დიახ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "დისკუსია",

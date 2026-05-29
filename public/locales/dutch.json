@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Komt de vertaling overeen met het woord?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Nee",
-    "speedMatchYes": "Ja ✓"
+    "speedMatchYes": "Ja ✓",
+    "savingPreferences": "Voorkeuren opslaan…",
+    "preferencesSaveError": "Voorkeuren konden niet worden opgeslagen. Controleer uw verbinding."
   },
   "discussion": {
     "title": "Discussie",

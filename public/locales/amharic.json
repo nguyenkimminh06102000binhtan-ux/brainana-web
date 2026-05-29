@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ትርጉሙ ከቃሉ ጋር ይዛመዳል?",
     "speedMatchBonus": "+{seconds}s ጉርሻ! 🎉",
     "speedMatchNo": "✗ አይ",
-    "speedMatchYes": "አዎ ✓"
+    "speedMatchYes": "አዎ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ውይይት",

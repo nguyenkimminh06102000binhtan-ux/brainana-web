@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Çeviri kelimeyle eşleşiyor mu?",
     "speedMatchBonus": "+{seconds}bonus! 🎉",
     "speedMatchNo": "✗ Hayır",
-    "speedMatchYes": "Evet ✓"
+    "speedMatchYes": "Evet ✓",
+    "savingPreferences": "Tercihler kaydediliyor…",
+    "preferencesSaveError": "Tercihler kaydedilemedi. Bağlantınızı kontrol edin."
   },
   "discussion": {
     "title": "Tartışma",

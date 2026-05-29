@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Turjumaada ma u dhigma ereyga?",
     "speedMatchBonus": "+{seconds}gunno! 🎉",
     "speedMatchNo": "Maya",
-    "speedMatchYes": "Haa ✓"
+    "speedMatchYes": "Haa ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Dood",

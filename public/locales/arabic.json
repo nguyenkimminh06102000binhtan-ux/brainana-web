@@ -412,7 +412,9 @@
     "speedMatchQuestion": "هل الترجمة مطابقة للكلمة؟",
     "speedMatchBonus": "+{seconds}مكافأة! 🎉",
     "speedMatchNo": "✗ لا",
-    "speedMatchYes": "نعم ✓"
+    "speedMatchYes": "نعم ✓",
+    "savingPreferences": "جارٍ حفظ التفضيلات…",
+    "preferencesSaveError": "تعذر حفظ التفضيلات. تحقق من اتصالك."
   },
   "discussion": {
     "title": "مناقشة",

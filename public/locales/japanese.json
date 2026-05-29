@@ -412,7 +412,9 @@
     "speedMatchQuestion": "翻訳は単語と一致していますか？",
     "speedMatchBonus": "+{seconds}ボーナス！ 🎉",
     "speedMatchNo": "✗ いいえ",
-    "speedMatchYes": "はい ✓"
+    "speedMatchYes": "はい ✓",
+    "savingPreferences": "設定を保存中…",
+    "preferencesSaveError": "設定を保存できませんでした。接続を確認してください。"
   },
   "discussion": {
     "title": "議論",

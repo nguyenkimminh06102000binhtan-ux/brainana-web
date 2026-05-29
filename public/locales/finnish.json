@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Vastaako käännös sanaa?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Ei",
-    "speedMatchYes": "Kyllä ✓"
+    "speedMatchYes": "Kyllä ✓",
+    "savingPreferences": "Tallennetaan asetuksia…",
+    "preferencesSaveError": "Asetuksia ei voitu tallentaa. Tarkista yhteys."
   },
   "discussion": {
     "title": "Keskustelu",

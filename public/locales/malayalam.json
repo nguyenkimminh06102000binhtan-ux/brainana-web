@@ -412,7 +412,9 @@
     "speedMatchQuestion": "വിവർത്തനം പദവുമായി പൊരുത്തപ്പെടുന്നുണ്ടോ?",
     "speedMatchBonus": "+{seconds}ബോണസ്! 🎉",
     "speedMatchNo": "✗ നമ്പർ",
-    "speedMatchYes": "അതെ ✓"
+    "speedMatchYes": "അതെ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ചർച്ച",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Apakah terjemahannya sesuai dengan kata tersebut?",
     "speedMatchBonus": "+{seconds}bonusnya! 🎉",
     "speedMatchNo": "✗ Tidak",
-    "speedMatchYes": "Ya ✓"
+    "speedMatchYes": "Ya ✓",
+    "savingPreferences": "Menyimpan preferensi…",
+    "preferencesSaveError": "Tidak dapat menyimpan preferensi. Periksa koneksi Anda."
   },
   "discussion": {
     "title": "Diskusi",

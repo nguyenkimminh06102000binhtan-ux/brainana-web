@@ -412,7 +412,9 @@
     "speedMatchQuestion": "மொழிபெயர்ப்பு வார்த்தையுடன் பொருந்துகிறதா?",
     "speedMatchBonus": "+{seconds}கள் போனஸ்! 🎉",
     "speedMatchNo": "✗ எண்",
-    "speedMatchYes": "ஆம் ✓"
+    "speedMatchYes": "ஆம் ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "கலந்துரையாடல்",

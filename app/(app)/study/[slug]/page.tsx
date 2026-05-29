@@ -83,8 +83,17 @@ export default async function StudyPage({
       newCards={newCards}
       totalCount={total}
       preferredTypes={preferredTypes}
+      hasAudio={hasAudio}
       showRomanization={profile?.show_romanization ?? true}
-      labels={loc.study}
+      labels={{
+        ...loc.study,
+        studyWith: loc.course.studyWithSection,
+        flashcard: loc.course.flashcard,
+        multipleChoice: loc.course.multipleChoice,
+        audioType: loc.course.audioType,
+        speedMatch: loc.course.speedMatch,
+        typeAnswer: loc.course.typeAnswer,
+      }}
     />
   );
 }

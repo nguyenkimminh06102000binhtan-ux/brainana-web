@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Орчуулга нь үгтэй таарч байна уу?",
     "speedMatchBonus": "+{seconds}урамшуулал! 🎉",
     "speedMatchNo": "✗ Үгүй",
-    "speedMatchYes": "Тийм ✓"
+    "speedMatchYes": "Тийм ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Хэлэлцүүлэг",

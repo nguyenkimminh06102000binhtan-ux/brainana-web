@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Kas tõlge sobib sõnaga?",
     "speedMatchBonus": "+{seconds}s boonus! 🎉",
     "speedMatchNo": "✗ Ei",
-    "speedMatchYes": "Jah ✓"
+    "speedMatchYes": "Jah ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Arutelu",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Odgovara li prijevod riječi?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Ne",
-    "speedMatchYes": "Da ✓"
+    "speedMatchYes": "Da ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Rasprava",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "A tradução corresponde à palavra?",
     "speedMatchBonus": "+{seconds}é um bônus! 🎉",
     "speedMatchNo": "✗ Não",
-    "speedMatchYes": "Sim ✓"
+    "speedMatchYes": "Sim ✓",
+    "savingPreferences": "Salvando preferências…",
+    "preferencesSaveError": "Não foi possível salvar as preferências. Verifique sua conexão."
   },
   "discussion": {
     "title": "Discussão",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Apa terjemahan cocog karo tembung kasebut?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Ora",
-    "speedMatchYes": "Ya wis ✓"
+    "speedMatchYes": "Ya wis ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "rembugan",

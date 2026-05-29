@@ -109,11 +109,20 @@ function AudioTypePlayer({ card, onAnswer, labels }: { card: StudyCard; onAnswer
 
   useEffect(() => {
     if (!submitted) return;
+    const autoSkip = setTimeout(() => advance(), 3000);
+    // Delay before accepting Enter to advance — prevents key-repeat from
+    // immediately skipping past the feedback screen.
+    let canAdvance = false;
+    const timer = setTimeout(() => { canAdvance = true; }, 600);
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Enter") advance();
+      if (canAdvance && e.key === "Enter") advance();
     }
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      clearTimeout(autoSkip);
+      clearTimeout(timer);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [submitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function submit() {

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Stem die vertaling ooreen met die woord?",
     "speedMatchBonus": "+{seconds}se bonus! 🎉",
     "speedMatchNo": "✗ Nee",
-    "speedMatchYes": "Ja ✓"
+    "speedMatchYes": "Ja ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Bespreking",

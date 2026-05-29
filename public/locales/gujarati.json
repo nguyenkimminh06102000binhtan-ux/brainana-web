@@ -412,7 +412,9 @@
     "speedMatchQuestion": "શું અનુવાદ શબ્દ સાથે મેળ ખાય છે?",
     "speedMatchBonus": "+{seconds}s બોનસ! 🎉",
     "speedMatchNo": "✗ ના",
-    "speedMatchYes": "હા ✓"
+    "speedMatchYes": "હા ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ચર્ચા",

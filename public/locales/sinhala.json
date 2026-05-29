@@ -412,7 +412,9 @@
     "speedMatchQuestion": "පරිවර්තනය වචනයට ගැලපේද?",
     "speedMatchBonus": "+{seconds}ප්‍රසාද දීමනාව! 🎉",
     "speedMatchNo": "✗ නැත",
-    "speedMatchYes": "ඔව් ✓"
+    "speedMatchYes": "ඔව් ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "සාකච්ඡාව",

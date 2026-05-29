@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Stämmer översättningen med ordet?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Nej",
-    "speedMatchYes": "Ja ✓"
+    "speedMatchYes": "Ja ✓",
+    "savingPreferences": "Sparar inställningar…",
+    "preferencesSaveError": "Det gick inte att spara inställningar. Kontrollera anslutningen."
   },
   "discussion": {
     "title": "Diskussion",

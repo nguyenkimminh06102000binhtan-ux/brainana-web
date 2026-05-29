@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Traducerea se potrivește cu cuvântul?",
     "speedMatchBonus": "+{seconds}bonusul lui! 🎉",
     "speedMatchNo": "✗ Nu",
-    "speedMatchYes": "Da ✓"
+    "speedMatchYes": "Da ✓",
+    "savingPreferences": "Se salvează preferințele…",
+    "preferencesSaveError": "Preferințele nu au putut fi salvate. Verificați conexiunea."
   },
   "discussion": {
     "title": "Discuţie",

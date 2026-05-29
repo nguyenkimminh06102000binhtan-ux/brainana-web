@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Shin fassarar ta dace da kalmar?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ A'a",
-    "speedMatchYes": "Da ✓"
+    "speedMatchYes": "Da ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Tattaunawa",

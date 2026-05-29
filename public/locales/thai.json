@@ -412,7 +412,9 @@
     "speedMatchQuestion": "คำแปลตรงกับคำหรือไม่?",
     "speedMatchBonus": "+{seconds}โบนัส! 🎉",
     "speedMatchNo": "✗ ไม่",
-    "speedMatchYes": "ใช่ ✓"
+    "speedMatchYes": "ใช่ ✓",
+    "savingPreferences": "กำลังบันทึกการตั้งค่า…",
+    "preferencesSaveError": "ไม่สามารถบันทึกการตั้งค่า กรุณาตรวจสอบการเชื่อมต่อ"
   },
   "discussion": {
     "title": "การอภิปราย",

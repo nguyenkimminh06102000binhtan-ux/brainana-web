@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Itzulpena bat dator hitzarekin?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Ez",
-    "speedMatchYes": "Bai ✓"
+    "speedMatchYes": "Bai ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Eztabaida",

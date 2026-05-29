@@ -412,7 +412,9 @@
     "speedMatchQuestion": "के अनुवाद शब्दसँग मेल खान्छ?",
     "speedMatchBonus": "+{seconds}s बोनस! 🎉",
     "speedMatchNo": "✗ छैन",
-    "speedMatchYes": "हो ✓"
+    "speedMatchYes": "हो ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "छलफल",

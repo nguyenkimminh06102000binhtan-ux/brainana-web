@@ -412,7 +412,9 @@
     "speedMatchQuestion": "翻譯同個字啱唔啱？",
     "speedMatchBonus": "+{seconds}s 獎金！ 🎉",
     "speedMatchNo": "✗ 唔係",
-    "speedMatchYes": "係呀 ✓"
+    "speedMatchYes": "係呀 ✓",
+    "savingPreferences": "正在儲存偏好設定…",
+    "preferencesSaveError": "無法儲存偏好設定。請檢查網絡連接。"
   },
   "discussion": {
     "title": "討論",

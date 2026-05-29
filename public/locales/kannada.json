@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ಅನುವಾದವು ಪದಕ್ಕೆ ಹೊಂದಿಕೆಯಾಗುತ್ತದೆಯೇ?",
     "speedMatchBonus": "+{seconds}ಗಳ ಬೋನಸ್! 🎉",
     "speedMatchNo": "✗ ಸಂ",
-    "speedMatchYes": "ಹೌದು ✓"
+    "speedMatchYes": "ಹೌದು ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ಚರ್ಚೆ",

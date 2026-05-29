@@ -412,7 +412,9 @@
     "speedMatchQuestion": "অনুবাদ কি শব্দের সাথে মেলে?",
     "speedMatchBonus": "+{seconds}বোনাস! 🎉",
     "speedMatchNo": "✗ না",
-    "speedMatchYes": "হ্যাঁ ✓"
+    "speedMatchYes": "হ্যাঁ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "আলোচনা",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "A fordítás megegyezik a szóval?",
     "speedMatchBonus": "+{seconds}s bónusz! 🎉",
     "speedMatchNo": "✗ Nem",
-    "speedMatchYes": "Igen ✓"
+    "speedMatchYes": "Igen ✓",
+    "savingPreferences": "Beállítások mentése…",
+    "preferencesSaveError": "A beállításokat nem sikerült menteni. Ellenőrizze a kapcsolatot."
   },
   "discussion": {
     "title": "Vita",

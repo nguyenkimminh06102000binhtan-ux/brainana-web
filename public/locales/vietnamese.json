@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Bản dịch có khớp với từ không?",
     "speedMatchBonus": "+{seconds}s thêm! 🎉",
     "speedMatchNo": "✗ Không",
-    "speedMatchYes": "Có ✓"
+    "speedMatchYes": "Có ✓",
+    "savingPreferences": "Đang lưu cài đặt…",
+    "preferencesSaveError": "Không thể lưu cài đặt. Vui lòng kiểm tra kết nối."
   },
   "discussion": {
     "title": "Thảo luận",

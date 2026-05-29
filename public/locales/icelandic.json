@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Passar þýðingin við orðið?",
     "speedMatchBonus": "+{seconds}s bónus! 🎉",
     "speedMatchNo": "✗ Nei",
-    "speedMatchYes": "Já ✓"
+    "speedMatchYes": "Já ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Umræða",

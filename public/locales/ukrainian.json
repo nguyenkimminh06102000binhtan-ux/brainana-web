@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Чи відповідає переклад слову?",
     "speedMatchBonus": "+{seconds}бонус! 🎉",
     "speedMatchNo": "✗ Ні",
-    "speedMatchYes": "Так ✓"
+    "speedMatchYes": "Так ✓",
+    "savingPreferences": "Збереження налаштувань…",
+    "preferencesSaveError": "Не вдалося зберегти налаштування. Перевірте підключення."
   },
   "discussion": {
     "title": "Обговорення",

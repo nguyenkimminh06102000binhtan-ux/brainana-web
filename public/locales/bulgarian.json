@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Преводът съвпада ли с думата?",
     "speedMatchBonus": "+{seconds}s бонус! 🎉",
     "speedMatchNo": "✗ Не",
-    "speedMatchYes": "Да ✓"
+    "speedMatchYes": "Да ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Дискусия",

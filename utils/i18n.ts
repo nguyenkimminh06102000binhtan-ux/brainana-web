@@ -286,6 +286,8 @@ export type Locale = {
     speedMatchBonus: string;
     speedMatchNo: string;
     speedMatchYes: string;
+    savingPreferences: string;
+    preferencesSaveError: string;
   };
   discussion: {
     title: string;

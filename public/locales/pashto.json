@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ایا ژباړه د کلمې سره سمون لري؟",
     "speedMatchBonus": "+{seconds}s بونس! 🎉",
     "speedMatchNo": "✗ نه",
-    "speedMatchYes": "هو ✓"
+    "speedMatchYes": "هو ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "بحث",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Je, tafsiri inalingana na neno?",
     "speedMatchBonus": "+{seconds}s ziada! 🎉",
     "speedMatchNo": "✗ Hapana",
-    "speedMatchYes": "Ndiyo ✓"
+    "speedMatchYes": "Ndiyo ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Majadiliano",

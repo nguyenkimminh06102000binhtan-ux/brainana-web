@@ -412,7 +412,9 @@
     "speedMatchQuestion": "کیا ترجمہ لفظ سے میل کھاتا ہے؟",
     "speedMatchBonus": "+{seconds}s بونس! 🎉",
     "speedMatchNo": "✗ نہیں",
-    "speedMatchYes": "ہاں ✓"
+    "speedMatchYes": "ہاں ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "بحث",

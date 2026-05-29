@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Zhoduje sa preklad so slovom?",
     "speedMatchBonus": "+{seconds}s bonusom! 🎉",
     "speedMatchNo": "✗ Nie",
-    "speedMatchYes": "Áno ✓"
+    "speedMatchYes": "Áno ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Diskusia",

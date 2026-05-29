@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Ταιριάζει η μετάφραση με τη λέξη;",
     "speedMatchBonus": "+{seconds}μπόνους! 🎉",
     "speedMatchNo": "✗ Όχι",
-    "speedMatchYes": "Ναι ✓"
+    "speedMatchYes": "Ναι ✓",
+    "savingPreferences": "Αποθήκευση προτιμήσεων…",
+    "preferencesSaveError": "Αδυναμία αποθήκευσης προτιμήσεων. Ελέγξτε τη σύνδεσή σας."
   },
   "discussion": {
     "title": "Συζήτηση",

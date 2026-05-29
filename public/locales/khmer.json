@@ -412,7 +412,9 @@
     "speedMatchQuestion": "តើការបកប្រែត្រូវនឹងពាក្យទេ?",
     "speedMatchBonus": "+{seconds}s ប្រាក់រង្វាន់! 🎉",
     "speedMatchNo": "✗ ទេ។",
-    "speedMatchYes": "បាទ ✓"
+    "speedMatchYes": "បាទ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ការពិភាក្សា",

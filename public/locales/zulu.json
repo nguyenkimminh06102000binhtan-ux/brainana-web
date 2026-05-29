@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Ingabe ukuhumusha kufana negama?",
     "speedMatchBonus": "+{seconds}s ibhonasi! 🎉",
     "speedMatchNo": "✗ Cha",
-    "speedMatchYes": "Yebo ✓"
+    "speedMatchYes": "Yebo ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Ingxoxo",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Ang pagsasalin ba ay tumutugma sa salita?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Hindi",
-    "speedMatchYes": "Oo ✓"
+    "speedMatchYes": "Oo ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Pagtalakay",

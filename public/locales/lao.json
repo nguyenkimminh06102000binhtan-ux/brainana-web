@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ຄໍາແປທີ່ກົງກັບຄໍາ?",
     "speedMatchBonus": "+{seconds}ໂບນັດ! 🎉",
     "speedMatchNo": "✗ ບໍ່",
-    "speedMatchYes": "ແມ່ນ ✓"
+    "speedMatchYes": "ແມ່ນ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ສົນທະນາ",

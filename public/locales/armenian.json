@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Արդյո՞ք թարգմանությունը համապատասխանում է բառին:",
     "speedMatchBonus": "+{seconds}s բոնուս! 🎉",
     "speedMatchNo": "✗ Ոչ",
-    "speedMatchYes": "Այո ✓"
+    "speedMatchYes": "Այո ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Քննարկում",

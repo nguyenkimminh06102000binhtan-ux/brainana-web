@@ -412,7 +412,9 @@
     "speedMatchQuestion": "번역이 단어와 일치합니까?",
     "speedMatchBonus": "+{seconds}보너스! 🎉",
     "speedMatchNo": "✗ 아니요",
-    "speedMatchYes": "예 ✓"
+    "speedMatchYes": "예 ✓",
+    "savingPreferences": "설정 저장 중…",
+    "preferencesSaveError": "설정을 저장할 수 없습니다. 연결을 확인하세요."
   },
   "discussion": {
     "title": "논의",

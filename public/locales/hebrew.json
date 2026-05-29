@@ -412,7 +412,9 @@
     "speedMatchQuestion": "האם התרגום תואם את המילה?",
     "speedMatchBonus": "+{seconds}בונוס! 🎉",
     "speedMatchNo": "✗ לא",
-    "speedMatchYes": "כן ✓"
+    "speedMatchYes": "כן ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "דִיוּן",

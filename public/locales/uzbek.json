@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Tarjima so'zga mos keladimi?",
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "✗ Yo'q",
-    "speedMatchYes": "Ha ✓"
+    "speedMatchYes": "Ha ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Munozara",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "ਕੀ ਅਨੁਵਾਦ ਸ਼ਬਦ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਹੈ?",
     "speedMatchBonus": "+{seconds}s ਬੋਨਸ! 🎉",
     "speedMatchNo": "✗ ਨੰ",
-    "speedMatchYes": "ਹਾਂ ✓"
+    "speedMatchYes": "ਹਾਂ ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "ਚਰਚਾ",

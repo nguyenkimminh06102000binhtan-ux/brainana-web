@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Аударма сөзге сәйкес келе ме?",
     "speedMatchBonus": "+{seconds}бонус! 🎉",
     "speedMatchNo": "✗ Жоқ",
-    "speedMatchYes": "Иә ✓"
+    "speedMatchYes": "Иә ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Талқылау",

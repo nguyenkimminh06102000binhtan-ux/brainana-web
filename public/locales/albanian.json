@@ -412,7 +412,9 @@
     "speedMatchQuestion": "A përputhet përkthimi me fjalën?",
     "speedMatchBonus": "+{seconds}bonus s! 🎉",
     "speedMatchNo": "✗ Jo",
-    "speedMatchYes": "Po ✓"
+    "speedMatchYes": "Po ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Diskutim",

@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Ṣe itumọ naa baramu ọrọ naa?",
     "speedMatchBonus": "+{seconds}s ajeseku! 🎉",
     "speedMatchNo": "✗ Bẹẹkọ",
-    "speedMatchYes": "Bẹẹni ✓"
+    "speedMatchYes": "Bẹẹni ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Ifọrọwanilẹnuwo",

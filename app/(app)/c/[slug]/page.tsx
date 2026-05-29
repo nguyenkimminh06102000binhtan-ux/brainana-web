@@ -7,7 +7,6 @@ import { getLocale, t } from "@/utils/i18n";
 import PreviewSection from "./preview";
 import FollowButton from "./follow-button";
 import ShareButton from "./share-button";
-import QuestionTypeSelector from "./question-type-selector";
 import DiscussionThread from "./discussion-thread";
 import { toggleEnroll } from "./actions";
 
@@ -72,8 +71,6 @@ export default async function CourseDetailPage({
   const cl = loc.course;
 
   const isEnrolled = Boolean(enrollmentData);
-  type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
-  const preferredTypes = (enrollmentData?.preferred_question_types ?? ["flashcard"]) as QType[];
   const isFollowing = Boolean(followData);
   const followingIds = (followingList ?? []).map((f) => f.following_id);
 
@@ -288,25 +285,6 @@ export default async function CourseDetailPage({
             </div>
           </aside>
 
-          {/* Question types */}
-          <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.studyWithSection}</p>
-            <QuestionTypeSelector
-              courseId={course.id}
-              initial={preferredTypes}
-              hasAudio={course.has_audio ?? false}
-              labels={{
-                flashcard: cl.flashcard,
-                multipleChoice: cl.multipleChoice,
-                audioType: cl.audioType,
-                speedMatch: cl.speedMatch,
-                typeAnswer: cl.typeAnswer,
-                savePreferences: cl.savePreferences,
-                savedPreferences: cl.savedPreferences,
-                savingPreferences: cl.savingPreferences,
-              }}
-            />
-          </aside>
 
           {/* Friends learning */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">

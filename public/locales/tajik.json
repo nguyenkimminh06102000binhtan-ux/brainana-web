@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Оё тарҷума ба калима мувофиқат мекунад?",
     "speedMatchBonus": "+{seconds}с бонус! 🎉",
     "speedMatchNo": "✗ Не",
-    "speedMatchYes": "Ҳа ✓"
+    "speedMatchYes": "Ҳа ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Муҳокима",

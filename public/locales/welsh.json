@@ -412,7 +412,9 @@
     "speedMatchQuestion": "Ydy'r cyfieithiad yn cyfateb i'r gair?",
     "speedMatchBonus": "+{seconds}s bonws! 🎉",
     "speedMatchNo": "✗ Nac ydy",
-    "speedMatchYes": "Ydy ✓"
+    "speedMatchYes": "Ydy ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "Trafodaeth",

@@ -66,8 +66,8 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
       newlyMastered: !wasMastered && nowMastered,
     };
 
-    // Auto-advance
-    setTimeout(() => onAnswer(answer), isCorrect ? 1000 : 2500);
+    // Auto-advance — longer delay on wrong so user can read the correct answer
+    setTimeout(() => onAnswer(answer), isCorrect ? 1000 : 3000);
   }
 
   return (

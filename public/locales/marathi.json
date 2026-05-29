@@ -412,7 +412,9 @@
     "speedMatchQuestion": "भाषांतर शब्दाशी जुळते का?",
     "speedMatchBonus": "+{seconds}s बोनस! 🎉",
     "speedMatchNo": "✗ नाही",
-    "speedMatchYes": "होय ✓"
+    "speedMatchYes": "होय ✓",
+    "savingPreferences": "Saving preferences…",
+    "preferencesSaveError": "Couldn't save preferences. Check your connection."
   },
   "discussion": {
     "title": "चर्चा",
