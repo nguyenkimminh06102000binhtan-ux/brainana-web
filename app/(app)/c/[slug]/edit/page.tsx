@@ -42,7 +42,7 @@ export default async function EditCoursePage({
 
   const { data: items } = await supabase
     .from("items")
-    .select("id, section_id, front_text, back_text, image_url, front_audio_url, back_audio_url, position")
+    .select("id, section_id, front_text, back_text, romanization, image_url, front_audio_url, back_audio_url, position")
     .eq("course_id", course.id)
     .order("position");
 

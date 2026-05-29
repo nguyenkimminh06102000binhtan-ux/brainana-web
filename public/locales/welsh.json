@@ -45,7 +45,8 @@
     "clear": "Clir",
     "clearFilters": "Clirio hidlwyr",
     "courseSingular": "cwrs",
-    "coursePlural": "cyrsiau"
+    "coursePlural": "cyrsiau",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Croeso nôl, {name}",
@@ -428,7 +429,8 @@
       "Paid â rhoi’r gorau iddi!",
       "Fe gei di’r tro nesaf!",
       "Parha i ymarfer!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Trafodaeth",
@@ -514,7 +516,13 @@
     "uploadingFiles": "Wrthi'n uwchlwytho ffeiliau...",
     "saving": "Wrthi'n cadw...",
     "saveChanges": "Cadw newidiadau",
-    "addAtLeastOneCard": "Ychwanegwch o leiaf un cerdyn i barhau"
+    "addAtLeastOneCard": "Ychwanegwch o leiaf un cerdyn i barhau",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 eiliad · i gyd ar un dudalen",

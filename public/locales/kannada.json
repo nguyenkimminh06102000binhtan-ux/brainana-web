@@ -45,7 +45,8 @@
     "clear": "ತೆರವುಗೊಳಿಸಿ",
     "clearFilters": "ಫಿಲ್ಟರ್‌ಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ",
     "courseSingular": "ಕೋರ್ಸ್",
-    "coursePlural": "ಕೋರ್ಸ್‌ಗಳು"
+    "coursePlural": "ಕೋರ್ಸ್‌ಗಳು",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "ಮರಳಿ ಸ್ವಾಗತ, {name}",
@@ -428,7 +429,8 @@
       "ಬಿಟ್ಟುಕೊಡಬೇಡಿ!",
       "ಮುಂದಿನ ಬಾರಿ ನಿಮಗೆ ಬರುತ್ತದೆ!",
       "ಅಭ್ಯಾಸ ಮುಂದುವರಿಸಿ!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "ಚರ್ಚೆ",
@@ -514,7 +516,13 @@
     "createCourse": "ಕೋರ್ಸ್ ರಚಿಸಿ",
     "cancel": "ರದ್ದುಮಾಡಿ",
     "saveChanges": "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
-    "saving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ..."
+    "saving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 ಸೆಕೆಂಡು · ಎಲ್ಲಾ ಒಂದೇ ಪುಟದಲ್ಲಿ",

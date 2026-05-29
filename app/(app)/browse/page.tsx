@@ -21,6 +21,7 @@ type Course = {
   rating_count: number;
   has_audio: boolean;
   has_images: boolean;
+  has_romanization: boolean;
   mems_count: number;
   profiles: { username: string; display_name: string | null } | null;
 };
@@ -98,7 +99,7 @@ export default async function BrowsePage({
   let query = supabase
     .from("courses")
     .select(
-      "id, slug, title, category, subcategory, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, has_images, mems_count, profiles!creator_id (username, display_name)"
+      "id, slug, title, category, subcategory, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, has_images, has_romanization, mems_count, profiles!creator_id (username, display_name)"
     )
     .eq("visibility", "public")
     .eq("is_published", true);
@@ -235,6 +236,11 @@ export default async function BrowsePage({
                         {course.has_images && (
                           <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
                             {loc.browse.images}
+                          </span>
+                        )}
+                        {course.has_romanization && (
+                          <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
+                            {loc.common.romanization}
                           </span>
                         )}
                         {course.mems_count > 0 && (

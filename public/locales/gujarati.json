@@ -45,7 +45,8 @@
     "clear": "સાફ કરો",
     "clearFilters": "ફિલ્ટર્સ સાફ કરો",
     "courseSingular": "અભ્યાસક્રમ",
-    "coursePlural": "અભ્યાસક્રમો"
+    "coursePlural": "અભ્યાસક્રમો",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "ફરી સ્વાગત છે, {name}",
@@ -428,7 +429,8 @@
       "હાર ન માનો!",
       "આગલી વખત થશે!",
       "અભ્યાસ ચાલુ રાખો!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "ચર્ચા",
@@ -514,7 +516,13 @@
     "creating": "બનાવી રહ્યું છે...",
     "cancel": "રદ કરો",
     "saving": "સાચવી રહ્યું છે...",
-    "saveChanges": "ફેરફારો સાચવો"
+    "saveChanges": "ફેરફારો સાચવો",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 સેકન્ડ · બધા એક પૃષ્ઠ પર",

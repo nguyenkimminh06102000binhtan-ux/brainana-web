@@ -45,7 +45,8 @@
     "clear": "Прозрачный",
     "clearFilters": "Очистить фильтры",
     "courseSingular": "курс",
-    "coursePlural": "курсы"
+    "coursePlural": "курсы",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Добро пожаловать, {name}",
@@ -428,7 +429,8 @@
       "Не сдавайся!",
       "В следующий раз получится!",
       "Продолжай практиковаться!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Обсуждение",
@@ -514,7 +516,13 @@
     "untitledSection": "Безымянный раздел",
     "createCourse": "Создать курс",
     "saveChanges": "Сохранить изменения",
-    "saving": "Сохранение..."
+    "saving": "Сохранение...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 секунд · все на одной странице",

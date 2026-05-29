@@ -10,6 +10,7 @@ type ItemPayload = {
   dbId: string | null;
   front: string;
   back: string;
+  romanization: string;
   imagePath: string;
   frontAudioPath: string;
   backAudioPath: string;
@@ -140,6 +141,7 @@ export async function updateCourse(
       const payload = {
         front_text: item.front,
         back_text: item.back,
+        romanization: item.romanization || null,
         image_url: item.imagePath || null,
         front_audio_url: item.frontAudioPath || null,
         back_audio_url: item.backAudioPath || null,
@@ -158,11 +160,12 @@ export async function updateCourse(
 
   // 4. Sync card_count, has_images, has_audio
   const allValidItems = sections.flatMap((s) => s.items.filter((i) => i.front.trim() && i.back.trim()));
-  const hasImages = allValidItems.some((i) => i.imagePath);
-  const hasAudio  = allValidItems.some((i) => i.frontAudioPath || i.backAudioPath);
+  const hasImages       = allValidItems.some((i) => i.imagePath);
+  const hasAudio        = allValidItems.some((i) => i.frontAudioPath || i.backAudioPath);
+  const hasRomanization = allValidItems.some((i) => i.romanization?.trim());
   await supabase
     .from("courses")
-    .update({ card_count: totalCards, has_images: hasImages, has_audio: hasAudio })
+    .update({ card_count: totalCards, has_images: hasImages, has_audio: hasAudio, has_romanization: hasRomanization })
     .eq("id", courseId);
 
   redirect(`/c/${courseSlug}`);

@@ -45,7 +45,8 @@
     "clear": "Világos",
     "clearFilters": "Tiszta szűrők",
     "courseSingular": "pálya",
-    "coursePlural": "tanfolyamok"
+    "coursePlural": "tanfolyamok",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Isten hozott vissza, {name}",
@@ -428,7 +429,8 @@
       "Ne add fel!",
       "Legközelebb sikerülni fog!",
       "Gyakorolj tovább!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Vita",
@@ -514,7 +516,13 @@
     "sectionUnits": "szakaszok",
     "creating": "Létrehozás...",
     "createCourse": "Kurzus létrehozása",
-    "saveChanges": "Módosítások mentése"
+    "saveChanges": "Módosítások mentése",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 mp · minden egy oldalon",

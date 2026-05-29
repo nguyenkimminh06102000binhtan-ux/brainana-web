@@ -14,9 +14,10 @@ interface MCModeProps {
   feedbackCorrect: string[];
   feedbackWrong: string[];
   continueLabel: string;
+  showRomanization?: boolean;
 }
 
-export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
@@ -109,6 +110,9 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
         <p className="font-fredoka text-3xl font-[600] text-ink leading-snug">
           {card.frontText}
         </p>
+        {showRomanization && card.romanization && (
+          <p className="mt-2 font-kalam text-base text-ink-2">{card.romanization}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 gap-2 px-4">

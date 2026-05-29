@@ -213,13 +213,18 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
       </div>
 
       {/* Hint chips */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
           {t(labels.letters, { count: card.backText.length })}
         </span>
         {showFirstLetter && (
           <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
             {t(labels.startsWith, { letter: card.backText[0] ?? "" })}
+          </span>
+        )}
+        {card.romanization && (
+          <span className="rounded-full border-2 border-ink/20 px-3 py-1 font-kalam text-sm text-ink-2">
+            {card.romanization}
           </span>
         )}
       </div>

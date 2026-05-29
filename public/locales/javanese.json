@@ -45,7 +45,8 @@
     "clear": "Cetha",
     "clearFilters": "Filter-filter sing cetha",
     "courseSingular": "mesthi",
-    "coursePlural": "kursus"
+    "coursePlural": "kursus",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Sugeng rawuh, {name}",
@@ -428,7 +429,8 @@
       "Aja nyerah!",
       "Mengko sabanjure mesthi bisa!",
       "Terus latihan!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "rembugan",
@@ -514,7 +516,13 @@
     "creating": "Nggawe...",
     "saveChanges": "Simpen owah-owahan",
     "saving": "Ngirit...",
-    "createCourse": "Nggawe kursus"
+    "createCourse": "Nggawe kursus",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 detik · kabeh ing sak kaca",

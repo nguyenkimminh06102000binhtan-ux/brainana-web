@@ -94,6 +94,7 @@ export default async function StudyPage({
         audioType: loc.course.audioType,
         speedMatch: loc.course.speedMatch,
         typeAnswer: loc.course.typeAnswer,
+        showRomanization: loc.study.showRomanization,
       }}
     />
   );

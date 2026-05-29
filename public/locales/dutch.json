@@ -45,7 +45,8 @@
     "clear": "Duidelijk",
     "clearFilters": "Wis filters",
     "courseSingular": "cursus",
-    "coursePlural": "cursussen"
+    "coursePlural": "cursussen",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Welkom terug, {name}",
@@ -428,7 +429,8 @@
       "Geef niet op!",
       "Volgende keer lukt het!",
       "Blijf oefenen!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Discussie",
@@ -514,7 +516,13 @@
     "saving": "Besparing...",
     "saveChanges": "Wijzigingen opslaan",
     "sectionUnits": "secties",
-    "createCourse": "Cursus maken"
+    "createCourse": "Cursus maken",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sec · alles op één pagina",

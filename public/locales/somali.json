@@ -45,7 +45,8 @@
     "clear": "Cad",
     "clearFilters": "Nadiifi filtarrada",
     "courseSingular": "koorsada",
-    "coursePlural": "koorsooyin"
+    "coursePlural": "koorsooyin",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Soo dhawaada, {name}",
@@ -428,7 +429,8 @@
       "Ha quusan!",
       "Marka xigta waad heli doontaa!",
       "Sii wad tababarka!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Dood",
@@ -514,7 +516,13 @@
     "cardUnits": "kaararka",
     "cancel": "Jooji",
     "saving": "Keydinaya...",
-    "saveChanges": "Badbaadada isbeddelada"
+    "saveChanges": "Badbaadada isbeddelada",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 ilbiriqsi · dhamaantood hal bog",

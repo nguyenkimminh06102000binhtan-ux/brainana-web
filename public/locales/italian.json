@@ -45,7 +45,8 @@
     "clear": "Chiaro",
     "clearFilters": "Cancella filtri",
     "courseSingular": "corso",
-    "coursePlural": "corsi"
+    "coursePlural": "corsi",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Bentornato, {name}",
@@ -428,7 +429,8 @@
       "Non mollare!",
       "La prossima volta ce la farai!",
       "Continua a esercitarti!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Discussione",
@@ -514,7 +516,13 @@
     "uploadingFiles": "Caricamento file...",
     "addAtLeastOneCard": "Aggiungi almeno una carta per continuare",
     "createCourse": "Crea corso",
-    "saveChanges": "Salva modifiche"
+    "saveChanges": "Salva modifiche",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sec · tutto su una pagina",

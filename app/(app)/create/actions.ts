@@ -9,6 +9,7 @@ export type CreateCourseState = { error: string } | null;
 type ItemPayload = {
   front: string;
   back: string;
+  romanization: string;
   imagePath: string;
   frontAudioPath: string;
   backAudioPath: string;
@@ -76,8 +77,9 @@ export async function createCourse(
   const slug = generateSlug(title);
   const totalCards = validItems.length;
 
-  const hasImages = validItems.some((i) => i.imagePath);
-  const hasAudio  = validItems.some((i) => i.frontAudioPath || i.backAudioPath);
+  const hasImages        = validItems.some((i) => i.imagePath);
+  const hasAudio         = validItems.some((i) => i.frontAudioPath || i.backAudioPath);
+  const hasRomanization  = validItems.some((i) => i.romanization?.trim());
 
   const { data: course, error: courseError } = await supabase
     .from("courses")
@@ -97,6 +99,7 @@ export async function createCourse(
       card_count: totalCards,
       has_images: hasImages,
       has_audio: hasAudio,
+      has_romanization: hasRomanization,
     })
     .select("id, slug")
     .single();
@@ -130,6 +133,7 @@ export async function createCourse(
         section_id: section.id,
         front_text: item.front,
         back_text: item.back,
+        romanization: item.romanization || null,
         image_url: item.imagePath || null,
         front_audio_url: item.frontAudioPath || null,
         back_audio_url: item.backAudioPath || null,

@@ -37,7 +37,7 @@ export default async function CourseDetailPage({
   // Fetch course + creator
   const { data: courseRaw } = await supabase
     .from("courses")
-    .select("id, slug, title, description, category, cover_image_url, source_language, target_language, level, card_count, learner_count, mems_count, avg_completion_days, has_audio, has_images, verified, visibility, is_published, creator_id, rating, rating_count, profiles!creator_id (username, display_name, avatar_url)")
+    .select("id, slug, title, description, category, cover_image_url, source_language, target_language, level, card_count, learner_count, mems_count, avg_completion_days, has_audio, has_images, has_romanization, verified, visibility, is_published, creator_id, rating, rating_count, profiles!creator_id (username, display_name, avatar_url)")
     .eq("slug", slug)
     .single();
 
@@ -147,6 +147,7 @@ export default async function CourseDetailPage({
                   {course.has_audio && <Badge>{loc.common.audio}</Badge>}
                   {(course.mems_count ?? 0) > 0 && <Badge>{loc.common.mems}</Badge>}
                   {course.has_images && <Badge>{cl.images}</Badge>}
+                  {course.has_romanization && <Badge>{loc.common.romanization}</Badge>}
                   {course.verified && <Badge accent>{cl.verified}</Badge>}
                   {course.visibility !== "public" && (
                     <span className="rounded-full bg-red-soft px-3 py-1 font-mono text-xs font-[700] uppercase tracking-wider text-ink-2">

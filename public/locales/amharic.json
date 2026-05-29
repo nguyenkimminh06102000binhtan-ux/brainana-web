@@ -45,7 +45,8 @@
     "clear": "ግልጽ",
     "clearFilters": "ማጣሪያዎችን አጽዳ",
     "courseSingular": "ኮርስ",
-    "coursePlural": "ኮርሶች"
+    "coursePlural": "ኮርሶች",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "እንኳን ደህና መጣህ፣ {name}",
@@ -428,7 +429,8 @@
       "አትሸነፍ!",
       "በሚቀጥለው ጊዜ ታገኘዋለህ!",
       "መለማመድህን ቀጥል!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "ውይይት",
@@ -514,7 +516,13 @@
     "saveChanges": "ለውጦችን ያስቀምጡ",
     "sectionUnits": "ክፍሎች",
     "uploadingFiles": "ፋይሎችን በመስቀል ላይ...",
-    "createCourse": "ኮርስ ይፍጠሩ"
+    "createCourse": "ኮርስ ይፍጠሩ",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 ሰከንድ · ሁሉም በአንድ ገጽ ላይ",

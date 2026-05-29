@@ -45,7 +45,8 @@
     "clear": "Klar",
     "clearFilters": "Tøm filtre",
     "courseSingular": "kurs",
-    "coursePlural": "kurs"
+    "coursePlural": "kurs",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Velkommen tilbake, {name}",
@@ -428,7 +429,8 @@
       "Ikke gi opp!",
       "Du klarer det neste gang!",
       "Fortsett å øve!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskusjon",
@@ -514,7 +516,13 @@
     "saveChanges": "Lagre endringer",
     "sectionUnits": "seksjoner",
     "creating": "Oppretter ...",
-    "createCourse": "Lag kurs"
+    "createCourse": "Lag kurs",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · alt på én side",

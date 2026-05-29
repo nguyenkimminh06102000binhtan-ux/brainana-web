@@ -45,7 +45,8 @@
     "clear": "క్లియర్",
     "clearFilters": "ఫిల్టర్‌లను క్లియర్ చేయండి",
     "courseSingular": "కోర్సు",
-    "coursePlural": "కోర్సులు"
+    "coursePlural": "కోర్సులు",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "తిరిగి స్వాగతం, {name}",
@@ -428,7 +429,8 @@
       "వదులుకోకండి!",
       "తర్వాతిసారి సాధిస్తారు!",
       "అభ్యాసం కొనసాగించండి!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "చర్చ",
@@ -514,7 +516,13 @@
     "creating": "సృష్టిస్తోంది...",
     "cancel": "రద్దు చేయి",
     "saveChanges": "మార్పులను సేవ్ చేయండి",
-    "saving": "సేవ్ చేస్తోంది..."
+    "saving": "సేవ్ చేస్తోంది...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 సెకన్లు · అన్నీ ఒకే పేజీలో",

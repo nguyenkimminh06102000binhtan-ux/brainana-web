@@ -45,7 +45,8 @@
     "clear": "ច្បាស់",
     "clearFilters": "ជម្រះតម្រង",
     "courseSingular": "វគ្គសិក្សា",
-    "coursePlural": "វគ្គសិក្សា"
+    "coursePlural": "វគ្គសិក្សា",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "សូមស្វាគមន៍ការត្រឡប់មកវិញ, {name}",
@@ -428,7 +429,8 @@
       "កុំបោះបង់!",
       "លើកក្រោយអ្នកនឹងធ្វើបាន!",
       "បន្តហាត់ប្រាណ!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "ការពិភាក្សា",
@@ -514,7 +516,13 @@
     "uploadingFiles": "កំពុងផ្ទុកឯកសារ...",
     "addAtLeastOneCard": "បន្ថែមយ៉ាងហោចណាស់កាតមួយដើម្បីបន្ត",
     "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
-    "createCourse": "បង្កើតវគ្គសិក្សា"
+    "createCourse": "បង្កើតវគ្គសិក្សា",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 វិនាទី · ទាំងអស់នៅលើទំព័រមួយ។",

@@ -45,7 +45,8 @@
     "clear": "Toza",
     "clearFilters": "Filtrlarni tozalash",
     "courseSingular": "kurs",
-    "coursePlural": "kurslar"
+    "coursePlural": "kurslar",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Qaytib kelganingizdan xursandmiz, {name}",
@@ -428,7 +429,8 @@
       "Taslim bo‘lmang!",
       "Keyingi safar uddalaysiz!",
       "Mashq qilishda davom eting!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Munozara",
@@ -514,7 +516,13 @@
     "saving": "Saqlanmoqda...",
     "cancel": "Bekor qilish",
     "saveChanges": "O'zgarishlarni saqlang",
-    "creating": "Yaratilmoqda..."
+    "creating": "Yaratilmoqda...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 soniya · hammasi bitta sahifada",

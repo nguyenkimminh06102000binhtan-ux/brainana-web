@@ -45,7 +45,8 @@
     "clear": "Σαφής",
     "clearFilters": "Καθαρίστε τα φίλτρα",
     "courseSingular": "πορεία",
-    "coursePlural": "μαθήματα"
+    "coursePlural": "μαθήματα",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Καλώς ήρθες πίσω, {name}",
@@ -428,7 +429,8 @@
       "Μην τα παρατάς!",
       "Θα τα καταφέρεις την επόμενη φορά!",
       "Συνέχισε την εξάσκηση!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Συζήτηση",
@@ -514,7 +516,13 @@
     "saving": "Οικονομία...",
     "creating": "Δημιουργία...",
     "saveChanges": "Αποθήκευση αλλαγών",
-    "createCourse": "Δημιουργία μαθήματος"
+    "createCourse": "Δημιουργία μαθήματος",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 δευτερόλεπτα · όλα σε μία σελίδα",

@@ -40,6 +40,7 @@
     "unknown": "Unknown",
     "audio": "audio",
     "mems": "mems",
+    "romanization": "romanization",
     "draft": "draft",
     "learners": "{count} learners",
     "clear": "Clear",
@@ -413,6 +414,7 @@
     "speedMatchBonus": "+{seconds}s bonus! 🎉",
     "speedMatchNo": "No",
     "speedMatchYes": "Yes",
+    "showRomanization": "Show romanization",
     "savingPreferences": "Saving preferences…",
     "preferencesSaveError": "Couldn't save preferences. Check your connection.",
     "feedbackCorrect": [
@@ -514,7 +516,13 @@
     "createCourse": "Create course",
     "cancel": "Cancel",
     "saving": "Saving...",
-    "saveChanges": "Save changes"
+    "saveChanges": "Save changes",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "mems": {
     "memoryHints": "Memory Hints",

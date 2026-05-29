@@ -45,7 +45,8 @@
     "clear": "Selge",
     "clearFilters": "Selge filtrid",
     "courseSingular": "muidugi",
-    "coursePlural": "kursused"
+    "coursePlural": "kursused",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Tere tulemast tagasi, {name}",
@@ -428,7 +429,8 @@
       "Ära anna alla!",
       "Järgmisel korral õnnestub!",
       "Harjuta edasi!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Arutelu",
@@ -514,7 +516,13 @@
     "cardUnit": "kaardile",
     "createCourse": "Loo kursus",
     "sectionUnits": "lõigud",
-    "addAtLeastOneCard": "Jätkamiseks lisage vähemalt üks kaart"
+    "addAtLeastOneCard": "Jätkamiseks lisage vähemalt üks kaart",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · kõik ühel lehel",

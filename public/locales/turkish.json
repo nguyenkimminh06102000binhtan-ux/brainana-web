@@ -45,7 +45,8 @@
     "clear": "Temizlemek",
     "clearFilters": "Filtreleri temizle",
     "courseSingular": "kurs",
-    "coursePlural": "kurslar"
+    "coursePlural": "kurslar",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Tekrar hoşgeldiniz, {name}",
@@ -428,7 +429,8 @@
       "Pes etme!",
       "Bir dahaki sefere olacak!",
       "Pratik yapmaya devam et!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Tartışma",
@@ -514,7 +516,13 @@
     "unsupportedFileType": "Desteklenmeyen dosya türü.",
     "creating": "Oluşturuluyor...",
     "saveChanges": "Değişiklikleri kaydet",
-    "createCourse": "Kurs oluştur"
+    "createCourse": "Kurs oluştur",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 saniye · hepsi tek sayfada",

@@ -45,7 +45,8 @@
     "clear": "Clar",
     "clearFilters": "Ștergeți filtrele",
     "courseSingular": "curs",
-    "coursePlural": "cursuri"
+    "coursePlural": "cursuri",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Bine ai revenit, {name}",
@@ -428,7 +429,8 @@
       "Nu renunța!",
       "Îți va ieși data viitoare!",
       "Continuă să exersezi!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Discuţie",
@@ -514,7 +516,13 @@
     "saving": "Economisire...",
     "creating": "Se creează...",
     "createCourse": "Creați un curs",
-    "saveChanges": "Salvați modificările"
+    "saveChanges": "Salvați modificările",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sec · toate pe o singură pagină",

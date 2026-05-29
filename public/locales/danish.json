@@ -45,7 +45,8 @@
     "clear": "Klar",
     "clearFilters": "Ryd filtre",
     "courseSingular": "kursus",
-    "coursePlural": "kurser"
+    "coursePlural": "kurser",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Velkommen tilbage, {name}",
@@ -428,7 +429,8 @@
       "Giv ikke op!",
       "Du klarer den næste gang!",
       "Bliv ved med at øve!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskussion",
@@ -514,7 +516,13 @@
     "sectionUnits": "sektioner",
     "untitledSection": "Unavngivet afsnit",
     "saveChanges": "Gem ændringer",
-    "saving": "Gemmer..."
+    "saving": "Gemmer...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek. · alt på én side",

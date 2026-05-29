@@ -45,7 +45,8 @@
     "clear": "ക്ലിയർ",
     "clearFilters": "ഫിൽട്ടറുകൾ മായ്ക്കുക",
     "courseSingular": "കോഴ്സ്",
-    "coursePlural": "കോഴ്സുകൾ"
+    "coursePlural": "കോഴ്സുകൾ",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "തിരികെ സ്വാഗതം, {name}",
@@ -428,7 +429,8 @@
       "വിട്ടുകൊടുക്കരുത്!",
       "അടുത്ത തവണ ലഭിക്കും!",
       "പരിശീലനം തുടരു!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "ചർച്ച",
@@ -514,7 +516,13 @@
     "cancel": "റദ്ദാക്കുക",
     "audioTooLarge": "ഓഡിയോ 10 MB-യിൽ താഴെ ആയിരിക്കണം.",
     "saving": "സംരക്ഷിക്കുന്നു...",
-    "saveChanges": "മാറ്റങ്ങൾ സംരക്ഷിക്കുക"
+    "saveChanges": "മാറ്റങ്ങൾ സംരക്ഷിക്കുക",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 സെക്കൻഡ് · എല്ലാം ഒരു പേജിൽ",

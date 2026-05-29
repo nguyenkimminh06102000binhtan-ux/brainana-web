@@ -301,10 +301,10 @@ export default function SessionView({
               <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
-              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} />
+              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} showRomanization={showRomanization} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
-              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} />
+              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} showRomanization={showRomanization} />
             )}
             {currentRegularCard.questionType === "audio_type" && (
               <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} />
