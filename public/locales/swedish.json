@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nej",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Sparar inställningar...",
-    "preferencesSaveError": "Det gick inte att spara inställningarna. Kontrollera din anslutning."
+    "preferencesSaveError": "Det gick inte att spara inställningarna. Kontrollera din anslutning.",
+    "feedbackCorrect": [
+      "Rätt!",
+      "Du klarade det!",
+      "Strålande!",
+      "Det stämmer!",
+      "Perfekt!"
+    ],
+    "feedbackWrong": [
+      "Inte riktigt — fortsätt!",
+      "Nästan där!",
+      "Ge inte upp!",
+      "Du klarar det nästa gång!",
+      "Fortsätt öva!"
+    ]
   },
   "discussion": {
     "title": "Diskussion",

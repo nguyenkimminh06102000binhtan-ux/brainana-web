@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Tidak",
     "speedMatchYes": "Ya ✓",
     "savingPreferences": "Menyimpan preferensi…",
-    "preferencesSaveError": "Tidak dapat menyimpan preferensi. Periksa koneksi Anda."
+    "preferencesSaveError": "Tidak dapat menyimpan preferensi. Periksa koneksi Anda.",
+    "feedbackCorrect": [
+      "Benar!",
+      "Kamu berhasil!",
+      "Cemerlang!",
+      "Tepat sekali!",
+      "Sempurna!"
+    ],
+    "feedbackWrong": [
+      "Belum tepat — lanjutkan!",
+      "Hampir sampai!",
+      "Jangan menyerah!",
+      "Kamu akan bisa lain kali!",
+      "Terus berlatih!"
+    ]
   },
   "discussion": {
     "title": "Diskusi",

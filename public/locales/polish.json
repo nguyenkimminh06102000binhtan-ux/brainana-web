@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nie",
     "speedMatchYes": "Tak ✓",
     "savingPreferences": "Zapisuję preferencje…",
-    "preferencesSaveError": "Nie udało się zapisać preferencji. Sprawdź swoje połączenie."
+    "preferencesSaveError": "Nie udało się zapisać preferencji. Sprawdź swoje połączenie.",
+    "feedbackCorrect": [
+      "Poprawnie!",
+      "Udało ci się!",
+      "Znakomicie!",
+      "Zgadza się!",
+      "Perfekcyjnie!"
+    ],
+    "feedbackWrong": [
+      "Nie do końca — próbuj dalej!",
+      "Prawie!",
+      "Nie poddawaj się!",
+      "Następnym razem się uda!",
+      "Ćwicz dalej!"
+    ]
   },
   "discussion": {
     "title": "Dyskusja",

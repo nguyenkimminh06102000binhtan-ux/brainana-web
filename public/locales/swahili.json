@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Hapana",
     "speedMatchYes": "Ndiyo ✓",
     "savingPreferences": "Inahifadhi mapendeleo...",
-    "preferencesSaveError": "Haikuweza kuhifadhi mapendeleo. Angalia muunganisho wako."
+    "preferencesSaveError": "Haikuweza kuhifadhi mapendeleo. Angalia muunganisho wako.",
+    "feedbackCorrect": [
+      "Sahihi!",
+      "Umeweza!",
+      "Hongera!",
+      "Hivyo ndivyo!",
+      "Kamili!"
+    ],
+    "feedbackWrong": [
+      "Si kabisa — endelea!",
+      "Upo karibu!",
+      "Usikate tamaa!",
+      "Utapata wakati ujao!",
+      "Endelea kufanya mazoezi!"
+    ]
   },
   "discussion": {
     "title": "Majadiliano",

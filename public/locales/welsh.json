@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nac ydy",
     "speedMatchYes": "Ydy ✓",
     "savingPreferences": "Wrthi'n cadw dewisiadau…",
-    "preferencesSaveError": "Ni fu modd cadw'r dewisiadau. Gwiriwch eich cysylltiad."
+    "preferencesSaveError": "Ni fu modd cadw'r dewisiadau. Gwiriwch eich cysylltiad.",
+    "feedbackCorrect": [
+      "Cywir!",
+      "Fe wnest ti!",
+      "Gwych!",
+      "Dyna’n iawn!",
+      "Perffaith!"
+    ],
+    "feedbackWrong": [
+      "Dim cweit — dal ati!",
+      "Bron yna!",
+      "Paid â rhoi’r gorau iddi!",
+      "Fe gei di’r tro nesaf!",
+      "Parha i ymarfer!"
+    ]
   },
   "discussion": {
     "title": "Trafodaeth",

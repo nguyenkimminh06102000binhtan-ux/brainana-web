@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Št",
     "speedMatchYes": "Da ✓",
     "savingPreferences": "Shranjevanje nastavitev ...",
-    "preferencesSaveError": "Nastavitve ni bilo mogoče shraniti. Preverite povezavo."
+    "preferencesSaveError": "Nastavitve ni bilo mogoče shraniti. Preverite povezavo.",
+    "feedbackCorrect": [
+      "Pravilno!",
+      "Uspelo ti je!",
+      "Odlično!",
+      "Tako je!",
+      "Popolno!"
+    ],
+    "feedbackWrong": [
+      "Ne čisto — nadaljuj!",
+      "Skoraj si tam!",
+      "Ne obupaj!",
+      "Naslednjič ti bo uspelo!",
+      "Nadaljuj z vajo!"
+    ]
   },
   "discussion": {
     "title": "Razprava",

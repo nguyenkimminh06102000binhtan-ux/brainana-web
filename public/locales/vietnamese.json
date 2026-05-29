@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Không",
     "speedMatchYes": "Có ✓",
     "savingPreferences": "Đang lưu cài đặt…",
-    "preferencesSaveError": "Không thể lưu cài đặt. Vui lòng kiểm tra kết nối."
+    "preferencesSaveError": "Không thể lưu cài đặt. Vui lòng kiểm tra kết nối.",
+    "feedbackCorrect": [
+      "Chính xác!",
+      "Xuất sắc!",
+      "Tuyệt vời!",
+      "Đúng rồi!",
+      "Hoàn hảo!"
+    ],
+    "feedbackWrong": [
+      "Chưa đúng — cố lên!",
+      "Gần đúng rồi!",
+      "Đừng bỏ cuộc!",
+      "Lần sau sẽ được!",
+      "Tiếp tục luyện tập!"
+    ]
   },
   "discussion": {
     "title": "Thảo luận",

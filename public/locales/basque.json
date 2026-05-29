@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ez",
     "speedMatchYes": "Bai ✓",
     "savingPreferences": "Hobespenak gordetzen…",
-    "preferencesSaveError": "Ezin izan dira hobespenak gorde. Egiaztatu zure konexioa."
+    "preferencesSaveError": "Ezin izan dira hobespenak gorde. Egiaztatu zure konexioa.",
+    "feedbackCorrect": [
+      "Zuzena!",
+      "Lortu duzu!",
+      "Bikain!",
+      "Hori da!",
+      "Perfektua!"
+    ],
+    "feedbackWrong": [
+      "Ez guztiz — jarraitu!",
+      "Ia-ia!",
+      "Ez amore eman!",
+      "Hurrengoan lortuko duzu!",
+      "Jarraitu praktikatzen!"
+    ]
   },
   "discussion": {
     "title": "Eztabaida",

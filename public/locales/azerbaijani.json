@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Xeyr",
     "speedMatchYes": "Bəli ✓",
     "savingPreferences": "Tərcihlər yadda saxlanılır...",
-    "preferencesSaveError": "Tərcihləri saxlamaq mümkün olmadı. Bağlantınızı yoxlayın."
+    "preferencesSaveError": "Tərcihləri saxlamaq mümkün olmadı. Bağlantınızı yoxlayın.",
+    "feedbackCorrect": [
+      "Düzdür!",
+      "Bacardın!",
+      "Əla!",
+      "Tam doğrudur!",
+      "Mükəmməl!"
+    ],
+    "feedbackWrong": [
+      "Tam deyil — davam et!",
+      "Az qaldı!",
+      "Təslim olma!",
+      "Növbəti dəfə alınacaq!",
+      "Məşq etməyə davam et!"
+    ]
   },
   "discussion": {
     "title": "Müzakirə",

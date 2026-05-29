@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ አይ",
     "speedMatchYes": "አዎ ✓",
     "savingPreferences": "ምርጫዎችን በማስቀመጥ ላይ…",
-    "preferencesSaveError": "ምርጫዎችን ማስቀመጥ አልተቻለም። ግንኙነትዎን ያረጋግጡ።"
+    "preferencesSaveError": "ምርጫዎችን ማስቀመጥ አልተቻለም። ግንኙነትዎን ያረጋግጡ።",
+    "feedbackCorrect": [
+      "ትክክል!",
+      "ቻልክ!",
+      "ድንቅ!",
+      "ትክክል ነው!",
+      "ፍጹም!"
+    ],
+    "feedbackWrong": [
+      "ትንሽ ቀረ — ቀጥል!",
+      "ቀርበሃል!",
+      "አትሸነፍ!",
+      "በሚቀጥለው ጊዜ ታገኘዋለህ!",
+      "መለማመድህን ቀጥል!"
+    ]
   },
   "discussion": {
     "title": "ውይይት",

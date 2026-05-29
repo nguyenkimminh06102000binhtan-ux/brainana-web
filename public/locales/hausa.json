@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ A'a",
     "speedMatchYes": "Da ✓",
     "savingPreferences": "Ajiye abubuwan da ake so…",
-    "preferencesSaveError": "An kasa ajiye abubuwan da ake so. Duba haɗin ku."
+    "preferencesSaveError": "An kasa ajiye abubuwan da ake so. Duba haɗin ku.",
+    "feedbackCorrect": [
+      "Daidai!",
+      "Ka/kin samu!",
+      "Madalla!",
+      "Haka ne!",
+      "Cikakke!"
+    ],
+    "feedbackWrong": [
+      "Ba daidai ba tukuna — ci gaba!",
+      "Kusan kai/ki!",
+      "Kada ka/ki karaya!",
+      "Za ka/ki samu a gaba!",
+      "Ci gaba da atisaye!"
+    ]
   },
   "discussion": {
     "title": "Tattaunawa",

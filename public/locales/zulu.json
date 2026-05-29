@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Cha",
     "speedMatchYes": "Yebo ✓",
     "savingPreferences": "Ilondoloza izintandokazi...",
-    "preferencesSaveError": "Ayikwazanga ukulondoloza izintandokazi. Hlola uxhumano lwakho."
+    "preferencesSaveError": "Ayikwazanga ukulondoloza izintandokazi. Hlola uxhumano lwakho.",
+    "feedbackCorrect": [
+      "Kulungile!",
+      "Ukwenzile!",
+      "Kuhle kakhulu!",
+      "Yilokho!",
+      "Kuphelele!"
+    ],
+    "feedbackWrong": [
+      "Akukapheleli — qhubeka!",
+      "Sekuseduze!",
+      "Ungapheli amandla!",
+      "Uzokuthola ngokuzayo!",
+      "Qhubeka uzijwayeza!"
+    ]
   },
   "discussion": {
     "title": "Ingxoxo",

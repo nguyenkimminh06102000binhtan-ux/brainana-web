@@ -51,6 +51,8 @@ interface SessionViewProps {
     speedMatchNo: string;
     speedMatchYes: string;
     xpEarned: string;
+    feedbackCorrect: string[];
+    feedbackWrong: string[];
   };
 }
 
@@ -245,8 +247,8 @@ export default function SessionView({
   const topBarLabels = { allSections: labels.allSections };
   const exitLabels = { exitSession: labels.exitSession, exitConfirm: labels.exitConfirm, exit: labels.exit, keepStudying: labels.keepStudying };
   const flashcardLabels = { flip: labels.flashcardFlip, howWellRemember: labels.howWellRemember, ratingAgain: labels.ratingAgain, ratingHard: labels.ratingHard, ratingGood: labels.ratingGood, ratingEasy: labels.ratingEasy };
-  const typeAnswerLabels = { noAudio: labels.noAudio, letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeAnswerPlaceholder, playAudio: labels.playAudio, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton };
-  const audioTypeLabels = { letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeWhatYouHear, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, noAudio: labels.noAudio, playAudio: labels.playAudio };
+  const typeAnswerLabels = { noAudio: labels.noAudio, letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeAnswerPlaceholder, playAudio: labels.playAudio, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
+  const audioTypeLabels = { letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeWhatYouHear, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, noAudio: labels.noAudio, playAudio: labels.playAudio, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
   const speedMatchLabels = { timesUp: labels.timesUp, xpEarned: labels.xpEarned, result: labels.speedMatchResult, question: labels.speedMatchQuestion, bonus: labels.speedMatchBonus, no: labels.speedMatchNo, yes: labels.speedMatchYes, continueBtn: labels.continueButton };
 
   return (
@@ -276,7 +278,7 @@ export default function SessionView({
               <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
-              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} />
+              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
               <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} labels={typeAnswerLabels} />

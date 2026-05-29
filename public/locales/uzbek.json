@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Yo'q",
     "speedMatchYes": "Ha ✓",
     "savingPreferences": "Parametrlar saqlanmoqda…",
-    "preferencesSaveError": "Parametrlarni saqlab bo‘lmadi. Ulanishingizni tekshiring."
+    "preferencesSaveError": "Parametrlarni saqlab bo‘lmadi. Ulanishingizni tekshiring.",
+    "feedbackCorrect": [
+      "To‘g‘ri!",
+      "Uddaladingiz!",
+      "Ajoyib!",
+      "Ha, to‘g‘ri!",
+      "Mukammal!"
+    ],
+    "feedbackWrong": [
+      "Unchalik emas — davom eting!",
+      "Deyarli topdingiz!",
+      "Taslim bo‘lmang!",
+      "Keyingi safar uddalaysiz!",
+      "Mashq qilishda davom eting!"
+    ]
   },
   "discussion": {
     "title": "Munozara",

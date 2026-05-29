@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ei",
     "speedMatchYes": "Jah ✓",
     "savingPreferences": "Eelistuste salvestamine…",
-    "preferencesSaveError": "Eelistusi ei saanud salvestada. Kontrollige ühendust."
+    "preferencesSaveError": "Eelistusi ei saanud salvestada. Kontrollige ühendust.",
+    "feedbackCorrect": [
+      "Õige!",
+      "Sa said hakkama!",
+      "Suurepärane!",
+      "Täpselt nii!",
+      "Täiuslik!"
+    ],
+    "feedbackWrong": [
+      "Mitte päris — jätka!",
+      "Peaaegu kohal!",
+      "Ära anna alla!",
+      "Järgmisel korral õnnestub!",
+      "Harjuta edasi!"
+    ]
   },
   "discussion": {
     "title": "Arutelu",

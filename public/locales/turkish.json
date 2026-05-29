@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Hayır",
     "speedMatchYes": "Evet ✓",
     "savingPreferences": "Tercihler kaydediliyor…",
-    "preferencesSaveError": "Tercihler kaydedilemedi. Bağlantınızı kontrol edin."
+    "preferencesSaveError": "Tercihler kaydedilemedi. Bağlantınızı kontrol edin.",
+    "feedbackCorrect": [
+      "Doğru!",
+      "Başardın!",
+      "Harika!",
+      "Aynen öyle!",
+      "Mükemmel!"
+    ],
+    "feedbackWrong": [
+      "Tam değil — devam et!",
+      "Neredeyse!",
+      "Pes etme!",
+      "Bir dahaki sefere olacak!",
+      "Pratik yapmaya devam et!"
+    ]
   },
   "discussion": {
     "title": "Tartışma",

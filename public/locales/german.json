@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nein",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Einstellungen speichern…",
-    "preferencesSaveError": "Einstellungen konnten nicht gespeichert werden. Überprüfen Sie Ihre Verbindung."
+    "preferencesSaveError": "Einstellungen konnten nicht gespeichert werden. Überprüfen Sie Ihre Verbindung.",
+    "feedbackCorrect": [
+      "Richtig!",
+      "Du hast es geschafft!",
+      "Brillant!",
+      "Das stimmt!",
+      "Perfekt!"
+    ],
+    "feedbackWrong": [
+      "Nicht ganz — mach weiter!",
+      "Fast geschafft!",
+      "Gib nicht auf!",
+      "Beim nächsten Mal klappt es!",
+      "Übe weiter!"
+    ]
   },
   "discussion": {
     "title": "Diskussion",

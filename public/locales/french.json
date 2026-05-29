@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Non",
     "speedMatchYes": "Oui ✓",
     "savingPreferences": "Sauvegarde des préférences…",
-    "preferencesSaveError": "Impossible d'enregistrer les préférences. Vérifiez votre connexion."
+    "preferencesSaveError": "Impossible d'enregistrer les préférences. Vérifiez votre connexion.",
+    "feedbackCorrect": [
+      "Exact !",
+      "Tu as réussi !",
+      "Brillant !",
+      "C’est juste !",
+      "Parfait !"
+    ],
+    "feedbackWrong": [
+      "Pas tout à fait — continue !",
+      "Tu y es presque !",
+      "N’abandonne pas !",
+      "Tu y arriveras la prochaine fois !",
+      "Continue à t’entraîner !"
+    ]
   },
   "discussion": {
     "title": "Discussion",

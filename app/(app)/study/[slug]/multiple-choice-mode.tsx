@@ -3,16 +3,21 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
+import { playCorrectSound, playWrongSound } from "@/utils/answer-audio";
+import AnswerFeedback from "./answer-feedback";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
 interface MCModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
+  feedbackCorrect: string[];
+  feedbackWrong: string[];
 }
 
-export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, feedbackCorrect, feedbackWrong }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
+  const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
 
   const options = useMemo(() => {
     const pool = [card.backText, ...card.distractors.slice(0, 3)];
@@ -25,6 +30,7 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
   useEffect(() => {
     startedAt.current = Date.now();
     setSelected(null);
+    setOutcome(null);
   }, [card.itemId]);
 
   useEffect(() => {
@@ -44,8 +50,12 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
 
     const isCorrect = options[idx]!.isCorrect;
     const hesitant = !isCorrect ? false : Date.now() - startedAt.current > 10_000;
-    const outcome: Outcome = isCorrect ? (hesitant ? "hesitant" : "correct") : "incorrect";
-    const quality = getQualityScore(outcome, "multiple_choice");
+    const cardOutcome: Outcome = isCorrect ? (hesitant ? "hesitant" : "correct") : "incorrect";
+    const quality = getQualityScore(cardOutcome, "multiple_choice");
+
+    if (isCorrect) playCorrectSound();
+    else playWrongSound();
+    setOutcome(isCorrect ? "correct" : "incorrect");
 
     const ef = card.progress?.easeFactor ?? 2.5;
     const iv = card.progress?.intervalDays ?? 1;
@@ -56,7 +66,7 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
 
     const answer: CardAnswer = {
       itemId: card.itemId,
-      outcome,
+      outcome: cardOutcome,
       quality,
       questionType: "multiple_choice",
       wasSpeedMatch: false,
@@ -71,8 +81,16 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
   }
 
   return (
-    <div className="flex flex-col gap-6 px-4 py-8">
-      <div className="rounded-lg bg-paper-2 p-6 shadow-hard-sm text-center">
+    <div className="flex flex-col gap-6">
+      {outcome && (
+        <AnswerFeedback
+          key={card.itemId}
+          outcome={outcome}
+          correctMessages={feedbackCorrect}
+          wrongMessages={feedbackWrong}
+        />
+      )}
+      <div className="rounded-lg bg-paper-2 mx-4 mt-8 p-6 shadow-hard-sm text-center">
         {card.imageUrl && (
           <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
             <Image
@@ -89,7 +107,7 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 gap-2 px-4">
         {options.map((opt, i) => {
           const isSelected = selected === i;
           const showCorrect = selected !== null && opt.isCorrect;
@@ -103,9 +121,9 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
               disabled={selected !== null}
               className={`flex cursor-pointer items-center gap-3 rounded-sm border-2 px-4 py-3 text-left font-manrope text-sm font-[600] transition active:translate-y-[1px] disabled:cursor-default ${
                 showCorrect
-                  ? "border-green bg-green-soft text-ink"
+                  ? "border-acid-green bg-acid-green/20 text-ink"
                   : showWrong
-                    ? "border-red-soft bg-red-soft text-ink"
+                    ? "border-electric-pink bg-electric-pink/20 text-ink"
                     : "border-ink/15 bg-ink/5 text-ink hover:border-ink/30 hover:bg-ink/10"
               }`}
             >
@@ -117,6 +135,7 @@ export default function MultipleChoiceMode({ card, onAnswer }: MCModeProps) {
           );
         })}
       </div>
+
     </div>
   );
 }

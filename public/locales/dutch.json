@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nee",
     "speedMatchYes": "Ja ✓",
     "savingPreferences": "Voorkeuren opslaan…",
-    "preferencesSaveError": "Kan voorkeuren niet opslaan. Controleer uw verbinding."
+    "preferencesSaveError": "Kan voorkeuren niet opslaan. Controleer uw verbinding.",
+    "feedbackCorrect": [
+      "Correct!",
+      "Je hebt het!",
+      "Briljant!",
+      "Dat klopt!",
+      "Perfect!"
+    ],
+    "feedbackWrong": [
+      "Niet helemaal — ga door!",
+      "Bijna!",
+      "Geef niet op!",
+      "Volgende keer lukt het!",
+      "Blijf oefenen!"
+    ]
   },
   "discussion": {
     "title": "Discussie",

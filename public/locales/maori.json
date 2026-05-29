@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Kao",
     "speedMatchYes": "Ae ✓",
     "savingPreferences": "Tiaki manakohanga…",
-    "preferencesSaveError": "Kāore i taea te tiaki manakohanga. Tirohia to hononga."
+    "preferencesSaveError": "Kāore i taea te tiaki manakohanga. Tirohia to hononga.",
+    "feedbackCorrect": [
+      "Tika!",
+      "Kua taea e koe!",
+      "Rawe!",
+      "Koia rā!",
+      "Tino pai rawa!"
+    ],
+    "feedbackWrong": [
+      "Kāore anō kia tino tika — haere tonu!",
+      "Kua tata!",
+      "Kaua e tuku!",
+      "Ā tērā wā ka taea!",
+      "Haere tonu te whakaharatau!"
+    ]
   },
   "discussion": {
     "title": "Matapakinga",

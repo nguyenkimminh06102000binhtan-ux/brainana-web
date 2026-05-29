@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Nei",
     "speedMatchYes": "Já ✓",
     "savingPreferences": "Vistar kjörstillingar...",
-    "preferencesSaveError": "Ekki tókst að vista kjörstillingar. Athugaðu tenginguna þína."
+    "preferencesSaveError": "Ekki tókst að vista kjörstillingar. Athugaðu tenginguna þína.",
+    "feedbackCorrect": [
+      "Rétt!",
+      "Þú náðir því!",
+      "Snilld!",
+      "Það er rétt!",
+      "Fullkomið!"
+    ],
+    "feedbackWrong": [
+      "Ekki alveg — haltu áfram!",
+      "Næstum komið!",
+      "Ekki gefast upp!",
+      "Þér tekst það næst!",
+      "Haltu áfram að æfa!"
+    ]
   },
   "discussion": {
     "title": "Umræða",

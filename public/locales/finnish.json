@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ei",
     "speedMatchYes": "Kyllä ✓",
     "savingPreferences": "Tallennetaan asetuksia…",
-    "preferencesSaveError": "Asetuksia ei voitu tallentaa. Tarkista yhteys."
+    "preferencesSaveError": "Asetuksia ei voitu tallentaa. Tarkista yhteys.",
+    "feedbackCorrect": [
+      "Oikein!",
+      "Sait sen!",
+      "Loistavaa!",
+      "Juuri niin!",
+      "Täydellistä!"
+    ],
+    "feedbackWrong": [
+      "Ei aivan — jatka vain!",
+      "Melkein perillä!",
+      "Älä luovuta!",
+      "Ensi kerralla onnistut!",
+      "Jatka harjoittelua!"
+    ]
   },
   "discussion": {
     "title": "Keskustelu",

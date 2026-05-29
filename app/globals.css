@@ -79,6 +79,8 @@
   --color-red: #F36B2E;
   --color-yellow: #F59A1E;
   --color-green: #C4E7E5;
+  --color-electric-pink: #FF0054;
+  --color-acid-green: #9EFF00;
   --color-ink: var(--brainana-ink);
   --color-paper: var(--brainana-paper);
   --color-paper-2: var(--brainana-paper-2);
@@ -99,6 +101,21 @@
   --radius-md: 22px;
   --radius-lg: 30px;
   --radius-full: 999px;
+}
+
+@keyframes flash-fade {
+  0%   { opacity: 0.45; }
+  100% { opacity: 0; }
+}
+
+@keyframes slide-up {
+  0%   { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
 }
 
 * {

@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ne",
     "speedMatchYes": "Taip ✓",
     "savingPreferences": "Išsaugomos nuostatos…",
-    "preferencesSaveError": "Nepavyko išsaugoti nuostatų. Patikrinkite ryšį."
+    "preferencesSaveError": "Nepavyko išsaugoti nuostatų. Patikrinkite ryšį.",
+    "feedbackCorrect": [
+      "Teisingai!",
+      "Tau pavyko!",
+      "Puiku!",
+      "Būtent taip!",
+      "Tobula!"
+    ],
+    "feedbackWrong": [
+      "Ne visai — tęsk!",
+      "Beveik!",
+      "Nepasiduok!",
+      "Kitą kartą pavyks!",
+      "Toliau praktikuokis!"
+    ]
   },
   "discussion": {
     "title": "Diskusija",

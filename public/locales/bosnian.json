@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Ne",
     "speedMatchYes": "Da ✓",
     "savingPreferences": "Spremanje postavki…",
-    "preferencesSaveError": "Nije moguće sačuvati postavke. Provjerite svoju vezu."
+    "preferencesSaveError": "Nije moguće sačuvati postavke. Provjerite svoju vezu.",
+    "feedbackCorrect": [
+      "Tačno!",
+      "Uspio/la si!",
+      "Sjajno!",
+      "Tako je!",
+      "Savršeno!"
+    ],
+    "feedbackWrong": [
+      "Ne baš — nastavi!",
+      "Skoro si tu!",
+      "Ne odustaj!",
+      "Uspjet ćeš sljedeći put!",
+      "Nastavi vježbati!"
+    ]
   },
   "discussion": {
     "title": "Diskusija",

@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Le",
     "speedMatchYes": "Iva ✓",
     "savingPreferences": "Nissejvja l-preferenzi...",
-    "preferencesSaveError": "Ma setgħetx issalva l-preferenzi. Iċċekkja l-konnessjoni tiegħek."
+    "preferencesSaveError": "Ma setgħetx issalva l-preferenzi. Iċċekkja l-konnessjoni tiegħek.",
+    "feedbackCorrect": [
+      "Tajjeb!",
+      "Irnexxielek!",
+      "Brillanti!",
+      "Hekk hu!",
+      "Perfett!"
+    ],
+    "feedbackWrong": [
+      "Mhux għalkollox — kompli!",
+      "Kważi wasalt!",
+      "Taqtax qalbek!",
+      "Id-darba li jmiss jirnexxilek!",
+      "Kompli tipprattika!"
+    ]
   },
   "discussion": {
     "title": "Diskussjoni",

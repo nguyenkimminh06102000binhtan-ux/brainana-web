@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ No",
     "speedMatchYes": "Sí ✓",
     "savingPreferences": "S'estan desant les preferències...",
-    "preferencesSaveError": "No s'han pogut desar les preferències. Comproveu la vostra connexió."
+    "preferencesSaveError": "No s'han pogut desar les preferències. Comproveu la vostra connexió.",
+    "feedbackCorrect": [
+      "Correcte!",
+      "Ho has aconseguit!",
+      "Brillant!",
+      "Això és!",
+      "Perfecte!"
+    ],
+    "feedbackWrong": [
+      "No ben bé — continua!",
+      "Gairebé!",
+      "No et rendeixis!",
+      "La pròxima vegada ho aconseguiràs!",
+      "Continua practicant!"
+    ]
   },
   "discussion": {
     "title": "Discussió",

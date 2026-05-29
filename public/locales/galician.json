@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Non",
     "speedMatchYes": "Si ✓",
     "savingPreferences": "Gardando preferencias…",
-    "preferencesSaveError": "Non se puideron gardar as preferencias. Comproba a túa conexión."
+    "preferencesSaveError": "Non se puideron gardar as preferencias. Comproba a túa conexión.",
+    "feedbackCorrect": [
+      "Correcto!",
+      "Conseguíchelo!",
+      "Brillante!",
+      "Así é!",
+      "Perfecto!"
+    ],
+    "feedbackWrong": [
+      "Non de todo — continúa!",
+      "Case o tes!",
+      "Non te rendas!",
+      "Conseguiralo a próxima vez!",
+      "Segue practicando!"
+    ]
   },
   "discussion": {
     "title": "Discusión",

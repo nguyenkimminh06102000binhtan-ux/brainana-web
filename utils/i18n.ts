@@ -288,6 +288,8 @@ export type Locale = {
     speedMatchYes: string;
     savingPreferences: string;
     preferencesSaveError: string;
+    feedbackCorrect: string[];
+    feedbackWrong: string[];
   };
   discussion: {
     title: string;

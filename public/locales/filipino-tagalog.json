@@ -414,7 +414,21 @@
     "speedMatchNo": "✗ Hindi",
     "speedMatchYes": "Oo ✓",
     "savingPreferences": "Sine-save ang mga kagustuhan...",
-    "preferencesSaveError": "Hindi ma-save ang mga kagustuhan. Suriin ang iyong koneksyon."
+    "preferencesSaveError": "Hindi ma-save ang mga kagustuhan. Suriin ang iyong koneksyon.",
+    "feedbackCorrect": [
+      "Tama!",
+      "Nakuha mo!",
+      "Napakahusay!",
+      "Tama iyan!",
+      "Perpekto!"
+    ],
+    "feedbackWrong": [
+      "Hindi pa eksakto — tuloy lang!",
+      "Malapit na!",
+      "Huwag sumuko!",
+      "Makukuha mo sa susunod!",
+      "Patuloy na magpraktis!"
+    ]
   },
   "discussion": {
     "title": "Pagtalakay",
