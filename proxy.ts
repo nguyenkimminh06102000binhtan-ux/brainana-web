@@ -53,7 +53,7 @@ export async function proxy(request: NextRequest) {
 
   const rule = isAuthRoute
     ? { limit: 20, windowSeconds: 60 }
-    : { limit: 120, windowSeconds: 60 };
+    : { limit: 300, windowSeconds: 60 };
   const scope = isAuthRoute ? "auth" : "app";
   const limit = await rateLimitRequest(request, scope, rule);
 
