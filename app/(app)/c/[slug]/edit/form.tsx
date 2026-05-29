@@ -10,6 +10,7 @@ import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
 import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
+import AiImportModal from "@/app/(app)/create/ai-import-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -382,6 +383,8 @@ export default function EditCourseForm({
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedVisibility, setSelectedVisibility] = useState(course.visibility);
   const [selectedTargetLanguage, setSelectedTargetLanguage] = useState(course.target_language ?? "Vietnamese");
+  const [selectedSourceLanguage, setSelectedSourceLanguage] = useState(course.source_language ?? "English (US)");
+  const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
   const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
 
   function toggleCollapse(id: number) {
@@ -503,6 +506,18 @@ export default function EditCourseForm({
     reader.readAsText(file);
   }
 
+  function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string }>) {
+    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back }));
+    setSections((prev) => prev.map((s) => {
+      if (s.id !== sectionId) return s;
+      const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
+      return { ...s, items: hasContent ? [...s.items, ...newItems] : newItems };
+    }));
+    if (newItems.length > COLLAPSE_THRESHOLD) {
+      setCollapsed((prev) => new Set([...prev, sectionId]));
+    }
+  }
+
   const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
   const hasValidItem = sections.some((s) => s.items.some((i) => i.front.trim() && i.back.trim()));
   const isUploading = sections.some((s) => s.items.some((i) => Object.values(i.uploads).some((u) => u.uploading || u.compressing)));
@@ -587,7 +602,7 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.questionLanguage)}
-              <select name="source_language" defaultValue={course.source_language ?? "English (US)"} className={selectCls}>
+              <select name="source_language" value={selectedSourceLanguage} onChange={(e) => setSelectedSourceLanguage(e.target.value)} className={selectCls}>
                 {courseLanguageOptions(course.source_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
@@ -656,6 +671,13 @@ export default function EditCourseForm({
                     </button>
                   </>
                 )}
+                <button
+                  type="button"
+                  onClick={() => setAiImportSectionId(section.id)}
+                  className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-orange-text active:translate-y-[1px] active:shadow-none"
+                >
+                  {labels.aiImportButton}
+                </button>
                 <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
                   {labels.importCsv}
                   <input type="file" accept=".csv,text/csv" className="hidden"
@@ -696,6 +718,21 @@ export default function EditCourseForm({
         <p className="rounded-md border border-red bg-red-soft px-4 py-3 font-manrope text-sm text-ink">
           {state.error}
         </p>
+      )}
+
+      {aiImportSectionId !== null && (
+        <AiImportModal
+          courseTitle={course.title}
+          sourceLanguage={selectedSourceLanguage}
+          targetLanguage={selectedTargetLanguage}
+          category={selectedCategory}
+          level={course.level ?? ""}
+          sectionTitle={sections.find((s) => s.id === aiImportSectionId)?.title ?? ""}
+          sectionDescription={sections.find((s) => s.id === aiImportSectionId)?.description ?? ""}
+          labels={labels}
+          onImport={(cards) => handleAiImport(aiImportSectionId, cards)}
+          onClose={() => setAiImportSectionId(null)}
+        />
       )}
 
       <div className="flex items-center justify-between pb-8">
