@@ -4,11 +4,9 @@ import { useActionState, useRef, useState } from "react";
 import { createCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
-import { TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
+import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
 import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
-
-const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -463,14 +461,14 @@ export default function CreateCourseForm({
             </div>
             <div>
               {label(labels.questionLanguage)}
-              <select id="source_language" name="source_language" defaultValue="English" className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
+              <select id="source_language" name="source_language" defaultValue="English (US)" className={selectCls}>
+                {SUPPORTED_COURSE_LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
             <div>
               {label(labels.answerLanguage)}
               <select id="target_language" name="target_language" defaultValue="Vietnamese" className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
+                {SUPPORTED_COURSE_LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
           </div>

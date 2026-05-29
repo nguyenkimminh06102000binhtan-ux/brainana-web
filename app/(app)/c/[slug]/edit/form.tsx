@@ -5,11 +5,9 @@ import Link from "next/link";
 import { updateCourse } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
-import { TOP_LEVEL_CATEGORIES, getCategoryItems, getCategoryForItem } from "@/app/constants/categories";
+import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems, getCategoryForItem } from "@/app/constants/categories";
 import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
-
-const LANGUAGES = ["English", "Vietnamese", "Japanese", "Korean", "Chinese", "Spanish", "French", "German", "Portuguese", "Arabic", "Other"];
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -200,6 +198,14 @@ function lbl(text: string, optional?: boolean, optionalLabel = "optional") {
       {text}{optional && <span className="ml-1 normal-case">({optionalLabel})</span>}
     </p>
   );
+}
+
+function courseLanguageOptions(currentLanguage: string | null | undefined) {
+  if (!currentLanguage || SUPPORTED_COURSE_LANGUAGES.includes(currentLanguage)) {
+    return SUPPORTED_COURSE_LANGUAGES;
+  }
+
+  return [currentLanguage, ...SUPPORTED_COURSE_LANGUAGES];
 }
 
 const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow";
@@ -508,14 +514,14 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.questionLanguage)}
-              <select name="source_language" defaultValue={course.source_language ?? "English"} className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
+              <select name="source_language" defaultValue={course.source_language ?? "English (US)"} className={selectCls}>
+                {courseLanguageOptions(course.source_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
             <div>
               {lbl(labels.answerLanguage)}
               <select name="target_language" defaultValue={course.target_language ?? "Vietnamese"} className={selectCls}>
-                {LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
+                {courseLanguageOptions(course.target_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
           </div>

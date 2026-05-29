@@ -105,6 +105,7 @@ export const CATEGORY_TREE: CategoryTree = [
 ];
 
 export const TOP_LEVEL_CATEGORIES = CATEGORY_TREE.map((g) => g.label);
+export const SUPPORTED_COURSE_LANGUAGES = CATEGORY_TREE.find((g) => g.label === "Languages")?.items ?? [];
 
 export function getCategoryItems(category: string): string[] {
   return CATEGORY_TREE.find((g) => g.label === category)?.items ?? [];
