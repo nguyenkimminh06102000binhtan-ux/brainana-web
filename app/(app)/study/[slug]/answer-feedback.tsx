@@ -50,7 +50,7 @@ export default function AnswerFeedback({ outcome, correctMessages, wrongMessages
         }}
       >
         <p className="font-fredoka text-2xl font-[700]" style={{ color: fg }}>
-          {isCorrect ? "✓" : "✗"} {message}
+          {message}
         </p>
       </div>
     </>

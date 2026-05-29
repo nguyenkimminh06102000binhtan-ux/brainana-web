@@ -93,9 +93,6 @@ export default function OriginLanguageSwitcher({
                     disabled={isPending}
                     className="flex w-full items-center gap-2 px-4 py-2.5 text-left font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
                   >
-                    <span className="w-4 shrink-0 text-center text-xs">
-                      {lang === active ? "✓" : ""}
-                    </span>
                     {lang}
                   </button>
                 ))}

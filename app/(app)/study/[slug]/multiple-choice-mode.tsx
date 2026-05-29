@@ -132,7 +132,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
               }`}
             >
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-current font-mono text-xs">
-                {showCorrect ? "✓" : showWrong ? "✗" : i + 1}
+                {i + 1}
               </span>
               <span>{opt.text}</span>
             </button>

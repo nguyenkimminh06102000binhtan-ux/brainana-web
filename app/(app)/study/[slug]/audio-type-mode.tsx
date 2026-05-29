@@ -243,8 +243,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           }`}
         />
         {submitted && (
-          <div className="mt-2 flex items-center gap-2">
-            <span className="text-lg">{submitted.correct ? "✓" : "✗"}</span>
+          <div className="mt-2">
             <span className="font-manrope text-sm text-ink-2">
               {submitted.correct ? labels.correct : t(labels.wrong, { answer: card.backText })}
             </span>

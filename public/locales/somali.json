@@ -357,7 +357,7 @@
     "speedMatch": "Ciyaarta xawaaraha",
     "typeAnswer": "Nooca jawaabta",
     "savePreferences": "Keydi dookhyada",
-    "savedPreferences": "La kaydiyay ✓",
+    "savedPreferences": "La kaydiyay",
     "savingPreferences": "Keydinaya…",
     "following": "Daba gal",
     "follow": "+ Raac",
@@ -412,7 +412,7 @@
     "speedMatchQuestion": "Turjumaada ma u dhigma ereyga?",
     "speedMatchBonus": "+{seconds}gunno! 🎉",
     "speedMatchNo": "Maya",
-    "speedMatchYes": "Haa ✓",
+    "speedMatchYes": "Haa",
     "savingPreferences": "Kaydinta dookhyada…",
     "preferencesSaveError": "Ma keydin karin dookhyada Hubi xidhiidhkaaga",
     "feedbackCorrect": [

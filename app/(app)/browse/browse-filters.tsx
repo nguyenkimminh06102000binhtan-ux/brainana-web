@@ -146,9 +146,7 @@ export default function BrowseFilters({
                             className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border-2 transition ${
                               checked ? "border-orange bg-orange" : "border-ink/25 bg-paper"
                             }`}
-                          >
-                            {checked && <span className="font-mono text-[8px] font-[900] text-white">✓</span>}
-                          </span>
+                          />
                           <span
                             onClick={() => toggleSubcategory(item)}
                             className={`font-manrope text-xs transition ${checked ? "font-[700] text-ink" : "text-ink-2"}`}

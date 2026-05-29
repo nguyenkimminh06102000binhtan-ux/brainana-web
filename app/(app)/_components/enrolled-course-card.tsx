@@ -103,7 +103,7 @@ export default function EnrolledCourseCard({
               {t(labels.due, { count: course.dueCount })}
             </span>
           ) : (
-            <span className="font-mono text-xs text-ink-3">{labels.upToDate} ✓</span>
+            <span className="font-mono text-xs text-ink-3">{labels.upToDate}</span>
           )}
           <Link
             href={`/study/${course.slug}`}
