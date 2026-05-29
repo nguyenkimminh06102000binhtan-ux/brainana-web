@@ -238,7 +238,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           placeholder={labels.placeholder}
           className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
             submitted
-              ? submitted.correct ? "border-acid-green bg-acid-green/20" : "border-electric-pink bg-electric-pink/20"
+              ? submitted.correct ? "border-acid-green bg-acid-green" : "border-electric-pink bg-electric-pink text-white"
               : "border-ink/20 bg-ink/5 focus:border-orange"
           }`}
         />
