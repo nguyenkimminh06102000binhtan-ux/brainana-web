@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import EditCourseForm from "./form";
 import { getLocale } from "@/utils/i18n";
+import { resolveMediaUrl } from "@/utils/resolve-media-url";
 
 export default async function EditCoursePage({
   params,
@@ -45,9 +46,19 @@ export default async function EditCoursePage({
     .eq("course_id", course.id)
     .order("position");
 
+  // Resolve display URLs for all items
+  const resolvedItems = await Promise.all(
+    (items ?? []).map(async (item) => ({
+      ...item,
+      image_display_url: await resolveMediaUrl(item.image_url, supabase),
+      front_audio_display_url: await resolveMediaUrl(item.front_audio_url, supabase),
+      back_audio_display_url: await resolveMediaUrl(item.back_audio_url, supabase),
+    }))
+  );
+
   const sectionsWithItems = (sections ?? []).map((section) => ({
     ...section,
-    items: (items ?? [])
+    items: resolvedItems
       .filter((item) => item.section_id === section.id)
       .sort((a, b) => a.position - b.position),
   }));

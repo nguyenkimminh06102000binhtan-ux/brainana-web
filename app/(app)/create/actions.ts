@@ -9,9 +9,9 @@ export type CreateCourseState = { error: string } | null;
 type ItemPayload = {
   front: string;
   back: string;
-  imageUrl: string;
-  frontAudioUrl: string;
-  backAudioUrl: string;
+  imagePath: string;
+  frontAudioPath: string;
+  backAudioPath: string;
 };
 
 type SectionPayload = {
@@ -19,6 +19,8 @@ type SectionPayload = {
   description: string;
   items: ItemPayload[];
 };
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function generateSlug(title: string): string {
   const base = title
@@ -39,6 +41,11 @@ export async function createCourse(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+
+  const prospectiveCourseId = String(formData.get("prospective_course_id") ?? "").trim();
+  if (!UUID_RE.test(prospectiveCourseId)) {
+    return { error: "Invalid form state. Please refresh and try again." };
+  }
 
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim() || null;
@@ -69,12 +76,13 @@ export async function createCourse(
   const slug = generateSlug(title);
   const totalCards = validItems.length;
 
-  const hasImages = validItems.some((i) => i.imageUrl);
-  const hasAudio  = validItems.some((i) => i.frontAudioUrl || i.backAudioUrl);
+  const hasImages = validItems.some((i) => i.imagePath);
+  const hasAudio  = validItems.some((i) => i.frontAudioPath || i.backAudioPath);
 
   const { data: course, error: courseError } = await supabase
     .from("courses")
     .insert({
+      id: prospectiveCourseId,
       creator_id: user.id,
       title,
       description,
@@ -122,9 +130,9 @@ export async function createCourse(
         section_id: section.id,
         front_text: item.front,
         back_text: item.back,
-        image_url: item.imageUrl || null,
-        front_audio_url: item.frontAudioUrl || null,
-        back_audio_url: item.backAudioUrl || null,
+        image_url: item.imagePath || null,
+        front_audio_url: item.frontAudioPath || null,
+        back_audio_url: item.backAudioPath || null,
         position: i,
       }))
     );

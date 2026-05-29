@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { resolveMediaUrl } from "@/utils/resolve-media-url";
 import type { StudyCard, QType } from "./types";
 
 const VALID_TYPES = new Set<QType>(["flashcard", "multiple_choice", "audio_type", "speed_match", "type_answer"]);
@@ -224,6 +225,15 @@ export async function fetchStudyCards(
       progress: null,
     });
   }
+
+  // Resolve storage paths to displayable URLs
+  await Promise.all(
+    cards.map(async (card) => {
+      card.imageUrl = await resolveMediaUrl(card.imageUrl, supabase);
+      card.frontAudioUrl = await resolveMediaUrl(card.frontAudioUrl, supabase);
+      card.backAudioUrl = await resolveMediaUrl(card.backAudioUrl, supabase);
+    })
+  );
 
   return cards;
 }
