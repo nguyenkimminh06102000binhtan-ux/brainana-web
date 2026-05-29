@@ -50,7 +50,6 @@ export default async function CourseDetailPage({
     { data: creatorCoursesData },
     { data: enrollmentData },
     { data: followData },
-    { data: followingList },
     { count: creatorFollowerCount },
     { data: profile },
   ] = await Promise.all([
@@ -60,7 +59,6 @@ export default async function CourseDetailPage({
     supabase.from("courses").select("id, learner_count").eq("creator_id", course.creator_id).eq("is_published", true),
     supabase.from("user_courses").select("id, preferred_question_types").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
-    supabase.from("follows").select("following_id").eq("follower_id", user.id),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
   ]);
@@ -70,23 +68,7 @@ export default async function CourseDetailPage({
 
   const isEnrolled = Boolean(enrollmentData);
   const isFollowing = Boolean(followData);
-  const followingIds = (followingList ?? []).map((f) => f.following_id);
 
-  // Friends learning this course
-  const { data: friendsLearning } = followingIds.length > 0
-    ? await supabase
-        .from("user_courses")
-        .select("profiles!user_id (id, username, display_name, avatar_url)")
-        .eq("course_id", course.id)
-        .in("user_id", followingIds)
-        .limit(5)
-    : { data: [] };
-
-  const friends = ((friendsLearning ?? []) as unknown as { profiles: { id: string; username: string; display_name: string | null; avatar_url: string | null } }[])
-    .map((f) => f.profiles)
-    .filter(Boolean);
-
-  const totalFriendsLearning = friends.length;
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
   const learnerCount = course.learner_count ?? 0;
   const creatorTotalLearners = (creatorCoursesData ?? []).reduce((sum, c) => sum + ((c as { learner_count: number }).learner_count ?? 0), 0);
@@ -98,7 +80,6 @@ export default async function CourseDetailPage({
     advanced: cl.advanced,
   };
 
-  const accentColors = ["bg-green-soft", "bg-yellow-soft", "bg-red-soft", "bg-blue/30"];
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -275,35 +256,6 @@ export default async function CourseDetailPage({
           </aside>
 
 
-          {/* Friends learning */}
-          <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.friendsSection}</p>
-            {friends.length === 0 ? (
-              <p className="font-manrope text-sm text-ink-2">{cl.noFriends}</p>
-            ) : (
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {friends.slice(0, 4).map((friend, i) => (
-                    <div
-                      key={friend.id}
-                      className={`relative h-8 w-8 overflow-hidden rounded-full border-2 border-paper-2 ${accentColors[i % accentColors.length]}`}
-                    >
-                      {friend.avatar_url ? (
-                        <Image src={friend.avatar_url} alt={friend.display_name ?? friend.username} fill className="object-cover" />
-                      ) : (
-                        <span className="flex h-full w-full items-center justify-center font-mono text-xs font-[700] text-ink">
-                          {(friend.display_name ?? friend.username)[0]?.toUpperCase()}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                {totalFriendsLearning > 4 && (
-                  <p className="font-manrope text-sm text-ink-2">{t(cl.moreFriends, { count: totalFriendsLearning - 4 })}</p>
-                )}
-              </div>
-            )}
-          </aside>
         </div>
       </div>
     </div>
