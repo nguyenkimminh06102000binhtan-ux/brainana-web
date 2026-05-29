@@ -101,6 +101,9 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
             <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
               {card.frontText}
             </p>
+            {showRomanization && card.romanization && (
+              <p className="mt-2 font-kalam text-base text-ink-2">{card.romanization}</p>
+            )}
             <p className="mt-4 font-manrope text-xs text-ink-3">
               {labels.flip}
             </p>
@@ -110,9 +113,6 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
             <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
               {card.backText}
             </p>
-            {showRomanization && card.romanization && (
-              <p className="mt-2 font-kalam text-lg text-ink-2">{card.romanization}</p>
-            )}
           </div>
         </div>
       </div>

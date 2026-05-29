@@ -45,7 +45,8 @@
     "clear": "Clear",
     "clearFilters": "Clear filters",
     "courseSingular": "course",
-    "coursePlural": "courses"
+    "coursePlural": "courses",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Welcome back, {name}",
@@ -428,7 +429,8 @@
       "Do not give up!",
       "You will get it next time!",
       "Keep practicing!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Discussion",
@@ -514,7 +516,13 @@
     "createCourse": "Create course",
     "cancel": "Cancel",
     "saving": "Saving...",
-    "saveChanges": "Save changes"
+    "saveChanges": "Save changes",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sec · all on one page",

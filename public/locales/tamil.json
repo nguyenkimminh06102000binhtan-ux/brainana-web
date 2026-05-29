@@ -45,7 +45,8 @@
     "clear": "தெளிவு",
     "clearFilters": "வடிகட்டிகளை அழிக்கவும்",
     "courseSingular": "நிச்சயமாக",
-    "coursePlural": "படிப்புகள்"
+    "coursePlural": "படிப்புகள்",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "மீண்டும் வரவேற்கிறோம், {name}",
@@ -428,7 +429,8 @@
       "விடாதீர்கள்!",
       "அடுத்த முறை கிடைக்கும்!",
       "பயிற்சியைத் தொடருங்கள்!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "கலந்துரையாடல்",
@@ -514,7 +516,13 @@
     "saving": "சேமிக்கிறது...",
     "saveChanges": "மாற்றங்களைச் சேமிக்கவும்",
     "createCourse": "பாடத்திட்டத்தை உருவாக்கவும்",
-    "creating": "உருவாக்குகிறது..."
+    "creating": "உருவாக்குகிறது...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 நொடி · அனைத்தும் ஒரே பக்கத்தில்",

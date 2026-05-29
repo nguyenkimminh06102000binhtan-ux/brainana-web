@@ -45,7 +45,8 @@
     "clear": "분명한",
     "clearFilters": "필터 지우기",
     "courseSingular": "강의",
-    "coursePlural": "행동"
+    "coursePlural": "행동",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "돌아온 것을 환영합니다. {name}",
@@ -428,7 +429,8 @@
       "포기하지 마세요!",
       "다음엔 꼭 될 거예요!",
       "계속 연습해요!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "논의",
@@ -514,7 +516,13 @@
     "audioTooLarge": "오디오는 10MB 미만이어야 합니다.",
     "saveChanges": "변경사항 저장",
     "sectionUnits": "섹션",
-    "untitledSection": "제목 없는 섹션"
+    "untitledSection": "제목 없는 섹션",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60초 · 한 페이지에 모두 포함",

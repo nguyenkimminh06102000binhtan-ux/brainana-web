@@ -45,7 +45,8 @@
     "clear": "Jasno",
     "clearFilters": "Obriši filtere",
     "courseSingular": "naravno",
-    "coursePlural": "kursevi"
+    "coursePlural": "kursevi",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Dobrodošli nazad, {name}",
@@ -428,7 +429,8 @@
       "Ne odustaj!",
       "Uspjet ćeš sljedeći put!",
       "Nastavi vježbati!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskusija",
@@ -514,7 +516,13 @@
     "cancel": "Otkaži",
     "saveChanges": "Sačuvaj promjene",
     "addAtLeastOneCard": "Dodajte barem jednu karticu da nastavite",
-    "createCourse": "Kreirajte kurs"
+    "createCourse": "Kreirajte kurs",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sekundi · sve na jednoj stranici",

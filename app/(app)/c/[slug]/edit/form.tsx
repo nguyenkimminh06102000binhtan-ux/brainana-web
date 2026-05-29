@@ -8,6 +8,8 @@ import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems, getCategoryForItem } from "@/app/constants/categories";
 import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
+import { getRomanizationSystem } from "@/utils/romanization";
+import { suggestRomanization } from "@/app/actions/romanization";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -22,6 +24,7 @@ type Item = {
   dbId: string | null;
   front: string;
   back: string;
+  romanization: string;
   imagePath: string;
   imageDisplayUrl: string;
   frontAudioPath: string;
@@ -48,6 +51,7 @@ type DbSection = {
     id: string;
     front_text: string;
     back_text: string;
+    romanization: string | null;
     image_url: string | null;
     image_display_url: string | null;
     front_audio_url: string | null;
@@ -85,6 +89,7 @@ const makeItem = (): Item => ({
   dbId: null,
   front: "",
   back: "",
+  romanization: "",
   imagePath: "",
   imageDisplayUrl: "",
   frontAudioPath: "",
@@ -107,6 +112,7 @@ function fromDb(dbSections: DbSection[]): Section[] {
           dbId: i.id,
           front: i.front_text,
           back: i.back_text,
+          romanization: i.romanization ?? "",
           imagePath: i.image_url ?? "",
           imageDisplayUrl: i.image_display_url ?? "",
           frontAudioPath: i.front_audio_url ?? "",
@@ -248,14 +254,28 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
-  item: Item; index: number; isOnly: boolean;
+function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
+  item: Item; index: number; isOnly: boolean; targetLanguage: string;
   labels: CreateEditLabels;
-  onUpdate: (field: "front" | "back", value: string) => void;
+  onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
 }) {
+  const [suggesting, setSuggesting] = useState(false);
+  const roSystem = getRomanizationSystem(targetLanguage);
+
+  async function handleAutoRomanization() {
+    if (!item.back.trim() || !roSystem) return;
+    setSuggesting(true);
+    try {
+      const { romanization } = await suggestRomanization(item.back, targetLanguage);
+      if (romanization) onUpdate("romanization", romanization);
+    } finally {
+      setSuggesting(false);
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
       <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
@@ -297,6 +317,28 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
           </div>
         </div>
       </div>
+      {roSystem && (
+        <div className="border-t border-ink/10 bg-paper px-4 py-3">
+          {lbl(t(labels.romanization, { system: roSystem.system }), true, labels.optional)}
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={item.romanization}
+              onChange={(e) => onUpdate("romanization", e.target.value)}
+              placeholder={roSystem.placeholder}
+              className="min-w-0 flex-1 bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3"
+            />
+            <button
+              type="button"
+              onClick={handleAutoRomanization}
+              disabled={suggesting || !item.back.trim()}
+              className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {suggesting ? labels.generating : labels.autoGenerate}
+            </button>
+          </div>
+        </div>
+      )}
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
         {lbl(labels.image, true, labels.optional)}
         {item.imageDisplayUrl
@@ -338,6 +380,8 @@ export default function EditCourseForm({
     TOP_LEVEL_CATEGORIES[0];
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedVisibility, setSelectedVisibility] = useState(course.visibility);
+  const [selectedTargetLanguage, setSelectedTargetLanguage] = useState(course.target_language ?? "Vietnamese");
+  const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -359,7 +403,7 @@ export default function EditCourseForm({
   function addItem(sectionId: number) {
     setSections((prev) => prev.map((s) => s.id === sectionId ? { ...s, items: [...s.items, makeItem()] } : s));
   }
-  function updateItem(sectionId: number, itemId: number, field: "front" | "back", value: string) {
+  function updateItem(sectionId: number, itemId: number, field: "front" | "back" | "romanization", value: string) {
     setSections((prev) => prev.map((s) =>
       s.id === sectionId ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, [field]: value } : i) } : s
     ));
@@ -381,6 +425,33 @@ export default function EditCourseForm({
         : s
     ));
   }
+  async function handleSectionBulkGenerate(sectionId: number) {
+    const roSystem = getRomanizationSystem(selectedTargetLanguage);
+    if (!roSystem) return;
+    const section = sections.find((s) => s.id === sectionId);
+    if (!section) return;
+    const missing = section.items
+      .filter((i) => i.back.trim() && !i.romanization.trim())
+      .map((i) => ({ itemId: i.id, back: i.back }));
+    if (missing.length === 0) return;
+    const BATCH = 10;
+    let done = 0;
+    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done: 0, total: missing.length })));
+    for (let i = 0; i < missing.length; i += BATCH) {
+      const batch = missing.slice(i, i + BATCH);
+      await Promise.all(
+        batch.map(async ({ itemId, back }) => {
+          const { romanization } = await suggestRomanization(back, selectedTargetLanguage);
+          if (romanization) updateItem(sectionId, itemId, "romanization", romanization);
+        })
+      );
+      done += batch.length;
+      setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done, total: missing.length })));
+    }
+    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneRomanization, { count: missing.length })));
+    setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+  }
+
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
     const pathField = field === "image" ? "imagePath" : field === "frontAudio" ? "frontAudioPath" : "backAudioPath";
     const displayField = field === "image" ? "imageDisplayUrl" : field === "frontAudio" ? "frontAudioDisplayUrl" : "backAudioDisplayUrl";
@@ -444,6 +515,7 @@ export default function EditCourseForm({
         dbId: i.dbId,
         front: i.front,
         back: i.back,
+        romanization: i.romanization,
         imagePath: i.imagePath,
         frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
@@ -520,7 +592,12 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.answerLanguage)}
-              <select name="target_language" defaultValue={course.target_language ?? "Vietnamese"} className={selectCls}>
+              <select
+                name="target_language"
+                value={selectedTargetLanguage}
+                onChange={(e) => setSelectedTargetLanguage(e.target.value)}
+                className={selectCls}
+              >
                 {courseLanguageOptions(course.target_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
@@ -565,18 +642,33 @@ export default function EditCourseForm({
                 <span className="text-[10px]">{collapsed.has(section.id) ? "▶" : "▼"}</span>
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
-              <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
-                {labels.importCsv}
-                <input type="file" accept=".csv,text/csv" className="hidden"
-                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
-              </label>
+              <div className="flex items-center gap-2">
+                {getRomanizationSystem(selectedTargetLanguage) && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleSectionBulkGenerate(section.id)}
+                      disabled={!section.items.some((i) => i.front.trim() && !i.romanization.trim())}
+                      className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      {bulkStatuses.get(section.id) ?? labels.bulkGenerateRomanization}
+                    </button>
+                  </>
+                )}
+                <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
+                  {labels.importCsv}
+                  <input type="file" accept=".csv,text/csv" className="hidden"
+                    onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
+                </label>
+              </div>
             </div>
 
             {!collapsed.has(section.id) && (
               <>
                 <div className="flex flex-col gap-3">
                   {section.items.map((item, iIdx) => (
-                    <ItemCard key={item.id} item={item} index={iIdx} isOnly={section.items.length === 1} labels={labels}
+                    <ItemCard key={item.id} item={item} index={iIdx} isOnly={section.items.length === 1}
+                      targetLanguage={selectedTargetLanguage} labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
@@ -597,6 +689,7 @@ export default function EditCourseForm({
         className="rounded-lg border-2 border-dashed border-ink/20 py-4 font-manrope text-sm font-[800] text-ink-2 transition hover:border-orange hover:text-orange-text">
         {labels.addSection}
       </button>
+
 
       {state?.error && (
         <p className="rounded-md border border-red bg-red-soft px-4 py-3 font-manrope text-sm text-ink">

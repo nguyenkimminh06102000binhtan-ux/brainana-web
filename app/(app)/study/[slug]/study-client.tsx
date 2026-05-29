@@ -11,6 +11,7 @@ import type { QType, StudyCard, SessionStats } from "./types";
 type Stage = "setup" | "loading" | "session" | "results";
 
 type StudyLabels = {
+  showRomanization: string;
   allSections: string;
   howManyWords: string;
   dueForReview: string;
@@ -124,6 +125,7 @@ export default function StudyClient({
   const [sessionStats, setSessionStats] = useState<SessionStats | null>(null);
   const [count, setCount] = useState(sessionLimit > 0 ? Math.min(10, sessionLimit) : 0);
   const [selectedTypes, setSelectedTypes] = useState<QType[]>(preferredTypes);
+  const [localShowRomanization, setLocalShowRomanization] = useState(showRomanization);
   const [isSaving, startSaveTransition] = useTransition();
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -184,7 +186,7 @@ export default function StudyClient({
         courseTitle={courseTitle}
         courseSlug={courseSlug}
         cards={sessionCards}
-        showRomanization={showRomanization}
+        showRomanization={localShowRomanization}
         audioOnlyMode={selectedTypes.length === 1 && selectedTypes[0] === "audio_type"}
         memsLabels={memsLabels}
         onComplete={handleSessionComplete}
@@ -368,6 +370,20 @@ export default function StudyClient({
               );
             })}
           </div>
+        </div>
+
+        {/* Romanization toggle */}
+        <div className="mb-6 flex items-center justify-between">
+          <span className="font-manrope text-sm text-ink-2">{labels.showRomanization}</span>
+          <button
+            type="button"
+            onClick={() => setLocalShowRomanization((v) => !v)}
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${localShowRomanization ? "bg-orange" : "bg-ink/20"}`}
+            role="switch"
+            aria-checked={localShowRomanization}
+          >
+            <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-hard-sm transition-transform ${localShowRomanization ? "translate-x-5" : "translate-x-0"}`} />
+          </button>
         </div>
 
         {/* Buttons */}

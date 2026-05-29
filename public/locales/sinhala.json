@@ -45,7 +45,8 @@
     "clear": "පැහැදිලියි",
     "clearFilters": "පෙරහන් හිස් කරන්න",
     "courseSingular": "පාඨමාලාව",
-    "coursePlural": "පාඨමාලා"
+    "coursePlural": "පාඨමාලා",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "ආපසු සාදරයෙන් පිළිගනිමු, {name}",
@@ -428,7 +429,8 @@
       "අත් නොහරින්න!",
       "ඊළඟ වතාවේ කරගන්න පුළුවන්!",
       "පුහුණුව දිගටම කරගෙන යන්න!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "සාකච්ඡාව",
@@ -514,7 +516,13 @@
     "createCourse": "පාඨමාලාවක් සාදන්න",
     "saving": "සුරකිමින්...",
     "cardUnit": "කාඩ්පත",
-    "saveChanges": "වෙනස්කම් සුරකින්න"
+    "saveChanges": "වෙනස්කම් සුරකින්න",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 තත්පර · සියල්ල එක පිටුවක",

@@ -45,7 +45,8 @@
     "clear": "ชัดเจน",
     "clearFilters": "ล้างตัวกรอง",
     "courseSingular": "คอร์ส",
-    "coursePlural": "หลักสูตร"
+    "coursePlural": "หลักสูตร",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "ยินดีต้อนรับกลับมา {name}",
@@ -428,7 +429,8 @@
       "อย่ายอมแพ้!",
       "ครั้งหน้าจะทำได้!",
       "ฝึกต่อไป!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "การอภิปราย",
@@ -514,7 +516,13 @@
     "saving": "ประหยัด...",
     "saveChanges": "บันทึกการเปลี่ยนแปลง",
     "createCourse": "สร้างหลักสูตร",
-    "creating": "กำลังสร้าง..."
+    "creating": "กำลังสร้าง...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 วินาที · ทั้งหมดในหน้าเดียว",

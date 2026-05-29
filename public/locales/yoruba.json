@@ -45,7 +45,8 @@
     "clear": "Ko o",
     "clearFilters": "Ko awọn asẹ kuro",
     "courseSingular": "dajudaju",
-    "coursePlural": "courses"
+    "coursePlural": "courses",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Ku aabọ pada, {name}",
@@ -428,7 +429,8 @@
       "Má ṣe juwọ́ sílẹ̀!",
       "Ìgbà tó ń bọ̀ wàá rí i!",
       "Máa tẹ̀síwájú nínú ìdánwò!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Ifọrọwanilẹnuwo",
@@ -514,7 +516,13 @@
     "uploadingFiles": "Nkojọpọ awọn faili...",
     "cancel": "Fagilee",
     "saveChanges": "Fi awọn ayipada pamọ",
-    "saving": "Nfipamọ..."
+    "saving": "Nfipamọ...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~ 60 iṣẹju-aaya · gbogbo rẹ ni oju-iwe kan",

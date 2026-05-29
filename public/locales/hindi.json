@@ -45,7 +45,8 @@
     "clear": "स्पष्ट",
     "clearFilters": "फ़िल्टर साफ़ करें",
     "courseSingular": "अवधि",
-    "coursePlural": "पाठ्यक्रम"
+    "coursePlural": "पाठ्यक्रम",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "वापसी पर स्वागत है, {name}",
@@ -428,7 +429,8 @@
       "हार मत मानो!",
       "अगली बार हो जाएगा!",
       "अभ्यास जारी रखो!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "बहस",
@@ -514,7 +516,13 @@
     "saving": "सहेजा जा रहा है...",
     "saveChanges": "परिवर्तनों को सुरक्षित करें",
     "createCourse": "पाठ्यक्रम बनायें",
-    "creating": "बनाया जा रहा है..."
+    "creating": "बनाया जा रहा है...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 सेकंड · सभी एक पृष्ठ पर",

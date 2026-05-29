@@ -45,7 +45,8 @@
     "clear": "Xoá",
     "clearFilters": "Xóa bộ lọc",
     "courseSingular": "khóa học",
-    "coursePlural": "các khóa học"
+    "coursePlural": "các khóa học",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Chào mừng trở lại, {name}",
@@ -428,7 +429,8 @@
       "Đừng bỏ cuộc!",
       "Lần sau sẽ được!",
       "Tiếp tục luyện tập!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Thảo luận",
@@ -514,7 +516,13 @@
     "saveChanges": "Lưu thay đổi",
     "addAtLeastOneCard": "Thêm ít nhất một thẻ để tiếp tục",
     "creating": "Đang tạo...",
-    "uploadingFiles": "Đang tải tệp lên..."
+    "uploadingFiles": "Đang tải tệp lên...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 giây · tất cả trên một trang",

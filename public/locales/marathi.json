@@ -45,7 +45,8 @@
     "clear": "साफ",
     "clearFilters": "फिल्टर साफ करा",
     "courseSingular": "अभ्यासक्रम",
-    "coursePlural": "अभ्यासक्रम"
+    "coursePlural": "अभ्यासक्रम",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "परत स्वागत आहे, {name}",
@@ -428,7 +429,8 @@
       "हार मानू नको!",
       "पुढच्या वेळी जमेल!",
       "सराव सुरू ठेव!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "चर्चा",
@@ -514,7 +516,13 @@
     "createCourse": "अभ्यासक्रम तयार करा",
     "cancel": "रद्द करा",
     "saving": "सेव्ह करत आहे...",
-    "saveChanges": "बदल जतन करा"
+    "saveChanges": "बदल जतन करा",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 सेकंद · सर्व एका पृष्ठावर",

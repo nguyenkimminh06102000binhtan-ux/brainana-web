@@ -45,7 +45,8 @@
     "clear": "Тодорхой",
     "clearFilters": "Шүүлтүүрийг цэвэрлэх",
     "courseSingular": "мэдээж",
-    "coursePlural": "курсууд"
+    "coursePlural": "курсууд",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Эргээд тавтай морил {name}",
@@ -428,7 +429,8 @@
       "Бүү бууж өг!",
       "Дараагийн удаа чадна!",
       "Дасгалаа үргэлжлүүл!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Хэлэлцүүлэг",
@@ -514,7 +516,13 @@
     "cancel": "Цуцлах",
     "createCourse": "Курс үүсгэх",
     "saving": "Хадгалж байна...",
-    "saveChanges": "Өөрчлөлтүүдийг хадгалах"
+    "saveChanges": "Өөрчлөлтүүдийг хадгалах",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 сек · бүгд нэг хуудсан дээр",

@@ -45,7 +45,8 @@
     "clear": "Aišku",
     "clearFilters": "Išvalyti filtrai",
     "courseSingular": "kursą",
-    "coursePlural": "kursai"
+    "coursePlural": "kursai",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Sveiki sugrįžę, {name}",
@@ -428,7 +429,8 @@
       "Nepasiduok!",
       "Kitą kartą pavyks!",
       "Toliau praktikuokis!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskusija",
@@ -514,7 +516,13 @@
     "creating": "Kuriama...",
     "saving": "Išsaugoma...",
     "createCourse": "Sukurti kursą",
-    "saveChanges": "Išsaugoti pakeitimus"
+    "saveChanges": "Išsaugoti pakeitimus",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · viskas viename puslapyje",

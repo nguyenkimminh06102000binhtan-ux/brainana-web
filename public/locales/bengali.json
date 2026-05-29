@@ -45,7 +45,8 @@
     "clear": "পরিষ্কার",
     "clearFilters": "ফিল্টার সাফ করুন",
     "courseSingular": "অবশ্যই",
-    "coursePlural": "কোর্স"
+    "coursePlural": "কোর্স",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "আবার স্বাগতম, {name}",
@@ -428,7 +429,8 @@
       "হাল ছেড়ো না!",
       "পরের বার পারবে!",
       "অনুশীলন চালিয়ে যাও!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "আলোচনা",
@@ -514,7 +516,13 @@
     "createCourse": "কোর্স তৈরি করুন",
     "saveChanges": "পরিবর্তনগুলি সংরক্ষণ করুন",
     "cancel": "বাতিল করুন",
-    "saving": "সংরক্ষণ করা হচ্ছে..."
+    "saving": "সংরক্ষণ করা হচ্ছে...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 সেকেন্ড · সব এক পৃষ্ঠায়",

@@ -45,7 +45,8 @@
     "clear": "Skaidrs",
     "clearFilters": "Notīrīt filtrus",
     "courseSingular": "protams",
-    "coursePlural": "kursi"
+    "coursePlural": "kursi",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Laipni lūdzam atpakaļ, {name}",
@@ -428,7 +429,8 @@
       "Nepadodies!",
       "Nākamreiz izdosies!",
       "Turpini trenēties!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskusija",
@@ -514,7 +516,13 @@
     "cancel": "Atcelt",
     "creating": "Notiek izveide...",
     "createCourse": "Izveidot kursu",
-    "saveChanges": "Saglabāt izmaiņas"
+    "saveChanges": "Saglabāt izmaiņas",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · viss vienā lapā",

@@ -45,7 +45,8 @@
     "clear": "Hreinsa",
     "clearFilters": "Hreinsaðu síur",
     "courseSingular": "námskeið",
-    "coursePlural": "námskeið"
+    "coursePlural": "námskeið",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Velkominn aftur, {name}",
@@ -428,7 +429,8 @@
       "Ekki gefast upp!",
       "Þér tekst það næst!",
       "Haltu áfram að æfa!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Umræða",
@@ -514,7 +516,13 @@
     "createCourse": "Búa til námskeið",
     "sectionUnits": "köflum",
     "saveChanges": "Vista breytingar",
-    "creating": "Býr til..."
+    "creating": "Býr til...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · allt á einni síðu",

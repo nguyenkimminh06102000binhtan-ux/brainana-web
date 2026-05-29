@@ -45,7 +45,8 @@
     "clear": "Rensa",
     "clearFilters": "Rensa filter",
     "courseSingular": "kurs",
-    "coursePlural": "kurser"
+    "coursePlural": "kurser",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Välkommen tillbaka, {name}",
@@ -428,7 +429,8 @@
       "Ge inte upp!",
       "Du klarar det nästa gång!",
       "Fortsätt öva!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskussion",
@@ -514,7 +516,13 @@
     "cardUnits": "kort",
     "cancel": "Avboka",
     "saving": "Sparande...",
-    "saveChanges": "Spara ändringar"
+    "saveChanges": "Spara ändringar",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · allt på en sida",

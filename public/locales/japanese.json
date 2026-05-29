@@ -45,7 +45,8 @@
     "clear": "クリア",
     "clearFilters": "フィルターをクリアする",
     "courseSingular": "コース",
-    "coursePlural": "コース"
+    "coursePlural": "コース",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "おかえり、 {name}",
@@ -428,7 +429,8 @@
       "あきらめないで！",
       "次はきっとできる！",
       "練習を続けよう！"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "議論",
@@ -514,7 +516,13 @@
     "audioTooLarge": "音声は 10 MB 未満である必要があります。",
     "saving": "保存中...",
     "saveChanges": "変更を保存する",
-    "createCourse": "コースの作成"
+    "createCourse": "コースの作成",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 秒 · すべてが 1 ページに",

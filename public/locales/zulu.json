@@ -45,7 +45,8 @@
     "clear": "Kucace",
     "clearFilters": "Sula izihlungi",
     "courseSingular": "inkambo",
-    "coursePlural": "izifundo"
+    "coursePlural": "izifundo",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Siyakwamukela, {name}",
@@ -428,7 +429,8 @@
       "Ungapheli amandla!",
       "Uzokuthola ngokuzayo!",
       "Qhubeka uzijwayeza!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Ingxoxo",
@@ -514,7 +516,13 @@
     "saving": "Iyalondoloza...",
     "creating": "Iyadala...",
     "createCourse": "Dala isifundo",
-    "saveChanges": "Londoloza izinguquko"
+    "saveChanges": "Londoloza izinguquko",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 isekhondi · konke ekhasini elilodwa",

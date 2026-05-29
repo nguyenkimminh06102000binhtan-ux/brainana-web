@@ -45,7 +45,8 @@
     "clear": "Təmiz",
     "clearFilters": "Filtrləri təmizləyin",
     "courseSingular": "kurs",
-    "coursePlural": "kurslar"
+    "coursePlural": "kurslar",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Xoş gəldiniz, {name}",
@@ -428,7 +429,8 @@
       "Təslim olma!",
       "Növbəti dəfə alınacaq!",
       "Məşq etməyə davam et!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Müzakirə",
@@ -514,7 +516,13 @@
     "addAtLeastOneCard": "Davam etmək üçün ən azı bir kart əlavə edin",
     "cardUnit": "kart",
     "createCourse": "Kurs yaradın",
-    "sectionUnit": "bölmə"
+    "sectionUnit": "bölmə",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 saniyə · hamısı bir səhifədə",

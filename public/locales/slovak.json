@@ -45,7 +45,8 @@
     "clear": "Jasné",
     "clearFilters": "Vymazať filtre",
     "courseSingular": "samozrejme",
-    "coursePlural": "kurzy"
+    "coursePlural": "kurzy",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "vitajte späť, {name}",
@@ -428,7 +429,8 @@
       "Nevzdávaj sa!",
       "Nabudúce sa ti to podarí!",
       "Pokračuj v precvičovaní!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskusia",
@@ -514,7 +516,13 @@
     "createCourse": "Vytvorte kurz",
     "cancel": "Zrušiť",
     "saveChanges": "Uložte zmeny",
-    "saving": "Ukladá sa..."
+    "saving": "Ukladá sa...",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sekúnd · všetko na jednej stránke",

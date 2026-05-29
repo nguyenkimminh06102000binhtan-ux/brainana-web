@@ -30,6 +30,7 @@ export type Locale = {
     unknown: string;
     audio: string;
     mems: string;
+    romanization: string;
     draft: string;
     learners: string;
     clear: string;
@@ -210,6 +211,12 @@ export type Locale = {
     cancel: string;
     saving: string;
     saveChanges: string;
+    romanization: string;
+    autoGenerate: string;
+    generating: string;
+    bulkGenerateRomanization: string;
+    bulkGeneratingRomanization: string;
+    bulkGenerateDoneRomanization: string;
   };
   start: {
     estimatedTime: string;
@@ -286,6 +293,7 @@ export type Locale = {
     speedMatchBonus: string;
     speedMatchNo: string;
     speedMatchYes: string;
+    showRomanization: string;
     savingPreferences: string;
     preferencesSaveError: string;
     feedbackCorrect: string[];

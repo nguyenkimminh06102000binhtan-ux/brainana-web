@@ -45,7 +45,8 @@
     "clear": "Wazi",
     "clearFilters": "Futa vichujio",
     "courseSingular": "bila shaka",
-    "coursePlural": "kozi"
+    "coursePlural": "kozi",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Karibu tena, {name}",
@@ -428,7 +429,8 @@
       "Usikate tamaa!",
       "Utapata wakati ujao!",
       "Endelea kufanya mazoezi!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Majadiliano",
@@ -514,7 +516,13 @@
     "cancel": "Ghairi",
     "saving": "Inahifadhi...",
     "createCourse": "Unda kozi",
-    "saveChanges": "Hifadhi mabadiliko"
+    "saveChanges": "Hifadhi mabadiliko",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "Sekunde ~60 · zote kwenye ukurasa mmoja",

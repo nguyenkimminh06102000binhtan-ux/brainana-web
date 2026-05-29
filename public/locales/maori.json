@@ -45,7 +45,8 @@
     "clear": "Maamaa",
     "clearFilters": "Ūkui tātari",
     "courseSingular": "akoranga",
-    "coursePlural": "akoranga"
+    "coursePlural": "akoranga",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Nau mai hoki mai, {name}",
@@ -428,7 +429,8 @@
       "Kaua e tuku!",
       "Ā tērā wā ka taea!",
       "Haere tonu te whakaharatau!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Matapakinga",
@@ -514,7 +516,13 @@
     "saving": "Tiaki ana...",
     "createCourse": "Waihanga akoranga",
     "cancel": "Whakakore",
-    "addAtLeastOneCard": "Tāpirihia kia kotahi te kaari kia haere tonu"
+    "addAtLeastOneCard": "Tāpirihia kia kotahi te kaari kia haere tonu",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 hēkona · kei te whārangi kotahi",

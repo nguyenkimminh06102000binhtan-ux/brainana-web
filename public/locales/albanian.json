@@ -45,7 +45,8 @@
     "clear": "E qartë",
     "clearFilters": "Pastro filtrat",
     "courseSingular": "kursi",
-    "coursePlural": "kurset"
+    "coursePlural": "kurset",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Mirë se erdhe, {name}",
@@ -428,7 +429,8 @@
       "Mos u dorëzo!",
       "Do ta arrish herën tjetër!",
       "Vazhdo të praktikohesh!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Diskutim",
@@ -514,7 +516,13 @@
     "saveChanges": "Ruaj ndryshimet",
     "cardUnit": "kartelë",
     "sectionUnits": "seksionet",
-    "createCourse": "Krijo kurs"
+    "createCourse": "Krijo kurs",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 sek · të gjitha në një faqe",

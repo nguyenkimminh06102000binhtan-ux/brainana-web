@@ -45,7 +45,8 @@
     "clear": "Maaliwalas",
     "clearFilters": "I-clear ang mga filter",
     "courseSingular": "kurso",
-    "coursePlural": "mga kurso"
+    "coursePlural": "mga kurso",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "maligayang pagbabalik, {name}",
@@ -428,7 +429,8 @@
       "Huwag sumuko!",
       "Makukuha mo sa susunod!",
       "Patuloy na magpraktis!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Pagtalakay",
@@ -514,7 +516,13 @@
     "saving": "Nagse-save...",
     "saveChanges": "I-save ang mga pagbabago",
     "untitledSection": "Walang pamagat na seksyon",
-    "createCourse": "Lumikha ng kurso"
+    "createCourse": "Lumikha ng kurso",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 segundo · lahat sa isang pahina",

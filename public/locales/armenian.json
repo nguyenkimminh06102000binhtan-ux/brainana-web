@@ -45,7 +45,8 @@
     "clear": "Պարզ",
     "clearFilters": "Մաքրել զտիչները",
     "courseSingular": "դասընթաց",
-    "coursePlural": "դասընթացներ"
+    "coursePlural": "դասընթացներ",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Բարի վերադարձ, {name}",
@@ -428,7 +429,8 @@
       "Մի հանձնվիր!",
       "Հաջորդ անգամ կստացվի!",
       "Շարունակիր վարժվել!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Քննարկում",
@@ -514,7 +516,13 @@
     "saveChanges": "Պահպանել փոփոխությունները",
     "cardUnit": "քարտ",
     "sectionUnits": "բաժինները",
-    "createCourse": "Ստեղծել դասընթաց"
+    "createCourse": "Ստեղծել դասընթաց",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 վայրկյան · բոլորը մեկ էջում",

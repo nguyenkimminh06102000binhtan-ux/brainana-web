@@ -7,6 +7,8 @@ import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
 import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
+import { getRomanizationSystem } from "@/utils/romanization";
+import { suggestRomanization } from "@/app/actions/romanization";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -20,6 +22,7 @@ type Item = {
   id: number;
   front: string;
   back: string;
+  romanization: string;
   imagePath: string;
   imageDisplayUrl: string;
   frontAudioPath: string;
@@ -46,6 +49,7 @@ const makeItem = (): Item => ({
   id: uid++,
   front: "",
   back: "",
+  romanization: "",
   imagePath: "",
   imageDisplayUrl: "",
   frontAudioPath: "",
@@ -180,16 +184,31 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
+function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
   item: Item;
   index: number;
   isOnly: boolean;
+  targetLanguage: string;
   labels: CreateEditLabels;
-  onUpdate: (field: "front" | "back", value: string) => void;
+  onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
 }) {
+  const [suggesting, setSuggesting] = useState(false);
+  const roSystem = getRomanizationSystem(targetLanguage);
+
+  async function handleAutoRomanization() {
+    if (!item.back.trim() || !roSystem) return;
+    setSuggesting(true);
+    try {
+      const { romanization } = await suggestRomanization(item.back, targetLanguage);
+      if (romanization) onUpdate("romanization", romanization);
+    } finally {
+      setSuggesting(false);
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
       <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
@@ -234,6 +253,29 @@ function ItemCard({ item, index, isOnly, labels, onUpdate, onRemove, onUpload, o
         </div>
       </div>
 
+      {roSystem && (
+        <div className="border-t border-ink/10 bg-paper px-4 py-3">
+          {label(t(labels.romanization, { system: roSystem.system }), true, labels.optional)}
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={item.romanization}
+              onChange={(e) => onUpdate("romanization", e.target.value)}
+              placeholder={roSystem.placeholder}
+              className="min-w-0 flex-1 bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3"
+            />
+            <button
+              type="button"
+              onClick={handleAutoRomanization}
+              disabled={suggesting || !item.back.trim()}
+              className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {suggesting ? labels.generating : labels.autoGenerate}
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
         {label(labels.image, true, labels.optional)}
         {item.imageDisplayUrl
@@ -262,6 +304,8 @@ export default function CreateCourseForm({
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]);
   const [selectedVisibility, setSelectedVisibility] = useState("public");
+  const [selectedTargetLanguage, setSelectedTargetLanguage] = useState("Vietnamese");
+  const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
   const prospectiveCourseId = useRef(crypto.randomUUID());
 
   function toggleCollapse(id: number) {
@@ -288,7 +332,7 @@ export default function CreateCourseForm({
     setSections((prev) => prev.map((s) => s.id === sectionId ? { ...s, items: [...s.items, makeItem()] } : s));
   }
 
-  function updateItem(sectionId: number, itemId: number, field: "front" | "back", value: string) {
+  function updateItem(sectionId: number, itemId: number, field: "front" | "back" | "romanization", value: string) {
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
         ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: value } : item) }
@@ -313,6 +357,33 @@ export default function CreateCourseForm({
         ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: "", [displayField]: "" } : item) }
         : s
     ));
+  }
+
+  async function handleSectionBulkGenerate(sectionId: number) {
+    const roSystem = getRomanizationSystem(selectedTargetLanguage);
+    if (!roSystem) return;
+    const section = sections.find((s) => s.id === sectionId);
+    if (!section) return;
+    const missing = section.items
+      .filter((i) => i.back.trim() && !i.romanization.trim())
+      .map((i) => ({ itemId: i.id, back: i.back }));
+    if (missing.length === 0) return;
+    const BATCH = 10;
+    let done = 0;
+    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done: 0, total: missing.length })));
+    for (let i = 0; i < missing.length; i += BATCH) {
+      const batch = missing.slice(i, i + BATCH);
+      await Promise.all(
+        batch.map(async ({ itemId, back }) => {
+          const { romanization } = await suggestRomanization(back, selectedTargetLanguage);
+          if (romanization) updateItem(sectionId, itemId, "romanization", romanization);
+        })
+      );
+      done += batch.length;
+      setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done, total: missing.length })));
+    }
+    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneRomanization, { count: missing.length })));
+    setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
   }
 
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
@@ -386,6 +457,7 @@ export default function CreateCourseForm({
       items: s.items.map((i) => ({
         front: i.front,
         back: i.back,
+        romanization: i.romanization,
         imagePath: i.imagePath,
         frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
@@ -467,7 +539,13 @@ export default function CreateCourseForm({
             </div>
             <div>
               {label(labels.answerLanguage)}
-              <select id="target_language" name="target_language" defaultValue="Vietnamese" className={selectCls}>
+              <select
+                id="target_language"
+                name="target_language"
+                value={selectedTargetLanguage}
+                onChange={(e) => setSelectedTargetLanguage(e.target.value)}
+                className={selectCls}
+              >
                 {SUPPORTED_COURSE_LANGUAGES.map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
@@ -514,11 +592,28 @@ export default function CreateCourseForm({
                 <span className="text-[10px]">{collapsed.has(section.id) ? "▶" : "▼"}</span>
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
-              <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
-                {labels.importCsv}
-                <input type="file" accept=".csv,text/csv" className="hidden"
-                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
-              </label>
+              <div className="flex items-center gap-2">
+                {getRomanizationSystem(selectedTargetLanguage) && (
+                  <div className="flex items-center gap-1.5">
+                    {bulkStatuses.get(section.id) && (
+                      <span className="font-manrope text-xs text-ink-2">{bulkStatuses.get(section.id)}</span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleSectionBulkGenerate(section.id)}
+                      disabled={!!bulkStatuses.get(section.id)}
+                      className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {labels.bulkGenerateRomanization}
+                    </button>
+                  </div>
+                )}
+                <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
+                  {labels.importCsv}
+                  <input type="file" accept=".csv,text/csv" className="hidden"
+                    onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
+                </label>
+              </div>
             </div>
 
             {!collapsed.has(section.id) && (
@@ -530,6 +625,7 @@ export default function CreateCourseForm({
                       item={item}
                       index={iIdx}
                       isOnly={section.items.length === 1}
+                      targetLanguage={selectedTargetLanguage}
                       labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onRemove={() => removeItem(section.id, item.id)}

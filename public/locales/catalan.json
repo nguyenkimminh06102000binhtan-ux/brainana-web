@@ -45,7 +45,8 @@
     "clear": "Clar",
     "clearFilters": "Esborra els filtres",
     "courseSingular": "curs",
-    "coursePlural": "cursos"
+    "coursePlural": "cursos",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "Benvingut de nou, {name}",
@@ -428,7 +429,8 @@
       "No et rendeixis!",
       "La pròxima vegada ho aconseguiràs!",
       "Continua practicant!"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "Discussió",
@@ -514,7 +516,13 @@
     "saveChanges": "Desa els canvis",
     "sectionUnits": "seccions",
     "cardUnit": "targeta",
-    "createCourse": "Crear curs"
+    "createCourse": "Crear curs",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 segons · tot en una pàgina",

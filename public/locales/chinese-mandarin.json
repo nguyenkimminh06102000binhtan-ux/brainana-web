@@ -45,7 +45,8 @@
     "clear": "清除",
     "clearFilters": "清除过滤器",
     "courseSingular": "课程",
-    "coursePlural": "课程"
+    "coursePlural": "课程",
+    "romanization": "romanization"
   },
   "home": {
     "welcomeBack": "欢迎回来， {name}",
@@ -428,7 +429,8 @@
       "别放弃！",
       "下次一定行！",
       "继续练习！"
-    ]
+    ],
+    "showRomanization": "Show romanization"
   },
   "discussion": {
     "title": "讨论",
@@ -514,7 +516,13 @@
     "cancel": "取消",
     "saving": "保存...",
     "saveChanges": "保存更改",
-    "createCourse": "创建课程"
+    "createCourse": "创建课程",
+    "romanization": "Romanization ({system})",
+    "autoGenerate": "Auto",
+    "generating": "Generating…",
+    "bulkGenerateRomanization": "Auto-generate missing romanizations",
+    "bulkGeneratingRomanization": "Generating romanization ({done}/{total})…",
+    "bulkGenerateDoneRomanization": "Done — {count} romanizations generated"
   },
   "start": {
     "estimatedTime": "~60 秒 · 全部在一页上",

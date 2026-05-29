@@ -13,6 +13,7 @@ interface TypeAnswerModeProps {
   onAnswer: (answer: CardAnswer) => void;
   onReveal?: () => void;
   showNoAudioNotice?: boolean;
+  showRomanization?: boolean;
   labels: {
     noAudio: string;
     letters: string;
@@ -58,6 +59,7 @@ export default function TypeAnswerMode({
   onAnswer,
   onReveal,
   showNoAudioNotice,
+  showRomanization,
   labels,
 }: TypeAnswerModeProps) {
   const startedAt = useRef(Date.now());
@@ -192,13 +194,18 @@ export default function TypeAnswerMode({
       </div>
 
       {/* Hint chips */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
           {t(labels.letters, { count: letterCount })}
         </span>
         {showFirstLetter && (
           <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
             {t(labels.startsWith, { letter: firstLetter })}
+          </span>
+        )}
+        {attempts > 0 && showRomanization && card.romanization && (
+          <span className="rounded-full border-2 border-ink/20 px-3 py-1 font-kalam text-sm text-ink-2">
+            {card.romanization}
           </span>
         )}
       </div>
