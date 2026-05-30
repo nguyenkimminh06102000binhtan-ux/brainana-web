@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       allowedOrigins: devNgrokOrigins,
+      bodySizeLimit: "10mb",
     },
   },
   images: {
