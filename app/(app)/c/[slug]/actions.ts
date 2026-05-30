@@ -34,10 +34,11 @@ export async function updateQuestionTypes(formData: FormData) {
 
   // Keep learner_count in sync when this creates a new row
   if (!existing) {
-    const { data: course } = await supabase.from("courses").select("learner_count").eq("id", courseId).single();
-    if (course) {
-      await supabase.from("courses").update({ learner_count: course.learner_count + 1 }).eq("id", courseId);
-    }
+    const { count } = await supabase
+      .from("user_courses")
+      .select("*", { count: "exact", head: true })
+      .eq("course_id", courseId);
+    await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
   }
 }
 
@@ -82,16 +83,17 @@ export async function toggleEnroll(formData: FormData) {
     .eq("course_id", courseId)
     .single();
 
-  const { data: course } = await supabase.from("courses").select("learner_count").eq("id", courseId).single();
-  if (!course) return;
-
   if (existing) {
     await supabase.from("user_courses").delete().eq("user_id", user.id).eq("course_id", courseId);
-    await supabase.from("courses").update({ learner_count: Math.max(0, course.learner_count - 1) }).eq("id", courseId);
   } else {
     await supabase.from("user_courses").insert({ user_id: user.id, course_id: courseId });
-    await supabase.from("courses").update({ learner_count: course.learner_count + 1 }).eq("id", courseId);
   }
+
+  const { count } = await supabase
+    .from("user_courses")
+    .select("*", { count: "exact", head: true })
+    .eq("course_id", courseId);
+  await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
 
   revalidatePath(`/c/${slug}`);
 }
