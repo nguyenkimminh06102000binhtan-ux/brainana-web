@@ -88,12 +88,12 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-paper px-6 py-8 text-ink">
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl gap-8 lg:grid-cols-2 lg:items-stretch">
-        <BrandPanel />
+        <div className="hidden lg:block"><BrandPanel /></div>
 
-        <div className="flex items-center justify-center rounded-lg bg-paper-2 p-8 shadow-hard">
+        <div className="flex items-center justify-center rounded-lg bg-paper-2 p-6 shadow-hard sm:p-8">
           <div className="w-full max-w-md">
             <div className="mb-8">
-              <h1 className="font-fredoka text-5xl font-[700] tracking-tight">Hey, welcome back</h1>
+              <h1 className="font-fredoka text-3xl font-[700] tracking-tight sm:text-5xl">Hey, welcome back</h1>
               <p className="mt-2 font-manrope text-sm font-[800] text-ink-2">
                 Log in to continue your streak, or{" "}
                 <Link href="/signup" className="text-orange-text">

@@ -123,7 +123,7 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
           <p className="mb-2 text-center font-manrope text-xs font-[600] uppercase tracking-wider text-ink-3">
             {labels.howWellRemember}
           </p>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {ratingButtons.map((r, i) => {
               const result = calculateSM2(r.quality, ef, iv, rp);
               return (

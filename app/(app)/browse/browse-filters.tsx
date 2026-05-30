@@ -45,6 +45,7 @@ export default function BrowseFilters({
   );
 
   const [expanded, setExpanded] = useState<Set<string>>(categoriesWithSubs);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const LEVELS = [
     { value: "", label: labels.any },
@@ -82,28 +83,48 @@ export default function BrowseFilters({
   }
 
   const hasAnyFilter = selectedSubcategories.length > 0 || level || minCards > 0 || hasAudio || hasMems || hasImages;
+  const activeFilterCount = selectedSubcategories.length + (level ? 1 : 0) + (minCards > 0 ? 1 : 0) + (hasAudio ? 1 : 0) + (hasMems ? 1 : 0) + (hasImages ? 1 : 0);
 
   return (
-    <aside className="flex flex-col gap-6 rounded-xl bg-paper-2 p-5 shadow-hard">
-      {/* Search */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const q = (e.currentTarget.elements.namedItem("q") as HTMLInputElement).value.trim();
-          update({ q: q || null });
-        }}
-      >
-        <div className="relative">
-          <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-ink-2">🔍</span>
-          <input
-            name="q"
-            defaultValue={initialQ}
-            placeholder={labels.searchPlaceholder}
-            autoComplete="off"
-            className="w-full rounded-full border-2 border-dashed border-ink/20 bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:border-orange"
-          />
-        </div>
-      </form>
+    <aside className="flex flex-col gap-4 rounded-xl bg-paper-2 p-5 shadow-hard lg:gap-6">
+      {/* Search + mobile toggle row */}
+      <div className="flex items-center gap-2">
+        <form
+          className="min-w-0 flex-1"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const q = (e.currentTarget.elements.namedItem("q") as HTMLInputElement).value.trim();
+            update({ q: q || null });
+          }}
+        >
+          <div className="relative">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-ink-2">🔍</span>
+            <input
+              name="q"
+              defaultValue={initialQ}
+              placeholder={labels.searchPlaceholder}
+              autoComplete="off"
+              className="w-full rounded-full border-2 border-dashed border-ink/20 bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:border-orange"
+            />
+          </div>
+        </form>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((v) => !v)}
+          className="flex shrink-0 items-center gap-1.5 rounded-full bg-paper px-3 py-2 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition active:translate-y-[1px] lg:hidden"
+        >
+          {labels.category}
+          {activeFilterCount > 0 && (
+            <span className="rounded-full bg-orange px-1.5 py-0.5 font-mono text-xs leading-none text-on-bright">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Filter panels: always visible on lg, toggleable on mobile */}
+      <div className={`${mobileOpen ? "flex" : "hidden"} flex-col gap-6 lg:flex`}>
 
       {/* Category accordion */}
       <section>
@@ -228,6 +249,7 @@ export default function BrowseFilters({
           {labels.clearAllFilters}
         </button>
       )}
+      </div>
     </aside>
   );
 }
