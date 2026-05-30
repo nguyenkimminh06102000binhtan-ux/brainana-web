@@ -9,6 +9,7 @@ const PROTECTED_PREFIXES = [
   "/create",
   "/community",
   "/study",
+  "/learn",
   "/u",
   "/c",
   "/settings",
@@ -61,7 +62,7 @@ export async function proxy(request: NextRequest) {
     return tooManyRequests(limit.resetSeconds);
   }
 
-  if (isProtectedRoute) {
+  if (isProtectedRoute || pathname === "/") {
     return updateSession(request);
   }
 
@@ -70,6 +71,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/",
     "/login",
     "/signup",
     "/verify-email",
@@ -80,6 +82,7 @@ export const config = {
     "/create/:path*",
     "/community/:path*",
     "/study/:path*",
+    "/learn/:path*",
     "/u/:path*",
     "/c/:path*",
     "/settings/:path*",

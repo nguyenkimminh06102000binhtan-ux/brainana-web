@@ -1,3 +1,6 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
 const features = [
@@ -54,7 +57,11 @@ const courseCards = [
   },
 ];
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) redirect("/home");
+
   return (
     <main className="min-h-screen bg-paper px-5 py-8 text-ink">
       <header className="mx-auto max-w-6xl rounded-full bg-paper-2 px-4 py-4 shadow-hard sm:px-6">
