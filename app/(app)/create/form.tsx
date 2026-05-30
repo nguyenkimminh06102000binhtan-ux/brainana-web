@@ -228,7 +228,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
       <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
         <div className="bg-paper p-4">
           {label(labels.question)}
-          <textarea name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)}
+          <textarea name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)} aria-label={labels.question}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -243,7 +243,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
 
         <div className="bg-paper-2 p-4">
           {label(labels.answer)}
-          <textarea name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)}
+          <textarea name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)} aria-label={labels.answer}
             placeholder={labels.answerPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">

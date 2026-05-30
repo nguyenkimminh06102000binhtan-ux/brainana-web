@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Create Course — Brainana" };
+
 import { cookies } from "next/headers";
 import CreateCourseForm from "./form";
 import { createClient } from "@/utils/supabase/server";

@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Home — Brainana" };
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Image from "next/image";

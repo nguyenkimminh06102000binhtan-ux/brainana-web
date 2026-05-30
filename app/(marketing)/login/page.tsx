@@ -28,9 +28,9 @@ function BrandPanel() {
       </Link>
 
       <div>
-        <h1 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-6xl">
+        <h2 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-6xl">
           welcome back, <span className="text-orange-text">keep</span> your streak alive.
-        </h1>
+        </h2>
         <p className="mt-6 max-w-xl font-manrope text-lg leading-8 text-ink-2">
           Your courses, saved mems, and next review are ready when you are.
         </p>

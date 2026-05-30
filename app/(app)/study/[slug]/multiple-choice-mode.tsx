@@ -127,6 +127,8 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
               type="button"
               onClick={() => choose(i)}
               disabled={selected !== null}
+              aria-pressed={isSelected}
+              aria-label={`${i + 1}. ${opt.text}${showCorrect ? " — correct" : showWrong ? " — incorrect" : ""}`}
               className={`flex cursor-pointer items-center gap-3 rounded-sm border-2 px-4 py-3 text-left font-manrope text-sm font-[600] transition active:translate-y-[1px] disabled:cursor-default ${
                 showCorrect
                   ? "border-acid-green bg-acid-green text-on-bright"
@@ -135,8 +137,8 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
                     : "border-ink/15 bg-ink/5 text-ink hover:border-ink/30 hover:bg-ink/10"
               }`}
             >
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-current font-mono text-xs">
-                {i + 1}
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-current font-mono text-xs" aria-hidden="true">
+                {showCorrect ? "✓" : showWrong ? "✗" : i + 1}
               </span>
               <span>{opt.text}</span>
             </button>

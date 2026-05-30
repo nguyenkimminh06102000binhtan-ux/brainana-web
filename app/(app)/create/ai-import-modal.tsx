@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { generateCardsWithAI, type AiImportCard } from "@/app/actions/ai-import";
 import { t } from "@/utils/t";
 
@@ -96,6 +96,30 @@ export default function AiImportModal({
   const [status, setStatus]                     = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg]                 = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dialogRef    = useRef<HTMLDivElement>(null);
+
+  // Focus first focusable element and trap Tab inside the modal
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const focusable = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const els = Array.from(dialog.querySelectorAll<HTMLElement>(focusable));
+    els[0]?.focus();
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") { onClose(); return; }
+      if (e.key !== "Tab" || els.length === 0) return;
+      const first = els[0]!;
+      const last  = els[els.length - 1]!;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const hasContent = files.length > 0 || pastedText.trim().length > 0;
 
@@ -173,12 +197,12 @@ export default function AiImportModal({
       className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-4 sm:items-center"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-lg bg-paper shadow-hard">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="ai-import-title" className="flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-lg bg-paper shadow-hard">
 
         {/* Header */}
         <div className="flex items-center justify-between border-b border-ink/10 px-6 py-4">
-          <h2 className="font-fredoka text-xl font-[700] tracking-tight">{labels.aiImportTitle}</h2>
-          <button type="button" onClick={onClose} className="font-manrope text-sm text-ink-3 hover:text-ink">✕</button>
+          <h2 id="ai-import-title" className="font-fredoka text-xl font-[700] tracking-tight">{labels.aiImportTitle}</h2>
+          <button type="button" onClick={onClose} aria-label="Close" className="font-manrope text-sm text-ink-3 hover:text-ink">✕</button>
         </div>
 
         {/* Scrollable body */}
@@ -191,6 +215,7 @@ export default function AiImportModal({
               <select
                 value={cardStyle}
                 onChange={(e) => setCardStyle(e.target.value)}
+                aria-label={labels.aiImportCardStyle}
                 className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue appearance-none"
               >
                 {CARD_STYLES.map((s) => (
@@ -208,6 +233,7 @@ export default function AiImportModal({
                 max={50}
                 value={count}
                 onChange={(e) => setCount(Math.min(50, Math.max(1, parseInt(e.target.value) || 1)))}
+                aria-label={labels.aiImportCount}
                 className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue"
               />
             </div>
@@ -220,6 +246,7 @@ export default function AiImportModal({
                 value={focus}
                 onChange={(e) => setFocus(e.target.value)}
                 placeholder={labels.aiImportFocusPlaceholder}
+                aria-label={labels.aiImportFocus}
                 className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
               />
             </div>

@@ -116,6 +116,14 @@
   --radius-full: 999px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @keyframes flash-fade {
   0%   { opacity: 0.45; }
   100% { opacity: 0; }

@@ -47,6 +47,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen bg-paper text-ink">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-full focus:bg-blue focus:px-4 focus:py-2 focus:font-manrope focus:text-sm focus:font-[800] focus:text-ocean focus:shadow-hard">
+        Skip to main content
+      </a>
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="m-3 rounded-[2rem] bg-paper-2 px-4 py-4 shadow-hard sm:m-4 sm:px-5 xl:rounded-full xl:px-6">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-4">
@@ -93,6 +96,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <form action="/browse" className="hidden w-full sm:block xl:w-auto xl:min-w-48">
               <input
                 name="q"
+                aria-label="Search courses"
                 placeholder={loc.app.searchPlaceholder}
                 className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
               />
@@ -100,7 +104,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           </div>
         </header>
 
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
       </div>
     </div>
   );
