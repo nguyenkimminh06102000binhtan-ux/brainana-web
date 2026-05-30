@@ -281,7 +281,6 @@ export default function StudyClient({
               {labels.howManyWords}
             </p>
           </div>
-          <div className="absolute -bottom-[11px] left-8 h-0 w-0 border-l-[11px] border-r-[11px] border-t-[11px] border-l-transparent border-r-transparent border-t-paper" />
         </div>
 
         {/* Count input */}
