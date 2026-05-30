@@ -23,14 +23,15 @@ const SYMBOL_GROUPS = [
 
 interface Props {
   onInsert: (symbol: string) => void;
+  direction?: "up" | "down";
 }
 
-export default function MathToolbar({ onInsert }: Props) {
+export default function MathToolbar({ onInsert, direction = "down" }: Props) {
   const [open, setOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState(0);
 
   return (
-    <div className="mb-2">
+    <div className={direction === "up" ? "relative" : "mb-2"}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -41,7 +42,9 @@ export default function MathToolbar({ onInsert }: Props) {
       </button>
 
       {open && (
-        <div className="mt-2 rounded-xl border border-ink/10 bg-paper shadow-hard-sm">
+        <div className={`rounded-xl border border-ink/10 bg-paper shadow-hard ${
+          direction === "up" ? "absolute bottom-full right-0 mb-2 w-72" : "mt-2"
+        }`}>
           {/* Group tabs */}
           <div className="flex border-b border-ink/10">
             {SYMBOL_GROUPS.map((g, i) => (

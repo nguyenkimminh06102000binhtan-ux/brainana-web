@@ -260,33 +260,17 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
+function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl, onFocusInput }: {
   item: Item; index: number; isOnly: boolean; targetLanguage: string;
   labels: CreateEditLabels;
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
+  onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
   const [suggesting, setSuggesting] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
-  const frontRef = useRef<HTMLTextAreaElement>(null);
-  const backRef = useRef<HTMLTextAreaElement>(null);
-  const lastFocused = useRef<"front" | "back">("front");
-
-  function insertSymbol(sym: string) {
-    const field = lastFocused.current;
-    const el = field === "front" ? frontRef.current : backRef.current;
-    if (!el) return;
-    const start = el.selectionStart ?? 0;
-    const end = el.selectionEnd ?? 0;
-    const current = field === "front" ? item.front : item.back;
-    onUpdate(field, current.slice(0, start) + sym + current.slice(end));
-    requestAnimationFrame(() => {
-      el.focus();
-      el.setSelectionRange(start + sym.length, start + sym.length);
-    });
-  }
 
   async function handleAutoRomanization() {
     if (!item.back.trim() || !roSystem) return;
@@ -313,8 +297,8 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
       <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
         <div className="bg-paper p-4">
           {lbl(labels.question)}
-          <textarea ref={frontRef} value={item.front} onChange={(e) => onUpdate("front", e.target.value)}
-            onFocus={() => { lastFocused.current = "front"; }}
+          <textarea value={item.front} onChange={(e) => onUpdate("front", e.target.value)}
+            onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("front", v))}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -328,8 +312,8 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
         </div>
         <div className="bg-paper-2 p-4">
           {lbl(labels.answer)}
-          <textarea ref={backRef} value={item.back} onChange={(e) => onUpdate("back", e.target.value)}
-            onFocus={() => { lastFocused.current = "back"; }}
+          <textarea value={item.back} onChange={(e) => onUpdate("back", e.target.value)}
+            onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("back", v))}
             placeholder={labels.answerPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -341,9 +325,6 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
                   onFile={(f) => onUpload("backAudio", f)} />}
           </div>
         </div>
-      </div>
-      <div className="border-t border-ink/10 bg-paper px-4 py-2">
-        <MathToolbar onInsert={insertSymbol} />
       </div>
       {roSystem && (
         <div className="border-t border-ink/10 bg-paper px-4 py-3">
@@ -412,6 +393,21 @@ export default function EditCourseForm({
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState(course.source_language ?? "English (US)");
   const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
   const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
+  const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
+  const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
+
+  function insertSymbol(sym: string) {
+    const el = lastFocusedEl.current;
+    const setter = lastFocusedSetter.current;
+    if (!el || !setter) return;
+    const start = el.selectionStart ?? el.value.length;
+    const end = el.selectionEnd ?? el.value.length;
+    setter(el.value.slice(0, start) + sym + el.value.slice(end));
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + sym.length, start + sym.length);
+    });
+  }
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -722,7 +718,8 @@ export default function EditCourseForm({
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
-                      onClearUrl={(field) => clearUrl(section.id, item.id, field)} />
+                      onClearUrl={(field) => clearUrl(section.id, item.id, field)}
+                      onFocusInput={(el, setter) => { lastFocusedEl.current = el; lastFocusedSetter.current = setter; }} />
                   ))}
                 </div>
                 <button type="button" onClick={() => addItem(section.id)}
@@ -782,6 +779,9 @@ export default function EditCourseForm({
           className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none">
           {pending ? labels.saving : labels.saveChanges}
         </button>
+      </div>
+      <div className="fixed bottom-6 right-6 z-50">
+        <MathToolbar onInsert={insertSymbol} direction="up" />
       </div>
     </form>
   );
