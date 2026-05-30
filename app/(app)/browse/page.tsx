@@ -12,14 +12,19 @@ import { getLocale, t } from "@/utils/i18n";
 
 type Course = {
   id: string;
+  creator_id: string;
   slug: string;
   title: string;
+  description: string | null;
   category: string | null;
   subcategory: string | null;
   cover_image_url: string | null;
+  source_language: string | null;
+  target_language: string | null;
   level: string | null;
   card_count: number;
   learner_count: number;
+  created_at: string;
   rating: number;
   rating_count: number;
   has_audio: boolean;
@@ -27,6 +32,10 @@ type Course = {
   has_romanization: boolean;
   mems_count: number;
   profiles: { username: string; display_name: string | null } | null;
+};
+
+type MemCourseRow = {
+  items: { course_id: string } | { course_id: string }[] | null;
 };
 
 const LEVEL_HEADER: Record<string, string> = {
@@ -48,6 +57,94 @@ function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 }
 
+function normalizeSearch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
+function searchTokens(query: string) {
+  return normalizeSearch(query).split(/\s+/).filter((token) => token.length > 1).slice(0, 6);
+}
+
+function searchTerms(query: string) {
+  const normalized = normalizeSearch(query);
+  return [...new Set([normalized, ...searchTokens(query)].filter(Boolean))];
+}
+
+function inList(values: string[]) {
+  return values.map((value) => `"${value.replace(/"/g, '\\"')}"`).join(",");
+}
+
+function courseSearchText(course: Course, categoryLabels: Record<string, string>) {
+  const creator = course.profiles;
+  return normalizeSearch([
+    course.title,
+    course.description,
+    course.slug,
+    course.category,
+    course.subcategory,
+    course.category ? categoryLabels[course.category] : null,
+    course.subcategory ? categoryLabels[course.subcategory] : null,
+    course.source_language,
+    course.target_language,
+    course.level,
+    creator?.username,
+    creator?.display_name,
+  ].filter(Boolean).join(" "));
+}
+
+function categoryMatches(query: string, categoryLabels: Record<string, string>) {
+  const normalizedQuery = normalizeSearch(query);
+  const tokens = searchTokens(query);
+
+  return Object.entries(categoryLabels)
+    .filter(([key, label]) => {
+      const text = normalizeSearch(`${key} ${label}`);
+      return text.includes(normalizedQuery) || tokens.some((token) => text.includes(token));
+    })
+    .map(([key]) => key);
+}
+
+function rankCourse(course: Course, query: string, categoryLabels: Record<string, string>, cardMatchIds: Set<string>) {
+  const normalizedQuery = normalizeSearch(query);
+  if (!normalizedQuery) return 0;
+
+  const text = courseSearchText(course, categoryLabels);
+  const tokens = searchTokens(query);
+  const title = normalizeSearch(course.title);
+  const slug = normalizeSearch(course.slug);
+  let score = 0;
+
+  if (title === normalizedQuery) score += 120;
+  if (title.includes(normalizedQuery)) score += 80;
+  if (slug.includes(normalizedQuery)) score += 45;
+  if (text.includes(normalizedQuery)) score += 35;
+  if (cardMatchIds.has(course.id)) score += 28;
+
+  for (const token of tokens) {
+    if (title.includes(token)) score += 14;
+    else if (text.includes(token)) score += 7;
+  }
+
+  return score;
+}
+
+function compareCourses(a: Course, b: Course, sortBy: string) {
+  if (sortBy === "newest") {
+    return Date.parse(b.created_at) - Date.parse(a.created_at);
+  }
+
+  if (sortBy === "rating") {
+    return b.rating - a.rating || b.rating_count - a.rating_count || b.learner_count - a.learner_count;
+  }
+
+  return b.learner_count - a.learner_count || b.rating - a.rating;
+}
+
 export default async function BrowsePage({
   searchParams,
 }: {
@@ -55,7 +152,7 @@ export default async function BrowsePage({
 }) {
   const p = await searchParams;
 
-  const q                    = p.q ?? "";
+  const q                    = (p.q ?? "").trim();
   const selectedSubcategories = p.subcategories ? p.subcategories.split(",").filter(Boolean) : [];
   const level                = p.level ?? "";
   const minCards          = p.min_cards ? parseInt(p.min_cards) : 0;
@@ -64,6 +161,7 @@ export default async function BrowsePage({
   const hasImages         = p.has_images === "1";
   const sourceLanguage    = p.source_language ?? "";
   const sortBy            = p.sort ?? "learner_count";
+  const qTerms            = searchTerms(q);
 
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
@@ -75,14 +173,15 @@ export default async function BrowsePage({
     .eq("id", user.id)
     .single();
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const categoryMatchKeys = categoryMatches(q, loc.categories);
   const levelLabels: Record<string, string> = {
     beginner: loc.course.beginner,
     intermediate: loc.course.intermediate,
     advanced: loc.course.advanced,
   };
 
-  // Resolve image/audio filters via items table (flags may be stale on old rows)
-  const [imageCourseIds, audioCourseIds] = await Promise.all([
+  // Resolve item-backed filters and badges from source rows because stored flags/counts can be stale.
+  const [imageCourseIds, audioCourseIds, memCourseIds, cardMatchCourseIds, profileMatchIds] = await Promise.all([
     hasImages
       ? supabase.from("items").select("course_id").not("image_url", "is", null)
           .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
@@ -92,26 +191,67 @@ export default async function BrowsePage({
           .or("front_audio_url.not.is.null,back_audio_url.not.is.null")
           .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
       : Promise.resolve(null),
+    supabase.from("mems").select("items!card_id(course_id)")
+      .then(({ data }) => {
+        const rows = (data ?? []) as unknown as MemCourseRow[];
+        return [...new Set(rows.flatMap((row) => {
+          if (!row.items) return [];
+          return Array.isArray(row.items) ? row.items.map((item) => item.course_id) : [row.items.course_id];
+        }))];
+      }),
+    qTerms.length > 0
+      ? supabase.from("items").select("course_id")
+          .or(qTerms.flatMap((term) => [
+            `front_text.ilike.%${term}%`,
+            `back_text.ilike.%${term}%`,
+            `romanization.ilike.%${term}%`,
+            `notes.ilike.%${term}%`,
+          ]).join(","))
+          .limit(1000)
+          .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
+      : Promise.resolve([]),
+    qTerms.length > 0
+      ? supabase.from("profiles").select("id")
+          .or(qTerms.flatMap((term) => [
+            `username.ilike.%${term}%`,
+            `display_name.ilike.%${term}%`,
+          ]).join(","))
+          .limit(100)
+          .then(({ data }) => (data ?? []).map((r) => r.id as string))
+      : Promise.resolve([]),
   ]);
 
   // Short-circuit if a filter yields no matching courses
   const noResults =
     (imageCourseIds !== null && imageCourseIds.length === 0) ||
-    (audioCourseIds !== null && audioCourseIds.length === 0);
+    (audioCourseIds !== null && audioCourseIds.length === 0) ||
+    (hasMems && memCourseIds !== null && memCourseIds.length === 0);
 
   let query = supabase
     .from("courses")
     .select(
-      "id, slug, title, category, subcategory, cover_image_url, level, card_count, learner_count, rating, rating_count, has_audio, has_images, has_romanization, mems_count, profiles!creator_id (username, display_name)"
+      "id, creator_id, slug, title, description, category, subcategory, cover_image_url, source_language, target_language, level, card_count, learner_count, created_at, rating, rating_count, has_audio, has_images, has_romanization, mems_count, profiles!creator_id (username, display_name)"
     )
     .eq("visibility", "public")
     .eq("is_published", true);
 
-  if (q)                              query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%,source_language.ilike.%${q}%,target_language.ilike.%${q}%,category.ilike.%${q}%`);
+  if (qTerms.length > 0) {
+    const courseFields = ["title", "description", "slug", "source_language", "target_language", "category", "subcategory", "level"];
+    const courseFilters = qTerms.flatMap((term) => courseFields.map((field) => `${field}.ilike.%${term}%`));
+    if (categoryMatchKeys.length > 0) {
+      const categoryList = inList(categoryMatchKeys);
+      courseFilters.push(`category.in.(${categoryList})`);
+      courseFilters.push(`subcategory.in.(${categoryList})`);
+    }
+    if (cardMatchCourseIds.length > 0) courseFilters.push(`id.in.(${cardMatchCourseIds.join(",")})`);
+    if (profileMatchIds.length > 0) courseFilters.push(`creator_id.in.(${profileMatchIds.join(",")})`);
+    query = query.or(courseFilters.join(","));
+  }
+
   if (selectedSubcategories.length)   query = query.in("subcategory", selectedSubcategories);
   if (level)                     query = query.eq("level", level);
   if (minCards > 0)              query = query.gte("card_count", minCards);
-  if (hasMems)                   query = query.gt("mems_count", 0);
+  if (hasMems && memCourseIds)   query = query.in("id", memCourseIds);
   if (sourceLanguage)            query = query.eq("source_language", sourceLanguage);
   if (imageCourseIds)            query = query.in("id", imageCourseIds);
   if (audioCourseIds)            query = query.in("id", audioCourseIds);
@@ -120,9 +260,47 @@ export default async function BrowsePage({
   else if (sortBy === "newest")  query = query.order("created_at", { ascending: false });
   else                           query = query.order("learner_count", { ascending: false });
 
-  const { data: coursesRaw, error: coursesError } = noResults ? { data: [], error: null } : await query.limit(60);
+  let { data: coursesRaw, error: coursesError } = noResults ? { data: [], error: null } : await query.limit(q ? 500 : 60);
+  if (q && !noResults && !coursesError) {
+    let fallbackQuery = supabase
+      .from("courses")
+      .select(
+        "id, creator_id, slug, title, description, category, subcategory, cover_image_url, source_language, target_language, level, card_count, learner_count, created_at, rating, rating_count, has_audio, has_images, has_romanization, mems_count, profiles!creator_id (username, display_name)"
+      )
+      .eq("visibility", "public")
+      .eq("is_published", true);
+
+    if (selectedSubcategories.length) fallbackQuery = fallbackQuery.in("subcategory", selectedSubcategories);
+    if (level) fallbackQuery = fallbackQuery.eq("level", level);
+    if (minCards > 0) fallbackQuery = fallbackQuery.gte("card_count", minCards);
+    if (hasMems && memCourseIds) fallbackQuery = fallbackQuery.in("id", memCourseIds);
+    if (sourceLanguage) fallbackQuery = fallbackQuery.eq("source_language", sourceLanguage);
+    if (imageCourseIds) fallbackQuery = fallbackQuery.in("id", imageCourseIds);
+    if (audioCourseIds) fallbackQuery = fallbackQuery.in("id", audioCourseIds);
+
+    if (sortBy === "rating") fallbackQuery = fallbackQuery.order("rating", { ascending: false });
+    else if (sortBy === "newest") fallbackQuery = fallbackQuery.order("created_at", { ascending: false });
+    else fallbackQuery = fallbackQuery.order("learner_count", { ascending: false });
+
+    const fallback = await fallbackQuery.limit(500);
+    const merged = new Map<string, unknown>();
+    for (const course of coursesRaw ?? []) merged.set((course as { id: string }).id, course);
+    for (const course of fallback.data ?? []) merged.set((course as { id: string }).id, course);
+    coursesRaw = [...merged.values()];
+    coursesError = fallback.error;
+  }
   if (coursesError) console.error("[browse] courses query error:", JSON.stringify(coursesError));
-  const courses = (coursesRaw ?? []) as unknown as Course[];
+  const cardMatchIds = new Set(cardMatchCourseIds);
+  const actualMemCourseIds = new Set(memCourseIds ?? []);
+  const courseCandidates = (coursesRaw ?? []) as unknown as Course[];
+  const courses = q
+    ? courseCandidates
+        .map((course) => ({ course, score: rankCourse(course, q, loc.categories, cardMatchIds) }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => compareCourses(a.course, b.course, sortBy) || b.score - a.score)
+        .slice(0, 120)
+        .map(({ course }) => course)
+    : courseCandidates;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
@@ -246,7 +424,7 @@ export default async function BrowsePage({
                             {loc.common.romanization}
                           </span>
                         )}
-                        {course.mems_count > 0 && (
+                        {(course.mems_count > 0 || actualMemCourseIds.has(course.id)) && (
                           <span className="rounded-full border border-ink/15 px-2.5 py-0.5 font-mono text-xs text-ink-2">
                             {loc.common.mems}
                           </span>

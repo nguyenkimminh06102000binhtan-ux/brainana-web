@@ -7,28 +7,109 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { enrollInCourse } from "./actions";
+import { getLocale } from "@/utils/i18n";
 
 type CourseWithCreator = {
   id: string;
+  creator_id: string;
+  slug: string;
   title: string;
   description: string | null;
   category: string | null;
+  subcategory: string | null;
   cover_image_url: string | null;
   source_language: string | null;
   target_language: string | null;
+  level: string | null;
   learner_count: number;
   profiles: { username: string; display_name: string | null } | null;
 };
 
 const CATEGORIES = ["All", "Language", "Science", "History", "Culture", "Technology"];
 
+function normalizeSearch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
+function searchTokens(query: string) {
+  return normalizeSearch(query).split(/\s+/).filter((token) => token.length > 1).slice(0, 6);
+}
+
+function searchTerms(query: string) {
+  const normalized = normalizeSearch(query);
+  return [...new Set([normalized, ...searchTokens(query)].filter(Boolean))];
+}
+
+function inList(values: string[]) {
+  return values.map((value) => `"${value.replace(/"/g, '\\"')}"`).join(",");
+}
+
+function courseSearchText(course: CourseWithCreator) {
+  const creator = course.profiles;
+  return normalizeSearch([
+    course.title,
+    course.description,
+    course.slug,
+    course.category,
+    course.subcategory,
+    course.source_language,
+    course.target_language,
+    course.level,
+    creator?.username,
+    creator?.display_name,
+  ].filter(Boolean).join(" "));
+}
+
+function categoryMatches(query: string, categoryLabels: Record<string, string>) {
+  const normalizedQuery = normalizeSearch(query);
+  const tokens = searchTokens(query);
+
+  return Object.entries(categoryLabels)
+    .filter(([key, label]) => {
+      const text = normalizeSearch(`${key} ${label}`);
+      return text.includes(normalizedQuery) || tokens.some((token) => text.includes(token));
+    })
+    .map(([key]) => key);
+}
+
+function rankCourse(course: CourseWithCreator, query: string, cardMatchIds: Set<string>) {
+  const normalizedQuery = normalizeSearch(query);
+  if (!normalizedQuery) return 0;
+
+  const text = courseSearchText(course);
+  const tokens = searchTokens(query);
+  const title = normalizeSearch(course.title);
+  const slug = normalizeSearch(course.slug);
+  let score = 0;
+
+  if (title === normalizedQuery) score += 120;
+  if (title.includes(normalizedQuery)) score += 80;
+  if (slug.includes(normalizedQuery)) score += 45;
+  if (text.includes(normalizedQuery)) score += 35;
+  if (cardMatchIds.has(course.id)) score += 28;
+
+  for (const token of tokens) {
+    if (title.includes(token)) score += 14;
+    else if (text.includes(token)) score += 7;
+  }
+
+  return score;
+}
+
 export default async function CoursesPage({
   searchParams,
 }: {
   searchParams: Promise<{ category?: string; q?: string }>;
 }) {
-  const { category, q } = await searchParams;
+  const { category, q: rawQ } = await searchParams;
+  const q = rawQ?.trim() ?? "";
   const activeCategory = category ?? "All";
+  const qTerms = searchTerms(q);
 
   const supabase = createClient(await cookies());
   const {
@@ -36,28 +117,96 @@ export default async function CoursesPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("active_origin_language")
+    .eq("id", user.id)
+    .single();
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const categoryMatchKeys = categoryMatches(q, loc.categories);
+
   let query = supabase
     .from("courses")
     .select(
-      "id, title, description, category, cover_image_url, source_language, target_language, learner_count, profiles!creator_id (username, display_name)"
+      "id, creator_id, slug, title, description, category, subcategory, cover_image_url, source_language, target_language, level, learner_count, profiles!creator_id (username, display_name)"
     )
-    .eq("is_private", false)
+    .eq("visibility", "public")
     .eq("is_published", true)
     .order("learner_count", { ascending: false });
 
   if (activeCategory !== "All") {
     query = query.eq("category", activeCategory);
   }
-  if (q) {
-    query = query.ilike("title", `%${q}%`);
-  }
-
-  const [{ data: coursesRaw }, { data: enrolled }] = await Promise.all([
-    query,
+  const [{ data: enrolled }, cardMatchCourseIds, profileMatchIds] = await Promise.all([
     supabase.from("user_courses").select("course_id").eq("user_id", user.id),
+    qTerms.length > 0
+      ? supabase.from("items").select("course_id")
+          .or(qTerms.flatMap((term) => [
+            `front_text.ilike.%${term}%`,
+            `back_text.ilike.%${term}%`,
+            `romanization.ilike.%${term}%`,
+            `notes.ilike.%${term}%`,
+          ]).join(","))
+          .limit(1000)
+          .then(({ data }) => [...new Set((data ?? []).map((r) => r.course_id as string))])
+      : Promise.resolve([]),
+    qTerms.length > 0
+      ? supabase.from("profiles").select("id")
+          .or(qTerms.flatMap((term) => [
+            `username.ilike.%${term}%`,
+            `display_name.ilike.%${term}%`,
+          ]).join(","))
+          .limit(100)
+          .then(({ data }) => (data ?? []).map((r) => r.id as string))
+      : Promise.resolve([]),
   ]);
 
-  const courses = (coursesRaw ?? []) as unknown as CourseWithCreator[];
+  if (qTerms.length > 0) {
+    const courseFields = ["title", "description", "slug", "source_language", "target_language", "category", "subcategory", "level"];
+    const courseFilters = qTerms.flatMap((term) => courseFields.map((field) => `${field}.ilike.%${term}%`));
+    if (categoryMatchKeys.length > 0) {
+      const categoryList = inList(categoryMatchKeys);
+      courseFilters.push(`category.in.(${categoryList})`);
+      courseFilters.push(`subcategory.in.(${categoryList})`);
+    }
+    if (cardMatchCourseIds.length > 0) courseFilters.push(`id.in.(${cardMatchCourseIds.join(",")})`);
+    if (profileMatchIds.length > 0) courseFilters.push(`creator_id.in.(${profileMatchIds.join(",")})`);
+    query = query.or(courseFilters.join(","));
+  }
+
+  let { data: coursesRaw, error: coursesError } = await query.limit(q ? 500 : 100);
+  if (q && !coursesError) {
+    let fallbackQuery = supabase
+      .from("courses")
+      .select(
+        "id, creator_id, slug, title, description, category, subcategory, cover_image_url, source_language, target_language, level, learner_count, profiles!creator_id (username, display_name)"
+      )
+      .eq("visibility", "public")
+      .eq("is_published", true)
+      .order("learner_count", { ascending: false });
+
+    if (activeCategory !== "All") {
+      fallbackQuery = fallbackQuery.eq("category", activeCategory);
+    }
+
+    const fallback = await fallbackQuery.limit(500);
+    const merged = new Map<string, unknown>();
+    for (const course of coursesRaw ?? []) merged.set((course as { id: string }).id, course);
+    for (const course of fallback.data ?? []) merged.set((course as { id: string }).id, course);
+    coursesRaw = [...merged.values()];
+    coursesError = fallback.error;
+  }
+  if (coursesError) console.error("[courses] courses query error:", JSON.stringify(coursesError));
+
+  const cardMatchIds = new Set(cardMatchCourseIds);
+  const courseCandidates = (coursesRaw ?? []) as unknown as CourseWithCreator[];
+  const courses = q
+    ? courseCandidates
+        .map((course) => ({ course, score: rankCourse(course, q, cardMatchIds) }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score || b.course.learner_count - a.course.learner_count)
+        .map(({ course }) => course)
+    : courseCandidates;
   const enrolledIds = new Set((enrolled ?? []).map((enrollment) => enrollment.course_id));
 
   function filterHref(cat: string) {

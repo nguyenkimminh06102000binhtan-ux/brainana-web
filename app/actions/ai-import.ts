@@ -145,7 +145,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   try {
     const msg = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 8192,
+      max_tokens: 4096,
       system: "You are a JSON generator. Respond with only a valid JSON array. No markdown, no code fences, no explanation — just the raw JSON array.",
       messages: [{ role: "user", content: contentBlocks }],
     });
