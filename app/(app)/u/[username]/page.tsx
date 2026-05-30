@@ -210,12 +210,12 @@ export default async function PublicProfilePage({
             <div className="flex justify-around">
               <div className="text-center">
                 <p className="font-fredoka text-2xl font-[700]">{fmt(followingCount ?? 0)}</p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-2">following</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-ink-2">following</p>
               </div>
               <div className="w-px bg-ink/10" />
               <div className="text-center">
                 <p className="font-fredoka text-2xl font-[700]">{fmt(followerCount ?? 0)}</p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-2">followers</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-ink-2">followers</p>
               </div>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default async function PublicProfilePage({
                             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-paper">
                               <div className="h-full rounded-full bg-orange transition-all" style={{ width: `${pct}%` }} />
                             </div>
-                            <span className="shrink-0 font-mono text-[10px] text-ink-3">{mastered}/{course.card_count}</span>
+                            <span className="shrink-0 font-mono text-xs text-ink-3">{mastered}/{course.card_count}</span>
                           </div>
                         </div>
                         <Link
@@ -316,7 +316,7 @@ export default async function PublicProfilePage({
                     <div className="min-w-0">
                       <p className="font-manrope text-sm font-[700] text-ink leading-tight">{badge.name}</p>
                       {badge.description && (
-                        <p className="font-mono text-[10px] text-ink-3 leading-tight">{badge.description}</p>
+                        <p className="font-mono text-xs text-ink-3 leading-tight">{badge.description}</p>
                       )}
                     </div>
                   </div>
@@ -366,7 +366,7 @@ function StatChip({
       <p className="font-fredoka text-2xl font-[700] leading-tight">
         {emoji} {value}
       </p>
-      <p className="font-mono text-[10px] uppercase tracking-widest text-ink-2">{label}</p>
+      <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{label}</p>
     </div>
   );
 }

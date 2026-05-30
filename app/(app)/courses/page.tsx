@@ -92,7 +92,7 @@ export default async function CoursesPage({
             defaultValue={q}
             placeholder="Search courses"
             autoComplete="off"
-            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
+            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
           />
           <button
             type="submit"

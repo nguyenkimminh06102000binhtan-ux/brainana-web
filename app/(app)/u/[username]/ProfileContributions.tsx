@@ -136,7 +136,7 @@ function MemContributionCard({
   return (
     <div className="rounded-lg border border-ink/10 bg-paper p-3">
       {/* Context */}
-      <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-ink-2">
+      <p className="mb-1 font-mono text-xs uppercase tracking-wider text-ink-2">
         {interpolate(labels.forCard, { front: cardFront })}
         {courseSlug && (
           <>

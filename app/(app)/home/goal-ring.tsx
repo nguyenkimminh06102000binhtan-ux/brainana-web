@@ -16,7 +16,7 @@ export default function GoalRing({ studied, goal, courseSlug, labels }: GoalRing
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-ink-2">
+      <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
         {labels.todayGoal.replace("{goal}", String(goal))}
       </p>
 
@@ -39,7 +39,7 @@ export default function GoalRing({ studied, goal, courseSlug, labels }: GoalRing
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-fredoka text-2xl font-[700] leading-none text-ink">{studied}</span>
-          <span className="font-mono text-[10px] text-ink-3">/ {goal}</span>
+          <span className="font-mono text-xs text-ink-3">/ {goal}</span>
         </div>
       </div>
 

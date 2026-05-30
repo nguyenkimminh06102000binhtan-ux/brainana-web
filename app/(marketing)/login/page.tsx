@@ -136,7 +136,7 @@ export default function LoginPage() {
                     if (!emailTouched) setEmailTouched(true);
                   }}
                   autoComplete="email"
-                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue ${state?.error ? "border-red" : ""}`}
                 />
                 {emailTouched && emailError && (
                   <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{emailError}</p>
@@ -155,7 +155,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   autoComplete="current-password"
-                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue ${state?.error ? "border-red" : ""}`}
                 />
               </div>
 

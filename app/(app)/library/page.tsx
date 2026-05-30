@@ -216,7 +216,7 @@ function CourseCardShell({ course, cards, categories, levels, children }: { cour
         {course.cover_image_url ? (
           <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
         ) : (
-          <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
+          <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink-2">
             [{" "}{[categoryLabel?.toLowerCase(), course.level ? (levels[course.level] ?? course.level).toLowerCase() : null].filter(Boolean).join(" · ")}{" "}]
           </span>
         )}
@@ -225,12 +225,12 @@ function CourseCardShell({ course, cards, categories, levels, children }: { cour
           style={{ backgroundColor: dotColor }}
         />
         {!course.is_published && (
-          <span className="absolute left-3 top-2.5 z-10 rounded-full bg-paper/90 px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-wider text-ink-2">
+          <span className="absolute left-3 top-2.5 z-10 rounded-full bg-paper/90 px-2 py-0.5 font-mono text-xs font-[700] uppercase tracking-wider text-ink-2">
             draft
           </span>
         )}
         {course.visibility !== "public" && course.is_published && (
-          <span className="absolute left-3 top-2.5 z-10 rounded-full bg-paper/90 px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-wider text-ink-2">
+          <span className="absolute left-3 top-2.5 z-10 rounded-full bg-paper/90 px-2 py-0.5 font-mono text-xs font-[700] uppercase tracking-wider text-ink-2">
             {course.visibility}
           </span>
         )}

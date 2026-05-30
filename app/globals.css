@@ -135,6 +135,10 @@
   border-color: var(--brainana-ink);
 }
 
+::placeholder {
+  opacity: 1;
+}
+
 body {
   background:
     radial-gradient(circle at 58% 18%, var(--background-glow-1) 0, transparent 16rem),

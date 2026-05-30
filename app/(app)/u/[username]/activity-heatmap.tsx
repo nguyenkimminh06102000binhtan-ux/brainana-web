@@ -66,7 +66,7 @@ export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmap
       {/* Tooltip */}
       <div className="mt-2 h-4">
         {hovered && (
-          <p className="font-mono text-[10px] text-ink-3">
+          <p className="font-mono text-xs text-ink-3">
             {hovered.date} · {hovered.count} card{hovered.count !== 1 ? "s" : ""} reviewed
           </p>
         )}

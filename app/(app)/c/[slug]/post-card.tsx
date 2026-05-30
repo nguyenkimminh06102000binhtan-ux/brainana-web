@@ -99,7 +99,7 @@ function ReplyRow({ reply, courseSlug, currentUserId, creatorId, labels }: { rep
         <div className="flex items-baseline gap-2 flex-wrap">
           <span className="font-manrope text-xs font-[700] text-ink">{handle}</span>
           {isCreator && <CreatorBadge label={labels.creator} />}
-          <span className="font-mono text-[10px] text-ink-3">{timeAgo(reply.created_at, labels)}</span>
+          <span className="font-mono text-xs text-ink-3">{timeAgo(reply.created_at, labels)}</span>
         </div>
         <p className="mt-0.5 font-manrope text-sm text-ink leading-relaxed">{reply.body}</p>
       </div>
@@ -108,7 +108,7 @@ function ReplyRow({ reply, courseSlug, currentUserId, creatorId, labels }: { rep
           type="button"
           disabled={pending}
           onClick={() => startTransition(() => deleteReply(reply.id, courseSlug))}
-          className="shrink-0 font-mono text-[10px] text-ink-3 hover:text-red-400 disabled:opacity-40"
+          className="shrink-0 font-mono text-xs text-ink-3 hover:text-red-400 disabled:opacity-40"
         >
           {labels.delete}
         </button>
@@ -144,7 +144,7 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
       {/* Pin badge */}
       {pinned && (
         <div className="mb-2 flex items-center gap-1">
-          <span className="font-mono text-[10px] font-[700] uppercase tracking-wider text-orange-text">📌 {labels.pinned}</span>
+          <span className="font-mono text-xs font-[700] uppercase tracking-wider text-orange-text">📌 {labels.pinned}</span>
         </div>
       )}
 
@@ -155,8 +155,8 @@ export default function PostCard({ post, courseId, courseSlug, currentUserId, cr
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="font-manrope text-sm font-[800] text-ink">{handle}</span>
             {isPostCreator && <CreatorBadge label={labels.creator} />}
-            <span className="font-mono text-[10px] text-ink-3">{timeAgo(post.created_at, labels)}</span>
-            {post.edited_at && <span className="font-mono text-[10px] text-ink-3">{labels.edited}</span>}
+            <span className="font-mono text-xs text-ink-3">{timeAgo(post.created_at, labels)}</span>
+            {post.edited_at && <span className="font-mono text-xs text-ink-3">{labels.edited}</span>}
           </div>
           <p className="mt-1 font-manrope text-sm text-ink leading-relaxed whitespace-pre-wrap">{post.body}</p>
         </div>

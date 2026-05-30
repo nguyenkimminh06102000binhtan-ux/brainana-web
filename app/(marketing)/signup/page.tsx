@@ -146,7 +146,7 @@ export default function SignupPage() {
                     if (!emailTouched) setEmailTouched(true);
                   }}
                   autoComplete="email"
-                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue ${state?.error ? "border-red" : ""}`}
                 />
                 {emailTouched && emailError && (
                   <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{emailError}</p>
@@ -170,7 +170,7 @@ export default function SignupPage() {
                     if (!passwordTouched) setPasswordTouched(true);
                   }}
                   autoComplete="new-password"
-                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue ${state?.error ? "border-red" : ""}`}
                 />
                 {passwordTouched && (
                   <ul className="mt-2 space-y-1 font-manrope text-xs font-[700] text-ink-2">
@@ -195,7 +195,7 @@ export default function SignupPage() {
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
                   autoComplete="new-password"
-                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow ${state?.error ? "border-red" : ""}`}
+                  className={`w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue ${state?.error ? "border-red" : ""}`}
                 />
                 {confirmPasswordError && (
                   <p className="mt-2 font-manrope text-sm font-[700] text-orange-text">{confirmPasswordError}</p>

@@ -193,7 +193,7 @@ export default async function BrowsePage({
                           className="object-cover"
                         />
                       ) : (
-                        <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink/50">
+                        <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink-2">
                           [{" "}
                           {[(course.subcategory ? (loc.categories[course.subcategory] ?? course.subcategory) : course.category ? (loc.categories[course.category] ?? course.category) : null)?.toLowerCase(), course.level ? (levelLabels[course.level] ?? course.level).toLowerCase() : null]
                             .filter(Boolean)

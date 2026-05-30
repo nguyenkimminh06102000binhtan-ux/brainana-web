@@ -94,7 +94,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
               <input
                 name="q"
                 placeholder={loc.app.searchPlaceholder}
-                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
+                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
               />
             </form>
           </div>

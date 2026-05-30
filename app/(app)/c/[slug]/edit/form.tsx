@@ -219,8 +219,8 @@ function courseLanguageOptions(currentLanguage: string | null | undefined) {
   return [currentLanguage, ...SUPPORTED_COURSE_LANGUAGES];
 }
 
-const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow";
-const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-yellow appearance-none";
+const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue";
+const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue appearance-none";
 
 function UploadButton({ label, labels, accept, uploading, compressing, error, onFile }: {
   label: string; labels: CreateEditLabels; accept: string; uploading: boolean; compressing: boolean; error: string | null; onFile: (f: File) => void;
@@ -659,7 +659,7 @@ export default function EditCourseForm({
                 onClick={() => toggleCollapse(section.id)}
                 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition hover:text-ink"
               >
-                <span className="text-[10px]">{collapsed.has(section.id) ? "▶" : "▼"}</span>
+                <span className="text-xs">{collapsed.has(section.id) ? "▶" : "▼"}</span>
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
               <div className="flex items-center gap-2">

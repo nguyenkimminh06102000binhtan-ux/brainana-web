@@ -23,7 +23,7 @@ const config = {
       "yellow-soft": "#FFE3A6",
       "green-soft": "#DDF1EF",
       "ink-2": "#3D4B72",
-      "ink-3": "#7890A0",
+      "ink-3": "#4F6270",
     },
     fontFamily: {
       fredoka: ["Young Typeface", "sans-serif"],

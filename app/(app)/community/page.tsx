@@ -42,7 +42,7 @@ export default async function CommunityPage() {
         ) : (
           <div className="flex flex-col gap-3">
             <div className="rounded-lg border border-ink/10 bg-paper p-4">
-              <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-ink-2">
+              <p className="mb-1 font-mono text-xs uppercase tracking-wider text-ink-2">
                 {loc.mems.forCard.replace("{front}", mem.items?.front_text ?? "")}
                 {mem.items?.courses && (
                   <>

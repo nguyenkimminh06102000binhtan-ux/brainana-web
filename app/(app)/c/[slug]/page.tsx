@@ -231,7 +231,7 @@ export default async function CourseDetailPage({
               <div className="flex flex-col gap-3">
                 {topMems.map((mem) => (
                   <div key={mem.id} className="rounded-lg border border-ink/10 bg-paper p-3">
-                    <p className="font-mono text-[10px] uppercase tracking-wider text-ink-2 mb-1">
+                    <p className="font-mono text-xs uppercase tracking-wider text-ink-2 mb-1">
                       {loc.mems.forCard.replace("{front}", mem.items?.front_text ?? "")}
                     </p>
                     <p className="font-kalam text-sm leading-relaxed text-ink">{mem.text}</p>

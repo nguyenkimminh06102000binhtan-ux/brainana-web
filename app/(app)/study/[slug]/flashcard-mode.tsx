@@ -134,10 +134,10 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
                   className="flex cursor-pointer flex-col items-center gap-1 rounded-sm border-2 border-ink/15 bg-ink/5 px-2 py-3 font-manrope transition hover:border-ink/30 hover:bg-ink/10 active:translate-y-[1px]"
                 >
                   <span className="text-sm font-[700] text-ink">{r.label}</span>
-                  <span className="font-mono text-[10px] text-ink-3">
+                  <span className="font-mono text-xs text-ink-3">
                     {formatInterval(result.interval)}
                   </span>
-                  <span className="font-mono text-[10px] text-ink-3/60">{i + 1}</span>
+                  <span className="font-mono text-xs text-ink-3">{i + 1}</span>
                 </button>
               );
             })}

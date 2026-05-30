@@ -114,7 +114,7 @@ export default function OnboardingForm({
                 id="native_language_step"
                 value={nativeLanguage}
                 onChange={(event) => handleNativeLanguageChange(event.target.value)}
-                className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-yellow"
+                className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-blue"
               >
                 <option value="" disabled>{labels.motherTonguePlaceholder}</option>
                 {LANGUAGES.map((lang) => (
@@ -165,7 +165,7 @@ export default function OnboardingForm({
               name="display_name"
               required
               placeholder={labels.namePlaceholder}
-              className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-base font-[700] text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
+              className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-base font-[700] text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
             />
           </section>
 
