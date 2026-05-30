@@ -9,6 +9,7 @@ import { createClient } from "@/utils/supabase/server";
 import GoalRing from "./goal-ring";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
 import { getLocale, t } from "@/utils/i18n";
+import { reviewDayCutoff } from "@/utils/review-schedule";
 
 function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -80,7 +81,7 @@ export default async function HomePage() {
 
   // Single item_progress query for all per-course + global stats
   const courseIds = enrolledCourses.map((c) => c.id);
-  const now = new Date().toISOString();
+  const dueCutoff = reviewDayCutoff().toISOString();
 
   const { data: progressRows } = courseIds.length > 0
     ? await supabase
@@ -101,7 +102,7 @@ export default async function HomePage() {
     if (row.mastered) {
       totalMastered++;
       masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
-    } else if (row.next_review_at <= now) {
+    } else if (row.next_review_at < dueCutoff) {
       totalDue++;
       dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
     }

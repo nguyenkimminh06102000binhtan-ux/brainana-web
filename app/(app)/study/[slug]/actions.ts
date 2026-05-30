@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { resolveMediaUrl } from "@/utils/resolve-media-url";
+import { reviewDayCutoff } from "@/utils/review-schedule";
 import type { StudyCard, QType } from "./types";
 
 const VALID_TYPES = new Set<QType>(["flashcard", "multiple_choice", "audio_type", "speed_match", "type_answer"]);
@@ -88,6 +89,7 @@ export async function fetchStudyCards(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+  const dueCutoff = reviewDayCutoff().toISOString();
 
   // Fetch overdue items with progress
   const { data: overdueRows } = await supabase
@@ -97,7 +99,7 @@ export async function fetchStudyCards(
     )
     .eq("user_id", user.id)
     .eq("course_id", courseId)
-    .lte("next_review_at", new Date().toISOString())
+    .lt("next_review_at", dueCutoff)
     .order("next_review_at", { ascending: true })
     .limit(count);
 

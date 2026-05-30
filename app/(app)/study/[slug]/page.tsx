@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
+import { reviewDayCutoff } from "@/utils/review-schedule";
 import StudyClient from "./study-client";
 
 type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "type_answer";
@@ -26,6 +27,7 @@ export default async function StudyPage({
     .single();
 
   if (!course) notFound();
+  const dueCutoff = reviewDayCutoff().toISOString();
 
   const [
     { data: enrollment },
@@ -54,7 +56,7 @@ export default async function StudyPage({
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
       .eq("course_id", course.id)
-      .lte("next_review_at", new Date().toISOString()),
+      .lt("next_review_at", dueCutoff),
     supabase
       .from("item_progress")
       .select("*", { count: "exact", head: true })

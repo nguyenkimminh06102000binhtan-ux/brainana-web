@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { calculateSM2, getQualityScore, addDays } from "@/utils/sm2";
+import { calculateSM2, getQualityScore } from "@/utils/sm2";
+import { nextReviewDay } from "@/utils/review-schedule";
 import TopBar from "./top-bar";
 import ExitConfirm from "./exit-confirm";
 import FlashcardMode from "./flashcard-mode";
@@ -125,7 +126,7 @@ export default function SessionView({
     if (answer.wasSpeedMatch) return;
     const supabase = createClient();
     const now = new Date();
-    const nextReview = addDays(now, answer.newInterval);
+    const nextReview = nextReviewDay(now, answer.newInterval);
     await supabase.from("item_progress").upsert(
       {
         user_id: userId,

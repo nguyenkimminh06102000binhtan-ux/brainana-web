@@ -8,6 +8,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
 import { getLocale, t } from "@/utils/i18n";
+import { reviewDayCutoff } from "@/utils/review-schedule";
 
 type CourseCard = {
   id: string;
@@ -95,7 +96,7 @@ export default async function LibraryPage() {
 
   // Single query for all progress data across enrolled courses
   const enrolledCourseIds = allEnrolled.map((c) => c.id);
-  const now = new Date().toISOString();
+  const dueCutoff = reviewDayCutoff().toISOString();
 
   const { data: progressRows } = enrolledCourseIds.length > 0
     ? await supabase
@@ -113,7 +114,7 @@ export default async function LibraryPage() {
     studiedCourseIds.add(row.course_id);
     if (row.mastered) {
       masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
-    } else if (row.next_review_at <= now) {
+    } else if (row.next_review_at < dueCutoff) {
       dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
     }
   }
