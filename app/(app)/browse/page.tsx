@@ -283,7 +283,8 @@ export default async function BrowsePage({
     else fallbackQuery = fallbackQuery.order("learner_count", { ascending: false });
 
     const fallback = await fallbackQuery.limit(500);
-    const merged = new Map<string, unknown>();
+    type CourseRow = NonNullable<typeof coursesRaw>[number];
+    const merged = new Map<string, CourseRow>();
     for (const course of coursesRaw ?? []) merged.set((course as { id: string }).id, course);
     for (const course of fallback.data ?? []) merged.set((course as { id: string }).id, course);
     coursesRaw = [...merged.values()];
