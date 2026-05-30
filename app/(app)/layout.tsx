@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import AvatarMenu from "./_components/avatar-menu";
+import BottomNav from "./_components/bottom-nav";
 import OriginLanguageSwitcher from "@/components/origin-language-switcher";
 import { getLocale, t } from "@/utils/i18n";
 
@@ -25,7 +26,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   let activeOriginLanguage = (profile?.active_origin_language as string | null) ?? null;
   const nativeLanguage = (profile?.native_language as string | null) ?? null;
 
-  // Auto-seed origin_languages from native_language if the column is still empty
   if (originLanguages.length === 0 && nativeLanguage) {
     await supabase
       .from("profiles")
@@ -38,11 +38,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const loc = getLocale(activeOriginLanguage);
 
   const navItems = [
-    { label: loc.app.nav.home,      href: "/home" },
-    { label: loc.app.nav.browse,    href: "/browse" },
-    { label: loc.app.nav.library,   href: "/library" },
-    { label: loc.app.nav.create,    href: "/create" },
-    { label: loc.app.nav.community, href: "/community" },
+    { label: loc.app.nav.home,      href: "/home",      icon: "🏠" },
+    { label: loc.app.nav.browse,    href: "/browse",    icon: "🔍" },
+    { label: loc.app.nav.library,   href: "/library",   icon: "📚" },
+    { label: loc.app.nav.create,    href: "/create",    icon: "✏️" },
+    { label: loc.app.nav.community, href: "/community", icon: "💬" },
   ];
 
   return (
@@ -51,49 +51,55 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         Skip to main content
       </a>
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="m-3 rounded-[2rem] bg-paper-2 px-4 py-4 shadow-hard sm:m-4 sm:px-5 xl:rounded-full xl:px-6">
-          <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-4">
-            <div className="flex min-w-0 items-center gap-3 xl:contents">
-              <Link href="/home" className="flex min-w-0 shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright">
-                  B
-                </span>
-                <span className="hidden truncate sm:inline">{loc.app.brand}</span>
-              </Link>
+        <header className="m-3 rounded-[2rem] bg-paper-2 px-4 py-3 shadow-hard sm:m-4 sm:px-5 xl:rounded-full xl:px-6 xl:py-4">
+          <div className="flex items-center gap-3 xl:gap-4">
 
-              <div className="ml-auto flex shrink-0 items-center gap-2 xl:order-last xl:ml-0">
-                <div className="hidden rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean sm:block">
-                  🔥 {t(loc.app.streakDays, { count: currentStreak })}
-                </div>
+            {/* Logo */}
+            <Link href="/home" className="flex shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright">
+                B
+              </span>
+              <span className="hidden sm:inline">{loc.app.brand}</span>
+            </Link>
 
-                <OriginLanguageSwitcher
-                  originLanguages={originLanguages}
-                  activeOriginLanguage={activeOriginLanguage}
-                  labels={loc.app.originLanguage}
-                />
-
-                <AvatarMenu
-                  avatarUrl={profile?.avatar_url ?? null}
-                  initial={initial}
-                  username={profile?.username ?? ""}
-                  labels={loc.app.avatar}
-                />
-              </div>
-            </div>
-
-            <nav className="flex min-w-0 gap-1 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] xl:flex-1 xl:flex-wrap xl:items-center xl:gap-2 xl:overflow-visible xl:pb-0 [&::-webkit-scrollbar]:hidden">
+            {/* Desktop nav — hidden on mobile, shown on xl */}
+            <nav className="hidden min-w-0 flex-1 flex-wrap items-center gap-2 xl:flex">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="shrink-0 rounded-full px-3 py-2 font-manrope text-sm font-[800] text-ink-2 hover:bg-blue hover:text-ocean sm:px-4"
+                  className="shrink-0 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 hover:bg-blue hover:text-ocean"
                 >
                   {item.label}
                 </Link>
               ))}
             </nav>
 
-            <form action="/browse" className="hidden w-full sm:block xl:w-auto xl:min-w-48">
+            {/* Spacer on mobile */}
+            <div className="flex-1 xl:hidden" />
+
+            {/* Right: streak, language, avatar */}
+            <div className="flex shrink-0 items-center gap-2">
+              <div className="hidden rounded-full bg-blue px-4 py-2 font-mono text-xs uppercase tracking-widest text-ocean sm:block">
+                🔥 {t(loc.app.streakDays, { count: currentStreak })}
+              </div>
+
+              <OriginLanguageSwitcher
+                originLanguages={originLanguages}
+                activeOriginLanguage={activeOriginLanguage}
+                labels={loc.app.originLanguage}
+              />
+
+              <AvatarMenu
+                avatarUrl={profile?.avatar_url ?? null}
+                initial={initial}
+                username={profile?.username ?? ""}
+                labels={loc.app.avatar}
+              />
+            </div>
+
+            {/* Desktop search */}
+            <form action="/browse" className="hidden xl:block xl:min-w-48">
               <input
                 name="q"
                 aria-label="Search courses"
@@ -104,7 +110,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           </div>
         </header>
 
-        <main id="main-content" className="flex-1">{children}</main>
+        {/* Main content — extra bottom padding on mobile for bottom nav */}
+        <main id="main-content" className="flex-1 pb-20 xl:pb-0">{children}</main>
+
+        {/* Bottom nav — visible on mobile/tablet, hidden on xl */}
+        <BottomNav items={navItems} />
       </div>
     </div>
   );
