@@ -21,19 +21,11 @@ export async function enrollInCourse(formData: FormData) {
     .insert({ user_id: user.id, course_id: courseId });
 
   if (!error) {
-    // Increment learner_count
-    const { data: course } = await supabase
-      .from("courses")
-      .select("learner_count")
-      .eq("id", courseId)
-      .single();
-
-    if (course) {
-      await supabase
-        .from("courses")
-        .update({ learner_count: course.learner_count + 1 })
-        .eq("id", courseId);
-    }
+    const { count } = await supabase
+      .from("user_courses")
+      .select("*", { count: "exact", head: true })
+      .eq("course_id", courseId);
+    await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
   }
 
   revalidatePath("/courses");
