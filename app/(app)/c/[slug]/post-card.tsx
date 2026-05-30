@@ -52,7 +52,7 @@ interface PostCardProps {
 
 function CreatorBadge({ label }: { label: string }) {
   return (
-    <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-[9px] font-[700] uppercase tracking-wider text-on-bright">
+    <span className="rounded-full bg-orange px-2 py-0.5 font-mono text-xs font-[700] uppercase tracking-wider text-on-bright">
       {label}
     </span>
   );

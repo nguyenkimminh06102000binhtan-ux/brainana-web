@@ -129,7 +129,7 @@ export default function BrowseFilters({
                       </span>
                     )}
                   </span>
-                  <span className={`shrink-0 font-mono text-[9px] text-ink-3 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`}>
+                  <span className={`shrink-0 font-mono text-xs text-ink-3 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`}>
                     ▶
                   </span>
                 </button>

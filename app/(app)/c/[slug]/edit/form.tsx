@@ -219,8 +219,8 @@ function courseLanguageOptions(currentLanguage: string | null | undefined) {
   return [currentLanguage, ...SUPPORTED_COURSE_LANGUAGES];
 }
 
-const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue";
-const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue appearance-none";
+const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink";
+const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink appearance-none";
 
 function UploadButton({ label, labels, accept, uploading, compressing, error, onFile }: {
   label: string; labels: CreateEditLabels; accept: string; uploading: boolean; compressing: boolean; error: string | null; onFile: (f: File) => void;

@@ -74,8 +74,8 @@ function label(text: string, optional?: boolean, optionalLabel = "optional") {
   );
 }
 
-const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue";
-const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue appearance-none";
+const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink";
+const selectCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink appearance-none";
 
 function parseCsv(text: string): Array<[string, string, string]> {
   const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");

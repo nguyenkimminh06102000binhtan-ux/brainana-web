@@ -216,7 +216,7 @@ export default function AiImportModal({
                 value={cardStyle}
                 onChange={(e) => setCardStyle(e.target.value)}
                 aria-label={labels.aiImportCardStyle}
-                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue appearance-none"
+                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink appearance-none"
               >
                 {CARD_STYLES.map((s) => (
                   <option key={s.value} value={s.value}>{labels[s.labelKey]}</option>
@@ -234,7 +234,7 @@ export default function AiImportModal({
                 value={count}
                 onChange={(e) => setCount(Math.min(50, Math.max(1, parseInt(e.target.value) || 1)))}
                 aria-label={labels.aiImportCount}
-                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-blue"
+                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink"
               />
             </div>
 
@@ -247,7 +247,7 @@ export default function AiImportModal({
                 onChange={(e) => setFocus(e.target.value)}
                 placeholder={labels.aiImportFocusPlaceholder}
                 aria-label={labels.aiImportFocus}
-                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
+                className="w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
               />
             </div>
 
@@ -301,7 +301,7 @@ export default function AiImportModal({
                 onChange={(e) => setPastedText(e.target.value)}
                 placeholder={labels.aiImportPastePlaceholder}
                 rows={4}
-                className="w-full resize-none rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
+                className="w-full resize-none rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
               />
             </div>
 

@@ -351,7 +351,7 @@ export default function SettingsForm({
 }
 
 const inputClassName =
-  "mt-2 w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none placeholder:text-ink-3 shadow-hard-sm focus:ring-2 focus:ring-blue";
+  "mt-2 w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none placeholder:text-ink-3 shadow-hard-sm focus:ring-2 focus:ring-ink";
 
 const secondaryButtonClassName =
   "cursor-pointer rounded-full bg-blue px-4 py-2.5 font-manrope text-xs font-[800] text-ocean shadow-hard-sm transition active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-50";

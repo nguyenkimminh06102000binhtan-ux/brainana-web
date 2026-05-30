@@ -98,7 +98,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
                 name="q"
                 aria-label="Search courses"
                 placeholder={loc.app.searchPlaceholder}
-                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-blue"
+                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
               />
             </form>
           </div>
