@@ -127,6 +127,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
     `- Back (answer side): use ${targetLanguage || "the target language"}`,
     "- Every card must be unique",
     "- Strictly match the card style",
+    "- If the source is a multiple-choice question and the correct answer is a combination option that references multiple other options, expand the back to list the actual text of every referenced option joined by ' / '. Recognize all of these patterns (in any language): explicit combination phrases ('All of the above', 'Both A and B', 'Cả a, b và c', 'Cả a, b, c đều đúng', 'Toutes ces réponses', 'Todas las anteriores'); SHORT bare-list forms where the answer text is nothing but a list of option letters ('Cả a, b, c' with or without 'đều đúng', 'a, b và c', 'a và b', 'A, B, C'); or any structurally equivalent pattern where the answer contains only letter references and no independent content. Never write 'All of the above', its translation, or bare letter labels as the back.",
     "",
     "Return ONLY a valid JSON array — no markdown, no explanation, nothing else:",
     '[{"front": "...", "back": "..."}, ...]',
