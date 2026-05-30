@@ -57,29 +57,29 @@ const courseCards = [
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-paper px-5 py-8 text-ink">
-      <header className="mx-auto max-w-6xl rounded-full bg-paper-2 px-6 py-4 shadow-hard">
+      <header className="mx-auto max-w-6xl rounded-full bg-paper-2 px-4 py-4 shadow-hard sm:px-6">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
+          <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
               B
             </span>
-            <span>Brainana</span>
+            <span className="truncate">Brainana</span>
           </Link>
           <nav className="hidden items-center gap-10 font-manrope text-sm font-[700] md:flex">
             <Link href="/courses">Courses</Link>
             <Link href="/browse">Browse</Link>
             <Link href="/terms">Community</Link>
           </nav>
-          <nav className="flex items-center gap-3 text-sm">
+          <nav className="ml-3 flex shrink-0 items-center gap-2 text-sm sm:gap-3">
             <Link
               href="/login"
-              className="hidden rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:inline-block"
+              className="rounded-full bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5 sm:py-2.5 sm:text-sm"
             >
               Log in
             </Link>
             <Link
               href="/signup"
-              className="rounded-full bg-orange px-6 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="rounded-full bg-orange px-4 py-2.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-6 sm:py-3 sm:text-sm"
             >
               Try free
             </Link>
