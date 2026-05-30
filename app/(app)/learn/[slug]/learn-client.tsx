@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { saveLearnProgress } from "./actions";
+import ChatMessage from "./chat-message";
+import MathToolbar from "./math-toolbar";
 
 export type LearnCard = {
   id: string;
@@ -49,6 +51,8 @@ interface Props {
   courseTitle: string;
   sourceLanguage: string | null;
   targetLanguage: string | null;
+  category: string | null;
+  level: string | null;
   sections: LearnSection[];
 }
 
@@ -58,10 +62,13 @@ export default function LearnClient({
   courseTitle,
   sourceLanguage,
   targetLanguage,
+  category,
+  level,
   sections,
 }: Props) {
   const [stage, setStage] = useState<"setup" | "chat" | "done">("setup");
   const [selectedSectionIds, setSelectedSectionIds] = useState<Set<string>>(new Set());
+  const [difficulty, setDifficulty] = useState<string>(level ?? "any");
   const [trackProgress, setTrackProgress] = useState(false);
   const [sessionCards, setSessionCards] = useState<LearnCard[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -98,6 +105,8 @@ export default function LearnClient({
           messages: apiMessages,
           cards,
           courseLanguages: { source: sourceLanguage, target: targetLanguage },
+          category,
+          level: difficulty,
         }),
       });
 
@@ -174,6 +183,19 @@ export default function LearnClient({
     setStage("done");
   }
 
+  function insertSymbol(sym: string) {
+    const el = inputRef.current;
+    if (!el) return;
+    const start = el.selectionStart ?? input.length;
+    const end = el.selectionEnd ?? input.length;
+    const next = input.slice(0, start) + sym + input.slice(end);
+    setInput(next);
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + sym.length, start + sym.length);
+    });
+  }
+
   function toggleSection(id: string) {
     setSelectedSectionIds((prev) => {
       const next = new Set(prev);
@@ -226,6 +248,43 @@ export default function LearnClient({
                 </button>
               );
             })}
+          </div>
+
+          {/* Difficulty selector */}
+          <div>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">Difficulty</p>
+            <div className="flex flex-col gap-2">
+              {(
+                [
+                  { value: "beginner",     label: "Beginner",     note: "Straightforward recall, one concept at a time" },
+                  { value: "intermediate", label: "Intermediate",  note: "Mix of recall and two-concept connections" },
+                  { value: "advanced",     label: "Advanced",      note: "Application, synthesis, and edge cases" },
+                  { value: "any",          label: "Any",           note: "Starts easy, gets harder as you answer correctly" },
+                ] as { value: string; label: string; note: string }[]
+              ).map(({ value, label, note }) => {
+                const active = difficulty === value;
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setDifficulty(value)}
+                    className={`flex items-start gap-3 rounded-lg border-2 px-4 py-3 text-left transition ${
+                      active
+                        ? "border-orange bg-orange text-on-bright"
+                        : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
+                    }`}
+                  >
+                    <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${active ? "border-on-bright" : "border-ink/30"}`}>
+                      {active && <span className="h-2 w-2 rounded-full bg-on-bright" />}
+                    </span>
+                    <span>
+                      <span className="block font-manrope text-sm font-[700]">{label}</span>
+                      <span className={`block font-manrope text-xs ${active ? "text-on-bright/80" : "text-ink-3"}`}>{note}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Track progress toggle */}
@@ -334,22 +393,25 @@ export default function LearnClient({
             className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-4 py-3 font-manrope text-sm leading-relaxed ${
+              className={`max-w-[80%] rounded-2xl px-4 py-3 font-manrope text-sm leading-relaxed ${
                 m.role === "user"
                   ? "rounded-br-sm bg-orange text-on-bright"
                   : "rounded-bl-sm bg-paper-2 text-ink shadow-hard-sm"
               }`}
             >
-              {m.display || (
-                <span className="animate-pulse text-ink-3">●●●</span>
-              )}
+              {m.display
+                ? <ChatMessage role={m.role} content={m.display} />
+                : <span className="animate-pulse text-ink-3">●●●</span>
+              }
             </div>
           </div>
         ))}
       </div>
 
       {/* Input */}
-      <div className="flex gap-2 pt-2">
+      <div className="pt-2">
+      <MathToolbar onInsert={insertSymbol} />
+      <div className="flex gap-2">
         <textarea
           ref={inputRef}
           value={input}
@@ -373,6 +435,7 @@ export default function LearnClient({
         >
           Send
         </button>
+      </div>
       </div>
     </div>
   );

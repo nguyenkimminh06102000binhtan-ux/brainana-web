@@ -19,7 +19,7 @@ export default async function LearnPage({
 
   const { data: course } = await supabase
     .from("courses")
-    .select("id, title, slug, source_language, target_language")
+    .select("id, title, slug, source_language, target_language, category, level")
     .eq("slug", slug)
     .single();
 
@@ -59,6 +59,8 @@ export default async function LearnPage({
       courseTitle={course.title}
       sourceLanguage={(course.source_language as string | null) ?? null}
       targetLanguage={(course.target_language as string | null) ?? null}
+      category={(course.category as string | null) ?? null}
+      level={(course.level as string | null) ?? null}
       sections={sections}
     />
   );

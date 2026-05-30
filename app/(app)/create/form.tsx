@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useState } from "react";
 import { createCourse } from "./actions";
+import MathToolbar from "@/app/(app)/_components/math-toolbar";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
@@ -201,6 +202,23 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
 }) {
   const [suggesting, setSuggesting] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
+  const frontRef = useRef<HTMLTextAreaElement>(null);
+  const backRef = useRef<HTMLTextAreaElement>(null);
+  const lastFocused = useRef<"front" | "back">("front");
+
+  function insertSymbol(sym: string) {
+    const field = lastFocused.current;
+    const el = field === "front" ? frontRef.current : backRef.current;
+    if (!el) return;
+    const start = el.selectionStart ?? 0;
+    const end = el.selectionEnd ?? 0;
+    const current = field === "front" ? item.front : item.back;
+    onUpdate(field, current.slice(0, start) + sym + current.slice(end));
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + sym.length, start + sym.length);
+    });
+  }
 
   async function handleAutoRomanization() {
     if (!item.back.trim() || !roSystem) return;
@@ -228,7 +246,8 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
       <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
         <div className="bg-paper p-4">
           {label(labels.question)}
-          <textarea name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)} aria-label={labels.question}
+          <textarea ref={frontRef} name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)} aria-label={labels.question}
+            onFocus={() => { lastFocused.current = "front"; }}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -243,7 +262,8 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
 
         <div className="bg-paper-2 p-4">
           {label(labels.answer)}
-          <textarea name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)} aria-label={labels.answer}
+          <textarea ref={backRef} name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)} aria-label={labels.answer}
+            onFocus={() => { lastFocused.current = "back"; }}
             placeholder={labels.answerPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -256,7 +276,9 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
           </div>
         </div>
       </div>
-
+      <div className="border-t border-ink/10 bg-paper px-4 py-2">
+        <MathToolbar onInsert={insertSymbol} />
+      </div>
       {roSystem && (
         <div className="border-t border-ink/10 bg-paper px-4 py-3">
           {label(t(labels.romanization, { system: roSystem.system }), true, labels.optional)}
