@@ -137,14 +137,23 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   try {
     const msg = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 4096,
+      max_tokens: 8192,
+      system: "You are a JSON generator. Respond with only a valid JSON array. No markdown, no code fences, no explanation — just the raw JSON array.",
       messages: [{ role: "user", content: contentBlocks }],
     });
 
+    if (msg.stop_reason === "max_tokens") {
+      return { error: "AI response was too long to process. Try requesting fewer cards." };
+    }
+
     const raw = msg.content.find((b) => b.type === "text");
-    const text = raw?.type === "text" ? raw.text : "";
+    const rawText = raw?.type === "text" ? raw.text : "";
+    const text = rawText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const match = text.match(/\[[\s\S]*\]/);
-    if (!match) return { error: "Could not parse AI response — no JSON array found" };
+    if (!match) {
+      console.error("[ai-import] No JSON array in response:", rawText.slice(0, 300));
+      return { error: "Could not parse AI response — no JSON array found" };
+    }
 
     const parsed = JSON.parse(match[0]) as Array<{ front?: string; back?: string }>;
     const cards = parsed
