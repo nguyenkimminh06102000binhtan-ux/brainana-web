@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
+const devNgrokOrigins =
+  process.env.NODE_ENV === "development"
+    ? ["chute-retrace-confidant.ngrok-free.dev"]
+    : [];
+
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["chute-retrace-confidant.ngrok-free.dev"],
+  allowedDevOrigins: devNgrokOrigins,
   experimental: {
     serverActions: {
-      allowedOrigins: ["chute-retrace-confidant.ngrok-free.dev"],
+      allowedOrigins: devNgrokOrigins,
     },
   },
   images: {
