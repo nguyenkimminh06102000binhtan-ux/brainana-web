@@ -165,6 +165,13 @@ export default async function CourseDetailPage({
                     {cl.startLearning}
                   </Link>
 
+                  <Link
+                    href={`/learn/${course.slug}`}
+                    className="rounded-full bg-blue px-5 py-2.5 font-manrope text-sm font-[800] text-ocean shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
+                  >
+                    ✨ AI Tutor
+                  </Link>
+
                   {!isOwner && (
                     <form action={toggleEnroll}>
                       <input type="hidden" name="course_id" value={course.id} />
