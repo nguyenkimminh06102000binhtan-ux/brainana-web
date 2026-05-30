@@ -360,7 +360,7 @@ export default function StudyClient({
                   onClick={() => toggleType(value)}
                   className={`flex cursor-pointer items-center gap-2 rounded-lg border-2 px-3 py-2.5 font-manrope text-sm font-[700] transition active:translate-y-[1px] ${
                     active
-                      ? "border-orange bg-orange/10 text-ink"
+                      ? "border-orange bg-orange text-on-bright"
                       : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
                   }`}
                 >
