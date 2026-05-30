@@ -13,6 +13,7 @@ type ItemPayload = {
   imagePath: string;
   frontAudioPath: string;
   backAudioPath: string;
+  distractors?: string[];
 };
 
 type SectionPayload = {
@@ -137,6 +138,7 @@ export async function createCourse(
         image_url: item.imagePath || null,
         front_audio_url: item.frontAudioPath || null,
         back_audio_url: item.backAudioPath || null,
+        distractors: item.distractors?.length ? item.distractors : null,
         position: i,
       }))
     );

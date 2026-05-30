@@ -27,8 +27,14 @@ const CARD_STYLE_DESCRIPTIONS: Record<string, string> = {
   translation: "Full sentence translation (e.g. I love learning → 나는 배우는 것을 좋아해)",
 };
 
+export type AiImportCard = {
+  front: string;
+  back: string;
+  distractors: string[];
+};
+
 export type AiImportResult =
-  | { cards: Array<{ front: string; back: string }> }
+  | { cards: AiImportCard[] }
   | { error: string };
 
 export async function generateCardsWithAI(formData: FormData): Promise<AiImportResult> {
@@ -128,9 +134,10 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
     "- Every card must be unique",
     "- Strictly match the card style",
     "- If the source is a multiple-choice question and the correct answer is a combination option that references multiple other options, expand the back to list the actual text of every referenced option joined by ' / '. Recognize all of these patterns (in any language): explicit combination phrases ('All of the above', 'Both A and B', 'Cả a, b và c', 'Cả a, b, c đều đúng', 'Toutes ces réponses', 'Todas las anteriores'); SHORT bare-list forms where the answer text is nothing but a list of option letters ('Cả a, b, c' with or without 'đều đúng', 'a, b và c', 'a và b', 'A, B, C'); or any structurally equivalent pattern where the answer contains only letter references and no independent content. Never write 'All of the above', its translation, or bare letter labels as the back.",
+    "- Every card MUST include a 'distractors' array of exactly 3 wrong answers. For MCQ source cards: take the wrong option texts from the source (no letter prefix). For non-MCQ cards: generate 3 plausible but clearly wrong alternatives. In both cases normalize all distractors to exactly match the format and sentence length of the correct answer — if the correct answer is a full sentence, rewrite each distractor as a full sentence using the same grammatical pattern (e.g. correct: 'The percentage of male students is 40%' → distractors: ['The percentage of male students is 10%', 'The percentage of male students is 55%', 'The percentage of male students is 60%']); if the correct answer is a short value, use equally short values. The goal is that no option stands out by length or structure.",
     "",
     "Return ONLY a valid JSON array — no markdown, no explanation, nothing else:",
-    '[{"front": "...", "back": "..."}, ...]',
+    '[{"front": "...", "back": "...", "distractors": ["wrong1", "wrong2", "wrong3"]}, ...]',
   ].filter(Boolean).join("\n");
 
   contentBlocks.push({ type: "text", text: promptLines });
@@ -156,10 +163,16 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
       return { error: "Could not parse AI response — no JSON array found" };
     }
 
-    const parsed = JSON.parse(match[0]) as Array<{ front?: string; back?: string }>;
-    const cards = parsed
+    const parsed = JSON.parse(match[0]) as Array<{ front?: string; back?: string; distractors?: unknown }>;
+    const cards: AiImportCard[] = parsed
       .filter((c) => c.front?.trim() && c.back?.trim())
-      .map((c) => ({ front: c.front!.trim(), back: c.back!.trim() }));
+      .map((c) => ({
+        front: c.front!.trim(),
+        back: c.back!.trim(),
+        distractors: Array.isArray(c.distractors)
+          ? (c.distractors as string[]).filter((d) => typeof d === "string" && d.trim())
+          : [],
+      }));
 
     if (cards.length === 0) return { error: "AI returned no valid cards" };
     return { cards };

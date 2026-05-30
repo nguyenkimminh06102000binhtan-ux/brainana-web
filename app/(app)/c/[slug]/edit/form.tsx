@@ -32,6 +32,7 @@ type Item = {
   frontAudioDisplayUrl: string;
   backAudioPath: string;
   backAudioDisplayUrl: string;
+  distractors: string[];
   uploads: Record<UploadField, UploadState>;
 };
 
@@ -97,6 +98,7 @@ const makeItem = (): Item => ({
   frontAudioDisplayUrl: "",
   backAudioPath: "",
   backAudioDisplayUrl: "",
+  distractors: [],
   uploads: freshUpload(),
 });
 const makeSection = (): Section => ({ id: uid++, dbId: null, title: "", description: "", items: [makeItem()] });
@@ -120,7 +122,8 @@ function fromDb(dbSections: DbSection[]): Section[] {
           frontAudioDisplayUrl: i.front_audio_display_url ?? "",
           backAudioPath: i.back_audio_url ?? "",
           backAudioDisplayUrl: i.back_audio_display_url ?? "",
-          uploads: freshUpload(),
+          distractors: [],
+                  uploads: freshUpload(),
         }))
       : [makeItem()],
   }));
@@ -506,8 +509,8 @@ export default function EditCourseForm({
     reader.readAsText(file);
   }
 
-  function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string }>) {
-    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back }));
+  function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string; distractors?: string[]; accepted_answers?: string[] }>) {
+    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back, distractors: c.distractors ?? [] }));
     setSections((prev) => prev.map((s) => {
       if (s.id !== sectionId) return s;
       const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
@@ -535,6 +538,7 @@ export default function EditCourseForm({
         imagePath: i.imagePath,
         frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
+        distractors: i.distractors,
       })),
     }))
   );

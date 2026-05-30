@@ -30,6 +30,7 @@ type Item = {
   frontAudioDisplayUrl: string;
   backAudioPath: string;
   backAudioDisplayUrl: string;
+  distractors: string[];
   uploads: Record<UploadField, UploadState>;
 };
 
@@ -57,6 +58,7 @@ const makeItem = (): Item => ({
   frontAudioDisplayUrl: "",
   backAudioPath: "",
   backAudioDisplayUrl: "",
+  distractors: [],
   uploads: freshUpload(),
 });
 const makeSection = (): Section => ({ id: uid++, title: "", description: "", items: [makeItem()] });
@@ -452,8 +454,8 @@ export default function CreateCourseForm({
     reader.readAsText(file);
   }
 
-  function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string }>) {
-    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back }));
+  function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string; distractors?: string[]; accepted_answers?: string[] }>) {
+    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back, distractors: c.distractors ?? [] }));
     setSections((prev) => prev.map((s) => {
       if (s.id !== sectionId) return s;
       const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
@@ -488,6 +490,7 @@ export default function CreateCourseForm({
         imagePath: i.imagePath,
         frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
+        distractors: i.distractors,
       })),
     }))
   );

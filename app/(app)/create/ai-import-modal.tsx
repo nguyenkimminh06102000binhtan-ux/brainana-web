@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { generateCardsWithAI } from "@/app/actions/ai-import";
+import { generateCardsWithAI, type AiImportCard } from "@/app/actions/ai-import";
 import { t } from "@/utils/t";
 
 // ── File constraints ──────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ export interface AiImportModalProps {
   category: string;
   level: string;
   labels: Record<string, string>;
-  onImport: (cards: Array<{ front: string; back: string }>) => void;
+  onImport: (cards: AiImportCard[]) => void;
   onClose: () => void;
 }
 
