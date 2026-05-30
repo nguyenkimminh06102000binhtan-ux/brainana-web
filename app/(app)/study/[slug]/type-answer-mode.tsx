@@ -6,6 +6,7 @@ import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import { t } from "@/utils/t";
 import { playCorrectSound, playWrongSound } from "@/utils/answer-audio";
 import AnswerFeedback from "./answer-feedback";
+import MathToolbar from "@/app/(app)/_components/math-toolbar";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
 interface TypeAnswerModeProps {
@@ -64,6 +65,18 @@ export default function TypeAnswerMode({
 }: TypeAnswerModeProps) {
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
+
+  function insertSymbol(sym: string) {
+    const el = inputRef.current;
+    if (!el) return;
+    const start = el.selectionStart ?? value.length;
+    const end = el.selectionEnd ?? value.length;
+    setValue(value.slice(0, start) + sym + value.slice(end));
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + sym.length, start + sym.length);
+    });
+  }
   const [value, setValue] = useState("");
   const [attempts, setAttempts] = useState(0);
   const [showFirstLetter, setShowFirstLetter] = useState(false);
@@ -212,6 +225,7 @@ export default function TypeAnswerMode({
 
       {/* Input */}
       <div>
+        <MathToolbar onInsert={insertSymbol} />
         <input
           ref={inputRef}
           type="text"

@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useState } from "react";
 import { createCourse } from "./actions";
+import MathToolbar from "@/app/(app)/_components/math-toolbar";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
@@ -188,7 +189,7 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl }: {
+function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl, onFocusInput }: {
   item: Item;
   index: number;
   isOnly: boolean;
@@ -198,6 +199,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
+  onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
   const [suggesting, setSuggesting] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
@@ -229,6 +231,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
         <div className="bg-paper p-4">
           {label(labels.question)}
           <textarea name="_front" value={item.front} onChange={(e) => onUpdate("front", e.target.value)} aria-label={labels.question}
+            onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("front", v))}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -244,6 +247,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
         <div className="bg-paper-2 p-4">
           {label(labels.answer)}
           <textarea name="_back" value={item.back} onChange={(e) => onUpdate("back", e.target.value)} aria-label={labels.answer}
+            onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("back", v))}
             placeholder={labels.answerPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
           <div className="mt-3">
@@ -256,7 +260,6 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
           </div>
         </div>
       </div>
-
       {roSystem && (
         <div className="border-t border-ink/10 bg-paper px-4 py-3">
           {label(t(labels.romanization, { system: roSystem.system }), true, labels.optional)}
@@ -315,6 +318,21 @@ export default function CreateCourseForm({
   const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
   const [aiImportValidationError, setAiImportValidationError] = useState<string | null>(null);
   const prospectiveCourseId = useRef(crypto.randomUUID());
+  const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
+  const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
+
+  function insertSymbol(sym: string) {
+    const el = lastFocusedEl.current;
+    const setter = lastFocusedSetter.current;
+    if (!el || !setter) return;
+    const start = el.selectionStart ?? el.value.length;
+    const end = el.selectionEnd ?? el.value.length;
+    setter(el.value.slice(0, start) + sym + el.value.slice(end));
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + sym.length, start + sym.length);
+    });
+  }
 
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
@@ -672,6 +690,7 @@ export default function CreateCourseForm({
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
                       onClearUrl={(field) => clearUrl(section.id, item.id, field)}
+                      onFocusInput={(el, setter) => { lastFocusedEl.current = el; lastFocusedSetter.current = setter; }}
                     />
                   ))}
                 </div>
@@ -729,6 +748,9 @@ export default function CreateCourseForm({
           onClose={() => setAiImportSectionId(null)}
         />
       )}
+      <div className="fixed right-6 top-1/2 z-50 -translate-y-1/2">
+        <MathToolbar onInsert={insertSymbol} direction="up" />
+      </div>
     </form>
   );
 }
