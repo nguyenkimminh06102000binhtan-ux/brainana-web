@@ -1,29 +1,28 @@
 "use server";
 
 import Anthropic from "@anthropic-ai/sdk";
-import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+import { rateLimitUser } from "@/utils/rate-limit";
 import { ROMANIZATION_SYSTEMS } from "@/utils/romanization";
 
 const anthropic = new Anthropic();
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  );
-}
 
 export async function suggestRomanization(
   text: string,
   language: string,
 ): Promise<{ romanization: string; system: string }> {
   const system = ROMANIZATION_SYSTEMS[language]?.system ?? "Romanization";
+
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { romanization: "", system };
+
   const normalized = text.trim();
   if (!normalized) return { romanization: "", system };
 
-  const supabase = getSupabase();
-
-  // Cache hit
+  // Cache hit — no AI call, no rate limit needed
   const { data: cached } = await supabase
     .from("romanization_cache")
     .select("romanization")
@@ -32,6 +31,10 @@ export async function suggestRomanization(
     .maybeSingle();
 
   if (cached?.romanization) return { romanization: cached.romanization, system };
+
+  // Rate limit before calling Claude (30 AI calls/hour per user)
+  const { allowed } = await rateLimitUser(user.id, "romanization", { limit: 30, windowSeconds: 3600 });
+  if (!allowed) return { romanization: "", system };
 
   // Cache miss — call Claude
   try {

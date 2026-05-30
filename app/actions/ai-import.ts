@@ -1,6 +1,9 @@
 "use server";
 
 import Anthropic from "@anthropic-ai/sdk";
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+import { rateLimitUser } from "@/utils/rate-limit";
 
 const anthropic = new Anthropic();
 
@@ -29,6 +32,15 @@ export type AiImportResult =
   | { error: string };
 
 export async function generateCardsWithAI(formData: FormData): Promise<AiImportResult> {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { error: "Unauthorized" };
+
+  // 10 AI card-generation requests per hour per user
+  const { allowed } = await rateLimitUser(user.id, "ai-import", { limit: 10, windowSeconds: 3600 });
+  if (!allowed) return { error: "Rate limit exceeded. Please try again later." };
+
   const get = (k: string) => (formData.get(k) as string | null) ?? "";
 
   const courseTitle        = get("courseTitle");

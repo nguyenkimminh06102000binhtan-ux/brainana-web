@@ -67,3 +67,26 @@ export async function rateLimitRequest(
     resetSeconds,
   };
 }
+
+export async function rateLimitUser(
+  userId: string,
+  scope: string,
+  rule: RateLimitRule,
+): Promise<RateLimitResult> {
+  const window = Math.floor(Date.now() / (rule.windowSeconds * 1000));
+  const key = `rate:${scope}:${userId}:${window}`;
+  const count = await redis.incr(key);
+
+  if (count === 1) {
+    await redis.expire(key, rule.windowSeconds + 5);
+  }
+
+  const resetSeconds = rule.windowSeconds - Math.floor((Date.now() / 1000) % rule.windowSeconds);
+
+  return {
+    allowed: count <= rule.limit,
+    limit: rule.limit,
+    remaining: Math.max(0, rule.limit - count),
+    resetSeconds,
+  };
+}
