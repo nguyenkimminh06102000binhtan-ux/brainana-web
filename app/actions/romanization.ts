@@ -1,12 +1,10 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { ROMANIZATION_SYSTEMS } from "@/utils/romanization";
-
-const anthropic = new Anthropic();
+import { aiComplete } from "@/utils/ai-client";
 
 export async function suggestRomanization(
   text: string,
@@ -36,21 +34,20 @@ export async function suggestRomanization(
   const { allowed } = await rateLimitUser(user.id, "romanization", { limit: 30, windowSeconds: 3600 });
   if (!allowed) return { romanization: "", system };
 
-  // Cache miss — call Claude
+  // Cache miss — call AI
   try {
-    const msg = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 200,
+    const result = await aiComplete({
+      system: "You are a romanization assistant. Return only the romanized text — no explanation, no punctuation changes, no quotes.",
       messages: [
         {
           role: "user",
-          content: `Provide the ${system} romanization for the following ${language} text. Return only the romanized text, no explanation, no punctuation changes, no quotes.\n\nText: ${normalized}`,
+          content: `Provide the ${system} romanization for the following ${language} text.\n\nText: ${normalized}`,
         },
       ],
+      maxTokens: 200,
     });
 
-    const block = msg.content[0];
-    const romanization = block?.type === "text" ? block.text.trim() : "";
+    const romanization = result.text.trim();
 
     if (romanization) {
       await supabase

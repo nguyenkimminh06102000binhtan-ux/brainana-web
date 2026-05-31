@@ -1,11 +1,10 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
-
-const anthropic = new Anthropic();
+import { aiComplete } from "@/utils/ai-client";
+import type Anthropic from "@anthropic-ai/sdk";
 
 const BLOCKED_EXTENSIONS = new Set([
   "exe", "dmg", "pkg", "zip", "rar", "tar",
@@ -68,6 +67,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   }
 
   // Build Claude message content
+  // contentBlocks retained for type-compat but only a text block is ever pushed
   const contentBlocks: Anthropic.MessageParam["content"] = [];
   // Start with pasted text + any pre-extracted text from client-side analysis
   let textContent = [pastedText, preExtractedText].filter(Boolean).join("\n");
@@ -137,6 +137,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
     `- Back (answer side): use ${targetLanguage || "the target language"}`,
     "- Every card must be unique",
     "- Strictly match the card style",
+    "- For mathematical content: always use Unicode characters — never LaTeX or code-style notation. Use superscripts (², ³, ⁴, ⁿ), subscripts (₀, ₁, ₂), fractions (½, ⅓, ¼), Greek letters (π, α, β, γ, θ, λ, μ, σ, ω, ∆, Σ), and math symbols (×, ÷, ≤, ≥, ≠, ≈, √, ∞, ∫, ∑). Write formulas in readable plain form: e.g. 'y(t) = y₀ + v₀t − ½gt²', 'f = 1/T', 'E = mc²', 'v = √(2gh)'. Never use $...$ LaTeX, \\frac, \\text, or ^ for exponents.",
     "- If the source is a multiple-choice question and the correct answer is a combination option that references multiple other options, expand the back to list the actual text of every referenced option joined by ' / '. Recognize all of these patterns (in any language): explicit combination phrases ('All of the above', 'Both A and B', 'Cả a, b và c', 'Cả a, b, c đều đúng', 'Toutes ces réponses', 'Todas las anteriores'); SHORT bare-list forms where the answer text is nothing but a list of option letters ('Cả a, b, c' with or without 'đều đúng', 'a, b và c', 'a và b', 'A, B, C'); or any structurally equivalent pattern where the answer contains only letter references and no independent content. Never write 'All of the above', its translation, or bare letter labels as the back.",
     "- Every card MUST include a 'distractors' array of exactly 3 wrong answers. For MCQ source cards: take the wrong option texts from the source (no letter prefix). For non-MCQ cards: generate 3 plausible but clearly wrong alternatives. In both cases normalize all distractors to exactly match the format and sentence length of the correct answer — if the correct answer is a full sentence, rewrite each distractor as a full sentence using the same grammatical pattern (e.g. correct: 'The percentage of male students is 40%' → distractors: ['The percentage of male students is 10%', 'The percentage of male students is 55%', 'The percentage of male students is 60%']); if the correct answer is a short value, use equally short values. The goal is that no option stands out by length or structure.",
     "",
@@ -147,19 +148,17 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   contentBlocks.push({ type: "text", text: promptLines });
 
   try {
-    const msg = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 10000,
+    const result = await aiComplete({
       system: "You are a JSON generator. Respond with only a valid JSON array. No markdown, no code fences, no explanation — just the raw JSON array.",
-      messages: [{ role: "user", content: contentBlocks }],
+      messages: [{ role: "user", content: promptLines }],
+      maxTokens: 10000,
     });
 
-    if (msg.stop_reason === "max_tokens") {
+    if (result.stopReason === "max_tokens") {
       return { error: "AI response was too long to process. Try requesting fewer cards." };
     }
 
-    const raw = msg.content.find((b) => b.type === "text");
-    const rawText = raw?.type === "text" ? raw.text : "";
+    const rawText = result.text;
     const text = rawText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const match = text.match(/\[[\s\S]*\]/);
     if (!match) {
@@ -167,7 +166,8 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
       return { error: "Could not parse AI response — no JSON array found" };
     }
 
-    const parsed = JSON.parse(match[0]) as Array<{ front?: string; back?: string; distractors?: unknown }>;
+    const { jsonrepair } = await import("jsonrepair");
+    const parsed = JSON.parse(jsonrepair(match[0])) as Array<{ front?: string; back?: string; distractors?: unknown }>;
     const cards: AiImportCard[] = parsed
       .filter((c) => c.front?.trim() && c.back?.trim())
       .map((c) => ({
