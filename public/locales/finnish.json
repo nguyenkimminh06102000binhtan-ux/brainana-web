@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Enintään 3 kuvaa sallittu.",
     "aiImportErrorTotalTooLarge": "Lähetyksen kokonaiskoko ylittää 25 Mt.",
     "aiImportErrorNoContent": "Lisää ensin tiedosto tai liitä tekstiä.",
-    "aiImportErrorNoTitle": "Lisää kurssin otsikko ennen korttien luomista."
+    "aiImportErrorNoTitle": "Lisää kurssin otsikko ennen korttien luomista.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 s · kaikki yhdellä sivulla",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Թույլատրվում է առավելագույնը 3 պատկեր:",
     "aiImportErrorTotalTooLarge": "Վերբեռնման ընդհանուր չափը գերազանցում է 25 ՄԲ-ը:",
     "aiImportErrorNoContent": "Նախ ավելացրեք ֆայլ կամ տեղադրեք որոշ տեքստ:",
-    "aiImportErrorNoTitle": "Քարտեր ստեղծելուց առաջ ավելացրեք դասընթացի անվանումը:"
+    "aiImportErrorNoTitle": "Քարտեր ստեղծելուց առաջ ավելացրեք դասընթացի անվանումը:",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 վայրկյան · բոլորը մեկ էջում",

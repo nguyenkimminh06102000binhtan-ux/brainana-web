@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Επιτρέπονται έως 3 εικόνες.",
     "aiImportErrorTotalTooLarge": "Το συνολικό μέγεθος μεταφόρτωσης υπερβαίνει τα 25 MB.",
     "aiImportErrorNoContent": "Προσθέστε ένα αρχείο ή επικολλήστε πρώτα κάποιο κείμενο.",
-    "aiImportErrorNoTitle": "Προσθέστε έναν τίτλο μαθήματος πριν δημιουργήσετε κάρτες."
+    "aiImportErrorNoTitle": "Προσθέστε έναν τίτλο μαθήματος πριν δημιουργήσετε κάρτες.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 δευτερόλεπτα · όλα σε μία σελίδα",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "3 íomhá ar a mhéad a cheadaítear.",
     "aiImportErrorTotalTooLarge": "Sáraíonn méid iomlán an uaslódála 25 MB.",
     "aiImportErrorNoContent": "Cuir comhad leis nó greamaigh téacs éigin ar dtús.",
-    "aiImportErrorNoTitle": "Cuir teideal cúrsa leis sula ngintear cártaí."
+    "aiImportErrorNoTitle": "Cuir teideal cúrsa leis sula ngintear cártaí.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 soicind · ar fad ar aon leathanach amháin",

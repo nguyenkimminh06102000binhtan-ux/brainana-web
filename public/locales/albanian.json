@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Lejohen maksimumi 3 imazhe.",
     "aiImportErrorTotalTooLarge": "Madhësia totale e ngarkimit i kalon 25 MB.",
     "aiImportErrorNoContent": "Fillimisht shtoni një skedar ose ngjitni një tekst.",
-    "aiImportErrorNoTitle": "Shtoni një titull kursi përpara se të krijoni karta."
+    "aiImportErrorNoTitle": "Shtoni një titull kursi përpara se të krijoni karta.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sek · të gjitha në një faqe",

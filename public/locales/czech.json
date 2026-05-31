@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Jsou povoleny maximálně 3 obrázky.",
     "aiImportErrorTotalTooLarge": "Celková velikost nahrávání přesahuje 25 MB.",
     "aiImportErrorNoContent": "Nejprve přidejte soubor nebo vložte nějaký text.",
-    "aiImportErrorNoTitle": "Před generováním karet přidejte název kurzu."
+    "aiImportErrorNoTitle": "Před generováním karet přidejte název kurzu.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sekund · vše na jedné stránce",

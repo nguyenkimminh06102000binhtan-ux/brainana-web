@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "ਅਧਿਕਤਮ 3 ਚਿੱਤਰਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ।",
     "aiImportErrorTotalTooLarge": "ਕੁੱਲ ਅੱਪਲੋਡ ਆਕਾਰ 25 MB ਤੋਂ ਵੱਧ ਹੈ।",
     "aiImportErrorNoContent": "ਇੱਕ ਫਾਈਲ ਜੋੜੋ ਜਾਂ ਪਹਿਲਾਂ ਕੁਝ ਟੈਕਸਟ ਪੇਸਟ ਕਰੋ।",
-    "aiImportErrorNoTitle": "ਕਾਰਡ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਕੋਰਸ ਦਾ ਸਿਰਲੇਖ ਸ਼ਾਮਲ ਕਰੋ।"
+    "aiImportErrorNoTitle": "ਕਾਰਡ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਕੋਰਸ ਦਾ ਸਿਰਲੇਖ ਸ਼ਾਮਲ ਕਰੋ।",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ਸਕਿੰਟ · ਸਾਰੇ ਇੱਕ ਪੰਨੇ 'ਤੇ",

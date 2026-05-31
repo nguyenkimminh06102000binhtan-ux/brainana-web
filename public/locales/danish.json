@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimalt 3 billeder tilladt.",
     "aiImportErrorTotalTooLarge": "Samlet uploadstørrelse overstiger 25 MB.",
     "aiImportErrorNoContent": "Tilføj en fil eller indsæt noget tekst først.",
-    "aiImportErrorNoTitle": "Tilføj en kursustitel, før du genererer kort."
+    "aiImportErrorNoTitle": "Tilføj en kursustitel, før du genererer kort.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sek. · alt på én side",

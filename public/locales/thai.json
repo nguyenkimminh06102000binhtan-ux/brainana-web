@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "อนุญาตให้มีรูปภาพได้สูงสุด 3 รูป",
     "aiImportErrorTotalTooLarge": "ขนาดอัพโหลดรวมเกิน 25 MB",
     "aiImportErrorNoContent": "เพิ่มไฟล์หรือวางข้อความก่อน",
-    "aiImportErrorNoTitle": "เพิ่มชื่อหลักสูตรก่อนที่จะสร้างการ์ด"
+    "aiImportErrorNoTitle": "เพิ่มชื่อหลักสูตรก่อนที่จะสร้างการ์ด",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 วินาที · ทั้งหมดในหน้าเดียว",

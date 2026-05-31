@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "મહત્તમ 3 છબીઓને મંજૂરી છે.",
     "aiImportErrorTotalTooLarge": "કુલ અપલોડ કદ 25 MB કરતાં વધી ગયું છે.",
     "aiImportErrorNoContent": "ફાઇલ ઉમેરો અથવા પહેલા અમુક ટેક્સ્ટ પેસ્ટ કરો.",
-    "aiImportErrorNoTitle": "કાર્ડ જનરેટ કરતા પહેલા કોર્સ શીર્ષક ઉમેરો."
+    "aiImportErrorNoTitle": "કાર્ડ જનરેટ કરતા પહેલા કોર્સ શીર્ષક ઉમેરો.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 સેકન્ડ · બધા એક પૃષ્ઠ પર",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimum 3 şəkilə icazə verilir.",
     "aiImportErrorTotalTooLarge": "Ümumi yükləmə ölçüsü 25 MB-ı keçir.",
     "aiImportErrorNoContent": "Əvvəlcə bir fayl əlavə edin və ya bir neçə mətn yapışdırın.",
-    "aiImportErrorNoTitle": "Kartlar yaratmazdan əvvəl kursun başlığını əlavə edin."
+    "aiImportErrorNoTitle": "Kartlar yaratmazdan əvvəl kursun başlığını əlavə edin.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 saniyə · hamısı bir səhifədə",

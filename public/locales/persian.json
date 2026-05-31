@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "حداکثر 3 تصویر مجاز است.",
     "aiImportErrorTotalTooLarge": "حجم کل آپلود بیش از 25 مگابایت است.",
     "aiImportErrorNoContent": "ابتدا یک فایل اضافه کنید یا متنی را جایگذاری کنید.",
-    "aiImportErrorNoTitle": "قبل از ایجاد کارت، عنوان دوره را اضافه کنید."
+    "aiImportErrorNoTitle": "قبل از ایجاد کارت، عنوان دوره را اضافه کنید.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ثانیه · همه در یک صفحه",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Massimu ta' 3 immaġini permessi.",
     "aiImportErrorTotalTooLarge": "Id-daqs totali tal-upload jaqbeż il-25 MB.",
     "aiImportErrorNoContent": "Żid fajl jew waħħal xi test l-ewwel.",
-    "aiImportErrorNoTitle": "Żid titolu tal-kors qabel ma tiġġenera l-karti."
+    "aiImportErrorNoTitle": "Żid titolu tal-kors qabel ma tiġġenera l-karti.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sek · kollha fuq paġna waħda",

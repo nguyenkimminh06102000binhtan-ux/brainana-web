@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "O pọju awọn aworan 3 laaye.",
     "aiImportErrorTotalTooLarge": "Lapapọ iwọn ikojọpọ kọja 25 MB.",
     "aiImportErrorNoContent": "Ṣafikun faili kan tabi lẹẹmọ ọrọ diẹ ni akọkọ.",
-    "aiImportErrorNoTitle": "Ṣafikun akọle papa ṣaaju ṣiṣe awọn kaadi."
+    "aiImportErrorNoTitle": "Ṣafikun akọle papa ṣaaju ṣiṣe awọn kaadi.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~ 60 iṣẹju-aaya · gbogbo rẹ ni oju-iwe kan",

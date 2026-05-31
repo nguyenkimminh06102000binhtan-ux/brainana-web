@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "زیادہ سے زیادہ 3 تصاویر کی اجازت ہے۔",
     "aiImportErrorTotalTooLarge": "کل اپ لوڈ سائز 25 MB سے زیادہ ہے۔",
     "aiImportErrorNoContent": "ایک فائل شامل کریں یا پہلے کچھ متن چسپاں کریں۔",
-    "aiImportErrorNoTitle": "کارڈ بنانے سے پہلے کورس کا عنوان شامل کریں۔"
+    "aiImportErrorNoTitle": "کارڈ بنانے سے پہلے کورس کا عنوان شامل کریں۔",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 سیکنڈ · سب ایک صفحے پر",

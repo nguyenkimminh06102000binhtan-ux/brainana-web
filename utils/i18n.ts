@@ -217,6 +217,9 @@ export type Locale = {
     bulkGenerateRomanization: string;
     bulkGeneratingRomanization: string;
     bulkGenerateDoneRomanization: string;
+    bulkGenerateAudio: string;
+    bulkGeneratingAudio: string;
+    bulkGenerateDoneAudio: string;
   };
   start: {
     estimatedTime: string;

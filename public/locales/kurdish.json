@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Herî zêde 3 wêne destûr tên dayîn.",
     "aiImportErrorTotalTooLarge": "Tevahiya mezinahiya barkirinê ji 25 MB derbas dibe.",
     "aiImportErrorNoContent": "Pêşî pelek lê zêde bikin an nivîsê bixin.",
-    "aiImportErrorNoTitle": "Berî ku hûn kartan çêbikin sernavek qursê zêde bikin."
+    "aiImportErrorNoTitle": "Berî ku hûn kartan çêbikin sernavek qursê zêde bikin.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~ 60 saniye · hemî li ser yek rûpelê",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimal 3 gambar sing diidini.",
     "aiImportErrorTotalTooLarge": "Total ukuran unggahan ngluwihi 25 MB.",
     "aiImportErrorNoContent": "Tambah file utawa tempel sawetara teks dhisik.",
-    "aiImportErrorNoTitle": "Tambah judhul kursus sadurunge nggawe kertu."
+    "aiImportErrorNoTitle": "Tambah judhul kursus sadurunge nggawe kertu.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 detik · kabeh ing sak kaca",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "د اعظمي 3 عکسونو اجازه.",
     "aiImportErrorTotalTooLarge": "د ټول اپلوډ اندازه له 25 MB څخه زیاته ده.",
     "aiImportErrorNoContent": "یو فایل اضافه کړئ یا لومړی متن پیسټ کړئ.",
-    "aiImportErrorNoTitle": "د کارتونو جوړولو دمخه د کورس سرلیک اضافه کړئ."
+    "aiImportErrorNoTitle": "د کارتونو جوړولو دمخه د کورس سرلیک اضافه کړئ.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~ 60 ثانیې · ټول په یوه پاڼه کې",

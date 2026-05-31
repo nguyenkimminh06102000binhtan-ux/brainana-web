@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "이미지는 최대 3개까지 허용됩니다.",
     "aiImportErrorTotalTooLarge": "총 업로드 크기가 25MB를 초과합니다.",
     "aiImportErrorNoContent": "파일을 추가하거나 텍스트를 먼저 붙여넣기 하세요.",
-    "aiImportErrorNoTitle": "카드를 생성하기 전에 코스 제목을 추가하세요."
+    "aiImportErrorNoTitle": "카드를 생성하기 전에 코스 제목을 추가하세요.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60초 · 한 페이지에 모두 포함",

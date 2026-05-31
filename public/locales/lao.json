@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "ອະນຸຍາດສູງສຸດ 3 ຮູບ.",
     "aiImportErrorTotalTooLarge": "ຂະໜາດອັບໂຫລດທັງໝົດເກີນ 25 MB.",
     "aiImportErrorNoContent": "ເພີ່ມໄຟລ໌ ຫຼືວາງບາງຂໍ້ຄວາມກ່ອນ.",
-    "aiImportErrorNoTitle": "ເພີ່ມຫົວຂໍ້ຫຼັກສູດກ່ອນທີ່ຈະສ້າງບັດ."
+    "aiImportErrorNoTitle": "ເພີ່ມຫົວຂໍ້ຫຼັກສູດກ່ອນທີ່ຈະສ້າງບັດ.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ວິ · ທັງໝົດຢູ່ໃນໜ້າດຽວ",

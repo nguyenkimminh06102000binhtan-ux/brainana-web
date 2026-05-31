@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimum 3 imej dibenarkan.",
     "aiImportErrorTotalTooLarge": "Jumlah saiz muat naik melebihi 25 MB.",
     "aiImportErrorNoContent": "Tambahkan fail atau tampal beberapa teks dahulu.",
-    "aiImportErrorNoTitle": "Tambahkan tajuk kursus sebelum menjana kad."
+    "aiImportErrorNoTitle": "Tambahkan tajuk kursus sebelum menjana kad.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 saat · semua pada satu halaman",

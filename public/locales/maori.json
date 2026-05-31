@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Kia 3 nga whakaahua e whakaaetia ana.",
     "aiImportErrorTotalTooLarge": "Neke atu i te 25 MB te rahinga tukuake katoa.",
     "aiImportErrorNoContent": "Tāpirihia he konae, whakapiri ranei i etahi tuhinga i te tuatahi.",
-    "aiImportErrorNoTitle": "Tāpirihia he taitara akoranga i mua i te whakaputa kāri."
+    "aiImportErrorNoTitle": "Tāpirihia he taitara akoranga i mua i te whakaputa kāri.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 hēkona · kei te whārangi kotahi",

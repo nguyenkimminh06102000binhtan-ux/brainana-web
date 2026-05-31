@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "గరిష్టంగా 3 చిత్రాలు అనుమతించబడతాయి.",
     "aiImportErrorTotalTooLarge": "మొత్తం అప్‌లోడ్ పరిమాణం 25 MB మించిపోయింది.",
     "aiImportErrorNoContent": "ముందుగా ఫైల్‌ను జోడించండి లేదా కొంత వచనాన్ని అతికించండి.",
-    "aiImportErrorNoTitle": "కార్డ్‌లను రూపొందించే ముందు కోర్సు శీర్షికను జోడించండి."
+    "aiImportErrorNoTitle": "కార్డ్‌లను రూపొందించే ముందు కోర్సు శీర్షికను జోడించండి.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 సెకన్లు · అన్నీ ఒకే పేజీలో",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "कमाल 3 प्रतिमांना परवानगी आहे.",
     "aiImportErrorTotalTooLarge": "एकूण अपलोड आकार 25 MB पेक्षा जास्त आहे.",
     "aiImportErrorNoContent": "फाइल जोडा किंवा प्रथम काही मजकूर पेस्ट करा.",
-    "aiImportErrorNoTitle": "कार्ड तयार करण्यापूर्वी कोर्सचे शीर्षक जोडा."
+    "aiImportErrorNoTitle": "कार्ड तयार करण्यापूर्वी कोर्सचे शीर्षक जोडा.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 सेकंद · सर्व एका पृष्ठावर",

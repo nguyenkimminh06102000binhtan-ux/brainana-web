@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "الحد الأقصى 3 صور.",
     "aiImportErrorTotalTooLarge": "إجمالي حجم التحميل يتجاوز 25 ميجابايت.",
     "aiImportErrorNoContent": "أضف ملفاً أو الصق نصاً أولاً.",
-    "aiImportErrorNoTitle": "أضف عنوان الدورة قبل إنشاء البطاقات."
+    "aiImportErrorNoTitle": "أضف عنوان الدورة قبل إنشاء البطاقات.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ثانية · كل ذلك في صفحة واحدة",

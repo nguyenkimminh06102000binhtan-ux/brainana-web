@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "画像は最大3枚まで。",
     "aiImportErrorTotalTooLarge": "合計サイズが25MBを超えています。",
     "aiImportErrorNoContent": "ファイルを追加するかテキストを貼り付けてください。",
-    "aiImportErrorNoTitle": "カードを生成する前にコースタイトルを追加してください。"
+    "aiImportErrorNoTitle": "カードを生成する前にコースタイトルを追加してください。",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 秒 · すべてが 1 ページに",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "የሚፈቀደው ከፍተኛው 3 ምስሎች።",
     "aiImportErrorTotalTooLarge": "አጠቃላይ የሰቀላ መጠን ከ25 ሜባ ይበልጣል።",
     "aiImportErrorNoContent": "መጀመሪያ ፋይል ያክሉ ወይም የተወሰነ ጽሑፍ ይለጥፉ።",
-    "aiImportErrorNoTitle": "ካርዶችን ከማፍለቅዎ በፊት የኮርስ ርዕስ ያክሉ።"
+    "aiImportErrorNoTitle": "ካርዶችን ከማፍለቅዎ በፊት የኮርስ ርዕስ ያክሉ።",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ሰከንድ · ሁሉም በአንድ ገጽ ላይ",
