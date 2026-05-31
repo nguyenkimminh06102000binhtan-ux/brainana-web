@@ -18,6 +18,7 @@
     "avatar": {
       "profile": "El meu perfil",
       "settings": "Configuració",
+      "billing": "Billing",
       "logout": "Tanca la sessió"
     },
     "originLanguage": {

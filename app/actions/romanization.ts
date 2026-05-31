@@ -5,11 +5,12 @@ import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { ROMANIZATION_SYSTEMS } from "@/utils/romanization";
 import { aiComplete } from "@/utils/ai-client";
+import { deductQuota, getQuotaBalance, aiCharCost } from "@/utils/quota";
 
 export async function suggestRomanization(
   text: string,
   language: string,
-): Promise<{ romanization: string; system: string }> {
+): Promise<{ romanization: string; system: string; remainingChars?: number; quotaExhausted?: true }> {
   const system = ROMANIZATION_SYSTEMS[language]?.system ?? "Romanization";
 
   const cookieStore = await cookies();
@@ -30,9 +31,14 @@ export async function suggestRomanization(
 
   if (cached?.romanization) return { romanization: cached.romanization, system };
 
-  // Rate limit before calling Claude (30 AI calls/hour per user)
+  // Rate limit before calling AI (30 AI calls/hour per user)
   const { allowed } = await rateLimitUser(user.id, "romanization", { limit: 30, windowSeconds: 3600 });
   if (!allowed) return { romanization: "", system };
+
+  // Quota check — deduct chars
+  const cost = aiCharCost(normalized);
+  const ok = await deductQuota(supabase, user.id, "chars", cost, { feature: "romanization" });
+  if (!ok) return { romanization: "", system, quotaExhausted: true };
 
   // Cache miss — call AI
   try {
@@ -56,7 +62,8 @@ export async function suggestRomanization(
         .throwOnError();
     }
 
-    return { romanization, system };
+    const balance = await getQuotaBalance(supabase, user.id);
+    return { romanization, system, remainingChars: balance?.chars_balance };
   } catch (err) {
     console.error("[suggestRomanization] error:", err);
     return { romanization: "", system };

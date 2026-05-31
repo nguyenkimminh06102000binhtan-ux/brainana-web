@@ -18,6 +18,7 @@
     "avatar": {
       "profile": "我的个人资料",
       "settings": "设置",
+      "billing": "Billing",
       "logout": "退出"
     },
     "originLanguage": {

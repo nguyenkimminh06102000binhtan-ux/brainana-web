@@ -18,6 +18,7 @@
     "avatar": {
       "profile": "Мой профиль",
       "settings": "Настройки",
+      "billing": "Billing",
       "logout": "Выйти"
     },
     "originLanguage": {

@@ -18,7 +18,7 @@ export default async function LearnPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: course }, { data: profile }] = await Promise.all([
+  const [{ data: course }, { data: profile }, { data: sub }] = await Promise.all([
     supabase
       .from("courses")
       .select("id, title, slug, source_language, target_language, category, level")
@@ -28,6 +28,11 @@ export default async function LearnPage({
       .from("profiles")
       .select("active_origin_language")
       .eq("id", user.id)
+      .single(),
+    supabase
+      .from("user_subscriptions")
+      .select("tutor_sessions_balance")
+      .eq("user_id", user.id)
       .single(),
   ]);
 
@@ -72,6 +77,7 @@ export default async function LearnPage({
       level={(course.level as string | null) ?? null}
       sections={sections}
       labels={loc.learn}
+      initialSessionsBalance={sub?.tutor_sessions_balance ?? 0}
     />
   );
 }

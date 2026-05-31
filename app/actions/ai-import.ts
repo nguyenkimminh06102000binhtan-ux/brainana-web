@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { aiComplete } from "@/utils/ai-client";
+import { deductQuota, getQuotaBalance, aiCharCost } from "@/utils/quota";
 import type Anthropic from "@anthropic-ai/sdk";
 
 const BLOCKED_EXTENSIONS = new Set([
@@ -29,7 +30,7 @@ export type AiImportCard = {
 };
 
 export type AiImportResult =
-  | { cards: AiImportCard[]; charCount: number }
+  | { cards: AiImportCard[]; charCount: number; remainingChars?: number }
   | { error: string };
 
 export async function generateCardsWithAI(formData: FormData): Promise<AiImportResult> {
@@ -113,6 +114,12 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
     return { error: "No content to process" };
   }
 
+  // Quota check — deduct chars based on content size (capped at 100K)
+  const cost = aiCharCost(textContent.trim().slice(0, 100_000));
+  const ok = await deductQuota(supabase, user.id, "chars", cost, { feature: "ai_import" });
+  if (!ok) return { error: "Insufficient character balance. Please top up to continue." };
+  const balanceAfterDeduct = await getQuotaBalance(supabase, user.id);
+
   const styleDesc = CARD_STYLE_DESCRIPTIONS[cardStyle] ?? CARD_STYLE_DESCRIPTIONS.vocabulary!;
 
   const promptLines = [
@@ -179,7 +186,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
       }));
 
     if (cards.length === 0) return { error: "AI returned no valid cards" };
-    return { cards, charCount: textContent.trim().length };
+    return { cards, charCount: textContent.trim().length, remainingChars: balanceAfterDeduct?.chars_balance };
   } catch (err) {
     console.error("[ai-import] Claude error:", err);
     return { error: (err as Error).message ?? "Unknown error" };
