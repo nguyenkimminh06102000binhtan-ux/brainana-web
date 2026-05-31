@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
-import { aiComplete } from "@/utils/ai-client";
+import { aiComplete, aiExtractTextFromImage } from "@/utils/ai-client";
 import { deductQuota, getQuotaBalance, aiCharCost } from "@/utils/quota";
 import type Anthropic from "@anthropic-ai/sdk";
 
@@ -82,16 +82,17 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
 
     try {
       if (IMAGE_EXTENSIONS.has(ext)) {
-        const { createWorker } = await import("tesseract.js");
-        const worker = await createWorker("eng");
-        const { data } = await worker.recognize(bytes);
-        await worker.terminate();
-        textContent += "\n" + data.text;
+        const mediaType = (ext === "jpg" || ext === "jpeg") ? "image/jpeg" as const
+          : ext === "png"  ? "image/png"  as const
+          : ext === "gif"  ? "image/gif"  as const
+          : "image/webp"   as const;
+        textContent += "\n" + await aiExtractTextFromImage(bytes, mediaType);
       } else if (ext === "pdf") {
         const { PDFParse } = await import("pdf-parse");
         const parser = new PDFParse({ data: bytes });
-        const data = await parser.getText();
-        textContent += "\n" + data.text;
+        const result = await parser.getText();
+        await parser.destroy();
+        textContent += "\n" + result.text;
       } else if (ext === "docx") {
         const mammoth = (await import("mammoth")).default;
         const { value } = await mammoth.extractRawText({ buffer: bytes });

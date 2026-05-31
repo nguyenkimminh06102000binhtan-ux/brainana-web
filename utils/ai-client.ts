@@ -11,6 +11,9 @@ export const PROVIDER: "anthropic" | "mistral" = "mistral";
 const MODELS = {
   anthropic: "claude-haiku-4-5-20251001",
   mistral:   "mistral-medium-latest",
+  // Vision models (used for image OCR only)
+  anthropicVision: "claude-haiku-4-5-20251001",
+  mistralVision:   "pixtral-large-latest",
 } as const;
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -142,4 +145,52 @@ export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string>
     if (delta) { full += delta; yield delta; }
   }
   console.log(`[AI] stream response (${full.length} chars): ${full.slice(0, 500)}${full.length > 500 ? "…" : ""}`);
+}
+
+// ── Vision: extract text from an image (replaces Tesseract) ──────────────────
+type ImageMediaType = "image/jpeg" | "image/png" | "image/gif" | "image/webp";
+
+export async function aiExtractTextFromImage(
+  imageBytes: Buffer,
+  mediaType: ImageMediaType,
+): Promise<string> {
+  const base64 = imageBytes.toString("base64");
+  const prompt = "Extract all text from this image exactly as it appears. Return only the extracted text with no additional commentary.";
+
+  if (PROVIDER === "anthropic") {
+    const Anthropic = (await import("@anthropic-ai/sdk")).default;
+    const client = new Anthropic();
+    const msg = await client.messages.create({
+      model:      MODELS.anthropicVision,
+      max_tokens: 4096,
+      messages: [{
+        role: "user",
+        content: [
+          { type: "image", source: { type: "base64", media_type: mediaType, data: base64 } },
+          { type: "text", text: prompt },
+        ],
+      }],
+    });
+    const block = msg.content.find((b) => b.type === "text");
+    return block?.type === "text" ? block.text : "";
+  }
+
+  // Mistral via Pixtral vision model
+  const OpenAI = (await import("openai")).default;
+  const client = new OpenAI({
+    apiKey:  process.env.MISTRAL_API_KEY!,
+    baseURL: "https://api.mistral.ai/v1",
+  });
+  const completion = await client.chat.completions.create({
+    model:      MODELS.mistralVision,
+    max_tokens: 4096,
+    messages: [{
+      role: "user",
+      content: [
+        { type: "image_url", image_url: { url: `data:${mediaType};base64,${base64}` } },
+        { type: "text", text: prompt },
+      ],
+    }],
+  });
+  return completion.choices[0]?.message?.content ?? "";
 }

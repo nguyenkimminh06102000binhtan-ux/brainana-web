@@ -7,7 +7,7 @@ const devNgrokOrigins =
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: devNgrokOrigins,
-  serverExternalPackages: ["tesseract.js", "pdf-parse"],
+  serverExternalPackages: ["pdf-parse"],
   experimental: {
     serverActions: {
       allowedOrigins: devNgrokOrigins,

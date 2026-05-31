@@ -1,23 +1,28 @@
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { aiExtractTextFromImage } from "@/utils/ai-client";
 
 const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "gif", "webp"]);
 const TEMP_BUCKET = "temp-uploads";
 
+function toImageMediaType(ext: string) {
+  if (ext === "jpg" || ext === "jpeg") return "image/jpeg" as const;
+  if (ext === "png")  return "image/png"  as const;
+  if (ext === "gif")  return "image/gif"  as const;
+  return "image/webp" as const;
+}
+
 async function extractText(bytes: Buffer, ext: string): Promise<string> {
   if (IMAGE_EXTENSIONS.has(ext)) {
-    const { createWorker } = await import("tesseract.js");
-    const worker = await createWorker("eng");
-    const { data } = await worker.recognize(bytes);
-    await worker.terminate();
-    return data.text;
+    return aiExtractTextFromImage(bytes, toImageMediaType(ext));
   }
 
   if (ext === "pdf") {
     const { PDFParse } = await import("pdf-parse");
     const parser = new PDFParse({ data: bytes });
     const result = await parser.getText();
+    await parser.destroy();
     const charCount = result.text.trim().length;
     // Scanned PDFs have no text layer — detect by chars-per-byte ratio.
     // A real text PDF yields at least 1 char per 1,000 bytes.
