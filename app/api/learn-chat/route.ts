@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { getCategoryForItem, CATEGORY_TREE } from "@/app/constants/categories";
 import { aiStream } from "@/utils/ai-client";
+import { deductQuota, getQuotaBalance } from "@/utils/quota";
 
 type LearnCard = {
   id: string;
@@ -174,8 +175,17 @@ export async function POST(req: NextRequest) {
     return new Response("No cards provided", { status: 400 });
   }
 
-  // Hard cap at 100 cards regardless of what the client sends
-  const cappedCards = cards.slice(0, 100);
+  // Deduct 1 session quota only when starting a new conversation
+  let remainingSessions: number | undefined;
+  if (!messages || messages.length === 0) {
+    const ok = await deductQuota(supabase, user.id, "tutor_sessions", 1, { feature: "ai_tutor" });
+    if (!ok) return new Response("Insufficient tutor session balance", { status: 402 });
+    const balance = await getQuotaBalance(supabase, user.id);
+    remainingSessions = balance?.tutor_sessions_balance;
+  }
+
+  // Hard cap at 50 cards regardless of what the client sends
+  const cappedCards = cards.slice(0, 50);
 
   const systemPrompt = buildSystemPrompt(cappedCards, courseLanguages ?? {}, category ?? null, level ?? null);
 
@@ -199,7 +209,9 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  return new Response(readable, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
-  });
+  const headers: Record<string, string> = { "Content-Type": "text/plain; charset=utf-8" };
+  if (remainingSessions !== undefined) {
+    headers["X-Remaining-Sessions"] = String(remainingSessions);
+  }
+  return new Response(readable, { headers });
 }

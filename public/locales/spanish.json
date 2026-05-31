@@ -18,6 +18,7 @@
     "avatar": {
       "profile": "mi perfil",
       "settings": "Ajustes",
+      "billing": "Billing",
       "logout": "Finalizar la sesión"
     },
     "originLanguage": {

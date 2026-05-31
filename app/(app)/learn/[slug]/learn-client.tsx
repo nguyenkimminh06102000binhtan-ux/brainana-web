@@ -7,6 +7,7 @@ import ChatMessage from "./chat-message";
 import MathToolbar from "./math-toolbar";
 import { t } from "@/utils/t";
 import type { Locale } from "@/utils/i18n";
+import { showQuotaToast } from "@/components/quota-toast";
 
 export type LearnCard = {
   id: string;
@@ -33,8 +34,9 @@ type CardSelectionMode = "quick" | "manual";
 
 const EVAL_RE = /%%EVAL:[^%]+%%\n?/g;
 const EVAL_PARSE_RE = /%%EVAL:([^:]+):(correct|incorrect)%%/g;
-const MAX_CARDS = 100;
-const QUICK_PICK_OPTIONS = [10, 25, 50, 100];
+const MAX_CARDS = 50;
+const MAX_MESSAGES = 50;
+const QUICK_PICK_OPTIONS = [10, 25, 50];
 
 function stripEvals(text: string): string {
   return text.replace(EVAL_RE, "").trim();
@@ -69,6 +71,7 @@ interface Props {
   level: string | null;
   sections: LearnSection[];
   labels: Locale["learn"];
+  initialSessionsBalance: number;
 }
 
 export default function LearnClient({
@@ -81,8 +84,10 @@ export default function LearnClient({
   level,
   sections,
   labels,
+  initialSessionsBalance,
 }: Props) {
   const [stage, setStage] = useState<"setup" | "chat" | "done">("setup");
+  const [sessionsBalance, setSessionsBalance] = useState(initialSessionsBalance);
   const [selectedSectionIds, setSelectedSectionIds] = useState<Set<string>>(new Set());
   const [difficulty, setDifficulty] = useState<string>(level ?? "any");
   const [trackProgress, setTrackProgress] = useState(false);
@@ -177,8 +182,21 @@ export default function LearnClient({
       });
 
       if (!res.ok || !res.body) {
+        if (res.status === 402) {
+          setSessionsBalance(0);
+          setStage("setup");
+        }
         setIsStreaming(false);
         return;
+      }
+
+      if (apiMessages.length === 0) {
+        const remaining = res.headers.get("X-Remaining-Sessions");
+        if (remaining !== null) {
+          const n = Number(remaining);
+          setSessionsBalance(n);
+          showQuotaToast("sessions", n);
+        }
       }
 
       const reader = res.body.getReader();
@@ -228,7 +246,7 @@ export default function LearnClient({
 
   async function handleSend() {
     const text = input.trim();
-    if (!text || isStreaming) return;
+    if (!text || isStreaming || messages.length >= MAX_MESSAGES) return;
     setInput("");
     const userMsg: Message = { role: "user", content: text, display: text };
     const history = [...messages, userMsg];
@@ -577,14 +595,27 @@ export default function LearnClient({
 
           {/* Actions */}
           <div className="flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={handleStart}
-              disabled={!canStart}
-              className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {labels.startSession}
-            </button>
+            {sessionsBalance === 0 ? (
+              <div className="rounded-lg border-2 border-ink/10 bg-ink/5 px-4 py-3 text-center">
+                <p className="font-manrope text-sm font-[700] text-ink">No AI sessions remaining</p>
+                <p className="mt-0.5 font-manrope text-xs text-ink-3">Upgrade your plan to start a new session</p>
+                <Link
+                  href="/billing/upgrade"
+                  className="mt-3 inline-block rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
+                >
+                  View plans
+                </Link>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleStart}
+                disabled={!canStart}
+                className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {labels.startSession}
+              </button>
+            )}
             <Link
               href={`/c/${courseSlug}`}
               className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink"
@@ -612,17 +643,29 @@ export default function LearnClient({
           </p>
         )}
         <div className="mx-auto mt-8 flex max-w-xs flex-col gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setStage("setup");
-              setMessages([]);
-              setEvals([]);
-            }}
-            className="w-full rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
-          >
-            {labels.studyAgain}
-          </button>
+          {sessionsBalance === 0 ? (
+            <>
+              <p className="font-manrope text-sm text-ink-3">No sessions remaining — upgrade to keep going</p>
+              <Link
+                href="/billing/upgrade"
+                className="w-full rounded-full bg-orange px-4 py-3 text-center font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
+              >
+                View plans
+              </Link>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setStage("setup");
+                setMessages([]);
+                setEvals([]);
+              }}
+              className="w-full rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
+            >
+              {labels.studyAgain}
+            </button>
+          )}
           <Link
             href={`/c/${courseSlug}`}
             className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink"
@@ -678,32 +721,48 @@ export default function LearnClient({
 
       {/* Input */}
       <div className="pt-2">
-        <MathToolbar onInsert={insertSymbol} />
-        <div className="flex gap-2">
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
-            disabled={isStreaming}
-            placeholder={labels.inputPlaceholder}
-            rows={1}
-            className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
-          />
-          <button
-            type="button"
-            onClick={handleSend}
-            disabled={isStreaming || !input.trim()}
-            className="rounded-full bg-orange px-5 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-40"
-          >
-            {labels.send}
-          </button>
-        </div>
+        {messages.length >= MAX_MESSAGES ? (
+          <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
+            <span className="font-manrope text-sm text-ink-3">Message limit reached — wrap up your session</span>
+            <button
+              type="button"
+              onClick={handleEnd}
+              disabled={isSaving}
+              className="ml-3 shrink-0 rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 disabled:opacity-50"
+            >
+              {isSaving ? labels.saving : labels.endSession}
+            </button>
+          </div>
+        ) : (
+          <>
+            <MathToolbar onInsert={insertSymbol} />
+            <div className="flex gap-2">
+              <textarea
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                  }
+                }}
+                disabled={isStreaming}
+                placeholder={labels.inputPlaceholder}
+                rows={1}
+                className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
+              />
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={isStreaming || !input.trim()}
+                className="rounded-full bg-orange px-5 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-40"
+              >
+                {labels.send}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

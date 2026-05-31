@@ -4,11 +4,12 @@ import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { TTS_VOICES } from "@/utils/tts";
+import { deductQuota, getQuotaBalance, ttsCharCost } from "@/utils/quota";
 
 export async function generateTTSAudio(
   text: string,
   language: string,
-): Promise<{ audioBase64: string }> {
+): Promise<{ audioBase64: string; remainingChars?: number; quotaExhausted?: true }> {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
@@ -25,6 +26,11 @@ export async function generateTTSAudio(
 
   const { allowed } = await rateLimitUser(user.id, "tts", { limit: 100, windowSeconds: 3600 });
   if (!allowed) return { audioBase64: "" };
+
+  // Quota check — deduct chars
+  const cost = ttsCharCost(normalized);
+  const ok = await deductQuota(supabase, user.id, "chars", cost, { feature: "audio" });
+  if (!ok) return { audioBase64: "", quotaExhausted: true };
 
   try {
     const res = await fetch(
@@ -46,7 +52,8 @@ export async function generateTTSAudio(
     }
 
     const data = await res.json();
-    return { audioBase64: data.audioContent ?? "" };
+    const balance = await getQuotaBalance(supabase, user.id);
+    return { audioBase64: data.audioContent ?? "", remainingChars: balance?.chars_balance };
   } catch (err) {
     console.error("[generateTTSAudio] error:", err);
     return { audioBase64: "" };

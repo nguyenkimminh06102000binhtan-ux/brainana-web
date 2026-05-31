@@ -9,14 +9,19 @@ import { getLocale } from "@/utils/i18n";
 export default async function CreatePage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
-  const { data: profile } = user
-    ? await supabase
-        .from("profiles")
-        .select("active_origin_language")
-        .eq("id", user.id)
-        .single()
-    : { data: null };
-  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+
+  const [profileResult, subResult] = await Promise.all([
+    user
+      ? supabase.from("profiles").select("active_origin_language").eq("id", user.id).single()
+      : Promise.resolve({ data: null }),
+    user
+      ? supabase.from("user_subscriptions").select("plan, chars_balance").eq("user_id", user.id).single()
+      : Promise.resolve({ data: null }),
+  ]);
+
+  const loc = getLocale((profileResult.data?.active_origin_language as string | null) ?? null);
+  const plan = (subResult.data?.plan as string | null) ?? "free";
+  const initialCharsBalance = (subResult.data?.chars_balance as number | null) ?? 0;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-8">
@@ -31,6 +36,8 @@ export default async function CreatePage() {
       </div>
 
       <CreateCourseForm
+        plan={plan}
+        initialCharsBalance={initialCharsBalance}
         labels={loc.createEdit}
         categories={loc.categories}
         levels={{

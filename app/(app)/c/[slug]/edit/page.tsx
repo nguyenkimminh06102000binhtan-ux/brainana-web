@@ -27,17 +27,11 @@ export default async function EditCoursePage({
   if (!course) notFound();
   if (course.creator_id !== user.id) redirect(`/c/${slug}`);
 
-  const { data: sections } = await supabase
-    .from("sections")
-    .select("id, title, description, position")
-    .eq("course_id", course.id)
-    .order("position");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("active_origin_language")
-    .eq("id", user.id)
-    .single();
+  const [{ data: sections }, { data: profile }, { data: sub }] = await Promise.all([
+    supabase.from("sections").select("id, title, description, position").eq("course_id", course.id).order("position"),
+    supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
+    supabase.from("user_subscriptions").select("plan, chars_balance").eq("user_id", user.id).single(),
+  ]);
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
 
   const { data: items } = await supabase
@@ -78,6 +72,8 @@ export default async function EditCoursePage({
       <EditCourseForm
         course={course}
         sections={sectionsWithItems}
+        plan={(sub?.plan as string | null) ?? "free"}
+        initialCharsBalance={(sub?.chars_balance as number | null) ?? 0}
         labels={loc.createEdit}
         categories={loc.categories}
         levels={{

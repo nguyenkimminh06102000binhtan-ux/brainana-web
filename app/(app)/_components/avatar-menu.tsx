@@ -10,7 +10,7 @@ interface AvatarMenuProps {
   avatarUrl: string | null;
   initial: string;
   username: string;
-  labels: { profile: string; settings: string; logout: string };
+  labels: { profile: string; settings: string; billing: string; logout: string };
 }
 
 export default function AvatarMenu({ avatarUrl, initial, username, labels }: AvatarMenuProps) {
@@ -94,6 +94,14 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
             className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
           >
             <Icon name="settings" className="h-4 w-4" /> {labels.settings}
+          </Link>
+          <Link
+            href="/billing"
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
+          >
+            <Icon name="creditCard" className="h-4 w-4" /> {labels.billing}
           </Link>
           <div className="mx-4 border-t border-ink/10" role="separator" />
           <form action={logout}>

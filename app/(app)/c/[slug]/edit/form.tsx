@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import MathToolbar from "@/app/(app)/_components/math-toolbar";
 import Link from "next/link";
 import { updateCourse } from "./actions";
@@ -13,6 +14,8 @@ import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
 import { getTTSVoice } from "@/utils/tts";
 import { generateTTSAudio } from "@/app/actions/tts";
+import { showQuotaToast } from "@/components/quota-toast";
+import { toast } from "sonner";
 import AiImportModal from "@/app/(app)/create/ai-import-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -261,8 +264,9 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRemove, onUpload, onClearUrl, onFocusInput }: {
+function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onRemove, onUpload, onClearUrl, onFocusInput }: {
   item: Item; index: number; isOnly: boolean; targetLanguage: string;
+  plan: string; charsExhausted: boolean; onQuotaExhausted: () => void;
   labels: CreateEditLabels;
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
@@ -270,17 +274,26 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
   onClearUrl: (field: "imagePath" | "backAudioPath") => void;
   onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
+  const router = useRouter();
   const [suggesting, setSuggesting] = useState(false);
   const [generatingAudio, setGeneratingAudio] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
   const ttsVoice = getTTSVoice(targetLanguage);
 
+  const billingHref = "/billing/upgrade";
+  const upsellLabel = plan === "free" ? "Upgrade your plan to unlock" : "Top up your balance to continue";
+
   async function handleAutoRomanization() {
     if (!item.back.trim() || !roSystem) return;
     setSuggesting(true);
     try {
-      const { romanization } = await suggestRomanization(item.back, targetLanguage);
+      const { romanization, remainingChars, quotaExhausted } = await suggestRomanization(item.back, targetLanguage);
+      if (quotaExhausted) { onQuotaExhausted(); return; }
       if (romanization) onUpdate("romanization", romanization);
+      if (remainingChars !== undefined) {
+        if (remainingChars === 0) onQuotaExhausted();
+        showQuotaToast("chars", remainingChars);
+      }
     } finally {
       setSuggesting(false);
     }
@@ -290,13 +303,18 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
     if (!item.back.trim() || !ttsVoice) return;
     setGeneratingAudio(true);
     try {
-      const { audioBase64 } = await generateTTSAudio(item.back, targetLanguage);
+      const { audioBase64, remainingChars, quotaExhausted } = await generateTTSAudio(item.back, targetLanguage);
+      if (quotaExhausted) { onQuotaExhausted(); return; }
       if (!audioBase64) return;
       const bytes = atob(audioBase64);
       const arr = new Uint8Array(bytes.length);
       for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
       const file = new File([arr], "tts.mp3", { type: "audio/mpeg" });
       onUpload("backAudio", file);
+      if (remainingChars !== undefined) {
+        if (remainingChars === 0) onQuotaExhausted();
+        showQuotaToast("chars", remainingChars);
+      }
     } finally {
       setGeneratingAudio(false);
     }
@@ -336,14 +354,24 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
                     uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
                     onFile={(f) => onUpload("backAudio", f)} />
                   {ttsVoice && (
-                    <button
-                      type="button"
-                      onClick={handleAutoAudio}
-                      disabled={generatingAudio || !item.back.trim() || item.uploads.backAudio.uploading}
-                      className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      {generatingAudio ? labels.generating : labels.autoGenerate}
-                    </button>
+                    charsExhausted ? (
+                      <div className="group relative shrink-0">
+                        <button type="button" onClick={() => router.push(billingHref)}
+                          className="rounded-md bg-orange/10 px-3 py-1.5 font-manrope text-xs font-[800] text-orange-text shadow-hard-sm transition hover:bg-orange/20">
+                          🔒 {labels.autoGenerate}
+                        </button>
+                        <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-44 -translate-x-1/2 rounded-lg bg-ink px-3 py-2 text-center font-manrope text-xs text-paper shadow-lg group-hover:block">
+                          {upsellLabel}
+                          <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-ink" />
+                        </div>
+                      </div>
+                    ) : (
+                      <button type="button" onClick={handleAutoAudio}
+                        disabled={generatingAudio || !item.back.trim() || item.uploads.backAudio.uploading}
+                        className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50">
+                        {generatingAudio ? labels.generating : labels.autoGenerate}
+                      </button>
+                    )
                   )}
                 </div>}
           </div>
@@ -360,14 +388,24 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
               placeholder={roSystem.placeholder}
               className="min-w-0 flex-1 bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3"
             />
-            <button
-              type="button"
-              onClick={handleAutoRomanization}
-              disabled={suggesting || !item.back.trim()}
-              className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {suggesting ? labels.generating : labels.autoGenerate}
-            </button>
+            {charsExhausted ? (
+              <div className="group relative shrink-0">
+                <button type="button" onClick={() => router.push(billingHref)}
+                  className="rounded-md bg-orange/10 px-3 py-1.5 font-manrope text-xs font-[800] text-orange-text shadow-hard-sm transition hover:bg-orange/20">
+                  🔒 {labels.autoGenerate}
+                </button>
+                <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-44 -translate-x-1/2 rounded-lg bg-ink px-3 py-2 text-center font-manrope text-xs text-paper shadow-lg group-hover:block">
+                  {upsellLabel}
+                  <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-ink" />
+                </div>
+              </div>
+            ) : (
+              <button type="button" onClick={handleAutoRomanization}
+                disabled={suggesting || !item.back.trim()}
+                className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50">
+                {suggesting ? labels.generating : labels.autoGenerate}
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -388,12 +426,16 @@ const COLLAPSE_THRESHOLD = 5;
 export default function EditCourseForm({
   course,
   sections: dbSections,
+  plan,
+  initialCharsBalance,
   labels,
   categories,
   levels,
 }: {
   course: Course;
   sections: DbSection[];
+  plan: string;
+  initialCharsBalance: number;
   labels: CreateEditLabels;
   categories: Record<string, string>;
   levels: LevelLabels;
@@ -415,6 +457,7 @@ export default function EditCourseForm({
   const [selectedTargetLanguage, setSelectedTargetLanguage] = useState(course.target_language ?? "Vietnamese");
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState(course.source_language ?? "English (US)");
   const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
+  const [charsExhausted, setCharsExhausted] = useState(initialCharsBalance <= 0);
   const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
   const [bulkAudioStatuses, setBulkAudioStatuses] = useState<Map<number, string>>(new Map());
   const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
@@ -482,20 +525,33 @@ export default function EditCourseForm({
     if (missing.length === 0) return;
     const BATCH = 10;
     let done = 0;
+    let successCount = 0;
+    let minRemaining: number | undefined;
+    let quotaRanOut = false;
     setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done: 0, total: missing.length })));
     for (let i = 0; i < missing.length; i += BATCH) {
+      if (quotaRanOut) break;
       const batch = missing.slice(i, i + BATCH);
       await Promise.all(
         batch.map(async ({ itemId, back }) => {
-          const { romanization } = await suggestRomanization(back, selectedTargetLanguage);
-          if (romanization) updateItem(sectionId, itemId, "romanization", romanization);
+          const { romanization, remainingChars, quotaExhausted } = await suggestRomanization(back, selectedTargetLanguage);
+          if (quotaExhausted) { quotaRanOut = true; return; }
+          if (romanization) { updateItem(sectionId, itemId, "romanization", romanization); successCount++; }
+          if (remainingChars !== undefined) {
+            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+          }
         })
       );
       done += batch.length;
       setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done, total: missing.length })));
     }
-    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneRomanization, { count: missing.length })));
+    setBulkStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingRomanization, { done, total: missing.length }) : t(labels.bulkGenerateDoneRomanization, { count: missing.length })));
     setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+    if (quotaRanOut) {
+      setCharsExhausted(true);
+      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
+      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+    } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
   async function handleSectionBulkGenerateAudio(sectionId: number) {
@@ -508,25 +564,39 @@ export default function EditCourseForm({
     if (missing.length === 0) return;
     const BATCH = 5;
     let done = 0;
+    let successCount = 0;
+    let minRemaining: number | undefined;
+    let quotaRanOut = false;
     setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done: 0, total: missing.length })));
     for (let i = 0; i < missing.length; i += BATCH) {
+      if (quotaRanOut) break;
       const batch = missing.slice(i, i + BATCH);
       await Promise.all(
         batch.map(async ({ itemId, back }) => {
-          const { audioBase64 } = await generateTTSAudio(back, selectedTargetLanguage);
+          const { audioBase64, remainingChars, quotaExhausted } = await generateTTSAudio(back, selectedTargetLanguage);
+          if (quotaExhausted) { quotaRanOut = true; return; }
           if (!audioBase64) return;
           const bytes = atob(audioBase64);
           const arr = new Uint8Array(bytes.length);
           for (let j = 0; j < bytes.length; j++) arr[j] = bytes.charCodeAt(j);
           const file = new File([arr], "tts.mp3", { type: "audio/mpeg" });
           await handleUpload(sectionId, itemId, "backAudio", file);
+          successCount++;
+          if (remainingChars !== undefined) {
+            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+          }
         })
       );
       done += batch.length;
       setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done, total: missing.length })));
     }
-    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneAudio, { count: missing.length })));
+    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingAudio, { done, total: missing.length }) : t(labels.bulkGenerateDoneAudio, { count: missing.length })));
     setTimeout(() => setBulkAudioStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+    if (quotaRanOut) {
+      setCharsExhausted(true);
+      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
+      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+    } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
@@ -663,16 +733,38 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.visibility)}
-              <select
-                name="visibility"
-                value={selectedVisibility}
-                onChange={(e) => setSelectedVisibility(e.target.value)}
-                className={selectCls}
-              >
-                <option value="public">{labels.public}</option>
-                <option value="unlisted">{labels.unlisted}</option>
-                <option value="private">{labels.private}</option>
-              </select>
+              <input type="hidden" name="visibility" value={selectedVisibility} />
+              <div className="flex gap-2">
+                {([
+                  { value: "public",  icon: "🌍", desc: labels.publicDesc  ?? "Anyone can find and study this course" },
+                  { value: "private", icon: "🔒", desc: labels.privateDesc ?? "Only you and invited members" },
+                ] as { value: string; icon: string; desc: string }[]).map(({ value, icon, desc }) => {
+                  const isVisibilityLocked = value === "private" && course.visibility === "public";
+                  const active = selectedVisibility === value;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => { if (!isVisibilityLocked) setSelectedVisibility(value); }}
+                      disabled={isVisibilityLocked}
+                      title={isVisibilityLocked ? "Public courses cannot be made private" : undefined}
+                      className={`flex flex-1 items-start gap-2 rounded-lg border-2 px-3 py-2.5 text-left transition ${
+                        isVisibilityLocked ? "cursor-not-allowed border-ink/10 bg-ink/5 opacity-50" :
+                        active ? "border-orange bg-orange/10" : "border-ink/10 bg-paper-2 hover:border-ink/30"
+                      }`}
+                    >
+                      <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition ${active && !isVisibilityLocked ? "border-orange" : "border-ink/30"}`}>
+                        {active && !isVisibilityLocked && <span className="h-2 w-2 rounded-full bg-orange" />}
+                      </span>
+                      <span>
+                        <span className={`block font-manrope text-sm font-[700] ${active && !isVisibilityLocked ? "text-orange" : "text-ink"}`}>{icon} {value.charAt(0).toUpperCase() + value.slice(1)}</span>
+                        <span className="block font-manrope text-xs text-ink-3">{desc}</span>
+                        {isVisibilityLocked && <span className="mt-1 block font-manrope text-[10px] text-ink-3">Cannot revert a public course</span>}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <div>
               {lbl(labels.questionLanguage)}
@@ -780,7 +872,9 @@ export default function EditCourseForm({
                 <div className="flex flex-col gap-3">
                   {section.items.map((item, iIdx) => (
                     <ItemCard key={item.id} item={item} index={iIdx} isOnly={section.items.length === 1}
-                      targetLanguage={selectedTargetLanguage} labels={labels}
+                      targetLanguage={selectedTargetLanguage} plan={plan}
+                      charsExhausted={charsExhausted} onQuotaExhausted={() => setCharsExhausted(true)}
+                      labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}

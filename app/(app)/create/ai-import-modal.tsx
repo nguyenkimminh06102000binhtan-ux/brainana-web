@@ -5,6 +5,7 @@ import { generateCardsWithAI, type AiImportCard } from "@/app/actions/ai-import"
 import { compressImage } from "@/utils/compress-image";
 import { createClient } from "@/utils/supabase/client";
 import { t } from "@/utils/t";
+import { showQuotaToast } from "@/components/quota-toast";
 
 const TEMP_BUCKET = "temp-uploads";
 
@@ -276,6 +277,7 @@ export default function AiImportModal({
     }
 
     setProcessedCharCount(result.charCount);
+    if (result.remainingChars !== undefined) showQuotaToast("chars", result.remainingChars);
     onImport(result.cards);
     onClose();
   }

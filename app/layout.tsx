@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "katex/dist/katex.min.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Brainana",
@@ -32,6 +33,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Toaster richColors position="bottom-right" />
       </body>
     </html>
   );

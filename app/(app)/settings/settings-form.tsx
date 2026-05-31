@@ -134,9 +134,17 @@ export default function SettingsForm({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Account center</p>
-        <h1 className="mt-2 font-fredoka text-4xl font-[700] tracking-tight text-ink">Settings</h1>
+      <div className="mb-8 flex items-end justify-between">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Account center</p>
+          <h1 className="mt-2 font-fredoka text-4xl font-[700] tracking-tight text-ink">Settings</h1>
+        </div>
+        <a
+          href="/billing"
+          className="flex items-center gap-2 rounded-full border-2 border-ink/20 px-4 py-2 font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/40 hover:text-ink"
+        >
+          💳 Billing &amp; Usage
+        </a>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">

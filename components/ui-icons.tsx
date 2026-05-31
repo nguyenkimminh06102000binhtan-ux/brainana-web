@@ -1,6 +1,7 @@
 import type { ReactNode, SVGProps } from "react";
 
 type IconName =
+  | "creditCard"
   | "arrowRight"
   | "bookOpen"
   | "check"
@@ -24,6 +25,7 @@ type IconName =
   | "x";
 
 const paths: Record<IconName, ReactNode> = {
+  creditCard: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></>,
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   bookOpen: <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7a3 3 0 0 0-3 3V5.5Zm0 0V21M20 3v15" />,
   check: <path d="m5 12 4 4L19 6" />,
