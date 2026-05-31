@@ -1,5 +1,5 @@
-export async function compressImage(file: File, maxBytes: number): Promise<File> {
-  if (file.size <= maxBytes) return file;
+export async function compressImage(file: File, maxBytes: number, maxDim?: number): Promise<File> {
+  if (file.size <= maxBytes && !maxDim) return file;
 
   return new Promise((resolve, reject) => {
     const objectUrl = URL.createObjectURL(file);
@@ -7,12 +7,19 @@ export async function compressImage(file: File, maxBytes: number): Promise<File>
 
     img.onload = () => {
       URL.revokeObjectURL(objectUrl);
+
+      let { naturalWidth: w, naturalHeight: h } = img;
+      if (maxDim && (w > maxDim || h > maxDim)) {
+        if (w >= h) { h = Math.round((h / w) * maxDim); w = maxDim; }
+        else        { w = Math.round((w / h) * maxDim); h = maxDim; }
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = w;
+      canvas.height = h;
       const ctx = canvas.getContext("2d");
       if (!ctx) { reject(new Error("Canvas unavailable")); return; }
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, w, h);
 
       const outputName = file.name.replace(/\.[^.]+$/, ".webp");
       let quality = 0.9;
