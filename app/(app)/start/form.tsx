@@ -7,6 +7,7 @@ import { saveNativeLanguage, saveOnboarding, type OnboardingState } from "./acti
 import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 import AvatarPicker from "@/components/avatar-picker";
 import { t } from "@/utils/t";
+import { Icon } from "@/components/ui-icons";
 
 type StartLabels = {
   estimatedTime: string;
@@ -74,8 +75,8 @@ export default function OnboardingForm({
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
-      <section className="rounded-lg bg-paper-2 p-8 shadow-hard">
+    <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6 sm:py-8">
+      <section className="rounded-[1.5rem] bg-paper-2 p-5 shadow-hard sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/home"
@@ -88,16 +89,16 @@ export default function OnboardingForm({
               <span className="text-orange-text">brainana</span>.app
             </span>
           </Link>
-          <p className="font-manrope text-sm font-[800] text-ink-2">{labels.estimatedTime}</p>
+          <p className="rounded-full bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm sm:text-sm">{labels.estimatedTime}</p>
         </div>
 
-        <h1 className="mt-10 font-fredoka text-4xl font-[700] leading-tight tracking-tight">
+        <h1 className="mt-8 font-fredoka text-3xl font-[700] leading-tight tracking-tight sm:mt-10 sm:text-4xl">
           {labels.title}
         </h1>
 
         {step === 1 && (
           <div className="mt-8 space-y-5">
-            <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+            <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
                 {labels.languageTitle}
               </p>
@@ -114,7 +115,7 @@ export default function OnboardingForm({
                 id="native_language_step"
                 value={nativeLanguage}
                 onChange={(event) => handleNativeLanguageChange(event.target.value)}
-                className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-sm font-[700] text-ink outline-none focus:ring-2 focus:ring-ink"
+                className="mt-4 w-full rounded-[1rem] bg-paper-2 px-4 py-3.5 font-manrope text-base font-[700] text-ink outline-none focus:ring-2 focus:ring-ink"
               >
                 <option value="" disabled>{labels.motherTonguePlaceholder}</option>
                 {LANGUAGES.map((lang) => (
@@ -131,9 +132,10 @@ export default function OnboardingForm({
                 type="button"
                 disabled={!nativeLanguageSaved || savingNativeLanguage}
                 onClick={() => setStep(2)}
-                className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
+                className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
               >
                 {savingNativeLanguage ? labels.savingLanguage : labels.next}
+                {!savingNativeLanguage && <Icon name="arrowRight" className="h-4 w-4" />}
               </button>
             </div>
           </div>
@@ -153,7 +155,7 @@ export default function OnboardingForm({
           <input type="hidden" name="avatar_url" value={avatarUrl ?? ""} />
           <input type="hidden" name="native_language" value={nativeLanguage} />
 
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+          <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
             <label
               htmlFor="display_name"
               className="font-mono text-xs uppercase tracking-widest text-ink-2"
@@ -165,11 +167,11 @@ export default function OnboardingForm({
               name="display_name"
               required
               placeholder={labels.namePlaceholder}
-              className="mt-4 w-full rounded-md bg-paper-2 px-4 py-3 font-manrope text-base font-[700] text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+              className="mt-4 w-full rounded-[1rem] bg-paper-2 px-4 py-3.5 font-manrope text-base font-[700] text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
             />
           </section>
 
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+          <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
               {labels.avatar}
             </p>
@@ -178,7 +180,7 @@ export default function OnboardingForm({
             </div>
           </section>
 
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+          <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
               {labels.whyHere}
             </p>
@@ -193,7 +195,7 @@ export default function OnboardingForm({
                     defaultChecked={p === "Hobby"}
                     className="peer sr-only"
                   />
-                  <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-yellow-soft">
+                  <span className="inline-flex min-h-10 items-center rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-yellow-soft">
                     {labels.purposes[p] ?? p}
                   </span>
                 </label>
@@ -201,7 +203,7 @@ export default function OnboardingForm({
             </div>
           </section>
 
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+          <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
               {labels.dailyGoal}
             </p>
@@ -216,7 +218,7 @@ export default function OnboardingForm({
                     defaultChecked={goal === 10}
                     className="peer sr-only"
                   />
-                  <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-blue peer-checked:text-ocean peer-checked:shadow-hard">
+                  <span className="inline-flex min-h-10 items-center rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-blue peer-checked:text-ocean peer-checked:shadow-hard">
                     {t(labels.cardsPerDay, { count: goal })}
                   </span>
                 </label>
@@ -224,7 +226,7 @@ export default function OnboardingForm({
             </div>
           </section>
 
-          <section className="rounded-lg bg-paper p-5 shadow-hard-sm">
+          <section className="rounded-[1.2rem] bg-paper p-5 shadow-hard-sm">
             <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
               {labels.topics}
             </p>
@@ -238,7 +240,7 @@ export default function OnboardingForm({
                     defaultChecked={["Languages", "Science", "Trivia"].includes(interest)}
                     className="peer sr-only"
                   />
-                  <span className="inline-flex rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-red-soft">
+                  <span className="inline-flex min-h-10 items-center rounded-full bg-paper-2 px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm peer-checked:bg-red-soft">
                     {categories[interest] ?? interest}
                   </span>
                 </label>
@@ -250,9 +252,10 @@ export default function OnboardingForm({
             <button
               type="submit"
               disabled={pending}
-              className="cursor-pointer rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-60"
+              className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:opacity-60"
             >
               {pending ? labels.saving : labels.takeMeHome}
+              {!pending && <Icon name="arrowRight" className="h-4 w-4" />}
             </button>
           </div>
         </form>

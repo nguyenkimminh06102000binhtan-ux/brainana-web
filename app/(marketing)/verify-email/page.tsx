@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { resendVerificationEmail } from "../actions";
+import { Icon } from "@/components/ui-icons";
+import { ThemeToggleFixed } from "../../theme-toggle";
 
 export default async function VerifyEmailPage({
   searchParams,
@@ -9,8 +11,18 @@ export default async function VerifyEmailPage({
   const { email, resent, error } = await searchParams;
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-paper px-6 py-12 text-ink">
-      <div className="w-full max-w-sm rounded-lg bg-paper-2 p-8 text-center shadow-hard">
+    <main className="flex min-h-screen items-center justify-center bg-paper px-4 py-12 text-ink sm:px-6">
+      <ThemeToggleFixed />
+      <div className="w-full max-w-md rounded-[1.5rem] bg-paper-2 p-6 text-center shadow-hard sm:p-8">
+        <Link href="/" className="mx-auto mb-8 flex w-fit items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
+            B
+          </span>
+          <span>Brainana</span>
+        </Link>
+        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-green-soft text-blue-text shadow-hard-sm">
+          <Icon name="check" className="h-7 w-7" />
+        </div>
         <h1 className="mb-3 font-fredoka text-3xl font-[600] leading-tight tracking-tight">Check your inbox</h1>
         <p className="font-manrope text-sm leading-6 text-ink-2">
           We sent a confirmation link to your email. Click it to activate your
@@ -33,18 +45,18 @@ export default async function VerifyEmailPage({
             <input type="hidden" name="email" value={email} />
             <button
               type="submit"
-              className="w-full rounded-full bg-yellow px-5 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-yellow px-5 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
             >
-              Resend email
+              Resend email <Icon name="arrowRight" className="h-4 w-4" />
             </button>
           </form>
         ) : (
           <div className="mt-6">
             <Link
               href="/signup"
-              className="block w-full rounded-full bg-paper px-5 py-3 text-center font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-paper px-5 py-3 text-center font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
             >
-              Back to sign up
+              Back to sign up <Icon name="arrowRight" className="h-4 w-4" />
             </Link>
           </div>
         )}

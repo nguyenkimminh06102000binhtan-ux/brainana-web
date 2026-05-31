@@ -34,8 +34,8 @@ export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmap
   }
 
   return (
-    <div className="rounded-lg bg-paper-2 p-5 shadow-hard">
-      <div className="mb-4 flex items-center justify-between">
+    <div className="overflow-hidden rounded-lg bg-paper-2 p-4 shadow-hard sm:p-5">
+      <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-mono text-xs uppercase tracking-widest text-ink-2">
           Activity · Last 12 weeks
         </p>
@@ -44,15 +44,15 @@ export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmap
         </p>
       </div>
 
-      <div className="flex gap-1 overflow-x-auto pb-1">
+      <div className="grid w-full grid-cols-12 gap-1">
         {weeks.map((week, wIdx) => (
-          <div key={wIdx} className="flex flex-col gap-1">
+          <div key={wIdx} className="grid min-w-0 grid-rows-7 gap-1">
             {week.map((cell) => {
               const { className, style } = cellStyle(cell.count);
               return (
                 <div
                   key={cell.date}
-                  className={`h-7 w-7 shrink-0 rounded-sm ${className} cursor-default transition-opacity hover:opacity-70`}
+                  className={`aspect-square min-w-0 rounded-[0.35rem] ${className} cursor-default transition-opacity hover:opacity-70`}
                   style={style}
                   onMouseEnter={() => setHovered(cell)}
                   onMouseLeave={() => setHovered(null)}

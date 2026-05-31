@@ -10,6 +10,7 @@ import GoalRing from "./goal-ring";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
 import { getLocale, t } from "@/utils/i18n";
 import { reviewDayCutoff } from "@/utils/review-schedule";
+import { Icon } from "@/components/ui-icons";
 
 function fmt(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -133,14 +134,14 @@ export default async function HomePage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
+    <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6 sm:py-8">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_260px]">
 
         {/* ── LEFT COLUMN ── */}
         <div className="flex flex-col gap-6">
 
           {/* Header */}
-          <section className="flex items-center gap-4">
+          <section className="flex items-center gap-4 rounded-[1.4rem] bg-paper-2 p-4 shadow-hard-sm sm:bg-transparent sm:p-0 sm:shadow-none">
             {profile?.avatar_url ? (
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-blue">
                 <Image src={profile.avatar_url} alt={displayName} fill sizes="56px" className="object-cover" />
@@ -153,8 +154,8 @@ export default async function HomePage() {
               </div>
             )}
             <div className="min-w-0 flex-1">
-              <h1 className="font-fredoka text-3xl font-[700] leading-tight tracking-tight">
-                {t(loc.home.welcomeBack, { name: displayName })} 🧠
+              <h1 className="font-fredoka text-2xl font-[700] leading-tight tracking-tight sm:text-3xl">
+                {t(loc.home.welcomeBack, { name: displayName })}
               </h1>
               <p className="font-manrope text-sm text-ink-2">
                 {totalDue > 0
@@ -162,11 +163,11 @@ export default async function HomePage() {
                   : t(loc.home.allCaughtUpProgress, { courses: coursesInProgress })}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm">
-                  🔥 {t(loc.home.dayStreak, { count: streak })}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
+                  <Icon name="flame" className="h-3.5 w-3.5 text-orange-text" /> {t(loc.home.dayStreak, { count: streak })}
                 </span>
-                <span className="rounded-full bg-paper-2 px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm">
-                  🧠 {t(loc.home.mastered, { count: fmt(totalMastered) })}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
+                  <Icon name="check" className="h-3.5 w-3.5 text-blue-text" /> {t(loc.home.mastered, { count: fmt(totalMastered) })}
                 </span>
               </div>
             </div>
@@ -174,9 +175,9 @@ export default async function HomePage() {
 
           {/* Today's Review card */}
           {totalDue > 0 && topDueCourse ? (
-            <section className="rounded-lg bg-red-soft p-5 shadow-hard">
+            <section className="rounded-[1.4rem] bg-red-soft p-5 shadow-hard">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
-              <div className="mt-2 flex items-center justify-between gap-4">
+              <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-fredoka text-2xl font-[700] leading-tight tracking-tight">
                     {t(loc.home.cardsDue, { count: fmt(totalDue) })}
@@ -187,16 +188,16 @@ export default async function HomePage() {
                 </div>
                 <Link
                   href={`/study/${topDueCourse.slug}`}
-                  className="shrink-0 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                  className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                 >
-                  {loc.home.startReview} →
+                  {loc.home.startReview} <Icon name="arrowRight" className="h-4 w-4" />
                 </Link>
               </div>
             </section>
           ) : (
-            <section className="rounded-lg bg-green-soft p-5 shadow-hard">
+            <section className="rounded-[1.4rem] bg-green-soft p-5 shadow-hard">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
-              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp} 🎉</p>
+              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp}</p>
               <p className="mt-1 font-manrope text-sm text-ink-2">{loc.home.noCardsDue}</p>
             </section>
           )}
@@ -205,19 +206,19 @@ export default async function HomePage() {
           <section>
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.yourCourses}</h2>
-              <Link href="/library" className="font-mono text-xs text-ink-2 hover:text-orange-text transition">
-                {loc.common.seeAll} →
+              <Link href="/library" className="inline-flex items-center gap-1 font-mono text-xs text-ink-2 transition hover:text-orange-text">
+                {loc.common.seeAll} <Icon name="chevronRight" className="h-3.5 w-3.5" />
               </Link>
             </div>
 
             {enrolledCourses.length === 0 ? (
-              <div className="flex items-center gap-4 rounded-xl bg-paper-2 px-6 py-5 shadow-hard-sm">
+              <div className="flex flex-col gap-4 rounded-[1.4rem] bg-paper-2 px-5 py-5 shadow-hard-sm sm:flex-row sm:items-center sm:px-6">
                 <p className="font-manrope text-sm text-ink-2">{loc.home.noCourses}</p>
                 <Link
                   href="/browse"
-                  className="ml-auto shrink-0 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] sm:ml-auto"
                 >
-                  {loc.common.browseCourses} →
+                  {loc.common.browseCourses} <Icon name="arrowRight" className="h-4 w-4" />
                 </Link>
               </div>
             ) : (
@@ -246,8 +247,8 @@ export default async function HomePage() {
                   <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{loc.home.discover}</h2>
                   <p className="font-manrope text-xs text-ink-2">{t(loc.home.coursesFrom, { language: activeOriginLanguage })}</p>
                 </div>
-                <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="font-mono text-xs text-ink-2 hover:text-orange-text transition">
-                  {loc.common.seeAll} →
+                <Link href={`/browse?source_language=${encodeURIComponent(activeOriginLanguage)}`} className="inline-flex items-center gap-1 font-mono text-xs text-ink-2 transition hover:text-orange-text">
+                  {loc.common.seeAll} <Icon name="chevronRight" className="h-3.5 w-3.5" />
                 </Link>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -255,7 +256,7 @@ export default async function HomePage() {
                   <Link
                     key={course.id}
                     href={`/c/${course.slug}`}
-                    className="flex items-center gap-3 rounded-xl bg-paper-2 p-4 shadow-hard-sm transition hover:-translate-y-0.5 hover:shadow-hard"
+                    className="flex min-h-20 items-center gap-3 rounded-[1.2rem] bg-paper-2 p-4 shadow-hard-sm transition hover:-translate-y-0.5 hover:shadow-hard"
                   >
                     {course.cover_image_url ? (
                       <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
@@ -279,7 +280,7 @@ export default async function HomePage() {
 
         {/* ── RIGHT SIDEBAR ── */}
         <div className="flex flex-col gap-4">
-          <aside className="rounded-lg bg-paper-2 p-5 shadow-hard flex flex-col items-center">
+          <aside className="rounded-[1.4rem] bg-paper-2 p-5 shadow-hard flex flex-col items-center">
             <GoalRing
               studied={studiedToday}
               goal={dailyGoal}
@@ -293,14 +294,14 @@ export default async function HomePage() {
             />
           </aside>
 
-          <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
+          <aside className="rounded-[1.4rem] bg-paper-2 p-5 shadow-hard">
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.quickLinks}</p>
             <div className="flex flex-col gap-2">
-              <Link href="/browse" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
-                {loc.common.browseCourses} <span>→</span>
+              <Link href="/browse" className="flex min-h-12 items-center justify-between rounded-[1rem] bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
+                {loc.common.browseCourses} <Icon name="chevronRight" className="h-4 w-4" />
               </Link>
-              <Link href="/library" className="flex items-center justify-between rounded-lg bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
-                {loc.home.myLibrary} <span>→</span>
+              <Link href="/library" className="flex min-h-12 items-center justify-between rounded-[1rem] bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
+                {loc.home.myLibrary} <Icon name="chevronRight" className="h-4 w-4" />
               </Link>
             </div>
           </aside>

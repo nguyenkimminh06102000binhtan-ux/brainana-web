@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { t } from "@/utils/i18n";
+import { Icon } from "@/components/ui-icons";
 
 const LEVEL_HEADER: Record<string, string> = {
   beginner: "bg-green-soft",
@@ -55,10 +56,10 @@ export default function EnrolledCourseCard({
   const dotColor = LEVEL_DOT[course.level ?? ""] ?? "#93c5fd";
 
   return (
-    <div className="overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
+    <div className="overflow-hidden rounded-[1.2rem] bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
       <Link
         href={`/c/${course.slug}`}
-        className={`relative flex h-20 items-end px-4 pb-3 ${headerBg} block`}
+        className={`relative flex h-24 items-end px-4 pb-3 sm:h-20 ${headerBg} block`}
         style={STRIPE}
       >
         {course.cover_image_url ? (
@@ -78,7 +79,7 @@ export default function EnrolledCourseCard({
         <div>
           <Link
             href={`/c/${course.slug}`}
-            className="font-fredoka text-lg font-[700] leading-tight tracking-tight hover:text-orange-text"
+            className="font-fredoka text-xl font-[700] leading-tight tracking-tight hover:text-orange-text sm:text-lg"
           >
             {course.title}
           </Link>
@@ -107,9 +108,9 @@ export default function EnrolledCourseCard({
           )}
           <Link
             href={`/study/${course.slug}`}
-            className="rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
           >
-            {labels.study} →
+            {labels.study} <Icon name="arrowRight" className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>

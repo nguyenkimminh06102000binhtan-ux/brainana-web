@@ -680,42 +680,42 @@ export default function CreateCourseForm({
           </div>
 
           {/* Items nested inside section */}
-          <div className="border-t border-ink/10 px-6 pb-6 pt-4">
-            <div className="mb-3 flex items-center justify-between">
+          <div className="border-t border-ink/10 px-4 pb-6 pt-4 sm:px-6">
+            <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="button"
                 onClick={() => toggleCollapse(section.id)}
-                className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition hover:text-ink"
+                className="flex min-w-0 items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition hover:text-ink"
               >
                 <span className="text-xs">{collapsed.has(section.id) ? "▶" : "▼"}</span>
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
-              <div className="flex items-center gap-2">
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end">
                 {getRomanizationSystem(selectedTargetLanguage) && (
-                  <div className="flex items-center gap-1.5">
+                  <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
                     {bulkStatuses.get(section.id) && (
-                      <span className="font-manrope text-xs text-ink-2">{bulkStatuses.get(section.id)}</span>
+                      <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkStatuses.get(section.id)}</span>
                     )}
                     <button
                       type="button"
                       onClick={() => handleSectionBulkGenerate(section.id)}
                       disabled={!!bulkStatuses.get(section.id)}
-                      className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+                      className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
                     >
                       {labels.bulkGenerateRomanization}
                     </button>
                   </div>
                 )}
                 {getTTSVoice(selectedTargetLanguage) && (
-                  <div className="flex items-center gap-1.5">
+                  <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
                     {bulkAudioStatuses.get(section.id) && (
-                      <span className="font-manrope text-xs text-ink-2">{bulkAudioStatuses.get(section.id)}</span>
+                      <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkAudioStatuses.get(section.id)}</span>
                     )}
                     <button
                       type="button"
                       onClick={() => handleSectionBulkGenerateAudio(section.id)}
                       disabled={!!bulkAudioStatuses.get(section.id)}
-                      className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+                      className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
                     >
                       {labels.bulkGenerateAudio}
                     </button>
@@ -724,11 +724,11 @@ export default function CreateCourseForm({
                 <button
                   type="button"
                   onClick={() => openAiImport(section.id)}
-                  className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-orange-text active:translate-y-[1px] active:shadow-none"
+                  className="min-h-11 rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-orange-text active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5"
                 >
                   {labels.aiImportButton}
                 </button>
-                <label className="cursor-pointer rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none">
+                <label className="flex min-h-11 cursor-pointer items-center justify-center rounded-[1rem] bg-paper px-3 py-2 text-center font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5">
                   {labels.importCsv}
                   <input type="file" accept=".csv,text/csv" className="hidden"
                     onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
@@ -776,8 +776,8 @@ export default function CreateCourseForm({
         </p>
       )}
 
-      <div className="flex items-center justify-between pb-8">
-        <p className="font-manrope text-sm text-ink-2">
+      <div className="flex flex-col gap-3 rounded-[1.4rem] bg-paper-2 p-4 pb-5 shadow-hard-sm sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:p-0 sm:pb-8 sm:shadow-none">
+        <p className="font-manrope text-sm leading-6 text-ink-2 sm:max-w-xl">
           {isUploading
             ? labels.uploadingFiles
             : hasValidItem
@@ -790,7 +790,7 @@ export default function CreateCourseForm({
             : labels.addAtLeastOneCard}
         </p>
         <button type="submit" disabled={!hasValidItem || pending || isUploading}
-          className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none">
+          className="min-h-14 w-full rounded-full bg-orange px-6 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none sm:w-auto sm:px-8">
           {pending ? labels.creating : labels.createCourse}
         </button>
       </div>

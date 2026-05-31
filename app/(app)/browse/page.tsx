@@ -9,6 +9,7 @@ import { createClient } from "@/utils/supabase/server";
 import BrowseFilters from "./browse-filters";
 import BrowseSort from "./browse-sort";
 import { getLocale, t } from "@/utils/i18n";
+import { Icon } from "@/components/ui-icons";
 
 type Course = {
   id: string;
@@ -304,8 +305,8 @@ export default async function BrowsePage({
     : courseCandidates;
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-8">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+    <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-8">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
 
         {/* ── Sidebar ── */}
         <div className="w-full shrink-0 lg:w-60">
@@ -339,7 +340,7 @@ export default async function BrowsePage({
         {/* ── Results ── */}
         <div className="min-w-0 flex-1">
           {/* Header row */}
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
             <p className="font-fredoka text-2xl font-[700]">
               <span className="text-orange-text">{courses.length}</span>{" "}
               {courses.length !== 1 ? loc.common.coursePlural : loc.common.courseSingular}
@@ -360,7 +361,7 @@ export default async function BrowsePage({
                   <Link
                     key={course.id}
                     href={`/c/${course.slug}`}
-                    className="group overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5"
+                    className="group overflow-hidden rounded-[1.2rem] bg-paper-2 shadow-hard transition hover:-translate-y-0.5"
                   >
                     {/* Card header */}
                     <div
@@ -434,8 +435,12 @@ export default async function BrowsePage({
 
                       {/* Stats */}
                       <div className="flex items-center gap-4 font-mono text-xs text-ink-2">
-                        <span>👥 {fmt(course.learner_count)}</span>
-                        <span>📚 {t(loc.common.cards, { count: course.card_count })}</span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Icon name="users" className="h-3.5 w-3.5" /> {fmt(course.learner_count)}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Icon name="bookOpen" className="h-3.5 w-3.5" /> {t(loc.common.cards, { count: course.card_count })}
+                        </span>
                       </div>
                     </div>
                   </Link>

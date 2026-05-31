@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Icon } from "@/components/ui-icons";
+import ThemeToggle from "../../theme-toggle";
 
 export const metadata = {
   title: "Privacy Policy - Brainana",
@@ -37,7 +39,7 @@ export default function PrivacyPolicyPage() {
     <main className="min-h-screen bg-paper text-ink">
       <Header />
 
-      <section className="mx-auto max-w-3xl px-6 py-14">
+      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-14">
         <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Legal</p>
         <h1 className="mt-3 font-fredoka text-5xl font-[600] leading-tight tracking-tight">Privacy Policy</h1>
         <p className="mt-3 font-mono text-xs uppercase tracking-widest text-ink-2">Last updated: May 21, 2026</p>
@@ -49,7 +51,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           {sections.map((section) => (
-            <section key={section.title} className="rounded-lg border border-ink/30 bg-paper-2 p-5">
+            <section key={section.title} className="rounded-[1.2rem] border border-ink/20 bg-paper-2 p-5 shadow-hard-sm">
               <h2 className="font-fredoka text-2xl font-[600] tracking-tight">{section.title}</h2>
               <p className="mt-3 font-manrope leading-7 text-ink-2">{section.body}</p>
             </section>
@@ -64,17 +66,21 @@ export default function PrivacyPolicyPage() {
 
 function Header() {
   return (
-    <header className="mx-auto mt-8 max-w-5xl rounded-full bg-paper-2 shadow-hard">
-      <div className="flex items-center justify-between px-6 py-4">
-        <Link href="/" className="font-fredoka text-2xl font-[700] tracking-tight">
-          Brainana
+    <header className="sticky top-3 z-40 mx-4 mt-4 rounded-[1.6rem] border border-ink/10 bg-paper-2/95 shadow-hard backdrop-blur sm:mx-auto sm:mt-8 sm:max-w-5xl sm:rounded-full">
+      <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-6 sm:py-4">
+        <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
+          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
+            B
+          </span>
+          <span className="truncate">Brainana</span>
         </Link>
         <nav className="flex items-center gap-3 text-sm">
-          <Link href="/login" className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none">
+          <ThemeToggle />
+          <Link href="/login" className="inline-flex min-h-10 items-center rounded-full bg-paper px-4 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5">
             Log in
           </Link>
-          <Link href="/signup" className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm">
-            Sign up
+          <Link href="/signup" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-5">
+            Sign up <Icon name="arrowRight" className="h-3.5 w-3.5" />
           </Link>
         </nav>
       </div>

@@ -4,9 +4,11 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import AvatarMenu from "./_components/avatar-menu";
 import MobileNav from "./_components/mobile-nav";
+import AppChrome from "./_components/app-chrome";
 import OriginLanguageSwitcher from "@/components/origin-language-switcher";
 import ThemeToggle from "@/app/theme-toggle";
 import { getLocale } from "@/utils/i18n";
+import { Icon } from "@/components/ui-icons";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient(await cookies());
@@ -37,11 +39,11 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
   const loc = getLocale(activeOriginLanguage);
 
   const navItems = [
-    { label: loc.app.nav.home,      href: "/home" },
-    { label: loc.app.nav.browse,    href: "/browse" },
-    { label: loc.app.nav.library,   href: "/library" },
-    { label: loc.app.nav.create,    href: "/create" },
-    { label: loc.app.nav.community, href: "/community" },
+    { label: loc.app.nav.home,      href: "/home",      icon: "home" as const },
+    { label: loc.app.nav.browse,    href: "/browse",    icon: "compass" as const },
+    { label: loc.app.nav.library,   href: "/library",   icon: "library" as const },
+    { label: loc.app.nav.create,    href: "/create",    icon: "plus" as const },
+    { label: loc.app.nav.community, href: "/community", icon: "users" as const },
   ];
 
   return (
@@ -50,12 +52,14 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
         Skip to main content
       </a>
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="m-3 rounded-[2rem] bg-paper-2 px-4 py-4 shadow-hard sm:m-4 sm:px-5 lg:rounded-full lg:px-6">
+        <AppChrome
+          header={(
+        <header className="fixed inset-x-3 bottom-3 top-auto z-40 rounded-[1.6rem] border border-ink/10 bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:inset-x-4 sm:bottom-4 sm:px-5 lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-4 lg:m-4 lg:rounded-full lg:px-6">
           <div className="flex items-center gap-3 lg:gap-4">
 
             {/* Logo */}
             <Link href="/home" className="flex shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
-              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright">
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
                 B
               </span>
               <span className="hidden sm:inline">{loc.app.brand}</span>
@@ -67,8 +71,9 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="shrink-0 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 hover:bg-blue hover:text-ocean"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 transition hover:bg-blue hover:text-ocean"
                 >
+                  <Icon name={item.icon} className="h-4 w-4" />
                   {item.label}
                 </Link>
               ))}
@@ -79,15 +84,18 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
 
             {/* Desktop search */}
             <form action="/browse" className="hidden lg:block lg:min-w-48">
-              <input
-                name="q"
-                aria-label="Search courses"
-                placeholder={loc.app.searchPlaceholder}
-                className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
-              />
+              <div className="relative">
+                <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-3" />
+                <input
+                  name="q"
+                  aria-label="Search courses"
+                  placeholder={loc.app.searchPlaceholder}
+                  className="w-full rounded-full bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+                />
+              </div>
             </form>
 
-            {/* Right: theme toggle, language, hamburger, avatar */}
+            {/* Right: theme toggle, language, avatar */}
             <div className="flex shrink-0 items-center gap-2">
               <ThemeToggle />
 
@@ -96,10 +104,6 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
                 activeOriginLanguage={activeOriginLanguage}
                 labels={loc.app.originLanguage}
               />
-
-              {/* Hamburger — mobile only */}
-              <MobileNav items={navItems} />
-
               <AvatarMenu
                 avatarUrl={profile?.avatar_url ?? null}
                 initial={initial}
@@ -109,18 +113,27 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
             </div>
           </div>
 
+          <div className="mt-3 lg:hidden">
+            <MobileNav items={navItems} />
+          </div>
+
           {/* Mobile search — below the nav row, hidden on desktop */}
-          <form action="/browse" className="mt-3 lg:hidden">
-            <input
-              name="q"
-              aria-label="Search courses"
-              placeholder={loc.app.searchPlaceholder}
-              className="w-full rounded-full bg-paper px-4 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
-            />
+          <form action="/browse" className="mt-3 hidden lg:hidden">
+            <div className="relative">
+              <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-3" />
+              <input
+                name="q"
+                aria-label="Search courses"
+                placeholder={loc.app.searchPlaceholder}
+                className="w-full rounded-full bg-paper py-3 pl-10 pr-4 font-manrope text-base text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+              />
+            </div>
           </form>
         </header>
-
-        <main id="main-content" className="flex-1">{children}</main>
+          )}
+        >
+          {children}
+        </AppChrome>
       </div>
     </div>
   );

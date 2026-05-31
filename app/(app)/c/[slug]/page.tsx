@@ -252,12 +252,61 @@ export default async function CourseDetailPage({
             )}
           </section>
 
+          <div className="flex flex-col gap-4 lg:hidden">
+            <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
+              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.creatorSection}</p>
+              <div className="flex items-center gap-3">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-blue">
+                  {creator?.avatar_url ? (
+                    <Image src={creator.avatar_url} alt={creatorName} fill sizes="40px" className="object-cover" />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center font-mono text-sm font-[700] text-ocean">
+                      {creatorName[0]?.toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate font-manrope text-sm font-[800] text-ink">{creatorHandle}</p>
+                  <p className="font-mono text-xs text-ink-2">
+                    {creatorCourseCount} {creatorCourseCount !== 1 ? cl.courseUnits : cl.courseUnit}
+                    {" · "}{t(loc.common.learners, { count: formatCount(creatorTotalLearners) })}
+                    {" · "}{formatCount(creatorFollowers)} {cl.followersUnit}
+                  </p>
+                </div>
+              </div>
+
+              {!isOwner && (
+                <div className="mt-4">
+                  <FollowButton
+                    isFollowing={isFollowing}
+                    creatorId={course.creator_id}
+                    slug={course.slug}
+                    labels={{ following: cl.following, follow: cl.follow }}
+                  />
+                </div>
+              )}
+            </aside>
+
+            <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">
+              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{cl.statsSection}</p>
+              <div className="flex flex-col gap-2">
+                <StatRow label={cl.cards} value={String(course.card_count)} />
+                {course.avg_completion_days != null && (
+                  <StatRow label={cl.avgTime} value={t(cl.avgTimeDays, { count: course.avg_completion_days })} />
+                )}
+                <StatRow label={loc.common.audio} value={`${audioCount ?? 0}/${course.card_count}`} />
+                <StatRow label={cl.images} value={`${imageCount ?? 0}/${course.card_count}`} />
+                <StatRow label={loc.common.mems} value={formatCount(course.mems_count ?? 0)} />
+              </div>
+            </aside>
+          </div>
+
           {/* Discussion */}
           <DiscussionThread courseId={course.id} courseSlug={course.slug} creatorId={course.creator_id} isOwner={isOwner} labels={loc.discussion} />
         </div>
 
         {/* ── RIGHT SIDEBAR ── */}
-        <div className="flex flex-col gap-4">
+        <div className="hidden flex-col gap-4 lg:flex">
 
           {/* Creator card */}
           <aside className="rounded-lg bg-paper-2 p-5 shadow-hard">

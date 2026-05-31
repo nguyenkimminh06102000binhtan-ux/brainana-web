@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
+import { Icon } from "@/components/ui-icons";
+import ThemeToggle from "../theme-toggle";
 
 const features = [
   {
@@ -63,8 +65,8 @@ export default async function LandingPage() {
   if (user) redirect("/home");
 
   return (
-    <main className="min-h-screen bg-paper px-5 py-8 text-ink">
-      <header className="mx-auto max-w-6xl rounded-full bg-paper-2 px-4 py-4 shadow-hard sm:px-6">
+    <main className="min-h-screen bg-paper px-4 py-5 text-ink sm:px-5 sm:py-8">
+      <header className="sticky top-3 z-40 mx-auto max-w-6xl rounded-[1.6rem] border border-ink/10 bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:rounded-full sm:px-6 sm:py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
@@ -72,58 +74,55 @@ export default async function LandingPage() {
             </span>
             <span className="truncate">Brainana</span>
           </Link>
-          <nav className="hidden items-center gap-10 font-manrope text-sm font-[700] md:flex">
-            <Link href="/courses">Courses</Link>
-            <Link href="/browse">Browse</Link>
-            <Link href="/terms">Community</Link>
-          </nav>
           <nav className="ml-3 flex shrink-0 items-center gap-2 text-sm sm:gap-3">
+            <ThemeToggle />
             <Link
               href="/login"
-              className="rounded-full bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex min-h-10 items-center rounded-full bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5 sm:py-2.5 sm:text-sm"
             >
               Log in
             </Link>
             <Link
               href="/signup"
-              className="rounded-full bg-orange px-4 py-2.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-6 sm:py-3 sm:text-sm"
-            >
-              Try free
+            className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-orange px-4 py-2.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-6 sm:py-3 sm:text-sm"
+          >
+              Try free <Icon name="arrowRight" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Link>
           </nav>
         </div>
       </header>
 
-      <section className="mx-auto grid max-w-6xl gap-12 py-24 md:grid-cols-[1fr_640px] md:items-center">
+      <section className="mx-auto grid max-w-6xl gap-10 py-12 sm:py-20 md:grid-cols-[1fr_640px] md:items-center md:py-24">
         <div>
-          <p className="mb-8 inline-flex rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm font-[800] text-ink shadow-hard-sm">
-            what's new this week
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-paper-2 px-4 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm sm:mb-8 sm:px-5 sm:py-3">
+            <Icon name="sparkles" className="h-4 w-4 text-orange-text" />
+            what&apos;s new this week
           </p>
-          <h1 className="font-fredoka text-6xl font-[700] leading-[0.98] tracking-tight sm:text-7xl">
+          <h1 className="font-fredoka text-5xl font-[700] leading-[0.98] tracking-tight sm:text-7xl">
             the <span className="text-orange-text">community</span> is your textbook.
           </h1>
-          <p className="mt-8 max-w-2xl font-manrope text-xl leading-9 text-ink-2">
+          <p className="mt-6 max-w-2xl font-manrope text-lg leading-8 text-ink-2 sm:mt-8 sm:text-xl sm:leading-9">
             Real teachers, real learners, real mems. Pick a course someone built, or build your own.
           </p>
-          <div className="mt-10 flex flex-wrap gap-5">
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-5">
             <Link
               href="/courses"
-              className="rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-orange px-8 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
             >
-              Browse all courses
+              Browse all courses <Icon name="arrowRight" className="h-4 w-4" />
             </Link>
             <Link
               href="/create"
-              className="rounded-full bg-paper-2 px-8 py-4 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper-2 px-8 py-4 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
             >
-              Create one
+              <Icon name="plus" className="h-4 w-4" /> Create one
             </Link>
           </div>
         </div>
 
         <aside className="grid gap-5 sm:grid-cols-2">
           {courseCards.map((course) => (
-            <article key={course.title} className="overflow-hidden rounded-lg bg-paper-2 shadow-hard">
+            <article key={course.title} className="overflow-hidden rounded-[1.2rem] bg-paper-2 shadow-hard">
               <div className={`${course.accent} border-b border-ink px-5 py-6`}>
                 <p className="font-mono text-sm font-[700] uppercase tracking-widest text-ink-2">
                   {course.eyebrow}
@@ -151,10 +150,10 @@ export default async function LandingPage() {
         </aside>
       </section>
 
-      <section className="mx-auto max-w-6xl rounded-lg bg-paper-2 p-6 shadow-hard">
+      <section className="mx-auto max-w-6xl rounded-[1.4rem] bg-paper-2 p-4 shadow-hard sm:p-6">
         <div className="grid gap-4 md:grid-cols-3">
           {features.map((feature) => (
-            <article key={feature.title} className="rounded-md bg-paper p-6 shadow-hard-sm">
+            <article key={feature.title} className="rounded-[1rem] bg-paper p-5 shadow-hard-sm sm:p-6">
               <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{feature.title}</h2>
               <p className="mt-2 font-manrope text-sm leading-6 text-ink-2">
                 {feature.description}

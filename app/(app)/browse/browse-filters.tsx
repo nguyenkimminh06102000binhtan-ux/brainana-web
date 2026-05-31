@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CATEGORY_TREE } from "@/app/constants/categories";
+import { Icon } from "@/components/ui-icons";
 
 export default function BrowseFilters({
   initialQ,
@@ -86,7 +87,7 @@ export default function BrowseFilters({
   const activeFilterCount = selectedSubcategories.length + (level ? 1 : 0) + (minCards > 0 ? 1 : 0) + (hasAudio ? 1 : 0) + (hasMems ? 1 : 0) + (hasImages ? 1 : 0);
 
   return (
-    <aside className="flex flex-col gap-4 rounded-xl bg-paper-2 p-5 shadow-hard lg:gap-6">
+    <aside className="flex flex-col gap-4 rounded-[1.4rem] bg-paper-2 p-4 shadow-hard sm:p-5 lg:gap-6">
       {/* Search + mobile toggle row */}
       <div className="flex items-center gap-2">
         <form
@@ -98,13 +99,13 @@ export default function BrowseFilters({
           }}
         >
           <div className="relative">
-            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-ink-2">🔍</span>
+            <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-2" />
             <input
               name="q"
               defaultValue={initialQ}
               placeholder={labels.searchPlaceholder}
               autoComplete="off"
-              className="w-full rounded-full border-2 border-dashed border-ink/20 bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:border-orange"
+              className="w-full rounded-full border-2 border-dashed border-ink/20 bg-paper py-3 pl-10 pr-4 font-manrope text-base text-ink outline-none placeholder:text-ink-3 focus:border-orange lg:py-2 lg:text-sm"
             />
           </div>
         </form>
@@ -112,8 +113,9 @@ export default function BrowseFilters({
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex shrink-0 items-center gap-1.5 rounded-full bg-paper px-3 py-2 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition active:translate-y-[1px] lg:hidden"
+          className="flex min-h-12 shrink-0 items-center gap-1.5 rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition active:translate-y-[1px] lg:hidden"
         >
+          <Icon name="filter" className="h-4 w-4" />
           {labels.category}
           {activeFilterCount > 0 && (
             <span className="rounded-full bg-orange px-1.5 py-0.5 font-mono text-xs leading-none text-on-bright">
@@ -140,7 +142,7 @@ export default function BrowseFilters({
                 <button
                   type="button"
                   onClick={() => toggleExpanded(group.label)}
-                  className="flex w-full items-center justify-between rounded-md px-2 py-1.5 transition hover:bg-paper"
+                  className="flex min-h-11 w-full items-center justify-between rounded-[0.9rem] px-3 py-2 transition hover:bg-paper"
                 >
                   <span className={`font-manrope text-sm ${selectedInGroup.length > 0 ? "font-[700] text-ink" : "text-ink-2"}`}>
                     {translatedLabel}
@@ -150,9 +152,7 @@ export default function BrowseFilters({
                       </span>
                     )}
                   </span>
-                  <span className={`shrink-0 font-mono text-xs text-ink-3 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`}>
-                    ▶
-                  </span>
+                  <Icon name="chevronRight" className={`h-4 w-4 shrink-0 text-ink-3 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`} />
                 </button>
 
                 {isExpanded && (
@@ -161,7 +161,7 @@ export default function BrowseFilters({
                       const checked = selectedSubcategories.includes(item);
                       const translatedItem = labels.categoryLabels[item] ?? item;
                       return (
-                        <label key={item} className="flex cursor-pointer items-center gap-2">
+                        <label key={item} className="flex min-h-9 cursor-pointer items-center gap-2">
                           <span
                             onClick={() => toggleSubcategory(item)}
                             className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border-2 transition ${
@@ -194,7 +194,7 @@ export default function BrowseFilters({
               key={value}
               type="button"
               onClick={() => update({ level: value || null })}
-              className={`cursor-pointer rounded-full px-3.5 py-1.5 font-manrope text-sm font-[700] shadow-hard-sm transition active:translate-y-[1px] ${
+              className={`min-h-10 cursor-pointer rounded-full px-4 py-2 font-manrope text-sm font-[700] shadow-hard-sm transition active:translate-y-[1px] ${
                 level === value
                   ? "bg-orange text-on-bright"
                   : "bg-paper text-ink hover:bg-orange hover:text-on-bright"
@@ -244,7 +244,7 @@ export default function BrowseFilters({
         <button
           type="button"
           onClick={() => { setSliderValue(0); router.replace("/browse"); }}
-          className="cursor-pointer rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink-2 shadow-hard-sm transition hover:text-orange-text"
+          className="min-h-11 cursor-pointer rounded-full bg-paper px-4 py-2 font-manrope text-sm font-[700] text-ink-2 shadow-hard-sm transition hover:text-orange-text"
         >
           {labels.clearAllFilters}
         </button>
@@ -256,18 +256,19 @@ export default function BrowseFilters({
 
 function Toggle({ label, active, onToggle }: { label: string; active: boolean; onToggle: () => void }) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex min-h-10 items-center justify-between">
       <span className="font-manrope text-sm text-ink">{label}</span>
       <button
         type="button"
         onClick={onToggle}
-        className={`cursor-pointer relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
+        aria-pressed={active}
+        className={`cursor-pointer relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
           active ? "bg-orange" : "bg-ink/20"
         }`}
       >
         <span
-          className={`inline-block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform ${
-            active ? "translate-x-4" : "translate-x-0.5"
+          className={`inline-block h-4 w-4 rounded-full bg-white shadow transition-transform ${
+            active ? "translate-x-6" : "translate-x-1"
           }`}
         />
       </button>

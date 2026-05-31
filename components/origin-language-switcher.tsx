@@ -82,7 +82,7 @@ export default function OriginLanguageSwitcher({
           {/* backdrop */}
           <div className="fixed inset-0 z-10" onClick={close} />
 
-          <div className="absolute right-0 top-full z-20 mt-2 min-w-[13rem] overflow-hidden rounded-xl bg-paper-2 shadow-hard">
+          <div className="absolute bottom-full right-0 z-20 mb-2 max-h-[min(18rem,calc(100vh-12rem))] min-w-[13rem] overflow-y-auto rounded-xl bg-paper-2 shadow-hard lg:bottom-auto lg:top-full lg:mb-0 lg:mt-2">
             {originLanguages.length > 0 && (
               <div className="border-b border-ink/10 py-1">
                 {originLanguages.map((lang) => (

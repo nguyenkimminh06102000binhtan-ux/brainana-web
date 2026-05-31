@@ -8,6 +8,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { enrollInCourse } from "./actions";
 import { getLocale } from "@/utils/i18n";
+import { Icon } from "@/components/ui-icons";
 
 type CourseWithCreator = {
   id: string;
@@ -223,7 +224,7 @@ export default async function CoursesPage({
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6 px-6 py-8">
+    <div className="mx-auto max-w-5xl space-y-6 px-4 py-5 sm:px-6 sm:py-8">
       <div>
         <h1 className="font-fredoka text-4xl font-[600] leading-tight tracking-tight">Explore Courses</h1>
         <p className="mt-2 font-manrope text-sm text-ink-2">
@@ -238,20 +239,20 @@ export default async function CoursesPage({
         <label htmlFor="course-search" className="mb-2 block font-mono text-xs uppercase tracking-widest text-ink-2">
           Search courses
         </label>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <input
             id="course-search"
             name="q"
             defaultValue={q}
             placeholder="Search courses"
             autoComplete="off"
-            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+            className="min-w-0 flex-1 rounded-full bg-paper-2 px-5 py-3.5 font-manrope text-base text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink sm:py-3 sm:text-sm"
           />
           <button
             type="submit"
-            className="rounded-full bg-yellow px-6 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-yellow px-6 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard transition active:translate-y-[2px] active:shadow-hard-sm"
           >
-            Search
+            <Icon name="search" className="h-4 w-4" /> Search
           </button>
         </div>
       </form>
@@ -263,7 +264,7 @@ export default async function CoursesPage({
             <Link
               key={cat}
               href={filterHref(cat)}
-              className={`rounded-md border px-3 py-1.5 text-sm ${
+            className={`rounded-full border px-4 py-2 text-sm ${
                 isActive
                   ? "bg-orange font-manrope font-[800] text-on-bright shadow-hard-sm"
                   : "bg-paper-2 font-manrope font-[800] text-ink shadow-hard-sm"
@@ -301,7 +302,7 @@ export default async function CoursesPage({
             return (
               <article
                 key={course.id}
-                className="overflow-hidden rounded-lg bg-paper-2 shadow-hard"
+                className="overflow-hidden rounded-[1.2rem] bg-paper-2 shadow-hard"
               >
                 <div className="relative flex h-32 items-center justify-center bg-blue">
                   {course.cover_image_url ? (
@@ -331,7 +332,9 @@ export default async function CoursesPage({
                   )}
 
                   <div className="mt-auto flex flex-wrap gap-2 font-mono text-xs text-ink-2">
-                    <span className="rounded-full border bg-green-soft px-2 py-1">🧠 {formatCount(course.learner_count)} learners</span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border bg-green-soft px-2.5 py-1">
+                      <Icon name="users" className="h-3.5 w-3.5" /> {formatCount(course.learner_count)} learners
+                    </span>
                     {course.source_language && course.target_language && (
                       <span className="rounded-full border bg-yellow-soft px-2 py-1">
                         {course.source_language} to {course.target_language}
@@ -340,17 +343,17 @@ export default async function CoursesPage({
                   </div>
 
                   {isEnrolled ? (
-                    <div className="rounded-full bg-green-soft px-5 py-3 text-center font-manrope text-base font-[800] text-ink shadow-hard-sm">
-                      Enrolled
+                    <div className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-green-soft px-5 py-3 text-center font-manrope text-base font-[800] text-ink shadow-hard-sm">
+                      <Icon name="check" className="h-4 w-4" /> Enrolled
                     </div>
                   ) : (
                     <form action={enrollInCourse}>
                       <input type="hidden" name="course_id" value={course.id} />
                       <button
                         type="submit"
-                        className="w-full rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
+                        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-orange px-5 py-3 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm"
                       >
-                        Enroll
+                        Enroll <Icon name="arrowRight" className="h-4 w-4" />
                       </button>
                     </form>
                   )}

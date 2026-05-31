@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { logout } from "../actions";
+import { Icon } from "@/components/ui-icons";
 
 interface AvatarMenuProps {
   avatarUrl: string | null;
@@ -77,14 +78,14 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
       </button>
 
       {open && (
-        <div role="menu" aria-label="Account menu" className="absolute right-0 top-12 z-50 min-w-44 overflow-hidden rounded-xl bg-paper-2 shadow-hard">
+        <div role="menu" aria-label="Account menu" className="absolute bottom-12 right-0 z-50 min-w-44 overflow-hidden rounded-xl border border-ink/10 bg-paper-2 shadow-hard lg:bottom-auto lg:top-12">
           <Link
             href={`/u/${username}`}
             role="menuitem"
             onClick={() => setOpen(false)}
             className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
           >
-            <span aria-hidden="true">👤</span> {labels.profile}
+            <Icon name="user" className="h-4 w-4" /> {labels.profile}
           </Link>
           <Link
             href="/settings"
@@ -92,7 +93,7 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
             onClick={() => setOpen(false)}
             className="flex items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-ink transition hover:bg-blue hover:text-ocean"
           >
-            <span aria-hidden="true">⚙️</span> {labels.settings}
+            <Icon name="settings" className="h-4 w-4" /> {labels.settings}
           </Link>
           <div className="mx-4 border-t border-ink/10" role="separator" />
           <form action={logout}>
@@ -101,7 +102,7 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
               role="menuitem"
               className="flex w-full items-center gap-2.5 px-4 py-3 font-manrope text-sm font-[700] text-orange-text transition hover:bg-red-soft"
             >
-              <span aria-hidden="true">🚪</span> {labels.logout}
+              <Icon name="logOut" className="h-4 w-4" /> {labels.logout}
             </button>
           </form>
         </div>
