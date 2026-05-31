@@ -1,11 +1,9 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { rateLimitUser } from "@/utils/rate-limit";
 import { getCategoryForItem, CATEGORY_TREE } from "@/app/constants/categories";
-
-const anthropic = new Anthropic();
+import { aiStream } from "@/utils/ai-client";
 
 type LearnCard = {
   id: string;
@@ -185,31 +183,17 @@ export async function POST(req: NextRequest) {
   const MAX_HISTORY = 10;
   const trimmedMessages = messages.slice(-MAX_HISTORY);
 
-  const stream = await anthropic.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 768,
-    // Prompt caching: system prompt is identical every call — cache it
-    system: [
-      {
-        type: "text",
-        text: systemPrompt,
-        cache_control: { type: "ephemeral" },
-      },
-    ],
-    messages: trimmedMessages.length > 0 ? trimmedMessages : [{ role: "user", content: "__START__" }],
-    stream: true,
-  });
-
   const readable = new ReadableStream({
     async start(controller) {
       const enc = new TextEncoder();
-      for await (const event of stream) {
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
-          controller.enqueue(enc.encode(event.delta.text));
-        }
+      const gen = aiStream({
+        system: systemPrompt,
+        messages: trimmedMessages.length > 0 ? trimmedMessages : [{ role: "user", content: "__START__" }],
+        maxTokens: 768,
+        cacheSystem: true, // prompt caching (Anthropic only, no-op on Mistral)
+      });
+      for await (const chunk of gen) {
+        controller.enqueue(enc.encode(chunk));
       }
       controller.close();
     },
