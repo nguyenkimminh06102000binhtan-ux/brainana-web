@@ -218,7 +218,7 @@ function CourseCardShell({ course, cards, categories, levels, children }: { cour
     <div className="group overflow-hidden rounded-xl bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
       <Link href={`/c/${course.slug}`} className={`relative flex h-20 items-end px-4 pb-3 ${headerBg} block`} style={STRIPE}>
         {course.cover_image_url ? (
-          <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
+          <Image src={course.cover_image_url} alt={course.title} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
         ) : (
           <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink-2">
             [{" "}{[categoryLabel?.toLowerCase(), course.level ? (levels[course.level] ?? course.level).toLowerCase() : null].filter(Boolean).join(" · ")}{" "}]

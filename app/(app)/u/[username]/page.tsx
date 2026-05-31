@@ -151,7 +151,7 @@ export default async function PublicProfilePage({
           <div className="relative">
             <div className="relative h-44 w-44 overflow-hidden rounded-full bg-blue shadow-hard">
               {profile.avatar_url ? (
-                <Image src={profile.avatar_url} alt={displayName} fill className="object-cover" />
+                <Image src={profile.avatar_url} alt={displayName} fill sizes="176px" className="object-cover" />
               ) : (
                 <span className="flex h-full w-full items-center justify-center font-fredoka text-6xl font-[700] text-ocean">
                   {displayName[0]?.toUpperCase()}

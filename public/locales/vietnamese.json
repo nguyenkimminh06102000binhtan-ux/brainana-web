@@ -610,5 +610,30 @@
     "memOfWeek": "Gợi ý tuần này",
     "memOfWeekEmpty": "Chưa có gợi ý trong tuần này.",
     "inCourse": "trong {course}"
+  },
+  "learn": {
+    "aiTutor": "✨ Gia sư AI",
+    "whichSections": "Chọn phần học?",
+    "allSections": "Tất cả các phần — {count} thẻ",
+    "untitledSection": "Phần chưa đặt tên",
+    "difficulty": "Độ khó",
+    "beginnerLabel": "Cơ bản",
+    "beginnerNote": "Ôn tập đơn giản, từng khái niệm một",
+    "intermediateLabel": "Trung cấp",
+    "intermediateNote": "Kết hợp ôn tập và liên kết hai khái niệm",
+    "advancedLabel": "Nâng cao",
+    "advancedNote": "Vận dụng, tổng hợp và các trường hợp đặc biệt",
+    "anyLabel": "Bất kỳ",
+    "anyNote": "Bắt đầu dễ, tăng dần khi bạn trả lời đúng",
+    "trackProgress": "Tính vào lịch ôn tập",
+    "startSession": "Bắt đầu phiên học với Gia sư AI",
+    "backToCourse": "Quay lại khoá học",
+    "sessionComplete": "Hoàn thành phiên học!",
+    "score": "{correct} / {total} thẻ trả lời đúng",
+    "studyAgain": "Học lại",
+    "saving": "Đang lưu…",
+    "endSession": "Kết thúc phiên học",
+    "inputPlaceholder": "Nhập câu trả lời của bạn…",
+    "send": "Gửi"
   }
 }

@@ -221,6 +221,31 @@ export type Locale = {
     bulkGeneratingAudio: string;
     bulkGenerateDoneAudio: string;
   };
+  learn: {
+    aiTutor: string;
+    whichSections: string;
+    allSections: string;
+    untitledSection: string;
+    difficulty: string;
+    beginnerLabel: string;
+    beginnerNote: string;
+    intermediateLabel: string;
+    intermediateNote: string;
+    advancedLabel: string;
+    advancedNote: string;
+    anyLabel: string;
+    anyNote: string;
+    trackProgress: string;
+    startSession: string;
+    backToCourse: string;
+    sessionComplete: string;
+    score: string;
+    studyAgain: string;
+    saving: string;
+    endSession: string;
+    inputPlaceholder: string;
+    send: string;
+  };
   start: {
     estimatedTime: string;
     title: string;

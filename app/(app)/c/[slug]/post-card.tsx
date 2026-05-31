@@ -76,7 +76,7 @@ function Avatar({ profile, size = 8 }: { profile: { username: string; display_na
   return (
     <div className={cls}>
       {profile?.avatar_url ? (
-        <Image src={profile.avatar_url} alt={name} fill className="object-cover" />
+        <Image src={profile.avatar_url} alt={name} fill sizes="48px" className="object-cover" />
       ) : (
         <span className="flex h-full w-full items-center justify-center font-mono text-xs font-[700] text-ocean">
           {name[0]?.toUpperCase()}
