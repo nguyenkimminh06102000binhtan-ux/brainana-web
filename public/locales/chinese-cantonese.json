@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "最多允許3張圖片。",
     "aiImportErrorTotalTooLarge": "總上傳大小超過25 MB。",
     "aiImportErrorNoContent": "請先添加文件或貼上文字。",
-    "aiImportErrorNoTitle": "請在生成卡片前添加課程標題。"
+    "aiImportErrorNoTitle": "請在生成卡片前添加課程標題。",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~ 60秒 · 全部喺一頁",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Dozvoljene su maksimalno 3 slike.",
     "aiImportErrorTotalTooLarge": "Ukupna veličina otpremanja prelazi 25 MB.",
     "aiImportErrorNoContent": "Prvo dodajte datoteku ili zalijepite tekst.",
-    "aiImportErrorNoTitle": "Dodajte naziv kursa prije generiranja kartica."
+    "aiImportErrorNoTitle": "Dodajte naziv kursa prije generiranja kartica.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sekundi · sve na jednoj stranici",

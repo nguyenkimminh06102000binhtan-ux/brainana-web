@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "அதிகபட்சம் 3 படங்கள் அனுமதிக்கப்படும்.",
     "aiImportErrorTotalTooLarge": "மொத்த பதிவேற்ற அளவு 25 MB ஐ விட அதிகமாக உள்ளது.",
     "aiImportErrorNoContent": "முதலில் கோப்பைச் சேர்க்கவும் அல்லது உரையை ஒட்டவும்.",
-    "aiImportErrorNoTitle": "கார்டுகளை உருவாக்கும் முன் பாடத் தலைப்பைச் சேர்க்கவும்."
+    "aiImportErrorNoTitle": "கார்டுகளை உருவாக்கும் முன் பாடத் தலைப்பைச் சேர்க்கவும்.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 நொடி · அனைத்தும் ஒரே பக்கத்தில்",

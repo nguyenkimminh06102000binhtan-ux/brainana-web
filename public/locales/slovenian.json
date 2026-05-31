@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Dovoljene so največ 3 slike.",
     "aiImportErrorTotalTooLarge": "Skupna velikost nalaganja presega 25 MB.",
     "aiImportErrorNoContent": "Najprej dodajte datoteko ali prilepite besedilo.",
-    "aiImportErrorNoTitle": "Pred ustvarjanjem kartic dodajte naslov tečaja."
+    "aiImportErrorNoTitle": "Pred ustvarjanjem kartic dodajte naslov tečaja.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 s · vse na eni strani",

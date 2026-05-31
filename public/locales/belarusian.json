@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Дапускаецца максімум 3 выявы.",
     "aiImportErrorTotalTooLarge": "Агульны памер загрузкі перавышае 25 МБ.",
     "aiImportErrorNoContent": "Спачатку дадайце файл або ўстаўце тэкст.",
-    "aiImportErrorNoTitle": "Дадайце назву курса перад стварэннем картак."
+    "aiImportErrorNoTitle": "Дадайце назву курса перад стварэннем картак.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 с · усё на адной старонцы",

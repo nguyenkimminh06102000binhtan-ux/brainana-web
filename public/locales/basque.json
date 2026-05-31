@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Gehienez 3 irudi onartzen dira.",
     "aiImportErrorTotalTooLarge": "Kargatze-tamainak 25 MB gainditzen ditu.",
     "aiImportErrorNoContent": "Gehitu fitxategi bat edo itsatsi testuren bat lehenik.",
-    "aiImportErrorNoTitle": "Gehitu ikastaroaren izenburua txartelak sortu aurretik."
+    "aiImportErrorNoTitle": "Gehitu ikastaroaren izenburua txartelak sortu aurretik.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 segundo · dena orrialde bakarrean",

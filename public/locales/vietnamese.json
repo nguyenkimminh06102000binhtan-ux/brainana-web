@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Tối đa 3 ảnh được phép.",
     "aiImportErrorTotalTooLarge": "Tổng kích thước tải lên vượt quá 25 MB.",
     "aiImportErrorNoContent": "Thêm file hoặc dán văn bản trước.",
-    "aiImportErrorNoTitle": "Thêm tiêu đề khóa học trước khi tạo thẻ."
+    "aiImportErrorNoTitle": "Thêm tiêu đề khóa học trước khi tạo thẻ.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 giây · tất cả trên một trang",

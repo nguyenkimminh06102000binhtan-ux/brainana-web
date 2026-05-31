@@ -10,6 +10,8 @@ import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
 import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
+import { getTTSVoice } from "@/utils/tts";
+import { generateTTSAudio } from "@/app/actions/tts";
 import AiImportModal from "./ai-import-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -18,7 +20,7 @@ const IMAGE_MAX = 5 * 1024 * 1024;
 const AUDIO_MAX = 10 * 1024 * 1024;
 
 type UploadState = { uploading: boolean; compressing: boolean; error: string | null };
-type UploadField = "image" | "frontAudio" | "backAudio";
+type UploadField = "image" | "backAudio";
 
 type Item = {
   id: number;
@@ -27,8 +29,6 @@ type Item = {
   romanization: string;
   imagePath: string;
   imageDisplayUrl: string;
-  frontAudioPath: string;
-  frontAudioDisplayUrl: string;
   backAudioPath: string;
   backAudioDisplayUrl: string;
   distractors: string[];
@@ -45,7 +45,6 @@ type Section = {
 let uid = 1;
 const freshUpload = (): Record<UploadField, UploadState> => ({
   image: { uploading: false, compressing: false, error: null },
-  frontAudio: { uploading: false, compressing: false, error: null },
   backAudio: { uploading: false, compressing: false, error: null },
 });
 const makeItem = (): Item => ({
@@ -55,8 +54,6 @@ const makeItem = (): Item => ({
   romanization: "",
   imagePath: "",
   imageDisplayUrl: "",
-  frontAudioPath: "",
-  frontAudioDisplayUrl: "",
   backAudioPath: "",
   backAudioDisplayUrl: "",
   distractors: [],
@@ -198,11 +195,13 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
-  onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
+  onClearUrl: (field: "imagePath" | "backAudioPath") => void;
   onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
   const [suggesting, setSuggesting] = useState(false);
+  const [generatingAudio, setGeneratingAudio] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
+  const ttsVoice = getTTSVoice(targetLanguage);
 
   async function handleAutoRomanization() {
     if (!item.back.trim() || !roSystem) return;
@@ -212,6 +211,22 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
       if (romanization) onUpdate("romanization", romanization);
     } finally {
       setSuggesting(false);
+    }
+  }
+
+  async function handleAutoAudio() {
+    if (!item.back.trim() || !ttsVoice) return;
+    setGeneratingAudio(true);
+    try {
+      const { audioBase64 } = await generateTTSAudio(item.back, targetLanguage);
+      if (!audioBase64) return;
+      const bytes = atob(audioBase64);
+      const arr = new Uint8Array(bytes.length);
+      for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
+      const file = new File([arr], "tts.mp3", { type: "audio/mpeg" });
+      onUpload("backAudio", file);
+    } finally {
+      setGeneratingAudio(false);
     }
   }
 
@@ -234,14 +249,6 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
             onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("front", v))}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
-          <div className="mt-3">
-            {label(labels.frontAudio, true, labels.optional)}
-            {item.frontAudioDisplayUrl
-              ? <AudioPreview url={item.frontAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioPath")} />
-              : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
-                  uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
-                  onFile={(f) => onUpload("frontAudio", f)} />}
-          </div>
         </div>
 
         <div className="bg-paper-2 p-4">
@@ -254,9 +261,21 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
             {label(labels.backAudio, true, labels.optional)}
             {item.backAudioDisplayUrl
               ? <AudioPreview url={item.backAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("backAudioPath")} />
-              : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
-                  uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
-                  onFile={(f) => onUpload("backAudio", f)} />}
+              : <div className="flex items-center gap-2">
+                  <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
+                    uploading={item.uploads.backAudio.uploading} compressing={item.uploads.backAudio.compressing} error={item.uploads.backAudio.error}
+                    onFile={(f) => onUpload("backAudio", f)} />
+                  {ttsVoice && (
+                    <button
+                      type="button"
+                      onClick={handleAutoAudio}
+                      disabled={generatingAudio || !item.back.trim() || item.uploads.backAudio.uploading}
+                      className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {generatingAudio ? labels.generating : labels.autoGenerate}
+                    </button>
+                  )}
+                </div>}
           </div>
         </div>
       </div>
@@ -315,6 +334,7 @@ export default function CreateCourseForm({
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState("English (US)");
   const [formTitle, setFormTitle] = useState("");
   const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
+  const [bulkAudioStatuses, setBulkAudioStatuses] = useState<Map<number, string>>(new Map());
   const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
   const [aiImportValidationError, setAiImportValidationError] = useState<string | null>(null);
   const prospectiveCourseId = useRef(crypto.randomUUID());
@@ -372,12 +392,8 @@ export default function CreateCourseForm({
     ));
   }
 
-  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "frontAudioPath" | "backAudioPath") {
-    const displayField = field === "imagePath"
-      ? "imageDisplayUrl"
-      : field === "frontAudioPath"
-        ? "frontAudioDisplayUrl"
-        : "backAudioDisplayUrl";
+  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "backAudioPath") {
+    const displayField = field === "imagePath" ? "imageDisplayUrl" : "backAudioDisplayUrl";
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
         ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: "", [displayField]: "" } : item) }
@@ -412,9 +428,40 @@ export default function CreateCourseForm({
     setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
   }
 
+  async function handleSectionBulkGenerateAudio(sectionId: number) {
+    if (!getTTSVoice(selectedTargetLanguage)) return;
+    const section = sections.find((s) => s.id === sectionId);
+    if (!section) return;
+    const missing = section.items
+      .filter((i) => i.back.trim() && !i.backAudioPath)
+      .map((i) => ({ itemId: i.id, back: i.back }));
+    if (missing.length === 0) return;
+    const BATCH = 5;
+    let done = 0;
+    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done: 0, total: missing.length })));
+    for (let i = 0; i < missing.length; i += BATCH) {
+      const batch = missing.slice(i, i + BATCH);
+      await Promise.all(
+        batch.map(async ({ itemId, back }) => {
+          const { audioBase64 } = await generateTTSAudio(back, selectedTargetLanguage);
+          if (!audioBase64) return;
+          const bytes = atob(audioBase64);
+          const arr = new Uint8Array(bytes.length);
+          for (let j = 0; j < bytes.length; j++) arr[j] = bytes.charCodeAt(j);
+          const file = new File([arr], "tts.mp3", { type: "audio/mpeg" });
+          await handleUpload(sectionId, itemId, "backAudio", file);
+        })
+      );
+      done += batch.length;
+      setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done, total: missing.length })));
+    }
+    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneAudio, { count: missing.length })));
+    setTimeout(() => setBulkAudioStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+  }
+
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
-    const pathField = field === "image" ? "imagePath" : field === "frontAudio" ? "frontAudioPath" : "backAudioPath";
-    const displayField = field === "image" ? "imageDisplayUrl" : field === "frontAudio" ? "frontAudioDisplayUrl" : "backAudioDisplayUrl";
+    const pathField = field === "image" ? "imagePath" : "backAudioPath";
+    const displayField = field === "image" ? "imageDisplayUrl" : "backAudioDisplayUrl";
     const willCompress = field === "image" && IMAGE_TYPES.includes(file.type) && file.size > IMAGE_MAX;
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
@@ -506,7 +553,6 @@ export default function CreateCourseForm({
         back: i.back,
         romanization: i.romanization,
         imagePath: i.imagePath,
-        frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
         distractors: i.distractors,
       })),
@@ -657,6 +703,21 @@ export default function CreateCourseForm({
                       className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {labels.bulkGenerateRomanization}
+                    </button>
+                  </div>
+                )}
+                {getTTSVoice(selectedTargetLanguage) && (
+                  <div className="flex items-center gap-1.5">
+                    {bulkAudioStatuses.get(section.id) && (
+                      <span className="font-manrope text-xs text-ink-2">{bulkAudioStatuses.get(section.id)}</span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleSectionBulkGenerateAudio(section.id)}
+                      disabled={!!bulkAudioStatuses.get(section.id)}
+                      className="rounded-md bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {labels.bulkGenerateAudio}
                     </button>
                   </div>
                 )}

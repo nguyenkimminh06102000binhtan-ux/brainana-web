@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maximum 3 images autorisées.",
     "aiImportErrorTotalTooLarge": "La taille totale dépasse 25 Mo.",
     "aiImportErrorNoContent": "Ajoutez un fichier ou collez du texte d'abord.",
-    "aiImportErrorNoTitle": "Ajoutez un titre de cours avant de générer des cartes."
+    "aiImportErrorNoTitle": "Ajoutez un titre de cours avant de générer des cartes.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 secondes · le tout sur une seule page",

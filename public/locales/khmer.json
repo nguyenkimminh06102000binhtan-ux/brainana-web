@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "រូបភាពអតិបរមា 3 ត្រូវបានអនុញ្ញាត។",
     "aiImportErrorTotalTooLarge": "ទំហំផ្ទុកឡើងសរុបលើសពី 25 MB ។",
     "aiImportErrorNoContent": "បន្ថែមឯកសារ ឬបិទភ្ជាប់អត្ថបទជាមុនសិន។",
-    "aiImportErrorNoTitle": "បន្ថែមចំណងជើងវគ្គសិក្សាមុនពេលបង្កើតកាត។"
+    "aiImportErrorNoTitle": "បន្ថែមចំណងជើងវគ្គសិក្សាមុនពេលបង្កើតកាត។",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 វិនាទី · ទាំងអស់នៅលើទំព័រមួយ។",

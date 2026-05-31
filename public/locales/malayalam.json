@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "പരമാവധി 3 ചിത്രങ്ങൾ അനുവദനീയമാണ്.",
     "aiImportErrorTotalTooLarge": "മൊത്തം അപ്‌ലോഡ് വലുപ്പം 25 MB കവിയുന്നു.",
     "aiImportErrorNoContent": "ആദ്യം ഒരു ഫയൽ ചേർക്കുക അല്ലെങ്കിൽ കുറച്ച് ടെക്സ്റ്റ് ഒട്ടിക്കുക.",
-    "aiImportErrorNoTitle": "കാർഡുകൾ സൃഷ്ടിക്കുന്നതിന് മുമ്പ് ഒരു കോഴ്‌സ് ശീർഷകം ചേർക്കുക."
+    "aiImportErrorNoTitle": "കാർഡുകൾ സൃഷ്ടിക്കുന്നതിന് മുമ്പ് ഒരു കോഴ്‌സ് ശീർഷകം ചേർക്കുക.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 സെക്കൻഡ് · എല്ലാം ഒരു പേജിൽ",

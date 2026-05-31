@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Максимум 3 тасвир иҷозат дода мешавад.",
     "aiImportErrorTotalTooLarge": "Андозаи умумии боргузорӣ аз 25 МБ зиёд аст.",
     "aiImportErrorNoContent": "Аввал файл илова кунед ё матнро часбонед.",
-    "aiImportErrorNoTitle": "Пеш аз тавлиди кортҳо унвони курсро илова кунед."
+    "aiImportErrorNoTitle": "Пеш аз тавлиди кортҳо унвони курсро илова кунед.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 сония · ҳама дар як саҳифа",

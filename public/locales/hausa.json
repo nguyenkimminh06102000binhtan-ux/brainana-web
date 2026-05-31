@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Matsakaicin hotuna 3 da aka yarda.",
     "aiImportErrorTotalTooLarge": "Jimlar girman ɗorawa ya wuce 25 MB.",
     "aiImportErrorNoContent": "Ƙara fayil ko liƙa wasu rubutu da farko.",
-    "aiImportErrorNoTitle": "Ƙara taken kwas kafin ƙirƙirar katunan."
+    "aiImportErrorNoTitle": "Ƙara taken kwas kafin ƙirƙirar katunan.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sec · duk a shafi daya",

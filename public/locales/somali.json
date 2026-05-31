@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "3 sawir ee ugu badan waa la ogolyahay",
     "aiImportErrorTotalTooLarge": "Wadarta cabbirka soo dejinta ayaa ka badan 25 MB.",
     "aiImportErrorNoContent": "Ku dar fayl ama ku dheji qoraal marka hore.",
-    "aiImportErrorNoTitle": "Ku dar cinwaanka koorsada ka hor inta aanad samayn kaadhadhka."
+    "aiImportErrorNoTitle": "Ku dar cinwaanka koorsada ka hor inta aanad samayn kaadhadhka.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 ilbiriqsi · dhamaantood hal bog",

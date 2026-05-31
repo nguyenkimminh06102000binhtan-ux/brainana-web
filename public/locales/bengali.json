@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "সর্বাধিক 3 ছবি অনুমোদিত.",
     "aiImportErrorTotalTooLarge": "মোট আপলোডের আকার 25 MB ছাড়িয়ে গেছে৷",
     "aiImportErrorNoContent": "প্রথমে একটি ফাইল যোগ করুন বা কিছু পাঠ্য পেস্ট করুন।",
-    "aiImportErrorNoTitle": "কার্ড তৈরি করার আগে একটি কোর্সের শিরোনাম যোগ করুন।"
+    "aiImportErrorNoTitle": "কার্ড তৈরি করার আগে একটি কোর্সের শিরোনাম যোগ করুন।",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 সেকেন্ড · সব এক পৃষ্ঠায়",

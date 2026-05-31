@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Atļauti ne vairāk kā 3 attēli.",
     "aiImportErrorTotalTooLarge": "Kopējais augšupielādes lielums pārsniedz 25 MB.",
     "aiImportErrorNoContent": "Vispirms pievienojiet failu vai ielīmējiet tekstu.",
-    "aiImportErrorNoTitle": "Pirms kartīšu ģenerēšanas pievienojiet kursa nosaukumu."
+    "aiImportErrorNoTitle": "Pirms kartīšu ģenerēšanas pievienojiet kursa nosaukumu.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sek · viss vienā lapā",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimal 3 ta rasmga ruxsat beriladi.",
     "aiImportErrorTotalTooLarge": "Umumiy yuklash hajmi 25 MB dan oshadi.",
     "aiImportErrorNoContent": "Avval fayl qo'shing yoki matnni joylashtiring.",
-    "aiImportErrorNoTitle": "Kartalarni yaratishdan oldin kurs nomini qo'shing."
+    "aiImportErrorNoTitle": "Kartalarni yaratishdan oldin kurs nomini qo'shing.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 soniya · hammasi bitta sahifada",

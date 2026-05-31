@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "En fazla 3 resme izin verilir.",
     "aiImportErrorTotalTooLarge": "Toplam yükleme boyutu 25 MB'ı aşıyor.",
     "aiImportErrorNoContent": "Önce bir dosya ekle veya metin yapıştır.",
-    "aiImportErrorNoTitle": "Kart oluşturmadan önce bir kurs başlığı ekle."
+    "aiImportErrorNoTitle": "Kart oluşturmadan önce bir kurs başlığı ekle.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 saniye · hepsi tek sayfada",

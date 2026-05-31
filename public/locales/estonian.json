@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Lubatud on maksimaalselt 3 pilti.",
     "aiImportErrorTotalTooLarge": "Üleslaadimise kogumaht ületab 25 MB.",
     "aiImportErrorNoContent": "Esmalt lisage fail või kleepige teksti.",
-    "aiImportErrorNoTitle": "Enne kaartide loomist lisage kursuse pealkiri."
+    "aiImportErrorNoTitle": "Enne kaartide loomist lisage kursuse pealkiri.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sek · kõik ühel lehel",

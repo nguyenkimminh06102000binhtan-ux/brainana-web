@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Màxim 3 imatges permeses.",
     "aiImportErrorTotalTooLarge": "La mida total de pujada supera els 25 MB.",
     "aiImportErrorNoContent": "Afegiu un fitxer o enganxeu un text primer.",
-    "aiImportErrorNoTitle": "Afegiu un títol de curs abans de generar targetes."
+    "aiImportErrorNoTitle": "Afegiu un títol de curs abans de generar targetes.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 segons · tot en una pàgina",

@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimum 3 gambar diperbolehkan.",
     "aiImportErrorTotalTooLarge": "Total ukuran unggahan melebihi 25 MB.",
     "aiImportErrorNoContent": "Tambahkan file atau tempel beberapa teks terlebih dahulu.",
-    "aiImportErrorNoTitle": "Tambahkan judul kursus sebelum membuat kartu."
+    "aiImportErrorNoTitle": "Tambahkan judul kursus sebelum membuat kartu.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 detik · semuanya dalam satu halaman",

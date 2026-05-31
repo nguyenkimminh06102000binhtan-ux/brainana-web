@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "උපරිම පින්තූර 3කට ඉඩ දී ඇත.",
     "aiImportErrorTotalTooLarge": "සම්පූර්ණ උඩුගත කිරීමේ ප්‍රමාණය 25 MB ඉක්මවයි.",
     "aiImportErrorNoContent": "පළමුව ගොනුවක් එක් කරන්න හෝ පෙළ කිහිපයක් අලවන්න.",
-    "aiImportErrorNoTitle": "කාඩ්පත් ජනනය කිරීමට පෙර පාඨමාලා මාතෘකාවක් එක් කරන්න."
+    "aiImportErrorNoTitle": "කාඩ්පත් ජනනය කිරීමට පෙර පාඨමාලා මාතෘකාවක් එක් කරන්න.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 තත්පර · සියල්ල එක පිටුවක",

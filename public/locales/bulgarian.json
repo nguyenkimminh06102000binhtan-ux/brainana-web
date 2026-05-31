@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Разрешени са максимум 3 изображения.",
     "aiImportErrorTotalTooLarge": "Общият размер на качените файлове надхвърля 25 MB.",
     "aiImportErrorNoContent": "Първо добавете файл или поставете текст.",
-    "aiImportErrorNoTitle": "Добавете заглавие на курс, преди да генерирате карти."
+    "aiImportErrorNoTitle": "Добавете заглавие на курс, преди да генерирате карти.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 сек · всичко на една страница",

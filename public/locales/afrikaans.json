@@ -549,7 +549,10 @@
     "aiImportErrorTooManyImages": "Maksimum 3 beelde word toegelaat.",
     "aiImportErrorTotalTooLarge": "Totale oplaaigrootte oorskry 25 MB.",
     "aiImportErrorNoContent": "Voeg eers 'n lêer by of plak 'n bietjie teks.",
-    "aiImportErrorNoTitle": "Voeg 'n kursustitel by voordat kaarte gegenereer word."
+    "aiImportErrorNoTitle": "Voeg 'n kursustitel by voordat kaarte gegenereer word.",
+    "bulkGenerateAudio": "Auto-generate missing audio",
+    "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
   },
   "start": {
     "estimatedTime": "~60 sekondes · alles op een bladsy",
