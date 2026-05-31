@@ -268,7 +268,19 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
   onClearUrl: (field: "imagePath" | "backAudioPath") => void;
   onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
+  const [suggesting, setSuggesting] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
+
+  async function handleAutoRomanization() {
+    if (!item.back.trim() || !roSystem) return;
+    setSuggesting(true);
+    try {
+      const { romanization } = await suggestRomanization(item.back, targetLanguage);
+      if (romanization) onUpdate("romanization", romanization);
+    } finally {
+      setSuggesting(false);
+    }
+  }
 
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
@@ -308,13 +320,23 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
       {roSystem && (
         <div className="border-t border-ink/10 bg-paper px-4 py-3">
           {lbl(t(labels.romanization, { system: roSystem.system }), true, labels.optional)}
-          <input
-            type="text"
-            value={item.romanization}
-            onChange={(e) => onUpdate("romanization", e.target.value)}
-            placeholder={roSystem.placeholder}
-            className="w-full bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3"
-          />
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={item.romanization}
+              onChange={(e) => onUpdate("romanization", e.target.value)}
+              placeholder={roSystem.placeholder}
+              className="min-w-0 flex-1 bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3"
+            />
+            <button
+              type="button"
+              onClick={handleAutoRomanization}
+              disabled={suggesting || !item.back.trim()}
+              className="shrink-0 rounded-md bg-paper-2 px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {suggesting ? labels.generating : labels.autoGenerate}
+            </button>
+          </div>
         </div>
       )}
       <div className="border-t border-ink/10 bg-paper px-4 py-3">
