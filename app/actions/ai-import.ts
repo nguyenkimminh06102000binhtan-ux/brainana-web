@@ -88,11 +88,9 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
           : "image/webp"   as const;
         textContent += "\n" + await aiExtractTextFromImage(bytes, mediaType);
       } else if (ext === "pdf") {
-        const { PDFParse } = await import("pdf-parse");
-        const parser = new PDFParse({ data: bytes });
-        const result = await parser.getText();
-        await parser.destroy();
-        textContent += "\n" + result.text;
+        const pdfParse = (await import("pdf-parse")).default;
+        const data = await pdfParse(bytes);
+        textContent += "\n" + data.text;
       } else if (ext === "docx") {
         const mammoth = (await import("mammoth")).default;
         const { value } = await mammoth.extractRawText({ buffer: bytes });

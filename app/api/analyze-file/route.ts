@@ -19,18 +19,16 @@ async function extractText(bytes: Buffer, ext: string): Promise<string> {
   }
 
   if (ext === "pdf") {
-    const { PDFParse } = await import("pdf-parse");
-    const parser = new PDFParse({ data: bytes });
-    const result = await parser.getText();
-    await parser.destroy();
-    const charCount = result.text.trim().length;
+    const pdfParse = (await import("pdf-parse")).default;
+    const data = await pdfParse(bytes);
+    const charCount = data.text.trim().length;
     // Scanned PDFs have no text layer — detect by chars-per-byte ratio.
     // A real text PDF yields at least 1 char per 1,000 bytes.
     const ratio = charCount / bytes.length;
     if (ratio < 0.001) {
       throw new Error("SCANNED_PDF");
     }
-    return result.text;
+    return data.text;
   }
 
   if (ext === "docx") {
