@@ -634,6 +634,12 @@
     "saving": "Đang lưu…",
     "endSession": "Kết thúc phiên học",
     "inputPlaceholder": "Nhập câu trả lời của bạn…",
-    "send": "Gửi"
+    "send": "Gửi",
+    "cardSelectionMode": "How many cards?",
+    "quickPick": "Quick pick",
+    "chooseCards": "Choose cards",
+    "cardsSelected": "{count} / 100 selected",
+    "maxCardsNote": "Max 100 cards",
+    "searchCards": "Search cards…"
   }
 }

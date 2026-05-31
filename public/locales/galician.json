@@ -634,6 +634,12 @@
     "saving": "Saving…",
     "endSession": "End session",
     "inputPlaceholder": "Type your answer…",
-    "send": "Send"
+    "send": "Send",
+    "cardSelectionMode": "How many cards?",
+    "quickPick": "Quick pick",
+    "chooseCards": "Choose cards",
+    "cardsSelected": "{count} / 100 selected",
+    "maxCardsNote": "Max 100 cards",
+    "searchCards": "Search cards…"
   }
 }

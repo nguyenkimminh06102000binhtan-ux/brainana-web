@@ -235,6 +235,12 @@ export type Locale = {
     advancedNote: string;
     anyLabel: string;
     anyNote: string;
+    cardSelectionMode: string;
+    quickPick: string;
+    chooseCards: string;
+    cardsSelected: string;
+    maxCardsNote: string;
+    searchCards: string;
     trackProgress: string;
     startSession: string;
     backToCourse: string;

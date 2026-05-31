@@ -176,13 +176,27 @@ export async function POST(req: NextRequest) {
     return new Response("No cards provided", { status: 400 });
   }
 
-  const systemPrompt = buildSystemPrompt(cards, courseLanguages ?? {}, category ?? null, level ?? null);
+  // Hard cap at 100 cards regardless of what the client sends
+  const cappedCards = cards.slice(0, 100);
+
+  const systemPrompt = buildSystemPrompt(cappedCards, courseLanguages ?? {}, category ?? null, level ?? null);
+
+  // Keep only the last 10 messages to prevent quadratic token growth
+  const MAX_HISTORY = 10;
+  const trimmedMessages = messages.slice(-MAX_HISTORY);
 
   const stream = await anthropic.messages.create({
     model: "claude-haiku-4-5-20251001",
     max_tokens: 768,
-    system: systemPrompt,
-    messages: messages.length > 0 ? messages : [{ role: "user", content: "__START__" }],
+    // Prompt caching: system prompt is identical every call — cache it
+    system: [
+      {
+        type: "text",
+        text: systemPrompt,
+        cache_control: { type: "ephemeral" },
+      },
+    ],
+    messages: trimmedMessages.length > 0 ? trimmedMessages : [{ role: "user", content: "__START__" }],
     stream: true,
   });
 
