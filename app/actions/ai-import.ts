@@ -84,10 +84,9 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
           source: { type: "base64", media_type: IMAGE_MIME[ext]!, data: bytes.toString("base64") },
         });
       } else if (ext === "pdf") {
-        contentBlocks.push({
-          type: "document",
-          source: { type: "base64", media_type: "application/pdf", data: bytes.toString("base64") },
-        } as unknown as Anthropic.TextBlockParam);
+        const { default: pdfParse } = await import("pdf-parse") as unknown as { default: (buf: Buffer) => Promise<{ text: string }> };
+        const data = await pdfParse(bytes);
+        textContent += "\n" + data.text;
       } else if (ext === "docx") {
         const mammoth = (await import("mammoth")).default;
         const { value } = await mammoth.extractRawText({ buffer: bytes });
