@@ -62,7 +62,7 @@ export default function EnrolledCourseCard({
         style={STRIPE}
       >
         {course.cover_image_url ? (
-          <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
+          <Image src={course.cover_image_url} alt={course.title} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
         ) : (
           <span className="relative z-10 font-mono text-xs uppercase tracking-widest text-ink-2">
             [{(labels.categories[course.category ?? ""] ?? course.category)?.toLowerCase() ?? "course"}{course.level ? ` · ${(labels.levels[course.level] ?? course.level).toLowerCase()}` : ""}]

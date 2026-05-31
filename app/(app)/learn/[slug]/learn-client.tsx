@@ -5,6 +5,8 @@ import Link from "next/link";
 import { saveLearnProgress } from "./actions";
 import ChatMessage from "./chat-message";
 import MathToolbar from "./math-toolbar";
+import { t } from "@/utils/t";
+import type { Locale } from "@/utils/i18n";
 
 export type LearnCard = {
   id: string;
@@ -54,6 +56,7 @@ interface Props {
   category: string | null;
   level: string | null;
   sections: LearnSection[];
+  labels: Locale["learn"];
 }
 
 export default function LearnClient({
@@ -65,6 +68,7 @@ export default function LearnClient({
   category,
   level,
   sections,
+  labels,
 }: Props) {
   const [stage, setStage] = useState<"setup" | "chat" | "done">("setup");
   const [selectedSectionIds, setSelectedSectionIds] = useState<Set<string>>(new Set());
@@ -210,7 +214,7 @@ export default function LearnClient({
     return (
       <div className="mx-auto max-w-md px-4 py-10">
         <div className="mb-8 text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-3">AI Tutor</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{labels.aiTutor}</p>
           <h1 className="mt-1 font-fredoka text-3xl font-[600] text-ink">{courseTitle}</h1>
         </div>
 
@@ -218,7 +222,7 @@ export default function LearnClient({
           {/* Section picker */}
           <div>
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">
-              Which sections?
+              {labels.whichSections}
             </p>
             <button
               type="button"
@@ -229,7 +233,7 @@ export default function LearnClient({
                   : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
               }`}
             >
-              All sections — {allCards.length} cards
+              {t(labels.allSections, { count: allCards.length })}
             </button>
             {sections.map((s) => {
               const active = selectedSectionIds.has(s.id);
@@ -244,7 +248,7 @@ export default function LearnClient({
                       : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
                   }`}
                 >
-                  {s.title || "Untitled section"} — {s.cards.length} cards
+                  {s.title || labels.untitledSection} — {s.cards.length} cards
                 </button>
               );
             })}
@@ -252,14 +256,14 @@ export default function LearnClient({
 
           {/* Difficulty selector */}
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">Difficulty</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">{labels.difficulty}</p>
             <div className="flex flex-col gap-2">
               {(
                 [
-                  { value: "beginner",     label: "Beginner",     note: "Straightforward recall, one concept at a time" },
-                  { value: "intermediate", label: "Intermediate",  note: "Mix of recall and two-concept connections" },
-                  { value: "advanced",     label: "Advanced",      note: "Application, synthesis, and edge cases" },
-                  { value: "any",          label: "Any",           note: "Starts easy, gets harder as you answer correctly" },
+                  { value: "beginner",     label: labels.beginnerLabel,     note: labels.beginnerNote },
+                  { value: "intermediate", label: labels.intermediateLabel,  note: labels.intermediateNote },
+                  { value: "advanced",     label: labels.advancedLabel,      note: labels.advancedNote },
+                  { value: "any",          label: labels.anyLabel,           note: labels.anyNote },
                 ] as { value: string; label: string; note: string }[]
               ).map(({ value, label, note }) => {
                 const active = difficulty === value;
@@ -289,7 +293,7 @@ export default function LearnClient({
 
           {/* Track progress toggle */}
           <div className="flex items-center justify-between">
-            <span className="font-manrope text-sm text-ink-2">Count towards spaced repetition</span>
+            <span className="font-manrope text-sm text-ink-2">{labels.trackProgress}</span>
             <button
               type="button"
               role="switch"
@@ -315,13 +319,13 @@ export default function LearnClient({
               disabled={allCards.length === 0}
               className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Start AI Tutor Session
+              {labels.startSession}
             </button>
             <Link
               href={`/c/${courseSlug}`}
               className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink"
             >
-              Back to course
+              {labels.backToCourse}
             </Link>
           </div>
         </div>
@@ -337,10 +341,10 @@ export default function LearnClient({
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <p className="mb-4 text-5xl">🎉</p>
-        <h2 className="font-fredoka text-3xl font-[600] text-ink">Session complete!</h2>
+        <h2 className="font-fredoka text-3xl font-[600] text-ink">{labels.sessionComplete}</h2>
         {total > 0 && (
           <p className="mt-2 font-manrope text-sm text-ink-2">
-            {correct} / {total} cards answered correctly
+            {t(labels.score, { correct, total })}
           </p>
         )}
         <div className="mx-auto mt-8 flex max-w-xs flex-col gap-2">
@@ -353,13 +357,13 @@ export default function LearnClient({
             }}
             className="w-full rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
           >
-            Study again
+            {labels.studyAgain}
           </button>
           <Link
             href={`/c/${courseSlug}`}
             className="w-full rounded-full border-2 border-ink/20 px-4 py-3 text-center font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink"
           >
-            Back to course
+            {labels.backToCourse}
           </Link>
         </div>
       </div>
@@ -372,7 +376,7 @@ export default function LearnClient({
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-3">AI Tutor</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{labels.aiTutor}</p>
           <h2 className="font-fredoka text-xl font-[600] text-ink">{courseTitle}</h2>
         </div>
         <button
@@ -381,7 +385,7 @@ export default function LearnClient({
           disabled={isSaving}
           className="rounded-full border-2 border-ink/20 px-4 py-2 font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/30 hover:text-ink disabled:opacity-50"
         >
-          {isSaving ? "Saving…" : "End session"}
+          {isSaving ? labels.saving : labels.endSession}
         </button>
       </div>
 
@@ -423,7 +427,7 @@ export default function LearnClient({
             }
           }}
           disabled={isStreaming}
-          placeholder="Type your answer…"
+          placeholder={labels.inputPlaceholder}
           rows={1}
           className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
         />
@@ -433,7 +437,7 @@ export default function LearnClient({
           disabled={isStreaming || !input.trim()}
           className="rounded-full bg-orange px-5 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-40"
         >
-          Send
+          {labels.send}
         </button>
       </div>
       </div>

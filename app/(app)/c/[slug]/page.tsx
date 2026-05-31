@@ -116,7 +116,7 @@ export default async function CourseDetailPage({
               {/* Thumbnail */}
               <div className="relative hidden h-36 w-36 shrink-0 overflow-hidden rounded-lg sm:block" style={{ background: "var(--color-blue)" }}>
                 {course.cover_image_url ? (
-                  <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
+                  <Image src={course.cover_image_url} alt={course.title} fill sizes="144px" className="object-cover" />
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center p-3">
                     <span className="text-center font-mono text-xs uppercase tracking-widest text-ocean opacity-70">
@@ -169,7 +169,7 @@ export default async function CourseDetailPage({
                     href={`/learn/${course.slug}`}
                     className="rounded-full bg-blue px-5 py-2.5 font-manrope text-sm font-[800] text-ocean shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
                   >
-                    ✨ AI Tutor
+                    {loc.learn.aiTutor}
                   </Link>
 
                   {!isOwner && (
@@ -265,7 +265,7 @@ export default async function CourseDetailPage({
             <div className="flex items-center gap-3">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-blue">
                 {creator?.avatar_url ? (
-                  <Image src={creator.avatar_url} alt={creatorName} fill className="object-cover" />
+                  <Image src={creator.avatar_url} alt={creatorName} fill sizes="40px" className="object-cover" />
                 ) : (
                   <span className="flex h-full w-full items-center justify-center font-mono text-sm font-[700] text-ocean">
                     {creatorName[0]?.toUpperCase()}

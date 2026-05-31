@@ -610,5 +610,30 @@
     "memOfWeek": "ម៉ែនៃសប្តាហ៍",
     "memOfWeekEmpty": "សប្តាហ៍នេះមិនទាន់មានសារទេ។",
     "inCourse": "នៅក្នុង{course}"
+  },
+  "learn": {
+    "aiTutor": "✨ AI Tutor",
+    "whichSections": "Which sections?",
+    "allSections": "All sections — {count} cards",
+    "untitledSection": "Untitled section",
+    "difficulty": "Difficulty",
+    "beginnerLabel": "Beginner",
+    "beginnerNote": "Straightforward recall, one concept at a time",
+    "intermediateLabel": "Intermediate",
+    "intermediateNote": "Mix of recall and two-concept connections",
+    "advancedLabel": "Advanced",
+    "advancedNote": "Application, synthesis, and edge cases",
+    "anyLabel": "Any",
+    "anyNote": "Starts easy, gets harder as you answer correctly",
+    "trackProgress": "Count towards spaced repetition",
+    "startSession": "Start AI Tutor Session",
+    "backToCourse": "Back to course",
+    "sessionComplete": "Session complete!",
+    "score": "{correct} / {total} cards answered correctly",
+    "studyAgain": "Study again",
+    "saving": "Saving…",
+    "endSession": "End session",
+    "inputPlaceholder": "Type your answer…",
+    "send": "Send"
   }
 }

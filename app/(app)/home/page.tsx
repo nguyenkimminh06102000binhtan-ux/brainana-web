@@ -143,7 +143,7 @@ export default async function HomePage() {
           <section className="flex items-center gap-4">
             {profile?.avatar_url ? (
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-blue">
-                <Image src={profile.avatar_url} alt={displayName} fill className="object-cover" />
+                <Image src={profile.avatar_url} alt={displayName} fill sizes="56px" className="object-cover" />
               </div>
             ) : (
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-blue">
@@ -259,7 +259,7 @@ export default async function HomePage() {
                   >
                     {course.cover_image_url ? (
                       <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
-                        <Image src={course.cover_image_url} alt={course.title} fill className="object-cover" />
+                        <Image src={course.cover_image_url} alt={course.title} fill sizes="48px" className="object-cover" />
                       </div>
                     ) : (
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue">

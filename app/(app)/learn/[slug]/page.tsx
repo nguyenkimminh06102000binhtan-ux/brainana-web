@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 import LearnClient from "./learn-client";
 import type { LearnSection } from "./learn-client";
 
@@ -17,15 +18,23 @@ export default async function LearnPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: course } = await supabase
-    .from("courses")
-    .select("id, title, slug, source_language, target_language, category, level")
-    .eq("slug", slug)
-    .single();
+  const [{ data: course }, { data: profile }] = await Promise.all([
+    supabase
+      .from("courses")
+      .select("id, title, slug, source_language, target_language, category, level")
+      .eq("slug", slug)
+      .single(),
+    supabase
+      .from("profiles")
+      .select("active_origin_language")
+      .eq("id", user.id)
+      .single(),
+  ]);
 
   if (!course) notFound();
 
-  // Fetch sections with their items
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+
   const { data: sectionsRaw } = await supabase
     .from("sections")
     .select(
@@ -62,6 +71,7 @@ export default async function LearnPage({
       category={(course.category as string | null) ?? null}
       level={(course.level as string | null) ?? null}
       sections={sections}
+      labels={loc.learn}
     />
   );
 }
