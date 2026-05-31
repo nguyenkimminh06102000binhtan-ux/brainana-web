@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { saveLearnProgress } from "./actions";
 import ChatMessage from "./chat-message";
@@ -29,9 +29,12 @@ type Message = {
 };
 
 type EvalResult = { itemId: string; correct: boolean };
+type CardSelectionMode = "quick" | "manual";
 
 const EVAL_RE = /%%EVAL:[^%]+%%\n?/g;
 const EVAL_PARSE_RE = /%%EVAL:([^:]+):(correct|incorrect)%%/g;
+const MAX_CARDS = 100;
+const QUICK_PICK_OPTIONS = [10, 25, 50, 100];
 
 function stripEvals(text: string): string {
   return text.replace(EVAL_RE, "").trim();
@@ -45,6 +48,15 @@ function parseEvals(text: string): EvalResult[] {
     results.push({ itemId: m[1], correct: m[2] === "correct" });
   }
   return results;
+}
+
+function shuffleSample<T>(arr: T[], n: number): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
 }
 
 interface Props {
@@ -80,18 +92,68 @@ export default function LearnClient({
   const [isStreaming, setIsStreaming] = useState(false);
   const [evals, setEvals] = useState<EvalResult[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Card selection
+  const [cardSelectionMode, setCardSelectionMode] = useState<CardSelectionMode>("quick");
+  const [quickPickCount, setQuickPickCount] = useState<number>(25);
+  const [selectedCardIds, setSelectedCardIds] = useState<Set<string>>(new Set());
+  const [cardSearch, setCardSearch] = useState("");
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const allCards = sections.flatMap((s) =>
-    selectedSectionIds.size === 0 || selectedSectionIds.has(s.id) ? s.cards : [],
+  // Cards from selected sections
+  const poolCards = useMemo(
+    () =>
+      sections.flatMap((s) =>
+        selectedSectionIds.size === 0 || selectedSectionIds.has(s.id) ? s.cards : [],
+      ),
+    [sections, selectedSectionIds],
   );
+
+  // Filtered cards for manual search
+  const filteredSections = useMemo(() => {
+    const q = cardSearch.trim().toLowerCase();
+    if (!q) {
+      return sections.filter(
+        (s) => selectedSectionIds.size === 0 || selectedSectionIds.has(s.id),
+      );
+    }
+    return sections
+      .filter((s) => selectedSectionIds.size === 0 || selectedSectionIds.has(s.id))
+      .map((s) => ({
+        ...s,
+        cards: s.cards.filter(
+          (c) =>
+            c.front.toLowerCase().includes(q) ||
+            c.back.toLowerCase().includes(q),
+        ),
+      }))
+      .filter((s) => s.cards.length > 0);
+  }, [sections, selectedSectionIds, cardSearch]);
+
+  // How many are currently manually selected (intersect with pool)
+  const poolCardIds = useMemo(() => new Set(poolCards.map((c) => c.id)), [poolCards]);
+  const validSelectedIds = useMemo(
+    () => new Set([...selectedCardIds].filter((id) => poolCardIds.has(id))),
+    [selectedCardIds, poolCardIds],
+  );
+  const manualCount = validSelectedIds.size;
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  function buildSessionCards(): LearnCard[] {
+    if (cardSelectionMode === "quick") {
+      const count = Math.min(quickPickCount, poolCards.length);
+      return shuffleSample(poolCards, count);
+    }
+    // manual: preserve section order
+    return poolCards.filter((c) => validSelectedIds.has(c.id)).slice(0, MAX_CARDS);
+  }
 
   const streamResponse = useCallback(
     async (history: Message[], cards: LearnCard[]) => {
@@ -151,13 +213,12 @@ export default function LearnClient({
       setIsStreaming(false);
       inputRef.current?.focus();
     },
-    [sourceLanguage, targetLanguage],
+    [sourceLanguage, targetLanguage, difficulty, category],
   );
 
   async function handleStart() {
-    const cards = sections.flatMap((s) =>
-      selectedSectionIds.size === 0 || selectedSectionIds.has(s.id) ? s.cards : [],
-    );
+    const cards = buildSessionCards();
+    if (cards.length === 0) return;
     setSessionCards(cards);
     setMessages([]);
     setEvals([]);
@@ -209,6 +270,41 @@ export default function LearnClient({
     });
   }
 
+  function toggleCard(id: string) {
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else if (manualCount < MAX_CARDS) {
+        next.add(id);
+      }
+      return next;
+    });
+  }
+
+  function toggleSectionCards(sectionCards: LearnCard[]) {
+    const ids = sectionCards.map((c) => c.id);
+    const allSelected = ids.every((id) => validSelectedIds.has(id));
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      if (allSelected) {
+        ids.forEach((id) => next.delete(id));
+      } else {
+        for (const id of ids) {
+          if (next.size >= MAX_CARDS) break;
+          next.add(id);
+        }
+      }
+      return next;
+    });
+  }
+
+  // Determine if start is disabled
+  const canStart =
+    cardSelectionMode === "quick"
+      ? poolCards.length > 0
+      : manualCount > 0;
+
   // ── Setup ────────────────────────────────────────────────────────────────
   if (stage === "setup") {
     return (
@@ -233,7 +329,7 @@ export default function LearnClient({
                   : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
               }`}
             >
-              {t(labels.allSections, { count: allCards.length })}
+              {t(labels.allSections, { count: poolCards.length })}
             </button>
             {sections.map((s) => {
               const active = selectedSectionIds.has(s.id);
@@ -252,6 +348,174 @@ export default function LearnClient({
                 </button>
               );
             })}
+          </div>
+
+          {/* Card selection */}
+          <div>
+            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">
+              {labels.cardSelectionMode}
+            </p>
+
+            {/* Mode toggle */}
+            <div className="mb-4 flex rounded-lg border-2 border-ink/10 bg-paper p-1">
+              <button
+                type="button"
+                onClick={() => setCardSelectionMode("quick")}
+                className={`flex-1 rounded-md py-2 font-manrope text-sm font-[700] transition ${
+                  cardSelectionMode === "quick"
+                    ? "bg-orange text-on-bright shadow-hard-sm"
+                    : "text-ink-2 hover:text-ink"
+                }`}
+              >
+                {labels.quickPick}
+              </button>
+              <button
+                type="button"
+                onClick={() => setCardSelectionMode("manual")}
+                className={`flex-1 rounded-md py-2 font-manrope text-sm font-[700] transition ${
+                  cardSelectionMode === "manual"
+                    ? "bg-orange text-on-bright shadow-hard-sm"
+                    : "text-ink-2 hover:text-ink"
+                }`}
+              >
+                {labels.chooseCards}
+              </button>
+            </div>
+
+            {/* Quick pick */}
+            {cardSelectionMode === "quick" && (
+              <div className="flex gap-2">
+                {QUICK_PICK_OPTIONS.map((n) => {
+                  const available = Math.min(n, poolCards.length);
+                  const disabled = poolCards.length === 0;
+                  const active = quickPickCount === n;
+                  return (
+                    <button
+                      key={n}
+                      type="button"
+                      disabled={disabled}
+                      onClick={() => setQuickPickCount(n)}
+                      className={`flex-1 rounded-lg border-2 py-2 font-manrope text-sm font-[700] transition ${
+                        active
+                          ? "border-orange bg-orange text-on-bright"
+                          : "border-ink/10 bg-paper text-ink-2 hover:border-ink/30"
+                      } disabled:cursor-not-allowed disabled:opacity-40`}
+                    >
+                      {available < n ? available : n}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Manual pick */}
+            {cardSelectionMode === "manual" && (
+              <div>
+                {/* Counter + search */}
+                <div className="mb-3 flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={cardSearch}
+                    onChange={(e) => setCardSearch(e.target.value)}
+                    placeholder={labels.searchCards}
+                    className="flex-1 rounded-lg border-2 border-ink/10 bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:border-ink/30"
+                  />
+                  <span
+                    className={`shrink-0 rounded-full px-3 py-1 font-manrope text-xs font-[700] ${
+                      manualCount >= MAX_CARDS
+                        ? "bg-orange/20 text-orange"
+                        : "bg-ink/10 text-ink-2"
+                    }`}
+                  >
+                    {t(labels.cardsSelected, { count: manualCount })}
+                  </span>
+                </div>
+
+                {/* Card list */}
+                <div className="max-h-64 overflow-y-auto rounded-lg border-2 border-ink/10 bg-paper">
+                  {filteredSections.length === 0 ? (
+                    <p className="px-4 py-6 text-center font-manrope text-sm text-ink-3">
+                      {labels.searchCards}
+                    </p>
+                  ) : (
+                    filteredSections.map((s) => {
+                      const sectionSelected = s.cards.every((c) => validSelectedIds.has(c.id));
+                      return (
+                        <div key={s.id}>
+                          {/* Section header */}
+                          <button
+                            type="button"
+                            onClick={() => toggleSectionCards(s.cards)}
+                            className="flex w-full items-center justify-between border-b border-ink/5 bg-paper-2 px-4 py-2 text-left hover:bg-paper-2/80"
+                          >
+                            <span className="font-manrope text-xs font-[700] uppercase tracking-widest text-ink-3">
+                              {s.title || labels.untitledSection}
+                            </span>
+                            <span
+                              className={`h-4 w-4 rounded border-2 transition ${
+                                sectionSelected
+                                  ? "border-orange bg-orange"
+                                  : "border-ink/30 bg-paper"
+                              }`}
+                            >
+                              {sectionSelected && (
+                                <svg viewBox="0 0 12 12" fill="none" className="h-full w-full p-[2px]">
+                                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              )}
+                            </span>
+                          </button>
+                          {/* Cards */}
+                          {s.cards.map((c) => {
+                            const checked = validSelectedIds.has(c.id);
+                            const atMax = manualCount >= MAX_CARDS && !checked;
+                            return (
+                              <button
+                                key={c.id}
+                                type="button"
+                                disabled={atMax}
+                                onClick={() => toggleCard(c.id)}
+                                className={`flex w-full items-center gap-3 border-b border-ink/5 px-4 py-2.5 text-left last:border-b-0 transition ${
+                                  checked ? "bg-orange/5" : "hover:bg-paper-2"
+                                } disabled:opacity-40`}
+                              >
+                                <span
+                                  className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition ${
+                                    checked
+                                      ? "border-orange bg-orange"
+                                      : "border-ink/30 bg-paper"
+                                  }`}
+                                >
+                                  {checked && (
+                                    <svg viewBox="0 0 12 12" fill="none" className="h-full w-full p-[2px]">
+                                      <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                  )}
+                                </span>
+                                <span className="min-w-0 flex-1">
+                                  <span className="block truncate font-manrope text-sm font-[600] text-ink">
+                                    {c.front}
+                                  </span>
+                                  <span className="block truncate font-manrope text-xs text-ink-3">
+                                    {c.back}
+                                  </span>
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+
+                {manualCount >= MAX_CARDS && (
+                  <p className="mt-2 font-manrope text-xs text-orange">
+                    {labels.maxCardsNote}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Difficulty selector */}
@@ -316,7 +580,7 @@ export default function LearnClient({
             <button
               type="button"
               onClick={handleStart}
-              disabled={allCards.length === 0}
+              disabled={!canStart}
               className="w-full cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40"
             >
               {labels.startSession}
@@ -414,32 +678,32 @@ export default function LearnClient({
 
       {/* Input */}
       <div className="pt-2">
-      <MathToolbar onInsert={insertSymbol} />
-      <div className="flex gap-2">
-        <textarea
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          }}
-          disabled={isStreaming}
-          placeholder={labels.inputPlaceholder}
-          rows={1}
-          className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
-        />
-        <button
-          type="button"
-          onClick={handleSend}
-          disabled={isStreaming || !input.trim()}
-          className="rounded-full bg-orange px-5 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-40"
-        >
-          {labels.send}
-        </button>
-      </div>
+        <MathToolbar onInsert={insertSymbol} />
+        <div className="flex gap-2">
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            disabled={isStreaming}
+            placeholder={labels.inputPlaceholder}
+            rows={1}
+            className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
+          />
+          <button
+            type="button"
+            onClick={handleSend}
+            disabled={isStreaming || !input.trim()}
+            className="rounded-full bg-orange px-5 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none disabled:opacity-40"
+          >
+            {labels.send}
+          </button>
+        </div>
       </div>
     </div>
   );
