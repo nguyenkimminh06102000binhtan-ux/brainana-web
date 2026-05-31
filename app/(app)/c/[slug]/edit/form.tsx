@@ -19,7 +19,7 @@ const IMAGE_MAX = 5 * 1024 * 1024;
 const AUDIO_MAX = 10 * 1024 * 1024;
 
 type UploadState = { uploading: boolean; compressing: boolean; error: string | null };
-type UploadField = "image" | "frontAudio" | "backAudio";
+type UploadField = "image" | "backAudio";
 
 type Item = {
   id: number;
@@ -84,7 +84,6 @@ type LevelLabels = { beginner: string; intermediate: string; advanced: string };
 let uid = 1;
 const freshUpload = (): Record<UploadField, UploadState> => ({
   image: { uploading: false, compressing: false, error: null },
-  frontAudio: { uploading: false, compressing: false, error: null },
   backAudio: { uploading: false, compressing: false, error: null },
 });
 const makeItem = (): Item => ({
@@ -266,7 +265,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
-  onClearUrl: (field: "imagePath" | "frontAudioPath" | "backAudioPath") => void;
+  onClearUrl: (field: "imagePath" | "backAudioPath") => void;
   onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
 }) {
   const roSystem = getRomanizationSystem(targetLanguage);
@@ -289,14 +288,6 @@ function ItemCard({ item, index, isOnly, targetLanguage, labels, onUpdate, onRem
             onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("front", v))}
             placeholder={labels.questionPlaceholder} rows={2}
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
-          <div className="mt-3">
-            {lbl(labels.frontAudio, true, labels.optional)}
-            {item.frontAudioDisplayUrl
-              ? <AudioPreview url={item.frontAudioDisplayUrl} removeLabel={labels.remove} onRemove={() => onClearUrl("frontAudioPath")} />
-              : <UploadButton label={labels.uploadAudio} labels={labels} accept="audio/mpeg,audio/wav,audio/ogg,audio/webm"
-                  uploading={item.uploads.frontAudio.uploading} compressing={item.uploads.frontAudio.compressing} error={item.uploads.frontAudio.error}
-                  onFile={(f) => onUpload("frontAudio", f)} />}
-          </div>
         </div>
         <div className="bg-paper-2 p-4">
           {lbl(labels.answer)}
@@ -417,12 +408,8 @@ export default function EditCourseForm({
       s.id === sectionId ? { ...s, items: s.items.filter((i) => i.id !== itemId) } : s
     ));
   }
-  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "frontAudioPath" | "backAudioPath") {
-    const displayField = field === "imagePath"
-      ? "imageDisplayUrl"
-      : field === "frontAudioPath"
-        ? "frontAudioDisplayUrl"
-        : "backAudioDisplayUrl";
+  function clearUrl(sectionId: number, itemId: number, field: "imagePath" | "backAudioPath") {
+    const displayField = field === "imagePath" ? "imageDisplayUrl" : "backAudioDisplayUrl";
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
         ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, [field]: "", [displayField]: "" } : i) }
@@ -457,8 +444,8 @@ export default function EditCourseForm({
   }
 
   async function handleUpload(sectionId: number, itemId: number, field: UploadField, file: File) {
-    const pathField = field === "image" ? "imagePath" : field === "frontAudio" ? "frontAudioPath" : "backAudioPath";
-    const displayField = field === "image" ? "imageDisplayUrl" : field === "frontAudio" ? "frontAudioDisplayUrl" : "backAudioDisplayUrl";
+    const pathField = field === "image" ? "imagePath" : "backAudioPath";
+    const displayField = field === "image" ? "imageDisplayUrl" : "backAudioDisplayUrl";
     const willCompress = field === "image" && IMAGE_TYPES.includes(file.type) && file.size > IMAGE_MAX;
     setSections((prev) => prev.map((s) =>
       s.id === sectionId ? { ...s, items: s.items.map((i) =>
