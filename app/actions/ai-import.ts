@@ -14,10 +14,6 @@ const BLOCKED_EXTENSIONS = new Set([
 ]);
 
 const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "gif", "webp"]);
-const IMAGE_MIME: Record<string, "image/jpeg" | "image/png" | "image/gif" | "image/webp"> = {
-  jpg: "image/jpeg", jpeg: "image/jpeg",
-  png: "image/png", gif: "image/gif", webp: "image/webp",
-};
 
 const CARD_STYLE_DESCRIPTIONS: Record<string, string> = {
   vocabulary:  "Single word pairs (e.g. Apple → 사과)",
@@ -34,7 +30,7 @@ export type AiImportCard = {
 };
 
 export type AiImportResult =
-  | { cards: AiImportCard[] }
+  | { cards: AiImportCard[]; charCount: number }
   | { error: string };
 
 export async function generateCardsWithAI(formData: FormData): Promise<AiImportResult> {
@@ -60,6 +56,8 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   const count              = Math.min(Math.max(parseInt(get("count") || "10", 10), 1), 50);
   const focusInstruction   = get("focusInstruction");
   const pastedText         = get("pastedText").trim();
+  // Pre-extracted text from client-side analyze-file calls (avoids re-running OCR/parsing)
+  const preExtractedText   = get("preExtractedText").trim();
 
   const files = formData.getAll("files") as File[];
 
@@ -71,21 +69,27 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
 
   // Build Claude message content
   const contentBlocks: Anthropic.MessageParam["content"] = [];
-  let textContent = pastedText;
+  // Start with pasted text + any pre-extracted text from client-side analysis
+  let textContent = [pastedText, preExtractedText].filter(Boolean).join("\n");
 
-  for (const file of files) {
+  // Only re-process files that weren't pre-extracted on the client
+  const filesToProcess = preExtractedText ? [] : files;
+
+  for (const file of filesToProcess) {
     const ext = file.name.toLowerCase().split(".").pop() ?? "";
     const bytes = Buffer.from(await file.arrayBuffer());
 
     try {
       if (IMAGE_EXTENSIONS.has(ext)) {
-        contentBlocks.push({
-          type: "image",
-          source: { type: "base64", media_type: IMAGE_MIME[ext]!, data: bytes.toString("base64") },
-        });
+        const { createWorker } = await import("tesseract.js");
+        const worker = await createWorker("eng");
+        const { data } = await worker.recognize(bytes);
+        await worker.terminate();
+        textContent += "\n" + data.text;
       } else if (ext === "pdf") {
-        const { default: pdfParse } = await import("pdf-parse") as unknown as { default: (buf: Buffer) => Promise<{ text: string }> };
-        const data = await pdfParse(bytes);
+        const { PDFParse } = await import("pdf-parse");
+        const parser = new PDFParse({ data: bytes });
+        const data = await parser.getText();
         textContent += "\n" + data.text;
       } else if (ext === "docx") {
         const mammoth = (await import("mammoth")).default;
@@ -94,7 +98,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
       } else if (ext === "xlsx") {
         const XLSX = await import("xlsx");
         const wb = XLSX.read(bytes, { type: "buffer" });
-        for (const name of wb.SheetNames.slice(0, 3)) {
+        for (const name of wb.SheetNames) {
           textContent += "\n" + XLSX.utils.sheet_to_csv(wb.Sheets[name]!);
         }
       } else if (["txt", "md", "csv", "json"].includes(ext)) {
@@ -123,9 +127,10 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
     sectionDescription ? `Section description: ${sectionDescription}` : "",
     "",
     `Card style: ${cardStyle} — ${styleDesc}`,
-    `Generate exactly ${count} flashcard pairs.`,
+    `You MUST generate EXACTLY ${count} flashcard pairs — no more, no less. This is a strict requirement.`,
+    `If the source content seems exhausted before reaching ${count} cards, generate variations, synonyms, related concepts, or deeper sub-topics from the same material to reach the exact count.`,
     focusInstruction   ? `Focus on: ${focusInstruction}` : "",
-    textContent.trim() ? `\nSource content:\n${textContent.trim().slice(0, 15_000)}` : "",
+    textContent.trim() ? `\nSource content:\n${textContent.trim().slice(0, 100_000)}` : "",
     "",
     "Rules:",
     `- Front (question side): use ${sourceLanguage || "the source language"}`,
@@ -144,7 +149,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
   try {
     const msg = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 4096,
+      max_tokens: 10000,
       system: "You are a JSON generator. Respond with only a valid JSON array. No markdown, no code fences, no explanation — just the raw JSON array.",
       messages: [{ role: "user", content: contentBlocks }],
     });
@@ -174,7 +179,7 @@ export async function generateCardsWithAI(formData: FormData): Promise<AiImportR
       }));
 
     if (cards.length === 0) return { error: "AI returned no valid cards" };
-    return { cards };
+    return { cards, charCount: textContent.trim().length };
   } catch (err) {
     console.error("[ai-import] Claude error:", err);
     return { error: (err as Error).message ?? "Unknown error" };
