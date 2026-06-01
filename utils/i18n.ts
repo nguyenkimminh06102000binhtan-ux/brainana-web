@@ -1,6 +1,7 @@
 import "server-only";
 import fs from "fs";
 import path from "path";
+import { languageToLocale } from "@/app/constants/languages";
 
 export type Locale = {
   meta: { language: string; locale: string; translated: boolean };
@@ -390,18 +391,6 @@ export type Locale = {
 
 const isProd = process.env.NODE_ENV === "production";
 const cache = new Map<string, Locale>();
-
-function languageToLocale(language: string): string {
-  if (language === "English") return "en";
-  return language
-    .replace(/[()]/g, " ")
-    .replace(/\//g, "-")
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/-$/, "");
-}
 
 export function getLocale(language: string | null): Locale {
   const localeName = language ? languageToLocale(language) : "en";

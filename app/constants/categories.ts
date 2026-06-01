@@ -1,80 +1,71 @@
+import { SUPPORTED_COURSE_LANGUAGES } from "./languages";
+
 export type CategoryGroup = { label: string; items: string[] };
 export type CategoryTree = CategoryGroup[];
 
 export const CATEGORY_TREE: CategoryTree = [
   {
     label: "Languages",
+    // Authoritative list lives in app/constants/languages.ts
+    items: [...SUPPORTED_COURSE_LANGUAGES],
+  },
+  {
+    // Renamed from "Arts & Literature" — broader and more accurate
+    label: "Arts & Humanities",
     items: [
-      "English (UK)", "English (US)", "Spanish", "French", "German",
-      "Italian", "Portuguese", "Dutch", "Swedish", "Danish", "Norwegian",
-      "Finnish", "Polish", "Czech", "Slovak", "Romanian", "Hungarian",
-      "Greek", "Turkish", "Ukrainian", "Croatian", "Serbian", "Bulgarian",
-      "Catalan", "Russian",
-      "Arabic (Modern Standard)", "Arabic (Egyptian)", "Arabic (Gulf)", "Arabic (Levantine)",
-      "Hebrew", "Persian (Farsi)", "Kurdish",
-      "Hindi", "Bengali", "Urdu", "Tamil", "Telugu", "Marathi", "Gujarati",
-      "Punjabi", "Sinhala", "Nepali", "Sanskrit", "Pali",
-      "Vietnamese", "Thai", "Indonesian", "Malay", "Filipino (Tagalog)",
-      "Burmese", "Khmer", "Lao", "Javanese",
-      "Mandarin (Simplified)", "Mandarin (Traditional)", "Mandarin (Spoken Only)", "Cantonese",
-      "Japanese", "Kanji", "Korean",
-      "Kazakh", "Uzbek", "Mongolian", "Tibetan",
-      "Swahili", "Amharic", "Yoruba", "Zulu", "Afrikaans", "Hausa", "Igbo", "Somali",
-      "Hawaiian", "Maori", "Samoan", "Tongan",
-      "Latin", "Ancient Greek", "Biblical Hebrew", "Classical Arabic", "Old English",
-      "Esperanto", "Klingon", "High Valyrian",
-      "American Sign Language (ASL)", "British Sign Language (BSL)",
-      "Korean Sign Language", "Japanese Sign Language",
+      "Architecture", "Comics & Manga", "Creative Writing", "Dance",
+      "Film & Television", "Literature & Poetry", "Music",
+      "Philosophy & Ethics", "Photography", "Theatre & Drama", "Visual Arts",
     ],
   },
   {
-    label: "Arts & Literature",
+    // Renamed from "Maths & Science" — clearer order, no Astronomy duplicate,
+    // no Engineering/Computer Science duplicates from Professional
+    label: "Science & Mathematics",
     items: [
-      "Visual Arts", "Music", "Film & TV", "Theatre & Drama", "Literature & Poetry",
-      "Philosophy", "Architecture", "Photography", "Dance", "Comics & Manga",
+      "Algebra", "Astronomy & Space", "Biology", "Calculus", "Chemistry",
+      "Computer Science", "Data Science & Statistics", "Earth Sciences",
+      "Ecology", "Engineering", "Environmental Science", "Geometry",
+      "Mathematics", "Neuroscience", "Physics", "Psychology",
     ],
   },
   {
-    label: "Maths & Science",
+    // Renamed from "History & Geography" — includes society/culture
+    label: "History & Society",
     items: [
-      "Mathematics", "Algebra", "Calculus", "Statistics", "Geometry",
-      "Physics", "Chemistry", "Biology", "Astronomy", "Earth Science",
-      "Environmental Science", "Computer Science", "Engineering",
-      "Health Sciences", "Psychology", "Neuroscience",
+      "African History", "American History", "Ancient History", "Asian History",
+      "Countries & Capitals", "European History", "Maps & Geography",
+      "Medieval History", "Middle Eastern History", "Modern History",
+      "Mythology & Folklore", "Politics & Government",
+      "Religion & Theology", "Sociology", "World War I", "World War II",
     ],
   },
   {
-    label: "The Natural World",
+    // Renamed from "The Natural World" — more descriptive
+    label: "Nature & Environment",
     items: [
-      "Animals", "Birds", "Marine Life", "Insects & Bugs", "Plants & Trees",
-      "Fruits & Vegetables", "Fungi & Mushrooms", "Ecology", "Weather & Climate",
-      "Geology", "Astronomy & Space",
+      "Animals & Wildlife", "Birds", "Ecology & Conservation",
+      "Food & Agriculture", "Fungi & Mushrooms", "Geology",
+      "Insects & Bugs", "Marine Life", "Plants & Trees", "Weather & Climate",
     ],
   },
   {
-    label: "History & Geography",
+    // New top-level — Health topics were scattered across Entertainment and Professional
+    label: "Health & Wellness",
     items: [
-      "Ancient History", "Medieval History", "Modern History",
-      "World War I", "World War II", "Asian History", "European History",
-      "American History", "African History", "World Geography",
-      "Countries & Capitals", "Maps & Flags", "Religion", "Mythology",
-      "Politics & Government",
+      "Cooking & Nutrition", "Dentistry", "Exercise & Fitness",
+      "Medicine & Healthcare", "Mental Health", "Nursing",
+      "Pharmacy", "Sports & Athletics", "Yoga & Wellness",
     ],
   },
   {
-    label: "Memory Training",
+    // Renamed from "Professional & Careers" — Engineering/CS/Architecture moved to their
+    // correct academic categories; duplicates removed
+    label: "Business & Careers",
     items: [
-      "Memory Palaces", "Number Systems", "Playing Card Systems",
-      "Speed Reading", "Name & Face Memory",
-    ],
-  },
-  {
-    label: "Professional & Careers",
-    items: [
-      "Business & Finance", "Marketing", "Law", "Medicine & Healthcare",
-      "Nursing", "Dentistry", "Pharmacy", "Computer Science & IT",
-      "Engineering", "Architecture", "Accounting", "Human Resources",
-      "Project Management", "Real Estate", "Education & Teaching",
+      "Accounting & Finance", "Business & Management", "Education & Teaching",
+      "Human Resources", "Law", "Marketing", "Project Management",
+      "Real Estate", "Technology & IT",
     ],
   },
   {
@@ -82,30 +73,39 @@ export const CATEGORY_TREE: CategoryTree = [
     items: [
       "SAT", "ACT", "GRE", "GMAT", "LSAT", "MCAT", "TOEFL", "IELTS",
       "JLPT", "HSK", "TOPIK", "DELF / DALF", "Cambridge English",
-      "AP Exams", "IB Exams", "Graduate School",
+      "AP Exams", "IB Exams",
     ],
   },
   {
-    label: "Trivia",
+    // Renamed from "Memory Training" — more inclusive of study habits
+    label: "Memory & Study Skills",
     items: [
-      "Art, Music & Literature", "History", "Science & Nature",
-      "Sports & Leisure", "Food & Drink", "People & Celebrities",
-      "Sociology", "Geography", "Pop Culture", "Miscellaneous",
+      "Learning Techniques", "Memory Palaces", "Mnemonics",
+      "Number Systems", "Speed Reading", "Study Methods",
     ],
   },
   {
-    label: "Entertainment",
+    // Entertainment: pure media & pop culture; lifestyle/health moved to Health & Wellness
+    label: "Entertainment & Pop Culture",
     items: [
-      "Movies & TV Shows", "Video Games", "Board Games", "Card Games",
-      "Pokémon", "Anime & Manga", "K-Pop & K-Drama", "Sports",
-      "Yoga & Wellness", "Cooking & Recipes", "Travel & Culture",
-      "Fashion & Beauty",
+      "Anime & Manga", "Board & Card Games", "Fashion & Beauty",
+      "K-Pop & K-Drama", "Movies & TV Shows", "Music & Artists",
+      "Pokémon", "Travel & Culture", "Video Games",
+    ],
+  },
+  {
+    // Trivia: general knowledge quizzing; Sociology moved to History & Society
+    label: "Trivia & General Knowledge",
+    items: [
+      "Art & Culture", "Food & Drink", "General Knowledge",
+      "Geography Quiz", "History Quiz", "Nature & Science Quiz",
+      "People & Celebrities", "Pop Culture", "Sports Quiz",
     ],
   },
 ];
 
 export const TOP_LEVEL_CATEGORIES = CATEGORY_TREE.map((g) => g.label);
-export const SUPPORTED_COURSE_LANGUAGES = CATEGORY_TREE.find((g) => g.label === "Languages")?.items ?? [];
+export { SUPPORTED_COURSE_LANGUAGES } from "./languages";
 
 export function getCategoryItems(category: string): string[] {
   return CATEGORY_TREE.find((g) => g.label === category)?.items ?? [];

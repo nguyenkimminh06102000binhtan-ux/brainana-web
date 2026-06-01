@@ -3,9 +3,11 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
-import { LANGUAGES } from "@/app/(app)/start/constants";
+import { isValidNativeLanguage } from "@/app/constants/languages";
 
 export async function switchOriginLanguage(language: string) {
+  if (!isValidNativeLanguage(language)) return;
+
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
@@ -26,7 +28,7 @@ export async function switchOriginLanguage(language: string) {
 }
 
 export async function addOriginLanguage(language: string) {
-  if (!(LANGUAGES as readonly string[]).includes(language)) return;
+  if (!isValidNativeLanguage(language)) return;
 
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);

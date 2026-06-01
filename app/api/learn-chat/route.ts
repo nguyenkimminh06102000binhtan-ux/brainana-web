@@ -23,7 +23,7 @@ function getCategoryGroup(category: string | null): string | null {
 }
 
 function isMathScience(category: string | null): boolean {
-  return getCategoryGroup(category) === "Maths & Science";
+  return getCategoryGroup(category) === "Science & Mathematics";
 }
 
 function isLanguage(category: string | null): boolean {

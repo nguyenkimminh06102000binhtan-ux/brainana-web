@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
-import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
+import { PURPOSES, DAILY_GOALS, INTERESTS } from "./constants";
+import { isValidNativeLanguage } from "@/app/constants/languages";
 
 export type OnboardingState = { error: string } | null;
 export type NativeLanguageState = {
@@ -29,7 +30,7 @@ export async function saveNativeLanguage(language: string): Promise<NativeLangua
   if (!user) redirect("/login");
 
   const nativeLanguage = language.trim();
-  if (!(LANGUAGES as readonly string[]).includes(nativeLanguage)) {
+  if (!isValidNativeLanguage(nativeLanguage)) {
     const { labels, categories } = languageLabels(null);
     return {
       error: labels.validationMotherTongue,
@@ -103,7 +104,7 @@ export async function saveOnboarding(
     return { error: locale.start.validationReason };
   if (!(DAILY_GOALS as readonly number[]).includes(dailyGoal))
     return { error: locale.start.validationDailyGoal };
-  if (!(LANGUAGES as readonly string[]).includes(nativeLanguage))
+  if (!isValidNativeLanguage(nativeLanguage))
     return { error: locale.start.validationMotherTongue };
 
   const { data, error } = await supabase
