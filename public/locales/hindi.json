@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "कार्ड बनाने से पहले एक पाठ्यक्रम शीर्षक जोड़ें.",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 सेकंड · सभी एक पृष्ठ पर",

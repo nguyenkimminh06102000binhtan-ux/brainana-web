@@ -189,7 +189,7 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onRemove, onUpload, onClearUrl, onFocusInput }: {
+function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput }: {
   item: Item;
   index: number;
   isOnly: boolean;
@@ -199,6 +199,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, o
   onQuotaExhausted: () => void;
   labels: CreateEditLabels;
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
+  onUpdateDistractors: (distractors: string[]) => void;
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "backAudioPath") => void;
@@ -350,6 +351,43 @@ function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, o
               uploading={item.uploads.image.uploading} compressing={item.uploads.image.compressing} error={item.uploads.image.error}
               onFile={(f) => onUpload("image", f)} />}
       </div>
+
+      <div className="border-t border-ink/10 bg-paper-2 px-4 py-3">
+        {label(labels.distractors, true, labels.optional)}
+        <div className="flex flex-col gap-1.5">
+          {item.distractors.map((d, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <input
+                type="text"
+                value={d}
+                placeholder={labels.distractorPlaceholder}
+                onChange={(e) => {
+                  const next = [...item.distractors];
+                  next[i] = e.target.value;
+                  onUpdateDistractors(next);
+                }}
+                className="min-w-0 flex-1 rounded bg-paper px-3 py-1.5 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+              />
+              <button
+                type="button"
+                onClick={() => onUpdateDistractors(item.distractors.filter((_, j) => j !== i))}
+                className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text"
+              >
+                {labels.remove}
+              </button>
+            </div>
+          ))}
+          {item.distractors.length < 3 && (
+            <button
+              type="button"
+              onClick={() => onUpdateDistractors([...item.distractors, ""])}
+              className="self-start font-manrope text-xs font-[800] text-ink-2 hover:text-ink"
+            >
+              {labels.addDistractor}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -427,6 +465,14 @@ export default function CreateCourseForm({
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
         ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, [field]: value } : item) }
+        : s
+    ));
+  }
+
+  function updateDistractors(sectionId: number, itemId: number, distractors: string[]) {
+    setSections((prev) => prev.map((s) =>
+      s.id === sectionId
+        ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, distractors } : item) }
         : s
     ));
   }
@@ -844,6 +890,7 @@ export default function CreateCourseForm({
                       onQuotaExhausted={() => setCharsExhausted(true)}
                       labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
+                      onUpdateDistractors={(d) => updateDistractors(section.id, item.id, d)}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
                       onClearUrl={(field) => clearUrl(section.id, item.id, field)}

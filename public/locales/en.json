@@ -584,7 +584,10 @@
     "aiImportErrorTooManyImages": "Maximum 3 images allowed.",
     "aiImportErrorTotalTooLarge": "Total upload size exceeds 25 MB.",
     "aiImportErrorNoContent": "Add a file or paste some text first.",
-    "aiImportErrorNoTitle": "Add a course title before generating cards."
+    "aiImportErrorNoTitle": "Add a course title before generating cards.",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "mems": {
     "memoryHints": "Memory Hints",

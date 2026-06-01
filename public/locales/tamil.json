@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "கார்டுகளை உருவாக்கும் முன் பாடத் தலைப்பைச் சேர்க்கவும்.",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 நொடி · அனைத்தும் ஒரே பக்கத்தில்",

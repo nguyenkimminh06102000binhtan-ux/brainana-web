@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "請在生成卡片前添加課程標題。",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~ 60秒 · 全部喺一頁",

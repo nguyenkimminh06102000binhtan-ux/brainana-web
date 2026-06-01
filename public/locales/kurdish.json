@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "Berî ku hûn kartan çêbikin sernavek qursê zêde bikin.",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~ 60 saniye · hemî li ser yek rûpelê",

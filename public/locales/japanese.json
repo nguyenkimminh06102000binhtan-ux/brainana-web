@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "カードを生成する前にコースタイトルを追加してください。",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 秒 · すべてが 1 ページに",
