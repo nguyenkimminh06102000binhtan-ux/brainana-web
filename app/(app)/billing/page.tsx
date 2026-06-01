@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 
 const PLAN_ALLOWANCES = {
   free:  { chars: 500,      sessions: 1  },
@@ -38,10 +39,14 @@ export default async function BillingPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: sub }, { data: transactions }] = await Promise.all([
+  const [{ data: sub }, { data: transactions }, { data: profile }] = await Promise.all([
     supabase.from("user_subscriptions").select("*").eq("user_id", user.id).single(),
     supabase.from("quota_transactions").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(20),
+    supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
   ]);
+
+  const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const b = loc.billing;
 
   const plan = (sub?.plan ?? "free") as "free" | "plus" | "pro";
   const allowance = PLAN_ALLOWANCES[plan];
@@ -55,8 +60,8 @@ export default async function BillingPage() {
 
       {/* Header */}
       <div className="mb-8">
-        <Link href="/settings" className="mb-4 inline-block font-manrope text-sm text-ink-3 hover:text-ink">← Settings</Link>
-        <h1 className="font-fredoka text-3xl font-[600] text-ink">Billing &amp; Usage</h1>
+        <Link href="/settings" className="mb-4 inline-block font-manrope text-sm text-ink-3 hover:text-ink">{b.backToSettings}</Link>
+        <h1 className="font-fredoka text-3xl font-[600] text-ink">{b.title}</h1>
       </div>
 
       <div className="flex flex-col gap-6">
@@ -65,14 +70,14 @@ export default async function BillingPage() {
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-3">Current plan</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{b.currentPlan}</p>
               <div className="mt-2 flex items-center gap-3">
                 <span className={`rounded-full px-3 py-1 font-manrope text-sm font-[700] ${planMeta.color}`}>
                   {planMeta.label}
                 </span>
                 {sub?.plan_expires_at && (
                   <span className="font-manrope text-xs text-ink-3">
-                    Renews {new Date(sub.plan_expires_at).toLocaleDateString()}
+                    {b.renews.replace("{date}", new Date(sub.plan_expires_at).toLocaleDateString())}
                   </span>
                 )}
               </div>
@@ -82,7 +87,7 @@ export default async function BillingPage() {
                 href="/billing/upgrade"
                 className="rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
               >
-                Upgrade
+                {b.upgrade}
               </Link>
             )}
           </div>
@@ -90,18 +95,18 @@ export default async function BillingPage() {
 
         {/* Usage */}
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
-          <p className="mb-5 font-mono text-xs uppercase tracking-widest text-ink-3">Usage</p>
+          <p className="mb-5 font-mono text-xs uppercase tracking-widest text-ink-3">{b.usage}</p>
 
           {/* Characters */}
           <div className="mb-6">
             <div className="mb-2 flex items-end justify-between">
               <div>
-                <p className="font-manrope text-sm font-[700] text-ink">Characters</p>
-                <p className="font-manrope text-xs text-ink-3">AI import · Romanization · Back cards · Audio</p>
+                <p className="font-manrope text-sm font-[700] text-ink">{b.characters}</p>
+                <p className="font-manrope text-xs text-ink-3">{b.charactersDescription}</p>
               </div>
               <div className="text-right">
                 <p className="font-mono text-sm font-[700] text-ink">{fmt(charsBalance)}</p>
-                <p className="font-mono text-xs text-ink-3">of {fmt(allowance.chars)} / mo</p>
+                <p className="font-mono text-xs text-ink-3">{b.quota.replace("{max}", fmt(allowance.chars))}</p>
               </div>
             </div>
             <BalanceBar
@@ -110,7 +115,7 @@ export default async function BillingPage() {
               color={charsBalance < allowance.chars * 0.2 ? "bg-orange" : "bg-blue"}
             />
             {charsBalance < allowance.chars * 0.1 && (
-              <p className="mt-1.5 font-manrope text-xs text-orange">⚠️ Running low — top up or upgrade to continue using AI features.</p>
+              <p className="mt-1.5 font-manrope text-xs text-orange">{b.runningLow}</p>
             )}
           </div>
 
@@ -118,12 +123,12 @@ export default async function BillingPage() {
           <div>
             <div className="mb-2 flex items-end justify-between">
               <div>
-                <p className="font-manrope text-sm font-[700] text-ink">AI Tutor sessions</p>
-                <p className="font-manrope text-xs text-ink-3">Per conversation started</p>
+                <p className="font-manrope text-sm font-[700] text-ink">{b.tutorSessions}</p>
+                <p className="font-manrope text-xs text-ink-3">{b.tutorSessionsDescription}</p>
               </div>
               <div className="text-right">
                 <p className="font-mono text-sm font-[700] text-ink">{sessionsBalance}</p>
-                <p className="font-mono text-xs text-ink-3">of {allowance.sessions} / mo</p>
+                <p className="font-mono text-xs text-ink-3">{b.quota.replace("{max}", String(allowance.sessions))}</p>
               </div>
             </div>
             <BalanceBar
@@ -132,31 +137,29 @@ export default async function BillingPage() {
               color={sessionsBalance < allowance.sessions * 0.2 ? "bg-orange" : "bg-blue"}
             />
             {sessionsBalance === 0 && (
-              <p className="mt-1.5 font-manrope text-xs text-orange">⚠️ No sessions left — top up or upgrade to start new tutor sessions.</p>
+              <p className="mt-1.5 font-manrope text-xs text-orange">{b.noSessionsLeft}</p>
             )}
           </div>
         </div>
 
         {/* Top-up packs */}
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
-          <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">Top up</p>
+          <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">{b.topUp}</p>
 
           {plan === "free" ? (
-            /* Free users — upgrade prompt */
             <div className="mt-3 flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-ink/20 py-8 text-center">
-              <p className="font-manrope text-sm font-[700] text-ink">Upgrade to buy extra characters or sessions</p>
-              <p className="font-manrope text-xs text-ink-3">Top-up packs are available on Plus and Pro plans.</p>
+              <p className="font-manrope text-sm font-[700] text-ink">{b.upgradeForTopUp}</p>
+              <p className="font-manrope text-xs text-ink-3">{b.topUpPacksInfo}</p>
               <Link
                 href="/billing/upgrade"
                 className="mt-1 rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
               >
-                Upgrade now
+                {b.upgradeNow}
               </Link>
             </div>
           ) : (
-            /* Plus / Pro users — show packs */
             <>
-              <p className="mb-4 font-manrope text-xs text-ink-3">Purchase extra characters or sessions — they never expire.</p>
+              <p className="mb-4 font-manrope text-xs text-ink-3">{b.topUpDescription}</p>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { label: "50K chars",    price: "$0.99" },
@@ -177,28 +180,28 @@ export default async function BillingPage() {
                   </button>
                 ))}
               </div>
-              <p className="mt-3 font-manrope text-xs text-ink-3 text-center">Payments coming soon</p>
+              <p className="mt-3 font-manrope text-xs text-ink-3 text-center">{b.paymentsComing}</p>
             </>
           )}
         </div>
 
         {/* Transaction history */}
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
-          <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-3">Transaction history</p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-3">{b.transactionHistory}</p>
           {(transactions ?? []).length === 0 ? (
-            <p className="font-manrope text-sm text-ink-3">No transactions yet.</p>
+            <p className="font-manrope text-sm text-ink-3">{b.noTransactions}</p>
           ) : (
             <div className="flex flex-col divide-y divide-ink/5">
               {(transactions ?? []).map((tx) => {
                 const isCredit = tx.amount > 0;
                 const reasonLabel: Record<string, string> = {
-                  monthly_grant: "Monthly grant",
-                  purchase:      "Top-up purchase",
-                  usage:         "Used",
-                  refund:        "Refund",
-                  chargeback:    "Chargeback",
-                  admin_grant:   "Admin grant",
-                  compensation:  "Compensation",
+                  monthly_grant: b.txMonthlyGrant,
+                  purchase:      b.txPurchase,
+                  usage:         b.txUsage,
+                  refund:        b.txRefund,
+                  chargeback:    b.txChargeback,
+                  admin_grant:   b.txAdminGrant,
+                  compensation:  b.txAdminGrant,
                 };
                 return (
                   <div key={tx.id} className="flex items-center gap-3 py-3">

@@ -53,7 +53,7 @@ function parseMessageParts(text: string): MessagePart[] {
   return parts.length > 0 ? parts : [{ type: "text", content: text }];
 }
 
-function InlineAudioPlayer({ url }: { url: string }) {
+function InlineAudioPlayer({ url, playLabel, playingLabel }: { url: string; playLabel: string; playingLabel: string }) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -79,7 +79,7 @@ function InlineAudioPlayer({ url }: { url: string }) {
       }`}
     >
       <span>{playing ? "◼" : "▶"}</span>
-      <span>{playing ? "Playing…" : "Play audio"}</span>
+      <span>{playing ? playingLabel : playLabel}</span>
     </button>
   );
 }
@@ -661,13 +661,13 @@ export default function LearnClient({
           <div className="flex flex-col gap-2">
             {sessionsBalance === 0 ? (
               <div className="rounded-lg border-2 border-ink/10 bg-ink/5 px-4 py-3 text-center">
-                <p className="font-manrope text-sm font-[700] text-ink">No AI sessions remaining</p>
-                <p className="mt-0.5 font-manrope text-xs text-ink-3">Upgrade your plan to start a new session</p>
+                <p className="font-manrope text-sm font-[700] text-ink">{labels.noSessionsRemaining}</p>
+                <p className="mt-0.5 font-manrope text-xs text-ink-3">{labels.upgradeToStart}</p>
                 <Link
                   href="/billing/upgrade"
                   className="mt-3 inline-block rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
                 >
-                  View plans
+                  {labels.viewPlans}
                 </Link>
               </div>
             ) : (
@@ -709,12 +709,12 @@ export default function LearnClient({
         <div className="mx-auto mt-8 flex max-w-xs flex-col gap-2">
           {sessionsBalance === 0 ? (
             <>
-              <p className="font-manrope text-sm text-ink-3">No sessions remaining — upgrade to keep going</p>
+              <p className="font-manrope text-sm text-ink-3">{labels.noSessionsLeft}</p>
               <Link
                 href="/billing/upgrade"
                 className="w-full rounded-full bg-orange px-4 py-3 text-center font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
               >
-                View plans
+                {labels.viewPlans}
               </Link>
             </>
           ) : (
@@ -779,7 +779,7 @@ export default function LearnClient({
                   ? parseMessageParts(m.display).map((part, i) =>
                       part.type === "audio"
                         ? audioMap.has(part.cardId)
-                          ? <InlineAudioPlayer key={i} url={audioMap.get(part.cardId)!} />
+                          ? <InlineAudioPlayer key={i} url={audioMap.get(part.cardId)!} playLabel={labels.audioPlay} playingLabel={labels.audioPlaying} />
                           : null
                         : <ChatMessage key={i} role="assistant" content={part.content} />
                     )
@@ -800,19 +800,19 @@ export default function LearnClient({
       <div className="pt-2">
         {!isStreaming && sessionCards.length > 0 && evals.length >= sessionCards.length ? (
           <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
-            <span className="font-manrope text-sm text-ink-3">All {sessionCards.length} cards covered!</span>
+            <span className="font-manrope text-sm text-ink-3">{t(labels.allCardsCovered, { count: sessionCards.length })}</span>
             <button
               type="button"
               onClick={handleEnd}
               disabled={isSaving}
               className="ml-3 shrink-0 rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 disabled:opacity-50"
             >
-              {isSaving ? labels.saving : "See results →"}
+              {isSaving ? labels.saving : labels.seeResults}
             </button>
           </div>
         ) : messages.length >= MAX_MESSAGES ? (
           <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
-            <span className="font-manrope text-sm text-ink-3">Message limit reached — wrap up your session</span>
+            <span className="font-manrope text-sm text-ink-3">{labels.messageLimitReached}</span>
             <button
               type="button"
               onClick={handleEnd}

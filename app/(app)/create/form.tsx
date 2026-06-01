@@ -271,7 +271,7 @@ function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, c
   }
 
   const billingHref = "/billing/upgrade";
-  const upsellLabel = plan === "free" ? "Upgrade your plan to unlock" : "Top up your balance to continue";
+  const upsellLabel = plan === "free" ? labels.upsellUpgrade : labels.upsellTopUp;
 
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
@@ -570,8 +570,8 @@ export default function CreateCourseForm({
     setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
-      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
-      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+      if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
+      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
     } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
@@ -615,8 +615,8 @@ export default function CreateCourseForm({
     setTimeout(() => setBulkAudioStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
-      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
-      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+      if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
+      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
     } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
@@ -658,8 +658,8 @@ export default function CreateCourseForm({
     setTimeout(() => setBulkBackStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
-      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
-      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+      if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
+      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
     } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
@@ -824,8 +824,8 @@ export default function CreateCourseForm({
               <input type="hidden" name="visibility" value={selectedVisibility} />
               <div className="flex gap-2">
                 {([
-                  { value: "public",  icon: "🌍", desc: labels.publicDesc  ?? "Anyone can find and study this course" },
-                  { value: "private", icon: "🔒", desc: labels.privateDesc ?? "Only you and invited members" },
+                  { value: "public",  icon: "🌍", desc: labels.publicDesc  },
+                  { value: "private", icon: "🔒", desc: labels.privateDesc },
                 ] as { value: string; icon: string; desc: string }[]).map(({ value, icon, desc }) => {
                   const isPlanLocked = value === "private" && plan === "free";
                   const active = selectedVisibility === value;
@@ -835,7 +835,7 @@ export default function CreateCourseForm({
                       type="button"
                       onClick={() => { if (!isPlanLocked) setSelectedVisibility(value); }}
                       disabled={isPlanLocked}
-                      title={isPlanLocked ? "Available on Plus & Pro" : undefined}
+                      title={isPlanLocked ? labels.lockedFeature : undefined}
                       className={`flex flex-1 items-start gap-2 rounded-lg border-2 px-3 py-2.5 text-left transition ${
                         isPlanLocked ? "cursor-not-allowed border-ink/10 bg-ink/5 opacity-50" :
                         active ? "border-orange bg-orange/10" : "border-ink/10 bg-paper-2 hover:border-ink/30"

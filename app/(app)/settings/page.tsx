@@ -4,6 +4,7 @@ export const metadata: Metadata = { title: "Settings — Brainana" };
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { getLocale } from "@/utils/i18n";
 import SettingsForm from "./settings-form";
 
 export default async function SettingsPage() {
@@ -15,16 +16,18 @@ export default async function SettingsPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, display_name, username, bio, avatar_url, website_url, twitter_handle, daily_goal, show_romanization, native_language")
+    .select("id, display_name, username, bio, avatar_url, website_url, twitter_handle, daily_goal, show_romanization, native_language, active_origin_language")
     .eq("id", user.id)
     .single();
 
   if (!profile) redirect("/start");
 
+  const loc = getLocale((profile.active_origin_language as string | null) ?? null);
   const googleIdentity = user.identities?.find((identity) => identity.provider === "google") ?? null;
 
   return (
     <SettingsForm
+      labels={loc.settings}
       profile={{
         id: profile.id,
         display_name: profile.display_name,

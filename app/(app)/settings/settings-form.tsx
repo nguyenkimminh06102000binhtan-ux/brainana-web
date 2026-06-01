@@ -34,11 +34,15 @@ type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid";
 
 const USERNAME_RE = /^[a-z0-9._]{3,24}$/;
 
+type SettingsLabels = Record<string, string>;
+
 export default function SettingsForm({
+  labels,
   profile,
   email,
   googleIdentity,
 }: {
+  labels: SettingsLabels;
   profile: ProfileSettings;
   email: string;
   googleIdentity: GoogleIdentity | null;
@@ -59,13 +63,13 @@ export default function SettingsForm({
   const [identityError, setIdentityError] = useState<string | null>(null);
 
   const usernameHelp = useMemo(() => {
-    if (username === profile.username) return "This is your current username.";
-    if (usernameStatus === "checking") return "Checking availability...";
-    if (usernameStatus === "available") return "Username is available.";
-    if (usernameStatus === "taken") return "Username is already taken.";
-    if (usernameStatus === "invalid") return "Use 3-24 lowercase letters, numbers, dots, or underscores.";
-    return "Use 3-24 lowercase letters, numbers, dots, or underscores.";
-  }, [profile.username, username, usernameStatus]);
+    if (username === profile.username) return labels.usernameCurrentHelp;
+    if (usernameStatus === "checking") return labels.usernameChecking;
+    if (usernameStatus === "available") return labels.usernameAvailable;
+    if (usernameStatus === "taken") return labels.usernameTaken;
+    if (usernameStatus === "invalid") return labels.usernameInvalid;
+    return labels.usernameInvalid;
+  }, [profile.username, username, usernameStatus, labels]);
 
   useEffect(() => {
     const nextUsername = username.trim().toLowerCase();
@@ -136,14 +140,14 @@ export default function SettingsForm({
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-end justify-between">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Account center</p>
-          <h1 className="mt-2 font-fredoka text-4xl font-[700] tracking-tight text-ink">Settings</h1>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{labels.accountCenter}</p>
+          <h1 className="mt-2 font-fredoka text-4xl font-[700] tracking-tight text-ink">{labels.title}</h1>
         </div>
         <a
           href="/billing"
           className="flex items-center gap-2 rounded-full border-2 border-ink/20 px-4 py-2 font-manrope text-sm font-[700] text-ink-2 transition hover:border-ink/40 hover:text-ink"
         >
-          💳 Billing &amp; Usage
+          💳 {labels.billingLink}
         </a>
       </div>
 
@@ -154,11 +158,11 @@ export default function SettingsForm({
           )}
 
           <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
-            <SectionHeader eyebrow="01" title="Profile" />
+            <SectionHeader eyebrow="01" title={labels.profileSection} />
             <input type="hidden" name="avatar_url" value={avatarUrl ?? ""} />
 
             <div className="mt-6 grid gap-5 md:grid-cols-2">
-              <Field label="Display name" htmlFor="display_name">
+              <Field label={labels.displayName} htmlFor="display_name">
                 <input
                   id="display_name"
                   name="display_name"
@@ -168,7 +172,7 @@ export default function SettingsForm({
                 />
               </Field>
 
-              <Field label="Username" htmlFor="username" help={usernameHelp} tone={usernameStatus}>
+              <Field label={labels.username} htmlFor="username" help={usernameHelp} tone={usernameStatus}>
                 <input
                   id="username"
                   name="username"
@@ -180,7 +184,7 @@ export default function SettingsForm({
               </Field>
 
               <div className="md:col-span-2">
-                <Field label="Bio" htmlFor="bio" help="Keep it short. 160 characters max.">
+                <Field label={labels.bio} htmlFor="bio" help={labels.bioHelp}>
                   <textarea
                     id="bio"
                     name="bio"
@@ -192,7 +196,7 @@ export default function SettingsForm({
                 </Field>
               </div>
 
-              <Field label="Website URL" htmlFor="website_url">
+              <Field label={labels.websiteUrl} htmlFor="website_url">
                 <input
                   id="website_url"
                   name="website_url"
@@ -202,7 +206,7 @@ export default function SettingsForm({
                 />
               </Field>
 
-              <Field label="Twitter/X handle" htmlFor="twitter_handle">
+              <Field label={labels.twitterHandle} htmlFor="twitter_handle">
                 <input
                   id="twitter_handle"
                   name="twitter_handle"
@@ -213,14 +217,14 @@ export default function SettingsForm({
               </Field>
 
               <div className="md:col-span-2">
-                <Field label="Mother tongue" htmlFor="native_language">
+                <Field label={labels.motherTongue} htmlFor="native_language">
                   <select
                     id="native_language"
                     name="native_language"
                     defaultValue={profile.native_language ?? ""}
                     className={inputClassName}
                   >
-                    <option value="">— not set —</option>
+                    <option value="">{labels.notSet}</option>
                     {LANGUAGES.map((lang) => (
                       <option key={lang} value={lang}>{lang}</option>
                     ))}
@@ -230,21 +234,21 @@ export default function SettingsForm({
             </div>
 
             <div className="mt-6 rounded-lg bg-paper p-5 shadow-hard-sm">
-              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-2">Avatar upload</p>
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-2">{labels.avatarUpload}</p>
               <AvatarPicker userId={profile.id} value={avatarUrl} onChange={setAvatarUrl} />
             </div>
           </section>
 
           <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
-            <SectionHeader eyebrow="02" title="Study preferences" />
+            <SectionHeader eyebrow="02" title={labels.studyPreferences} />
             <div className="mt-6 space-y-6">
               <div className="rounded-lg bg-paper p-5 shadow-hard-sm">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <label htmlFor="daily_goal" className="font-manrope text-sm font-[800] text-ink">
-                    Daily goal
+                    {labels.dailyGoal}
                   </label>
                   <span className="rounded-full bg-yellow-soft px-3 py-1 font-mono text-xs font-[700] text-ink">
-                    {dailyGoal} cards/day
+                    {labels.cardsPerDay?.replace("{count}", String(dailyGoal))}
                   </span>
                 </div>
                 <input
@@ -266,9 +270,9 @@ export default function SettingsForm({
 
               <label className="flex cursor-pointer items-center justify-between gap-4 rounded-lg bg-paper p-5 shadow-hard-sm">
                 <span>
-                  <span className="block font-manrope text-sm font-[800] text-ink">Show romanization</span>
+                  <span className="block font-manrope text-sm font-[800] text-ink">{labels.showRomanization}</span>
                   <span className="mt-1 block font-manrope text-xs text-ink-2">
-                    Display pronunciation hints for CJK language cards.
+                    {labels.romanizationHelp}
                   </span>
                 </span>
                 <input
@@ -288,14 +292,14 @@ export default function SettingsForm({
               disabled={profilePending || usernameStatus === "taken" || usernameStatus === "invalid"}
               className="cursor-pointer rounded-full bg-orange px-7 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {profilePending ? "Saving..." : "Save changes"}
+              {profilePending ? labels.saving : labels.saveChanges}
             </button>
           </div>
         </form>
 
         <aside className="space-y-6">
           <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
-            <SectionHeader eyebrow="03" title="Account" />
+            <SectionHeader eyebrow="03" title={labels.accountSection} />
             {(accountState?.error || accountState?.success) && (
               <div className="mt-5">
                 <StatusMessage state={accountState} />
@@ -304,11 +308,11 @@ export default function SettingsForm({
 
             <form action={accountAction} className="mt-6 space-y-4">
               <input type="hidden" name="intent" value="email" />
-              <Field label="Change email" htmlFor="email">
+              <Field label={labels.changeEmail} htmlFor="email">
                 <input id="email" name="email" type="email" defaultValue={email} className={inputClassName} />
               </Field>
               <button type="submit" disabled={accountPending} className={secondaryButtonClassName}>
-                Update email
+                {labels.updateEmail}
               </button>
             </form>
 
@@ -316,26 +320,26 @@ export default function SettingsForm({
 
             <form action={accountAction} className="space-y-4">
               <input type="hidden" name="intent" value="password" />
-              <Field label="New password" htmlFor="password">
+              <Field label={labels.newPassword} htmlFor="password">
                 <input id="password" name="password" type="password" autoComplete="new-password" className={inputClassName} />
               </Field>
-              <Field label="Confirm password" htmlFor="confirm_password">
+              <Field label={labels.confirmPassword} htmlFor="confirm_password">
                 <input id="confirm_password" name="confirm_password" type="password" autoComplete="new-password" className={inputClassName} />
               </Field>
               <button type="submit" disabled={accountPending} className={secondaryButtonClassName}>
-                Change password
+                {labels.changePassword}
               </button>
             </form>
           </section>
 
           <section className="rounded-lg bg-paper-2 p-6 shadow-hard">
-            <SectionHeader eyebrow="04" title="Connected accounts" />
+            <SectionHeader eyebrow="04" title={labels.connectedAccounts} />
             <div className="mt-6 rounded-lg bg-paper p-5 shadow-hard-sm">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="font-manrope text-sm font-[800] text-ink">Google</p>
+                  <p className="font-manrope text-sm font-[800] text-ink">{labels.googleProvider}</p>
                   <p className="mt-1 font-manrope text-xs text-ink-2">
-                    {googleIdentity ? "Connected to your account." : "Not connected."}
+                    {googleIdentity ? labels.connected : labels.notConnected}
                   </p>
                 </div>
                 <button
@@ -344,7 +348,7 @@ export default function SettingsForm({
                   disabled={identityPending}
                   className={googleIdentity ? dangerButtonClassName : secondaryButtonClassName}
                 >
-                  {identityPending ? "Working..." : googleIdentity ? "Disconnect" : "Connect"}
+                  {identityPending ? labels.working : googleIdentity ? labels.disconnect : labels.connect}
                 </button>
               </div>
               {identityError && (
