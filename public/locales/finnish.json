@@ -403,7 +403,15 @@
     "following": "Jälkeen",
     "follow": "+ Seuraa",
     "share": "Jakaa",
-    "copied": "Kopioitu!"
+    "copied": "Kopioitu!",
+    "configureWords": "Määritä sanat",
+    "configureWordsTitle": "Opittavat sanat",
+    "configureWordsDesc": "Poista rasti sanoista, jotka haluat ohittaa",
+    "configureWordsSave": "Tallenna",
+    "configureWordsSaving": "Tallennetaan…",
+    "configureWordsSaved": "Tallennettu",
+    "configureWordsSelectAll": "Valitse kaikki",
+    "configureWordsUntitled": "Nimetön osio"
   },
   "study": {
     "allSections": "Kaikki osat",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Istuntoja ei jäljellä — päivitä jatkaaksesi",
     "allCardsCovered": "Kaikki {count} korttia käyty läpi!",
     "seeResults": "Näytä tulokset",
-    "messageLimitReached": "Viestirajaa saavutettu — lopeta istuntosi"
+    "messageLimitReached": "Viestirajaa saavutettu — lopeta istuntosi",
+    "ignoredLabel": "Ohitettu"
   },
   "settings": {
     "accountCenter": "Tilikeskus",

@@ -403,7 +403,15 @@
     "following": "Kuzatish",
     "follow": "+ Kuzatish",
     "share": "Ulashish",
-    "copied": "Ko‘chirildi!"
+    "copied": "Ko‘chirildi!",
+    "configureWords": "So'zlarni sozlash",
+    "configureWordsTitle": "O'rganish uchun so'zlar",
+    "configureWordsDesc": "O'tkazib yubormoqchi bo'lgan so'zlarning belgilarini olib tashlang",
+    "configureWordsSave": "Saqlash",
+    "configureWordsSaving": "Saqlanmoqda…",
+    "configureWordsSaved": "Saqlandi",
+    "configureWordsSelectAll": "Hammasini tanlash",
+    "configureWordsUntitled": "Sarlavhasiz bo'lim"
   },
   "study": {
     "allSections": "Barcha bo'limlar",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Seanslar qolmadi — davom etish uchun yangilang",
     "allCardsCovered": "Barcha {count} kartalar qamrab olingan!",
     "seeResults": "Natijalarni ko'ring",
-    "messageLimitReached": "Xabar limitiga yetdi — seansni yakunlang"
+    "messageLimitReached": "Xabar limitiga yetdi — seansni yakunlang",
+    "ignoredLabel": "E'tiborga olinmagan"
   },
   "settings": {
     "accountCenter": "Hisob markazi",

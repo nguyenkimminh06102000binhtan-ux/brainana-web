@@ -403,7 +403,15 @@
     "following": "Дагаж байна",
     "follow": "+ Дага",
     "share": "Хуваалцах",
-    "copied": "Хуулсан!"
+    "copied": "Хуулсан!",
+    "configureWords": "Үгс тохируулах",
+    "configureWordsTitle": "Сурах үгс",
+    "configureWordsDesc": "Алгасахыг хүссэн үгсийн тэмдэглэгээг арилгана уу",
+    "configureWordsSave": "Хадгалах",
+    "configureWordsSaving": "Хадгалж байна…",
+    "configureWordsSaved": "Хадгалагдсан",
+    "configureWordsSelectAll": "Бүгдийг сонгох",
+    "configureWordsUntitled": "Гарчиггүй хэсэг"
   },
   "study": {
     "allSections": "Бүх хэсгүүд",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ямар ч сесс үлдсэнгүй - үргэлжлүүлэхийн тулд шинэчилнэ үү",
     "allCardsCovered": "Бүх {count} картууд хамрагдсан!",
     "seeResults": "Үр дүнг харах",
-    "messageLimitReached": "Мессежийн хязгаарт хүрсэн — сессээ дуусга"
+    "messageLimitReached": "Мессежийн хязгаарт хүрсэн — сессээ дуусга",
+    "ignoredLabel": "Үл тоомсорлосон"
   },
   "settings": {
     "accountCenter": "Дансны төв",

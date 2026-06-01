@@ -403,7 +403,15 @@
     "following": "Następny",
     "follow": "+ Obserwuj",
     "share": "Udział",
-    "copied": "Skopiowano!"
+    "copied": "Skopiowano!",
+    "configureWords": "Konfiguruj słowa",
+    "configureWordsTitle": "Słowa do nauki",
+    "configureWordsDesc": "Odznacz słowa, które chcesz pominąć",
+    "configureWordsSave": "Zapisz",
+    "configureWordsSaving": "Zapisywanie…",
+    "configureWordsSaved": "Zapisano",
+    "configureWordsSelectAll": "Zaznacz wszystko",
+    "configureWordsUntitled": "Sekcja bez tytułu"
   },
   "study": {
     "allSections": "Wszystkie sekcje",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Brak pozostałych sesji — uaktualnij, aby kontynuować",
     "allCardsCovered": "Wszystkie karty {count} objęte!",
     "seeResults": "Zobacz wyniki",
-    "messageLimitReached": "Osiągnięto limit wiadomości — zakończ sesję"
+    "messageLimitReached": "Osiągnięto limit wiadomości — zakończ sesję",
+    "ignoredLabel": "Ignorowane"
   },
   "settings": {
     "accountCenter": "Centrum kont",

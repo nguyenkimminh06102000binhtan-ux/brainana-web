@@ -403,7 +403,15 @@
     "following": "ਅਨੁਸਰਣ ਕਰ ਰਹੇ ਹਨ",
     "follow": "+ ਪਾਲਣਾ ਕਰੋ",
     "share": "ਸ਼ੇਅਰ ਕਰੋ",
-    "copied": "ਕਾਪੀ ਕੀਤਾ!"
+    "copied": "ਕਾਪੀ ਕੀਤਾ!",
+    "configureWords": "ਸ਼ਬਦ ਕੌਂਫਿਗਰ ਕਰੋ",
+    "configureWordsTitle": "ਸਿੱਖਣ ਲਈ ਸ਼ਬਦ",
+    "configureWordsDesc": "ਜੋ ਸ਼ਬਦ ਛੱਡਣੇ ਹਨ ਉਨ੍ਹਾਂ ਦਾ ਟਿੱਕ ਹਟਾਓ",
+    "configureWordsSave": "ਸੇਵ ਕਰੋ",
+    "configureWordsSaving": "ਸੇਵ ਹੋ ਰਿਹਾ ਹੈ…",
+    "configureWordsSaved": "ਸੇਵ ਕੀਤਾ",
+    "configureWordsSelectAll": "ਸਭ ਚੁਣੋ",
+    "configureWordsUntitled": "ਸਿਰਲੇਖ ਰਹਿਤ ਭਾਗ"
   },
   "study": {
     "allSections": "ਸਾਰੇ ਭਾਗ",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "ਕੋਈ ਸੈਸ਼ਨ ਬਾਕੀ ਨਹੀਂ ਹਨ — ਜਾਰੀ ਰੱਖਣ ਲਈ ਅੱਪਗ੍ਰੇਡ ਕਰੋ",
     "allCardsCovered": "ਸਾਰੇ {count} ਕਾਰਡ ਕਵਰ ਕੀਤੇ ਗਏ ਹਨ!",
     "seeResults": "ਨਤੀਜੇ ਵੇਖੋ",
-    "messageLimitReached": "ਸੁਨੇਹਾ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ ਹੈ — ਆਪਣਾ ਸੈਸ਼ਨ ਪੂਰਾ ਕਰੋ"
+    "messageLimitReached": "ਸੁਨੇਹਾ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ ਹੈ — ਆਪਣਾ ਸੈਸ਼ਨ ਪੂਰਾ ਕਰੋ",
+    "ignoredLabel": "ਨਜ਼ਰਅੰਦਾਜ਼"
   },
   "settings": {
     "accountCenter": "ਖਾਤਾ ਕੇਂਦਰ",

@@ -403,7 +403,15 @@
     "following": "Ukulandela",
     "follow": "+ Landela",
     "share": "Yabelana",
-    "copied": "Kukopishiwe!"
+    "copied": "Kukopishiwe!",
+    "configureWords": "Misa amagama",
+    "configureWordsTitle": "Amagama okufunda",
+    "configureWordsDesc": "Susa amafulethi emagameni ofuna ukuwagqitha",
+    "configureWordsSave": "Gcina",
+    "configureWordsSaving": "Kugcinwa…",
+    "configureWordsSaved": "Kugcinwe",
+    "configureWordsSelectAll": "Khetha konke",
+    "configureWordsUntitled": "Isigaba esingenisihloko"
   },
   "study": {
     "allSections": "Zonke izigaba",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Awekho amaseshini asele — thuthukisa ukuze uqhubeke",
     "allCardsCovered": "Wonke {count} amakhadi akhavwe!",
     "seeResults": "Bona imiphumela",
-    "messageLimitReached": "Umkhawulo womlayezo ufinyelelwe - vala iseshini yakho"
+    "messageLimitReached": "Umkhawulo womlayezo ufinyelelwe - vala iseshini yakho",
+    "ignoredLabel": "Okulahlwe"
   },
   "settings": {
     "accountCenter": "Isikhungo se-akhawunti",

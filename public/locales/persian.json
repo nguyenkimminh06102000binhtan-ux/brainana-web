@@ -403,7 +403,15 @@
     "following": "دنبال کردن",
     "follow": "+ دنبال کن",
     "share": "به اشتراک بگذارید",
-    "copied": "کپی شده!"
+    "copied": "کپی شده!",
+    "configureWords": "پیکربندی کلمات",
+    "configureWordsTitle": "کلمات برای یادگیری",
+    "configureWordsDesc": "کلماتی که می‌خواهید رد شوید را از حالت انتخاب خارج کنید",
+    "configureWordsSave": "ذخیره",
+    "configureWordsSaving": "در حال ذخیره…",
+    "configureWordsSaved": "ذخیره شد",
+    "configureWordsSelectAll": "همه را انتخاب کنید",
+    "configureWordsUntitled": "بخش بدون عنوان"
   },
   "study": {
     "allSections": "همه بخش ها",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "هیچ جلسه ای باقی نمانده - ارتقا دهید تا ادامه دهید",
     "allCardsCovered": "همه کارت های {count} پوشیده شده اند!",
     "seeResults": "نتایج را ببینید",
-    "messageLimitReached": "به محدودیت پیام رسیده است - جلسه خود را به پایان برسانید"
+    "messageLimitReached": "به محدودیت پیام رسیده است - جلسه خود را به پایان برسانید",
+    "ignoredLabel": "نادیده گرفته شده"
   },
   "settings": {
     "accountCenter": "مرکز حساب",

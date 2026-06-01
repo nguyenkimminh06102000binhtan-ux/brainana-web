@@ -403,7 +403,15 @@
     "following": "പിന്തുടരുന്നു",
     "follow": "+ പിന്തുടരുക",
     "share": "പങ്കിടുക",
-    "copied": "പകർത്തി!"
+    "copied": "പകർത്തി!",
+    "configureWords": "വാക്കുകൾ ക്രമീകരിക്കുക",
+    "configureWordsTitle": "പഠിക്കേണ്ട വാക്കുകൾ",
+    "configureWordsDesc": "ഒഴിവാക്കേണ്ട വാക്കുകളുടെ ടിക് നീക്കം ചെയ്യൂ",
+    "configureWordsSave": "സേവ് ചെയ്യുക",
+    "configureWordsSaving": "സേവ് ചെയ്യുന്നു…",
+    "configureWordsSaved": "സേവ് ചെയ്തു",
+    "configureWordsSelectAll": "എല്ലാം തിരഞ്ഞെടുക്കുക",
+    "configureWordsUntitled": "ശീർഷകമില്ലാത്ത വിഭാഗം"
   },
   "study": {
     "allSections": "എല്ലാ വിഭാഗങ്ങളും",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "സെഷനുകളൊന്നും ശേഷിക്കുന്നില്ല - തുടരാൻ നവീകരിക്കുക",
     "allCardsCovered": "എല്ലാ {count} കാർഡുകളും കവർ ചെയ്യുന്നു!",
     "seeResults": "ഫലങ്ങൾ കാണുക",
-    "messageLimitReached": "സന്ദേശ പരിധി എത്തി - നിങ്ങളുടെ സെഷൻ അവസാനിപ്പിക്കുക"
+    "messageLimitReached": "സന്ദേശ പരിധി എത്തി - നിങ്ങളുടെ സെഷൻ അവസാനിപ്പിക്കുക",
+    "ignoredLabel": "അവഗണിച്ചത്"
   },
   "settings": {
     "accountCenter": "അക്കൗണ്ട് സെൻ്റർ",

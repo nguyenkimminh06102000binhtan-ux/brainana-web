@@ -403,7 +403,15 @@
     "following": "Whai muri",
     "follow": "+ Whai",
     "share": "Tiria",
-    "copied": "Kua kapea!"
+    "copied": "Kua kapea!",
+    "configureWords": "Tautuhia ngā kupu",
+    "configureWordsTitle": "Ngā kupu hei ako",
+    "configureWordsDesc": "Wetekina ngā kupu e hiahia ana koe ki te prewhi",
+    "configureWordsSave": "Tiaki",
+    "configureWordsSaving": "E tiaki ana…",
+    "configureWordsSaved": "Kua tiakina",
+    "configureWordsSelectAll": "Tīpakohia katoa",
+    "configureWordsUntitled": "Wāhanga kore ingoa"
   },
   "study": {
     "allSections": "Nga waahanga katoa",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Karekau he waahi e toe ana — whakamohoa kia haere tonu",
     "allCardsCovered": "Kua kapi katoa nga kaari {count}!",
     "seeResults": "Tirohia nga hua",
-    "messageLimitReached": "Kua tae te tepe o te karere — takai i to wahanga"
+    "messageLimitReached": "Kua tae te tepe o te karere — takai i to wahanga",
+    "ignoredLabel": "Kāore i aro"
   },
   "settings": {
     "accountCenter": "Pokapū kaute",

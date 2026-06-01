@@ -403,7 +403,15 @@
     "following": "跟住",
     "follow": "+ 跟住",
     "share": "分享",
-    "copied": "複製咗！"
+    "copied": "複製咗！",
+    "configureWords": "配置詞彙",
+    "configureWordsTitle": "要學習的詞彙",
+    "configureWordsDesc": "取消勾選你想跳過的詞彙",
+    "configureWordsSave": "儲存",
+    "configureWordsSaving": "儲存中…",
+    "configureWordsSaved": "已儲存",
+    "configureWordsSelectAll": "全選",
+    "configureWordsUntitled": "未命名章節"
   },
   "study": {
     "allSections": "所有部分",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "沒有課程剩餘 — 升級以繼續",
     "allCardsCovered": "所有 {count} 卡已涵蓋！",
     "seeResults": "查看結果",
-    "messageLimitReached": "信息限制已達到 — 結束你的課程"
+    "messageLimitReached": "信息限制已達到 — 結束你的課程",
+    "ignoredLabel": "已忽略"
   },
   "settings": {
     "accountCenter": "帳戶中心",

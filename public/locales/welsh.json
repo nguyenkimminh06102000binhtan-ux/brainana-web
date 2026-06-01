@@ -403,7 +403,15 @@
     "following": "Yn dilyn",
     "follow": "+ Dilyn",
     "share": "Rhannu",
-    "copied": "Wedi'i gopïo!"
+    "copied": "Wedi'i gopïo!",
+    "configureWords": "Ffurfweddu geiriau",
+    "configureWordsTitle": "Geiriau i'w dysgu",
+    "configureWordsDesc": "Daddiciwch eiriau rydych am eu hepgor",
+    "configureWordsSave": "Cadw",
+    "configureWordsSaving": "Yn cadw…",
+    "configureWordsSaved": "Wedi'i gadw",
+    "configureWordsSelectAll": "Dewis popeth",
+    "configureWordsUntitled": "Adran heb deitl"
   },
   "study": {
     "allSections": "Pob adran",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Dim sesiynau ar ôl - uwchraddio i barhau",
     "allCardsCovered": "Pob cerdyn {count} wedi'i orchuddio!",
     "seeResults": "Gweler canlyniadau",
-    "messageLimitReached": "Cyrhaeddwyd y terfyn negeseuon - gorffennwch eich sesiwn"
+    "messageLimitReached": "Cyrhaeddwyd y terfyn negeseuon - gorffennwch eich sesiwn",
+    "ignoredLabel": "Wedi'i anwybyddu"
   },
   "settings": {
     "accountCenter": "Canolfan gyfrifon",

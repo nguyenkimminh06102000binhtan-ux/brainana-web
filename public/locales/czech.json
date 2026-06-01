@@ -403,7 +403,15 @@
     "following": "Následující",
     "follow": "+ Sledovat",
     "share": "Podíl",
-    "copied": "Zkopírováno!"
+    "copied": "Zkopírováno!",
+    "configureWords": "Konfigurovat slova",
+    "configureWordsTitle": "Slova k učení",
+    "configureWordsDesc": "Odznačte slova, která chcete přeskočit",
+    "configureWordsSave": "Uložit",
+    "configureWordsSaving": "Ukládání…",
+    "configureWordsSaved": "Uloženo",
+    "configureWordsSelectAll": "Vybrat vše",
+    "configureWordsUntitled": "Sekce bez názvu"
   },
   "study": {
     "allSections": "Všechny sekce",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Žádné zbývající relace — upgradujte, abyste pokračovali",
     "allCardsCovered": "Všechny {count} karty probrány!",
     "seeResults": "Zobrazit výsledky",
-    "messageLimitReached": "Dosažen limit zpráv — dokončete svou relaci"
+    "messageLimitReached": "Dosažen limit zpráv — dokončete svou relaci",
+    "ignoredLabel": "Ignorováno"
   },
   "settings": {
     "accountCenter": "Centrum účtu",

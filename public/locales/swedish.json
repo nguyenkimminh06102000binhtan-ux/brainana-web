@@ -403,7 +403,15 @@
     "following": "Följande",
     "follow": "+ Följ",
     "share": "Dela",
-    "copied": "Kopierade!"
+    "copied": "Kopierade!",
+    "configureWords": "Konfigurera ord",
+    "configureWordsTitle": "Ord att lära sig",
+    "configureWordsDesc": "Avmarkera ord som du vill hoppa över",
+    "configureWordsSave": "Spara",
+    "configureWordsSaving": "Sparar…",
+    "configureWordsSaved": "Sparat",
+    "configureWordsSelectAll": "Välj alla",
+    "configureWordsUntitled": "Namnlöst avsnitt"
   },
   "study": {
     "allSections": "Alla avsnitt",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Inga sessioner kvar – uppgradera för att fortsätta",
     "allCardsCovered": "Alla {count}-kort täcks!",
     "seeResults": "Se resultat",
-    "messageLimitReached": "Meddelandegräns nådd – avsluta din session"
+    "messageLimitReached": "Meddelandegräns nådd – avsluta din session",
+    "ignoredLabel": "Ignorerad"
   },
   "settings": {
     "accountCenter": "Kontocenter",

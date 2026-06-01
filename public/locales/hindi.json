@@ -403,7 +403,15 @@
     "following": "अगले",
     "follow": "+ अनुसरण करें",
     "share": "शेयर करना",
-    "copied": "नकल की गई!"
+    "copied": "नकल की गई!",
+    "configureWords": "शब्द कॉन्फ़िगर करें",
+    "configureWordsTitle": "सीखने के लिए शब्द",
+    "configureWordsDesc": "जो शब्द छोड़ना चाहते हैं उनका चेक हटाएं",
+    "configureWordsSave": "सहेजें",
+    "configureWordsSaving": "सहेजा जा रहा है…",
+    "configureWordsSaved": "सहेजा गया",
+    "configureWordsSelectAll": "सभी चुनें",
+    "configureWordsUntitled": "शीर्षक रहित अनुभाग"
   },
   "study": {
     "allSections": "सभी अनुभाग",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "कोई सत्र शेष नहीं — जारी रखने के लिए अपग्रेड करें",
     "allCardsCovered": "सभी {count} कार्ड कवर हो गए!",
     "seeResults": "परिणाम देखें",
-    "messageLimitReached": "संदेश सीमा पूरी हो गई — अपना सत्र समाप्त करें"
+    "messageLimitReached": "संदेश सीमा पूरी हो गई — अपना सत्र समाप्त करें",
+    "ignoredLabel": "अनदेखा"
   },
   "settings": {
     "accountCenter": "खाता केंद्र",

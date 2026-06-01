@@ -403,7 +403,15 @@
     "following": "અનુસરે છે",
     "follow": "+ અનુસરો",
     "share": "શેર કરો",
-    "copied": "નકલ કરી!"
+    "copied": "નકલ કરી!",
+    "configureWords": "શબ્દો ગોઠવો",
+    "configureWordsTitle": "શીખવા માટે શબ્દો",
+    "configureWordsDesc": "જે શબ્દો છોડવા છે તેમની ટિક દૂર કરો",
+    "configureWordsSave": "સાચવો",
+    "configureWordsSaving": "સાચવી રહ્યા છીએ…",
+    "configureWordsSaved": "સાચવ્યું",
+    "configureWordsSelectAll": "બધું પસંદ કરો",
+    "configureWordsUntitled": "શીર્ષક વગરનો વિભાગ"
   },
   "study": {
     "allSections": "બધા વિભાગો",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "સત્ર બાકી નથી — ચાલુ રાખવા માટે અપગ્રેડ કરો",
     "allCardsCovered": "બધા {count} કાર્ડ્સ આવરી લેવાયા!",
     "seeResults": "પરિણામો જુઓ",
-    "messageLimitReached": "સંદેશ મર્યાદા પહોંચી ગઈ — તમારું સત્ર પૂર્ણ કરો"
+    "messageLimitReached": "સંદેશ મર્યાદા પહોંચી ગઈ — તમારું સત્ર પૂર્ણ કરો",
+    "ignoredLabel": "અવગણ્યું"
   },
   "settings": {
     "accountCenter": "ખાતું કેન્દ્ર",

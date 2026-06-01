@@ -403,7 +403,15 @@
     "following": "Пасля",
     "follow": "+ Выконвайце",
     "share": "падзяліцца",
-    "copied": "Скапіравана!"
+    "copied": "Скапіравана!",
+    "configureWords": "Наладзіць словы",
+    "configureWordsTitle": "Словы для вывучэння",
+    "configureWordsDesc": "Зніміце адзнаку са слоў, якія хочаце прапусціць",
+    "configureWordsSave": "Захаваць",
+    "configureWordsSaving": "Захоўванне…",
+    "configureWordsSaved": "Захавана",
+    "configureWordsSelectAll": "Выбраць усё",
+    "configureWordsUntitled": "Раздзел без назвы"
   },
   "study": {
     "allSections": "Усе раздзелы",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Сеансаў не засталося — палепшыце план, каб продажаць",
     "allCardsCovered": "Усе {count} карт прабраны!",
     "seeResults": "Глядзіце вынікі",
-    "messageLimitReached": "Ліміт паведамленняў дасягнуты — завяршыце ваш сеанс"
+    "messageLimitReached": "Ліміт паведамленняў дасягнуты — завяршыце ваш сеанс",
+    "ignoredLabel": "Ігнараваны"
   },
   "settings": {
     "accountCenter": "Центр рахунку",

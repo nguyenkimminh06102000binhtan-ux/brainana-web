@@ -403,7 +403,15 @@
     "following": "Праћење",
     "follow": "+ Пратите",
     "share": "Схаре",
-    "copied": "Копирано!"
+    "copied": "Копирано!",
+    "configureWords": "Konfiguriši reči",
+    "configureWordsTitle": "Reči za učenje",
+    "configureWordsDesc": "Odznači reči koje želiš da preskočiš",
+    "configureWordsSave": "Sačuvaj",
+    "configureWordsSaving": "Čuvanje…",
+    "configureWordsSaved": "Sačuvano",
+    "configureWordsSelectAll": "Izaberi sve",
+    "configureWordsUntitled": "Odeljak bez naslova"
   },
   "study": {
     "allSections": "Све секције",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Нема преосталих сесија — надоградите да бисте наставили",
     "allCardsCovered": "Све __Б0__ картице покривене!",
     "seeResults": "Погледајте резултате",
-    "messageLimitReached": "Достигнуто је ограничење за поруке — завршите сесију"
+    "messageLimitReached": "Достигнуто је ограничење за поруке — завршите сесију",
+    "ignoredLabel": "Игнорисано"
   },
   "settings": {
     "accountCenter": "Центар за рачуне",

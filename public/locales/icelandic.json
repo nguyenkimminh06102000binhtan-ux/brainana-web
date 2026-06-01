@@ -403,7 +403,15 @@
     "following": "Á eftir",
     "follow": "+ Fylgstu með",
     "share": "Deila",
-    "copied": "Afritað!"
+    "copied": "Afritað!",
+    "configureWords": "Stilla orð",
+    "configureWordsTitle": "Orð til að læra",
+    "configureWordsDesc": "Taktu hakið af orðum sem þú vilt sleppa",
+    "configureWordsSave": "Vista",
+    "configureWordsSaving": "Vistun…",
+    "configureWordsSaved": "Vistað",
+    "configureWordsSelectAll": "Velja allt",
+    "configureWordsUntitled": "Nafnlaus hluti"
   },
   "study": {
     "allSections": "Allir kaflar",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Engar lotur eftir — uppfæra til að halda áfram",
     "allCardsCovered": "Öll {count} kort þekkt!",
     "seeResults": "Sjá niðurstöður",
-    "messageLimitReached": "Skilaboðamörk náð — lokið lotunni"
+    "messageLimitReached": "Skilaboðamörk náð — lokið lotunni",
+    "ignoredLabel": "Hunsað"
   },
   "settings": {
     "accountCenter": "Reikningur",

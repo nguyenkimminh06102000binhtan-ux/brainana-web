@@ -403,7 +403,15 @@
     "following": "Εξής",
     "follow": "+ Ακολουθήστε",
     "share": "Μερίδιο",
-    "copied": "Αντιγράφηκε!"
+    "copied": "Αντιγράφηκε!",
+    "configureWords": "Ρύθμιση λέξεων",
+    "configureWordsTitle": "Λέξεις προς μάθηση",
+    "configureWordsDesc": "Αποεπιλέξτε λέξεις που θέλετε να παραλείψετε",
+    "configureWordsSave": "Αποθήκευση",
+    "configureWordsSaving": "Αποθήκευση…",
+    "configureWordsSaved": "Αποθηκεύτηκε",
+    "configureWordsSelectAll": "Επιλογή όλων",
+    "configureWordsUntitled": "Τμήμα χωρίς τίτλο"
   },
   "study": {
     "allSections": "Όλα τα τμήματα",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Δεν έχουν απομείνει συνεδρίες — αναβαθμίστε για να συνεχίσετε",
     "allCardsCovered": "Καλύφθηκαν όλες οι {count} κάρτες!",
     "seeResults": "Δείτε τα αποτελέσματα",
-    "messageLimitReached": "Φτάσατε το όριο μηνυμάτων — ολοκληρώστε τη συνεδρία σας"
+    "messageLimitReached": "Φτάσατε το όριο μηνυμάτων — ολοκληρώστε τη συνεδρία σας",
+    "ignoredLabel": "Αγνοημένο"
   },
   "settings": {
     "accountCenter": "Κέντρο Λογαριασμού",

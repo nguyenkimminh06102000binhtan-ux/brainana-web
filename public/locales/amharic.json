@@ -403,7 +403,15 @@
     "following": "በመከተል ላይ",
     "follow": "+ ተከተል",
     "share": "አጋራ",
-    "copied": "ተቀድቷል!"
+    "copied": "ተቀድቷል!",
+    "configureWords": "ቃላትን አዋቅር",
+    "configureWordsTitle": "ለመማር ቃላት",
+    "configureWordsDesc": "መዝለል የሚፈልጓቸውን ቃላት ምልክቱን ያስወግዱ",
+    "configureWordsSave": "አስቀምጥ",
+    "configureWordsSaving": "በማስቀመጥ ላይ…",
+    "configureWordsSaved": "ተቀምጧል",
+    "configureWordsSelectAll": "ሁሉንም ምረጥ",
+    "configureWordsUntitled": "ርዕስ የሌለው ክፍል"
   },
   "study": {
     "allSections": "ሁሉም ክፍሎች",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "ቀሪ ስትሮች የሉም — ለመቀጠል የእቅድህን ደረጃ አሻሽል",
     "allCardsCovered": "ሁሉንም {count} ካርዶች ማስተማር ተጠናቋል!",
     "seeResults": "ውጤቶችን ይመልከቱ",
-    "messageLimitReached": "የመልእክት ገደብ ተጠናቋል — ስትሩን አጠና"
+    "messageLimitReached": "የመልእክት ገደብ ተጠናቋል — ስትሩን አጠና",
+    "ignoredLabel": "ተዉ"
   },
   "settings": {
     "accountCenter": "የመግለጫ ማዕከል",

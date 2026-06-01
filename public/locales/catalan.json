@@ -403,7 +403,15 @@
     "following": "Seguint",
     "follow": "+ Segueix",
     "share": "Comparteix",
-    "copied": "Copiat!"
+    "copied": "Copiat!",
+    "configureWords": "Configura paraules",
+    "configureWordsTitle": "Paraules per aprendre",
+    "configureWordsDesc": "Desmarca les paraules que vols ometre",
+    "configureWordsSave": "Desa",
+    "configureWordsSaving": "Desant…",
+    "configureWordsSaved": "Desat",
+    "configureWordsSelectAll": "Selecciona-ho tot",
+    "configureWordsUntitled": "Secció sense títol"
   },
   "study": {
     "allSections": "Totes les seccions",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "No queden sessions — millora el pla per continuar",
     "allCardsCovered": "Les {count} fitxes cobertes!",
     "seeResults": "Veure resultats",
-    "messageLimitReached": "Límit de missatges assolit — finalitza la teva sessió"
+    "messageLimitReached": "Límit de missatges assolit — finalitza la teva sessió",
+    "ignoredLabel": "Ignorat"
   },
   "settings": {
     "accountCenter": "Centre de compte",

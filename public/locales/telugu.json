@@ -403,7 +403,15 @@
     "following": "అనుసరిస్తోంది",
     "follow": "+ అనుసరించండి",
     "share": "షేర్ చేయండి",
-    "copied": "కాపీ చేయబడింది!"
+    "copied": "కాపీ చేయబడింది!",
+    "configureWords": "పదాలు కాన్ఫిగర్ చేయండి",
+    "configureWordsTitle": "నేర్చుకోవడానికి పదాలు",
+    "configureWordsDesc": "దాటవేయాలనుకునే పదాల టిక్ తీసివేయండి",
+    "configureWordsSave": "సేవ్ చేయండి",
+    "configureWordsSaving": "సేవ్ అవుతోంది…",
+    "configureWordsSaved": "సేవ్ అయింది",
+    "configureWordsSelectAll": "అన్నీ ఎంచుకోండి",
+    "configureWordsUntitled": "శీర్షిక లేని విభాగం"
   },
   "study": {
     "allSections": "అన్ని విభాగాలు",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "సెషన్‌లు ఏవీ మిగిలి లేవు — కొనసాగించడానికి అప్‌గ్రేడ్ చేయండి",
     "allCardsCovered": "అన్ని {count} కార్డ్‌లు కవర్ చేయబడ్డాయి!",
     "seeResults": "ఫలితాలను చూడండి",
-    "messageLimitReached": "సందేశ పరిమితిని చేరుకున్నారు — మీ సెషన్‌ను ముగించండి"
+    "messageLimitReached": "సందేశ పరిమితిని చేరుకున్నారు — మీ సెషన్‌ను ముగించండి",
+    "ignoredLabel": "విస్మరించబడింది"
   },
   "settings": {
     "accountCenter": "ఖాతా కేంద్రం",

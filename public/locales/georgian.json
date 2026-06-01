@@ -403,7 +403,15 @@
     "following": "მიჰყვება",
     "follow": "+ მიყევით",
     "share": "გააზიარეთ",
-    "copied": "კოპირებულია!"
+    "copied": "კოპირებულია!",
+    "configureWords": "სიტყვების კონფიგურაცია",
+    "configureWordsTitle": "სიტყვები სასწავლად",
+    "configureWordsDesc": "მოხსენით ნიშანი სიტყვებს, რომელთა გამოტოვება გსურთ",
+    "configureWordsSave": "შენახვა",
+    "configureWordsSaving": "შენახვა…",
+    "configureWordsSaved": "შენახულია",
+    "configureWordsSelectAll": "ყველის არჩევა",
+    "configureWordsUntitled": "სათაურის გარეშე სექცია"
   },
   "study": {
     "allSections": "ყველა განყოფილება",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "სესიები აღარ დარჩა — გაუმჯობესეთ პაკეტი გასაგრძელებლად",
     "allCardsCovered": "ყველა {count} ბარათი დაფარულია!",
     "seeResults": "შედეგების ნახვა",
-    "messageLimitReached": "მესიჯების ლიმიტი ამოწურულია — დაასრულეთ სესია"
+    "messageLimitReached": "მესიჯების ლიმიტი ამოწურულია — დაასრულეთ სესია",
+    "ignoredLabel": "იგნორირებული"
   },
   "settings": {
     "accountCenter": "ანგარიშის ცენტრი",

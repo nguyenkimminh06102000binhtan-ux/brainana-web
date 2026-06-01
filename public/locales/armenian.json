@@ -403,7 +403,15 @@
     "following": "Հետևելով",
     "follow": "+ Հետևեք",
     "share": "Կիսվել",
-    "copied": "Պատճենվել է"
+    "copied": "Պատճենվել է",
+    "configureWords": "Կարգավորել բառերը",
+    "configureWordsTitle": "Բառեր սովորելու համար",
+    "configureWordsDesc": "Ապընտրեք բառերը, որոնք ցանկանում եք բաց թողնել",
+    "configureWordsSave": "Պահպանել",
+    "configureWordsSaving": "Պահպանվում է…",
+    "configureWordsSaved": "Պահպանված է",
+    "configureWordsSelectAll": "Ընտրել բոլորը",
+    "configureWordsUntitled": "Անտիտղոս բաժին"
   },
   "study": {
     "allSections": "Բոլոր բաժինները",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Սեսիաներ չեն մնացել — բարձրացրեք պլանը շարունակելու համար",
     "allCardsCovered": "Բոլոր {count} քարտերն ընդգրկված են!",
     "seeResults": "Դիտել արդյունքները",
-    "messageLimitReached": "Հաղորդագրությունների սահմանը հասել է — ավարտեք ձեր սեսիան"
+    "messageLimitReached": "Հաղորդագրությունների սահմանը հասել է — ավարտեք ձեր սեսիան",
+    "ignoredLabel": "Անտեսված"
   },
   "settings": {
     "accountCenter": "Հաշվի կենտրոն",

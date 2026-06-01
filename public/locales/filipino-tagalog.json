@@ -403,7 +403,15 @@
     "following": "Sumusunod",
     "follow": "+ Sundin",
     "share": "Ibahagi",
-    "copied": "Kinopya!"
+    "copied": "Kinopya!",
+    "configureWords": "I-configure ang mga salita",
+    "configureWordsTitle": "Mga salitang matututo",
+    "configureWordsDesc": "Alisan ng tsek ang mga salitang gusto mong laktawan",
+    "configureWordsSave": "I-save",
+    "configureWordsSaving": "Sine-save…",
+    "configureWordsSaved": "Na-save",
+    "configureWordsSelectAll": "Piliin lahat",
+    "configureWordsUntitled": "Walang pamagat na seksyon"
   },
   "study": {
     "allSections": "Lahat ng mga seksyon",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Walang natitirang sesyon — i-upgrade para magpatuloy",
     "allCardsCovered": "Natapos na ang lahat ng {count} mga card!",
     "seeResults": "Tingnan ang mga resulta",
-    "messageLimitReached": "Naabot na ang limitasyon ng mensahe — tapusin ang iyong sesyon"
+    "messageLimitReached": "Naabot na ang limitasyon ng mensahe — tapusin ang iyong sesyon",
+    "ignoredLabel": "Binabalewala"
   },
   "settings": {
     "accountCenter": "Sentro ng Account",

@@ -1,19 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import WordConfigModal from "./word-config-modal";
+import type { ConfigSection } from "./word-config-modal";
 
 type PreviewItem = { id: string; front_text: string; back_text: string };
 
 export default function PreviewSection({
   items,
   totalCount,
+  courseId,
+  slug,
+  isEnrolled,
+  sections,
   labels,
 }: {
   items: PreviewItem[];
   totalCount: number;
-  labels: { preview: string; previewOf: string; flipUp: string; flipDown: string; more: string };
+  courseId: string;
+  slug: string;
+  isEnrolled: boolean;
+  sections: ConfigSection[];
+  labels: {
+    preview: string;
+    previewOf: string;
+    more: string;
+    configureWords: string;
+    configureWordsTitle: string;
+    configureWordsDesc: string;
+    configureWordsSave: string;
+    configureWordsSaving: string;
+    configureWordsSaved: string;
+    configureWordsSelectAll: string;
+    configureWordsUntitled: string;
+    ignoredLabel: string;
+  };
 }) {
-  const [flipped, setFlipped] = useState(false);
   const remaining = totalCount - items.length;
 
   return (
@@ -25,13 +46,14 @@ export default function PreviewSection({
             · {labels.previewOf.replace("{shown}", String(items.length)).replace("{total}", String(totalCount))}
           </span>
         </p>
-        <button
-          type="button"
-          onClick={() => setFlipped((f) => !f)}
-          className="cursor-pointer flex items-center gap-1.5 rounded-full bg-paper px-4 py-1.5 font-mono text-xs font-[700] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none"
-        >
-          {flipped ? labels.flipUp : labels.flipDown}
-        </button>
+        {isEnrolled && (
+          <WordConfigModal
+            courseId={courseId}
+            slug={slug}
+            sections={sections}
+            labels={labels}
+          />
+        )}
       </div>
 
       <div className="flex gap-3 overflow-x-auto pb-1">
@@ -41,10 +63,10 @@ export default function PreviewSection({
             className="flex min-h-[120px] w-36 shrink-0 flex-col items-center justify-center rounded-lg bg-paper p-4 shadow-hard-sm"
           >
             <p className="text-center font-fredoka text-lg font-[600] leading-tight tracking-tight">
-              {flipped ? item.back_text : item.front_text}
+              {item.front_text}
             </p>
             <p className="mt-2 text-center font-manrope text-xs text-ink-2 line-clamp-2">
-              {flipped ? item.front_text : item.back_text}
+              {item.back_text}
             </p>
           </div>
         ))}

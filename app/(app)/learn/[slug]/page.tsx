@@ -41,13 +41,23 @@ export default async function LearnPage({
 
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
 
-  const { data: sectionsRaw } = await supabase
-    .from("sections")
-    .select(
-      "id, title, items(id, front_text, back_text, romanization, accepted_answers, back_audio_url)",
-    )
-    .eq("course_id", course.id)
-    .order("position");
+  const [{ data: sectionsRaw }, { data: progressRows }] = await Promise.all([
+    supabase
+      .from("sections")
+      .select(
+        "id, title, items(id, front_text, back_text, romanization, accepted_answers, back_audio_url)",
+      )
+      .eq("course_id", course.id)
+      .order("position"),
+    supabase
+      .from("item_progress")
+      .select("item_id, ignored")
+      .eq("user_id", user.id)
+      .eq("course_id", course.id)
+      .eq("ignored", true),
+  ]);
+
+  const ignoredIds = new Set((progressRows ?? []).map((r) => r.item_id));
 
   type RawItem = {
     id: string;
@@ -70,6 +80,7 @@ export default async function LearnPage({
           romanization: item.romanization ?? null,
           acceptedAnswers: item.accepted_answers ?? [item.back_text],
           backAudioUrl: await resolveMediaUrl(item.back_audio_url, supabase),
+          ignored: ignoredIds.has(item.id),
         })),
       ),
     })),

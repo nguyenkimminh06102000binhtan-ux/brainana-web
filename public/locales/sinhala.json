@@ -403,7 +403,15 @@
     "following": "අනුගමනය",
     "follow": "+ අනුගමනය කරන්න",
     "share": "බෙදාගන්න",
-    "copied": "පිටපත් කළා!"
+    "copied": "පිටපත් කළා!",
+    "configureWords": "වචන වින්‍යාස කරන්න",
+    "configureWordsTitle": "ඉගෙනීමට වචන",
+    "configureWordsDesc": "මගහැරීමට අවශ්‍ය වචනවල ටික් ඉවත් කරන්න",
+    "configureWordsSave": "සුරකින්න",
+    "configureWordsSaving": "සුරකිමින්…",
+    "configureWordsSaved": "සුරකිනු ලැබිණ",
+    "configureWordsSelectAll": "සියල්ල තෝරන්න",
+    "configureWordsUntitled": "නාමයක් නැති කොටස"
   },
   "study": {
     "allSections": "සියලුම අංශ",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "සැසි කිසිවක් ඉතිරිව නැත - දිගටම කරගෙන යාමට උත්ශ්‍රේණි කරන්න",
     "allCardsCovered": "සියලුම {count} කාඩ්පත් ආවරණය කර ඇත!",
     "seeResults": "ප්රතිඵල බලන්න",
-    "messageLimitReached": "පණිවිඩ සීමාව ළඟා වී ඇත - ඔබේ සැසිය අවසන් කරන්න"
+    "messageLimitReached": "පණිවිඩ සීමාව ළඟා වී ඇත - ඔබේ සැසිය අවසන් කරන්න",
+    "ignoredLabel": "නොසලකා හැරීම"
   },
   "settings": {
     "accountCenter": "ගිණුම් මධ්යස්ථානය",

@@ -391,6 +391,14 @@
     "previewOf": "{shown} of {total}",
     "flipUp": "flip ↑",
     "flipDown": "flip ↓",
+    "configureWords": "Configure words",
+    "configureWordsTitle": "Words to learn",
+    "configureWordsDesc": "Uncheck words you want to skip",
+    "configureWordsSave": "Save",
+    "configureWordsSaving": "Saving…",
+    "configureWordsSaved": "Saved",
+    "configureWordsSelectAll": "Select all",
+    "configureWordsUntitled": "Untitled section",
     "more": "more",
     "flashcard": "Flashcard",
     "multipleChoice": "Multiple choice",
@@ -443,7 +451,8 @@
     "noSessionsLeft": "No sessions remaining — upgrade to keep going",
     "allCardsCovered": "All {count} cards covered!",
     "seeResults": "See results",
-    "messageLimitReached": "Message limit reached — wrap up your session"
+    "messageLimitReached": "Message limit reached — wrap up your session",
+    "ignoredLabel": "Ignored"
   },
   "study": {
     "allSections": "All sections",

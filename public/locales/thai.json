@@ -403,7 +403,15 @@
     "following": "กำลังติดตาม",
     "follow": "+ ติดตาม",
     "share": "แบ่งปัน",
-    "copied": "คัดลอก!"
+    "copied": "คัดลอก!",
+    "configureWords": "ตั้งค่าคำศัพท์",
+    "configureWordsTitle": "คำศัพท์ที่จะเรียน",
+    "configureWordsDesc": "ยกเลิกการเลือกคำที่ต้องการข้าม",
+    "configureWordsSave": "บันทึก",
+    "configureWordsSaving": "กำลังบันทึก…",
+    "configureWordsSaved": "บันทึกแล้ว",
+    "configureWordsSelectAll": "เลือกทั้งหมด",
+    "configureWordsUntitled": "ส่วนที่ไม่มีชื่อ"
   },
   "study": {
     "allSections": "ทุกส่วน",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "ไม่มีเซสชันเหลืออยู่ — อัปเกรดเพื่อดำเนินการต่อ",
     "allCardsCovered": "ครอบคลุมการ์ด {count} ทั้งหมดแล้ว!",
     "seeResults": "ดูผลลัพธ์",
-    "messageLimitReached": "ถึงขีดจำกัดข้อความ — ปิดเซสชันของคุณ"
+    "messageLimitReached": "ถึงขีดจำกัดข้อความ — ปิดเซสชันของคุณ",
+    "ignoredLabel": "ถูกละเว้น"
   },
   "settings": {
     "accountCenter": "ศูนย์บัญชี",

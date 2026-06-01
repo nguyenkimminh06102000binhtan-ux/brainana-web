@@ -403,7 +403,15 @@
     "following": "Jarraian",
     "follow": "+ Jarraitu",
     "share": "Partekatu",
-    "copied": "Kopiatu!"
+    "copied": "Kopiatu!",
+    "configureWords": "Konfiguratu hitzak",
+    "configureWordsTitle": "Ikasteko hitzak",
+    "configureWordsDesc": "Saltatu nahi dituzun hitzak desmarkatu",
+    "configureWordsSave": "Gorde",
+    "configureWordsSaving": "Gordetzen…",
+    "configureWordsSaved": "Gordeta",
+    "configureWordsSelectAll": "Hautatu guztiak",
+    "configureWordsUntitled": "Izenburugabeko atala"
   },
   "study": {
     "allSections": "Atal guztiak",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ez dago saiorik gelditzen — eguneratu jarraitua ahal izateko",
     "allCardsCovered": "Guztiak {count} txartelak estalia!",
     "seeResults": "Ikusi emaitzak",
-    "messageLimitReached": "Mezuaren muga iritsita — amaitu zure saioa"
+    "messageLimitReached": "Mezuaren muga iritsita — amaitu zure saioa",
+    "ignoredLabel": "Ezikusiarena"
   },
   "settings": {
     "accountCenter": "Kontu zentroa",

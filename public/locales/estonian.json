@@ -403,7 +403,15 @@
     "following": "Jälgides",
     "follow": "+ Jälgi",
     "share": "Jaga",
-    "copied": "Kopeeritud!"
+    "copied": "Kopeeritud!",
+    "configureWords": "Seadista sõnad",
+    "configureWordsTitle": "Õppimiseks sõnad",
+    "configureWordsDesc": "Tühjendage sõnade märkeruudud, mida soovite vahele jätta",
+    "configureWordsSave": "Salvesta",
+    "configureWordsSaving": "Salvestamine…",
+    "configureWordsSaved": "Salvestatud",
+    "configureWordsSelectAll": "Vali kõik",
+    "configureWordsUntitled": "Pealkirjata jaotis"
   },
   "study": {
     "allSections": "Kõik sektsioonid",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Seanse pole jäänud — uuendage, et jätkata",
     "allCardsCovered": "Kõik {count} kaarti käsitletud!",
     "seeResults": "Näe tulemusi",
-    "messageLimitReached": "Sõnumi piirang saavutatud — lõpetage oma seanss"
+    "messageLimitReached": "Sõnumi piirang saavutatud — lõpetage oma seanss",
+    "ignoredLabel": "Ignoreeritud"
   },
   "settings": {
     "accountCenter": "Kontokeskus",

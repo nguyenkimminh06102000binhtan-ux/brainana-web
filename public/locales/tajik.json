@@ -403,7 +403,15 @@
     "following": "Пайравӣ",
     "follow": "+ Пайравӣ кунед",
     "share": "Мубодила",
-    "copied": "Нусхабардорӣ!"
+    "copied": "Нусхабардорӣ!",
+    "configureWords": "Калимаҳоро танзим кунед",
+    "configureWordsTitle": "Калимаҳо барои омӯхтан",
+    "configureWordsDesc": "Аломати калимаҳоеро, ки мехоҳед гузаред, бардоред",
+    "configureWordsSave": "Захира кунед",
+    "configureWordsSaving": "Захира мешавад…",
+    "configureWordsSaved": "Захира шуд",
+    "configureWordsSelectAll": "Ҳамаро интихоб кунед",
+    "configureWordsUntitled": "Бахши бе унвон"
   },
   "study": {
     "allSections": "Ҳама бахшҳо",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ягон сессия боқӣ намондааст - барои идома додан навсозӣ кунед",
     "allCardsCovered": "Ҳамаи кортҳои {count} фаро гирифта шудаанд!",
     "seeResults": "Натиҷаҳоро бубинед",
-    "messageLimitReached": "Ба ҳадди ниҳоии паём расид — ҷаласаи худро ба анҷом расонед"
+    "messageLimitReached": "Ба ҳадди ниҳоии паём расид — ҷаласаи худро ба анҷом расонед",
+    "ignoredLabel": "Нодида гирифта шудааст"
   },
   "settings": {
     "accountCenter": "Маркази ҳисоб",

@@ -403,7 +403,15 @@
     "following": "Pêketînî",
     "follow": "+ Bişopînin",
     "share": "Par",
-    "copied": "Kopî kirin!"
+    "copied": "Kopî kirin!",
+    "configureWords": "Peyvan mîheng bike",
+    "configureWordsTitle": "Peyvan ji bo fêrbûnê",
+    "configureWordsDesc": "Nîşana peyvên ku dixwazî derbas bikî rake",
+    "configureWordsSave": "Tomar bike",
+    "configureWordsSaving": "Tomar dibe…",
+    "configureWordsSaved": "Hat tomarkirin",
+    "configureWordsSelectAll": "Hemûyan hilbijêre",
+    "configureWordsUntitled": "Beşa bê sernavê"
   },
   "study": {
     "allSections": "Hemû beş",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ti danişîn namîne - nûve bikin ku berdewam bikin",
     "allCardsCovered": "Hemî kartên {count} vegirtî!",
     "seeResults": "Encaman bibînin",
-    "messageLimitReached": "Sînorê peyamê gihîştiye - danişîna xwe biqedînin"
+    "messageLimitReached": "Sînorê peyamê gihîştiye - danişîna xwe biqedînin",
+    "ignoredLabel": "Guh nedihat"
   },
   "settings": {
     "accountCenter": "Navenda Hesabê",

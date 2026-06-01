@@ -403,7 +403,15 @@
     "following": "Sledovanie",
     "follow": "+ Sledovať",
     "share": "zdieľať",
-    "copied": "Skopírované!"
+    "copied": "Skopírované!",
+    "configureWords": "Konfigurovať slová",
+    "configureWordsTitle": "Slová na učenie",
+    "configureWordsDesc": "Odznačte slová, ktoré chcete preskočiť",
+    "configureWordsSave": "Uložiť",
+    "configureWordsSaving": "Ukladá sa…",
+    "configureWordsSaved": "Uložené",
+    "configureWordsSelectAll": "Vybrať všetko",
+    "configureWordsUntitled": "Sekcia bez názvu"
   },
   "study": {
     "allSections": "Všetky sekcie",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Nezostávajú žiadne relácie – inovujte, aby ste mohli pokračovať",
     "allCardsCovered": "Všetky {count} karty sú pokryté!",
     "seeResults": "Pozrite si výsledky",
-    "messageLimitReached": "Dosiahnutý limit správ – ukončite svoju reláciu"
+    "messageLimitReached": "Dosiahnutý limit správ – ukončite svoju reláciu",
+    "ignoredLabel": "Ignorované"
   },
   "settings": {
     "accountCenter": "Účtovné centrum",
