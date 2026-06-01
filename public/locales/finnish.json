@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Nimetön osio",
     "quickReview": "Pikakerhaus",
     "reviewCards": "Kertaa ({count})",
-    "learnNewWords": "Opi uutta"
+    "learnNewWords": "Opi uutta",
+    "duplicateCourse": "Kopioi kirjastooni",
+    "duplicating": "Kopioidaan…",
+    "duplicateUpsell": "Plus/Pro-ominaisuus — päivitä kopioidaksesi"
   },
   "study": {
     "allSections": "Kaikki osat",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Merkkiraja saavutettiin — {done} / {total} korttia käsitelty",
     "lockedFeature": "Saatavilla Plus- ja Pro-palvelupaketeissa",
     "publicDesc": "Kuka tahansa voi löytää ja opiskella tätä kurssia",
-    "privateDesc": "Vain sinä ja kutsutut jäsenet"
+    "privateDesc": "Vain sinä ja kutsutut jäsenet",
+    "publicWarningTitle": "Tehdäänkö tämä kurssi julkiseksi?",
+    "publicWarningSubtitle": "Tätä ei voi peruuttaa. Lue ennen vahvistamista.",
+    "publicWarningLock": "Olemassa olevat kortit ja osiot lukitaan pysyvästi — voit lisätä uutta sisältöä, mutta et voi muokata tai poistaa olemassa olevia kortteja.",
+    "publicWarningNoDelete": "Tätä kurssia ei voi poistaa julkaisemisen jälkeen.",
+    "publicWarningVisible": "Kurssi on kaikkien nähtävissä ja opiskeltavissa.",
+    "publicWarningConfirm": "Kyllä, tee julkiseksi",
+    "publicWarningBack": "Takaisin",
+    "cardLockedBadge": "Lukittu",
+    "publicWarningIrreversible": "Kun kurssi on julkinen, sitä ei voi enää tehdä yksityiseksi."
   },
   "start": {
     "estimatedTime": "~60 s · kaikki yhdellä sivulla",

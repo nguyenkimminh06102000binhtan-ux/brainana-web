@@ -59,7 +59,16 @@ export const TTS_VOICES: Record<string, TTSVoice> = {
   "Zulu":                     { languageCode: "zu-ZA", name: "zu-ZA-Standard-A" },
 };
 
+// Aliases: canonical course language names → TTS voice
+// (course language list uses plain names; TTS_VOICES uses variant names for some)
+const TTS_ALIASES: Record<string, TTSVoice> = {
+  "English":            TTS_VOICES["English (US)"],
+  "Chinese (Mandarin)": TTS_VOICES["Mandarin (Simplified)"],
+  "Chinese (Cantonese)": { languageCode: "yue-HK", name: "yue-HK-Standard-A" },
+  "Arabic":             TTS_VOICES["Arabic (Modern Standard)"],
+};
+
 export function getTTSVoice(language: string | null | undefined): TTSVoice | null {
   if (!language) return null;
-  return TTS_VOICES[language] ?? null;
+  return TTS_VOICES[language] ?? TTS_ALIASES[language] ?? null;
 }

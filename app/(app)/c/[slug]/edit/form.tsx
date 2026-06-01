@@ -18,6 +18,7 @@ import { generateTTSAudio } from "@/app/actions/tts";
 import { showQuotaToast } from "@/components/quota-toast";
 import { toast } from "sonner";
 import AiImportModal from "@/app/(app)/create/ai-import-modal";
+import PublicCourseWarningModal from "@/components/public-course-warning-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -266,7 +267,7 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput }: {
+function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput, locked }: {
   item: Item; index: number; isOnly: boolean; sourceLanguage: string; targetLanguage: string;
   plan: string; charsExhausted: boolean; onQuotaExhausted: () => void;
   labels: CreateEditLabels;
@@ -276,6 +277,7 @@ function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, c
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "backAudioPath") => void;
   onFocusInput: (el: HTMLTextAreaElement, setter: (v: string) => void) => void;
+  locked?: boolean;
 }) {
   const router = useRouter();
   const [suggesting, setSuggesting] = useState(false);
@@ -341,6 +343,37 @@ function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, c
     } finally {
       setGeneratingBack(false);
     }
+  }
+
+  if (locked) {
+    return (
+      <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2 opacity-75">
+        <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
+          <span className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">{t(labels.cardLabel, { number: index + 1 })}</span>
+          <span className="rounded-full bg-ink/10 px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-wide text-ink-3">
+            🔒 {labels.cardLockedBadge}
+          </span>
+        </div>
+        <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
+          <div className="bg-paper p-4">
+            {lbl(labels.question)}
+            <p className="font-manrope text-sm text-ink">{item.front || <span className="text-ink-3">—</span>}</p>
+          </div>
+          <div className="bg-paper-2 p-4">
+            {lbl(labels.answer)}
+            <p className="font-manrope text-sm text-ink">{item.back || <span className="text-ink-3">—</span>}</p>
+            {item.backAudioDisplayUrl && (
+              <audio src={item.backAudioDisplayUrl} controls className="mt-2 h-8 w-full" />
+            )}
+          </div>
+        </div>
+        {item.romanization && (
+          <div className="border-t border-ink/10 bg-paper px-4 py-2">
+            <p className="font-manrope text-xs text-ink-2">{item.romanization}</p>
+          </div>
+        )}
+      </div>
+    );
   }
 
   return (
@@ -521,6 +554,9 @@ export default function EditCourseForm({
   levels: LevelLabels;
 }) {
   const [state, formAction, pending] = useActionState(updateCourse, null);
+  const isPublic = course.visibility === "public";
+  const [showPublicWarning, setShowPublicWarning] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const [sections, setSections] = useState<Section[]>(() =>
     dbSections.length > 0 ? fromDb(dbSections) : [makeSection()]
   );
@@ -569,6 +605,8 @@ export default function EditCourseForm({
     setSections((prev) => prev.map((s) => s.id === id ? { ...s, [field]: value } : s));
   }
   function removeSection(id: number) {
+    const section = sections.find((s) => s.id === id);
+    if (isPublic && section?.dbId) return; // locked
     setSections((prev) => prev.filter((s) => s.id !== id));
   }
   function addSection() {
@@ -588,6 +626,8 @@ export default function EditCourseForm({
     ));
   }
   function removeItem(sectionId: number, itemId: number) {
+    const item = sections.find((s) => s.id === sectionId)?.items.find((i) => i.id === itemId);
+    if (isPublic && item?.dbId) return; // locked
     setSections((prev) => prev.map((s) =>
       s.id === sectionId ? { ...s, items: s.items.filter((i) => i.id !== itemId) } : s
     ));
@@ -813,25 +853,33 @@ export default function EditCourseForm({
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <>
+    <form ref={formRef} action={formAction} className="flex flex-col gap-6">
       <input type="hidden" name="course_id" value={course.id} />
       <input type="hidden" name="course_slug" value={course.slug} />
       <input type="hidden" name="sections_data" value={sectionsPayload} />
 
       {/* Course info */}
-      <section className="rounded-lg bg-paper-2 p-8 shadow-hard">
-        <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{labels.courseInfo}</h2>
+      <section className={`rounded-lg bg-paper-2 p-8 shadow-hard ${isPublic ? "opacity-75" : ""}`}>
+        <div className="flex items-center justify-between">
+          <h2 className="font-fredoka text-2xl font-[700] tracking-tight">{labels.courseInfo}</h2>
+          {isPublic && (
+            <span className="rounded-full bg-ink/10 px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-wide text-ink-3">
+              🔒 {labels.cardLockedBadge}
+            </span>
+          )}
+        </div>
         <div className="mt-6 flex flex-col gap-5">
           <div>
             {lbl(labels.title)}
             <input name="title" type="text" defaultValue={course.title}
-              placeholder={labels.titlePlaceholder} required className={inputCls} />
+              placeholder={labels.titlePlaceholder} required readOnly={isPublic} className={inputCls} />
           </div>
           <div>
             {lbl(labels.description, true, labels.optional)}
             <textarea name="description" defaultValue={course.description ?? ""}
               placeholder={labels.descriptionPlaceholder}
-              rows={3} className={`${inputCls} resize-none`} />
+              rows={3} readOnly={isPublic} className={`${inputCls} resize-none`} />
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
@@ -839,7 +887,8 @@ export default function EditCourseForm({
               <select
                 name="category"
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(e) => { if (!isPublic) setSelectedCategory(e.target.value); }}
+                disabled={isPublic}
                 className={selectCls}
               >
                 {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{categories[c] ?? c}</option>)}
@@ -847,13 +896,13 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.subcategory)}
-              <select name="subcategory" defaultValue={course.subcategory ?? ""} className={selectCls}>
+              <select name="subcategory" defaultValue={course.subcategory ?? ""} disabled={isPublic} className={selectCls}>
                 {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{categories[s] ?? s}</option>)}
               </select>
             </div>
             <div>
               {lbl(labels.difficulty)}
-              <select name="level" defaultValue={course.level ?? ""} className={selectCls}>
+              <select name="level" defaultValue={course.level ?? ""} disabled={isPublic} className={selectCls}>
                 <option value="">{labels.anyLevel}</option>
                 <option value="beginner">{levels.beginner}</option>
                 <option value="intermediate">{levels.intermediate}</option>
@@ -897,7 +946,7 @@ export default function EditCourseForm({
             </div>
             <div>
               {lbl(labels.questionLanguage)}
-              <select name="source_language" value={selectedSourceLanguage} onChange={(e) => setSelectedSourceLanguage(e.target.value)} className={selectCls}>
+              <select name="source_language" value={selectedSourceLanguage} onChange={(e) => { if (!isPublic) setSelectedSourceLanguage(e.target.value); }} disabled={isPublic} className={selectCls}>
                 {courseLanguageOptions(course.source_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
               </select>
             </div>
@@ -906,7 +955,8 @@ export default function EditCourseForm({
               <select
                 name="target_language"
                 value={selectedTargetLanguage}
-                onChange={(e) => setSelectedTargetLanguage(e.target.value)}
+                onChange={(e) => { if (!isPublic) setSelectedTargetLanguage(e.target.value); }}
+                disabled={isPublic}
                 className={selectCls}
               >
                 {courseLanguageOptions(course.target_language).map((l) => <option key={l} value={l}>{categories[l] ?? l}</option>)}
@@ -925,6 +975,7 @@ export default function EditCourseForm({
                 {lbl(labels.sectionName)}
                 <input type="text" value={section.title} placeholder={t(labels.sectionPlaceholder, { number: sIdx + 1 })}
                   onChange={(e) => updateSection(section.id, "title", e.target.value)}
+                  disabled={isPublic && !!section.dbId}
                   className={inputCls} />
               </div>
               <div>
@@ -932,10 +983,11 @@ export default function EditCourseForm({
                 <input type="text" value={section.description}
                   placeholder={labels.sectionDescriptionPlaceholder}
                   onChange={(e) => updateSection(section.id, "description", e.target.value)}
+                  disabled={isPublic && !!section.dbId}
                   className={inputCls} />
               </div>
             </div>
-            {sections.length > 1 && (
+            {sections.length > 1 && !(isPublic && section.dbId) && (
               <button type="button" onClick={() => removeSection(section.id)}
                 className="mt-5 shrink-0 rounded-md px-3 py-2 font-manrope text-xs font-[800] text-ink-3 transition hover:text-orange-text">
                 {labels.removeSection}
@@ -1017,6 +1069,7 @@ export default function EditCourseForm({
                       sourceLanguage={selectedSourceLanguage} targetLanguage={selectedTargetLanguage} plan={plan}
                       charsExhausted={charsExhausted} onQuotaExhausted={() => setCharsExhausted(true)}
                       labels={labels}
+                      locked={isPublic && !!item.dbId}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onUpdateDistractors={(d) => updateDistractors(section.id, item.id, d)}
                       onRemove={() => removeItem(section.id, item.id)}
@@ -1078,7 +1131,16 @@ export default function EditCourseForm({
                 })}
           </p>
         </div>
-        <button type="submit" disabled={!hasValidItem || pending || isUploading}
+        <button
+          type="button"
+          disabled={!hasValidItem || pending || isUploading}
+          onClick={() => {
+            if (!isPublic && selectedVisibility === "public") {
+              setShowPublicWarning(true);
+            } else {
+              formRef.current?.requestSubmit();
+            }
+          }}
           className="min-h-14 w-full rounded-full bg-orange px-6 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none sm:w-auto sm:px-8">
           {pending ? labels.saving : labels.saveChanges}
         </button>
@@ -1087,5 +1149,15 @@ export default function EditCourseForm({
         <MathToolbar onInsert={insertSymbol} direction="up" />
       </div>
     </form>
+
+    {showPublicWarning && (
+      <PublicCourseWarningModal
+        labels={{ publicWarningTitle: labels.publicWarningTitle, publicWarningSubtitle: labels.publicWarningSubtitle, publicWarningLock: labels.publicWarningLock, publicWarningNoDelete: labels.publicWarningNoDelete, publicWarningVisible: labels.publicWarningVisible, publicWarningConfirm: labels.publicWarningConfirm, publicWarningBack: labels.publicWarningBack, publicWarningIrreversible: labels.publicWarningIrreversible }}
+        showIrreversible
+        onConfirm={() => { setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
+        onBack={() => setShowPublicWarning(false)}
+      />
+    )}
+    </>
   );
 }

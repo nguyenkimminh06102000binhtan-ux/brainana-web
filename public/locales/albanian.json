@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Seksion pa titull",
     "quickReview": "Rishikim i shpejtë",
     "reviewCards": "Rishiko ({count})",
-    "learnNewWords": "Mëso të reja"
+    "learnNewWords": "Mëso të reja",
+    "duplicateCourse": "Dupliko në bibliotekën time",
+    "duplicating": "Duke duplifikuar…",
+    "duplicateUpsell": "Veçori Plus/Pro — përmirëso për të duplifikuar"
   },
   "study": {
     "allSections": "Të gjitha seksionet",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kuota e karaktereve doli — {done} nga {total} letra të përpunuara",
     "lockedFeature": "I disponueshëm në Plus & Pro",
     "publicDesc": "Kushdo mund ta gjejë dhe të studiojë këtë kurs",
-    "privateDesc": "Vetëm ti dhe anëtarët e ftuar"
+    "privateDesc": "Vetëm ti dhe anëtarët e ftuar",
+    "publicWarningTitle": "Ta bëni këtë kurs publik?",
+    "publicWarningSubtitle": "Kjo nuk mund të zhbëhet. Ju lutemi lexoni përpara se të konfirmoni.",
+    "publicWarningLock": "Kartat dhe seksionet ekzistuese do të bllokohen përgjithmonë — mund të shtoni përmbajtje të re, por nuk mund të redaktoni ose fshini kartat ekzistuese.",
+    "publicWarningNoDelete": "Ky kurs nuk mund të fshihet pasi të bëhet publik.",
+    "publicWarningVisible": "Kursi do të jetë i dukshëm dhe i studiueshëm nga kushdo.",
+    "publicWarningConfirm": "Po, bëje publik",
+    "publicWarningBack": "Kthehu",
+    "cardLockedBadge": "Bllokuar",
+    "publicWarningIrreversible": "Pasi të bëhet publik, ky kurs nuk mund të bëhet sërish privat."
   },
   "start": {
     "estimatedTime": "~60 sek · të gjitha në një faqe",

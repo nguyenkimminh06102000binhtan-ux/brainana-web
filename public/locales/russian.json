@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Раздел без названия",
     "quickReview": "Быстрое повторение",
     "reviewCards": "Повторить ({count})",
-    "learnNewWords": "Учить новое"
+    "learnNewWords": "Учить новое",
+    "duplicateCourse": "Дублировать в мою библиотеку",
+    "duplicating": "Дублирование…",
+    "duplicateUpsell": "Функция Plus/Pro — обновите план для дублирования"
   },
   "study": {
     "allSections": "Все разделы",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Квота символов исчерпана — обработано {done} из {total} карточек",
     "lockedFeature": "Доступно на Plus и Pro",
     "publicDesc": "Любой желающий может найти и изучить этот курс.",
-    "privateDesc": "Только вы и приглашенные участники"
+    "privateDesc": "Только вы и приглашенные участники",
+    "publicWarningTitle": "Сделать этот курс публичным?",
+    "publicWarningSubtitle": "Это необратимо. Пожалуйста, прочитайте перед подтверждением.",
+    "publicWarningLock": "Существующие карточки и разделы будут заблокированы навсегда — вы можете добавлять новый контент, но не можете редактировать или удалять существующие карточки.",
+    "publicWarningNoDelete": "Этот курс нельзя удалить после публикации.",
+    "publicWarningVisible": "Курс будет виден и доступен для обучения всем.",
+    "publicWarningConfirm": "Да, сделать публичным",
+    "publicWarningBack": "Назад",
+    "cardLockedBadge": "Заблокировано",
+    "publicWarningIrreversible": "После публикации этот курс нельзя снова сделать приватным."
   },
   "start": {
     "estimatedTime": "~60 секунд · все на одной странице",

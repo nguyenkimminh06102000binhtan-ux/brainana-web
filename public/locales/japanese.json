@@ -414,7 +414,10 @@
     "configureWordsUntitled": "無題のセクション",
     "quickReview": "クイック復習",
     "reviewCards": "復習 ({count})",
-    "learnNewWords": "新しく学ぶ"
+    "learnNewWords": "新しく学ぶ",
+    "duplicateCourse": "マイライブラリに複製",
+    "duplicating": "複製中…",
+    "duplicateUpsell": "Plus/Pro機能 — 複製するにはアップグレード"
   },
   "study": {
     "allSections": "すべてのセクション",
@@ -617,7 +620,16 @@
     "quotaRanOut": "文字数の上限に達しました — {done} / {total} 枚のカードを処理しました",
     "lockedFeature": "PlusおよびProプランで利用可能",
     "publicDesc": "誰でもこのコースを見つけて学習できます",
-    "privateDesc": "あなたと招待されたメンバーのみ"
+    "privateDesc": "あなたと招待されたメンバーのみ",
+    "publicWarningTitle": "このコースを公開しますか？",
+    "publicWarningSubtitle": "これは元に戻せません。確認する前にお読みください。",
+    "publicWarningLock": "既存のカードとセクションは永久にロックされます。新しいコンテンツを追加できますが、既存のカードを編集または削除することはできません。",
+    "publicWarningNoDelete": "このコースは公開後に削除できません。",
+    "publicWarningVisible": "コースは誰でも閲覧・学習できるようになります。",
+    "publicWarningConfirm": "はい、公開する",
+    "publicWarningBack": "戻る",
+    "cardLockedBadge": "ロック済み",
+    "publicWarningIrreversible": "一度公開すると、このコースを再び非公開にすることはできません。"
   },
   "start": {
     "estimatedTime": "~60 秒 · すべてが 1 ページに",

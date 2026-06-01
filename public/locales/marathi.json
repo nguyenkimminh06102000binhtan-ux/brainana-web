@@ -414,7 +414,10 @@
     "configureWordsUntitled": "शीर्षकाशिवाय विभाग",
     "quickReview": "जलद पुनरावलोकन",
     "reviewCards": "पुनरावलोकन ({count})",
-    "learnNewWords": "नवे शिका"
+    "learnNewWords": "नवे शिका",
+    "duplicateCourse": "माझ्या लायब्ररीत डुप्लिकेट करा",
+    "duplicating": "डुप्लिकेट होत आहे…",
+    "duplicateUpsell": "Plus/Pro वैशिष्ट्य — डुप्लिकेट करण्यासाठी अपग्रेड करा"
   },
   "study": {
     "allSections": "सर्व विभाग",
@@ -617,7 +620,16 @@
     "quotaRanOut": "वर्ण कोटा संपला — {total} पैकी {done} कार्डांवर प्रक्रिया झाली",
     "lockedFeature": "प्लस आणि प्रो वर उपलब्ध",
     "publicDesc": "कोणीही हा कोर्स शोधू शकतो आणि त्याचा अभ्यास करू शकतो",
-    "privateDesc": "फक्त तुम्ही आणि आमंत्रित सदस्य"
+    "privateDesc": "फक्त तुम्ही आणि आमंत्रित सदस्य",
+    "publicWarningTitle": "हा कोर्स सार्वजनिक करायचा?",
+    "publicWarningSubtitle": "हे पूर्वाधावस्थेत आणता येणार नाही. कृपया पुष्टी करण्यापूर्वी वाचा.",
+    "publicWarningLock": "विद्यमान कार्ड आणि विभाग कायमस्वरूपी लॉक होतील — नवीन सामग्री जोडू शकता परंतु विद्यमान कार्ड संपादित किंवा हटवू शकत नाही.",
+    "publicWarningNoDelete": "हा कोर्स सार्वजनिक झाल्यावर हटवता येणार नाही.",
+    "publicWarningVisible": "कोर्स कोणासाठीही दृश्यमान आणि शिकण्यायोग्य असेल.",
+    "publicWarningConfirm": "होय, सार्वजनिक करा",
+    "publicWarningBack": "मागे",
+    "cardLockedBadge": "लॉक",
+    "publicWarningIrreversible": "एकदा सार्वजनिक झाल्यावर, हा कोर्स पुन्हा खाजगी करता येणार नाही."
   },
   "start": {
     "estimatedTime": "~60 सेकंद · सर्व एका पृष्ठावर",

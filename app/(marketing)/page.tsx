@@ -163,15 +163,15 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 font-mono text-xs uppercase tracking-widest text-ink-2 sm:flex-row sm:items-center sm:justify-between">
-        <p>Brainana</p>
-        <div className="flex gap-5">
-          <Link href="/privacy" className="hover:text-ink">
-            Privacy
-          </Link>
-          <Link href="/terms" className="hover:text-ink">
-            Terms
-          </Link>
+      <footer className="mx-auto max-w-6xl px-6 py-8">
+        <div className="flex flex-col gap-3 font-mono text-xs uppercase tracking-widest text-ink-2 sm:flex-row sm:items-center sm:justify-between">
+          <p>Brainana</p>
+          <div className="flex flex-wrap gap-5">
+            <Link href="/pricing" className="hover:text-ink">Pricing</Link>
+            <Link href="/terms" className="hover:text-ink">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-ink">Privacy Policy</Link>
+            <Link href="/refund" className="hover:text-ink">Refund Policy</Link>
+          </div>
         </div>
       </footer>
     </main>

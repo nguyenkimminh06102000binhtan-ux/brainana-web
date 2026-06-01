@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Namnlöst avsnitt",
     "quickReview": "Snabb genomgång",
     "reviewCards": "Gå igenom ({count})",
-    "learnNewWords": "Lär nytt"
+    "learnNewWords": "Lär nytt",
+    "duplicateCourse": "Duplicera till mitt bibliotek",
+    "duplicating": "Duplicerar…",
+    "duplicateUpsell": "Plus/Pro-funktion — uppgradera för att duplicera"
   },
   "study": {
     "allSections": "Alla avsnitt",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Teckenkvoten tog slut — {done} av {total}-kort behandlade",
     "lockedFeature": "Finns på Plus & Pro",
     "publicDesc": "Vem som helst kan hitta och studera denna kurs",
-    "privateDesc": "Endast du och inbjudna medlemmar"
+    "privateDesc": "Endast du och inbjudna medlemmar",
+    "publicWarningTitle": "Gör kursen offentlig?",
+    "publicWarningSubtitle": "Det går inte att ångra. Vänligen läs innan du bekräftar.",
+    "publicWarningLock": "Befintliga kort och avsnitt kommer att låsas permanent — du kan lägga till nytt innehåll men kan inte redigera eller ta bort befintliga kort.",
+    "publicWarningNoDelete": "Denna kurs kan inte raderas när den är offentlig.",
+    "publicWarningVisible": "Kursen kommer att vara synlig och studierbar för alla.",
+    "publicWarningConfirm": "Ja, gör offentlig",
+    "publicWarningBack": "Tillbaka",
+    "cardLockedBadge": "Låst",
+    "publicWarningIrreversible": "När kursen är offentlig kan den inte göras privat igen."
   },
   "start": {
     "estimatedTime": "~60 sek · allt på en sida",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Taqsima mingħajr titolu",
     "quickReview": "Reviżjoni rapida",
     "reviewCards": "Irrevedi ({count})",
-    "learnNewWords": "Tgħallem ġdid"
+    "learnNewWords": "Tgħallem ġdid",
+    "duplicateCourse": "Idduplika fil-librerija tiegħi",
+    "duplicating": "Qed tidduplika…",
+    "duplicateUpsell": "Karatteristika Plus/Pro — aġġorna biex tidduplika"
   },
   "study": {
     "allSections": "It-taqsimiet kollha",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Il-kwota tal-karattri spiċċat — {done} minn {total} karti pproċessati",
     "lockedFeature": "Disponibbli fuq Plus & Pro",
     "publicDesc": "Kulħadd jista’ jsib u jistudja dan il-kors",
-    "privateDesc": "Int biss u membri mistiedna"
+    "privateDesc": "Int biss u membri mistiedna",
+    "publicWarningTitle": "Tagħmel dan il-kors pubbliku?",
+    "publicWarningSubtitle": "Dan ma jistax jiġi rrevers. Jekk jogħġbok aqra qabel tikkonferma.",
+    "publicWarningLock": "Il-karti u s-sezzjonijiet eżistenti jiġu msakkar permanentement — tista' żżid kontenut ġdid iżda ma tistax teditja jew tħassar karti eżistenti.",
+    "publicWarningNoDelete": "Dan il-kors ma jistax jitħassar ladarba jsir pubbliku.",
+    "publicWarningVisible": "Il-kors ikun viżibbli u talinqas jista' jitgħallem minn kulħadd.",
+    "publicWarningConfirm": "Iva, agħmlu pubbliku",
+    "publicWarningBack": "Lura",
+    "cardLockedBadge": "Imsikkar",
+    "publicWarningIrreversible": "Ladarba tkun pubblika, din il-kors ma tistax issir privata mill-ġdid."
   },
   "start": {
     "estimatedTime": "~60 sek · kollha fuq paġna waħda",

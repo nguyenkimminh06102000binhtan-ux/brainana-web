@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Naamlose afdeling",
     "quickReview": "Vinnige hersiening",
     "reviewCards": "Hersien ({count})",
-    "learnNewWords": "Leer nuut"
+    "learnNewWords": "Leer nuut",
+    "duplicateCourse": "Dupliseer na my biblioteek",
+    "duplicating": "Dupliseer…",
+    "duplicateUpsell": "Plus/Pro-funksie — opgradeer om te dupliseer"
   },
   "study": {
     "allSections": "Alle afdelings",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Karakterkwota het opgeraak — {done} van {total} kaarte verwerk",
     "lockedFeature": "Beskikbaar op Plus & Pro",
     "publicDesc": "Enige iemand kan hierdie kursus vind en bestudeer",
-    "privateDesc": "Slegs jy en uitgenodigde lede"
+    "privateDesc": "Slegs jy en uitgenodigde lede",
+    "publicWarningTitle": "Maak hierdie kursus publiek?",
+    "publicWarningSubtitle": "Dit kan nie ongedaan gemaak word nie. Lees asseblief voor bevestiging.",
+    "publicWarningLock": "Bestaande kaarte en afdelings sal permanent gesluit word — jy kan nuwe inhoud byvoeg maar kan nie bestaande kaarte wysig of verwyder nie.",
+    "publicWarningNoDelete": "Hierdie kursus kan nie verwyder word sodra dit publiek is nie.",
+    "publicWarningVisible": "Die kursus sal sigbaar en leerbaar wees vir enigiemand.",
+    "publicWarningConfirm": "Ja, maak dit publiek",
+    "publicWarningBack": "Terug",
+    "cardLockedBadge": "Gesluit",
+    "publicWarningIrreversible": "Sodra dit publiek is, kan hierdie kursus nie weer privaat gemaak word nie."
   },
   "start": {
     "estimatedTime": "~60 sekondes · alles op een bladsy",

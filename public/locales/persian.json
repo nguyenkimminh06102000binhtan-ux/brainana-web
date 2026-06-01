@@ -414,7 +414,10 @@
     "configureWordsUntitled": "بخش بدون عنوان",
     "quickReview": "مرور سریع",
     "reviewCards": "مرور ({count})",
-    "learnNewWords": "یادگیری جدید"
+    "learnNewWords": "یادگیری جدید",
+    "duplicateCourse": "تکثیر به کتابخانه‌ام",
+    "duplicating": "در حال تکثیر…",
+    "duplicateUpsell": "قابلیت Plus/Pro — برای تکثیر ارتقا دهید"
   },
   "study": {
     "allSections": "همه بخش ها",
@@ -617,7 +620,16 @@
     "quotaRanOut": "سهمیه نویسه تمام شد - {done} کارت {total} پردازش شد",
     "lockedFeature": "در پلاس و پرو موجود است",
     "publicDesc": "هر کسی می تواند این دوره را بیابد و مطالعه کند",
-    "privateDesc": "فقط شما و اعضای دعوت شده"
+    "privateDesc": "فقط شما و اعضای دعوت شده",
+    "publicWarningTitle": "این دوره را عمومی کنید؟",
+    "publicWarningSubtitle": "این قابل بازگشت نیست. لطفاً قبل از تأیید بخوانید.",
+    "publicWarningLock": "کارت‌ها و بخش‌های موجود برای همیشه قفل می‌شوند — می‌توانید محتوای جدید اضافه کنید اما نمی‌توانید کارت‌های موجود را ویرایش یا حذف کنید.",
+    "publicWarningNoDelete": "این دوره پس از عمومی شدن قابل حذف نیست.",
+    "publicWarningVisible": "دوره برای هر کسی قابل مشاهده و یادگیری خواهد بود.",
+    "publicWarningConfirm": "بله، عمومی کن",
+    "publicWarningBack": "بازگشت",
+    "cardLockedBadge": "قفل‌شده",
+    "publicWarningIrreversible": "پس از عمومی شدن، این دوره دیگر نمی‌تواند خصوصی شود."
   },
   "start": {
     "estimatedTime": "~60 ثانیه · همه در یک صفحه",

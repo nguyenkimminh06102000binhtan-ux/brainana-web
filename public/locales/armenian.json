@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Անտիտղոս բաժին",
     "quickReview": "Արագ կրկնություն",
     "reviewCards": "Կրկնել ({count})",
-    "learnNewWords": "Սովորել նոր"
+    "learnNewWords": "Սովորել նոր",
+    "duplicateCourse": "Կրկնօրինակել իմ գրադարան",
+    "duplicating": "Կրկնօրինակում…",
+    "duplicateUpsell": "Plus/Pro հատկություն — բարձրացրեք պլանն ու կրկնօրինակեք"
   },
   "study": {
     "allSections": "Բոլոր բաժինները",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Նիշերի քվոտան սպառվել է — մշակվել է {done} քարտ {total}-ից",
     "lockedFeature": "Հասանելի է Plus և Pro պլաններում",
     "publicDesc": "Յուրաքանչյուր ոք կարող է գտնել և սովորել այս դասընթացը",
-    "privateDesc": "Միայն դուք և հրավիրված անդամները"
+    "privateDesc": "Միայն դուք և հրավիրված անդամները",
+    "publicWarningTitle": "Հրապարակե՞լ այս դասընթացը:",
+    "publicWarningSubtitle": "Սա հնարավոր չէ հետ շրջել: Հաստատելուց առաջ կարդացեք:",
+    "publicWarningLock": "Գոյություն ունեցող քարտերն ու բաժինները կփակվեն մշտապես — կարող եք ավելացնել նոր բովանդակություն, բայց չի հնարավոր խմբագրել կամ ջնջել առկա քարտերը:",
+    "publicWarningNoDelete": "Հրապարակված դասընթացը հնարավոր չէ ջնջել:",
+    "publicWarningVisible": "Դասընթացը կտեսանելի լինի ցանկացածի համար:",
+    "publicWarningConfirm": "Այո, հրապարակել",
+    "publicWarningBack": "Հետ",
+    "cardLockedBadge": "Կողպված",
+    "publicWarningIrreversible": "Հրապարակումից հետո այս դասընթացը հնարավոր չէ դարձնել մասնավոր:"
   },
   "start": {
     "estimatedTime": "~60 վայրկյան · բոլորը մեկ էջում",

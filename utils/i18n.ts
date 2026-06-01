@@ -111,6 +111,9 @@ export type Locale = {
     intermediate: string;
     advanced: string;
     startLearning: string;
+    duplicateCourse: string;
+    duplicating: string;
+    duplicateUpsell: string;
     quickReview: string;
     reviewCards: string;
     learnNewWords: string;
@@ -246,6 +249,15 @@ export type Locale = {
     lockedFeature: string;
     publicDesc: string;
     privateDesc: string;
+    publicWarningTitle: string;
+    publicWarningSubtitle: string;
+    publicWarningLock: string;
+    publicWarningNoDelete: string;
+    publicWarningVisible: string;
+    publicWarningConfirm: string;
+    publicWarningBack: string;
+    publicWarningIrreversible: string;
+    cardLockedBadge: string;
   };
   speedReview: {
     title: string;

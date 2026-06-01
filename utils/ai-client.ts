@@ -10,7 +10,7 @@ export const PROVIDER: "anthropic" | "mistral" = "mistral";
 // ── Model mapping ─────────────────────────────────────────────────────────────
 const MODELS = {
   anthropic: "claude-haiku-4-5-20251001",
-  mistral:   "mistral-medium-latest",
+  mistral:   "mistral-large-latest",
   // Vision models (used for image OCR only)
   anthropicVision: "claude-haiku-4-5-20251001",
   mistralVision:   "pixtral-large-latest",

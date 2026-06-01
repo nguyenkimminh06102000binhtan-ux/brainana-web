@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Abschnitt ohne Titel",
     "quickReview": "Schnelle Wiederholung",
     "reviewCards": "Wiederholen ({count})",
-    "learnNewWords": "Neues lernen"
+    "learnNewWords": "Neues lernen",
+    "duplicateCourse": "In meine Bibliothek duplizieren",
+    "duplicating": "Duplizieren…",
+    "duplicateUpsell": "Plus/Pro-Funktion — Upgrade zum Duplizieren"
   },
   "study": {
     "allSections": "Alle Abschnitte",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Zeichenkontingent aufgebraucht – {done} von {total} Karten verarbeitet",
     "lockedFeature": "Verfügbar in Plus & Pro",
     "publicDesc": "Jeder kann diesen Kurs finden und lernen",
-    "privateDesc": "Nur du und eingeladene Mitglieder"
+    "privateDesc": "Nur du und eingeladene Mitglieder",
+    "publicWarningTitle": "Diesen Kurs öffentlich machen?",
+    "publicWarningSubtitle": "Dies kann nicht rückgängig gemacht werden. Bitte lesen Sie vor der Bestätigung.",
+    "publicWarningLock": "Bestehende Karten und Abschnitte werden dauerhaft gesperrt — Sie können neuen Inhalt hinzufügen, aber keine bestehenden Karten bearbeiten oder löschen.",
+    "publicWarningNoDelete": "Dieser Kurs kann nach der Veröffentlichung nicht gelöscht werden.",
+    "publicWarningVisible": "Der Kurs ist für jeden sichtbar und lernbar.",
+    "publicWarningConfirm": "Ja, öffentlich machen",
+    "publicWarningBack": "Zurück",
+    "cardLockedBadge": "Gesperrt",
+    "publicWarningIrreversible": "Sobald er öffentlich ist, kann dieser Kurs nicht mehr privat gemacht werden."
   },
   "start": {
     "estimatedTime": "~60 Sek. · alles auf einer Seite",

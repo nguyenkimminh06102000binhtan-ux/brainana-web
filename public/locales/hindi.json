@@ -414,7 +414,10 @@
     "configureWordsUntitled": "शीर्षक रहित अनुभाग",
     "quickReview": "त्वरित समीक्षा",
     "reviewCards": "समीक्षा ({count})",
-    "learnNewWords": "नया सीखें"
+    "learnNewWords": "नया सीखें",
+    "duplicateCourse": "मेरी लाइब्रेरी में डुप्लिकेट करें",
+    "duplicating": "डुप्लिकेट हो रहा है…",
+    "duplicateUpsell": "Plus/Pro सुविधा — डुप्लिकेट करने के लिए अपग्रेड करें"
   },
   "study": {
     "allSections": "सभी अनुभाग",
@@ -617,7 +620,16 @@
     "quotaRanOut": "अक्षर कोटा समाप्त हो गया — {done} में से {total} कार्ड प्रोसेस किए गए",
     "lockedFeature": "प्लस और प्रो पर उपलब्ध",
     "publicDesc": "कोई भी इस कोर्स को खोज और अध्ययन कर सकता है",
-    "privateDesc": "केवल आप और आमंत्रित सदस्य"
+    "privateDesc": "केवल आप और आमंत्रित सदस्य",
+    "publicWarningTitle": "इस कोर्स को सार्वजनिक करें?",
+    "publicWarningSubtitle": "यह पूर्ववत नहीं किया जा सकता। कृपया पुष्टि से पहले पढ़ें।",
+    "publicWarningLock": "मौजूदा कार्ड और सेक्शन स्थायी रूप से लॉक हो जाएंगे — आप नई सामग्री जोड़ सकते हैं लेकिन मौजूदा कार्ड संपादित या हटा नहीं सकते।",
+    "publicWarningNoDelete": "यह कोर्स सार्वजनिक होने के बाद हटाया नहीं जा सकता।",
+    "publicWarningVisible": "कोर्स किसी के भी लिए दृश्यमान और सीखने योग्य होगा।",
+    "publicWarningConfirm": "हाँ, सार्वजनिक करें",
+    "publicWarningBack": "वापस",
+    "cardLockedBadge": "लॉक",
+    "publicWarningIrreversible": "एक बार सार्वजनिक होने के बाद, इस कोर्स को दोबारा निजी नहीं बनाया जा सकता।"
   },
   "start": {
     "estimatedTime": "~60 सेकंड · सभी एक पृष्ठ पर",

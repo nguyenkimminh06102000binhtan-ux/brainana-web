@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sadaļa bez nosaukuma",
     "quickReview": "Ātrā atkārtošana",
     "reviewCards": "Atkārtot ({count})",
-    "learnNewWords": "Mācīties jaunu"
+    "learnNewWords": "Mācīties jaunu",
+    "duplicateCourse": "Dublēt manā bibliotēkā",
+    "duplicating": "Dublēšana…",
+    "duplicateUpsell": "Plus/Pro funkcija — jauniniet, lai dublētu"
   },
   "study": {
     "allSections": "Visas sadaļas",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Rakstzīmju kvota ir beigusies — apstrādātas {done} no {total} kartēm",
     "lockedFeature": "Pieejams Plus un Pro",
     "publicDesc": "Ikviens var atrast un apgūt šo kursu",
-    "privateDesc": "Tikai jūs un uzaicinātie dalībnieki"
+    "privateDesc": "Tikai jūs un uzaicinātie dalībnieki",
+    "publicWarningTitle": "Padarīt šo kursu publisku?",
+    "publicWarningSubtitle": "To nevar atcelt. Lūdzu, izlasiet pirms apstiprināšanas.",
+    "publicWarningLock": "Esošās kartes un sadaļas tiks neatgriezeniski bloķētas — var pievienot jaunu saturu, bet nevar rediģēt vai dzēst esošās kartes.",
+    "publicWarningNoDelete": "Šo kursu nevar dzēst pēc publiskošanas.",
+    "publicWarningVisible": "Kurss būs redzams un apgūstams ikvienam.",
+    "publicWarningConfirm": "Jā, padarīt publisku",
+    "publicWarningBack": "Atpakaļ",
+    "cardLockedBadge": "Bloķēts",
+    "publicWarningIrreversible": "Kad kurss ir publisks, to vairs nevar padarīt privātu."
   },
   "start": {
     "estimatedTime": "~60 sek · viss vienā lapā",

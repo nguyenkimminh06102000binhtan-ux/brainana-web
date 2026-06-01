@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Secțiune fără titlu",
     "quickReview": "Recenzie rapidă",
     "reviewCards": "Recenzează ({count})",
-    "learnNewWords": "Învață nou"
+    "learnNewWords": "Învață nou",
+    "duplicateCourse": "Duplicați în biblioteca mea",
+    "duplicating": "Duplicare…",
+    "duplicateUpsell": "Funcție Plus/Pro — actualizați pentru a duplica"
   },
   "study": {
     "allSections": "Toate secțiunile",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Cota de caractere a epuizat — {done} din {total} cărți procesate",
     "lockedFeature": "Disponibil pe Plus și Pro",
     "publicDesc": "Oricine poate găsi și studia acest curs",
-    "privateDesc": "Doar tu și membrii invitați"
+    "privateDesc": "Doar tu și membrii invitați",
+    "publicWarningTitle": "Faceți acest curs public?",
+    "publicWarningSubtitle": "Aceasta nu poate fi anulată. Vă rugăm să citiți înainte de confirmare.",
+    "publicWarningLock": "Cardurile și secțiunile existente vor fi blocate permanent — puteți adăuga conținut nou, dar nu puteți edita sau șterge cardurile existente.",
+    "publicWarningNoDelete": "Acest curs nu poate fi șters după ce devine public.",
+    "publicWarningVisible": "Cursul va fi vizibil și studiabil de oricine.",
+    "publicWarningConfirm": "Da, faceți public",
+    "publicWarningBack": "Înapoi",
+    "cardLockedBadge": "Blocat",
+    "publicWarningIrreversible": "Odată public, acest curs nu mai poate fi făcut privat."
   },
   "start": {
     "estimatedTime": "~60 sec · toate pe o singură pagină",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Izenburugabeko atala",
     "quickReview": "Berrikuspena azkar",
     "reviewCards": "Berrikusi ({count})",
-    "learnNewWords": "Berri ikasi"
+    "learnNewWords": "Berri ikasi",
+    "duplicateCourse": "Bikoiztu nire liburutegian",
+    "duplicating": "Bikoizten…",
+    "duplicateUpsell": "Plus/Pro eginbidea — eguneratu bikoizteko"
   },
   "study": {
     "allSections": "Atal guztiak",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Karaktereen kuota agortu da — {done} / {total} txartela prozesatuta",
     "lockedFeature": "Plus eta Pro planetan eskuragarri",
     "publicDesc": "Edonork aurki eta ikasi dezake kurtsoa",
-    "privateDesc": "Zu eta gonbidaturiko kideak bakarrik"
+    "privateDesc": "Zu eta gonbidaturiko kideak bakarrik",
+    "publicWarningTitle": "Ikastaro hau publikoa bihurtu?",
+    "publicWarningSubtitle": "Hau ezin da desegin. Mesedez, irakurri baieztatu aurretik.",
+    "publicWarningLock": "Dauden txartelak eta atalak betirako blokeatuko dira — eduki berria gehitu dezakezu, baina ezin duzu lehendik dauden txartelak editatu edo ezabatu.",
+    "publicWarningNoDelete": "Ikastaro hau ezin da ezabatu publikoa bihurtu ondoren.",
+    "publicWarningVisible": "Ikastaroa edonorentzat ikusgai eta ikasgarri izango da.",
+    "publicWarningConfirm": "Bai, egin publikoa",
+    "publicWarningBack": "Atzera",
+    "cardLockedBadge": "Blokeatua",
+    "publicWarningIrreversible": "Publikoa bihurtu ondoren, ikastaro hau ezin da berriz pribatu bihurtu."
   },
   "start": {
     "estimatedTime": "~60 segundo · dena orrialde bakarrean",

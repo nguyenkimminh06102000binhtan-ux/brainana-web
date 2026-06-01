@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Дел без наслов",
     "quickReview": "Брз преглед",
     "reviewCards": "Преглед ({count})",
-    "learnNewWords": "Учи ново"
+    "learnNewWords": "Учи ново",
+    "duplicateCourse": "Дупликат во мојата библиотека",
+    "duplicating": "Дупликат…",
+    "duplicateUpsell": "Plus/Pro функција — надградете за дупликат"
   },
   "study": {
     "allSections": "Сите делови",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Истече квотата на знаци - обработени се {done} од {total} картички",
     "lockedFeature": "Достапно на Plus & Pro",
     "publicDesc": "Секој може да го најде и проучува овој курс",
-    "privateDesc": "Само вие и поканетите членови"
+    "privateDesc": "Само вие и поканетите членови",
+    "publicWarningTitle": "Да се направи овој курс јавен?",
+    "publicWarningSubtitle": "Ова не може да се врати. Ве молиме прочитајте пред потврдување.",
+    "publicWarningLock": "Постојните картички и секции ќе бидат трајно заклучени — можете да додадете нова содржина, но не можете да уредувате или бришете постојни картички.",
+    "publicWarningNoDelete": "Овој курс не може да се избрише откако ќе стане јавен.",
+    "publicWarningVisible": "Курсот ќе биде видлив и достапен за учење за секого.",
+    "publicWarningConfirm": "Да, направи го јавен",
+    "publicWarningBack": "Назад",
+    "cardLockedBadge": "Заклучено",
+    "publicWarningIrreversible": "Откако ќе стане јавен, овој курс не може повторно да се направи приватен."
   },
   "start": {
     "estimatedTime": "~60 секунди · сите на една страница",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "未命名章节",
     "quickReview": "快速复习",
     "reviewCards": "复习 ({count})",
-    "learnNewWords": "学新内容"
+    "learnNewWords": "学新内容",
+    "duplicateCourse": "复制到我的库",
+    "duplicating": "复制中…",
+    "duplicateUpsell": "Plus/Pro 功能 — 升级以复制"
   },
   "study": {
     "allSections": "所有部分",
@@ -617,7 +620,16 @@
     "quotaRanOut": "字符配额用尽 — 已处理 {done} / {total} 张卡片",
     "lockedFeature": "在 Plus 和 Pro 中可用",
     "publicDesc": "任何人都可以找到和学习此课程",
-    "privateDesc": "仅限您和受邀成员"
+    "privateDesc": "仅限您和受邀成员",
+    "publicWarningTitle": "将此课程设为公开？",
+    "publicWarningSubtitle": "此操作无法撤销。请在确认前阅读。",
+    "publicWarningLock": "现有的卡片和章节将被永久锁定——您可以添加新内容，但无法编辑或删除现有卡片。",
+    "publicWarningNoDelete": "课程设为公开后将无法删除。",
+    "publicWarningVisible": "课程将对任何人可见且可学习。",
+    "publicWarningConfirm": "是，设为公开",
+    "publicWarningBack": "返回",
+    "cardLockedBadge": "已锁定",
+    "publicWarningIrreversible": "一旦公开，此课程将无法再设为私人。"
   },
   "start": {
     "estimatedTime": "~60 秒 · 全部在一页上",

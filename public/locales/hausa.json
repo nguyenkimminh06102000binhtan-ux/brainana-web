@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Ɓangare maras suna",
     "quickReview": "Bitar sauri",
     "reviewCards": "Sake duba ({count})",
-    "learnNewWords": "Koyi sabo"
+    "learnNewWords": "Koyi sabo",
+    "duplicateCourse": "Kwafi zuwa ɗakin karatu na",
+    "duplicating": "Ana kwafawa…",
+    "duplicateUpsell": "Fasali na Plus/Pro — inganta don kwafawa"
   },
   "study": {
     "allSections": "Duk sassan",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Haruffa quota ya ɓace — {done} na {total} katai aiki",
     "lockedFeature": "Samuwa akan Plus & Pro",
     "publicDesc": "Kowa zai iya neman da karata kursuni",
-    "privateDesc": "Kai da buɗe jami'a kawai"
+    "privateDesc": "Kai da buɗe jami'a kawai",
+    "publicWarningTitle": "Yin wannan darasi na jama'a?",
+    "publicWarningSubtitle": "Ba za a iya mayar da haka ba. Da fatan za a karanta kafin tabbatarwa.",
+    "publicWarningLock": "Katunan da suka wanzu da sassa za su kulle ta dindindin — kuna iya ƙara abubuwa sabbin amma ba za ku iya gyara ko share katunan da suka wanzu ba.",
+    "publicWarningNoDelete": "Wannan darasi ba za a iya share shi ba bayan ya zama na jama'a.",
+    "publicWarningVisible": "Darasin zai kasance bayyane kuma kowa zai iya koyo.",
+    "publicWarningConfirm": "Ee, yi shi na jama'a",
+    "publicWarningBack": "Komawa",
+    "cardLockedBadge": "An kulle",
+    "publicWarningIrreversible": "Da zarar ya zama na jama'a, ba za a iya mai da wannan darasi zuwa mai zaman kansa ba."
   },
   "start": {
     "estimatedTime": "~60 sec · duk a shafi daya",

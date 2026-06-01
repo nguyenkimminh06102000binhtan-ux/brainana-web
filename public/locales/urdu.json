@@ -414,7 +414,10 @@
     "configureWordsUntitled": "بے عنوان حصہ",
     "quickReview": "فوری جائزہ",
     "reviewCards": "جائزہ ({count})",
-    "learnNewWords": "نیا سیکھیں"
+    "learnNewWords": "نیا سیکھیں",
+    "duplicateCourse": "میری لائبریری میں نقل کریں",
+    "duplicating": "نقل ہو رہا ہے…",
+    "duplicateUpsell": "Plus/Pro فیچر — نقل کرنے کے لیے اپگریڈ کریں"
   },
   "study": {
     "allSections": "تمام سیکشنز",
@@ -617,7 +620,16 @@
     "quotaRanOut": "کریکٹر کوٹہ ختم ہو گیا — {total} کارڈز میں سے {done} پر کارروائی ہو گئی۔",
     "lockedFeature": "پلس اور پرو پر دستیاب ہے۔",
     "publicDesc": "کوئی بھی اس کورس کو تلاش اور پڑھ سکتا ہے۔",
-    "privateDesc": "صرف آپ اور مدعو ممبران"
+    "privateDesc": "صرف آپ اور مدعو ممبران",
+    "publicWarningTitle": "یہ کورس عام کریں؟",
+    "publicWarningSubtitle": "یہ واپس نہیں کیا جا سکتا۔ تصدیق کرنے سے پہلے پڑھیں۔",
+    "publicWarningLock": "موجودہ کارڈز اور سیکشن ہمیشہ کے لیے لاک ہو جائیں گے — نئا مواد شامل کر سکتے ہیں لیکن موجودہ کارڈز ترمیم یا حذف نہیں کر سکتے۔",
+    "publicWarningNoDelete": "یہ کورس عام ہونے کے بعد حذف نہیں کیا جا سکتا۔",
+    "publicWarningVisible": "کورس ہر کسی کے لیے نظر آنے والا اور سیکھنے کے قابل ہوگا۔",
+    "publicWarningConfirm": "ہاں، عام کریں",
+    "publicWarningBack": "واپس",
+    "cardLockedBadge": "لاک",
+    "publicWarningIrreversible": "ایک بار عام ہونے کے بعد، یہ کورس دوبارہ نجی نہیں بنایا جا سکتا۔"
   },
   "start": {
     "estimatedTime": "~60 سیکنڈ · سب ایک صفحے پر",

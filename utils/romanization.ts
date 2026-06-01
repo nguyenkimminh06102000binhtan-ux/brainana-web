@@ -5,8 +5,10 @@ export type RomanizationSystem = {
 
 export const ROMANIZATION_SYSTEMS: Record<string, RomanizationSystem> = {
   "Japanese":            { system: "Romaji",               placeholder: "e.g. nihongo" },
-  "Chinese (Simplified)": { system: "Pinyin",              placeholder: "e.g. nǐ hǎo" },
+  "Chinese (Simplified)":  { system: "Pinyin",              placeholder: "e.g. nǐ hǎo" },
   "Chinese (Traditional)": { system: "Pinyin",             placeholder: "e.g. nǐ hǎo" },
+  "Chinese (Mandarin)":    { system: "Pinyin",              placeholder: "e.g. nǐ hǎo" },
+  "Chinese (Cantonese)":   { system: "Jyutping",            placeholder: "e.g. nei5 hou2" },
   "Korean":              { system: "Revised Romanization",  placeholder: "e.g. annyeonghaseyo" },
   "Hindi":               { system: "Hunterian",             placeholder: "e.g. namaste" },
   "Arabic":              { system: "ALA-LC",                placeholder: "e.g. marḥaban" },

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "শিরোনামবিহীন বিভাগ",
     "quickReview": "দ্রুত পুনরালোচনা",
     "reviewCards": "পর্যালোচনা ({count})",
-    "learnNewWords": "নতুন শিখুন"
+    "learnNewWords": "নতুন শিখুন",
+    "duplicateCourse": "আমার লাইব্রেরিতে কপি করুন",
+    "duplicating": "কপি হচ্ছে…",
+    "duplicateUpsell": "Plus/Pro ফিচার — কপি করতে আপগ্রেড করুন"
   },
   "study": {
     "allSections": "সব বিভাগ",
@@ -617,7 +620,16 @@
     "quotaRanOut": "অক্ষরের কোটা শেষ — {done} এর মধ্যে {total} কার্ড প্রক্রিয়া করা হয়েছে",
     "lockedFeature": "প্লাস ও প্রোতে উপলব্ধ",
     "publicDesc": "যেকেউ এই কোর্স খুঁজে পেতে ও পড়তে পারবে",
-    "privateDesc": "শুধুমাত্র আপনি এবং আমন্ত্রিত সদস্যরা"
+    "privateDesc": "শুধুমাত্র আপনি এবং আমন্ত্রিত সদস্যরা",
+    "publicWarningTitle": "এই কোর্সটি পাবলিক করবেন?",
+    "publicWarningSubtitle": "এটি পূর্বাবস্থায় ফেরানো যাবে না। নিশ্চিত করার আগে পড়ুন।",
+    "publicWarningLock": "বিদ্যমান কার্ড এবং বিভাগগুলি স্থায়ীভাবে লক হয়ে যাবে — আপনি নতুন বিষয়বস্তু যোগ করতে পারবেন কিন্তু বিদ্যমান কার্ড সম্পাদনা বা মুছতে পারবেন না।",
+    "publicWarningNoDelete": "পাবলিক হওয়ার পরে এই কোর্সটি মুছে ফেলা যাবে না।",
+    "publicWarningVisible": "কোর্সটি যে কারো কাছে দৃশ্যমান এবং শেখার যোগ্য হবে।",
+    "publicWarningConfirm": "হ্যাঁ, পাবলিক করুন",
+    "publicWarningBack": "ফিরে যান",
+    "cardLockedBadge": "লক",
+    "publicWarningIrreversible": "একবার পাবলিক হলে, এই কোর্সটি আর প্রাইভেট করা যাবে না।"
   },
   "start": {
     "estimatedTime": "~60 সেকেন্ড · সব এক পৃষ্ঠায়",

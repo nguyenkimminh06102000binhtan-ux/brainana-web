@@ -414,7 +414,10 @@
     "configureWordsUntitled": "शीर्षकविहीन खण्ड",
     "quickReview": "द्रुत समीक्षा",
     "reviewCards": "समीक्षा ({count})",
-    "learnNewWords": "नयाँ सिक्नुहोस्"
+    "learnNewWords": "नयाँ सिक्नुहोस्",
+    "duplicateCourse": "मेरो पुस्तकालयमा नक्कल गर्नुहोस्",
+    "duplicating": "नक्कल हुँदैछ…",
+    "duplicateUpsell": "Plus/Pro सुविधा — नक्कल गर्न अपग्रेड गर्नुहोस्"
   },
   "study": {
     "allSections": "सबै खण्डहरू",
@@ -617,7 +620,16 @@
     "quotaRanOut": "क्यारेक्टर कोटा सकियो — {done} को {total} कार्डहरू प्रशोधन गरियो",
     "lockedFeature": "प्लस र प्रो मा उपलब्ध छ",
     "publicDesc": "जो कोहीले यो पाठ्यक्रम फेला पार्न र अध्ययन गर्न सक्नुहुन्छ",
-    "privateDesc": "तपाईं र आमन्त्रित सदस्यहरू मात्र"
+    "privateDesc": "तपाईं र आमन्त्रित सदस्यहरू मात्र",
+    "publicWarningTitle": "यो कोर्स सार्वजनिक गर्ने?",
+    "publicWarningSubtitle": "यो फिर्ता गर्न सकिँदैन। कृपया पुष्टि गर्नु अघि पढ्नुहोस्।",
+    "publicWarningLock": "अवस्थित कार्ड र सेक्सनहरू स्थायी रूपमा लक हुनेछन् — नयाँ सामग्री थप्न सकिन्छ तर अवस्थित कार्ड सम्पादन वा मेट्न सकिँदैन।",
+    "publicWarningNoDelete": "यो कोर्स सार्वजनिक भएपछि मेट्न सकिँदैन।",
+    "publicWarningVisible": "कोर्स जोसुकैका लागि देख्न र सिक्न सकिने हुनेछ।",
+    "publicWarningConfirm": "हो, सार्वजनिक गर्नुहोस्",
+    "publicWarningBack": "फिर्ता",
+    "cardLockedBadge": "लक",
+    "publicWarningIrreversible": "एकपटक सार्वजनिक भएपछि, यो कोर्स फेरि निजी बनाउन सकिँदैन।"
   },
   "start": {
     "estimatedTime": "~60 सेकेन्ड · सबै एक पृष्ठमा",

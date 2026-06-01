@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Раздзел без назвы",
     "quickReview": "Хуткае паўтарэнне",
     "reviewCards": "Паўтарыць ({count})",
-    "learnNewWords": "Вучыць новае"
+    "learnNewWords": "Вучыць новае",
+    "duplicateCourse": "Скапіяваць у маю бібліятэку",
+    "duplicating": "Капіраванне…",
+    "duplicateUpsell": "Функцыя Plus/Pro — абнавіце план для капіравання"
   },
   "study": {
     "allSections": "Усе раздзелы",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Квота знакаў выкончылася — {done} з {total} карт апрацавана",
     "lockedFeature": "Даступна на Plus & Pro",
     "publicDesc": "Кожны можа знайсці і вучыцца гэтаму курсу",
-    "privateDesc": "Толькі вы і запрошаныя члены"
+    "privateDesc": "Толькі вы і запрошаныя члены",
+    "publicWarningTitle": "Зрабіць гэты курс публічным?",
+    "publicWarningSubtitle": "Гэта нельга адмяніць. Калі ласка, прачытайце перад пацвярджэннем.",
+    "publicWarningLock": "Існуючыя карткі і раздзелы будуць назаўжды заблакіраваны — вы можаце дадаваць новы змест, але не можаце рэдагаваць або выдаляць існуючыя карткі.",
+    "publicWarningNoDelete": "Гэты курс нельга выдаліць пасля публікацыі.",
+    "publicWarningVisible": "Курс будзе бачны і даступны для вывучэння любым.",
+    "publicWarningConfirm": "Так, зрабіць публічным",
+    "publicWarningBack": "Назад",
+    "cardLockedBadge": "Заблакіравана",
+    "publicWarningIrreversible": "Пасля публікацыі гэты курс нельга зноў зрабіць прыватным."
   },
   "start": {
     "estimatedTime": "~60 с · усё на адной старонцы",

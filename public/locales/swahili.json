@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sehemu bila kichwa",
     "quickReview": "Mapitio ya haraka",
     "reviewCards": "Pitia ({count})",
-    "learnNewWords": "Jifunza kipya"
+    "learnNewWords": "Jifunza kipya",
+    "duplicateCourse": "Nakili kwenye maktaba yangu",
+    "duplicating": "Kunakili…",
+    "duplicateUpsell": "Kipengele cha Plus/Pro — boresha ili kunakili"
   },
   "study": {
     "allSections": "Sehemu zote",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Idadi ya wahusika imeisha - {done} ya {total} kadi zimechakatwa",
     "lockedFeature": "Inapatikana kwenye Plus & Pro",
     "publicDesc": "Mtu yeyote anaweza kupata na kusoma kozi hii",
-    "privateDesc": "Wewe tu na wanachama walioalikwa"
+    "privateDesc": "Wewe tu na wanachama walioalikwa",
+    "publicWarningTitle": "Fanya kozi hii kuwa ya umma?",
+    "publicWarningSubtitle": "Hii haiwezi kutenduliwa. Tafadhali soma kabla ya kuthibitisha.",
+    "publicWarningLock": "Kadi na sehemu zilizopo zitafungwa milele — unaweza kuongeza maudhui mapya lakini huwezi kuhariri au kufuta kadi zilizopo.",
+    "publicWarningNoDelete": "Kozi hii haiwezi kufutwa baada ya kuwa ya umma.",
+    "publicWarningVisible": "Kozi itakuwa inaonekana na inaweza kujifunzwa na mtu yeyote.",
+    "publicWarningConfirm": "Ndiyo, ifanye ya umma",
+    "publicWarningBack": "Rudi",
+    "cardLockedBadge": "Imefungwa",
+    "publicWarningIrreversible": "Ikishawa ya umma, kozi hii haiwezi kuwa ya kibinafsi tena."
   },
   "start": {
     "estimatedTime": "Sekunde ~60 · zote kwenye ukurasa mmoja",

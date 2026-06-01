@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Гарчиггүй хэсэг",
     "quickReview": "Хурдан давтах",
     "reviewCards": "Давтах ({count})",
-    "learnNewWords": "Шинэ сурах"
+    "learnNewWords": "Шинэ сурах",
+    "duplicateCourse": "Миний номын санд хуулах",
+    "duplicating": "Хуулж байна…",
+    "duplicateUpsell": "Plus/Pro функц — хуулахын тулд шинэчлэх"
   },
   "study": {
     "allSections": "Бүх хэсгүүд",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Тэмдэгтийн квот дууссан — {total} картын {done}-г боловсруулсан",
     "lockedFeature": "Plus & Pro дээр боломжтой",
     "publicDesc": "Энэ хичээлийг хэн ч олж, судлах боломжтой",
-    "privateDesc": "Зөвхөн та болон уригдсан гишүүд"
+    "privateDesc": "Зөвхөн та болон уригдсан гишүүд",
+    "publicWarningTitle": "Энэ курсыг нийтэд нээлттэй болгох уу?",
+    "publicWarningSubtitle": "Үүнийг буцаах боломжгүй. Баталгаажуулахаасаа өмнө уншина уу.",
+    "publicWarningLock": "Одоогийн карт болон хэсгүүд байнга хаагдах болно — шинэ контент нэмж болно, гэхдээ одоогийн картуудыг засах эсвэл устгах боломжгүй.",
+    "publicWarningNoDelete": "Энэ курсыг нийтэд нээлттэй болгосны дараа устгах боломжгүй.",
+    "publicWarningVisible": "Курс хэн бүхэнд харагдах бөгөөд сурч болно.",
+    "publicWarningConfirm": "Тийм, нийтэд нээлттэй болгох",
+    "publicWarningBack": "Буцах",
+    "cardLockedBadge": "Хаагдсан",
+    "publicWarningIrreversible": "Нийтэд нээлттэй болсны дараа энэ курсыг дахин хувийн болгох боломжгүй."
   },
   "start": {
     "estimatedTime": "~60 сек · бүгд нэг хуудсан дээр",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Secció sense títol",
     "quickReview": "Revisió ràpida",
     "reviewCards": "Revisar ({count})",
-    "learnNewWords": "Aprèn nou"
+    "learnNewWords": "Aprèn nou",
+    "duplicateCourse": "Duplica a la meva biblioteca",
+    "duplicating": "Duplicant…",
+    "duplicateUpsell": "Funció Plus/Pro — actualitza per duplicar"
   },
   "study": {
     "allSections": "Totes les seccions",
@@ -617,7 +620,16 @@
     "quotaRanOut": "La quota de caràcters s'ha esgotat — {done} de {total} fitxes processades",
     "lockedFeature": "Disponible a Plus i Pro",
     "publicDesc": "Qualsevol pot trobar i estudiar aquest curs",
-    "privateDesc": "Només tu i membres convidats"
+    "privateDesc": "Només tu i membres convidats",
+    "publicWarningTitle": "Fer públic aquest curs?",
+    "publicWarningSubtitle": "Això no es pot desfer. Llegiu abans de confirmar.",
+    "publicWarningLock": "Les targetes i seccions existents quedaran bloquejades permanentment — podeu afegir nou contingut però no podeu editar ni eliminar les targetes existents.",
+    "publicWarningNoDelete": "Aquest curs no es pot eliminar un cop sigui públic.",
+    "publicWarningVisible": "El curs serà visible i es podrà estudiar per a tothom.",
+    "publicWarningConfirm": "Sí, fes-lo públic",
+    "publicWarningBack": "Enrere",
+    "cardLockedBadge": "Bloquejat",
+    "publicWarningIrreversible": "Un cop públic, aquest curs no pot tornar a ser privat."
   },
   "start": {
     "estimatedTime": "~60 segons · tot en una pàgina",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "ርዕስ የሌለው ክፍል",
     "quickReview": "ፈጣን ክለሳ",
     "reviewCards": "ክለሳ ({count})",
-    "learnNewWords": "አዲስ ተማር"
+    "learnNewWords": "አዲስ ተማር",
+    "duplicateCourse": "ወደ ቤተ-መጻሕፍቴ ቅዳ",
+    "duplicating": "በመቅዳት ላይ…",
+    "duplicateUpsell": "Plus/Pro ባህሪ — ለማባዛት አሻሽል"
   },
   "study": {
     "allSections": "ሁሉም ክፍሎች",
@@ -617,7 +620,16 @@
     "quotaRanOut": "የፊደል ገደብ ተጠናቋል — {done} ካርዶች ከ {total} ውስጥ ተሰርተዋል",
     "lockedFeature": "በፕላስ እና ፕሮ ደረጃዎች ላይ ይገኛል",
     "publicDesc": "ማንኛውም ሰው ይገኛል እና መማር ይችላል",
-    "privateDesc": "ብቻ እና የተጋባ አባላት"
+    "privateDesc": "ብቻ እና የተጋባ አባላት",
+    "publicWarningTitle": "ይህን ኮርስ ይፋዊ ያድርጉ?",
+    "publicWarningSubtitle": "ይህ ሊቀለበስ አይችልም። ከማረጋገጥ በፊት እባክዎ ያንብቡ።",
+    "publicWarningLock": "ያሉ ካርዶች እና ክፍሎች ቋሚ ሆነው ይዘጋሉ — አዲስ ይዘት ማከል ይችላሉ ነገር ግን ያሉ ካርዶችን ማርትዕ ወይም መሰረዝ አይችሉም።",
+    "publicWarningNoDelete": "ኮርሱ ይፋዊ ከሆነ በኋላ ሊሰረዝ አይችልም።",
+    "publicWarningVisible": "ኮርሱ ለሁሉም ሰው ይታያል እና ሊማር ይችላል።",
+    "publicWarningConfirm": "አዎ፣ ይፋዊ አድርጌ",
+    "publicWarningBack": "ተመለስ",
+    "cardLockedBadge": "ተዘግቷል",
+    "publicWarningIrreversible": "ይፋዊ ከሆነ በኋላ ይህ ኮርስ እንደገና ግላዊ ሊሆን አይችልም።"
   },
   "start": {
     "estimatedTime": "~60 ሰከንድ · ሁሉም በአንድ ገጽ ላይ",

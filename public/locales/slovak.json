@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sekcia bez názvu",
     "quickReview": "Rýchle opakovanie",
     "reviewCards": "Opakovať ({count})",
-    "learnNewWords": "Učiť sa nové"
+    "learnNewWords": "Učiť sa nové",
+    "duplicateCourse": "Duplikovať do mojej knižnice",
+    "duplicating": "Duplikovanie…",
+    "duplicateUpsell": "Funkcia Plus/Pro — aktualizujte na duplikovanie"
   },
   "study": {
     "allSections": "Všetky sekcie",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kvóta znakov sa minula – spracovaných {done} z {total} kariet",
     "lockedFeature": "Dostupné na Plus a Pro",
     "publicDesc": "Tento kurz môže nájsť a študovať ktokoľvek",
-    "privateDesc": "Iba vy a pozvaní členovia"
+    "privateDesc": "Iba vy a pozvaní členovia",
+    "publicWarningTitle": "Zverejniť tento kurz?",
+    "publicWarningSubtitle": "To sa nedá vrátiť. Pred potvrdením si prečítajte.",
+    "publicWarningLock": "Existujúce karty a sekcie budú trvalo uzamknuté — môžete pridávať nový obsah, ale nemôžete upravovať ani mazať existujúce karty.",
+    "publicWarningNoDelete": "Tento kurz nemožno po zverejnení zmazať.",
+    "publicWarningVisible": "Kurz bude viditeľný a študovateľný pre každého.",
+    "publicWarningConfirm": "Áno, zverejniť",
+    "publicWarningBack": "Späť",
+    "cardLockedBadge": "Uzamknuté",
+    "publicWarningIrreversible": "Po zverejnení nemožno tento kurz znova nastaviť ako súkromný."
   },
   "start": {
     "estimatedTime": "~60 sekúnd · všetko na jednej stránke",

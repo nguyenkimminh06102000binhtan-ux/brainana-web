@@ -414,7 +414,10 @@
     "configureWordsUntitled": "제목 없는 섹션",
     "quickReview": "빠른 복습",
     "reviewCards": "복습 ({count})",
-    "learnNewWords": "새로 배우기"
+    "learnNewWords": "새로 배우기",
+    "duplicateCourse": "내 라이브러리에 복제",
+    "duplicating": "복제 중…",
+    "duplicateUpsell": "Plus/Pro 기능 — 복제하려면 업그레이드"
   },
   "study": {
     "allSections": "모든 섹션",
@@ -617,7 +620,16 @@
     "quotaRanOut": "캐릭터 할당량이 소진되었습니다 — {total} 카드 중 {done}이(가) 처리되었습니다.",
     "lockedFeature": "Plus & Pro에서 사용 가능",
     "publicDesc": "누구나 이 강좌를 찾아 학습할 수 있습니다.",
-    "privateDesc": "나와 초대된 구성원만"
+    "privateDesc": "나와 초대된 구성원만",
+    "publicWarningTitle": "이 코스를 공개하겠습니까?",
+    "publicWarningSubtitle": "이 작업은 취소할 수 없습니다. 확인하기 전에 읽어주세요.",
+    "publicWarningLock": "기존 카드와 섹션은 영구적으로 잠깁니다 — 새 콘텐츠를 추가할 수 있지만 기존 카드를 편집하거나 삭제할 수 없습니다.",
+    "publicWarningNoDelete": "이 코스는 공개된 후 삭제할 수 없습니다.",
+    "publicWarningVisible": "코스는 누구에게나 표시되고 학습 가능합니다.",
+    "publicWarningConfirm": "예, 공개합니다",
+    "publicWarningBack": "뒤로",
+    "cardLockedBadge": "잠김",
+    "publicWarningIrreversible": "공개된 후에는 이 코스를 다시 비공개로 만들 수 없습니다."
   },
   "start": {
     "estimatedTime": "~60초 · 한 페이지에 모두 포함",

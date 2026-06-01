@@ -414,7 +414,10 @@
     "configureWordsUntitled": "ສ່ວນທີ່ບໍ່ມີຫົວຂໍ້",
     "quickReview": "ທົບທວນດ່ວນ",
     "reviewCards": "ທົບທວນ ({count})",
-    "learnNewWords": "ຮຽນໃໝ່"
+    "learnNewWords": "ຮຽນໃໝ່",
+    "duplicateCourse": "ຄັດລອກໄປຫ້ອງສະໝຸດຂອງຂ້ອຍ",
+    "duplicating": "ກຳລັງຄັດລອກ…",
+    "duplicateUpsell": "ຄຸນສົມບັດ Plus/Pro — ອັບເກຣດເພື່ອຄັດລອກ"
   },
   "study": {
     "allSections": "ທຸກພາກສ່ວນ",
@@ -617,7 +620,16 @@
     "quotaRanOut": "ໂຄຕ້າຕົວອັກສອນໝົດ — {done} ຂອງບັດ {total} ປະມວນຜົນແລ້ວ",
     "lockedFeature": "ມີໃຫ້ໃນ Plus & Pro",
     "publicDesc": "ທຸກຄົນສາມາດຊອກຫາ ແລະສຶກສາຫຼັກສູດນີ້ໄດ້",
-    "privateDesc": "ພຽງແຕ່ທ່ານ ແລະສະມາຊິກທີ່ເຊີນ"
+    "privateDesc": "ພຽງແຕ່ທ່ານ ແລະສະມາຊິກທີ່ເຊີນ",
+    "publicWarningTitle": "ເຮັດໃຫ້ຫຼັກສູດນີ້ເປັນສາທາລະນະ?",
+    "publicWarningSubtitle": "ສິ່ງນີ້ບໍ່ສາມາດຍ້ອນກັບໄດ້. ກະລຸນາອ່ານກ່ອນຢືນຢັນ.",
+    "publicWarningLock": "ບັດ ແລະ ສ່ວນທີ່ມີຢູ່ຈະຖືກລ໋ອກຖາວອນ — ທ່ານສາມາດເພີ່ມເນື້ອຫາໃໝ່ ແຕ່ບໍ່ສາມາດແກ້ໄຂ ຫຼື ລຶບບັດທີ່ມີຢູ່ໄດ້.",
+    "publicWarningNoDelete": "ຫຼັກສູດນີ້ບໍ່ສາມາດລຶບໄດ້ຫຼັງຈາກເປັນສາທາລະນະ.",
+    "publicWarningVisible": "ຫຼັກສູດຈະສາມາດເຫັນ ແລະ ຮຽນໄດ້ສຳລັບທຸກຄົນ.",
+    "publicWarningConfirm": "ແມ່ນ, ເຮັດໃຫ້ສາທາລະນະ",
+    "publicWarningBack": "ກັບ",
+    "cardLockedBadge": "ລ໋ອກ",
+    "publicWarningIrreversible": "ເມື່ອເປັນສາທາລະນະແລ້ວ ຫຼັກສູດນີ້ຈະບໍ່ສາມາດເຮັດໃຫ້ເປັນສ່ວນຕົວໄດ້ອີກ."
   },
   "start": {
     "estimatedTime": "~60 ວິ · ທັງໝົດຢູ່ໃນໜ້າດຽວ",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Névtelen szakasz",
     "quickReview": "Gyors ismétlés",
     "reviewCards": "Ismétlés ({count})",
-    "learnNewWords": "Újat tanulni"
+    "learnNewWords": "Újat tanulni",
+    "duplicateCourse": "Másolás a könyvtáramba",
+    "duplicating": "Másolás…",
+    "duplicateUpsell": "Plus/Pro funkció — frissítsen a másoláshoz"
   },
   "study": {
     "allSections": "Minden szakasz",
@@ -617,7 +620,16 @@
     "quotaRanOut": "A karakterkvóta elfogyott — {done} / {total} kártya feldolgozva",
     "lockedFeature": "Plus & Pro csomagban elérhető",
     "publicDesc": "Bárki megtalálhatja és tanulhatja ezt a kurzust",
-    "privateDesc": "Csak te és a meghívott tagok"
+    "privateDesc": "Csak te és a meghívott tagok",
+    "publicWarningTitle": "Nyilvánossá tenni ezt a kurzust?",
+    "publicWarningSubtitle": "Ez nem vonható vissza. Kérjük, olvassa el megerősítés előtt.",
+    "publicWarningLock": "A meglévő kártyák és szakaszok véglegesen zárolva lesznek — új tartalmat hozzáadhat, de a meglévő kártyákat nem szerkesztheti vagy törölheti.",
+    "publicWarningNoDelete": "Ez a kurzus nem törölhető, miután nyilvánossá vált.",
+    "publicWarningVisible": "A kurzus mindenki számára látható és tanulható lesz.",
+    "publicWarningConfirm": "Igen, tegyük nyilvánossá",
+    "publicWarningBack": "Vissza",
+    "cardLockedBadge": "Zárolva",
+    "publicWarningIrreversible": "Miután nyilvánossá vált, ez a kurzus többé nem tehető priváttá."
   },
   "start": {
     "estimatedTime": "~60 mp · minden egy oldalon",

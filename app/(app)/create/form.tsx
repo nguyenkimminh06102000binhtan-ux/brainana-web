@@ -17,6 +17,7 @@ import { generateTTSAudio } from "@/app/actions/tts";
 import { showQuotaToast } from "@/components/quota-toast";
 import { toast } from "sonner";
 import AiImportModal from "./ai-import-modal";
+import PublicCourseWarningModal from "@/components/public-course-warning-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -450,6 +451,8 @@ export default function CreateCourseForm({
   levels: LevelLabels;
 }) {
   const [state, formAction, pending] = useActionState(createCourse, null);
+  const [showPublicWarning, setShowPublicWarning] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const [sections, setSections] = useState<Section[]>([makeSection()]);
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]);
@@ -764,7 +767,8 @@ export default function CreateCourseForm({
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <>
+    <form ref={formRef} action={formAction} className="flex flex-col gap-6">
       <input type="hidden" name="sections_data" value={sectionsPayload} />
       <input type="hidden" name="prospective_course_id" value={prospectiveCourseId.current} />
 
@@ -1032,7 +1036,16 @@ export default function CreateCourseForm({
               })
             : labels.addAtLeastOneCard}
         </p>
-        <button type="submit" disabled={!hasValidItem || pending || isUploading}
+        <button
+          type="button"
+          disabled={!hasValidItem || pending || isUploading}
+          onClick={() => {
+            if (selectedVisibility === "public") {
+              setShowPublicWarning(true);
+            } else {
+              formRef.current?.requestSubmit();
+            }
+          }}
           className="min-h-14 w-full rounded-full bg-orange px-6 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none sm:w-auto sm:px-8">
           {pending ? labels.creating : labels.createCourse}
         </button>
@@ -1056,5 +1069,14 @@ export default function CreateCourseForm({
         <MathToolbar onInsert={insertSymbol} direction="up" />
       </div>
     </form>
+
+    {showPublicWarning && (
+      <PublicCourseWarningModal
+        labels={{ publicWarningTitle: labels.publicWarningTitle, publicWarningSubtitle: labels.publicWarningSubtitle, publicWarningLock: labels.publicWarningLock, publicWarningNoDelete: labels.publicWarningNoDelete, publicWarningVisible: labels.publicWarningVisible, publicWarningConfirm: labels.publicWarningConfirm, publicWarningBack: labels.publicWarningBack }}
+        onConfirm={() => { setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
+        onBack={() => setShowPublicWarning(false)}
+      />
+    )}
+    </>
   );
 }

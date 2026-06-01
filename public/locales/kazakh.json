@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Тақырыпсыз бөлім",
     "quickReview": "Жылдам қайталау",
     "reviewCards": "Қайталау ({count})",
-    "learnNewWords": "Жаңа үйрен"
+    "learnNewWords": "Жаңа үйрен",
+    "duplicateCourse": "Менің кітапханама көшіру",
+    "duplicating": "Көшіру…",
+    "duplicateUpsell": "Plus/Pro мүмкіндігі — көшіру үшін жаңартыңыз"
   },
   "study": {
     "allSections": "Барлық бөлімдер",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Таңбалар лимиті бітті — {done} / {total} карта өңделді",
     "lockedFeature": "Plus және Pro тарифтерінде қолжетімді",
     "publicDesc": "Бұл курс барлық адамдар таба алады және оқи алады",
-    "privateDesc": "Тек сіз және шақырылған мүшелер"
+    "privateDesc": "Тек сіз және шақырылған мүшелер",
+    "publicWarningTitle": "Бұл курсты жария ету керек пе?",
+    "publicWarningSubtitle": "Бұл кері қайтарылмайды. Растамас бұрын оқыңыз.",
+    "publicWarningLock": "Бар карталар мен бөлімдер мәңгілік бұғатталады — жаңа мазмұн қосуға болады, бірақ бар карталарды өзгертуге немесе жоюға болмайды.",
+    "publicWarningNoDelete": "Бұл курс жарияланғаннан кейін жойылмайды.",
+    "publicWarningVisible": "Курс кез келген адамға көрінетін болады.",
+    "publicWarningConfirm": "Иә, жариялау",
+    "publicWarningBack": "Артқа",
+    "cardLockedBadge": "Бұғатталған",
+    "publicWarningIrreversible": "Жарияланғаннан кейін бұл курсты жекелікке қайтарып алу мүмкін емес."
   },
   "start": {
     "estimatedTime": "~60 сек · барлығы бір бетте",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Unavngivet afsnit",
     "quickReview": "Hurtig gennemgang",
     "reviewCards": "Gennemgå ({count})",
-    "learnNewWords": "Lær nyt"
+    "learnNewWords": "Lær nyt",
+    "duplicateCourse": "Dupliker til mit bibliotek",
+    "duplicating": "Duplikerer…",
+    "duplicateUpsell": "Plus/Pro-funktion — opgrader for at duplikere"
   },
   "study": {
     "allSections": "Alle afsnit",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Tegnkvota løb ud — {done} af {total} kort behandlet",
     "lockedFeature": "Tilgængeligt på Plus og Pro",
     "publicDesc": "Alle kan finde og studere dette kursus",
-    "privateDesc": "Kun du og inviterede medlemmer"
+    "privateDesc": "Kun du og inviterede medlemmer",
+    "publicWarningTitle": "Gøre dette kursus offentligt?",
+    "publicWarningSubtitle": "Dette kan ikke fortrydes. Læs venligst inden bekræftelse.",
+    "publicWarningLock": "Eksisterende kort og sektioner vil blive permanent låst — du kan tilføje nyt indhold, men kan ikke redigere eller slette eksisterende kort.",
+    "publicWarningNoDelete": "Dette kursus kan ikke slettes, når det er offentligt.",
+    "publicWarningVisible": "Kurset vil være synligt og studiérbart for alle.",
+    "publicWarningConfirm": "Ja, gør det offentligt",
+    "publicWarningBack": "Tilbage",
+    "cardLockedBadge": "Låst",
+    "publicWarningIrreversible": "Når det er offentliggjort, kan dette kursus ikke gøres privat igen."
   },
   "start": {
     "estimatedTime": "~60 sek. · alt på én side",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Бахши бе унвон",
     "quickReview": "Такрори зуд",
     "reviewCards": "Такрор кунед ({count})",
-    "learnNewWords": "Нав омӯзед"
+    "learnNewWords": "Нав омӯзед",
+    "duplicateCourse": "Ба китобхонаи ман нусхабардорӣ кунед",
+    "duplicating": "Нусхабардорӣ…",
+    "duplicateUpsell": "Функсияи Plus/Pro — барои нусхабардорӣ навсозӣ кунед"
   },
   "study": {
     "allSections": "Ҳама бахшҳо",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Квота ба охир расид — {done} аз {total} корт коркард шуд",
     "lockedFeature": "Дар Plus & Pro дастрас аст",
     "publicDesc": "Ҳар як шахс метавонад ин курсро пайдо кунад ва омӯзад",
-    "privateDesc": "Танҳо шумо ва аъзоёни даъватшуда"
+    "privateDesc": "Танҳо шумо ва аъзоёни даъватшуда",
+    "publicWarningTitle": "Ин курсро ҷамъиятӣ кунед?",
+    "publicWarningSubtitle": "Ин баргашт надорад. Лутфан пеш аз тасдиқ бихонед.",
+    "publicWarningLock": "Корточаҳо ва бахшҳои мавҷуда барои ҳамеша қулф мешаванд — шумо метавонед мӯҳтавои нав илова кунед, аммо корточаҳои мавҷударо таҳрир карда ё нест карда наметавонед.",
+    "publicWarningNoDelete": "Ин курсро пас аз интишор нест кардан мумкин нест.",
+    "publicWarningVisible": "Курс барои ҳама намоён ва омӯхтанӣ хоҳад буд.",
+    "publicWarningConfirm": "Бале, ҷамъиятӣ кунед",
+    "publicWarningBack": "Бозгашт",
+    "cardLockedBadge": "Қулф",
+    "publicWarningIrreversible": "Баъд аз нашр, ин курсро дигар хусусӣ кардан мумкин нест."
   },
   "start": {
     "estimatedTime": "~60 сония · ҳама дар як саҳифа",

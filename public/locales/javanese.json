@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Bagian tanpa judul",
     "quickReview": "Review cepet",
     "reviewCards": "Review ({count})",
-    "learnNewWords": "Sinau anyar"
+    "learnNewWords": "Sinau anyar",
+    "duplicateCourse": "Duplikat menyang perpustakaan saya",
+    "duplicating": "Duplikasi…",
+    "duplicateUpsell": "Fitur Plus/Pro — upgrade kanggo duplikasi"
   },
   "study": {
     "allSections": "Kabeh bagean",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kuota karakter entek — {done} saka {total} kartu diproses",
     "lockedFeature": "Tersedia ing Plus & Pro",
     "publicDesc": "Sapa wae bisa nemokake lan sinau kursus iki",
-    "privateDesc": "Mung sampeyan lan anggota sing diundang"
+    "privateDesc": "Mung sampeyan lan anggota sing diundang",
+    "publicWarningTitle": "Gawe kursus iki dadi publik?",
+    "publicWarningSubtitle": "Iki ora bisa dibatalake. Mohon waca sadurunge konfirmasi.",
+    "publicWarningLock": "Kartu lan bagian sing ana bakal dikunci permanen — sampeyan bisa nambah konten anyar nanging ora bisa ngubah utawa mbusak kartu sing ana.",
+    "publicWarningNoDelete": "Kursus iki ora bisa dibusak sawise dadi publik.",
+    "publicWarningVisible": "Kursus bakal katon lan bisa dipelajari dening sapa wae.",
+    "publicWarningConfirm": "Ya, gawe publik",
+    "publicWarningBack": "Bali",
+    "cardLockedBadge": "Dikunci",
+    "publicWarningIrreversible": "Sawise dadi publik, kursus iki ora bisa dijadikan pribadi maneh."
   },
   "start": {
     "estimatedTime": "~60 detik · kabeh ing sak kaca",

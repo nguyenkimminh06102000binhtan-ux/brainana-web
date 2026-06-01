@@ -414,7 +414,10 @@
     "configureWordsUntitled": "ផ្នែកគ្មានចំណងជើង",
     "quickReview": "ពិនិត្យរហ័ស",
     "reviewCards": "ពិនិត្យ ({count})",
-    "learnNewWords": "រៀនថ្មី"
+    "learnNewWords": "រៀនថ្មី",
+    "duplicateCourse": "ចម្លងទៅបណ្ណាល័យរបស់ខ្ញុំ",
+    "duplicating": "កំពុងចម្លង…",
+    "duplicateUpsell": "មុខងារ Plus/Pro — upgrade ដើម្បីចម្លង"
   },
   "study": {
     "allSections": "ផ្នែកទាំងអស់។",
@@ -617,7 +620,16 @@
     "quotaRanOut": "កូតាតួអក្សរអស់ — បានដំណើរការ {done} នៃ {total} កាត់",
     "lockedFeature": "មាននៅលើ Plus & Pro",
     "publicDesc": "អ្នកគ្រប់គ្នាអាចរកឃើញ និងរៀនវគ្គសិក្សានេះបាន",
-    "privateDesc": "តែអ្នកប្រើប្រាស់អ្នកអាចរកឃើញ និងអ្នកដែលបានអញ្ជើញ"
+    "privateDesc": "តែអ្នកប្រើប្រាស់អ្នកអាចរកឃើញ និងអ្នកដែលបានអញ្ជើញ",
+    "publicWarningTitle": "ធ្វើឱ្យវគ្គសិក្សានេះជាសាធារណៈ?",
+    "publicWarningSubtitle": "វាមិនអាចត្រឡប់ក្រោយវិញបានទេ។ សូមអានមុនពេលបញ្ជាក់។",
+    "publicWarningLock": "ប័ណ្ណ និងផ្នែកដែលមានស្រាប់នឹងត្រូវចាក់សោរជាអចិន្ត្រៃយ៍ — អ្នកអាចបន្ថែមមាតិកាថ្មីបាន ប៉ុន្តែមិនអាចកែប្រែ ឬលុបប័ណ្ណដែលមានស្រាប់ឡើយ។",
+    "publicWarningNoDelete": "វគ្គសិក្សានេះមិនអាចលុបបំបាត់បានបន្ទាប់ពីក្លាយជាសាធារណៈ។",
+    "publicWarningVisible": "វគ្គសិក្សានឹងអាចចូលមើល និងរៀនបានដោយអ្នកណាម្នាក់។",
+    "publicWarningConfirm": "បាទ/ចាស ធ្វើឱ្យជាសាធារណៈ",
+    "publicWarningBack": "ត្រឡប់",
+    "cardLockedBadge": "ចាក់សោ",
+    "publicWarningIrreversible": "នៅពេលក្លាយជាសាធារណៈ វគ្គសិក្សានេះមិនអាចធ្វើឱ្យជាឯកជនវិញបានទេ។"
   },
   "start": {
     "estimatedTime": "~60 វិនាទី · ទាំងអស់នៅលើទំព័រមួយ។",

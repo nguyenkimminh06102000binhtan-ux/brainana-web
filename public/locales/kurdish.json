@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Beşa bê sernavê",
     "quickReview": "Nirxandina bilez",
     "reviewCards": "Nirxandin ({count})",
-    "learnNewWords": "Nû fêr bibe"
+    "learnNewWords": "Nû fêr bibe",
+    "duplicateCourse": "Li pirtûkxaneya min dubare bike",
+    "duplicating": "Dubarekirin…",
+    "duplicateUpsell": "Taybetmendiya Plus/Pro — ji bo dubarekirin xwe bilind bike"
   },
   "study": {
     "allSections": "Hemû beş",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kotaya karakteran qediya - {done} ji {total} kartên hatin pêvajo kirin",
     "lockedFeature": "Li ser Plus & Pro heye",
     "publicDesc": "Her kes dikare vê qursê bibîne û bixwîne",
-    "privateDesc": "Tenê hûn û endamên vexwendin"
+    "privateDesc": "Tenê hûn û endamên vexwendin",
+    "publicWarningTitle": "Ev qurs ragihîne?",
+    "publicWarningSubtitle": "Ev nayê vegerandin. Berî pejirandinê bixwîne.",
+    "publicWarningLock": "Kartên û beşên heyî dê bi domdarî werin girtin — hûn dikarin naveroka nû zêde bikin lê nikarin kartên heyî biguherînin an jê bikin.",
+    "publicWarningNoDelete": "Ev qurs piştî ragihiştinê nayê jêbirin.",
+    "publicWarningVisible": "Qurs dê ji her kesî re xuya bibe û bibe fêrbûn.",
+    "publicWarningConfirm": "Erê, ragihîne",
+    "publicWarningBack": "Vegerîne",
+    "cardLockedBadge": "Girtî",
+    "publicWarningIrreversible": "Dema ku bibe giştî, ev qurs nayê vegera taybetiyê."
   },
   "start": {
     "estimatedTime": "~ 60 saniye · hemî li ser yek rûpelê",

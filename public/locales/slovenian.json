@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Razdelek brez naslova",
     "quickReview": "Hitro ponavljanje",
     "reviewCards": "Ponovi ({count})",
-    "learnNewWords": "Učiti novo"
+    "learnNewWords": "Učiti novo",
+    "duplicateCourse": "Podvoji v mojo knjižnico",
+    "duplicating": "Podvajanje…",
+    "duplicateUpsell": "Funkcija Plus/Pro — nadgradite za podvajanje"
   },
   "study": {
     "allSections": "Vsi razdelki",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kvota znakov je zmanjkala — {done} od {total} obdelanih kartic",
     "lockedFeature": "Na voljo na Plus & Pro",
     "publicDesc": "Vsakdo lahko najde in preuči ta tečaj",
-    "privateDesc": "Samo vi in ​​povabljeni člani"
+    "privateDesc": "Samo vi in ​​povabljeni člani",
+    "publicWarningTitle": "Narediti ta tečaj javen?",
+    "publicWarningSubtitle": "To ni mogoče razveljaviti. Prosimo, preberite pred potrditvijo.",
+    "publicWarningLock": "Obstoječe kartice in razdelki bodo trajno zaklenjeni — dodate lahko novo vsebino, ne morete pa urejati ali brisati obstoječih kartic.",
+    "publicWarningNoDelete": "Ta tečaj po javni objavi ni mogoče izbrisati.",
+    "publicWarningVisible": "Tečaj bo viden in dostopen za vse.",
+    "publicWarningConfirm": "Da, objavi javno",
+    "publicWarningBack": "Nazaj",
+    "cardLockedBadge": "Zaklenjeno",
+    "publicWarningIrreversible": "Ko je javen, tega tečaja ni mogoče znova narediti zasebnega."
   },
   "start": {
     "estimatedTime": "~60 s · vse na eni strani",
