@@ -200,6 +200,13 @@ export default async function UpgradePage() {
       <p className="mt-8 text-center font-manrope text-xs text-ink-3">
         Prices in USD · Monthly billing · Cancel anytime · Characters and sessions reset each month
       </p>
+      <p className="mt-3 text-center font-manrope text-xs text-ink-3">
+        By subscribing you agree to our{" "}
+        <a href="/terms" className="underline hover:text-ink">Terms of Service</a>,{" "}
+        <a href="/privacy" className="underline hover:text-ink">Privacy Policy</a>, and{" "}
+        <a href="/refund" className="underline hover:text-ink">Refund Policy</a>.
+        Payments processed by Paddle.
+      </p>
     </div>
   );
 }
