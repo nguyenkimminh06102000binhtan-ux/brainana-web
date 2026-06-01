@@ -24,7 +24,17 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
   const [pendingAnswer, setPendingAnswer] = useState<CardAnswer | null>(null);
 
   const options = useMemo(() => {
-    const pool = [card.backText, ...card.distractors.slice(0, 3)];
+    const seen = new Set<string>();
+    seen.add(card.backText.trim().toLowerCase());
+    const uniqueDistractors = card.distractors
+      .slice(0, 3)
+      .filter((d) => {
+        const key = d.trim().toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    const pool = [card.backText, ...uniqueDistractors];
     // Shuffle deterministically per itemId so re-renders don't reshuffle
     return pool
       .map((text, i) => ({ text, isCorrect: i === 0, originalIndex: i }))
@@ -107,7 +117,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
             />
           </div>
         )}
-        <p className="font-fredoka text-3xl font-[600] text-ink leading-snug">
+        <p className="break-words font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
           {card.frontText}
         </p>
         {showRomanization && card.romanization && (
