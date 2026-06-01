@@ -587,7 +587,11 @@
     "aiImportErrorNoTitle": "Add a course title before generating cards.",
     "distractors": "Wrong Answers",
     "distractorPlaceholder": "e.g. Wrong choice",
-    "addDistractor": "+ Add wrong answer"
+    "addDistractor": "+ Add wrong answer",
+    "autoGenerateBack": "Auto-fill",
+    "bulkGenerateBack": "Auto-fill answers",
+    "bulkGeneratingBack": "Filling {done}/{total}...",
+    "bulkGenerateDoneBack": "Filled {count} answers"
   },
   "mems": {
     "memoryHints": "Memory Hints",

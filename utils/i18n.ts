@@ -223,6 +223,10 @@ export type Locale = {
     distractors: string;
     distractorPlaceholder: string;
     addDistractor: string;
+    autoGenerateBack: string;
+    bulkGenerateBack: string;
+    bulkGeneratingBack: string;
+    bulkGenerateDoneBack: string;
   };
   learn: {
     aiTutor: string;
