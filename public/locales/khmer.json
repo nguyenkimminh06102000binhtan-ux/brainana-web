@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "បន្ថែមចំណងជើងវគ្គសិក្សាមុនពេលបង្កើតកាត។",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 វិនាទី · ទាំងអស់នៅលើទំព័រមួយ។",

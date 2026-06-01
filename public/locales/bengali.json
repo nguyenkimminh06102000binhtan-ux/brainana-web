@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "কার্ড তৈরি করার আগে একটি কোর্সের শিরোনাম যোগ করুন।",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 সেকেন্ড · সব এক পৃষ্ঠায়",

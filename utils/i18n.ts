@@ -220,6 +220,9 @@ export type Locale = {
     bulkGenerateAudio: string;
     bulkGeneratingAudio: string;
     bulkGenerateDoneAudio: string;
+    distractors: string;
+    distractorPlaceholder: string;
+    addDistractor: string;
   };
   learn: {
     aiTutor: string;

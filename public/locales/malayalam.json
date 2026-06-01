@@ -553,7 +553,10 @@
     "aiImportErrorNoTitle": "കാർഡുകൾ സൃഷ്ടിക്കുന്നതിന് മുമ്പ് ഒരു കോഴ്‌സ് ശീർഷകം ചേർക്കുക.",
     "bulkGenerateAudio": "Auto-generate missing audio",
     "bulkGeneratingAudio": "Generating audio ({done}/{total})…",
-    "bulkGenerateDoneAudio": "Done — {count} audio clips generated"
+    "bulkGenerateDoneAudio": "Done — {count} audio clips generated",
+    "distractors": "Wrong Answers",
+    "distractorPlaceholder": "e.g. Wrong choice",
+    "addDistractor": "+ Add wrong answer"
   },
   "start": {
     "estimatedTime": "~60 സെക്കൻഡ് · എല്ലാം ഒരു പേജിൽ",
