@@ -135,6 +135,7 @@ ${cardList}
 ${questionTypes}
 
 INSTRUCTIONS:
+- For mathematical content: always use Unicode characters — never LaTeX or code-style notation. Use superscripts (², ³, ⁴, ⁿ), subscripts (₀, ₁, ₂), fractions (½, ⅓, ¼), Greek letters (π, α, β, γ, θ, λ, μ, σ, ω, ∆, Σ), and math symbols (×, ÷, ≤, ≥, ≠, ≈, √, ∞, ∫, ∑). Write formulas in readable plain form e.g. 'a = ∆v/∆t', 'E = mc²', 'ω = ∆θ/∆t'. Never use $...$, \\frac, \\text, \\omega, or ^ for exponents.
 - For each card, pick the question format that best fits its content — a formula card suits "Apply it" or "Spot the mistake", a vocab card suits "Riddle" or "Fill in the blank", etc. Surprise the student.
 - After evaluating each student answer, include this hidden marker on its own line exactly as shown:
   %%EVAL:CARD_ID:correct%% or %%EVAL:CARD_ID:incorrect%%

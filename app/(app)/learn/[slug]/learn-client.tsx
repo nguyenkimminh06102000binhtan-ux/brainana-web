@@ -203,6 +203,7 @@ export default function LearnClient({
       const decoder = new TextDecoder();
       let fullText = "";
 
+      // Add placeholder — shows typing animation until stream completes
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "", display: "" },
@@ -212,16 +213,19 @@ export default function LearnClient({
         const { done, value } = await reader.read();
         if (done) break;
         fullText += decoder.decode(value, { stream: true });
-        const display = stripEvals(fullText);
-        setMessages((prev) => {
-          const next = [...prev];
-          const last = next[next.length - 1];
-          if (last?.role === "assistant") {
-            next[next.length - 1] = { ...last, content: fullText, display };
-          }
-          return next;
-        });
+        // Accumulate silently — no per-chunk re-renders
       }
+
+      // Flush the complete message once
+      const display = stripEvals(fullText);
+      setMessages((prev) => {
+        const next = [...prev];
+        const last = next[next.length - 1];
+        if (last?.role === "assistant") {
+          next[next.length - 1] = { ...last, content: fullText, display };
+        }
+        return next;
+      });
 
       const newEvals = parseEvals(fullText);
       if (newEvals.length > 0) {
@@ -679,7 +683,7 @@ export default function LearnClient({
 
   // ── Chat ─────────────────────────────────────────────────────────────────
   return (
-    <div className="mx-auto flex h-[calc(100vh-7rem)] max-w-2xl flex-col px-4 py-4">
+    <div className="mx-auto flex h-[calc(100dvh-4rem)] max-w-2xl flex-col px-4 py-4">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <div>
@@ -710,10 +714,15 @@ export default function LearnClient({
                   : "rounded-bl-sm bg-paper-2 text-ink shadow-hard-sm"
               }`}
             >
-              {m.display
-                ? <ChatMessage role={m.role} content={m.display} />
-                : <span className="animate-pulse text-ink-3">●●●</span>
-              }
+              {m.display ? (
+                <ChatMessage role={m.role} content={m.display} />
+              ) : (
+                <span className="flex items-center gap-1 py-0.5">
+                  <span className="h-2 w-2 rounded-full bg-ink-3 animate-bounce [animation-delay:0ms]" />
+                  <span className="h-2 w-2 rounded-full bg-ink-3 animate-bounce [animation-delay:150ms]" />
+                  <span className="h-2 w-2 rounded-full bg-ink-3 animate-bounce [animation-delay:300ms]" />
+                </span>
+              )}
             </div>
           </div>
         ))}
@@ -750,7 +759,7 @@ export default function LearnClient({
                 disabled={isStreaming}
                 placeholder={labels.inputPlaceholder}
                 rows={1}
-                className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
+                className="flex-1 resize-none rounded-2xl bg-paper-2 px-4 py-3 font-manrope text-[16px] text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink disabled:opacity-50"
               />
               <button
                 type="button"

@@ -83,10 +83,10 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
         aria-label={flipped ? "Card back — click to flip back" : "Card front — press Space or click to flip"}
       >
         <div
-          className={`relative min-h-48 w-full rounded-lg bg-paper-2 shadow-hard transition-all duration-300 motion-reduce:duration-0 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
+          className={`grid min-h-52 w-full rounded-lg bg-paper-2 shadow-hard transition-all duration-300 motion-reduce:duration-0 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
         >
           {/* Front */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden]">
+          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden]">
             {card.imageUrl && (
               <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
                 <Image
@@ -98,7 +98,7 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
                 />
               </div>
             )}
-            <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
+            <p className="break-words text-center font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
               {card.frontText}
             </p>
             {showRomanization && card.romanization && (
@@ -109,8 +109,8 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
             </p>
           </div>
           {/* Back */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-            <p className="text-center font-fredoka text-3xl font-[600] text-ink leading-snug">
+          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+            <p className="break-words text-center font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
               {card.backText}
             </p>
           </div>

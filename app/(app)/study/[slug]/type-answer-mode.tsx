@@ -192,7 +192,7 @@ export default function TypeAnswerMode({
             />
           </div>
         )}
-        <p className="font-fredoka text-3xl font-[600] text-ink leading-snug">
+        <p className="break-words font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
           {card.frontText}
         </p>
         {card.frontAudioUrl && (
