@@ -414,7 +414,10 @@
     "configureWordsUntitled": "ส่วนที่ไม่มีชื่อ",
     "quickReview": "ทบทวนด่วน",
     "reviewCards": "ทบทวน ({count})",
-    "learnNewWords": "เรียนใหม่"
+    "learnNewWords": "เรียนใหม่",
+    "duplicateCourse": "ทำสำเนาลงในคลังของฉัน",
+    "duplicating": "กำลังทำสำเนา…",
+    "duplicateUpsell": "ฟีเจอร์ Plus/Pro — อัปเกรดเพื่อทำสำเนา"
   },
   "study": {
     "allSections": "ทุกส่วน",
@@ -617,7 +620,16 @@
     "quotaRanOut": "โควต้าตัวละครหมด — ประมวลผลการ์ด {done} จาก {total} แล้ว",
     "lockedFeature": "มีอยู่ใน Plus & Pro",
     "publicDesc": "ใครๆ ก็สามารถค้นหาและศึกษาหลักสูตรนี้ได้",
-    "privateDesc": "เฉพาะคุณและสมาชิกที่ได้รับเชิญเท่านั้น"
+    "privateDesc": "เฉพาะคุณและสมาชิกที่ได้รับเชิญเท่านั้น",
+    "publicWarningTitle": "ทำให้คอร์สนี้เป็นสาธารณะ?",
+    "publicWarningSubtitle": "ไม่สามารถยกเลิกได้ กรุณาอ่านก่อนยืนยัน",
+    "publicWarningLock": "การ์ดและส่วนที่มีอยู่จะถูกล็อคอย่างถาวร — คุณสามารถเพิ่มเนื้อหาใหม่ได้แต่ไม่สามารถแก้ไขหรือลบการ์ดที่มีอยู่",
+    "publicWarningNoDelete": "คอร์สนี้ไม่สามารถลบได้หลังจากเป็นสาธารณะ",
+    "publicWarningVisible": "คอร์สจะมองเห็นได้และเรียนรู้ได้สำหรับทุกคน",
+    "publicWarningConfirm": "ใช่ ทำให้เป็นสาธารณะ",
+    "publicWarningBack": "กลับ",
+    "cardLockedBadge": "ล็อค",
+    "publicWarningIrreversible": "เมื่อเป็นสาธารณะแล้ว คอร์สนี้จะไม่สามารถทำให้เป็นส่วนตัวอีกได้"
   },
   "start": {
     "estimatedTime": "~60 วินาที · ทั้งหมดในหน้าเดียว",

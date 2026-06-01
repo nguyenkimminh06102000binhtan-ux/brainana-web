@@ -414,7 +414,10 @@
     "configureWordsUntitled": "سرلیک پرته برخه",
     "quickReview": "ګړندۍ بیاکتنه",
     "reviewCards": "بیاکتنه ({count})",
-    "learnNewWords": "نوې زده کړه"
+    "learnNewWords": "نوې زده کړه",
+    "duplicateCourse": "زما کتابتون ته کاپي کړئ",
+    "duplicating": "کاپي کیږي…",
+    "duplicateUpsell": "د Plus/Pro ځانګړتیا — د کاپي کولو لپاره ارتقا ورکړئ"
   },
   "study": {
     "allSections": "ټولې برخې",
@@ -617,7 +620,16 @@
     "quotaRanOut": "د کرکټر کوټه پای ته ورسیده — د {total} کارتونو څخه {done} پروسس شوي",
     "lockedFeature": "په پلس او پرو کې شتون لري",
     "publicDesc": "هر څوک کولی شي دا کورس ومومي او مطالعه کړي",
-    "privateDesc": "یوازې تاسو او بل شوي غړي"
+    "privateDesc": "یوازې تاسو او بل شوي غړي",
+    "publicWarningTitle": "دا کورس عامه کړئ؟",
+    "publicWarningSubtitle": "دا بیرته نه شي کیدی. مهرباني وکړئ تایید کولو دمخه ولولئ.",
+    "publicWarningLock": "موجوده کارتونه او برخې به تل لپاره قفل شي — تاسو کولای شئ نوی مواد اضافه کړئ مګر نشئ کولای موجوده کارتونه سمول یا لرې کول.",
+    "publicWarningNoDelete": "دا کورس د عامه کیدو وروسته نه شي حذف کیدی.",
+    "publicWarningVisible": "دا کورس د ټولو لپاره لیدل کیدونکی او د زده کړې وړ وي.",
+    "publicWarningConfirm": "هو، عامه کړئ",
+    "publicWarningBack": "شاته",
+    "cardLockedBadge": "قفل",
+    "publicWarningIrreversible": "یوځل چې عامه شو، دا کورس بیا د خصوصي کیدو وړ نه دی."
   },
   "start": {
     "estimatedTime": "~ 60 ثانیې · ټول په یوه پاڼه کې",

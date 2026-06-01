@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Adran heb deitl",
     "quickReview": "Adolygiad cyflym",
     "reviewCards": "Adolygu ({count})",
-    "learnNewWords": "Dysgu newydd"
+    "learnNewWords": "Dysgu newydd",
+    "duplicateCourse": "Dyblygu i fy llyfrgell",
+    "duplicating": "Yn dyblygu…",
+    "duplicateUpsell": "Nodwedd Plus/Pro — uwchraddiwch i ddyblygu"
   },
   "study": {
     "allSections": "Pob adran",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Daeth cwota cymeriad i ben — {done} o gardiau {total} wedi'u prosesu",
     "lockedFeature": "Ar gael ar Plus & Pro",
     "publicDesc": "Gall unrhyw un ddod o hyd i'r cwrs hwn a'i astudio",
-    "privateDesc": "Dim ond chi ac aelodau gwahoddedig"
+    "privateDesc": "Dim ond chi ac aelodau gwahoddedig",
+    "publicWarningTitle": "Gwneud y cwrs hwn yn gyhoeddus?",
+    "publicWarningSubtitle": "Ni ellir dadwneud hyn. Darllenwch cyn cadarnhau.",
+    "publicWarningLock": "Bydd cardiau a adrannau presennol yn cael eu cloi am byth — gallwch ychwanegu cynnwys newydd ond ni allwch olygu na dileu cardiau presennol.",
+    "publicWarningNoDelete": "Ni ellir dileu'r cwrs hwn ar ôl iddo fod yn gyhoeddus.",
+    "publicWarningVisible": "Bydd y cwrs yn weladwy ac yn astudiadwy i unrhyw un.",
+    "publicWarningConfirm": "Ie, gwneud yn gyhoeddus",
+    "publicWarningBack": "Yn ôl",
+    "cardLockedBadge": "Wedi'i gloi",
+    "publicWarningIrreversible": "Unwaith y mae'n gyhoeddus, ni ellir gwneud y cwrs hwn yn breifat eto."
   },
   "start": {
     "estimatedTime": "~60 eiliad · i gyd ar un dudalen",

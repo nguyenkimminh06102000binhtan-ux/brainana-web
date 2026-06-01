@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Apakan laisi akọle",
     "quickReview": "Atunyẹwo iyara",
     "reviewCards": "Tunwo ({count})",
-    "learnNewWords": "Kọ tuntun"
+    "learnNewWords": "Kọ tuntun",
+    "duplicateCourse": "Ṣe ẹdà si ile-ikawe mi",
+    "duplicating": "Ṣiṣe ẹdà…",
+    "duplicateUpsell": "Ẹya Plus/Pro — gba ìgbésókè lati ṣe ẹdà"
   },
   "study": {
     "allSections": "Gbogbo awọn apakan",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Awọn ipin ohun kikọ ti pari - {done} ti awọn kaadi {total} ti ni ilọsiwaju",
     "lockedFeature": "Wa lori Plus & Pro",
     "publicDesc": "Ẹnikẹni le wa ati kọ ẹkọ yii",
-    "privateDesc": "Iwọ nikan ati awọn ọmọ ẹgbẹ ti a pe"
+    "privateDesc": "Iwọ nikan ati awọn ọmọ ẹgbẹ ti a pe",
+    "publicWarningTitle": "Ṣe ẹkọ yii ni gbangba?",
+    "publicWarningSubtitle": "Eyi ko le ṣe atunse. Jọwọ ka ṣaaju ki o to jẹrisi.",
+    "publicWarningLock": "Awọn kaadi ati awọn apakan ti o wa tẹlẹ yoo ti titiipa ni aibikita — o le ṣafikun akoonu tuntun ṣugbọn o ko le ṣatunkọ tabi pa awọn kaadi ti o wa tẹlẹ.",
+    "publicWarningNoDelete": "Ẹkọ yii ko le parun lẹhin ti o ba jẹ gbangba.",
+    "publicWarningVisible": "Ẹkọ yii yoo han ati pe ẹnikẹni le kọ.",
+    "publicWarningConfirm": "Bẹẹni, jẹ ki o jẹ gbangba",
+    "publicWarningBack": "Pada",
+    "cardLockedBadge": "Ti titiipa",
+    "publicWarningIrreversible": "Ni kete ti o ba jẹ gbangba, ẹkọ yii ko le jẹ aṣiri mọ."
   },
   "start": {
     "estimatedTime": "~ 60 iṣẹju-aaya · gbogbo rẹ ni oju-iwe kan",

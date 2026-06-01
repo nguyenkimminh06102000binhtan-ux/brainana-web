@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Skyrius be pavadinimo",
     "quickReview": "Greitas kartojimas",
     "reviewCards": "Kartoti ({count})",
-    "learnNewWords": "Mokytis naujų"
+    "learnNewWords": "Mokytis naujų",
+    "duplicateCourse": "Kopijuoti į mano biblioteką",
+    "duplicating": "Kopijuojama…",
+    "duplicateUpsell": "Plus/Pro funkcija — atnaujinkite kopijavimui"
   },
   "study": {
     "allSections": "Visi skyriai",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Išnaudota simbolių kvota – apdorota {done} iš {total} kortelių",
     "lockedFeature": "Galima „Plus & Pro“.",
     "publicDesc": "Kiekvienas gali rasti ir studijuoti šį kursą",
-    "privateDesc": "Tik jūs ir pakviesti nariai"
+    "privateDesc": "Tik jūs ir pakviesti nariai",
+    "publicWarningTitle": "Padaryti šį kursą viešą?",
+    "publicWarningSubtitle": "To negalima atšaukti. Prašome perskaityti prieš patvirtinant.",
+    "publicWarningLock": "Esamos kortelės ir skyriai bus užrakinti visam laikui — galite pridėti naują turinį, bet negalite redaguoti ar ištrinti esamų kortelių.",
+    "publicWarningNoDelete": "Šio kurso negalima ištrinti po jo paskelbimo.",
+    "publicWarningVisible": "Kursas bus matomas ir mokomas visiems.",
+    "publicWarningConfirm": "Taip, padaryti viešą",
+    "publicWarningBack": "Atgal",
+    "cardLockedBadge": "Užrakinta",
+    "publicWarningIrreversible": "Kai jis tampa viešas, šio kurso nebegalima vėl padaryti privataus."
   },
   "start": {
     "estimatedTime": "~60 sek · viskas viename puslapyje",

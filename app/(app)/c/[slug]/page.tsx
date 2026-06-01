@@ -9,6 +9,7 @@ import FollowButton from "./follow-button";
 import ShareButton from "./share-button";
 import DiscussionThread from "./discussion-thread";
 import { toggleEnroll } from "./actions";
+import DuplicateButton from "./duplicate-button";
 
 function formatCount(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -66,6 +67,7 @@ export default async function CourseDetailPage({
     { data: ignoredProgressRows },
     { count: seenCount },
     { count: dueCount },
+    { data: subData },
     topMems,
   ] = await Promise.all([
     supabase.from("sections").select("id, title, position, items(id, front_text, back_text, position)").eq("course_id", course.id).order("position"),
@@ -79,6 +81,7 @@ export default async function CourseDetailPage({
     supabase.from("item_progress").select("item_id").eq("user_id", user.id).eq("course_id", course.id).eq("ignored", true),
     supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false),
     supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false).lt("next_review_at", dueCutoff),
+    supabase.from("user_subscriptions").select("plan").eq("user_id", user.id).single(),
     (async (): Promise<TopMem[]> => {
       const { data: itemRows } = await supabase.from("items").select("id").eq("course_id", course.id);
       const ids = (itemRows ?? []).map((r) => r.id as string);
@@ -116,6 +119,8 @@ export default async function CourseDetailPage({
 
   const isEnrolled = Boolean(enrollmentData);
   const isFollowing = Boolean(followData);
+  const userPlan = (subData?.plan as string | null) ?? "free";
+  const canDuplicate = ["plus", "pro"].includes(userPlan);
   const hasStarted = (seenCount ?? 0) > 0;
   const reviewDue = dueCount ?? 0;
   const totalNonIgnored = configSections.flatMap((s) => s.cards.filter((c) => !c.ignored)).length;
@@ -234,6 +239,14 @@ export default async function CourseDetailPage({
                   >
                     {loc.learn.aiTutor}
                   </Link>
+
+                  {!isOwner && course.visibility === "public" && (
+                    <DuplicateButton
+                      courseId={course.id}
+                      canDuplicate={canDuplicate}
+                      labels={{ duplicateCourse: cl.duplicateCourse, duplicating: cl.duplicating, duplicateUpsell: cl.duplicateUpsell }}
+                    />
+                  )}
 
                   {!isOwner && (
                     <form action={toggleEnroll}>

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sekce bez názvu",
     "quickReview": "Rychlé opakování",
     "reviewCards": "Opakovat ({count})",
-    "learnNewWords": "Učit nové"
+    "learnNewWords": "Učit nové",
+    "duplicateCourse": "Duplikovat do mé knihovny",
+    "duplicating": "Duplikování…",
+    "duplicateUpsell": "Funkce Plus/Pro — upgradujte pro duplikování"
   },
   "study": {
     "allSections": "Všechny sekce",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kvóta znaků vyčerpána — {done} z {total} karet zpracováno",
     "lockedFeature": "Dostupné v plánech Plus a Pro",
     "publicDesc": "Kdokoliv může najít a studovat tento kurz",
-    "privateDesc": "Pouze vy a pozvaní členové"
+    "privateDesc": "Pouze vy a pozvaní členové",
+    "publicWarningTitle": "Zveřejnit tento kurz?",
+    "publicWarningSubtitle": "Toto nelze vrátit. Před potvrzením si přečtěte.",
+    "publicWarningLock": "Existující karty a sekce budou trvale uzamčeny — můžete přidávat nový obsah, ale nemůžete upravovat ani mazat existující karty.",
+    "publicWarningNoDelete": "Tento kurz nelze po zveřejnění smazat.",
+    "publicWarningVisible": "Kurz bude viditelný a studovatelný pro každého.",
+    "publicWarningConfirm": "Ano, zveřejnit",
+    "publicWarningBack": "Zpět",
+    "cardLockedBadge": "Uzamčeno",
+    "publicWarningIrreversible": "Po zveřejnění nelze tento kurz znovu nastavit jako soukromý."
   },
   "start": {
     "estimatedTime": "~60 sekund · vše na jedné stránce",

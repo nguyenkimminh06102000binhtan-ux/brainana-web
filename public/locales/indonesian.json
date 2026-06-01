@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Bagian tanpa judul",
     "quickReview": "Ulasan cepat",
     "reviewCards": "Ulang ({count})",
-    "learnNewWords": "Belajar baru"
+    "learnNewWords": "Belajar baru",
+    "duplicateCourse": "Duplikasi ke perpustakaan saya",
+    "duplicating": "Menduplikasi…",
+    "duplicateUpsell": "Fitur Plus/Pro — upgrade untuk menduplikasi"
   },
   "study": {
     "allSections": "Semua bagian",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kuota karakter habis — {done} dari {total} kartu diproses",
     "lockedFeature": "Tersedia di Plus & Pro",
     "publicDesc": "Siapa pun dapat menemukan dan mempelajari kursus ini",
-    "privateDesc": "Hanya Anda dan anggota yang diundang"
+    "privateDesc": "Hanya Anda dan anggota yang diundang",
+    "publicWarningTitle": "Jadikan kursus ini publik?",
+    "publicWarningSubtitle": "Ini tidak bisa dibatalkan. Harap baca sebelum mengonfirmasi.",
+    "publicWarningLock": "Kartu dan bagian yang ada akan dikunci secara permanen — Anda dapat menambah konten baru tetapi tidak dapat mengedit atau menghapus kartu yang ada.",
+    "publicWarningNoDelete": "Kursus ini tidak dapat dihapus setelah menjadi publik.",
+    "publicWarningVisible": "Kursus akan terlihat dan dapat dipelajari oleh siapa saja.",
+    "publicWarningConfirm": "Ya, jadikan publik",
+    "publicWarningBack": "Kembali",
+    "cardLockedBadge": "Terkunci",
+    "publicWarningIrreversible": "Setelah menjadi publik, kursus ini tidak dapat dijadikan privat lagi."
   },
   "start": {
     "estimatedTime": "~60 detik · semuanya dalam satu halaman",

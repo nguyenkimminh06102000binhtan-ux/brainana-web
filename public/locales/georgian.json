@@ -414,7 +414,10 @@
     "configureWordsUntitled": "სათაურის გარეშე სექცია",
     "quickReview": "სწრაფი გამეორება",
     "reviewCards": "გამეორება ({count})",
-    "learnNewWords": "ახლის სწავლა"
+    "learnNewWords": "ახლის სწავლა",
+    "duplicateCourse": "ჩემს ბიბლიოთეკაში დუბლირება",
+    "duplicating": "დუბლირება…",
+    "duplicateUpsell": "Plus/Pro ფუნქცია — განაახლეთ დუბლირებისთვის"
   },
   "study": {
     "allSections": "ყველა განყოფილება",
@@ -617,7 +620,16 @@
     "quotaRanOut": "სიმბოლოების ლიმიტი ამოიწურა — დამუშავებულია {done} ბარათი {total}-დან",
     "lockedFeature": "ხელმისაწვდომია Plus და Pro პაკეტებზე",
     "publicDesc": "ყველას შეუძლია იპოვოს და ისწავლოს ეს კურსი",
-    "privateDesc": "მხოლოდ თქვენ და მოწვეულ წევრებს"
+    "privateDesc": "მხოლოდ თქვენ და მოწვეულ წევრებს",
+    "publicWarningTitle": "გასაჯაროვდეს ეს კურსი?",
+    "publicWarningSubtitle": "ეს შეუქცევადია. გთხოვთ, წაიკითხეთ დადასტურებამდე.",
+    "publicWarningLock": "არსებული ბარათები და სექციები სამუდამოდ დაიბლოკება — შეგიძლიათ ახალი კონტენტის დამატება, მაგრამ ვერ დაარედაქტირებთ ან წაშლით არსებულ ბარათებს.",
+    "publicWarningNoDelete": "ეს კურსი ვერ წაიშლება გასაჯაროვდება.",
+    "publicWarningVisible": "კურსი ნებისმიერი ადამიანისთვის ხელმისაწვდომი იქნება.",
+    "publicWarningConfirm": "დიახ, გავასაჯაროვდო",
+    "publicWarningBack": "უკან",
+    "cardLockedBadge": "დაბლოკილი",
+    "publicWarningIrreversible": "გასაჯაროვდება — ამ კურსს ვეღარ დაბრუნებთ კერძო სტატუსში."
   },
   "start": {
     "estimatedTime": "~60 წმ · ყველაფერი ერთ გვერდზე",

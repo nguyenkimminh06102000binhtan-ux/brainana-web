@@ -414,7 +414,10 @@
     "configureWordsUntitled": "શીર્ષક વગરનો વિભાગ",
     "quickReview": "ઝડપી સમીક્ષા",
     "reviewCards": "સમીક્ષા ({count})",
-    "learnNewWords": "નવું શીખો"
+    "learnNewWords": "નવું શીખો",
+    "duplicateCourse": "મારી લાઇબ્રેરીમાં ડુપ્લિકેટ કરો",
+    "duplicating": "ડુપ્લિકેટ થઈ રહ્યું છે…",
+    "duplicateUpsell": "Plus/Pro સુવિધા — ડુપ્લિકેટ કરવા અપગ્રેડ કરો"
   },
   "study": {
     "allSections": "બધા વિભાગો",
@@ -617,7 +620,16 @@
     "quotaRanOut": "અક્ષર ક્વોટા પૂરો થયો — {done} માંથી {total} કાર્ડ્સ પ્રોસેસ થયા",
     "lockedFeature": "પ્લસ અને પ્રો પર ઉપલબ્ધ",
     "publicDesc": "કોઈપણ આ કોર્સ શોધી અને અભ્યાસ કરી શકે છે",
-    "privateDesc": "માત્ર તમે અને આમંત્રિત સભ્યો"
+    "privateDesc": "માત્ર તમે અને આમંત્રિત સભ્યો",
+    "publicWarningTitle": "આ કોર્સ જાહેર કરીએ?",
+    "publicWarningSubtitle": "આ પૂર્વાવસ્થામાં ફેરવી શકાશે નહીં. કૃપા કરીને પુષ્ટિ કરતા પહેલા વાંચો.",
+    "publicWarningLock": "હાલના કાર્ડ અને વિભાગો કાયમ માટે લૉક થઈ જશે — તમે નવો કન્ટેન્ટ ઉમેરી શકો છો પરંતુ હાલના કાર્ડ સંપાદિત અથવા કાઢી શકો નહીં.",
+    "publicWarningNoDelete": "આ કોર્સ જાહેર થઈ ગયા પછી ડિલીટ કરી શકાશે નહીં.",
+    "publicWarningVisible": "કોર્સ કોઈ પણ માટે દૃશ્યમાન અને શીખવા યોગ્ય બનશે.",
+    "publicWarningConfirm": "હા, જાહેર કરો",
+    "publicWarningBack": "પાછા",
+    "cardLockedBadge": "લૉક",
+    "publicWarningIrreversible": "એકવાર જાહેર થઈ ગયા પછી, આ કોર્સ ફરીથી ખાનગી કરી શકાતો નથી."
   },
   "start": {
     "estimatedTime": "~60 સેકન્ડ · બધા એક પૃષ્ઠ પર",

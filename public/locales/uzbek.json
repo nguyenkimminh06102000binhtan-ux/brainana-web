@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sarlavhasiz bo'lim",
     "quickReview": "Tezkor takrorlash",
     "reviewCards": "Takrorlash ({count})",
-    "learnNewWords": "Yangi o'rganish"
+    "learnNewWords": "Yangi o'rganish",
+    "duplicateCourse": "Kutubxonamga nusxa olish",
+    "duplicating": "Nusxa olinmoqda…",
+    "duplicateUpsell": "Plus/Pro xususiyati — nusxa olish uchun yangilang"
   },
   "study": {
     "allSections": "Barcha bo'limlar",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Belgilar kvotasi tugadi — {total} kartadan {done} tasi qayta ishlandi",
     "lockedFeature": "Plus & Pro-da mavjud",
     "publicDesc": "Har kim bu kursni topishi va o'rganishi mumkin",
-    "privateDesc": "Faqat siz va taklif qilingan aʼzolar"
+    "privateDesc": "Faqat siz va taklif qilingan aʼzolar",
+    "publicWarningTitle": "Bu kursni ommaviy qilasizmi?",
+    "publicWarningSubtitle": "Bu qaytarib bo'lmaydi. Tasdiqlashdan oldin o'qing.",
+    "publicWarningLock": "Mavjud kartalar va bo'limlar abadiy qulflanadi — yangi kontent qo'sha olasiz, ammo mavjud kartalarni tahrirlash yoki o'chirish mumkin emas.",
+    "publicWarningNoDelete": "Bu kurs ommaviy bo'lgandan keyin o'chirib bo'lmaydi.",
+    "publicWarningVisible": "Kurs hamma uchun ko'rinadigan va o'rganiladigan bo'ladi.",
+    "publicWarningConfirm": "Ha, ommaviy qiling",
+    "publicWarningBack": "Orqaga",
+    "cardLockedBadge": "Qulflangan",
+    "publicWarningIrreversible": "Ommaviy bo'lgandan keyin bu kursni yana shaxsiy qilib bo'lmaydi."
   },
   "start": {
     "estimatedTime": "~60 soniya · hammasi bitta sahifada",

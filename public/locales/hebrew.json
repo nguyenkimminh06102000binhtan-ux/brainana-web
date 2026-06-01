@@ -414,7 +414,10 @@
     "configureWordsUntitled": "קטע ללא כותרת",
     "quickReview": "סקירה מהירה",
     "reviewCards": "סקירה ({count})",
-    "learnNewWords": "למד חדש"
+    "learnNewWords": "למד חדש",
+    "duplicateCourse": "שכפל לספריה שלי",
+    "duplicating": "משכפל…",
+    "duplicateUpsell": "תכונת Plus/Pro — שדרג לשכפול"
   },
   "study": {
     "allSections": "כל הסעיפים",
@@ -617,7 +620,16 @@
     "quotaRanOut": "מכסת התווים הסתיימה — {done} מתוך {total} כרטיסים עובדו",
     "lockedFeature": "זמין ב-Plus & Pro",
     "publicDesc": "כל אחד יכול למצוא וללמוד את הקורס הזה",
-    "privateDesc": "רק אתה וחברים שהוזמנו"
+    "privateDesc": "רק אתה וחברים שהוזמנו",
+    "publicWarningTitle": "לפרסם קורס זה?",
+    "publicWarningSubtitle": "לא ניתן לבטל פעולה זו. אנא קראו לפני האישור.",
+    "publicWarningLock": "הכרטיסים והחלקים הקיימים יינעלו לצמיתות — ניתן להוסיף תוכן חדש אך לא לערוך או למחוק כרטיסים קיימים.",
+    "publicWarningNoDelete": "לא ניתן למחוק קורס זה לאחר פרסומו.",
+    "publicWarningVisible": "הקורס יהיה גלוי ונגיש ללמידה לכולם.",
+    "publicWarningConfirm": "כן, לפרסם",
+    "publicWarningBack": "חזרה",
+    "cardLockedBadge": "נעול",
+    "publicWarningIrreversible": "לאחר פרסומו, לא ניתן להפוך קורס זה לפרטי שוב."
   },
   "start": {
     "estimatedTime": "~60 שניות · הכל בעמוד אחד",

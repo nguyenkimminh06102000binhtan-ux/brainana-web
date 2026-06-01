@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Walang pamagat na seksyon",
     "quickReview": "Mabilis na review",
     "reviewCards": "I-review ({count})",
-    "learnNewWords": "Matuto ng bago"
+    "learnNewWords": "Matuto ng bago",
+    "duplicateCourse": "I-duplicate sa aking library",
+    "duplicating": "Dina-duplicate…",
+    "duplicateUpsell": "Plus/Pro feature — i-upgrade para mag-duplicate"
   },
   "study": {
     "allSections": "Lahat ng mga seksyon",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Nag-expire na ang character quota — {done} sa {total} mga card ang naproseso",
     "lockedFeature": "Available sa Plus at Pro",
     "publicDesc": "Maaaring mahanap at pag-aralan ng kahit sino ang kursong ito",
-    "privateDesc": "Ikaw lamang at ang mga inimbita"
+    "privateDesc": "Ikaw lamang at ang mga inimbita",
+    "publicWarningTitle": "Gawing pampubliko ang kursong ito?",
+    "publicWarningSubtitle": "Hindi ito maaaring i-undo. Pakibasa bago kumpirmahin.",
+    "publicWarningLock": "Ang mga kasalukuyang card at seksyon ay permanenteng mala-lock — maaari kang magdagdag ng bagong nilalaman ngunit hindi mo maaaring i-edit o tanggalin ang mga kasalukuyang card.",
+    "publicWarningNoDelete": "Hindi maaaring tanggalin ang kursong ito kapag naging pampubliko na.",
+    "publicWarningVisible": "Ang kurso ay magiging visible at maaaring pag-aralan ng sinuman.",
+    "publicWarningConfirm": "Oo, gawing pampubliko",
+    "publicWarningBack": "Bumalik",
+    "cardLockedBadge": "Naka-lock",
+    "publicWarningIrreversible": "Kapag naging pampubliko na, hindi na maaaring gawing pribado muli ang kursong ito."
   },
   "start": {
     "estimatedTime": "~60 segundo · lahat sa isang pahina",

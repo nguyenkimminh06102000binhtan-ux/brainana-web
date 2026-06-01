@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Wāhanga kore ingoa",
     "quickReview": "Arotake tere",
     "reviewCards": "Arotake ({count})",
-    "learnNewWords": "Ako hou"
+    "learnNewWords": "Ako hou",
+    "duplicateCourse": "Tārua ki tōku whare pukapuka",
+    "duplicating": "E tārua ana…",
+    "duplicateUpsell": "Āhuatanga Plus/Pro — whakahou ki te tārua"
   },
   "study": {
     "allSections": "Nga waahanga katoa",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kua pau te motunga pūāhua — {done} o {total} kāri i tukatukahia",
     "lockedFeature": "Kei runga i te Plus & Pro",
     "publicDesc": "Ka taea e te tangata te kimi me te ako i tenei akoranga",
-    "privateDesc": "Ko koe anake me nga mema i karangatia"
+    "privateDesc": "Ko koe anake me nga mema i karangatia",
+    "publicWarningTitle": "Whakaaturia tēnei akoranga ki te tūmatanui?",
+    "publicWarningSubtitle": "Kāore e taea te huri. Tēnā koa pānui i mua i te whakaaetanga.",
+    "publicWarningLock": "Ka mau tūāhanga ngā kāri me ngā wāhanga ōrite — ka taea te tāpiri kōrero hou engari kāore e taea te whakatika, whakakore rānei ngā kāri o nāianei.",
+    "publicWarningNoDelete": "Kāore e taea te muku i tēnei akoranga i muri i tōna whakaaturia.",
+    "publicWarningVisible": "Ka kitea ai te akoranga, ka āhei hoki te ako mā te katoa.",
+    "publicWarningConfirm": "Āe, whakaaturia",
+    "publicWarningBack": "Hoki",
+    "cardLockedBadge": "Kua mauhia",
+    "publicWarningIrreversible": "Kia whakaaturia, kāore e taea te huri anō tēnei akoranga hei mea whaiaro."
   },
   "start": {
     "estimatedTime": "~60 hēkona · kei te whārangi kotahi",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "ਸਿਰਲੇਖ ਰਹਿਤ ਭਾਗ",
     "quickReview": "ਤੇਜ਼ ਸਮੀਖਿਆ",
     "reviewCards": "ਸਮੀਖਿਆ ({count})",
-    "learnNewWords": "ਨਵਾਂ ਸਿੱਖੋ"
+    "learnNewWords": "ਨਵਾਂ ਸਿੱਖੋ",
+    "duplicateCourse": "ਮੇਰੀ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਨਕਲ ਕਰੋ",
+    "duplicating": "ਨਕਲ ਹੋ ਰਹੀ ਹੈ…",
+    "duplicateUpsell": "Plus/Pro ਵਿਸ਼ੇਸ਼ਤਾ — ਨਕਲ ਕਰਨ ਲਈ ਅਪਗ੍ਰੇਡ ਕਰੋ"
   },
   "study": {
     "allSections": "ਸਾਰੇ ਭਾਗ",
@@ -617,7 +620,16 @@
     "quotaRanOut": "ਅੱਖਰ ਕੋਟਾ ਖਤਮ ਹੋ ਗਿਆ — {total} ਕਾਰਡਾਂ ਵਿੱਚੋਂ {done} ਦੀ ਪ੍ਰਕਿਰਿਆ ਕੀਤੀ ਗਈ",
     "lockedFeature": "ਪਲੱਸ ਅਤੇ ਪ੍ਰੋ 'ਤੇ ਉਪਲਬਧ ਹੈ",
     "publicDesc": "ਕੋਈ ਵੀ ਇਸ ਕੋਰਸ ਨੂੰ ਲੱਭ ਅਤੇ ਪੜ੍ਹ ਸਕਦਾ ਹੈ",
-    "privateDesc": "ਸਿਰਫ਼ ਤੁਸੀਂ ਅਤੇ ਸੱਦੇ ਗਏ ਮੈਂਬਰ"
+    "privateDesc": "ਸਿਰਫ਼ ਤੁਸੀਂ ਅਤੇ ਸੱਦੇ ਗਏ ਮੈਂਬਰ",
+    "publicWarningTitle": "ਇਸ ਕੋਰਸ ਨੂੰ ਜਨਤਕ ਕਰੋ?",
+    "publicWarningSubtitle": "ਇਹ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ। ਕਿਰਪਾ ਕਰਕੇ ਪੁਸ਼ਟੀ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਪੜ੍ਹੋ।",
+    "publicWarningLock": "ਮੌਜੂਦਾ ਕਾਰਡ ਅਤੇ ਭਾਗ ਸਦਾ ਲਈ ਲਾਕ ਹੋ ਜਾਣਗੇ — ਨਵਾਂ ਕੰਟੈਂਟ ਜੋੜ ਸਕਦੇ ਹੋ ਪਰ ਮੌਜੂਦਾ ਕਾਰਡ ਸੰਪਾਦਿਤ ਜਾਂ ਮਿਟਾ ਨਹੀਂ ਸਕਦੇ।",
+    "publicWarningNoDelete": "ਇਹ ਕੋਰਸ ਜਨਤਕ ਹੋਣ ਤੋਂ ਬਾਅਦ ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।",
+    "publicWarningVisible": "ਕੋਰਸ ਕਿਸੇ ਵੀ ਲਈ ਦਿਖਣਯੋਗ ਅਤੇ ਸਿੱਖਣਯੋਗ ਹੋਵੇਗਾ।",
+    "publicWarningConfirm": "ਹਾਂ, ਜਨਤਕ ਕਰੋ",
+    "publicWarningBack": "ਵਾਪਸ",
+    "cardLockedBadge": "ਲਾਕ",
+    "publicWarningIrreversible": "ਇੱਕ ਵਾਰ ਜਨਤਕ ਹੋਣ ਤੋਂ ਬਾਅਦ, ਇਸ ਕੋਰਸ ਨੂੰ ਦੁਬਾਰਾ ਪ੍ਰਾਈਵੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।"
   },
   "start": {
     "estimatedTime": "~60 ਸਕਿੰਟ · ਸਾਰੇ ਇੱਕ ਪੰਨੇ 'ਤੇ",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sección sen título",
     "quickReview": "Revisión rápida",
     "reviewCards": "Revisar ({count})",
-    "learnNewWords": "Aprender novo"
+    "learnNewWords": "Aprender novo",
+    "duplicateCourse": "Duplicar na miña biblioteca",
+    "duplicating": "Duplicando…",
+    "duplicateUpsell": "Función Plus/Pro — actualiza para duplicar"
   },
   "study": {
     "allSections": "Todas as seccións",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Cuota de caracteres agotada — {done} de {total} tarxetas procesadas",
     "lockedFeature": "Dispoñible en Plus e Pro",
     "publicDesc": "Calquera pode atopar e estudar este curso",
-    "privateDesc": "Solo ti e os membros convidados"
+    "privateDesc": "Solo ti e os membros convidados",
+    "publicWarningTitle": "Facer público este curso?",
+    "publicWarningSubtitle": "Isto non se pode desfacer. Por favor, le antes de confirmar.",
+    "publicWarningLock": "As tarxetas e seccións existentes bloquearanse permanentemente — podes engadir novo contido pero non podes editar nin eliminar as tarxetas existentes.",
+    "publicWarningNoDelete": "Este curso non se pode eliminar unha vez que sexa público.",
+    "publicWarningVisible": "O curso será visible e estudable por calquera.",
+    "publicWarningConfirm": "Si, facer público",
+    "publicWarningBack": "Atrás",
+    "cardLockedBadge": "Bloqueado",
+    "publicWarningIrreversible": "Unha vez público, este curso non pode volver ser privado."
   },
   "start": {
     "estimatedTime": "~60 segundos · todo nunha páxina",

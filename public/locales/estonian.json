@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Pealkirjata jaotis",
     "quickReview": "Kiire kordamine",
     "reviewCards": "Korda ({count})",
-    "learnNewWords": "Õpi uut"
+    "learnNewWords": "Õpi uut",
+    "duplicateCourse": "Dubleeri minu kogusse",
+    "duplicating": "Dubleerimine…",
+    "duplicateUpsell": "Plus/Pro funktsioon — uuenda dubleerimiseks"
   },
   "study": {
     "allSections": "Kõik sektsioonid",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Märkide kvoot sai otsa — {done} / {total} kaarti töödeldud",
     "lockedFeature": "Saadaval Plus ja Pro versioonis",
     "publicDesc": "Kõik saavad selle kursuse leida ja õppida",
-    "privateDesc": "Ainult teie ja kutsutud liikmed"
+    "privateDesc": "Ainult teie ja kutsutud liikmed",
+    "publicWarningTitle": "Teha see kursus avalikuks?",
+    "publicWarningSubtitle": "Seda ei saa tagasi võtta. Palun lugege enne kinnitamist.",
+    "publicWarningLock": "Olemasolevad kaardid ja jaotised lukustatakse jäädavalt — saate lisada uut sisu, kuid ei saa olemasolevaid kaarte redigeerida ega kustutada.",
+    "publicWarningNoDelete": "Seda kursust ei saa pärast avalikustamist kustutada.",
+    "publicWarningVisible": "Kursus on kõigile nähtav ja õpitav.",
+    "publicWarningConfirm": "Jah, tee avalikuks",
+    "publicWarningBack": "Tagasi",
+    "cardLockedBadge": "Lukustatud",
+    "publicWarningIrreversible": "Pärast avalikustamist ei saa seda kursust enam privaatseks muuta."
   },
   "start": {
     "estimatedTime": "~60 sek · kõik ühel lehel",

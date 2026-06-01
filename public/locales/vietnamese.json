@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Phần không có tiêu đề",
     "quickReview": "Ôn tập nhanh",
     "reviewCards": "Ôn tập ({count})",
-    "learnNewWords": "Học mới"
+    "learnNewWords": "Học mới",
+    "duplicateCourse": "Nhân bản vào thư viện của tôi",
+    "duplicating": "Đang nhân bản…",
+    "duplicateUpsell": "Tính năng Plus/Pro — nâng cấp để nhân bản"
   },
   "study": {
     "allSections": "Tất cả chương",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Đã hết hạn ngạch ký tự — {done} trong số {total} thẻ được xử lý",
     "lockedFeature": "Có sẵn trên Plus & Pro",
     "publicDesc": "Bất cứ ai cũng có thể tìm và học khóa học này",
-    "privateDesc": "Chỉ có bạn và các thành viên được mời"
+    "privateDesc": "Chỉ có bạn và các thành viên được mời",
+    "publicWarningTitle": "Công khai khóa học này?",
+    "publicWarningSubtitle": "Điều này không thể hoàn tác. Vui lòng đọc trước khi xác nhận.",
+    "publicWarningLock": "Các thẻ và phần hiện có sẽ bị khóa vĩnh viễn — bạn có thể thêm nội dung mới nhưng không thể chỉnh sửa hoặc xóa các thẻ hiện có.",
+    "publicWarningNoDelete": "Khóa học này không thể xóa sau khi công khai.",
+    "publicWarningVisible": "Khóa học sẽ hiển thị và có thể học bởi bất kỳ ai.",
+    "publicWarningConfirm": "Có, công khai",
+    "publicWarningBack": "Quay lại",
+    "cardLockedBadge": "Đã khóa",
+    "publicWarningIrreversible": "Một khi đã công khai, khóa học này không thể được đặt lại thành riêng tư."
   },
   "start": {
     "estimatedTime": "~60 giây · tất cả trên một trang",

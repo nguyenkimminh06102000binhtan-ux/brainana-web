@@ -414,7 +414,10 @@
     "configureWordsUntitled": "قسم بلا عنوان",
     "quickReview": "مراجعة سريعة",
     "reviewCards": "مراجعة ({count})",
-    "learnNewWords": "تعلم جديد"
+    "learnNewWords": "تعلم جديد",
+    "duplicateCourse": "نسخ إلى مكتبتي",
+    "duplicating": "جارٍ النسخ…",
+    "duplicateUpsell": "ميزة Plus/Pro — رقّ خطتك للنسخ"
   },
   "study": {
     "allSections": "جميع الأقسام",
@@ -617,7 +620,16 @@
     "quotaRanOut": "تم استنفاد حصة الأحرف — تم معالجة {done} من {total} بطاقة",
     "lockedFeature": "متاح في خطط بلس وبرو",
     "publicDesc": "يمكن لأي شخص العثور على هذه الدورة ودراستها",
-    "privateDesc": "أنت والأعضاء المدعوون فقط"
+    "privateDesc": "أنت والأعضاء المدعوون فقط",
+    "publicWarningTitle": "هل تريد جعل هذه الدورة عامة؟",
+    "publicWarningSubtitle": "لا يمكن التراجع عن هذا. يرجى القراءة قبل التأكيد.",
+    "publicWarningLock": "ستُقفل البطاقات والأقسام الموجودة بشكل دائم — يمكنك إضافة محتوى جديد لكن لا يمكنك تعديل أو حذف البطاقات الموجودة.",
+    "publicWarningNoDelete": "لا يمكن حذف هذه الدورة بعد نشرها.",
+    "publicWarningVisible": "ستكون الدورة مرئية ويمكن لأي شخص دراستها.",
+    "publicWarningConfirm": "نعم، اجعلها عامة",
+    "publicWarningBack": "رجوع",
+    "cardLockedBadge": "مقفل",
+    "publicWarningIrreversible": "بمجرد نشره، لا يمكن جعل هذه الدورة خاصة مرة أخرى."
   },
   "start": {
     "estimatedTime": "~60 ثانية · كل ذلك في صفحة واحدة",

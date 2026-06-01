@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Nafnlaus hluti",
     "quickReview": "Skjót endurskoðun",
     "reviewCards": "Endurskoða ({count})",
-    "learnNewWords": "Læra nýtt"
+    "learnNewWords": "Læra nýtt",
+    "duplicateCourse": "Tvöfalda í mitt bókasafn",
+    "duplicating": "Tvöfalda…",
+    "duplicateUpsell": "Plus/Pro eiginleiki — uppfærðu til að tvöfalda"
   },
   "study": {
     "allSections": "Allir kaflar",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Stafkvóti endaði — {done} af {total} kortum unnin",
     "lockedFeature": "Tiltækt á Plus og Pro",
     "publicDesc": "Hver sem er getur fundið og læst þessu námskeiði",
-    "privateDesc": "Bara þú og boðaðir meðlimir"
+    "privateDesc": "Bara þú og boðaðir meðlimir",
+    "publicWarningTitle": "Gera þetta námskeið opinbert?",
+    "publicWarningSubtitle": "Þetta er óafturkræft. Vinsamlegast lestu áður en þú staðfestir.",
+    "publicWarningLock": "Núverandi spjöld og hlutar verða varanlega læst — þú getur bætt við nýju efni en getur ekki breytt eða eytt núverandi spjöldum.",
+    "publicWarningNoDelete": "Þetta námskeið er ekki hægt að eyða þegar það er opinbert.",
+    "publicWarningVisible": "Námskeiðið verður sýnilegt og lærdómsríkt fyrir alla.",
+    "publicWarningConfirm": "Já, gera opinbert",
+    "publicWarningBack": "Til baka",
+    "cardLockedBadge": "Læst",
+    "publicWarningIrreversible": "Þegar það er opinbert, er ekki hægt að gera þetta námskeið einka aftur."
   },
   "start": {
     "estimatedTime": "~60 sek · allt á einni síðu",

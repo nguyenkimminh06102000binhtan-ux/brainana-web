@@ -368,6 +368,9 @@
     "intermediate": "Intermediate",
     "advanced": "Advanced",
     "startLearning": "Start learning →",
+    "duplicateCourse": "Duplicate to my library",
+    "duplicating": "Duplicating…",
+    "duplicateUpsell": "Plus / Pro feature — upgrade to duplicate",
     "quickReview": "Quick review",
     "reviewCards": "Review ({count})",
     "learnNewWords": "Learn new",
@@ -672,7 +675,16 @@
     "quotaRanOut": "Character quota ran out — {done} of {total} cards processed",
     "lockedFeature": "Available on Plus & Pro",
     "publicDesc": "Anyone can find and study this course",
-    "privateDesc": "Only you and invited members"
+    "privateDesc": "Only you and invited members",
+    "publicWarningTitle": "Make this course public?",
+    "publicWarningSubtitle": "This cannot be undone. Please read before confirming.",
+    "publicWarningLock": "Existing cards and sections will be permanently locked — you can add new content but cannot edit or delete existing cards.",
+    "publicWarningNoDelete": "This course cannot be deleted once public.",
+    "publicWarningVisible": "The course will be visible and learnable by anyone.",
+    "publicWarningConfirm": "Yes, make it public",
+    "publicWarningBack": "Back",
+    "publicWarningIrreversible": "Once public, this course cannot be made private again.",
+    "cardLockedBadge": "Locked"
   },
   "mems": {
     "memoryHints": "Memory Hints",

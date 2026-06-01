@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Раздел без заглавие",
     "quickReview": "Бърз преглед",
     "reviewCards": "Преглед ({count})",
-    "learnNewWords": "Учи ново"
+    "learnNewWords": "Учи ново",
+    "duplicateCourse": "Дублирай в моята библиотека",
+    "duplicating": "Дублиране…",
+    "duplicateUpsell": "Функция Plus/Pro — надградете за дублиране"
   },
   "study": {
     "allSections": "Всички раздели",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Квотата на символите се изчерпа — {done} от {total} карти обработени",
     "lockedFeature": "Налично на Plus и Pro",
     "publicDesc": "Всеки може да намери и изучава този курс",
-    "privateDesc": "Само вие и поканени членове"
+    "privateDesc": "Само вие и поканени членове",
+    "publicWarningTitle": "Да направите ли този курс публичен?",
+    "publicWarningSubtitle": "Това не може да бъде отменено. Моля, прочетете преди потвърждение.",
+    "publicWarningLock": "Съществуващите карти и секции ще бъдат постоянно заключени — можете да добавяте ново съдържание, но не можете да редактирате или изтривате съществуващи карти.",
+    "publicWarningNoDelete": "Този курс не може да бъде изтрит след публикуването.",
+    "publicWarningVisible": "Курсът ще бъде видим и достъпен за всеки.",
+    "publicWarningConfirm": "Да, направи го публичен",
+    "publicWarningBack": "Назад",
+    "cardLockedBadge": "Заключено",
+    "publicWarningIrreversible": "След публикуването, този курс не може да бъде направен отново частен."
   },
   "start": {
     "estimatedTime": "~60 сек · всичко на една страница",

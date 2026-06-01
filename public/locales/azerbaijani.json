@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Adsız bölmə",
     "quickReview": "Sürətli təkrar",
     "reviewCards": "Təkrar et ({count})",
-    "learnNewWords": "Yeni öyrən"
+    "learnNewWords": "Yeni öyrən",
+    "duplicateCourse": "Kitabxanama kopyala",
+    "duplicating": "Kopyalanır…",
+    "duplicateUpsell": "Plus/Pro funksiyası — kopyalamaq üçün yüksəldin"
   },
   "study": {
     "allSections": "Bütün bölmələr",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Simvol kvotası tamamlandı — {done} / {total} kart emal olundu",
     "lockedFeature": "Plus və Pro planlarında mövcuddur",
     "publicDesc": "Hər kəs bu kursu tapa və oxuya bilər",
-    "privateDesc": "Yalnız sən və dəvət edilmiş üzvlər"
+    "privateDesc": "Yalnız sən və dəvət edilmiş üzvlər",
+    "publicWarningTitle": "Bu kursu ictimai etmək istəyirsiniz?",
+    "publicWarningSubtitle": "Bu geri qaytarıla bilməz. Zəhmət olmasa, təsdiqləmədən əvvəl oxuyun.",
+    "publicWarningLock": "Mövcud kartlar və bölmələr daimi kilidlənəcək — yeni məzmun əlavə edə bilərsiniz, lakin mövcud kartları redaktə edə və ya silə bilməzsiniz.",
+    "publicWarningNoDelete": "Bu kurs ictimai edildikdən sonra silinə bilməz.",
+    "publicWarningVisible": "Kurs hər kəs üçün görünən və öyrənilə bilən olacaq.",
+    "publicWarningConfirm": "Bəli, ictimai et",
+    "publicWarningBack": "Geri",
+    "cardLockedBadge": "Kilitli",
+    "publicWarningIrreversible": "İctimai edildikdən sonra bu kurs yenidən gizli edilə bilməz."
   },
   "start": {
     "estimatedTime": "~60 saniyə · hamısı bir səhifədə",

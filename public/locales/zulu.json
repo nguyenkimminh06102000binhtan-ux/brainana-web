@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Isigaba esingenisihloko",
     "quickReview": "Ukubuyekeza okusha",
     "reviewCards": "Buyekeza ({count})",
-    "learnNewWords": "Funda okutsha"
+    "learnNewWords": "Funda okutsha",
+    "duplicateCourse": "Phindaphinda kubhulokhi lami",
+    "duplicating": "Iyaphindaphinda…",
+    "duplicateUpsell": "Isici se-Plus/Pro — thola ukuphakanyiswa ukuphindaphinda"
   },
   "study": {
     "allSections": "Zonke izigaba",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Isilinganiso sohlamvu siphelile — {done} kwamakhadi {total} asetshenziwe",
     "lockedFeature": "Itholakala ku-Plus & Pro",
     "publicDesc": "Noma ubani angathola futhi atadishe lesi sifundo",
-    "privateDesc": "Nguwe kuphela namalungu amenyiwe"
+    "privateDesc": "Nguwe kuphela namalungu amenyiwe",
+    "publicWarningTitle": "Yenza lo kosi ube womphakathi?",
+    "publicWarningSubtitle": "Lokhu akukwazi ukuguquliwa. Sicela ufunde ngaphambi kokuqinisekisa.",
+    "publicWarningLock": "Amakhadi nezigaba ezikhona zizovalwa ngokupermanente — ungengeza okusha kodwa awukwazi ukuhlela noma ukususa amakhadi alandelayo.",
+    "publicWarningNoDelete": "Lo kosi awukwazi ukususwa ngemva kokuba womphakathi.",
+    "publicWarningVisible": "Ukosi kuzobonakala futhi kuzofundeka yilowo nalowo.",
+    "publicWarningConfirm": "Yebo, yenza womphakathi",
+    "publicWarningBack": "Emuva",
+    "cardLockedBadge": "Kuvaliwe",
+    "publicWarningIrreversible": "Uma ususesidlalweni, lo kosi awukwazi ukuba wumuntu siqu futhi."
   },
   "start": {
     "estimatedTime": "~60 isekhondi · konke ekhasini elilodwa",

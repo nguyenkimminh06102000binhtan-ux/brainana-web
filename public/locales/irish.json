@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Rannóg gan teideal",
     "quickReview": "Athbhreithniú tapa",
     "reviewCards": "Athbhreithnigh ({count})",
-    "learnNewWords": "Foghlaim nua"
+    "learnNewWords": "Foghlaim nua",
+    "duplicateCourse": "Dúblaigh chuig mo leabharlann",
+    "duplicating": "Dúblú…",
+    "duplicateUpsell": "Gné Plus/Pro — uasghrádaigh le dúblú"
   },
   "study": {
     "allSections": "Gach rannóg",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Roinn charachtair tubaisteach — {done} de {total} cárta próiseáilte",
     "lockedFeature": "Ar fáil ar Plus & Pro",
     "publicDesc": "Is féidir le haon duine an cúrsa seo a aimsiú agus a dhéanamh staidéir",
-    "privateDesc": "Tusa agus baill ionchurtha amháin"
+    "privateDesc": "Tusa agus baill ionchurtha amháin",
+    "publicWarningTitle": "An cúrsa seo a dhéanamh poiblí?",
+    "publicWarningSubtitle": "Ní féidir é seo a chealú. Léigh roimh dhearbhú.",
+    "publicWarningLock": "Cuirfear glas buan ar na cártaí agus na rannóga atá ann — is féidir leat ábhar nua a chur leis ach ní féidir leat cártaí atá ann a chur in eagar nó a scriosadh.",
+    "publicWarningNoDelete": "Ní féidir an cúrsa seo a scriosadh nuair a bhíonn sé poiblí.",
+    "publicWarningVisible": "Beidh an cúrsa infheicthe agus inchleachttha ag aon duine.",
+    "publicWarningConfirm": "Tá, déan poiblí é",
+    "publicWarningBack": "Ar ais",
+    "cardLockedBadge": "Faoi ghlas",
+    "publicWarningIrreversible": "Nuair atá sé poiblí, ní féidir an cúrsa seo a dhéanamh príobháideach arís."
   },
   "start": {
     "estimatedTime": "~60 soicind · ar fad ar aon leathanach amháin",

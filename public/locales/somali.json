@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Qaybta aan cinwaan lahayn",
     "quickReview": "Dib u eegis degdeg ah",
     "reviewCards": "Dib u eeg ({count})",
-    "learnNewWords": "Baro cusub"
+    "learnNewWords": "Baro cusub",
+    "duplicateCourse": "U nuqul gaar maktabadeyda",
+    "duplicating": "Koobiyaynta…",
+    "duplicateUpsell": "Astaamaha Plus/Pro — kor u qaad si aad u nuqul gaarto"
   },
   "study": {
     "allSections": "Dhammaan qaybaha",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kootada xarfaha ayaa dhammaatay - {done} ee {total} kaadhadhka la farsameeyay",
     "lockedFeature": "Laga heli karo Plus & Pro",
     "publicDesc": "Qof kasta ayaa heli kara oo baran kara koorsadan",
-    "privateDesc": "Kaliya adiga iyo xubnaha lagu casuumay"
+    "privateDesc": "Kaliya adiga iyo xubnaha lagu casuumay",
+    "publicWarningTitle": "Koorskaan u dhig dadweyne?",
+    "publicWarningSubtitle": "Tani ma noqon karto. Fadlan akhri ka hor xaqiijinta.",
+    "publicWarningLock": "Kaadhadhka iyo qaybaha jira ayaa si joogto ah u xidmi doona — waxaad ku dari kartaa macluumaad cusub laakiin kuma turi kartid ama ka saari kartid kaadhadhka jira.",
+    "publicWarningNoDelete": "Koorskaan ma tuuran karo marka ay dadweyne noqoto.",
+    "publicWarningVisible": "Koorsadu waxay u muuqan doontaa oo la baran karaa qof kasta.",
+    "publicWarningConfirm": "Haa, u dhig dadweyne",
+    "publicWarningBack": "Dib u noqo",
+    "cardLockedBadge": "Xidhan",
+    "publicWarningIrreversible": "Markay dadweyne noqoto, koorskaan ma noqon karo mid gaarka ah mar kale."
   },
   "start": {
     "estimatedTime": "~60 ilbiriqsi · dhamaantood hal bog",

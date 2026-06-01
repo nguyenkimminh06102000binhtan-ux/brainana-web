@@ -414,7 +414,10 @@
     "configureWordsUntitled": "නාමයක් නැති කොටස",
     "quickReview": "ඉක්මන් සමාලෝචනය",
     "reviewCards": "සමාලෝචනය ({count})",
-    "learnNewWords": "නව ඉගෙනීම"
+    "learnNewWords": "නව ඉගෙනීම",
+    "duplicateCourse": "මගේ පුස්තකාලයට නකල් කරන්න",
+    "duplicating": "නකල් කෙරෙමින්…",
+    "duplicateUpsell": "Plus/Pro විශේෂාංගය — නකල් කිරීමට උත්‍සාහ කරන්න"
   },
   "study": {
     "allSections": "සියලුම අංශ",
@@ -617,7 +620,16 @@
     "quotaRanOut": "අක්ෂර කෝටාව අවසන් විය — {total} කාඩ්පත් වලින් {done} සකසන ලදී",
     "lockedFeature": "Plus & Pro මත තිබේ",
     "publicDesc": "ඕනෑම කෙනෙකුට මෙම පාඨමාලාව සොයාගෙන ඉගෙන ගත හැකිය",
-    "privateDesc": "ඔබ සහ ආරාධිත සාමාජිකයින් පමණි"
+    "privateDesc": "ඔබ සහ ආරාධිත සාමාජිකයින් පමණි",
+    "publicWarningTitle": "මෙම පාඨමාලාව පොදු කරන්නද?",
+    "publicWarningSubtitle": "මෙය ආපසු හැරවිය නොහැක. කරුණාකර තහවුරු කිරීමට පෙර කියවන්න.",
+    "publicWarningLock": "පවතින කාඩ්පත් සහ අංශ ස්ථිරව අගුළු දමනු ලැබේ — නව අන්තර්ගතය එකතු කළ හැකිය, නමුත් පවතින කාඩ්පත් සංස්කරණය කිරීම හෝ ඉවත් කිරීම නොකළ හැකිය.",
+    "publicWarningNoDelete": "මෙම පාඨමාලාව පොදු වූ පසු ඉවත් කළ නොහැක.",
+    "publicWarningVisible": "ඕනෑම කෙනෙකුට පාඨමාලාව දැකිය හැකි අතර ඉගෙනිය හැකිය.",
+    "publicWarningConfirm": "ඔව්, පොදු කරන්න",
+    "publicWarningBack": "ආපසු",
+    "cardLockedBadge": "අගුළු දමා ඇත",
+    "publicWarningIrreversible": "එක් වරක් පොදු වූ විට, මෙම පාඨමාලාව නැවත පෞද්ගලික කළ නොහැක."
   },
   "start": {
     "estimatedTime": "~60 තත්පර · සියල්ල එක පිටුවක",

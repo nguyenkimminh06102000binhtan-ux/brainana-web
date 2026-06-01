@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { PRIVATE_BUCKET, PUBLIC_BUCKET, parseStoragePath, buildStoragePath } from "@/utils/storage";
 
 export type UpdateCourseState = { error: string } | null;
 
@@ -23,6 +24,42 @@ type SectionPayload = {
   description: string;
   items: ItemPayload[];
 };
+
+// Copies one object from private-course-assets to public-course-assets,
+// deletes the source, and returns the new storage path.
+// Returns the original path unchanged on any error so the caller can continue.
+async function migrateAssetToPublic(
+  supabase: ReturnType<typeof createClient>,
+  storagePath: string,
+): Promise<string> {
+  const parsed = parseStoragePath(storagePath);
+  if (!parsed || parsed.bucket !== PRIVATE_BUCKET) return storagePath;
+
+  const { objectPath } = parsed;
+
+  const { data: blob, error: downloadErr } = await supabase.storage
+    .from(PRIVATE_BUCKET)
+    .download(objectPath);
+
+  if (downloadErr || !blob) {
+    console.error(`[asset-migration] download failed for ${objectPath}:`, downloadErr?.message);
+    return storagePath;
+  }
+
+  const { data: uploaded, error: uploadErr } = await supabase.storage
+    .from(PUBLIC_BUCKET)
+    .upload(objectPath, blob, { upsert: true });
+
+  if (uploadErr || !uploaded) {
+    console.error(`[asset-migration] upload failed for ${objectPath}:`, uploadErr?.message);
+    return storagePath;
+  }
+
+  // Best-effort delete from private bucket — don't fail if this errors
+  await supabase.storage.from(PRIVATE_BUCKET).remove([objectPath]);
+
+  return buildStoragePath(PUBLIC_BUCKET, uploaded.path);
+}
 
 export async function updateCourse(
   _prev: UpdateCourseState,
@@ -54,7 +91,23 @@ export async function updateCourse(
     return { error: "Invalid form data. Please refresh and try again." };
   }
 
-  if (!title) return { error: "Course title is required." };
+  // Verify ownership and fetch current visibility first
+  const { data: course, error: fetchError } = await supabase
+    .from("courses")
+    .select("id, creator_id, visibility")
+    .eq("id", courseId)
+    .single();
+
+  if (fetchError || !course) return { error: "Course not found." };
+  if (course.creator_id !== user.id) return { error: "Not authorized." };
+
+  const wasPublic = course.visibility === "public";
+  const goingPublic = visibility === "public";
+  // Lock existing content if the course is (or is becoming) public
+  const lockContent = wasPublic || goingPublic;
+
+  // Title required only when course isn't locked (locked courses keep their DB title)
+  if (!title && !lockContent) return { error: "Course title is required." };
 
   const validSections = sections.filter((s) =>
     s.items.some((i) => i.front.trim() && i.back.trim())
@@ -62,25 +115,48 @@ export async function updateCourse(
   if (validSections.length === 0)
     return { error: "Add at least one card with both a question and answer." };
 
-  // Verify ownership
-  const { data: course, error: fetchError } = await supabase
-    .from("courses")
-    .select("id, creator_id")
-    .eq("id", courseId)
-    .single();
-
-  if (fetchError || !course) return { error: "Course not found." };
-  if (course.creator_id !== user.id) return { error: "Not authorized." };
-
   // 1. Update course metadata
+  // Locked courses: only visibility can change
+  const courseUpdate = lockContent
+    ? { visibility }
+    : { title, description, category, subcategory, source_language: sourceLanguage, target_language: targetLanguage, visibility, level };
   const { error: courseError } = await supabase
     .from("courses")
-    .update({ title, description, category, subcategory, source_language: sourceLanguage, target_language: targetLanguage, visibility, level })
+    .update(courseUpdate)
     .eq("id", courseId);
 
   if (courseError) return { error: courseError.message };
 
-  // 2. Delete sections that were removed (cascade deletes their items)
+  // 2. Migrate assets from private bucket → public bucket when going public
+  if (!wasPublic && goingPublic) {
+    const { data: assetItems } = await supabase
+      .from("items")
+      .select("id, image_url, front_audio_url, back_audio_url")
+      .eq("course_id", courseId);
+
+    for (const item of assetItems ?? []) {
+      type AssetCol = "image_url" | "front_audio_url" | "back_audio_url";
+      const cols: AssetCol[] = ["image_url", "front_audio_url", "back_audio_url"];
+      const updates: Partial<Record<AssetCol, string>> = {};
+      let changed = false;
+
+      for (const col of cols) {
+        const current = item[col] as string | null;
+        if (!current) continue;
+        const migrated = await migrateAssetToPublic(supabase, current);
+        if (migrated !== current) {
+          updates[col] = migrated;
+          changed = true;
+        }
+      }
+
+      if (changed) {
+        await supabase.from("items").update(updates).eq("id", item.id);
+      }
+    }
+  }
+
+  // 3. Delete sections that were removed — blocked for locked courses
   const keepSectionIds = sections.filter((s) => s.dbId).map((s) => s.dbId!);
   const { data: existingSections } = await supabase
     .from("sections")
@@ -88,14 +164,14 @@ export async function updateCourse(
     .eq("course_id", courseId);
 
   const sectionsToDelete = (existingSections ?? [])
-    .map((s) => s.id)
+    .map((s) => s.id as string)
     .filter((id) => !keepSectionIds.includes(id));
 
-  if (sectionsToDelete.length > 0) {
+  if (!lockContent && sectionsToDelete.length > 0) {
     await supabase.from("sections").delete().in("id", sectionsToDelete);
   }
 
-  // 3. Upsert sections and their items
+  // 4. Upsert sections and their items
   let totalCards = 0;
 
   for (let sIdx = 0; sIdx < sections.length; sIdx++) {
@@ -106,10 +182,11 @@ export async function updateCourse(
     let sectionId: string;
 
     if (sec.dbId) {
-      await supabase
-        .from("sections")
-        .update({ title: sec.title || `Section ${sIdx + 1}`, description: sec.description || null, position: sIdx })
-        .eq("id", sec.dbId);
+      // Locked courses: only update position, not title/description
+      const sectionUpdate = lockContent
+        ? { position: sIdx }
+        : { title: sec.title || `Section ${sIdx + 1}`, description: sec.description || null, position: sIdx };
+      await supabase.from("sections").update(sectionUpdate).eq("id", sec.dbId);
       sectionId = sec.dbId;
     } else {
       const { data: newSection, error: sectionError } = await supabase
@@ -121,7 +198,7 @@ export async function updateCourse(
       sectionId = newSection.id;
     }
 
-    // Delete items removed from this section
+    // Delete items removed from this section — blocked for locked courses
     const keepItemIds = validItems.filter((i) => i.dbId).map((i) => i.dbId!);
     const { data: existingItems } = await supabase
       .from("items")
@@ -129,17 +206,17 @@ export async function updateCourse(
       .eq("section_id", sectionId);
 
     const itemsToDelete = (existingItems ?? [])
-      .map((i) => i.id)
+      .map((i) => i.id as string)
       .filter((id) => !keepItemIds.includes(id));
 
-    if (itemsToDelete.length > 0) {
+    if (!lockContent && itemsToDelete.length > 0) {
       await supabase.from("items").delete().in("id", itemsToDelete);
     }
 
     // Upsert items
     for (let iIdx = 0; iIdx < validItems.length; iIdx++) {
       const item = validItems[iIdx];
-      const payload = {
+      const fullPayload = {
         front_text: item.front,
         back_text: item.back,
         romanization: item.romanization || null,
@@ -151,16 +228,18 @@ export async function updateCourse(
       };
 
       if (item.dbId) {
-        await supabase.from("items").update(payload).eq("id", item.dbId);
+        // Locked courses: only update position, never content
+        const updatePayload = lockContent ? { position: iIdx } : fullPayload;
+        await supabase.from("items").update(updatePayload).eq("id", item.dbId);
       } else {
-        await supabase.from("items").insert({ ...payload, course_id: courseId, section_id: sectionId });
+        await supabase.from("items").insert({ ...fullPayload, course_id: courseId, section_id: sectionId });
       }
     }
 
     totalCards += validItems.length;
   }
 
-  // 4. Sync card_count, has_images, has_audio
+  // 5. Sync card_count, has_images, has_audio
   const allValidItems = sections.flatMap((s) => s.items.filter((i) => i.front.trim() && i.back.trim()));
   const hasImages       = allValidItems.some((i) => i.imagePath);
   const hasAudio        = allValidItems.some((i) => i.frontAudioPath || i.backAudioPath);

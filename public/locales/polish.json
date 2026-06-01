@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sekcja bez tytułu",
     "quickReview": "Szybkie powtórzenie",
     "reviewCards": "Powtórz ({count})",
-    "learnNewWords": "Ucz się nowego"
+    "learnNewWords": "Ucz się nowego",
+    "duplicateCourse": "Duplikuj do mojej biblioteki",
+    "duplicating": "Duplikowanie…",
+    "duplicateUpsell": "Funkcja Plus/Pro — uaktualnij, aby duplikować"
   },
   "study": {
     "allSections": "Wszystkie sekcje",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Skończył się limit znaków — przetworzono {done} z {total} kart",
     "lockedFeature": "Dostępne w Plusie i Pro",
     "publicDesc": "Każdy może znaleźć i przestudiować ten kurs",
-    "privateDesc": "Tylko Ty i zaproszeni członkowie"
+    "privateDesc": "Tylko Ty i zaproszeni członkowie",
+    "publicWarningTitle": "Upublicznić ten kurs?",
+    "publicWarningSubtitle": "Tego nie można cofnąć. Przeczytaj przed potwierdzeniem.",
+    "publicWarningLock": "Istniejące karty i sekcje zostaną na stałe zablokowane — możesz dodawać nowe treści, ale nie możesz edytować ani usuwać istniejących kart.",
+    "publicWarningNoDelete": "Ten kurs nie może zostać usunięty po upublicznieniu.",
+    "publicWarningVisible": "Kurs będzie widoczny i dostępny do nauki dla każdego.",
+    "publicWarningConfirm": "Tak, upublicznij",
+    "publicWarningBack": "Wstecz",
+    "cardLockedBadge": "Zablokowane",
+    "publicWarningIrreversible": "Po upublicznieniu ten kurs nie może być ponownie ustawiony jako prywatny."
   },
   "start": {
     "estimatedTime": "~60 sekund · wszystko na jednej stronie",

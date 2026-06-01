@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Odeljak bez naslova",
     "quickReview": "Brzi pregled",
     "reviewCards": "Pregled ({count})",
-    "learnNewWords": "Uči novo"
+    "learnNewWords": "Uči novo",
+    "duplicateCourse": "Dupliraj u moju biblioteku",
+    "duplicating": "Dupliciranje…",
+    "duplicateUpsell": "Plus/Pro funkcija — nadogradite za dupliciranje"
   },
   "study": {
     "allSections": "Све секције",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Истекла је квота знакова — обрађено је __Б0__ од __Б1__ картица",
     "lockedFeature": "Доступно на Плус и Про",
     "publicDesc": "Свако може пронаћи и проучити овај курс",
-    "privateDesc": "Само ви и позвани чланови"
+    "privateDesc": "Само ви и позвани чланови",
+    "publicWarningTitle": "Učiniti ovaj kurs javnim?",
+    "publicWarningSubtitle": "Ovo se ne može poništiti. Molimo pročitajte pre potvrde.",
+    "publicWarningLock": "Postojeće kartice i sekcije biće trajno zaključane — možete dodati novi sadržaj, ali ne možete uređivati ili brisati postojeće kartice.",
+    "publicWarningNoDelete": "Ovaj kurs se ne može obrisati kada postane javan.",
+    "publicWarningVisible": "Kurs će biti vidljiv i dostupan za učenje svima.",
+    "publicWarningConfirm": "Da, učini javnim",
+    "publicWarningBack": "Nazad",
+    "cardLockedBadge": "Zaključano",
+    "publicWarningIrreversible": "Jednom kada postane javan, ovaj kurs se ne može ponovo učiniti privatnim."
   },
   "start": {
     "estimatedTime": "~60 секунди · све на једној страници",

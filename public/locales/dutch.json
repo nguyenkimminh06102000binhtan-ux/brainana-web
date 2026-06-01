@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Sectie zonder titel",
     "quickReview": "Snelle herhaling",
     "reviewCards": "Herhalen ({count})",
-    "learnNewWords": "Leer nieuw"
+    "learnNewWords": "Leer nieuw",
+    "duplicateCourse": "Dupliceer naar mijn bibliotheek",
+    "duplicating": "Dupliceren…",
+    "duplicateUpsell": "Plus/Pro-functie — upgrade om te dupliceren"
   },
   "study": {
     "allSections": "Alle secties",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Karakterquotum opgebruikt — {done} van {total} kaarten verwerkt",
     "lockedFeature": "Beschikbaar op Plus & Pro",
     "publicDesc": "Iedereen kan deze cursus vinden en bestuderen",
-    "privateDesc": "Alleen jij en uitgenodigde leden"
+    "privateDesc": "Alleen jij en uitgenodigde leden",
+    "publicWarningTitle": "Dit vak openbaar maken?",
+    "publicWarningSubtitle": "Dit kan niet ongedaan worden gemaakt. Lees voor bevestiging.",
+    "publicWarningLock": "Bestaande kaarten en secties worden permanent vergrendeld — je kunt nieuwe inhoud toevoegen maar kunt bestaande kaarten niet bewerken of verwijderen.",
+    "publicWarningNoDelete": "Dit vak kan niet worden verwijderd zodra het openbaar is.",
+    "publicWarningVisible": "Het vak is voor iedereen zichtbaar en studeerbaar.",
+    "publicWarningConfirm": "Ja, maak openbaar",
+    "publicWarningBack": "Terug",
+    "cardLockedBadge": "Vergrendeld",
+    "publicWarningIrreversible": "Zodra het openbaar is, kan dit vak niet meer privé worden gemaakt."
   },
   "start": {
     "estimatedTime": "~60 sec · alles op één pagina",

@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Bahagian tanpa tajuk",
     "quickReview": "Semakan pantas",
     "reviewCards": "Semak ({count})",
-    "learnNewWords": "Belajar baru"
+    "learnNewWords": "Belajar baru",
+    "duplicateCourse": "Duplikat ke perpustakaan saya",
+    "duplicating": "Menduplikat…",
+    "duplicateUpsell": "Ciri Plus/Pro — naik taraf untuk menduplikat"
   },
   "study": {
     "allSections": "Semua bahagian",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Kuota aksara habis — {done} daripada {total} kad diproses",
     "lockedFeature": "Tersedia di Plus & Pro",
     "publicDesc": "Sesiapa sahaja boleh mencari dan mempelajari kursus ini",
-    "privateDesc": "Hanya anda dan ahli jemputan"
+    "privateDesc": "Hanya anda dan ahli jemputan",
+    "publicWarningTitle": "Jadikan kursus ini awam?",
+    "publicWarningSubtitle": "Ini tidak boleh dibatalkan. Sila baca sebelum mengesahkan.",
+    "publicWarningLock": "Kad dan bahagian yang sedia ada akan dikunci secara kekal — anda boleh menambah kandungan baru tetapi tidak boleh mengedit atau memadam kad sedia ada.",
+    "publicWarningNoDelete": "Kursus ini tidak boleh dipadamkan setelah menjadi awam.",
+    "publicWarningVisible": "Kursus akan kelihatan dan boleh dipelajari oleh sesiapa sahaja.",
+    "publicWarningConfirm": "Ya, jadikan awam",
+    "publicWarningBack": "Kembali",
+    "cardLockedBadge": "Dikunci",
+    "publicWarningIrreversible": "Setelah menjadi awam, kursus ini tidak boleh dijadikan peribadi semula."
   },
   "start": {
     "estimatedTime": "~60 saat · semua pada satu halaman",

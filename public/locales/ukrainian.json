@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Розділ без назви",
     "quickReview": "Швидке повторення",
     "reviewCards": "Повторити ({count})",
-    "learnNewWords": "Вчити нове"
+    "learnNewWords": "Вчити нове",
+    "duplicateCourse": "Дублювати до моєї бібліотеки",
+    "duplicating": "Дублювання…",
+    "duplicateUpsell": "Функція Plus/Pro — оновіть план для дублювання"
   },
   "study": {
     "allSections": "Всі розділи",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Квота символів вичерпано — оброблено {done} з {total} карток",
     "lockedFeature": "Доступно на Plus & Pro",
     "publicDesc": "Будь-хто може знайти та вивчити цей курс",
-    "privateDesc": "Тільки ви та запрошені учасники"
+    "privateDesc": "Тільки ви та запрошені учасники",
+    "publicWarningTitle": "Зробити цей курс публічним?",
+    "publicWarningSubtitle": "Це незворотно. Будь ласка, прочитайте перед підтвердженням.",
+    "publicWarningLock": "Існуючі картки та розділи будуть заблоковані назавжди — ви можете додавати новий вміст, але не можете редагувати або видаляти існуючі картки.",
+    "publicWarningNoDelete": "Цей курс не можна видалити після публікації.",
+    "publicWarningVisible": "Курс буде видимий і доступний для вивчення для всіх.",
+    "publicWarningConfirm": "Так, зробити публічним",
+    "publicWarningBack": "Назад",
+    "cardLockedBadge": "Заблоковано",
+    "publicWarningIrreversible": "Після публікації цей курс не можна знову зробити приватним."
   },
   "start": {
     "estimatedTime": "~60 сек · все на одній сторінці",

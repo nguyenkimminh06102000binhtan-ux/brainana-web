@@ -414,7 +414,10 @@
     "configureWordsUntitled": "Başlıksız bölüm",
     "quickReview": "Hızlı tekrar",
     "reviewCards": "Tekrar et ({count})",
-    "learnNewWords": "Yeni öğren"
+    "learnNewWords": "Yeni öğren",
+    "duplicateCourse": "Kütüphaneime kopyala",
+    "duplicating": "Kopyalanıyor…",
+    "duplicateUpsell": "Plus/Pro özelliği — kopyalamak için yükselt"
   },
   "study": {
     "allSections": "Tüm bölümler",
@@ -617,7 +620,16 @@
     "quotaRanOut": "Karakter kotası doldu — {done} / {total} kart işlendi",
     "lockedFeature": "Plus ve Pro'da mevcut",
     "publicDesc": "Herkes bu kursu bulabilir ve çalışabilir",
-    "privateDesc": "Yalnızca siz ve davet edilen üyeler"
+    "privateDesc": "Yalnızca siz ve davet edilen üyeler",
+    "publicWarningTitle": "Bu kursu herkese açık yapmak ister misiniz?",
+    "publicWarningSubtitle": "Bu geri alınamaz. Onaylamadan önce lütfen okuyun.",
+    "publicWarningLock": "Mevcut kartlar ve bölümler kalıcı olarak kilitlenecektir — yeni içerik ekleyebilirsiniz ancak mevcut kartları düzenleyemez veya silemezsiniz.",
+    "publicWarningNoDelete": "Bu kurs herkese açık hale getirildikten sonra silinemez.",
+    "publicWarningVisible": "Kurs herkes tarafından görülebilir ve çalışılabilir olacaktır.",
+    "publicWarningConfirm": "Evet, herkese açık yap",
+    "publicWarningBack": "Geri",
+    "cardLockedBadge": "Kilitli",
+    "publicWarningIrreversible": "Herkese açık hale getirildikten sonra bu kurs tekrar özel yapılamaz."
   },
   "start": {
     "estimatedTime": "~60 saniye · hepsi tek sayfada",
