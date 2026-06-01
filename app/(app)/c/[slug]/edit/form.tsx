@@ -12,6 +12,7 @@ import { t } from "@/utils/t";
 import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
 import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
+import { generateBack } from "@/app/actions/generate-back";
 import { getTTSVoice } from "@/utils/tts";
 import { generateTTSAudio } from "@/app/actions/tts";
 import { showQuotaToast } from "@/components/quota-toast";
@@ -265,8 +266,8 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput }: {
-  item: Item; index: number; isOnly: boolean; targetLanguage: string;
+function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput }: {
+  item: Item; index: number; isOnly: boolean; sourceLanguage: string; targetLanguage: string;
   plan: string; charsExhausted: boolean; onQuotaExhausted: () => void;
   labels: CreateEditLabels;
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
@@ -279,6 +280,7 @@ function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, o
   const router = useRouter();
   const [suggesting, setSuggesting] = useState(false);
   const [generatingAudio, setGeneratingAudio] = useState(false);
+  const [generatingBack, setGeneratingBack] = useState(false);
   const roSystem = getRomanizationSystem(targetLanguage);
   const ttsVoice = getTTSVoice(targetLanguage);
 
@@ -322,6 +324,25 @@ function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, o
     }
   }
 
+  async function handleAutoBack() {
+    if (!item.front.trim()) return;
+    setGeneratingBack(true);
+    try {
+      const { back, distractors, remainingChars, quotaExhausted } = await generateBack(item.front, sourceLanguage, targetLanguage);
+      if (quotaExhausted) { onQuotaExhausted(); return; }
+      if (back) {
+        onUpdate("back", back);
+        onUpdateDistractors(distractors);
+      }
+      if (remainingChars !== undefined) {
+        if (remainingChars === 0) onQuotaExhausted();
+        showQuotaToast("chars", remainingChars);
+      }
+    } finally {
+      setGeneratingBack(false);
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-md border border-ink/10 bg-paper-2">
       <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
@@ -342,7 +363,27 @@ function ItemCard({ item, index, isOnly, targetLanguage, plan, charsExhausted, o
             className="w-full resize-none bg-transparent font-manrope text-sm text-ink outline-none placeholder:text-ink-3" />
         </div>
         <div className="bg-paper-2 p-4">
-          {lbl(labels.answer)}
+          <div className="mb-1.5 flex items-center justify-between">
+            {lbl(labels.answer)}
+            {charsExhausted ? (
+              <div className="group relative">
+                <button type="button" onClick={() => router.push(billingHref)}
+                  className="rounded-md bg-orange/10 px-2 py-1 font-manrope text-xs font-[800] text-orange-text shadow-hard-sm transition hover:bg-orange/20">
+                  🔒 {labels.autoGenerateBack}
+                </button>
+                <div className="pointer-events-none absolute bottom-full right-0 z-20 mb-2 hidden w-44 rounded-lg bg-ink px-3 py-2 text-center font-manrope text-xs text-paper shadow-lg group-hover:block">
+                  {upsellLabel}
+                  <div className="absolute right-4 top-full border-4 border-transparent border-t-ink" />
+                </div>
+              </div>
+            ) : (
+              <button type="button" onClick={handleAutoBack}
+                disabled={generatingBack || !item.front.trim()}
+                className="rounded-md bg-paper px-2 py-1 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50">
+                {generatingBack ? labels.generating : labels.autoGenerateBack}
+              </button>
+            )}
+          </div>
           <textarea value={item.back} onChange={(e) => onUpdate("back", e.target.value)}
             onFocus={(e) => onFocusInput(e.currentTarget, (v) => onUpdate("back", v))}
             placeholder={labels.answerPlaceholder} rows={2}
@@ -499,6 +540,7 @@ export default function EditCourseForm({
   const [charsExhausted, setCharsExhausted] = useState(initialCharsBalance <= 0);
   const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
   const [bulkAudioStatuses, setBulkAudioStatuses] = useState<Map<number, string>>(new Map());
+  const [bulkBackStatuses, setBulkBackStatuses] = useState<Map<number, string>>(new Map());
   const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
   const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
 
@@ -636,6 +678,49 @@ export default function EditCourseForm({
     }
     setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingAudio, { done, total: missing.length }) : t(labels.bulkGenerateDoneAudio, { count: missing.length })));
     setTimeout(() => setBulkAudioStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+    if (quotaRanOut) {
+      setCharsExhausted(true);
+      if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
+      else toast.warning(`Character quota ran out — ${successCount} of ${missing.length} cards processed`, { duration: 6000 });
+    } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
+  }
+
+  async function handleSectionBulkGenerateBack(sectionId: number) {
+    const section = sections.find((s) => s.id === sectionId);
+    if (!section) return;
+    const missing = section.items.filter((i) => i.front.trim() && !i.back.trim()).map((i) => ({ itemId: i.id, front: i.front }));
+    if (missing.length === 0) return;
+    const BATCH = 5;
+    let done = 0;
+    let successCount = 0;
+    let minRemaining: number | undefined;
+    let quotaRanOut = false;
+    setBulkBackStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingBack, { done: 0, total: missing.length })));
+    for (let i = 0; i < missing.length; i += BATCH) {
+      if (quotaRanOut) break;
+      const batch = missing.slice(i, i + BATCH);
+      await Promise.all(
+        batch.map(async ({ itemId, front }) => {
+          const { back, distractors, remainingChars, quotaExhausted } = await generateBack(front, selectedSourceLanguage, selectedTargetLanguage);
+          if (quotaExhausted) { quotaRanOut = true; return; }
+          if (back) {
+            setSections((prev) => prev.map((s) =>
+              s.id === sectionId
+                ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, back, distractors } : item) }
+                : s
+            ));
+            successCount++;
+          }
+          if (remainingChars !== undefined) {
+            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+          }
+        })
+      );
+      done += batch.length;
+      setBulkBackStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingBack, { done, total: missing.length })));
+    }
+    setBulkBackStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingBack, { done, total: missing.length }) : t(labels.bulkGenerateDoneBack, { count: successCount })));
+    setTimeout(() => setBulkBackStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
       if (successCount === 0) toast.warning("Not enough characters to process any cards", { duration: 6000 });
@@ -869,6 +954,19 @@ export default function EditCourseForm({
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
               <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end">
+                <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
+                  {bulkBackStatuses.get(section.id) && (
+                    <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkBackStatuses.get(section.id)}</span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleSectionBulkGenerateBack(section.id)}
+                    disabled={!!bulkBackStatuses.get(section.id)}
+                    className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
+                  >
+                    {labels.bulkGenerateBack}
+                  </button>
+                </div>
                 {getRomanizationSystem(selectedTargetLanguage) && (
                   <>
                     <button
@@ -916,7 +1014,7 @@ export default function EditCourseForm({
                 <div className="flex flex-col gap-3">
                   {section.items.map((item, iIdx) => (
                     <ItemCard key={item.id} item={item} index={iIdx} isOnly={section.items.length === 1}
-                      targetLanguage={selectedTargetLanguage} plan={plan}
+                      sourceLanguage={selectedSourceLanguage} targetLanguage={selectedTargetLanguage} plan={plan}
                       charsExhausted={charsExhausted} onQuotaExhausted={() => setCharsExhausted(true)}
                       labels={labels}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
