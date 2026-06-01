@@ -404,14 +404,17 @@
     "follow": "+フォローする",
     "share": "共有",
     "copied": "コピーしました！",
-    "configureWords": "単語を設定",
+    "configureWords": "カードを設定",
     "configureWordsTitle": "学習する単語",
     "configureWordsDesc": "スキップしたい単語のチェックを外してください",
     "configureWordsSave": "保存",
     "configureWordsSaving": "保存中…",
     "configureWordsSaved": "保存しました",
     "configureWordsSelectAll": "すべて選択",
-    "configureWordsUntitled": "無題のセクション"
+    "configureWordsUntitled": "無題のセクション",
+    "quickReview": "クイック復習",
+    "reviewCards": "復習 ({count})",
+    "learnNewWords": "新しく学ぶ"
   },
   "study": {
     "allSections": "すべてのセクション",
@@ -783,5 +786,19 @@
     "txChargeback": "チャージバック",
     "txAdminGrant": "管理者付与",
     "txUnknown": "取引"
+  },
+  "speedReview": {
+    "title": "スピードレビュー",
+    "score": "スコア",
+    "gameOver": "ゲームオーバー！",
+    "complete": "完了！",
+    "cardsReviewed": "{count}枚のカードを復習しました",
+    "yourScore": "あなたのスコア",
+    "playAgain": "もう一度プレイ",
+    "correct": "正解！",
+    "wrong": "不正解！",
+    "timeUp": "時間切れ！",
+    "backToCourse": "コースに戻る",
+    "notEnoughCards": "スピードレビューを解除するには少なくとも3枚のカードを学習してください"
   }
 }

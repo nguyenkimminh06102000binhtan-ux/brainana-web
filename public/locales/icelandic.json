@@ -404,14 +404,17 @@
     "follow": "+ Fylgstu með",
     "share": "Deila",
     "copied": "Afritað!",
-    "configureWords": "Stilla orð",
+    "configureWords": "Stilla spjöld",
     "configureWordsTitle": "Orð til að læra",
     "configureWordsDesc": "Taktu hakið af orðum sem þú vilt sleppa",
     "configureWordsSave": "Vista",
     "configureWordsSaving": "Vistun…",
     "configureWordsSaved": "Vistað",
     "configureWordsSelectAll": "Velja allt",
-    "configureWordsUntitled": "Nafnlaus hluti"
+    "configureWordsUntitled": "Nafnlaus hluti",
+    "quickReview": "Skjót endurskoðun",
+    "reviewCards": "Endurskoða ({count})",
+    "learnNewWords": "Læra nýtt"
   },
   "study": {
     "allSections": "Allir kaflar",
@@ -783,5 +786,19 @@
     "txChargeback": "Áskorun",
     "txAdminGrant": "Kerfisstjóri úthlutun",
     "txUnknown": "Viðskipti"
+  },
+  "speedReview": {
+    "title": "Hraðendurskoðun",
+    "score": "Stig",
+    "gameOver": "Leikur lokið!",
+    "complete": "Lokið!",
+    "cardsReviewed": "{count} spjöld yfirfarið",
+    "yourScore": "Stig þín",
+    "playAgain": "Spila aftur",
+    "correct": "Rétt!",
+    "wrong": "Rangt!",
+    "timeUp": "Tími upp!",
+    "backToCourse": "Aftur á námskeið",
+    "notEnoughCards": "Lærðu að minnsta kosti 3 spjöld til að opna"
   }
 }

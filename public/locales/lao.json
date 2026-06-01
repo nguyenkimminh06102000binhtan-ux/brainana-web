@@ -404,14 +404,17 @@
     "follow": "+ ຕິດຕາມ",
     "share": "ແບ່ງປັນ",
     "copied": "ສຳເນົາແລ້ວ!",
-    "configureWords": "ຕັ້ງຄ່າຄຳສັບ",
+    "configureWords": "ຕັ້ງຄ່າບັດ",
     "configureWordsTitle": "ຄຳສັບທີ່ຈະຮຽນ",
     "configureWordsDesc": "ຍົກເລີກການໝາຍຄຳສັບທີ່ຕ້ອງການຂ້າມ",
     "configureWordsSave": "ບັນທຶກ",
     "configureWordsSaving": "ກຳລັງບັນທຶກ…",
     "configureWordsSaved": "ບັນທຶກແລ້ວ",
     "configureWordsSelectAll": "ເລືອກທັງໝົດ",
-    "configureWordsUntitled": "ສ່ວນທີ່ບໍ່ມີຫົວຂໍ້"
+    "configureWordsUntitled": "ສ່ວນທີ່ບໍ່ມີຫົວຂໍ້",
+    "quickReview": "ທົບທວນດ່ວນ",
+    "reviewCards": "ທົບທວນ ({count})",
+    "learnNewWords": "ຮຽນໃໝ່"
   },
   "study": {
     "allSections": "ທຸກພາກສ່ວນ",
@@ -783,5 +786,19 @@
     "txChargeback": "ຈ່າຍຄືນ",
     "txAdminGrant": "ການຊ່ວຍເຫຼືອຜູ້ເບິ່ງແຍງ",
     "txUnknown": "ທຸລະກໍາ"
+  },
+  "speedReview": {
+    "title": "ທົບທວນດ່ວນ",
+    "score": "ຄະແນນ",
+    "gameOver": "ໝົດເກມ!",
+    "complete": "ສຳເລັດ!",
+    "cardsReviewed": "ທົບທວນ {count} ບັດ",
+    "yourScore": "ຄະແນນຂອງທ່ານ",
+    "playAgain": "ຫຼິ້ນໃໝ່",
+    "correct": "ຖືກ!",
+    "wrong": "ຜິດ!",
+    "timeUp": "ໝົດເວລາ!",
+    "backToCourse": "ກັບຄືນຫຼັກສູດ",
+    "notEnoughCards": "ຮຽນຢ່າງໜ້ອຍ 3 ບັດເພື່ອປົດລ໋ອກ"
   }
 }

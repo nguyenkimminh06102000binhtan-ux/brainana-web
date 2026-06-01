@@ -111,6 +111,9 @@ export type Locale = {
     intermediate: string;
     advanced: string;
     startLearning: string;
+    quickReview: string;
+    reviewCards: string;
+    learnNewWords: string;
     saved: string;
     save: string;
     editCourse: string;
@@ -243,6 +246,20 @@ export type Locale = {
     lockedFeature: string;
     publicDesc: string;
     privateDesc: string;
+  };
+  speedReview: {
+    title: string;
+    score: string;
+    gameOver: string;
+    complete: string;
+    cardsReviewed: string;
+    yourScore: string;
+    playAgain: string;
+    correct: string;
+    wrong: string;
+    timeUp: string;
+    backToCourse: string;
+    notEnoughCards: string;
   };
   learn: {
     aiTutor: string;

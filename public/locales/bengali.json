@@ -404,14 +404,17 @@
     "follow": "+ অনুসরণ করুন",
     "share": "শেয়ার করুন",
     "copied": "কপি করা !",
-    "configureWords": "শব্দ কনফিগার করুন",
+    "configureWords": "কার্ড কনফিগার করুন",
     "configureWordsTitle": "শিখতে হবে এমন শব্দ",
     "configureWordsDesc": "যে শব্দগুলো বাদ দিতে চান সেগুলোর চেক তুলে নিন",
     "configureWordsSave": "সংরক্ষণ করুন",
     "configureWordsSaving": "সংরক্ষণ হচ্ছে…",
     "configureWordsSaved": "সংরক্ষিত",
     "configureWordsSelectAll": "সব নির্বাচন করুন",
-    "configureWordsUntitled": "শিরোনামবিহীন বিভাগ"
+    "configureWordsUntitled": "শিরোনামবিহীন বিভাগ",
+    "quickReview": "দ্রুত পুনরালোচনা",
+    "reviewCards": "পর্যালোচনা ({count})",
+    "learnNewWords": "নতুন শিখুন"
   },
   "study": {
     "allSections": "সব বিভাগ",
@@ -783,5 +786,19 @@
     "txChargeback": "চার্জব্যাক",
     "txAdminGrant": "অ্যাডমিন অনুদান",
     "txUnknown": "লেনদেন"
+  },
+  "speedReview": {
+    "title": "স্পিড রিভিউ",
+    "score": "স্কোর",
+    "gameOver": "খেলা শেষ!",
+    "complete": "সম্পূর্ণ!",
+    "cardsReviewed": "{count} কার্ড পর্যালোচনা হয়েছে",
+    "yourScore": "আপনার স্কোর",
+    "playAgain": "আবার খেলুন",
+    "correct": "সঠিক!",
+    "wrong": "ভুল!",
+    "timeUp": "সময় শেষ!",
+    "backToCourse": "কোর্সে ফিরে যান",
+    "notEnoughCards": "স্পিড রিভিউ আনলক করতে কমপক্ষে ৩টি কার্ড পড়ুন"
   }
 }

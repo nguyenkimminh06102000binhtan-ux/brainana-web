@@ -404,14 +404,17 @@
     "follow": "+ Theo dõi",
     "share": "Chia sẻ",
     "copied": "Đã sao chép!",
-    "configureWords": "Cấu hình từ vựng",
+    "configureWords": "Cấu hình thẻ",
     "configureWordsTitle": "Từ cần học",
     "configureWordsDesc": "Bỏ chọn các từ bạn muốn bỏ qua",
     "configureWordsSave": "Lưu",
     "configureWordsSaving": "Đang lưu…",
     "configureWordsSaved": "Đã lưu",
     "configureWordsSelectAll": "Chọn tất cả",
-    "configureWordsUntitled": "Phần không có tiêu đề"
+    "configureWordsUntitled": "Phần không có tiêu đề",
+    "quickReview": "Ôn tập nhanh",
+    "reviewCards": "Ôn tập ({count})",
+    "learnNewWords": "Học mới"
   },
   "study": {
     "allSections": "Tất cả chương",
@@ -783,5 +786,19 @@
     "txChargeback": "Khoản bồi hoàn",
     "txAdminGrant": "Cấp quản trị viên",
     "txUnknown": "Giao dịch"
+  },
+  "speedReview": {
+    "title": "Ôn Tập Nhanh",
+    "score": "Điểm số",
+    "gameOver": "Hết giờ!",
+    "complete": "Hoàn thành!",
+    "cardsReviewed": "Đã ôn tập {count} thẻ",
+    "yourScore": "Điểm của bạn",
+    "playAgain": "Chơi lại",
+    "correct": "Đúng rồi!",
+    "wrong": "Sai rồi!",
+    "timeUp": "Hết giờ!",
+    "backToCourse": "Quay lại khóa học",
+    "notEnoughCards": "Học ít nhất 3 thẻ để mở khóa Ôn Tập Nhanh"
   }
 }

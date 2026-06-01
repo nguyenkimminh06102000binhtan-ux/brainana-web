@@ -83,6 +83,7 @@ export async function fetchStudyCards(
   courseId: string,
   count: number,
   selectedTypes: QType[],
+  mode?: "review" | "new",
 ): Promise<StudyCard[]> {
   const supabase = createClient(await cookies());
   const {
@@ -91,22 +92,26 @@ export async function fetchStudyCards(
   if (!user) redirect("/login");
   const dueCutoff = reviewDayCutoff().toISOString();
 
-  // Fetch overdue items with progress
-  const { data: overdueRows } = await supabase
-    .from("item_progress")
-    .select(
-      "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
-    )
-    .eq("user_id", user.id)
-    .eq("course_id", courseId)
-    .lt("next_review_at", dueCutoff)
-    .order("next_review_at", { ascending: true })
-    .limit(count);
+  // Fetch overdue items with progress (skip in "new" mode)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let overdue: any[] = [];
+  if (mode !== "new") {
+    const { data: overdueRows } = await supabase
+      .from("item_progress")
+      .select(
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+      )
+      .eq("user_id", user.id)
+      .eq("course_id", courseId)
+      .eq("ignored", false)
+      .lt("next_review_at", dueCutoff)
+      .order("next_review_at", { ascending: true })
+      .limit(count);
+    overdue = overdueRows ?? [];
+  }
 
-  const overdue = overdueRows ?? [];
-
-  // Fetch new items if we need more
-  const needed = count - overdue.length;
+  // Fetch new items if we need more (skip in "review" mode)
+  const needed = mode === "review" ? 0 : count - overdue.length;
   let newItems: { id: string; front_text: string; back_text: string; image_url: string | null; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null }[] = [];
 
   if (needed > 0) {
@@ -116,7 +121,16 @@ export async function fetchStudyCards(
       .eq("user_id", user.id)
       .eq("course_id", courseId);
 
-    const allSeen = (allProgressIds ?? []).map((r) => r.item_id);
+    const allSeen = (allProgressIds ?? []).map((r) => r.item_id as string);
+
+    // Also exclude ignored items from new cards
+    const { data: ignoredIds } = await supabase
+      .from("item_progress")
+      .select("item_id")
+      .eq("user_id", user.id)
+      .eq("course_id", courseId)
+      .eq("ignored", true);
+    const excluded = [...new Set([...allSeen, ...(ignoredIds ?? []).map((r) => r.item_id as string)])];
 
     let q = supabase
       .from("items")
@@ -125,16 +139,17 @@ export async function fetchStudyCards(
       .order("position")
       .limit(needed);
 
-    if (allSeen.length > 0) {
-      q = q.not("id", "in", `(${allSeen.join(",")})`);
+    if (excluded.length > 0) {
+      q = q.not("id", "in", `(${excluded.join(",")})`);
     }
 
     const { data } = await q;
     newItems = data ?? [];
   }
 
-  let practiceRows: typeof overdueRows = [];
-  if (overdue.length === 0 && newItems.length === 0 && count > 0) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let practiceRows: any[] = [];
+  if (overdue.length === 0 && newItems.length === 0 && count > 0 && !mode) {
     const { data } = await supabase
       .from("item_progress")
       .select(
@@ -142,6 +157,7 @@ export async function fetchStudyCards(
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
+      .eq("ignored", false)
       .order("last_reviewed_at", { ascending: true, nullsFirst: false })
       .limit(count);
 

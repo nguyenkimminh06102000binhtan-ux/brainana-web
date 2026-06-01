@@ -404,14 +404,17 @@
     "follow": "+ Следвайте",
     "share": "Споделете",
     "copied": "Копирано!",
-    "configureWords": "Конфигурирайте думи",
+    "configureWords": "Конфигурирайте картите",
     "configureWordsTitle": "Думи за учене",
     "configureWordsDesc": "Премахнете отметката от думи, които искате да пропуснете",
     "configureWordsSave": "Запази",
     "configureWordsSaving": "Запазване…",
     "configureWordsSaved": "Запазено",
     "configureWordsSelectAll": "Избери всички",
-    "configureWordsUntitled": "Раздел без заглавие"
+    "configureWordsUntitled": "Раздел без заглавие",
+    "quickReview": "Бърз преглед",
+    "reviewCards": "Преглед ({count})",
+    "learnNewWords": "Учи ново"
   },
   "study": {
     "allSections": "Всички раздели",
@@ -783,5 +786,19 @@
     "txChargeback": "Отказ на плащане",
     "txAdminGrant": "Администраторски дял",
     "txUnknown": "Транзакция"
+  },
+  "speedReview": {
+    "title": "Бърз Преглед",
+    "score": "Резултат",
+    "gameOver": "Играта приключи!",
+    "complete": "Завършено!",
+    "cardsReviewed": "{count} карти прегледани",
+    "yourScore": "Вашият резултат",
+    "playAgain": "Играй отново",
+    "correct": "Правилно!",
+    "wrong": "Грешно!",
+    "timeUp": "Времето изтече!",
+    "backToCourse": "Обратно към курса",
+    "notEnoughCards": "Изучете поне 3 карти за отключване"
   }
 }

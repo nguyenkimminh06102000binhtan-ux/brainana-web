@@ -404,14 +404,17 @@
     "follow": "+ Sekite",
     "share": "Dalintis",
     "copied": "Nukopijuota!",
-    "configureWords": "Konfigūruoti žodžius",
+    "configureWords": "Konfigūruoti korteles",
     "configureWordsTitle": "Žodžiai mokymuisi",
     "configureWordsDesc": "Atžymėkite žodžius, kuriuos norite praleisti",
     "configureWordsSave": "Išsaugoti",
     "configureWordsSaving": "Išsaugoma…",
     "configureWordsSaved": "Išsaugota",
     "configureWordsSelectAll": "Pasirinkti visus",
-    "configureWordsUntitled": "Skyrius be pavadinimo"
+    "configureWordsUntitled": "Skyrius be pavadinimo",
+    "quickReview": "Greitas kartojimas",
+    "reviewCards": "Kartoti ({count})",
+    "learnNewWords": "Mokytis naujų"
   },
   "study": {
     "allSections": "Visi skyriai",
@@ -783,5 +786,19 @@
     "txChargeback": "Mokėjimo grąžinimas",
     "txAdminGrant": "Administratoriaus dotacija",
     "txUnknown": "Sandoris"
+  },
+  "speedReview": {
+    "title": "Greitas Kartojimas",
+    "score": "Taškai",
+    "gameOver": "Žaidimas baigtas!",
+    "complete": "Baigta!",
+    "cardsReviewed": "{count} korteles pakartota",
+    "yourScore": "Jūsų rezultatas",
+    "playAgain": "Žaisti vėl",
+    "correct": "Teisingai!",
+    "wrong": "Neteisingai!",
+    "timeUp": "Laikas baigėsi!",
+    "backToCourse": "Grįžti į kursą",
+    "notEnoughCards": "Išmokite bent 3 kortelių atblokuoti"
   }
 }

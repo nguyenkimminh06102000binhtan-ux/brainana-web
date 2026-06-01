@@ -404,14 +404,17 @@
     "follow": "+ Ikuti",
     "share": "Kongsi",
     "copied": "disalin!",
-    "configureWords": "Konfigurasikan perkataan",
+    "configureWords": "Konfigurasikan kad",
     "configureWordsTitle": "Perkataan untuk dipelajari",
     "configureWordsDesc": "Nyahtanda perkataan yang anda ingin langkau",
     "configureWordsSave": "Simpan",
     "configureWordsSaving": "Menyimpan…",
     "configureWordsSaved": "Tersimpan",
     "configureWordsSelectAll": "Pilih semua",
-    "configureWordsUntitled": "Bahagian tanpa tajuk"
+    "configureWordsUntitled": "Bahagian tanpa tajuk",
+    "quickReview": "Semakan pantas",
+    "reviewCards": "Semak ({count})",
+    "learnNewWords": "Belajar baru"
   },
   "study": {
     "allSections": "Semua bahagian",
@@ -783,5 +786,19 @@
     "txChargeback": "Caj balik",
     "txAdminGrant": "Pemberian admin",
     "txUnknown": "Transaksi"
+  },
+  "speedReview": {
+    "title": "Semakan Pantas",
+    "score": "Markah",
+    "gameOver": "Permainan tamat!",
+    "complete": "Selesai!",
+    "cardsReviewed": "{count} kad disemak",
+    "yourScore": "Markah anda",
+    "playAgain": "Main semula",
+    "correct": "Betul!",
+    "wrong": "Salah!",
+    "timeUp": "Masa tamat!",
+    "backToCourse": "Kembali ke kursus",
+    "notEnoughCards": "Pelajari sekurang-kurangnya 3 kad untuk membuka kunci"
   }
 }

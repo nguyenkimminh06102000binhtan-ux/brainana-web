@@ -404,14 +404,17 @@
     "follow": "+ Следовать",
     "share": "Делиться",
     "copied": "Скопировано!",
-    "configureWords": "Настроить слова",
+    "configureWords": "Настроить карточки",
     "configureWordsTitle": "Слова для изучения",
     "configureWordsDesc": "Снимите отметку со слов, которые хотите пропустить",
     "configureWordsSave": "Сохранить",
     "configureWordsSaving": "Сохранение…",
     "configureWordsSaved": "Сохранено",
     "configureWordsSelectAll": "Выбрать всё",
-    "configureWordsUntitled": "Раздел без названия"
+    "configureWordsUntitled": "Раздел без названия",
+    "quickReview": "Быстрое повторение",
+    "reviewCards": "Повторить ({count})",
+    "learnNewWords": "Учить новое"
   },
   "study": {
     "allSections": "Все разделы",
@@ -783,5 +786,19 @@
     "txChargeback": "Возвратный платеж",
     "txAdminGrant": "Грант администратора",
     "txUnknown": "Сделка"
+  },
+  "speedReview": {
+    "title": "Быстрое Повторение",
+    "score": "Очки",
+    "gameOver": "Игра окончена!",
+    "complete": "Завершено!",
+    "cardsReviewed": "{count} карточек повторено",
+    "yourScore": "Ваш счёт",
+    "playAgain": "Играть снова",
+    "correct": "Правильно!",
+    "wrong": "Неправильно!",
+    "timeUp": "Время вышло!",
+    "backToCourse": "Вернуться к курсу",
+    "notEnoughCards": "Изучите хотя бы 3 карточки для разблокировки"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Segui",
     "share": "Condividere",
     "copied": "Copiato!",
-    "configureWords": "Configura parole",
+    "configureWords": "Configura le schede",
     "configureWordsTitle": "Parole da imparare",
     "configureWordsDesc": "Deseleziona le parole che vuoi saltare",
     "configureWordsSave": "Salva",
     "configureWordsSaving": "Salvataggio…",
     "configureWordsSaved": "Salvato",
     "configureWordsSelectAll": "Seleziona tutto",
-    "configureWordsUntitled": "Sezione senza titolo"
+    "configureWordsUntitled": "Sezione senza titolo",
+    "quickReview": "Ripasso rapido",
+    "reviewCards": "Ripassare ({count})",
+    "learnNewWords": "Impara nuovo"
   },
   "study": {
     "allSections": "Tutte le sezioni",
@@ -783,5 +786,19 @@
     "txChargeback": "Storno",
     "txAdminGrant": "Concessione amministratore",
     "txUnknown": "Transazione"
+  },
+  "speedReview": {
+    "title": "Revisione Rapida",
+    "score": "Punteggio",
+    "gameOver": "Gioco finito!",
+    "complete": "Completato!",
+    "cardsReviewed": "{count} schede revisionate",
+    "yourScore": "Il tuo punteggio",
+    "playAgain": "Gioca ancora",
+    "correct": "Corretto!",
+    "wrong": "Sbagliato!",
+    "timeUp": "Tempo scaduto!",
+    "backToCourse": "Torna al corso",
+    "notEnoughCards": "Studia almeno 3 schede per sbloccare la Revisione Rapida"
   }
 }

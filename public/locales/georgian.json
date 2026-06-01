@@ -404,14 +404,17 @@
     "follow": "+ მიყევით",
     "share": "გააზიარეთ",
     "copied": "კოპირებულია!",
-    "configureWords": "სიტყვების კონფიგურაცია",
+    "configureWords": "ბარათების კონფიგურაცია",
     "configureWordsTitle": "სიტყვები სასწავლად",
     "configureWordsDesc": "მოხსენით ნიშანი სიტყვებს, რომელთა გამოტოვება გსურთ",
     "configureWordsSave": "შენახვა",
     "configureWordsSaving": "შენახვა…",
     "configureWordsSaved": "შენახულია",
     "configureWordsSelectAll": "ყველის არჩევა",
-    "configureWordsUntitled": "სათაურის გარეშე სექცია"
+    "configureWordsUntitled": "სათაურის გარეშე სექცია",
+    "quickReview": "სწრაფი გამეორება",
+    "reviewCards": "გამეორება ({count})",
+    "learnNewWords": "ახლის სწავლა"
   },
   "study": {
     "allSections": "ყველა განყოფილება",
@@ -783,5 +786,19 @@
     "txChargeback": "ჩارجბექი",
     "txAdminGrant": "ადმინისტრატორის გრანტი",
     "txUnknown": "ტრანზაქცია"
+  },
+  "speedReview": {
+    "title": "სწრაფი გამეორება",
+    "score": "ქულა",
+    "gameOver": "თამაში დასრულდა!",
+    "complete": "დასრულებულია!",
+    "cardsReviewed": "{count} ბარათი გამეორდა",
+    "yourScore": "თქვენი ქულა",
+    "playAgain": "თამაში ახლიდან",
+    "correct": "სწორია!",
+    "wrong": "მცდარია!",
+    "timeUp": "დრო ამოიწურა!",
+    "backToCourse": "კურსზე დაბრუნება",
+    "notEnoughCards": "განბლოკვისთვის ისწავლეთ მინიმუმ 3 ბარათი"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Folgen",
     "share": "Aktie",
     "copied": "Kopiert!",
-    "configureWords": "Wörter konfigurieren",
+    "configureWords": "Karten konfigurieren",
     "configureWordsTitle": "Zu lernende Wörter",
     "configureWordsDesc": "Entfernen Sie Häkchen bei Wörtern, die Sie überspringen möchten",
     "configureWordsSave": "Speichern",
     "configureWordsSaving": "Speichern…",
     "configureWordsSaved": "Gespeichert",
     "configureWordsSelectAll": "Alle auswählen",
-    "configureWordsUntitled": "Abschnitt ohne Titel"
+    "configureWordsUntitled": "Abschnitt ohne Titel",
+    "quickReview": "Schnelle Wiederholung",
+    "reviewCards": "Wiederholen ({count})",
+    "learnNewWords": "Neues lernen"
   },
   "study": {
     "allSections": "Alle Abschnitte",
@@ -783,5 +786,19 @@
     "txChargeback": "Reklamation",
     "txAdminGrant": "Admin-Zuteilung",
     "txUnknown": "Transaktion"
+  },
+  "speedReview": {
+    "title": "Schnelle Wiederholung",
+    "score": "Punkte",
+    "gameOver": "Spiel vorbei!",
+    "complete": "Abgeschlossen!",
+    "cardsReviewed": "{count} Karten wiederholt",
+    "yourScore": "Dein Punktestand",
+    "playAgain": "Nochmal spielen",
+    "correct": "Richtig!",
+    "wrong": "Falsch!",
+    "timeUp": "Zeit abgelaufen!",
+    "backToCourse": "Zurück zum Kurs",
+    "notEnoughCards": "Lerne mindestens 3 Karten um freizuschalten"
   }
 }

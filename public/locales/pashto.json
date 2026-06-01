@@ -404,14 +404,17 @@
     "follow": "+ تعقیب کړئ",
     "share": "شریکول",
     "copied": "کاپی شوی!",
-    "configureWords": "کلمې تنظیم کړئ",
+    "configureWords": "کارتونه تنظیم کړئ",
     "configureWordsTitle": "د زده کولو لپاره کلمې",
     "configureWordsDesc": "هغه کلمې غیرچیک کړئ چې غواړئ پرې تیر شئ",
     "configureWordsSave": "خوندي کړئ",
     "configureWordsSaving": "خوندي کیږي…",
     "configureWordsSaved": "خوندي شو",
     "configureWordsSelectAll": "ټول وټاکئ",
-    "configureWordsUntitled": "سرلیک پرته برخه"
+    "configureWordsUntitled": "سرلیک پرته برخه",
+    "quickReview": "ګړندۍ بیاکتنه",
+    "reviewCards": "بیاکتنه ({count})",
+    "learnNewWords": "نوې زده کړه"
   },
   "study": {
     "allSections": "ټولې برخې",
@@ -783,5 +786,19 @@
     "txChargeback": "چارج بیک",
     "txAdminGrant": "اداری مرسته",
     "txUnknown": "معامله"
+  },
+  "speedReview": {
+    "title": "د سرعت کتنه",
+    "score": "نمرې",
+    "gameOver": "لوبه پای ته ورسیده!",
+    "complete": "بشپړه!",
+    "cardsReviewed": "{count} کارتونه کتل شول",
+    "yourScore": "ستاسو نمرې",
+    "playAgain": "بیا لوبه کوه",
+    "correct": "سم!",
+    "wrong": "غلط!",
+    "timeUp": "وخت پای ته ورسید!",
+    "backToCourse": "کورس ته ستنیږه",
+    "notEnoughCards": "خلاصولو لپاره لږترلږه 3 کارتونه ولوله"
   }
 }

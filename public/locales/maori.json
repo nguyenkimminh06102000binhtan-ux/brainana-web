@@ -404,14 +404,17 @@
     "follow": "+ Whai",
     "share": "Tiria",
     "copied": "Kua kapea!",
-    "configureWords": "Tautuhia ngā kupu",
+    "configureWords": "Tautuhia ngā kāri",
     "configureWordsTitle": "Ngā kupu hei ako",
     "configureWordsDesc": "Wetekina ngā kupu e hiahia ana koe ki te prewhi",
     "configureWordsSave": "Tiaki",
     "configureWordsSaving": "E tiaki ana…",
     "configureWordsSaved": "Kua tiakina",
     "configureWordsSelectAll": "Tīpakohia katoa",
-    "configureWordsUntitled": "Wāhanga kore ingoa"
+    "configureWordsUntitled": "Wāhanga kore ingoa",
+    "quickReview": "Arotake tere",
+    "reviewCards": "Arotake ({count})",
+    "learnNewWords": "Ako hou"
   },
   "study": {
     "allSections": "Nga waahanga katoa",
@@ -783,5 +786,19 @@
     "txChargeback": "Utu utu",
     "txAdminGrant": "Karahipi Kaiwhakahaere",
     "txUnknown": "Tauwhitinga"
+  },
+  "speedReview": {
+    "title": "Arotake Tere",
+    "score": "Ira",
+    "gameOver": "Kua mutu te kēmu!",
+    "complete": "Kua oti!",
+    "cardsReviewed": "{count} kāri i arotakehia",
+    "yourScore": "Ō ira",
+    "playAgain": "Tākaro anō",
+    "correct": "Tika!",
+    "wrong": "Hē!",
+    "timeUp": "Kua mutu te wā!",
+    "backToCourse": "Hoki ki te akoranga",
+    "notEnoughCards": "Ako kāri 3 mō te whakatuwhera"
   }
 }

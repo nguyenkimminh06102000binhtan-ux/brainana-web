@@ -404,14 +404,17 @@
     "follow": "+ Segue",
     "share": "Compartir",
     "copied": "Copiado!",
-    "configureWords": "Configurar palabras",
+    "configureWords": "Configurar tarxetas",
     "configureWordsTitle": "Palabras para aprender",
     "configureWordsDesc": "Desmarca as palabras que queres omitir",
     "configureWordsSave": "Gardar",
     "configureWordsSaving": "Gardando…",
     "configureWordsSaved": "Gardado",
     "configureWordsSelectAll": "Seleccionar todo",
-    "configureWordsUntitled": "Sección sen título"
+    "configureWordsUntitled": "Sección sen título",
+    "quickReview": "Revisión rápida",
+    "reviewCards": "Revisar ({count})",
+    "learnNewWords": "Aprender novo"
   },
   "study": {
     "allSections": "Todas as seccións",
@@ -783,5 +786,19 @@
     "txChargeback": "Revogación de cargo",
     "txAdminGrant": "Concesión do administrador",
     "txUnknown": "Transacción"
+  },
+  "speedReview": {
+    "title": "Revisión Rápida",
+    "score": "Puntuación",
+    "gameOver": "Xogo terminado!",
+    "complete": "Completado!",
+    "cardsReviewed": "{count} tarxetas revisadas",
+    "yourScore": "A túa puntuación",
+    "playAgain": "Xogar de novo",
+    "correct": "Correcto!",
+    "wrong": "Incorrecto!",
+    "timeUp": "Tempo esgotado!",
+    "backToCourse": "Volver ao curso",
+    "notEnoughCards": "Estuda polo menos 3 tarxetas para desbloquear"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Dilyn",
     "share": "Rhannu",
     "copied": "Wedi'i gopïo!",
-    "configureWords": "Ffurfweddu geiriau",
+    "configureWords": "Ffurfweddu cardiau",
     "configureWordsTitle": "Geiriau i'w dysgu",
     "configureWordsDesc": "Daddiciwch eiriau rydych am eu hepgor",
     "configureWordsSave": "Cadw",
     "configureWordsSaving": "Yn cadw…",
     "configureWordsSaved": "Wedi'i gadw",
     "configureWordsSelectAll": "Dewis popeth",
-    "configureWordsUntitled": "Adran heb deitl"
+    "configureWordsUntitled": "Adran heb deitl",
+    "quickReview": "Adolygiad cyflym",
+    "reviewCards": "Adolygu ({count})",
+    "learnNewWords": "Dysgu newydd"
   },
   "study": {
     "allSections": "Pob adran",
@@ -783,5 +786,19 @@
     "txChargeback": "Tâl yn ôl",
     "txAdminGrant": "Grant gweinyddol",
     "txUnknown": "Trafodyn"
+  },
+  "speedReview": {
+    "title": "Adolygiad Cyflym",
+    "score": "Sgôr",
+    "gameOver": "Diwedd y gêm!",
+    "complete": "Wedi'i gwblhau!",
+    "cardsReviewed": "Adolygwyd {count} cerdyn",
+    "yourScore": "Eich sgôr",
+    "playAgain": "Chwarae eto",
+    "correct": "Cywir!",
+    "wrong": "Anghywir!",
+    "timeUp": "Amser i fyny!",
+    "backToCourse": "Yn ôl i'r cwrs",
+    "notEnoughCards": "Astudiwch o leiaf 3 cerdyn i ddatgloi'r Adolygiad Cyflym"
   }
 }

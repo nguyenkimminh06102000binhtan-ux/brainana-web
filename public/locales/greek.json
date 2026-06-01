@@ -404,14 +404,17 @@
     "follow": "+ Ακολουθήστε",
     "share": "Μερίδιο",
     "copied": "Αντιγράφηκε!",
-    "configureWords": "Ρύθμιση λέξεων",
+    "configureWords": "Ρύθμιση καρτών",
     "configureWordsTitle": "Λέξεις προς μάθηση",
     "configureWordsDesc": "Αποεπιλέξτε λέξεις που θέλετε να παραλείψετε",
     "configureWordsSave": "Αποθήκευση",
     "configureWordsSaving": "Αποθήκευση…",
     "configureWordsSaved": "Αποθηκεύτηκε",
     "configureWordsSelectAll": "Επιλογή όλων",
-    "configureWordsUntitled": "Τμήμα χωρίς τίτλο"
+    "configureWordsUntitled": "Τμήμα χωρίς τίτλο",
+    "quickReview": "Γρήγορη επανάληψη",
+    "reviewCards": "Επανάληψη ({count})",
+    "learnNewWords": "Μάθε νέα"
   },
   "study": {
     "allSections": "Όλα τα τμήματα",
@@ -783,5 +786,19 @@
     "txChargeback": "Αντίστροφη χρέωση",
     "txAdminGrant": "Χορήγηση από διαχειριστή",
     "txUnknown": "Συναλλαγή"
+  },
+  "speedReview": {
+    "title": "Γρήγορη Επανάληψη",
+    "score": "Βαθμολογία",
+    "gameOver": "Τέλος παιχνιδιού!",
+    "complete": "Ολοκληρώθηκε!",
+    "cardsReviewed": "{count} κάρτες επαναλήφθηκαν",
+    "yourScore": "Η βαθμολογία σου",
+    "playAgain": "Παίξε ξανά",
+    "correct": "Σωστό!",
+    "wrong": "Λάθος!",
+    "timeUp": "Ο χρόνος τελείωσε!",
+    "backToCourse": "Πίσω στο μάθημα",
+    "notEnoughCards": "Μελέτησε τουλάχιστον 3 κάρτες για ξεκλείδωμα"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ अनुसरण करा",
     "share": "शेअर करा",
     "copied": "कॉपी केले!",
-    "configureWords": "शब्द कॉन्फिगर करा",
+    "configureWords": "कार्ड कॉन्फिगर करा",
     "configureWordsTitle": "शिकण्यासाठी शब्द",
     "configureWordsDesc": "जे शब्द वगळायचे आहेत त्यांचा टिक काढा",
     "configureWordsSave": "जतन करा",
     "configureWordsSaving": "जतन होत आहे…",
     "configureWordsSaved": "जतन झाले",
     "configureWordsSelectAll": "सर्व निवडा",
-    "configureWordsUntitled": "शीर्षकाशिवाय विभाग"
+    "configureWordsUntitled": "शीर्षकाशिवाय विभाग",
+    "quickReview": "जलद पुनरावलोकन",
+    "reviewCards": "पुनरावलोकन ({count})",
+    "learnNewWords": "नवे शिका"
   },
   "study": {
     "allSections": "सर्व विभाग",
@@ -783,5 +786,19 @@
     "txChargeback": "चार्जबॅक",
     "txAdminGrant": "प्रशासन अनुदान",
     "txUnknown": "व्यवहार"
+  },
+  "speedReview": {
+    "title": "स्पीड रिव्ह्यू",
+    "score": "गुण",
+    "gameOver": "गेम संपला!",
+    "complete": "पूर्ण!",
+    "cardsReviewed": "{count} कार्ड पुनरावलोकन केले",
+    "yourScore": "तुमचे गुण",
+    "playAgain": "पुन्हा खेळा",
+    "correct": "बरोबर!",
+    "wrong": "चूक!",
+    "timeUp": "वेळ संपली!",
+    "backToCourse": "कोर्सवर परत",
+    "notEnoughCards": "अनलॉक करण्यासाठी किमान 3 कार्ड शिका"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ ਪਾਲਣਾ ਕਰੋ",
     "share": "ਸ਼ੇਅਰ ਕਰੋ",
     "copied": "ਕਾਪੀ ਕੀਤਾ!",
-    "configureWords": "ਸ਼ਬਦ ਕੌਂਫਿਗਰ ਕਰੋ",
+    "configureWords": "ਕਾਰਡ ਕੌਂਫਿਗਰ ਕਰੋ",
     "configureWordsTitle": "ਸਿੱਖਣ ਲਈ ਸ਼ਬਦ",
     "configureWordsDesc": "ਜੋ ਸ਼ਬਦ ਛੱਡਣੇ ਹਨ ਉਨ੍ਹਾਂ ਦਾ ਟਿੱਕ ਹਟਾਓ",
     "configureWordsSave": "ਸੇਵ ਕਰੋ",
     "configureWordsSaving": "ਸੇਵ ਹੋ ਰਿਹਾ ਹੈ…",
     "configureWordsSaved": "ਸੇਵ ਕੀਤਾ",
     "configureWordsSelectAll": "ਸਭ ਚੁਣੋ",
-    "configureWordsUntitled": "ਸਿਰਲੇਖ ਰਹਿਤ ਭਾਗ"
+    "configureWordsUntitled": "ਸਿਰਲੇਖ ਰਹਿਤ ਭਾਗ",
+    "quickReview": "ਤੇਜ਼ ਸਮੀਖਿਆ",
+    "reviewCards": "ਸਮੀਖਿਆ ({count})",
+    "learnNewWords": "ਨਵਾਂ ਸਿੱਖੋ"
   },
   "study": {
     "allSections": "ਸਾਰੇ ਭਾਗ",
@@ -783,5 +786,19 @@
     "txChargeback": "ਚਾਰਜਬੈਕ",
     "txAdminGrant": "ਐਡਮਿਨ ਗ੍ਰਾਂਟ",
     "txUnknown": "ਲੈਣ-ਦੇਣ"
+  },
+  "speedReview": {
+    "title": "ਸਪੀਡ ਰਿਵਿਊ",
+    "score": "ਸਕੋਰ",
+    "gameOver": "ਗੇਮ ਖਤਮ!",
+    "complete": "ਪੂਰਾ!",
+    "cardsReviewed": "{count} ਕਾਰਡ ਸਮੀਖਿਆ ਕੀਤੇ",
+    "yourScore": "ਤੁਹਾਡਾ ਸਕੋਰ",
+    "playAgain": "ਦੁਬਾਰਾ ਖੇਡੋ",
+    "correct": "ਸਹੀ!",
+    "wrong": "ਗਲਤ!",
+    "timeUp": "ਸਮਾਂ ਖਤਮ!",
+    "backToCourse": "ਕੋਰਸ ਤੇ ਵਾਪਸ",
+    "notEnoughCards": "ਅਨਲਾਕ ਕਰਨ ਲਈ ਘੱਟੋ-ਘੱਟ 3 ਕਾਰਡ ਪੜ੍ਹੋ"
   }
 }

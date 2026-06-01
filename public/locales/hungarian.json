@@ -404,14 +404,17 @@
     "follow": "+ Kövesd",
     "share": "Részesedés",
     "copied": "Másolva!",
-    "configureWords": "Szavak konfigurálása",
+    "configureWords": "Kártyák konfigurálása",
     "configureWordsTitle": "Tanulni kívánt szavak",
     "configureWordsDesc": "Vegye ki a pipát azokból a szavakból, amelyeket át szeretne ugrani",
     "configureWordsSave": "Mentés",
     "configureWordsSaving": "Mentés…",
     "configureWordsSaved": "Mentve",
     "configureWordsSelectAll": "Mindet kijelöl",
-    "configureWordsUntitled": "Névtelen szakasz"
+    "configureWordsUntitled": "Névtelen szakasz",
+    "quickReview": "Gyors ismétlés",
+    "reviewCards": "Ismétlés ({count})",
+    "learnNewWords": "Újat tanulni"
   },
   "study": {
     "allSections": "Minden szakasz",
@@ -783,5 +786,19 @@
     "txChargeback": "Visszaterhelés",
     "txAdminGrant": "Adminisztrátori támogatás",
     "txUnknown": "Tranzakció"
+  },
+  "speedReview": {
+    "title": "Gyors Ismétlés",
+    "score": "Pontszám",
+    "gameOver": "Játék vége!",
+    "complete": "Kész!",
+    "cardsReviewed": "{count} kártya ismételve",
+    "yourScore": "A pontszámod",
+    "playAgain": "Játék újra",
+    "correct": "Helyes!",
+    "wrong": "Helytelen!",
+    "timeUp": "Lejárt az idő!",
+    "backToCourse": "Vissza a kurzushoz",
+    "notEnoughCards": "Tanulj legalább 3 kártyát a feloldáshoz"
   }
 }

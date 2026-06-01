@@ -404,14 +404,17 @@
     "follow": "+ Kuzatish",
     "share": "Ulashish",
     "copied": "Ko‘chirildi!",
-    "configureWords": "So'zlarni sozlash",
+    "configureWords": "Kartalarni sozlash",
     "configureWordsTitle": "O'rganish uchun so'zlar",
     "configureWordsDesc": "O'tkazib yubormoqchi bo'lgan so'zlarning belgilarini olib tashlang",
     "configureWordsSave": "Saqlash",
     "configureWordsSaving": "Saqlanmoqda…",
     "configureWordsSaved": "Saqlandi",
     "configureWordsSelectAll": "Hammasini tanlash",
-    "configureWordsUntitled": "Sarlavhasiz bo'lim"
+    "configureWordsUntitled": "Sarlavhasiz bo'lim",
+    "quickReview": "Tezkor takrorlash",
+    "reviewCards": "Takrorlash ({count})",
+    "learnNewWords": "Yangi o'rganish"
   },
   "study": {
     "allSections": "Barcha bo'limlar",
@@ -783,5 +786,19 @@
     "txChargeback": "To'lovni qaytarish",
     "txAdminGrant": "Admin granti",
     "txUnknown": "Tranzaksiya"
+  },
+  "speedReview": {
+    "title": "Tezkor Takrorlash",
+    "score": "Ball",
+    "gameOver": "O'yin tugadi!",
+    "complete": "Tugallandi!",
+    "cardsReviewed": "{count} ta karta takrorlandi",
+    "yourScore": "Sizning ballingiz",
+    "playAgain": "Yana o'ynash",
+    "correct": "To'g'ri!",
+    "wrong": "Noto'g'ri!",
+    "timeUp": "Vaqt tugadi!",
+    "backToCourse": "Kursga qaytish",
+    "notEnoughCards": "Tezkor Takrorlashni ochish uchun kamida 3 ta kartani o'rganing"
   }
 }

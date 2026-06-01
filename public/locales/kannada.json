@@ -404,14 +404,17 @@
     "follow": "+ ಅನುಸರಿಸಿ",
     "share": "ಹಂಚಿಕೊಳ್ಳಿ",
     "copied": "ನಕಲು ಮಾಡಲಾಗಿದೆ!",
-    "configureWords": "ಪದಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ",
+    "configureWords": "ಕಾರ್ಡ್‌ಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ",
     "configureWordsTitle": "ಕಲಿಯಲು ಪದಗಳು",
     "configureWordsDesc": "ಬಿಡಿಸಲು ಬಯಸುವ ಪದಗಳ ಟಿಕ್ ತೆಗೆಯಿರಿ",
     "configureWordsSave": "ಉಳಿಸಿ",
     "configureWordsSaving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ…",
     "configureWordsSaved": "ಉಳಿಸಲಾಗಿದೆ",
     "configureWordsSelectAll": "ಎಲ್ಲವನ್ನೂ ಆಯ್ಕೆ ಮಾಡಿ",
-    "configureWordsUntitled": "ಶೀರ್ಷಿಕೆಯಿಲ್ಲದ ವಿಭಾಗ"
+    "configureWordsUntitled": "ಶೀರ್ಷಿಕೆಯಿಲ್ಲದ ವಿಭಾಗ",
+    "quickReview": "ತ್ವರಿತ ಪರಿಶೀಲನೆ",
+    "reviewCards": "ಪರಿಶೀಲನೆ ({count})",
+    "learnNewWords": "ಹೊಸದು ಕಲಿಯಿರಿ"
   },
   "study": {
     "allSections": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",
@@ -783,5 +786,19 @@
     "txChargeback": "ಚಾರ್ಜ್‌ಬ್ಯಾಕ್",
     "txAdminGrant": "ಆಡ್ಮಿನ್ ಅನುದಾನ",
     "txUnknown": "ಲೆನದೇನ"
+  },
+  "speedReview": {
+    "title": "ಸ್ಪೀಡ್ ರಿವ್ಯೂ",
+    "score": "ಅಂಕ",
+    "gameOver": "ಆಟ ಮುಗಿದಿದೆ!",
+    "complete": "ಪೂರ್ಣ!",
+    "cardsReviewed": "{count} ಕಾರ್ಡ್ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "yourScore": "ನಿಮ್ಮ ಅಂಕ",
+    "playAgain": "ಮತ್ತೆ ಆಡಿ",
+    "correct": "ಸರಿ!",
+    "wrong": "ತಪ್ಪು!",
+    "timeUp": "ಸಮಯ ಮುಗಿದಿದೆ!",
+    "backToCourse": "ಕೋರ್ಸ್‌ಗೆ ಹಿಂದಿರುಗಿ",
+    "notEnoughCards": "ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ 3 ಕಾರ್ಡ್ ಅಧ್ಯಯನ ಮಾಡಿ"
   }
 }

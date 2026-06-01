@@ -404,14 +404,17 @@
     "follow": "+ Följ",
     "share": "Dela",
     "copied": "Kopierade!",
-    "configureWords": "Konfigurera ord",
+    "configureWords": "Konfigurera kort",
     "configureWordsTitle": "Ord att lära sig",
     "configureWordsDesc": "Avmarkera ord som du vill hoppa över",
     "configureWordsSave": "Spara",
     "configureWordsSaving": "Sparar…",
     "configureWordsSaved": "Sparat",
     "configureWordsSelectAll": "Välj alla",
-    "configureWordsUntitled": "Namnlöst avsnitt"
+    "configureWordsUntitled": "Namnlöst avsnitt",
+    "quickReview": "Snabb genomgång",
+    "reviewCards": "Gå igenom ({count})",
+    "learnNewWords": "Lär nytt"
   },
   "study": {
     "allSections": "Alla avsnitt",
@@ -783,5 +786,19 @@
     "txChargeback": "Återbetalning",
     "txAdminGrant": "Administratörsbidrag",
     "txUnknown": "Transaktion"
+  },
+  "speedReview": {
+    "title": "Snabb Genomgång",
+    "score": "Poäng",
+    "gameOver": "Spelet är slut!",
+    "complete": "Klart!",
+    "cardsReviewed": "{count} kort genomgångna",
+    "yourScore": "Din poäng",
+    "playAgain": "Spela igen",
+    "correct": "Rätt!",
+    "wrong": "Fel!",
+    "timeUp": "Tid ute!",
+    "backToCourse": "Tillbaka till kursen",
+    "notEnoughCards": "Studera minst 3 kort för att låsa upp"
   }
 }

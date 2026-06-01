@@ -404,14 +404,17 @@
     "follow": "+ Takip et",
     "share": "Paylaşmak",
     "copied": "Kopyalandı!",
-    "configureWords": "Kelimeleri yapılandır",
+    "configureWords": "Kartları yapılandır",
     "configureWordsTitle": "Öğrenilecek kelimeler",
     "configureWordsDesc": "Atlamak istediğiniz kelimelerin işaretini kaldırın",
     "configureWordsSave": "Kaydet",
     "configureWordsSaving": "Kaydediliyor…",
     "configureWordsSaved": "Kaydedildi",
     "configureWordsSelectAll": "Tümünü seç",
-    "configureWordsUntitled": "Başlıksız bölüm"
+    "configureWordsUntitled": "Başlıksız bölüm",
+    "quickReview": "Hızlı tekrar",
+    "reviewCards": "Tekrar et ({count})",
+    "learnNewWords": "Yeni öğren"
   },
   "study": {
     "allSections": "Tüm bölümler",
@@ -783,5 +786,19 @@
     "txChargeback": "Ters ibraz",
     "txAdminGrant": "Yönetici izni",
     "txUnknown": "İşlem"
+  },
+  "speedReview": {
+    "title": "Hızlı Tekrar",
+    "score": "Puan",
+    "gameOver": "Oyun bitti!",
+    "complete": "Tamamlandı!",
+    "cardsReviewed": "{count} kart tekrar edildi",
+    "yourScore": "Puanınız",
+    "playAgain": "Tekrar oyna",
+    "correct": "Doğru!",
+    "wrong": "Yanlış!",
+    "timeUp": "Süre doldu!",
+    "backToCourse": "Kursa geri dön",
+    "notEnoughCards": "Hızlı Tekrarı açmak için en az 3 kart çalışın"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Дага",
     "share": "Хуваалцах",
     "copied": "Хуулсан!",
-    "configureWords": "Үгс тохируулах",
+    "configureWords": "Карт тохируулах",
     "configureWordsTitle": "Сурах үгс",
     "configureWordsDesc": "Алгасахыг хүссэн үгсийн тэмдэглэгээг арилгана уу",
     "configureWordsSave": "Хадгалах",
     "configureWordsSaving": "Хадгалж байна…",
     "configureWordsSaved": "Хадгалагдсан",
     "configureWordsSelectAll": "Бүгдийг сонгох",
-    "configureWordsUntitled": "Гарчиггүй хэсэг"
+    "configureWordsUntitled": "Гарчиггүй хэсэг",
+    "quickReview": "Хурдан давтах",
+    "reviewCards": "Давтах ({count})",
+    "learnNewWords": "Шинэ сурах"
   },
   "study": {
     "allSections": "Бүх хэсгүүд",
@@ -783,5 +786,19 @@
     "txChargeback": "Төлбөрийг буцаан авах",
     "txAdminGrant": "Админ тэтгэлэг",
     "txUnknown": "Гүйлгээ"
+  },
+  "speedReview": {
+    "title": "Хурдан Давтах",
+    "score": "Оноо",
+    "gameOver": "Тоглоом дуусав!",
+    "complete": "Дууссан!",
+    "cardsReviewed": "{count} карт давтагдлаа",
+    "yourScore": "Таны оноо",
+    "playAgain": "Дахин тоглох",
+    "correct": "Зөв!",
+    "wrong": "Буруу!",
+    "timeUp": "Хугацаа дууссан!",
+    "backToCourse": "Курст буцах",
+    "notEnoughCards": "Нээхийн тулд дор хаяж 3 карт сур"
   }
 }

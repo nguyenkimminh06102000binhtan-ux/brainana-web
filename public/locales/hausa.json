@@ -404,14 +404,17 @@
     "follow": "+ Bi",
     "share": "Raba",
     "copied": "Kwafi!",
-    "configureWords": "Tsara kalmomi",
+    "configureWords": "Tsara katunan",
     "configureWordsTitle": "Kalmomi don koyo",
     "configureWordsDesc": "Cire alamar kalmomi da kuke so ku tsallake",
     "configureWordsSave": "Adana",
     "configureWordsSaving": "Ana adanawa…",
     "configureWordsSaved": "An adana",
     "configureWordsSelectAll": "Zaɓi duka",
-    "configureWordsUntitled": "Ɓangare maras suna"
+    "configureWordsUntitled": "Ɓangare maras suna",
+    "quickReview": "Bitar sauri",
+    "reviewCards": "Sake duba ({count})",
+    "learnNewWords": "Koyi sabo"
   },
   "study": {
     "allSections": "Duk sassan",
@@ -783,5 +786,19 @@
     "txChargeback": "Dawowar aiki",
     "txAdminGrant": "Janginta na admin",
     "txUnknown": "Aiki"
+  },
+  "speedReview": {
+    "title": "Bitar Sauri",
+    "score": "Maki",
+    "gameOver": "Wasan ya ƙare!",
+    "complete": "An kammala!",
+    "cardsReviewed": "An duba katunan {count}",
+    "yourScore": "Makin ku",
+    "playAgain": "Buga sake",
+    "correct": "Daidai!",
+    "wrong": "Kuskure!",
+    "timeUp": "Lokaci ya ƙare!",
+    "backToCourse": "Koma darasin",
+    "notEnoughCards": "Karanta katin 3 aƙalla don buɗewa"
   }
 }

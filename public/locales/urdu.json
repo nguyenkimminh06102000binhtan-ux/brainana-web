@@ -404,14 +404,17 @@
     "follow": "+ فالو کریں۔",
     "share": "شیئر کریں۔",
     "copied": "نقل کیا گیا!",
-    "configureWords": "الفاظ ترتیب دیں",
+    "configureWords": "کارڈز ترتیب دیں",
     "configureWordsTitle": "سیکھنے کے الفاظ",
     "configureWordsDesc": "جو الفاظ چھوڑنا چاہتے ہیں ان کا نشان ہٹائیں",
     "configureWordsSave": "محفوظ کریں",
     "configureWordsSaving": "محفوظ ہو رہا ہے…",
     "configureWordsSaved": "محفوظ ہو گیا",
     "configureWordsSelectAll": "سب منتخب کریں",
-    "configureWordsUntitled": "بے عنوان حصہ"
+    "configureWordsUntitled": "بے عنوان حصہ",
+    "quickReview": "فوری جائزہ",
+    "reviewCards": "جائزہ ({count})",
+    "learnNewWords": "نیا سیکھیں"
   },
   "study": {
     "allSections": "تمام سیکشنز",
@@ -783,5 +786,19 @@
     "txChargeback": "چارج بیک",
     "txAdminGrant": "ایڈمن گرانٹ",
     "txUnknown": "لین دین"
+  },
+  "speedReview": {
+    "title": "سپیڈ ریویو",
+    "score": "اسکور",
+    "gameOver": "گیم ختم!",
+    "complete": "مکمل!",
+    "cardsReviewed": "{count} کارڈز کا جائزہ لیا",
+    "yourScore": "آپ کا اسکور",
+    "playAgain": "دوبارہ کھیلیں",
+    "correct": "درست!",
+    "wrong": "غلط!",
+    "timeUp": "وقت ختم!",
+    "backToCourse": "کورس پر واپس",
+    "notEnoughCards": "اسپیڈ ریویو کھولنے کے لیے کم از کم 3 کارڈز پڑھیں"
   }
 }

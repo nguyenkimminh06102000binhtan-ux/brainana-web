@@ -404,14 +404,17 @@
     "follow": "+ دنبال کن",
     "share": "به اشتراک بگذارید",
     "copied": "کپی شده!",
-    "configureWords": "پیکربندی کلمات",
+    "configureWords": "پیکربندی کارت‌ها",
     "configureWordsTitle": "کلمات برای یادگیری",
     "configureWordsDesc": "کلماتی که می‌خواهید رد شوید را از حالت انتخاب خارج کنید",
     "configureWordsSave": "ذخیره",
     "configureWordsSaving": "در حال ذخیره…",
     "configureWordsSaved": "ذخیره شد",
     "configureWordsSelectAll": "همه را انتخاب کنید",
-    "configureWordsUntitled": "بخش بدون عنوان"
+    "configureWordsUntitled": "بخش بدون عنوان",
+    "quickReview": "مرور سریع",
+    "reviewCards": "مرور ({count})",
+    "learnNewWords": "یادگیری جدید"
   },
   "study": {
     "allSections": "همه بخش ها",
@@ -783,5 +786,19 @@
     "txChargeback": "استرداد شارژ",
     "txAdminGrant": "کمک هزینه مدیریت",
     "txUnknown": "معامله"
+  },
+  "speedReview": {
+    "title": "مرور سریع",
+    "score": "امتیاز",
+    "gameOver": "بازی تمام شد!",
+    "complete": "تکمیل!",
+    "cardsReviewed": "{count} کارت مرور شد",
+    "yourScore": "امتیاز شما",
+    "playAgain": "دوباره بازی کن",
+    "correct": "درست!",
+    "wrong": "غلط!",
+    "timeUp": "وقت تمام شد!",
+    "backToCourse": "بازگشت به دوره",
+    "notEnoughCards": "برای باز کردن مرور سریع ابتدا حداقل ۳ کارت بخوانید"
   }
 }

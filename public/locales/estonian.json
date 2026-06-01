@@ -404,14 +404,17 @@
     "follow": "+ Jälgi",
     "share": "Jaga",
     "copied": "Kopeeritud!",
-    "configureWords": "Seadista sõnad",
+    "configureWords": "Seadista kaarte",
     "configureWordsTitle": "Õppimiseks sõnad",
     "configureWordsDesc": "Tühjendage sõnade märkeruudud, mida soovite vahele jätta",
     "configureWordsSave": "Salvesta",
     "configureWordsSaving": "Salvestamine…",
     "configureWordsSaved": "Salvestatud",
     "configureWordsSelectAll": "Vali kõik",
-    "configureWordsUntitled": "Pealkirjata jaotis"
+    "configureWordsUntitled": "Pealkirjata jaotis",
+    "quickReview": "Kiire kordamine",
+    "reviewCards": "Korda ({count})",
+    "learnNewWords": "Õpi uut"
   },
   "study": {
     "allSections": "Kõik sektsioonid",
@@ -783,5 +786,19 @@
     "txChargeback": "Tagasinõue",
     "txAdminGrant": "Administraatori grant",
     "txUnknown": "Kanne"
+  },
+  "speedReview": {
+    "title": "Kiire Kordamine",
+    "score": "Punktid",
+    "gameOver": "Mäng läbi!",
+    "complete": "Valmis!",
+    "cardsReviewed": "{count} kaarti korratud",
+    "yourScore": "Sinu tulemus",
+    "playAgain": "Mängi uuesti",
+    "correct": "Õige!",
+    "wrong": "Vale!",
+    "timeUp": "Aeg läbi!",
+    "backToCourse": "Tagasi kursusele",
+    "notEnoughCards": "Õpi vähemalt 3 kaarti avamiseks"
   }
 }

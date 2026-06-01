@@ -404,14 +404,17 @@
     "follow": "+ ተከተል",
     "share": "አጋራ",
     "copied": "ተቀድቷል!",
-    "configureWords": "ቃላትን አዋቅር",
+    "configureWords": "ካርዶችን አዋቅር",
     "configureWordsTitle": "ለመማር ቃላት",
     "configureWordsDesc": "መዝለል የሚፈልጓቸውን ቃላት ምልክቱን ያስወግዱ",
     "configureWordsSave": "አስቀምጥ",
     "configureWordsSaving": "በማስቀመጥ ላይ…",
     "configureWordsSaved": "ተቀምጧል",
     "configureWordsSelectAll": "ሁሉንም ምረጥ",
-    "configureWordsUntitled": "ርዕስ የሌለው ክፍል"
+    "configureWordsUntitled": "ርዕስ የሌለው ክፍል",
+    "quickReview": "ፈጣን ክለሳ",
+    "reviewCards": "ክለሳ ({count})",
+    "learnNewWords": "አዲስ ተማር"
   },
   "study": {
     "allSections": "ሁሉም ክፍሎች",
@@ -783,5 +786,19 @@
     "txChargeback": "የተመለሰ ክፍያ",
     "txAdminGrant": "የአስተዳዳሪ ስጦታ",
     "txUnknown": "ግብይት"
+  },
+  "speedReview": {
+    "title": "ፈጣን ክለሳ",
+    "score": "ነጥብ",
+    "gameOver": "ጨዋታ አለቀ!",
+    "complete": "ተጠናቀቀ!",
+    "cardsReviewed": "{count} ካርዶች ተከለሱ",
+    "yourScore": "ነጥብህ",
+    "playAgain": "እንደገና ጫወት",
+    "correct": "ትክክል!",
+    "wrong": "ስህተት!",
+    "timeUp": "ጊዜ አለቀ!",
+    "backToCourse": "ወደ ኮርሱ ተመለስ",
+    "notEnoughCards": "Speed Review ለማስጀመር ቢያንስ 3 ካርዶች አጥናህ"
   }
 }

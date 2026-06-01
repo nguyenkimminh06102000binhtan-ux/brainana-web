@@ -404,14 +404,17 @@
     "follow": "+ Suivre",
     "share": "Partager",
     "copied": "Copié!",
-    "configureWords": "Configurer les mots",
+    "configureWords": "Configurer les cartes",
     "configureWordsTitle": "Mots à apprendre",
     "configureWordsDesc": "Décochez les mots que vous souhaitez ignorer",
     "configureWordsSave": "Enregistrer",
     "configureWordsSaving": "Enregistrement…",
     "configureWordsSaved": "Enregistré",
     "configureWordsSelectAll": "Tout sélectionner",
-    "configureWordsUntitled": "Section sans titre"
+    "configureWordsUntitled": "Section sans titre",
+    "quickReview": "Révision rapide",
+    "reviewCards": "Réviser ({count})",
+    "learnNewWords": "Apprendre du nouveau"
   },
   "study": {
     "allSections": "Toutes les rubriques",
@@ -783,5 +786,19 @@
     "txChargeback": "Rétrofacturation",
     "txAdminGrant": "Attribution administrateur",
     "txUnknown": "Transaction"
+  },
+  "speedReview": {
+    "title": "Révision Rapide",
+    "score": "Score",
+    "gameOver": "Jeu terminé !",
+    "complete": "Terminé !",
+    "cardsReviewed": "{count} cartes révisées",
+    "yourScore": "Votre score",
+    "playAgain": "Rejouer",
+    "correct": "Correct !",
+    "wrong": "Incorrect !",
+    "timeUp": "Temps écoulé !",
+    "backToCourse": "Retour au cours",
+    "notEnoughCards": "Étudiez au moins 3 cartes pour débloquer la Révision Rapide"
   }
 }

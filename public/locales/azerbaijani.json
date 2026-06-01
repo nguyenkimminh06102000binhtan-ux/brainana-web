@@ -404,14 +404,17 @@
     "follow": "+ İzləyin",
     "share": "Paylaşın",
     "copied": "Kopyalandı!",
-    "configureWords": "Sözləri konfiqurasiya et",
+    "configureWords": "Kartları konfiqurasiya et",
     "configureWordsTitle": "Öyrənəcək sözlər",
     "configureWordsDesc": "Keçmək istədiyiniz sözlərin işarəsini çıxarın",
     "configureWordsSave": "Saxla",
     "configureWordsSaving": "Saxlanılır…",
     "configureWordsSaved": "Saxlanıldı",
     "configureWordsSelectAll": "Hamısını seç",
-    "configureWordsUntitled": "Adsız bölmə"
+    "configureWordsUntitled": "Adsız bölmə",
+    "quickReview": "Sürətli təkrar",
+    "reviewCards": "Təkrar et ({count})",
+    "learnNewWords": "Yeni öyrən"
   },
   "study": {
     "allSections": "Bütün bölmələr",
@@ -783,5 +786,19 @@
     "txChargeback": "Geri dəvirmə",
     "txAdminGrant": "Admin qrantı",
     "txUnknown": "Əməliyyat"
+  },
+  "speedReview": {
+    "title": "Sürətli Təkrar",
+    "score": "Xal",
+    "gameOver": "Oyun bitdi!",
+    "complete": "Tamamlandı!",
+    "cardsReviewed": "{count} kart təkrar edildi",
+    "yourScore": "Sizin xalınız",
+    "playAgain": "Yenidən oynayın",
+    "correct": "Düzgün!",
+    "wrong": "Yanlış!",
+    "timeUp": "Vaxt bitdi!",
+    "backToCourse": "Kursə qayıt",
+    "notEnoughCards": "Sürətli Təkrarı açmaq üçün ən azı 3 kart öyrənin"
   }
 }

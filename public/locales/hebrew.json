@@ -404,14 +404,17 @@
     "follow": "+ עקוב",
     "share": "לַחֲלוֹק",
     "copied": "מוּעֲתָק!",
-    "configureWords": "הגדר מילים",
+    "configureWords": "הגדר כרטיסים",
     "configureWordsTitle": "מילים ללמוד",
     "configureWordsDesc": "בטל סימון מילים שברצונך לדלג עליהן",
     "configureWordsSave": "שמור",
     "configureWordsSaving": "שומר…",
     "configureWordsSaved": "נשמר",
     "configureWordsSelectAll": "בחר הכל",
-    "configureWordsUntitled": "קטע ללא כותרת"
+    "configureWordsUntitled": "קטע ללא כותרת",
+    "quickReview": "סקירה מהירה",
+    "reviewCards": "סקירה ({count})",
+    "learnNewWords": "למד חדש"
   },
   "study": {
     "allSections": "כל הסעיפים",
@@ -783,5 +786,19 @@
     "txChargeback": "החזר חיוב",
     "txAdminGrant": "מענק מנהל",
     "txUnknown": "עסקה"
+  },
+  "speedReview": {
+    "title": "חזרה מהירה",
+    "score": "ניקוד",
+    "gameOver": "המשחק הסתיים!",
+    "complete": "הושלם!",
+    "cardsReviewed": "נסקרו {count} כרטיסים",
+    "yourScore": "הניקוד שלך",
+    "playAgain": "שחק שוב",
+    "correct": "נכון!",
+    "wrong": "טעות!",
+    "timeUp": "הזמן נגמר!",
+    "backToCourse": "חזרה לקורס",
+    "notEnoughCards": "למד לפחות 3 כרטיסים לפתיחת החזרה המהירה"
   }
 }

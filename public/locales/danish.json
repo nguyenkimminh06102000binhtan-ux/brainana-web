@@ -404,14 +404,17 @@
     "follow": "+ Følg",
     "share": "Dele",
     "copied": "Kopieret!",
-    "configureWords": "Konfigurer ord",
+    "configureWords": "Konfigurer kort",
     "configureWordsTitle": "Ord at lære",
     "configureWordsDesc": "Fjern markeringen af ord, du vil springe over",
     "configureWordsSave": "Gem",
     "configureWordsSaving": "Gemmer…",
     "configureWordsSaved": "Gemt",
     "configureWordsSelectAll": "Vælg alle",
-    "configureWordsUntitled": "Unavngivet afsnit"
+    "configureWordsUntitled": "Unavngivet afsnit",
+    "quickReview": "Hurtig gennemgang",
+    "reviewCards": "Gennemgå ({count})",
+    "learnNewWords": "Lær nyt"
   },
   "study": {
     "allSections": "Alle afsnit",
@@ -783,5 +786,19 @@
     "txChargeback": "Tilbageførsel",
     "txAdminGrant": "Administrator-tildeling",
     "txUnknown": "Transaktion"
+  },
+  "speedReview": {
+    "title": "Hurtig Gennemgang",
+    "score": "Point",
+    "gameOver": "Spillet er slut!",
+    "complete": "Afsluttet!",
+    "cardsReviewed": "{count} kort gennemgået",
+    "yourScore": "Din score",
+    "playAgain": "Spil igen",
+    "correct": "Korrekt!",
+    "wrong": "Forkert!",
+    "timeUp": "Tid op!",
+    "backToCourse": "Tilbage til kurset",
+    "notEnoughCards": "Studér mindst 3 kort for at låse op"
   }
 }

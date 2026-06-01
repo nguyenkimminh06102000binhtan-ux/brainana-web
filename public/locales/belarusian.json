@@ -404,14 +404,17 @@
     "follow": "+ Выконвайце",
     "share": "падзяліцца",
     "copied": "Скапіравана!",
-    "configureWords": "Наладзіць словы",
+    "configureWords": "Наладзіць карткі",
     "configureWordsTitle": "Словы для вывучэння",
     "configureWordsDesc": "Зніміце адзнаку са слоў, якія хочаце прапусціць",
     "configureWordsSave": "Захаваць",
     "configureWordsSaving": "Захоўванне…",
     "configureWordsSaved": "Захавана",
     "configureWordsSelectAll": "Выбраць усё",
-    "configureWordsUntitled": "Раздзел без назвы"
+    "configureWordsUntitled": "Раздзел без назвы",
+    "quickReview": "Хуткае паўтарэнне",
+    "reviewCards": "Паўтарыць ({count})",
+    "learnNewWords": "Вучыць новае"
   },
   "study": {
     "allSections": "Усе раздзелы",
@@ -783,5 +786,19 @@
     "txChargeback": "Чарджбэк",
     "txAdminGrant": "Адміністратыўны грант",
     "txUnknown": "Трансакцыя"
+  },
+  "speedReview": {
+    "title": "Хуткі Агляд",
+    "score": "Ачкі",
+    "gameOver": "Гульня скончана!",
+    "complete": "Завершана!",
+    "cardsReviewed": "{count} картак паўторана",
+    "yourScore": "Вашы ачкі",
+    "playAgain": "Гуляць зноў",
+    "correct": "Правільна!",
+    "wrong": "Няправільна!",
+    "timeUp": "Час скончыўся!",
+    "backToCourse": "Назад да курса",
+    "notEnoughCards": "Вывучыце хаця б 3 карткі каб разблакаваць"
   }
 }

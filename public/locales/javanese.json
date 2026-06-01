@@ -404,14 +404,17 @@
     "follow": "+ Tindakake",
     "share": "Nuduhake",
     "copied": "Disalin!",
-    "configureWords": "Atur tembung",
+    "configureWords": "Atur kartu",
     "configureWordsTitle": "Tembung kanggo sinau",
     "configureWordsDesc": "Uncheck tembung sing pengin dilewati",
     "configureWordsSave": "Simpen",
     "configureWordsSaving": "Nyimpen…",
     "configureWordsSaved": "Disimpen",
     "configureWordsSelectAll": "Pilih kabeh",
-    "configureWordsUntitled": "Bagian tanpa judul"
+    "configureWordsUntitled": "Bagian tanpa judul",
+    "quickReview": "Review cepet",
+    "reviewCards": "Review ({count})",
+    "learnNewWords": "Sinau anyar"
   },
   "study": {
     "allSections": "Kabeh bagean",
@@ -783,5 +786,19 @@
     "txChargeback": "Pengembalian biaya",
     "txAdminGrant": "Bantuan admin",
     "txUnknown": "Transaksi"
+  },
+  "speedReview": {
+    "title": "Ulasan Cepet",
+    "score": "Skor",
+    "gameOver": "Permainan rampung!",
+    "complete": "Rampung!",
+    "cardsReviewed": "{count} kartu diulas",
+    "yourScore": "Skor sampeyan",
+    "playAgain": "Main maneh",
+    "correct": "Bener!",
+    "wrong": "Salah!",
+    "timeUp": "Wektune entek!",
+    "backToCourse": "Balik menyang kursus",
+    "notEnoughCards": "Sinau minimal 3 kartu kanggo mbukak"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Sledovať",
     "share": "zdieľať",
     "copied": "Skopírované!",
-    "configureWords": "Konfigurovať slová",
+    "configureWords": "Konfigurovať karty",
     "configureWordsTitle": "Slová na učenie",
     "configureWordsDesc": "Odznačte slová, ktoré chcete preskočiť",
     "configureWordsSave": "Uložiť",
     "configureWordsSaving": "Ukladá sa…",
     "configureWordsSaved": "Uložené",
     "configureWordsSelectAll": "Vybrať všetko",
-    "configureWordsUntitled": "Sekcia bez názvu"
+    "configureWordsUntitled": "Sekcia bez názvu",
+    "quickReview": "Rýchle opakovanie",
+    "reviewCards": "Opakovať ({count})",
+    "learnNewWords": "Učiť sa nové"
   },
   "study": {
     "allSections": "Všetky sekcie",
@@ -783,5 +786,19 @@
     "txChargeback": "Vrátenie platby",
     "txAdminGrant": "Správcovský grant",
     "txUnknown": "Transakcia"
+  },
+  "speedReview": {
+    "title": "Rýchle Opakovanie",
+    "score": "Skóre",
+    "gameOver": "Hra skončila!",
+    "complete": "Dokončené!",
+    "cardsReviewed": "{count} kariet zopakovaných",
+    "yourScore": "Vaše skóre",
+    "playAgain": "Hrať znova",
+    "correct": "Správne!",
+    "wrong": "Nesprávne!",
+    "timeUp": "Čas vypršal!",
+    "backToCourse": "Späť na kurz",
+    "notEnoughCards": "Naučte sa aspoň 3 karty na odomknutie"
   }
 }

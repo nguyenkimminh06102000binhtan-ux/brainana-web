@@ -404,14 +404,17 @@
     "follow": "+ पछ्याउनुहोस्",
     "share": "सेयर गर्नुहोस्",
     "copied": "प्रतिलिपि गरियो!",
-    "configureWords": "शब्दहरू कन्फिगर गर्नुहोस्",
+    "configureWords": "कार्डहरू कन्फिगर गर्नुहोस्",
     "configureWordsTitle": "सिक्नका लागि शब्दहरू",
     "configureWordsDesc": "छोड्न चाहनुभएका शब्दहरूको टिक हटाउनुहोस्",
     "configureWordsSave": "सुरक्षित गर्नुहोस्",
     "configureWordsSaving": "सुरक्षित हुँदैछ…",
     "configureWordsSaved": "सुरक्षित गरियो",
     "configureWordsSelectAll": "सबै छान्नुहोस्",
-    "configureWordsUntitled": "शीर्षकविहीन खण्ड"
+    "configureWordsUntitled": "शीर्षकविहीन खण्ड",
+    "quickReview": "द्रुत समीक्षा",
+    "reviewCards": "समीक्षा ({count})",
+    "learnNewWords": "नयाँ सिक्नुहोस्"
   },
   "study": {
     "allSections": "सबै खण्डहरू",
@@ -783,5 +786,19 @@
     "txChargeback": "चार्जब्याक",
     "txAdminGrant": "प्रशासन अनुदान",
     "txUnknown": "लेनदेन"
+  },
+  "speedReview": {
+    "title": "स्पिड रिभ्यू",
+    "score": "अङ्क",
+    "gameOver": "खेल समाप्त!",
+    "complete": "पूरा!",
+    "cardsReviewed": "{count} कार्ड समीक्षा भयो",
+    "yourScore": "तपाईंको अङ्क",
+    "playAgain": "फेरि खेल्नुहोस्",
+    "correct": "सही!",
+    "wrong": "गलत!",
+    "timeUp": "समय सकियो!",
+    "backToCourse": "कोर्समा फर्कनुहोस्",
+    "notEnoughCards": "अनलक गर्न कम्तिमा 3 कार्ड पढ्नुहोस्"
   }
 }

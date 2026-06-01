@@ -404,14 +404,17 @@
     "follow": "+ Fuata",
     "share": "Shiriki",
     "copied": "Imenakiliwa!",
-    "configureWords": "Sanidi maneno",
+    "configureWords": "Sanidi kadi",
     "configureWordsTitle": "Maneno ya kujifunza",
     "configureWordsDesc": "Ondoa alama ya maneno unayotaka kuruka",
     "configureWordsSave": "Hifadhi",
     "configureWordsSaving": "Inahifadhi…",
     "configureWordsSaved": "Imehifadhiwa",
     "configureWordsSelectAll": "Chagua yote",
-    "configureWordsUntitled": "Sehemu bila kichwa"
+    "configureWordsUntitled": "Sehemu bila kichwa",
+    "quickReview": "Mapitio ya haraka",
+    "reviewCards": "Pitia ({count})",
+    "learnNewWords": "Jifunza kipya"
   },
   "study": {
     "allSections": "Sehemu zote",
@@ -783,5 +786,19 @@
     "txChargeback": "Urejeshaji malipo",
     "txAdminGrant": "Ruzuku ya msimamizi",
     "txUnknown": "Shughuli"
+  },
+  "speedReview": {
+    "title": "Mapitio ya Haraka",
+    "score": "Alama",
+    "gameOver": "Mchezo umekwisha!",
+    "complete": "Umekamilika!",
+    "cardsReviewed": "Kadi {count} zimepitwa",
+    "yourScore": "Alama zako",
+    "playAgain": "Cheza tena",
+    "correct": "Sahihi!",
+    "wrong": "Kosa!",
+    "timeUp": "Muda umekwisha!",
+    "backToCourse": "Rudi kwenye kozi",
+    "notEnoughCards": "Soma kadi angalau 3 kuanzisha"
   }
 }

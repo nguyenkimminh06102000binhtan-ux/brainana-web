@@ -51,6 +51,8 @@ export default async function CourseDetailPage({
   const creatorName = creator?.display_name ?? creator?.username ?? "Unknown";
   const creatorHandle = creator?.username ? `@${creator.username}` : creatorName;
 
+  const dueCutoff = (await import("@/utils/review-schedule")).reviewDayCutoff().toISOString();
+
   // Parallel queries
   const [
     { data: allSectionsRaw },
@@ -62,6 +64,8 @@ export default async function CourseDetailPage({
     { count: creatorFollowerCount },
     { data: profile },
     { data: ignoredProgressRows },
+    { count: seenCount },
+    { count: dueCount },
     topMems,
   ] = await Promise.all([
     supabase.from("sections").select("id, title, position, items(id, front_text, back_text, position)").eq("course_id", course.id).order("position"),
@@ -73,6 +77,8 @@ export default async function CourseDetailPage({
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
     supabase.from("item_progress").select("item_id").eq("user_id", user.id).eq("course_id", course.id).eq("ignored", true),
+    supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false),
+    supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false).lt("next_review_at", dueCutoff),
     (async (): Promise<TopMem[]> => {
       const { data: itemRows } = await supabase.from("items").select("id").eq("course_id", course.id);
       const ids = (itemRows ?? []).map((r) => r.id as string);
@@ -110,6 +116,10 @@ export default async function CourseDetailPage({
 
   const isEnrolled = Boolean(enrollmentData);
   const isFollowing = Boolean(followData);
+  const hasStarted = (seenCount ?? 0) > 0;
+  const reviewDue = dueCount ?? 0;
+  const totalNonIgnored = configSections.flatMap((s) => s.cards.filter((c) => !c.ignored)).length;
+  const newCardsCount = Math.max(0, totalNonIgnored - (seenCount ?? 0));
 
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
   const learnerCount = course.learner_count ?? 0;
@@ -178,12 +188,45 @@ export default async function CourseDetailPage({
 
                 {/* CTA row */}
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Link
-                    href={`/study/${course.slug}`}
-                    className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
-                  >
-                    {cl.startLearning}
-                  </Link>
+                  {!hasStarted ? (
+                    <Link
+                      href={`/study/${course.slug}`}
+                      className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                    >
+                      {cl.startLearning}
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        href={`/speed-review/${course.slug}`}
+                        className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                      >
+                        {cl.quickReview}
+                      </Link>
+                      <Link
+                        href={reviewDue > 0 ? `/study/${course.slug}?mode=review` : "#"}
+                        aria-disabled={reviewDue === 0}
+                        className={`rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
+                          reviewDue > 0
+                            ? "bg-paper text-ink hover:bg-paper-2 active:translate-y-[1px] active:shadow-none"
+                            : "pointer-events-none bg-ink/10 text-ink-3"
+                        }`}
+                      >
+                        {t(cl.reviewCards, { count: String(reviewDue) })}
+                      </Link>
+                      <Link
+                        href={newCardsCount > 0 ? `/study/${course.slug}?mode=new` : "#"}
+                        aria-disabled={newCardsCount === 0}
+                        className={`rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
+                          newCardsCount > 0
+                            ? "bg-paper text-ink hover:bg-paper-2 active:translate-y-[1px] active:shadow-none"
+                            : "pointer-events-none bg-ink/10 text-ink-3"
+                        }`}
+                      >
+                        {cl.learnNewWords}
+                      </Link>
+                    </>
+                  )}
 
                   <Link
                     href={`/learn/${course.slug}`}
@@ -239,7 +282,6 @@ export default async function CourseDetailPage({
               totalCount={course.card_count}
               courseId={course.id}
               slug={course.slug}
-              isEnrolled={isEnrolled}
               sections={configSections}
               labels={{
                 preview: cl.preview,

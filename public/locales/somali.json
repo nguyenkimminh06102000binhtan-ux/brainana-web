@@ -404,14 +404,17 @@
     "follow": "+ Raac",
     "share": "La wadaag",
     "copied": "la guuriyay!",
-    "configureWords": "Habbee erayada",
+    "configureWords": "Habbee kaadhadhka",
     "configureWordsTitle": "Erayada la baranayo",
     "configureWordsDesc": "Ka saar calaamadaha erayada aad rabto in aad ka booddo",
     "configureWordsSave": "Keydi",
     "configureWordsSaving": "La keydiyaa…",
     "configureWordsSaved": "La keydsay",
     "configureWordsSelectAll": "Xulo dhammaan",
-    "configureWordsUntitled": "Qaybta aan cinwaan lahayn"
+    "configureWordsUntitled": "Qaybta aan cinwaan lahayn",
+    "quickReview": "Dib u eegis degdeg ah",
+    "reviewCards": "Dib u eeg ({count})",
+    "learnNewWords": "Baro cusub"
   },
   "study": {
     "allSections": "Dhammaan qaybaha",
@@ -783,5 +786,19 @@
     "txChargeback": "Dib u soo celinta",
     "txAdminGrant": "deeqda maamulka",
     "txUnknown": "Wax kala iibsiga"
+  },
+  "speedReview": {
+    "title": "Dib u Eegis Degdeg",
+    "score": "Dhibcaha",
+    "gameOver": "Ciyaarta waa dhamaatay!",
+    "complete": "La dhammeeyey!",
+    "cardsReviewed": "{count} kaadh la dib u eegay",
+    "yourScore": "Dhibcahaaga",
+    "playAgain": "Ciyaar mar kale",
+    "correct": "Sax!",
+    "wrong": "Khalad!",
+    "timeUp": "Waqtiga waa dhacay!",
+    "backToCourse": "Ku laabo koorsada",
+    "notEnoughCards": "Baadh ugu yaraan 3 kaadh si aad u furto"
   }
 }

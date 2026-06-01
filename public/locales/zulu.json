@@ -404,14 +404,17 @@
     "follow": "+ Landela",
     "share": "Yabelana",
     "copied": "Kukopishiwe!",
-    "configureWords": "Misa amagama",
+    "configureWords": "Misa amakhadi",
     "configureWordsTitle": "Amagama okufunda",
     "configureWordsDesc": "Susa amafulethi emagameni ofuna ukuwagqitha",
     "configureWordsSave": "Gcina",
     "configureWordsSaving": "Kugcinwa…",
     "configureWordsSaved": "Kugcinwe",
     "configureWordsSelectAll": "Khetha konke",
-    "configureWordsUntitled": "Isigaba esingenisihloko"
+    "configureWordsUntitled": "Isigaba esingenisihloko",
+    "quickReview": "Ukubuyekeza okusha",
+    "reviewCards": "Buyekeza ({count})",
+    "learnNewWords": "Funda okutsha"
   },
   "study": {
     "allSections": "Zonke izigaba",
@@ -783,5 +786,19 @@
     "txChargeback": "Inkokhelo emuva",
     "txAdminGrant": "Admin grant",
     "txUnknown": "Okwenziwayo"
+  },
+  "speedReview": {
+    "title": "Ukubuyekeza Okusha",
+    "score": "Amanqe",
+    "gameOver": "Umdlalo uphelile!",
+    "complete": "Kuqediwe!",
+    "cardsReviewed": "Kubuyekezwe amakhadi angu-{count}",
+    "yourScore": "Amanqe akho",
+    "playAgain": "Dlala futhi",
+    "correct": "Kulungile!",
+    "wrong": "Akuqinisekile!",
+    "timeUp": "Isikhathi siphelile!",
+    "backToCourse": "Buyela ekhosini",
+    "notEnoughCards": "Funda okungenani amakhadi angu-3 ukuvula"
   }
 }

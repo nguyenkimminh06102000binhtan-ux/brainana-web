@@ -404,14 +404,17 @@
     "follow": "+ Jarraitu",
     "share": "Partekatu",
     "copied": "Kopiatu!",
-    "configureWords": "Konfiguratu hitzak",
+    "configureWords": "Konfiguratu txartelak",
     "configureWordsTitle": "Ikasteko hitzak",
     "configureWordsDesc": "Saltatu nahi dituzun hitzak desmarkatu",
     "configureWordsSave": "Gorde",
     "configureWordsSaving": "Gordetzen…",
     "configureWordsSaved": "Gordeta",
     "configureWordsSelectAll": "Hautatu guztiak",
-    "configureWordsUntitled": "Izenburugabeko atala"
+    "configureWordsUntitled": "Izenburugabeko atala",
+    "quickReview": "Berrikuspena azkar",
+    "reviewCards": "Berrikusi ({count})",
+    "learnNewWords": "Berri ikasi"
   },
   "study": {
     "allSections": "Atal guztiak",
@@ -783,5 +786,19 @@
     "txChargeback": "Itzulketa",
     "txAdminGrant": "Adminaren doaria",
     "txUnknown": "Transakzioa"
+  },
+  "speedReview": {
+    "title": "Azterketa Azkarra",
+    "score": "Puntuazioa",
+    "gameOver": "Jokoa amaitu da!",
+    "complete": "Osatuta!",
+    "cardsReviewed": "{count} txartel berrikusi",
+    "yourScore": "Zure puntuazioa",
+    "playAgain": "Berriro jo",
+    "correct": "Zuzena!",
+    "wrong": "Okerra!",
+    "timeUp": "Denbora amaitu da!",
+    "backToCourse": "Itzuli ikastarora",
+    "notEnoughCards": "Ikasi gutxienez 3 txartel Speed Review desblokeatzeko"
   }
 }

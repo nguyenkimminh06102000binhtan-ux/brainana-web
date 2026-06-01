@@ -404,14 +404,17 @@
     "follow": "+ 关注",
     "share": "分享",
     "copied": "复制了！",
-    "configureWords": "配置词汇",
+    "configureWords": "配置卡片",
     "configureWordsTitle": "要学习的词汇",
     "configureWordsDesc": "取消勾选你想跳过的词汇",
     "configureWordsSave": "保存",
     "configureWordsSaving": "保存中…",
     "configureWordsSaved": "已保存",
     "configureWordsSelectAll": "全选",
-    "configureWordsUntitled": "未命名章节"
+    "configureWordsUntitled": "未命名章节",
+    "quickReview": "快速复习",
+    "reviewCards": "复习 ({count})",
+    "learnNewWords": "学新内容"
   },
   "study": {
     "allSections": "所有部分",
@@ -783,5 +786,19 @@
     "txChargeback": "退单",
     "txAdminGrant": "管理员赠送",
     "txUnknown": "交易"
+  },
+  "speedReview": {
+    "title": "速度复习",
+    "score": "得分",
+    "gameOver": "游戏结束！",
+    "complete": "完成！",
+    "cardsReviewed": "已复习 {count} 张卡片",
+    "yourScore": "你的得分",
+    "playAgain": "再玩一次",
+    "correct": "正确！",
+    "wrong": "错误！",
+    "timeUp": "时间到！",
+    "backToCourse": "返回课程",
+    "notEnoughCards": "先学习至少3张卡片以解锁速度复习"
   }
 }
