@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
+import { resolveMediaUrl } from "@/utils/resolve-media-url";
 import LearnClient from "./learn-client";
 import type { LearnSection } from "./learn-client";
 
@@ -43,28 +44,36 @@ export default async function LearnPage({
   const { data: sectionsRaw } = await supabase
     .from("sections")
     .select(
-      "id, title, items(id, front_text, back_text, romanization, accepted_answers)",
+      "id, title, items(id, front_text, back_text, romanization, accepted_answers, back_audio_url)",
     )
     .eq("course_id", course.id)
     .order("position");
 
-  const sections: LearnSection[] = (sectionsRaw ?? []).map((s) => ({
-    id: String(s.id),
-    title: s.title ?? "",
-    cards: ((s.items ?? []) as {
-      id: string;
-      front_text: string;
-      back_text: string;
-      romanization: string | null;
-      accepted_answers: string[] | null;
-    }[]).map((item) => ({
-      id: item.id,
-      front: item.front_text,
-      back: item.back_text,
-      romanization: item.romanization ?? null,
-      acceptedAnswers: item.accepted_answers ?? [item.back_text],
+  type RawItem = {
+    id: string;
+    front_text: string;
+    back_text: string;
+    romanization: string | null;
+    accepted_answers: string[] | null;
+    back_audio_url: string | null;
+  };
+
+  const sections: LearnSection[] = await Promise.all(
+    (sectionsRaw ?? []).map(async (s) => ({
+      id: String(s.id),
+      title: s.title ?? "",
+      cards: await Promise.all(
+        ((s.items ?? []) as RawItem[]).map(async (item) => ({
+          id: item.id,
+          front: item.front_text,
+          back: item.back_text,
+          romanization: item.romanization ?? null,
+          acceptedAnswers: item.accepted_answers ?? [item.back_text],
+          backAudioUrl: await resolveMediaUrl(item.back_audio_url, supabase),
+        })),
+      ),
     })),
-  }));
+  );
 
   return (
     <LearnClient

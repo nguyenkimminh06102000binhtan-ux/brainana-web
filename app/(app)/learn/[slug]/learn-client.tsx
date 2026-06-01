@@ -15,6 +15,7 @@ export type LearnCard = {
   back: string;
   romanization: string | null;
   acceptedAnswers: string[];
+  backAudioUrl?: string | null;
 };
 
 export type LearnSection = {
@@ -34,6 +35,54 @@ type CardSelectionMode = "quick" | "manual";
 
 const EVAL_RE = /%%EVAL:[^%]+%%\n?/g;
 const EVAL_PARSE_RE = /%%EVAL:([^:]+):(correct|incorrect)%%/g;
+const AUDIO_MARKER_RE = /%%AUDIO:([^%]+)%%/g;
+
+type MessagePart = { type: "text"; content: string } | { type: "audio"; cardId: string };
+
+function parseMessageParts(text: string): MessagePart[] {
+  const parts: MessagePart[] = [];
+  let last = 0;
+  const re = new RegExp(AUDIO_MARKER_RE.source, "g");
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push({ type: "text", content: text.slice(last, m.index) });
+    parts.push({ type: "audio", cardId: m[1]! });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push({ type: "text", content: text.slice(last) });
+  return parts.length > 0 ? parts : [{ type: "text", content: text }];
+}
+
+function InlineAudioPlayer({ url }: { url: string }) {
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  function play() {
+    if (!audioRef.current) {
+      const audio = new Audio(url);
+      audioRef.current = audio;
+      audio.onplay = () => setPlaying(true);
+      audio.onended = () => setPlaying(false);
+    }
+    audioRef.current.currentTime = 0;
+    audioRef.current.play();
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={play}
+      className={`my-2 flex items-center gap-2 rounded-full border-2 px-4 py-2 font-manrope text-sm font-[700] transition ${
+        playing
+          ? "border-orange bg-orange text-on-bright"
+          : "border-orange/40 bg-orange/10 text-orange-text hover:bg-orange/20"
+      }`}
+    >
+      <span>{playing ? "◼" : "▶"}</span>
+      <span>{playing ? "Playing…" : "Play audio"}</span>
+    </button>
+  );
+}
 const MAX_CARDS = 50;
 const MAX_MESSAGES = 50;
 const QUICK_PICK_OPTIONS = [10, 25, 50];
@@ -107,6 +156,16 @@ export default function LearnClient({
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Map cardId → resolved audio URL for all cards that have audio
+  const audioMap = useMemo(
+    () => new Map(
+      sections.flatMap((s) => s.cards)
+        .filter((c) => c.backAudioUrl)
+        .map((c) => [c.id, c.backAudioUrl!]),
+    ),
+    [sections],
+  );
+
   // Cards from selected sections
   const poolCards = useMemo(
     () =>
@@ -178,6 +237,7 @@ export default function LearnClient({
           courseLanguages: { source: sourceLanguage, target: targetLanguage },
           category,
           level: difficulty,
+          audioCardIds: cards.filter((c) => c.backAudioUrl).map((c) => c.id),
         }),
       });
 
@@ -715,7 +775,15 @@ export default function LearnClient({
               }`}
             >
               {m.display ? (
-                <ChatMessage role={m.role} content={m.display} />
+                m.role === "assistant"
+                  ? parseMessageParts(m.display).map((part, i) =>
+                      part.type === "audio"
+                        ? audioMap.has(part.cardId)
+                          ? <InlineAudioPlayer key={i} url={audioMap.get(part.cardId)!} />
+                          : null
+                        : <ChatMessage key={i} role="assistant" content={part.content} />
+                    )
+                  : <ChatMessage role="user" content={m.display} />
               ) : (
                 <span className="flex items-center gap-1 py-0.5">
                   <span className="h-2 w-2 rounded-full bg-ink-3 animate-bounce [animation-delay:0ms]" />
@@ -730,7 +798,19 @@ export default function LearnClient({
 
       {/* Input */}
       <div className="pt-2">
-        {messages.length >= MAX_MESSAGES ? (
+        {!isStreaming && sessionCards.length > 0 && evals.length >= sessionCards.length ? (
+          <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
+            <span className="font-manrope text-sm text-ink-3">All {sessionCards.length} cards covered!</span>
+            <button
+              type="button"
+              onClick={handleEnd}
+              disabled={isSaving}
+              className="ml-3 shrink-0 rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 disabled:opacity-50"
+            >
+              {isSaving ? labels.saving : "See results →"}
+            </button>
+          </div>
+        ) : messages.length >= MAX_MESSAGES ? (
           <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
             <span className="font-manrope text-sm text-ink-3">Message limit reached — wrap up your session</span>
             <button

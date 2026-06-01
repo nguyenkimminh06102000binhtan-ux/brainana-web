@@ -49,6 +49,7 @@ function buildSystemPrompt(
   courseLanguages: { source: string | null; target: string | null },
   category: string | null,
   level: string | null,
+  audioCardIds: Set<string>,
 ) {
   const sourceLang = courseLanguages.source;
   const targetLang = courseLanguages.target;
@@ -63,13 +64,13 @@ function buildSystemPrompt(
     : `The SUBJECT is ${category ?? "general knowledge"} — test concepts and understanding.`;
 
   const langInstruction = sourceLang
-    ? `Write all messages in ${sourceLang}. ${subjectNote} ${targetLang ? `The student's native language is ${targetLang} — you may briefly clarify in ${targetLang} only when the student is clearly confused.` : ""}`
-    : `Conduct the session in the language of the cards. ${subjectNote}`;
+    ? `Conduct the entire session — questions, feedback, hints — in ${sourceLang}. ${subjectNote} ${targetLang ? `The vocabulary being studied is ${targetLang}; the student already speaks ${sourceLang} and is learning ${targetLang}. Never switch to ${targetLang} for your own explanations — only quote ${targetLang} words when asking about them.` : ""}`
+    : `Conduct the session in the language of the card fronts. ${subjectNote}`;
 
   const cardList = cards
     .map(
       (c) =>
-        `[${c.id}] "${c.front}" → "${c.back}"` +
+        `[${c.id}]${audioCardIds.has(c.id) ? " [audio]" : ""} "${c.front}" → "${c.back}"` +
         (c.romanization ? ` (${c.romanization})` : "") +
         (c.acceptedAnswers.length > 1
           ? ` [also accepted: ${c.acceptedAnswers.slice(1).join(", ")}]`
@@ -92,6 +93,7 @@ function buildSystemPrompt(
     : languageMode
     ? (() => {
         const hasRomanization = cards.some((c) => c.romanization);
+        const hasAudio = audioCardIds.size > 0;
         return `AVAILABLE QUESTION FORMATS — choose whichever type best suits each card. Avoid using the same type twice in a row. Use your judgment; don't follow this list in order.
 1. 🔤 Direct translation — "How do you say '...' ?"
 2. 📝 Fill in the blank — give a sentence with a ___ gap
@@ -103,7 +105,8 @@ function buildSystemPrompt(
 8. ⚡ Rapid fire — short clue, expect a one-word snap answer
 9. 🌍 Real-world prompt — "You want to [situation]... what do you say?"
 10. 🎵 Rhythm recall — give the first syllable or a rhyme hint, student completes the word${hasRomanization ? `
-11. 🔊 Romanization recall — show the romanization of a card that has one (e.g. "annyeonghaseyo"), ask the student to write the native script (e.g. 안녕하세요). Only use this for cards where romanization is available in the card list above; skip it entirely for cards without romanization.` : ""}`;
+11. 🔊 Romanization recall — show the romanization of a card that has one (e.g. "annyeonghaseyo"), ask the student to write the native script (e.g. 안녕하세요). Only use this for cards where romanization is available in the card list above; skip it entirely for cards without romanization.` : ""}${hasAudio ? `
+12. 🎧 Listen and answer — use %%AUDIO:CARD_ID%% to play the pronunciation of a card marked [audio], then ask the student what the word means or how to spell it. Only use card IDs marked [audio] in the card list above.` : ""}`;
       })()
     : `AVAILABLE QUESTION FORMATS — choose whichever type best suits each card. Avoid using the same type twice in a row. Use your judgment; don't follow this list in order.
 1. 📝 Fill in the blank — give a sentence or fact with a ___ gap
@@ -136,14 +139,15 @@ ${questionTypes}
 
 INSTRUCTIONS:
 - For mathematical content: always use Unicode characters — never LaTeX or code-style notation. Use superscripts (², ³, ⁴, ⁿ), subscripts (₀, ₁, ₂), fractions (½, ⅓, ¼), Greek letters (π, α, β, γ, θ, λ, μ, σ, ω, ∆, Σ), and math symbols (×, ÷, ≤, ≥, ≠, ≈, √, ∞, ∫, ∑). Write formulas in readable plain form e.g. 'a = ∆v/∆t', 'E = mc²', 'ω = ∆θ/∆t'. Never use $...$, \\frac, \\text, \\omega, or ^ for exponents.
-- For each card, pick the question format that best fits its content — a formula card suits "Apply it" or "Spot the mistake", a vocab card suits "Riddle" or "Fill in the blank", etc. Surprise the student.
+- DISTRIBUTE question types evenly across the session. No single type should appear more than 2 times in a row or more than 30% of all questions. Spread audio questions (🎧) evenly throughout — use them from the first few questions onward, not only at the end.
+- Never use the same question type twice in a row.
 - After evaluating each student answer, include this hidden marker on its own line exactly as shown:
   %%EVAL:CARD_ID:correct%% or %%EVAL:CARD_ID:incorrect%%
   Replace CARD_ID with the actual card ID in brackets above.
 - Be generous — accept reasonable paraphrases and minor errors as correct.
 - React with energy: celebrate wins ("🎉 Exactly!"), gently tease mistakes ("Ohhh so close!"), give a quick explanation when wrong.
 - Keep each response punchy — 2–3 sentences max before the next question.
-- After all ${cards.length} cards, give a hype end-of-session recap with a score and a fun comment.
+- You MUST test EXACTLY ${cards.length} cards — one question per card, no more. After the ${cards.length}th card is evaluated, give a short hype recap with the score and stop — do NOT ask any further questions.
 
 Begin with ONE high-energy greeting line (no more), then fire the first question immediately.`;
 }
@@ -164,13 +168,15 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { messages, cards, courseLanguages, category, level } = body as {
+  const { messages, cards, courseLanguages, category, level, audioCardIds: audioCardIdsArr } = body as {
     messages: { role: "user" | "assistant"; content: string }[];
     cards: LearnCard[];
     courseLanguages: { source: string | null; target: string | null };
     category: string | null;
     level: string | null;
+    audioCardIds?: string[];
   };
+  const audioCardIds = new Set<string>(audioCardIdsArr ?? []);
 
   if (!Array.isArray(cards) || cards.length === 0) {
     return new Response("No cards provided", { status: 400 });
@@ -188,7 +194,7 @@ export async function POST(req: NextRequest) {
   // Hard cap at 50 cards regardless of what the client sends
   const cappedCards = cards.slice(0, 50);
 
-  const systemPrompt = buildSystemPrompt(cappedCards, courseLanguages ?? {}, category ?? null, level ?? null);
+  const systemPrompt = buildSystemPrompt(cappedCards, courseLanguages ?? {}, category ?? null, level ?? null, audioCardIds);
 
   // Keep only the last 10 messages to prevent quadratic token growth
   const MAX_HISTORY = 10;
