@@ -403,7 +403,15 @@
     "following": "تعقیب",
     "follow": "+ تعقیب کړئ",
     "share": "شریکول",
-    "copied": "کاپی شوی!"
+    "copied": "کاپی شوی!",
+    "configureWords": "کلمې تنظیم کړئ",
+    "configureWordsTitle": "د زده کولو لپاره کلمې",
+    "configureWordsDesc": "هغه کلمې غیرچیک کړئ چې غواړئ پرې تیر شئ",
+    "configureWordsSave": "خوندي کړئ",
+    "configureWordsSaving": "خوندي کیږي…",
+    "configureWordsSaved": "خوندي شو",
+    "configureWordsSelectAll": "ټول وټاکئ",
+    "configureWordsUntitled": "سرلیک پرته برخه"
   },
   "study": {
     "allSections": "ټولې برخې",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "هیڅ ناستې پاتې نه دي - د دوام لپاره لوړ کړئ",
     "allCardsCovered": "ټول {count} کارتونه پوښل شوي!",
     "seeResults": "پایلې وګورئ",
-    "messageLimitReached": "د پیغام حد ته رسیدلی - خپل سیشن سم کړئ"
+    "messageLimitReached": "د پیغام حد ته رسیدلی - خپل سیشن سم کړئ",
+    "ignoredLabel": "له پامه غورزول شوی"
   },
   "settings": {
     "accountCenter": "د حساب مرکز",

@@ -403,7 +403,15 @@
     "following": "التالي",
     "follow": "+ متابعة",
     "share": "يشارك",
-    "copied": "منسوخ!"
+    "copied": "منسوخ!",
+    "configureWords": "تكوين الكلمات",
+    "configureWordsTitle": "الكلمات للتعلم",
+    "configureWordsDesc": "قم بإلغاء تحديد الكلمات التي تريد تخطيها",
+    "configureWordsSave": "حفظ",
+    "configureWordsSaving": "جارٍ الحفظ…",
+    "configureWordsSaved": "تم الحفظ",
+    "configureWordsSelectAll": "تحديد الكل",
+    "configureWordsUntitled": "قسم بلا عنوان"
   },
   "study": {
     "allSections": "جميع الأقسام",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "لا توجد جلسات متبقية — قم بالترقية للمتابعة",
     "allCardsCovered": "تم تغطية جميع البطاقات {count}!",
     "seeResults": "عرض النتائج",
-    "messageLimitReached": "تم الوصول إلى حد الرسائل — أنهِ جلستك"
+    "messageLimitReached": "تم الوصول إلى حد الرسائل — أنهِ جلستك",
+    "ignoredLabel": "مُتجاهَل"
   },
   "settings": {
     "accountCenter": "مركز الحساب",

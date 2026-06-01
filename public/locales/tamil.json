@@ -403,7 +403,15 @@
     "following": "தொடர்ந்து",
     "follow": "+ பின்பற்றவும்",
     "share": "பகிரவும்",
-    "copied": "நகலெடுக்கப்பட்டது!"
+    "copied": "நகலெடுக்கப்பட்டது!",
+    "configureWords": "வார்த்தைகளை உள்ளமைக்கவும்",
+    "configureWordsTitle": "கற்கும் வார்த்தைகள்",
+    "configureWordsDesc": "தவிர்க்க விரும்பும் வார்த்தைகளின் டிக் நீக்கவும்",
+    "configureWordsSave": "சேமிக்கவும்",
+    "configureWordsSaving": "சேமிக்கிறது…",
+    "configureWordsSaved": "சேமிக்கப்பட்டது",
+    "configureWordsSelectAll": "அனைத்தையும் தேர்ந்தெடு",
+    "configureWordsUntitled": "தலைப்பு இல்லாத பிரிவு"
   },
   "study": {
     "allSections": "அனைத்து பிரிவுகளும்",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "அமர்வுகள் எதுவும் இல்லை - தொடர மேம்படுத்தவும்",
     "allCardsCovered": "அனைத்து {count} கார்டுகளும் மூடப்பட்டிருக்கும்!",
     "seeResults": "முடிவுகளைப் பார்க்கவும்",
-    "messageLimitReached": "செய்தி வரம்பை எட்டிவிட்டது - உங்கள் அமர்வை முடிக்கவும்"
+    "messageLimitReached": "செய்தி வரம்பை எட்டிவிட்டது - உங்கள் அமர்வை முடிக்கவும்",
+    "ignoredLabel": "புறக்கணிக்கப்பட்டது"
   },
   "settings": {
     "accountCenter": "கணக்கு மையம்",

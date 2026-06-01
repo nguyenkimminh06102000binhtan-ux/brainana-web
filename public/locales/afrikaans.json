@@ -403,7 +403,15 @@
     "following": "Volgende",
     "follow": "+ Volg",
     "share": "Deel",
-    "copied": "Gekopieer!"
+    "copied": "Gekopieer!",
+    "configureWords": "Stel woorde in",
+    "configureWordsTitle": "Woorde om te leer",
+    "configureWordsDesc": "Ontmerk woorde wat jy wil oorslaan",
+    "configureWordsSave": "Stoor",
+    "configureWordsSaving": "Stoor…",
+    "configureWordsSaved": "Gestoor",
+    "configureWordsSelectAll": "Kies alles",
+    "configureWordsUntitled": "Naamlose afdeling"
   },
   "study": {
     "allSections": "Alle afdelings",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Geen sessies oor — opgradeer om voort te gaan",
     "allCardsCovered": "Alle {count} kaarte afgedek!",
     "seeResults": "Sien resultate",
-    "messageLimitReached": "Berigtelimiet bereik — sluit jou sessie af"
+    "messageLimitReached": "Berigtelimiet bereik — sluit jou sessie af",
+    "ignoredLabel": "Geïgnoreer"
   },
   "settings": {
     "accountCenter": "Rekeningsentrum",

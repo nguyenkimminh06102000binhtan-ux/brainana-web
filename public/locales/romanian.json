@@ -403,7 +403,15 @@
     "following": "Urmând",
     "follow": "+ Urmăriți",
     "share": "Distribuie",
-    "copied": "Copiat!"
+    "copied": "Copiat!",
+    "configureWords": "Configurați cuvintele",
+    "configureWordsTitle": "Cuvinte de învățat",
+    "configureWordsDesc": "Debifați cuvintele pe care doriți să le omiteți",
+    "configureWordsSave": "Salvați",
+    "configureWordsSaving": "Se salvează…",
+    "configureWordsSaved": "Salvat",
+    "configureWordsSelectAll": "Selectați tot",
+    "configureWordsUntitled": "Secțiune fără titlu"
   },
   "study": {
     "allSections": "Toate secțiunile",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Nu au mai rămas sesiuni - faceți upgrade pentru a continua",
     "allCardsCovered": "Toate cardurile {count} sunt acoperite!",
     "seeResults": "Vezi rezultatele",
-    "messageLimitReached": "Limita de mesaje a fost atinsă — încheiați-vă sesiunea"
+    "messageLimitReached": "Limita de mesaje a fost atinsă — încheiați-vă sesiunea",
+    "ignoredLabel": "Ignorat"
   },
   "settings": {
     "accountCenter": "Centru de cont",

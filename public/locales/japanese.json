@@ -403,7 +403,15 @@
     "following": "続く",
     "follow": "+フォローする",
     "share": "共有",
-    "copied": "コピーしました！"
+    "copied": "コピーしました！",
+    "configureWords": "単語を設定",
+    "configureWordsTitle": "学習する単語",
+    "configureWordsDesc": "スキップしたい単語のチェックを外してください",
+    "configureWordsSave": "保存",
+    "configureWordsSaving": "保存中…",
+    "configureWordsSaved": "保存しました",
+    "configureWordsSelectAll": "すべて選択",
+    "configureWordsUntitled": "無題のセクション"
   },
   "study": {
     "allSections": "すべてのセクション",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "セッション残数なし — 続けるにはアップグレードしてください",
     "allCardsCovered": "全{count}枚のカードをカバーしました！",
     "seeResults": "結果を見る",
-    "messageLimitReached": "メッセージの上限に達しました — セッションを終了してください"
+    "messageLimitReached": "メッセージの上限に達しました — セッションを終了してください",
+    "ignoredLabel": "無視済み"
   },
   "settings": {
     "accountCenter": "アカウントセンター",

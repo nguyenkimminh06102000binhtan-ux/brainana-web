@@ -68,6 +68,35 @@ export async function toggleFollow(formData: FormData) {
   revalidatePath(`/c/${slug}`);
 }
 
+export async function saveWordConfig(courseId: string, slug: string, ignoredItemIds: string[]) {
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  // Clear existing ignored flags for this user+course
+  await supabase
+    .from("item_progress")
+    .update({ ignored: false })
+    .eq("user_id", user.id)
+    .eq("course_id", courseId)
+    .eq("ignored", true);
+
+  // Set ignored=true for specified items
+  if (ignoredItemIds.length > 0) {
+    const rows = ignoredItemIds.map((itemId) => ({
+      user_id: user.id,
+      item_id: itemId,
+      course_id: courseId,
+      ignored: true,
+    }));
+    await supabase
+      .from("item_progress")
+      .upsert(rows, { onConflict: "user_id,item_id" });
+  }
+
+  revalidatePath(`/c/${slug}`);
+}
+
 export async function toggleEnroll(formData: FormData) {
   const courseId = String(formData.get("course_id") ?? "");
   const slug = String(formData.get("slug") ?? "");

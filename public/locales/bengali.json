@@ -403,7 +403,15 @@
     "following": "অনুসরণ করছে",
     "follow": "+ অনুসরণ করুন",
     "share": "শেয়ার করুন",
-    "copied": "কপি করা !"
+    "copied": "কপি করা !",
+    "configureWords": "শব্দ কনফিগার করুন",
+    "configureWordsTitle": "শিখতে হবে এমন শব্দ",
+    "configureWordsDesc": "যে শব্দগুলো বাদ দিতে চান সেগুলোর চেক তুলে নিন",
+    "configureWordsSave": "সংরক্ষণ করুন",
+    "configureWordsSaving": "সংরক্ষণ হচ্ছে…",
+    "configureWordsSaved": "সংরক্ষিত",
+    "configureWordsSelectAll": "সব নির্বাচন করুন",
+    "configureWordsUntitled": "শিরোনামবিহীন বিভাগ"
   },
   "study": {
     "allSections": "সব বিভাগ",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "আর কোনো সেশন বাকি নেই — চালিয়ে যেতে আপগ্রেড করুন",
     "allCardsCovered": "সব {count} কার্ড কভার করা হয়েছে!",
     "seeResults": "ফলাফল দেখুন",
-    "messageLimitReached": "মেসেজ সীমা পৌঁছেছে — আপনার সেশন শেষ করুন"
+    "messageLimitReached": "মেসেজ সীমা পৌঁছেছে — আপনার সেশন শেষ করুন",
+    "ignoredLabel": "উপেক্ষিত"
   },
   "settings": {
     "accountCenter": "অ্যাকাউন্ট কেন্দ্র",

@@ -403,7 +403,15 @@
     "following": "Следующий",
     "follow": "+ Следовать",
     "share": "Делиться",
-    "copied": "Скопировано!"
+    "copied": "Скопировано!",
+    "configureWords": "Настроить слова",
+    "configureWordsTitle": "Слова для изучения",
+    "configureWordsDesc": "Снимите отметку со слов, которые хотите пропустить",
+    "configureWordsSave": "Сохранить",
+    "configureWordsSaving": "Сохранение…",
+    "configureWordsSaved": "Сохранено",
+    "configureWordsSelectAll": "Выбрать всё",
+    "configureWordsUntitled": "Раздел без названия"
   },
   "study": {
     "allSections": "Все разделы",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Сеансов не осталось — обновите, чтобы продолжить работу",
     "allCardsCovered": "Все карты {count} закрыты!",
     "seeResults": "Посмотреть результаты",
-    "messageLimitReached": "Достигнут лимит сообщений — завершите сеанс"
+    "messageLimitReached": "Достигнут лимит сообщений — завершите сеанс",
+    "ignoredLabel": "Игнорируемое"
   },
   "settings": {
     "accountCenter": "Центр счетов",

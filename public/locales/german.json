@@ -403,7 +403,15 @@
     "following": "Nachfolgend",
     "follow": "+ Folgen",
     "share": "Aktie",
-    "copied": "Kopiert!"
+    "copied": "Kopiert!",
+    "configureWords": "Wörter konfigurieren",
+    "configureWordsTitle": "Zu lernende Wörter",
+    "configureWordsDesc": "Entfernen Sie Häkchen bei Wörtern, die Sie überspringen möchten",
+    "configureWordsSave": "Speichern",
+    "configureWordsSaving": "Speichern…",
+    "configureWordsSaved": "Gespeichert",
+    "configureWordsSelectAll": "Alle auswählen",
+    "configureWordsUntitled": "Abschnitt ohne Titel"
   },
   "study": {
     "allSections": "Alle Abschnitte",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Keine Sitzungen mehr – Upgrade durchführen, um weiterzumachen",
     "allCardsCovered": "Alle {count} Karten behandelt!",
     "seeResults": "Ergebnisse anzeigen",
-    "messageLimitReached": "Nachrichtenlimit erreicht – beende deine Sitzung"
+    "messageLimitReached": "Nachrichtenlimit erreicht – beende deine Sitzung",
+    "ignoredLabel": "Ignoriert"
   },
   "settings": {
     "accountCenter": "Kontocenter",

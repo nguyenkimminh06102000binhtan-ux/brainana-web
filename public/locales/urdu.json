@@ -403,7 +403,15 @@
     "following": "پیروی کرنا",
     "follow": "+ فالو کریں۔",
     "share": "شیئر کریں۔",
-    "copied": "نقل کیا گیا!"
+    "copied": "نقل کیا گیا!",
+    "configureWords": "الفاظ ترتیب دیں",
+    "configureWordsTitle": "سیکھنے کے الفاظ",
+    "configureWordsDesc": "جو الفاظ چھوڑنا چاہتے ہیں ان کا نشان ہٹائیں",
+    "configureWordsSave": "محفوظ کریں",
+    "configureWordsSaving": "محفوظ ہو رہا ہے…",
+    "configureWordsSaved": "محفوظ ہو گیا",
+    "configureWordsSelectAll": "سب منتخب کریں",
+    "configureWordsUntitled": "بے عنوان حصہ"
   },
   "study": {
     "allSections": "تمام سیکشنز",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "کوئی سیشن باقی نہیں - جاری رکھنے کے لیے اپ گریڈ کریں۔",
     "allCardsCovered": "تمام {count} کارڈز کا احاطہ کیا گیا ہے!",
     "seeResults": "نتائج دیکھیں",
-    "messageLimitReached": "پیغام کی حد تک پہنچ گئی — اپنا سیشن ختم کریں۔"
+    "messageLimitReached": "پیغام کی حد تک پہنچ گئی — اپنا سیشن ختم کریں۔",
+    "ignoredLabel": "نظرانداز"
   },
   "settings": {
     "accountCenter": "اکاؤنٹ سینٹر",

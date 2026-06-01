@@ -403,7 +403,15 @@
     "following": "ಅನುಸರಿಸುತ್ತಿದೆ",
     "follow": "+ ಅನುಸರಿಸಿ",
     "share": "ಹಂಚಿಕೊಳ್ಳಿ",
-    "copied": "ನಕಲು ಮಾಡಲಾಗಿದೆ!"
+    "copied": "ನಕಲು ಮಾಡಲಾಗಿದೆ!",
+    "configureWords": "ಪದಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ",
+    "configureWordsTitle": "ಕಲಿಯಲು ಪದಗಳು",
+    "configureWordsDesc": "ಬಿಡಿಸಲು ಬಯಸುವ ಪದಗಳ ಟಿಕ್ ತೆಗೆಯಿರಿ",
+    "configureWordsSave": "ಉಳಿಸಿ",
+    "configureWordsSaving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ…",
+    "configureWordsSaved": "ಉಳಿಸಲಾಗಿದೆ",
+    "configureWordsSelectAll": "ಎಲ್ಲವನ್ನೂ ಆಯ್ಕೆ ಮಾಡಿ",
+    "configureWordsUntitled": "ಶೀರ್ಷಿಕೆಯಿಲ್ಲದ ವಿಭಾಗ"
   },
   "study": {
     "allSections": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "ಸೆಷನ್‌ಗಳು ಉಳಿದಿಲ್ಲ — ಮುಂದುವರಿಸಲು ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ",
     "allCardsCovered": "ಎಲ್ಲಾ {count} ಕಾರ್ಡ್‌ಗಳು ಒಳಗೊಂಡಿವೆ!",
     "seeResults": "ಫಲಿತಾಂಶಗಳನ್ನು ನೋಡಿ",
-    "messageLimitReached": "ಸಂದೇಶ ಮಿತಿ ತಲುಪಿದೆ — ನಿಮ್ಮ ಸೆಷನ್ ಅನ್ನು ಮುಗಿಸಿ"
+    "messageLimitReached": "ಸಂದೇಶ ಮಿತಿ ತಲುಪಿದೆ — ನಿಮ್ಮ ಸೆಷನ್ ಅನ್ನು ಮುಗಿಸಿ",
+    "ignoredLabel": "ನಿರ್ಲಕ್ಷಿಸಲಾಗಿದೆ"
   },
   "settings": {
     "accountCenter": "ಖಾತೆ ಕೇಂದ್ರ",

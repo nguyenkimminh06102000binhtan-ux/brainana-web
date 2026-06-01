@@ -403,7 +403,15 @@
     "following": "Бақылау",
     "follow": "+ Бақылаңыз",
     "share": "Бөлісу",
-    "copied": "Көшірілген!"
+    "copied": "Көшірілген!",
+    "configureWords": "Сөздерді баптау",
+    "configureWordsTitle": "Үйренетін сөздер",
+    "configureWordsDesc": "Өткізіп жіберетін сөздердің белгісін алып тастаңыз",
+    "configureWordsSave": "Сақтау",
+    "configureWordsSaving": "Сақталуда…",
+    "configureWordsSaved": "Сақталды",
+    "configureWordsSelectAll": "Барлығын таңдау",
+    "configureWordsUntitled": "Тақырыпсыз бөлім"
   },
   "study": {
     "allSections": "Барлық бөлімдер",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Сессиялар біткен — жалғастыру үшін тарифті жетілдіріңіз",
     "allCardsCovered": "Барлық {count} карта қамтылды!",
     "seeResults": "Нәтижелерді қарау",
-    "messageLimitReached": "Хабарлама лимитіне жеттіңіз — сессияны аяқтаңыз"
+    "messageLimitReached": "Хабарлама лимитіне жеттіңіз — сессияны аяқтаңыз",
+    "ignoredLabel": "Еленбеген"
   },
   "settings": {
     "accountCenter": "Аккаунт орталығы",

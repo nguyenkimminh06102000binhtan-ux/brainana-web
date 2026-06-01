@@ -403,7 +403,15 @@
     "following": "Në vijim",
     "follow": "+ Ndiqni",
     "share": "Shpërndaje",
-    "copied": "E kopjuar!"
+    "copied": "E kopjuar!",
+    "configureWords": "Konfiguro fjalët",
+    "configureWordsTitle": "Fjalët për të mësuar",
+    "configureWordsDesc": "Zgjidhni fjalët që doni të kaloni",
+    "configureWordsSave": "Ruaj",
+    "configureWordsSaving": "Duke ruajtur…",
+    "configureWordsSaved": "Ruajtur",
+    "configureWordsSelectAll": "Zgjidh të gjitha",
+    "configureWordsUntitled": "Seksion pa titull"
   },
   "study": {
     "allSections": "Të gjitha seksionet",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Nuk ka sesione të mbetura — përditëso për të vazhduar",
     "allCardsCovered": "Të gjitha {count} letrat u mbuluan!",
     "seeResults": "Shiko rezultatet",
-    "messageLimitReached": "Limiti i mesazheve arritur — përfundo sesionin tuaj"
+    "messageLimitReached": "Limiti i mesazheve arritur — përfundo sesionin tuaj",
+    "ignoredLabel": "Injoruar"
   },
   "settings": {
     "accountCenter": "Qendra e llogarisë",

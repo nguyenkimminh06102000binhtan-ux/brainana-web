@@ -403,7 +403,15 @@
     "following": "Sekant",
     "follow": "+ Sekite",
     "share": "Dalintis",
-    "copied": "Nukopijuota!"
+    "copied": "Nukopijuota!",
+    "configureWords": "Konfigūruoti žodžius",
+    "configureWordsTitle": "Žodžiai mokymuisi",
+    "configureWordsDesc": "Atžymėkite žodžius, kuriuos norite praleisti",
+    "configureWordsSave": "Išsaugoti",
+    "configureWordsSaving": "Išsaugoma…",
+    "configureWordsSaved": "Išsaugota",
+    "configureWordsSelectAll": "Pasirinkti visus",
+    "configureWordsUntitled": "Skyrius be pavadinimo"
   },
   "study": {
     "allSections": "Visi skyriai",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Neliko seansų – atnaujinkite, kad tęstumėte",
     "allCardsCovered": "Apimtos visos {count} kortelės!",
     "seeResults": "Žiūrėti rezultatus",
-    "messageLimitReached": "Pasiektas pranešimų limitas – užbaikite sesiją"
+    "messageLimitReached": "Pasiektas pranešimų limitas – užbaikite sesiją",
+    "ignoredLabel": "Ignoruota"
   },
   "settings": {
     "accountCenter": "Sąskaitų centras",

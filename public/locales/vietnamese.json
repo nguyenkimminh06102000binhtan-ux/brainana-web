@@ -403,7 +403,15 @@
     "following": "Đang theo dõi",
     "follow": "+ Theo dõi",
     "share": "Chia sẻ",
-    "copied": "Đã sao chép!"
+    "copied": "Đã sao chép!",
+    "configureWords": "Cấu hình từ vựng",
+    "configureWordsTitle": "Từ cần học",
+    "configureWordsDesc": "Bỏ chọn các từ bạn muốn bỏ qua",
+    "configureWordsSave": "Lưu",
+    "configureWordsSaving": "Đang lưu…",
+    "configureWordsSaved": "Đã lưu",
+    "configureWordsSelectAll": "Chọn tất cả",
+    "configureWordsUntitled": "Phần không có tiêu đề"
   },
   "study": {
     "allSections": "Tất cả chương",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Không còn phiên nào nữa — hãy nâng cấp để tiếp tục",
     "allCardsCovered": "Tất cả các thẻ {count} đều được bảo hiểm!",
     "seeResults": "Xem kết quả",
-    "messageLimitReached": "Đã đạt đến giới hạn tin nhắn - kết thúc phiên của bạn"
+    "messageLimitReached": "Đã đạt đến giới hạn tin nhắn - kết thúc phiên của bạn",
+    "ignoredLabel": "Bị bỏ qua"
   },
   "settings": {
     "accountCenter": "Trung tâm tài khoản",

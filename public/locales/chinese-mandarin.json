@@ -403,7 +403,15 @@
     "following": "下列的",
     "follow": "+ 关注",
     "share": "分享",
-    "copied": "复制了！"
+    "copied": "复制了！",
+    "configureWords": "配置词汇",
+    "configureWordsTitle": "要学习的词汇",
+    "configureWordsDesc": "取消勾选你想跳过的词汇",
+    "configureWordsSave": "保存",
+    "configureWordsSaving": "保存中…",
+    "configureWordsSaved": "已保存",
+    "configureWordsSelectAll": "全选",
+    "configureWordsUntitled": "未命名章节"
   },
   "study": {
     "allSections": "所有部分",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "没有剩余课程 — 升级以继续",
     "allCardsCovered": "已覆盖所有 {count} 张卡片！",
     "seeResults": "查看结果",
-    "messageLimitReached": "消息限制已达 — 结束您的课程"
+    "messageLimitReached": "消息限制已达 — 结束您的课程",
+    "ignoredLabel": "已忽略"
   },
   "settings": {
     "accountCenter": "账户中心",

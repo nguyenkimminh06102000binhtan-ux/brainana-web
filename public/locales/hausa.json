@@ -403,7 +403,15 @@
     "following": "Masu bi",
     "follow": "+ Bi",
     "share": "Raba",
-    "copied": "Kwafi!"
+    "copied": "Kwafi!",
+    "configureWords": "Tsara kalmomi",
+    "configureWordsTitle": "Kalmomi don koyo",
+    "configureWordsDesc": "Cire alamar kalmomi da kuke so ku tsallake",
+    "configureWordsSave": "Adana",
+    "configureWordsSaving": "Ana adanawa…",
+    "configureWordsSaved": "An adana",
+    "configureWordsSelectAll": "Zaɓi duka",
+    "configureWordsUntitled": "Ɓangare maras suna"
   },
   "study": {
     "allSections": "Duk sassan",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Babu jeri — dagawa don ci gaba",
     "allCardsCovered": "Duk {count} katai ya rufe!",
     "seeResults": "Ga sakamakon",
-    "messageLimitReached": "Iyakar sakin ya cika — jibgita jerin"
+    "messageLimitReached": "Iyakar sakin ya cika — jibgita jerin",
+    "ignoredLabel": "An yi watsi"
   },
   "settings": {
     "accountCenter": "Cibiyar asusun",

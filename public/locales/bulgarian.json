@@ -403,7 +403,15 @@
     "following": "Следване",
     "follow": "+ Следвайте",
     "share": "Споделете",
-    "copied": "Копирано!"
+    "copied": "Копирано!",
+    "configureWords": "Конфигурирайте думи",
+    "configureWordsTitle": "Думи за учене",
+    "configureWordsDesc": "Премахнете отметката от думи, които искате да пропуснете",
+    "configureWordsSave": "Запази",
+    "configureWordsSaving": "Запазване…",
+    "configureWordsSaved": "Запазено",
+    "configureWordsSelectAll": "Избери всички",
+    "configureWordsUntitled": "Раздел без заглавие"
   },
   "study": {
     "allSections": "Всички раздели",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Няма останали сеанси — надстройте, за да продължите",
     "allCardsCovered": "Всички {count} карти покрити!",
     "seeResults": "Преглед на резултатите",
-    "messageLimitReached": "Лимитът на съобщенията е достигнат — завършете вашия сеанс"
+    "messageLimitReached": "Лимитът на съобщенията е достигнат — завършете вашия сеанс",
+    "ignoredLabel": "Игнориран"
   },
   "settings": {
     "accountCenter": "Център на акаунта",

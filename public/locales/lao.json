@@ -403,7 +403,15 @@
     "following": "ຕິດຕາມ",
     "follow": "+ ຕິດຕາມ",
     "share": "ແບ່ງປັນ",
-    "copied": "ສຳເນົາແລ້ວ!"
+    "copied": "ສຳເນົາແລ້ວ!",
+    "configureWords": "ຕັ້ງຄ່າຄຳສັບ",
+    "configureWordsTitle": "ຄຳສັບທີ່ຈະຮຽນ",
+    "configureWordsDesc": "ຍົກເລີກການໝາຍຄຳສັບທີ່ຕ້ອງການຂ້າມ",
+    "configureWordsSave": "ບັນທຶກ",
+    "configureWordsSaving": "ກຳລັງບັນທຶກ…",
+    "configureWordsSaved": "ບັນທຶກແລ້ວ",
+    "configureWordsSelectAll": "ເລືອກທັງໝົດ",
+    "configureWordsUntitled": "ສ່ວນທີ່ບໍ່ມີຫົວຂໍ້"
   },
   "study": {
     "allSections": "ທຸກພາກສ່ວນ",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "ບໍ່ມີເຊດຊັນທີ່ຍັງເຫຼືອ — ອັບເກຣດເພື່ອສືບຕໍ່",
     "allCardsCovered": "ບັດທັງໝົດ {count} ຄອບຄຸມ!",
     "seeResults": "ເບິ່ງຜົນໄດ້ຮັບ",
-    "messageLimitReached": "ຮອດຂີດຈຳກັດຂໍ້ຄວາມແລ້ວ — ສິ້ນສຸດເຊດຊັນຂອງທ່ານ"
+    "messageLimitReached": "ຮອດຂີດຈຳກັດຂໍ້ຄວາມແລ້ວ — ສິ້ນສຸດເຊດຊັນຂອງທ່ານ",
+    "ignoredLabel": "ຖືກລະເລີຍ"
   },
   "settings": {
     "accountCenter": "ສູນບັນຊີ",

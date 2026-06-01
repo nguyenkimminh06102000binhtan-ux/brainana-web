@@ -403,7 +403,15 @@
     "following": "Слідую",
     "follow": "+ Слідкуйте",
     "share": "Поділіться",
-    "copied": "Скопійовано!"
+    "copied": "Скопійовано!",
+    "configureWords": "Налаштувати слова",
+    "configureWordsTitle": "Слова для вивчення",
+    "configureWordsDesc": "Зніміть позначку зі слів, які хочете пропустити",
+    "configureWordsSave": "Зберегти",
+    "configureWordsSaving": "Збереження…",
+    "configureWordsSaved": "Збережено",
+    "configureWordsSelectAll": "Вибрати все",
+    "configureWordsUntitled": "Розділ без назви"
   },
   "study": {
     "allSections": "Всі розділи",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Сеансів не залишилося — оновіть, щоб продовжувати",
     "allCardsCovered": "Охоплено всі картки {count}!",
     "seeResults": "Перегляньте результати",
-    "messageLimitReached": "Досягнуто ліміту повідомлень — завершіть сеанс"
+    "messageLimitReached": "Досягнуто ліміту повідомлень — завершіть сеанс",
+    "ignoredLabel": "Ігнорується"
   },
   "settings": {
     "accountCenter": "Центр обліку",

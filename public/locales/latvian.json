@@ -403,7 +403,15 @@
     "following": "Sekošana",
     "follow": "+ Sekojiet",
     "share": "Dalīties",
-    "copied": "Kopēts!"
+    "copied": "Kopēts!",
+    "configureWords": "Konfigurēt vārdus",
+    "configureWordsTitle": "Vārdi mācīšanās",
+    "configureWordsDesc": "Noņemiet atzīmi no vārdiem, kurus vēlaties izlaist",
+    "configureWordsSave": "Saglabāt",
+    "configureWordsSaving": "Saglabā…",
+    "configureWordsSaved": "Saglabāts",
+    "configureWordsSelectAll": "Atlasīt visu",
+    "configureWordsUntitled": "Sadaļa bez nosaukuma"
   },
   "study": {
     "allSections": "Visas sadaļas",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Nav atlikušu sesiju — jauniniet, lai turpinātu",
     "allCardsCovered": "Visas {count} kartes ir aptvertas!",
     "seeResults": "Skatīt rezultātus",
-    "messageLimitReached": "Sasniegts ziņojumu ierobežojums — pabeidziet sesiju"
+    "messageLimitReached": "Sasniegts ziņojumu ierobežojums — pabeidziet sesiju",
+    "ignoredLabel": "Ignorēts"
   },
   "settings": {
     "accountCenter": "Kontu centrs",

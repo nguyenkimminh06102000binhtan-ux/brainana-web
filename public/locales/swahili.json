@@ -403,7 +403,15 @@
     "following": "Kufuatia",
     "follow": "+ Fuata",
     "share": "Shiriki",
-    "copied": "Imenakiliwa!"
+    "copied": "Imenakiliwa!",
+    "configureWords": "Sanidi maneno",
+    "configureWordsTitle": "Maneno ya kujifunza",
+    "configureWordsDesc": "Ondoa alama ya maneno unayotaka kuruka",
+    "configureWordsSave": "Hifadhi",
+    "configureWordsSaving": "Inahifadhi…",
+    "configureWordsSaved": "Imehifadhiwa",
+    "configureWordsSelectAll": "Chagua yote",
+    "configureWordsUntitled": "Sehemu bila kichwa"
   },
   "study": {
     "allSections": "Sehemu zote",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Hakuna vipindi vilivyosalia - sasisha ili uendelee",
     "allCardsCovered": "Kadi {count} zote zimefunikwa!",
     "seeResults": "Tazama matokeo",
-    "messageLimitReached": "Kikomo cha ujumbe kimefikiwa - maliza kipindi chako"
+    "messageLimitReached": "Kikomo cha ujumbe kimefikiwa - maliza kipindi chako",
+    "ignoredLabel": "Kupuuzwa"
   },
   "settings": {
     "accountCenter": "Kituo cha akaunti",

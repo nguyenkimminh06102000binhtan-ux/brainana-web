@@ -135,6 +135,14 @@ export type Locale = {
     flipUp: string;
     flipDown: string;
     more: string;
+    configureWords: string;
+    configureWordsTitle: string;
+    configureWordsDesc: string;
+    configureWordsSave: string;
+    configureWordsSaving: string;
+    configureWordsSaved: string;
+    configureWordsSelectAll: string;
+    configureWordsUntitled: string;
     flashcard: string;
     multipleChoice: string;
     audioType: string;
@@ -256,6 +264,7 @@ export type Locale = {
     cardsSelected: string;
     maxCardsNote: string;
     searchCards: string;
+    ignoredLabel: string;
     trackProgress: string;
     startSession: string;
     backToCourse: string;

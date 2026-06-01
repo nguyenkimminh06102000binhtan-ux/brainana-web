@@ -403,7 +403,15 @@
     "following": "កំពុងតាម",
     "follow": "+ ធ្វើតាម",
     "share": "ចែករំលែក",
-    "copied": "ចម្លង!"
+    "copied": "ចម្លង!",
+    "configureWords": "រៀបចំពាក្យ",
+    "configureWordsTitle": "ពាក្យដើម្បីរៀន",
+    "configureWordsDesc": "លុបសញ្ញាធីកពាក្យដែលអ្នកចង់រំលង",
+    "configureWordsSave": "រក្សាទុក",
+    "configureWordsSaving": "កំពុងរក្សាទុក…",
+    "configureWordsSaved": "បានរក្សាទុក",
+    "configureWordsSelectAll": "ជ្រើសរើសទាំងអស់",
+    "configureWordsUntitled": "ផ្នែកគ្មានចំណងជើង"
   },
   "study": {
     "allSections": "ផ្នែកទាំងអស់។",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "មិនមានសម្ភាសន៍នៅសល់ទេ — ធ្វើឱ្យប្រសើរឡើងដើម្បីបន្ត",
     "allCardsCovered": "គ្រប់ {count} កាត់បានបញ្ចប់ហើយ!",
     "seeResults": "មើលលទ្ធផល",
-    "messageLimitReached": "ឈានដល់លីមីតសារ — បញ្ចប់សម្ភាសន៍របស់អ្នក"
+    "messageLimitReached": "ឈានដល់លីមីតសារ — បញ្ចប់សម្ភាសន៍របស់អ្នក",
+    "ignoredLabel": "មិនអើពើ"
   },
   "settings": {
     "accountCenter": "មជ្ឈមណ្ឌលគណនី",

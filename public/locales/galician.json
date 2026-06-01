@@ -403,7 +403,15 @@
     "following": "Seguindo",
     "follow": "+ Segue",
     "share": "Compartir",
-    "copied": "Copiado!"
+    "copied": "Copiado!",
+    "configureWords": "Configurar palabras",
+    "configureWordsTitle": "Palabras para aprender",
+    "configureWordsDesc": "Desmarca as palabras que queres omitir",
+    "configureWordsSave": "Gardar",
+    "configureWordsSaving": "Gardando…",
+    "configureWordsSaved": "Gardado",
+    "configureWordsSelectAll": "Seleccionar todo",
+    "configureWordsUntitled": "Sección sen título"
   },
   "study": {
     "allSections": "Todas as seccións",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Non quedan sesións — actualiza para continuar",
     "allCardsCovered": "¡Todas as {count} tarxetas cubiertas!",
     "seeResults": "Ver resultados",
-    "messageLimitReached": "Límite de mensaxes alcanzado — remata a túa sesión"
+    "messageLimitReached": "Límite de mensaxes alcanzado — remata a túa sesión",
+    "ignoredLabel": "Ignorado"
   },
   "settings": {
     "accountCenter": "Centro de conta",

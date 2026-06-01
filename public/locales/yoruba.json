@@ -403,7 +403,15 @@
     "following": "Awọn atẹle",
     "follow": "+ Tẹle",
     "share": "Pinpin",
-    "copied": "Ti daakọ!"
+    "copied": "Ti daakọ!",
+    "configureWords": "Ṣeto awọn ọrọ",
+    "configureWordsTitle": "Awọn ọrọ lati kọ",
+    "configureWordsDesc": "Yọ aami kuro lori awọn ọrọ tí o fẹ fò",
+    "configureWordsSave": "Fipamọ",
+    "configureWordsSaving": "Fifipamọ…",
+    "configureWordsSaved": "Ti fipamọ",
+    "configureWordsSelectAll": "Yan gbogbo",
+    "configureWordsUntitled": "Apakan laisi akọle"
   },
   "study": {
     "allSections": "Gbogbo awọn apakan",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ko si awọn akoko ti o ku - igbesoke lati tẹsiwaju",
     "allCardsCovered": "Gbogbo {count} awọn kaadi bo!",
     "seeResults": "Wo esi",
-    "messageLimitReached": "Ifiranṣẹ opin ti de - ipari si ipade rẹ"
+    "messageLimitReached": "Ifiranṣẹ opin ti de - ipari si ipade rẹ",
+    "ignoredLabel": "Ti fojufo"
   },
   "settings": {
     "accountCenter": "Aarin iroyin",

@@ -403,7 +403,15 @@
     "following": "İzləyir",
     "follow": "+ İzləyin",
     "share": "Paylaşın",
-    "copied": "Kopyalandı!"
+    "copied": "Kopyalandı!",
+    "configureWords": "Sözləri konfiqurasiya et",
+    "configureWordsTitle": "Öyrənəcək sözlər",
+    "configureWordsDesc": "Keçmək istədiyiniz sözlərin işarəsini çıxarın",
+    "configureWordsSave": "Saxla",
+    "configureWordsSaving": "Saxlanılır…",
+    "configureWordsSaved": "Saxlanıldı",
+    "configureWordsSelectAll": "Hamısını seç",
+    "configureWordsUntitled": "Adsız bölmə"
   },
   "study": {
     "allSections": "Bütün bölmələr",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Sessiya qalmayıb — davam etmək üçün yüksəlt",
     "allCardsCovered": "Bütün {count} kart əhatə olundu!",
     "seeResults": "Nəticələrə baxın",
-    "messageLimitReached": "Mesaj limitinə çatılıb — sessiyanı tamamlayın"
+    "messageLimitReached": "Mesaj limitinə çatılıb — sessiyanı tamamlayın",
+    "ignoredLabel": "Nəzərə alınmayan"
   },
   "settings": {
     "accountCenter": "Hesab mərkəzi",

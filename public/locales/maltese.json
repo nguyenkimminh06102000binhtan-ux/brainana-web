@@ -403,7 +403,15 @@
     "following": "Wara",
     "follow": "+ Segwi",
     "share": "Aqsam",
-    "copied": "Ikkopjati!"
+    "copied": "Ikkopjati!",
+    "configureWords": "Ikkonfigura l-kliem",
+    "configureWordsTitle": "Kliem biex titgħallem",
+    "configureWordsDesc": "Neħħi l-marki mill-kliem li trid taqbeż",
+    "configureWordsSave": "Salva",
+    "configureWordsSaving": "Qed tissalva…",
+    "configureWordsSaved": "Salvat",
+    "configureWordsSelectAll": "Agħżel kollox",
+    "configureWordsUntitled": "Taqsima mingħajr titolu"
   },
   "study": {
     "allSections": "It-taqsimiet kollha",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ma fadal l-ebda sessjoni — upgrade biex tkompli għaddejja",
     "allCardsCovered": "Il-karti kollha {count} koperti!",
     "seeResults": "Ara r-riżultati",
-    "messageLimitReached": "Limitu tal-messaġġ milħuq — tlesti s-sessjoni tiegħek"
+    "messageLimitReached": "Limitu tal-messaġġ milħuq — tlesti s-sessjoni tiegħek",
+    "ignoredLabel": "Injorat"
   },
   "settings": {
     "accountCenter": "Ċentru tal-kont",

@@ -403,7 +403,15 @@
     "following": "הַבָּא",
     "follow": "+ עקוב",
     "share": "לַחֲלוֹק",
-    "copied": "מוּעֲתָק!"
+    "copied": "מוּעֲתָק!",
+    "configureWords": "הגדר מילים",
+    "configureWordsTitle": "מילים ללמוד",
+    "configureWordsDesc": "בטל סימון מילים שברצונך לדלג עליהן",
+    "configureWordsSave": "שמור",
+    "configureWordsSaving": "שומר…",
+    "configureWordsSaved": "נשמר",
+    "configureWordsSelectAll": "בחר הכל",
+    "configureWordsUntitled": "קטע ללא כותרת"
   },
   "study": {
     "allSections": "כל הסעיפים",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "אין סשנים נותרים — שדרג כדי להמשיך",
     "allCardsCovered": "כל {count} הכרטיסים כוללים!",
     "seeResults": "ראה תוצאות",
-    "messageLimitReached": "הגעת למגבלת הודעות — סיים את הסשן שלך"
+    "messageLimitReached": "הגעת למגבלת הודעות — סיים את הסשן שלך",
+    "ignoredLabel": "מוּתְעלָם"
   },
   "settings": {
     "accountCenter": "מרכז החשבון",

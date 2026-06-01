@@ -403,7 +403,15 @@
     "following": "Mengikuti",
     "follow": "+ Ikuti",
     "share": "Kongsi",
-    "copied": "disalin!"
+    "copied": "disalin!",
+    "configureWords": "Konfigurasikan perkataan",
+    "configureWordsTitle": "Perkataan untuk dipelajari",
+    "configureWordsDesc": "Nyahtanda perkataan yang anda ingin langkau",
+    "configureWordsSave": "Simpan",
+    "configureWordsSaving": "Menyimpan…",
+    "configureWordsSaved": "Tersimpan",
+    "configureWordsSelectAll": "Pilih semua",
+    "configureWordsUntitled": "Bahagian tanpa tajuk"
   },
   "study": {
     "allSections": "Semua bahagian",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Tiada sesi yang tinggal — naik taraf untuk meneruskan",
     "allCardsCovered": "Semua kad {count} dilindungi!",
     "seeResults": "Lihat hasil",
-    "messageLimitReached": "Had mesej dicapai — selesaikan sesi anda"
+    "messageLimitReached": "Had mesej dicapai — selesaikan sesi anda",
+    "ignoredLabel": "Diabaikan"
   },
   "settings": {
     "accountCenter": "Pusat akaun",

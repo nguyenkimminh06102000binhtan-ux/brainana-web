@@ -403,7 +403,15 @@
     "following": "Nderek",
     "follow": "+ Tindakake",
     "share": "Nuduhake",
-    "copied": "Disalin!"
+    "copied": "Disalin!",
+    "configureWords": "Atur tembung",
+    "configureWordsTitle": "Tembung kanggo sinau",
+    "configureWordsDesc": "Uncheck tembung sing pengin dilewati",
+    "configureWordsSave": "Simpen",
+    "configureWordsSaving": "Nyimpen…",
+    "configureWordsSaved": "Disimpen",
+    "configureWordsSelectAll": "Pilih kabeh",
+    "configureWordsUntitled": "Bagian tanpa judul"
   },
   "study": {
     "allSections": "Kabeh bagean",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ora ana sesi ketinggalan — tingkatke kanggo terus",
     "allCardsCovered": "Kabeh {count} kartu wis dicakup!",
     "seeResults": "Deleng hasil",
-    "messageLimitReached": "Bates pesen wis tekan — rampungake sesi sampeyan"
+    "messageLimitReached": "Bates pesen wis tekan — rampungake sesi sampeyan",
+    "ignoredLabel": "Diabaikan"
   },
   "settings": {
     "accountCenter": "Pusat Akun",

@@ -403,7 +403,15 @@
     "following": "Ag leanúint",
     "follow": "+ Lean",
     "share": "Comhroinn",
-    "copied": "Cóipeáladh!"
+    "copied": "Cóipeáladh!",
+    "configureWords": "Cumraigh focail",
+    "configureWordsTitle": "Focail le foghlaim",
+    "configureWordsDesc": "Díroghnaigh focail ar mhaith leat dul tharstu",
+    "configureWordsSave": "Sábháil",
+    "configureWordsSaving": "Ag sábháil…",
+    "configureWordsSaved": "Sábháilte",
+    "configureWordsSelectAll": "Roghnaigh uile",
+    "configureWordsUntitled": "Rannóg gan teideal"
   },
   "study": {
     "allSections": "Gach rannóg",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Gan seisiúin fágtha — ardaigh chun leanúint ar aghaidh",
     "allCardsCovered": "Gach {count} cárta clúdaithe!",
     "seeResults": "Féach ar thorthaí",
-    "messageLimitReached": "Teorainn an teachtaireachta bainte amach — críochnaigh do sheisiún"
+    "messageLimitReached": "Teorainn an teachtaireachta bainte amach — críochnaigh do sheisiún",
+    "ignoredLabel": "Neamhaird"
   },
   "settings": {
     "accountCenter": "Ionad an Chuntais",

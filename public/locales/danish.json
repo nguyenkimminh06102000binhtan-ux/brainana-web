@@ -403,7 +403,15 @@
     "following": "Følge",
     "follow": "+ Følg",
     "share": "Dele",
-    "copied": "Kopieret!"
+    "copied": "Kopieret!",
+    "configureWords": "Konfigurer ord",
+    "configureWordsTitle": "Ord at lære",
+    "configureWordsDesc": "Fjern markeringen af ord, du vil springe over",
+    "configureWordsSave": "Gem",
+    "configureWordsSaving": "Gemmer…",
+    "configureWordsSaved": "Gemt",
+    "configureWordsSelectAll": "Vælg alle",
+    "configureWordsUntitled": "Unavngivet afsnit"
   },
   "study": {
     "allSections": "Alle afsnit",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ingen sessioner tilbage — opgrader for at fortsætte",
     "allCardsCovered": "Alle {count} kort dækket!",
     "seeResults": "Se resultater",
-    "messageLimitReached": "Beskedgrænse nået — afslut din session"
+    "messageLimitReached": "Beskedgrænse nået — afslut din session",
+    "ignoredLabel": "Ignoreret"
   },
   "settings": {
     "accountCenter": "Kontocenter",

@@ -403,7 +403,15 @@
     "following": "Daba gal",
     "follow": "+ Raac",
     "share": "La wadaag",
-    "copied": "la guuriyay!"
+    "copied": "la guuriyay!",
+    "configureWords": "Habbee erayada",
+    "configureWordsTitle": "Erayada la baranayo",
+    "configureWordsDesc": "Ka saar calaamadaha erayada aad rabto in aad ka booddo",
+    "configureWordsSave": "Keydi",
+    "configureWordsSaving": "La keydiyaa…",
+    "configureWordsSaved": "La keydsay",
+    "configureWordsSelectAll": "Xulo dhammaan",
+    "configureWordsUntitled": "Qaybta aan cinwaan lahayn"
   },
   "study": {
     "allSections": "Dhammaan qaybaha",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Ma jiraan wax fadhi ah oo hadhay - cusboonaysii si aad u socoto",
     "allCardsCovered": "Dhammaan {count} kaadhadhka ayaa daboolay!",
     "seeResults": "Daawo natiijooyinka",
-    "messageLimitReached": "Xadka fariinta waa la gaarey - soo xir fadhigaaga"
+    "messageLimitReached": "Xadka fariinta waa la gaarey - soo xir fadhigaaga",
+    "ignoredLabel": "La iska indho tiray"
   },
   "settings": {
     "accountCenter": "Xarunta xisaabaadka",

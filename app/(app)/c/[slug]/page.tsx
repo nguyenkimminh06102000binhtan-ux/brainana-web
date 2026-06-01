@@ -53,7 +53,7 @@ export default async function CourseDetailPage({
 
   // Parallel queries
   const [
-    { data: previewItems },
+    { data: allSectionsRaw },
     { count: audioCount },
     { count: imageCount },
     { data: creatorCoursesData },
@@ -61,9 +61,10 @@ export default async function CourseDetailPage({
     { data: followData },
     { count: creatorFollowerCount },
     { data: profile },
+    { data: ignoredProgressRows },
     topMems,
   ] = await Promise.all([
-    supabase.from("items").select("id, front_text, back_text").eq("course_id", course.id).order("position").limit(4),
+    supabase.from("sections").select("id, title, position, items(id, front_text, back_text, position)").eq("course_id", course.id).order("position"),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).or("front_audio_url.not.is.null,back_audio_url.not.is.null"),
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).not("image_url", "is", null),
     supabase.from("courses").select("id, learner_count").eq("creator_id", course.creator_id).eq("is_published", true),
@@ -71,6 +72,7 @@ export default async function CourseDetailPage({
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
+    supabase.from("item_progress").select("item_id").eq("user_id", user.id).eq("course_id", course.id).eq("ignored", true),
     (async (): Promise<TopMem[]> => {
       const { data: itemRows } = await supabase.from("items").select("id").eq("course_id", course.id);
       const ids = (itemRows ?? []).map((r) => r.id as string);
@@ -84,6 +86,24 @@ export default async function CourseDetailPage({
       return (data ?? []) as unknown as TopMem[];
     })(),
   ]);
+
+  const ignoredIds = new Set((ignoredProgressRows ?? []).map((r) => r.item_id as string));
+
+  type RawSectionItem = { id: string; front_text: string; back_text: string; position: number | null };
+  const configSections = (allSectionsRaw ?? []).map((s) => ({
+    id: String(s.id),
+    title: s.title ?? "",
+    cards: ((s.items ?? []) as unknown as RawSectionItem[])
+      .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
+      .map((item) => ({
+        id: item.id,
+        front: item.front_text,
+        back: item.back_text,
+        ignored: ignoredIds.has(item.id),
+      })),
+  }));
+
+  const previewItems = configSections.flatMap((s) => s.cards.map((c) => ({ id: c.id, front_text: c.front, back_text: c.back }))).slice(0, 4);
 
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
   const cl = loc.course;
@@ -215,9 +235,26 @@ export default async function CourseDetailPage({
           {/* Preview */}
           {(previewItems ?? []).length > 0 && (
             <PreviewSection
-              items={previewItems ?? []}
+              items={previewItems}
               totalCount={course.card_count}
-              labels={{ preview: cl.preview, previewOf: cl.previewOf, flipUp: cl.flipUp, flipDown: cl.flipDown, more: cl.more }}
+              courseId={course.id}
+              slug={course.slug}
+              isEnrolled={isEnrolled}
+              sections={configSections}
+              labels={{
+                preview: cl.preview,
+                previewOf: cl.previewOf,
+                more: cl.more,
+                configureWords: cl.configureWords,
+                configureWordsTitle: cl.configureWordsTitle,
+                configureWordsDesc: cl.configureWordsDesc,
+                configureWordsSave: cl.configureWordsSave,
+                configureWordsSaving: cl.configureWordsSaving,
+                configureWordsSaved: cl.configureWordsSaved,
+                configureWordsSelectAll: cl.configureWordsSelectAll,
+                configureWordsUntitled: cl.configureWordsUntitled,
+                ignoredLabel: loc.learn.ignoredLabel,
+              }}
             />
           )}
 

@@ -16,6 +16,7 @@ export type LearnCard = {
   romanization: string | null;
   acceptedAnswers: string[];
   backAudioUrl?: string | null;
+  ignored: boolean;
 };
 
 export type LearnSection = {
@@ -166,11 +167,13 @@ export default function LearnClient({
     [sections],
   );
 
-  // Cards from selected sections
+  // Cards from selected sections, excluding ignored (used for quick pick)
   const poolCards = useMemo(
     () =>
       sections.flatMap((s) =>
-        selectedSectionIds.size === 0 || selectedSectionIds.has(s.id) ? s.cards : [],
+        selectedSectionIds.size === 0 || selectedSectionIds.has(s.id)
+          ? s.cards.filter((c) => !c.ignored)
+          : [],
       ),
     [sections, selectedSectionIds],
   );
@@ -575,8 +578,15 @@ export default function LearnClient({
                                   )}
                                 </span>
                                 <span className="min-w-0 flex-1">
-                                  <span className="block truncate font-manrope text-sm font-[600] text-ink">
-                                    {c.front}
+                                  <span className="flex items-center gap-2">
+                                    <span className="truncate font-manrope text-sm font-[600] text-ink">
+                                      {c.front}
+                                    </span>
+                                    {c.ignored && (
+                                      <span className="shrink-0 rounded-full bg-ink/10 px-2 py-0.5 font-manrope text-[10px] font-[700] uppercase tracking-wide text-ink-3">
+                                        {labels.ignoredLabel}
+                                      </span>
+                                    )}
                                   </span>
                                   <span className="block truncate font-manrope text-xs text-ink-3">
                                     {c.back}

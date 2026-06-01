@@ -403,7 +403,15 @@
     "following": "Takip etme",
     "follow": "+ Takip et",
     "share": "Paylaşmak",
-    "copied": "Kopyalandı!"
+    "copied": "Kopyalandı!",
+    "configureWords": "Kelimeleri yapılandır",
+    "configureWordsTitle": "Öğrenilecek kelimeler",
+    "configureWordsDesc": "Atlamak istediğiniz kelimelerin işaretini kaldırın",
+    "configureWordsSave": "Kaydet",
+    "configureWordsSaving": "Kaydediliyor…",
+    "configureWordsSaved": "Kaydedildi",
+    "configureWordsSelectAll": "Tümünü seç",
+    "configureWordsUntitled": "Başlıksız bölüm"
   },
   "study": {
     "allSections": "Tüm bölümler",
@@ -703,7 +711,8 @@
     "noSessionsLeft": "Oturum kalmadı; devam etmek için yükseltme yapın",
     "allCardsCovered": "Tüm {count} kartları kapsanmaktadır!",
     "seeResults": "Sonuçları görün",
-    "messageLimitReached": "Mesaj sınırına ulaşıldı — oturumunuzu tamamlayın"
+    "messageLimitReached": "Mesaj sınırına ulaşıldı — oturumunuzu tamamlayın",
+    "ignoredLabel": "Yoksayıldı"
   },
   "settings": {
     "accountCenter": "Hesap merkezi",
