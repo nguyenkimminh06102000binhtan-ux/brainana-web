@@ -404,14 +404,17 @@
     "follow": "+ പിന്തുടരുക",
     "share": "പങ്കിടുക",
     "copied": "പകർത്തി!",
-    "configureWords": "വാക്കുകൾ ക്രമീകരിക്കുക",
+    "configureWords": "കാർഡുകൾ ക്രമീകരിക്കുക",
     "configureWordsTitle": "പഠിക്കേണ്ട വാക്കുകൾ",
     "configureWordsDesc": "ഒഴിവാക്കേണ്ട വാക്കുകളുടെ ടിക് നീക്കം ചെയ്യൂ",
     "configureWordsSave": "സേവ് ചെയ്യുക",
     "configureWordsSaving": "സേവ് ചെയ്യുന്നു…",
     "configureWordsSaved": "സേവ് ചെയ്തു",
     "configureWordsSelectAll": "എല്ലാം തിരഞ്ഞെടുക്കുക",
-    "configureWordsUntitled": "ശീർഷകമില്ലാത്ത വിഭാഗം"
+    "configureWordsUntitled": "ശീർഷകമില്ലാത്ത വിഭാഗം",
+    "quickReview": "വേഗത്തിലുള്ള അവലോകനം",
+    "reviewCards": "അവലോകനം ({count})",
+    "learnNewWords": "പുതിയത് പഠിക്കുക"
   },
   "study": {
     "allSections": "എല്ലാ വിഭാഗങ്ങളും",
@@ -783,5 +786,19 @@
     "txChargeback": "ചാർജ്ബാക്ക്",
     "txAdminGrant": "അഡ്മിൻ ഗ്രാൻ്റ്",
     "txUnknown": "ഇടപാട്"
+  },
+  "speedReview": {
+    "title": "സ്പീഡ് റിവ്യൂ",
+    "score": "സ്കോർ",
+    "gameOver": "ഗെയിം ഓവർ!",
+    "complete": "പൂർണ്ണം!",
+    "cardsReviewed": "{count} കാർഡ് അവലോകനം ചെയ്തു",
+    "yourScore": "നിങ്ങളുടെ സ്കോർ",
+    "playAgain": "വീണ്ടും കളിക്കുക",
+    "correct": "ശരി!",
+    "wrong": "തെറ്റ്!",
+    "timeUp": "സമയം കഴിഞ്ഞു!",
+    "backToCourse": "കോഴ്‌സിലേക്ക് മടങ്ങുക",
+    "notEnoughCards": "അൺലോക്ക് ചെയ്യാൻ കുറഞ്ഞത് 3 കാർഡ് പഠിക്കുക"
   }
 }

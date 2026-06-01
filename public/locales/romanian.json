@@ -404,14 +404,17 @@
     "follow": "+ Urmăriți",
     "share": "Distribuie",
     "copied": "Copiat!",
-    "configureWords": "Configurați cuvintele",
+    "configureWords": "Configurați cardurile",
     "configureWordsTitle": "Cuvinte de învățat",
     "configureWordsDesc": "Debifați cuvintele pe care doriți să le omiteți",
     "configureWordsSave": "Salvați",
     "configureWordsSaving": "Se salvează…",
     "configureWordsSaved": "Salvat",
     "configureWordsSelectAll": "Selectați tot",
-    "configureWordsUntitled": "Secțiune fără titlu"
+    "configureWordsUntitled": "Secțiune fără titlu",
+    "quickReview": "Recenzie rapidă",
+    "reviewCards": "Recenzează ({count})",
+    "learnNewWords": "Învață nou"
   },
   "study": {
     "allSections": "Toate secțiunile",
@@ -783,5 +786,19 @@
     "txChargeback": "Rambursare",
     "txAdminGrant": "Grant administrativ",
     "txUnknown": "Tranzacţie"
+  },
+  "speedReview": {
+    "title": "Recenzie Rapidă",
+    "score": "Scor",
+    "gameOver": "Jocul s-a terminat!",
+    "complete": "Complet!",
+    "cardsReviewed": "{count} carduri recenzate",
+    "yourScore": "Scorul tău",
+    "playAgain": "Joacă din nou",
+    "correct": "Corect!",
+    "wrong": "Greșit!",
+    "timeUp": "Timpul a expirat!",
+    "backToCourse": "Înapoi la curs",
+    "notEnoughCards": "Studiați cel puțin 3 carduri pentru a debloca"
   }
 }

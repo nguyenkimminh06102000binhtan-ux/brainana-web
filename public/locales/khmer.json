@@ -404,14 +404,17 @@
     "follow": "+ ធ្វើតាម",
     "share": "ចែករំលែក",
     "copied": "ចម្លង!",
-    "configureWords": "រៀបចំពាក្យ",
+    "configureWords": "រៀបចំប័ណ្ណ",
     "configureWordsTitle": "ពាក្យដើម្បីរៀន",
     "configureWordsDesc": "លុបសញ្ញាធីកពាក្យដែលអ្នកចង់រំលង",
     "configureWordsSave": "រក្សាទុក",
     "configureWordsSaving": "កំពុងរក្សាទុក…",
     "configureWordsSaved": "បានរក្សាទុក",
     "configureWordsSelectAll": "ជ្រើសរើសទាំងអស់",
-    "configureWordsUntitled": "ផ្នែកគ្មានចំណងជើង"
+    "configureWordsUntitled": "ផ្នែកគ្មានចំណងជើង",
+    "quickReview": "ពិនិត្យរហ័ស",
+    "reviewCards": "ពិនិត្យ ({count})",
+    "learnNewWords": "រៀនថ្មី"
   },
   "study": {
     "allSections": "ផ្នែកទាំងអស់។",
@@ -783,5 +786,19 @@
     "txChargeback": "ការបង្វិលប្រាក់វិញ",
     "txAdminGrant": "ការផ្តល់ដោយអ្នកគ្រប់គ្រង",
     "txUnknown": "ប្រតិបត្តិការ"
+  },
+  "speedReview": {
+    "title": "ពិនិត្យរហ័ស",
+    "score": "ពិន្ទុ",
+    "gameOver": "ហ្គេមបញ្ចប់ហើយ!",
+    "complete": "បានបញ្ចប់!",
+    "cardsReviewed": "ពិនិត្យ {count} ប័ណ្ណ",
+    "yourScore": "ពិន្ទុរបស់អ្នក",
+    "playAgain": "លេងម្ដងទៀត",
+    "correct": "ត្រឹមត្រូវ!",
+    "wrong": "មិនត្រឹមត្រូវ!",
+    "timeUp": "អស់ពេលហើយ!",
+    "backToCourse": "ត្រឡប់ទៅវគ្គ",
+    "notEnoughCards": "សិក្សាយ៉ាងតិច 3 ប័ណ្ណដើម្បីដោះសោ"
   }
 }

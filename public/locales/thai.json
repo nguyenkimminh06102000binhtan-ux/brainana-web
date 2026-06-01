@@ -404,14 +404,17 @@
     "follow": "+ ติดตาม",
     "share": "แบ่งปัน",
     "copied": "คัดลอก!",
-    "configureWords": "ตั้งค่าคำศัพท์",
+    "configureWords": "ตั้งค่าการ์ด",
     "configureWordsTitle": "คำศัพท์ที่จะเรียน",
     "configureWordsDesc": "ยกเลิกการเลือกคำที่ต้องการข้าม",
     "configureWordsSave": "บันทึก",
     "configureWordsSaving": "กำลังบันทึก…",
     "configureWordsSaved": "บันทึกแล้ว",
     "configureWordsSelectAll": "เลือกทั้งหมด",
-    "configureWordsUntitled": "ส่วนที่ไม่มีชื่อ"
+    "configureWordsUntitled": "ส่วนที่ไม่มีชื่อ",
+    "quickReview": "ทบทวนด่วน",
+    "reviewCards": "ทบทวน ({count})",
+    "learnNewWords": "เรียนใหม่"
   },
   "study": {
     "allSections": "ทุกส่วน",
@@ -783,5 +786,19 @@
     "txChargeback": "การปฏิเสธการชำระเงิน",
     "txAdminGrant": "ผู้ดูแลระบบให้สิทธิ์",
     "txUnknown": "ธุรกรรม"
+  },
+  "speedReview": {
+    "title": "สปีดรีวิว",
+    "score": "คะแนน",
+    "gameOver": "เกมจบแล้ว!",
+    "complete": "เสร็จสิ้น!",
+    "cardsReviewed": "ทบทวน {count} การ์ดแล้ว",
+    "yourScore": "คะแนนของคุณ",
+    "playAgain": "เล่นอีกครั้ง",
+    "correct": "ถูกต้อง!",
+    "wrong": "ผิด!",
+    "timeUp": "หมดเวลา!",
+    "backToCourse": "กลับไปที่คอร์ส",
+    "notEnoughCards": "ศึกษาการ์ดอย่างน้อย 3 ใบเพื่อปลดล็อกสปีดรีวิว"
   }
 }

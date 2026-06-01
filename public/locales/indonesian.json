@@ -404,14 +404,17 @@
     "follow": "+ Ikuti",
     "share": "Membagikan",
     "copied": "Disalin!",
-    "configureWords": "Konfigurasikan kata",
+    "configureWords": "Konfigurasikan kartu",
     "configureWordsTitle": "Kata untuk dipelajari",
     "configureWordsDesc": "Hapus centang kata yang ingin Anda lewati",
     "configureWordsSave": "Simpan",
     "configureWordsSaving": "Menyimpan…",
     "configureWordsSaved": "Tersimpan",
     "configureWordsSelectAll": "Pilih semua",
-    "configureWordsUntitled": "Bagian tanpa judul"
+    "configureWordsUntitled": "Bagian tanpa judul",
+    "quickReview": "Ulasan cepat",
+    "reviewCards": "Ulang ({count})",
+    "learnNewWords": "Belajar baru"
   },
   "study": {
     "allSections": "Semua bagian",
@@ -783,5 +786,19 @@
     "txChargeback": "Pengembalian Dana",
     "txAdminGrant": "Pemberian admin",
     "txUnknown": "Transaksi"
+  },
+  "speedReview": {
+    "title": "Ulasan Cepat",
+    "score": "Skor",
+    "gameOver": "Permainan selesai!",
+    "complete": "Selesai!",
+    "cardsReviewed": "{count} kartu diulas",
+    "yourScore": "Skor Anda",
+    "playAgain": "Main lagi",
+    "correct": "Benar!",
+    "wrong": "Salah!",
+    "timeUp": "Waktu habis!",
+    "backToCourse": "Kembali ke kursus",
+    "notEnoughCards": "Pelajari setidaknya 3 kartu untuk membuka Ulasan Cepat"
   }
 }

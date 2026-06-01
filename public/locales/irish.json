@@ -404,14 +404,17 @@
     "follow": "+ Lean",
     "share": "Comhroinn",
     "copied": "Cóipeáladh!",
-    "configureWords": "Cumraigh focail",
+    "configureWords": "Cumraigh cártaí",
     "configureWordsTitle": "Focail le foghlaim",
     "configureWordsDesc": "Díroghnaigh focail ar mhaith leat dul tharstu",
     "configureWordsSave": "Sábháil",
     "configureWordsSaving": "Ag sábháil…",
     "configureWordsSaved": "Sábháilte",
     "configureWordsSelectAll": "Roghnaigh uile",
-    "configureWordsUntitled": "Rannóg gan teideal"
+    "configureWordsUntitled": "Rannóg gan teideal",
+    "quickReview": "Athbhreithniú tapa",
+    "reviewCards": "Athbhreithnigh ({count})",
+    "learnNewWords": "Foghlaim nua"
   },
   "study": {
     "allSections": "Gach rannóg",
@@ -783,5 +786,19 @@
     "txChargeback": "Tarraing siar",
     "txAdminGrant": "Deonú riartha",
     "txUnknown": "Idirbheart"
+  },
+  "speedReview": {
+    "title": "Athbhreithniú Tapa",
+    "score": "Scór",
+    "gameOver": "Cluiche thart!",
+    "complete": "Críochnaithe!",
+    "cardsReviewed": "{count} cárta athbhreithnithe",
+    "yourScore": "Do scór",
+    "playAgain": "Imir arís",
+    "correct": "Ceart!",
+    "wrong": "Mícheart!",
+    "timeUp": "Am istigh!",
+    "backToCourse": "Ar ais chuig an gcúrsa",
+    "notEnoughCards": "Foghlaim ar a laghad 3 cárta chun díghlasáil"
   }
 }

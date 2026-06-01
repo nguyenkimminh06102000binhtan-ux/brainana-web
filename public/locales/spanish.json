@@ -404,14 +404,17 @@
     "follow": "+ Seguir",
     "share": "Compartir",
     "copied": "¡Copiado!",
-    "configureWords": "Configurar palabras",
+    "configureWords": "Configurar tarjetas",
     "configureWordsTitle": "Palabras para aprender",
     "configureWordsDesc": "Desmarca las palabras que quieres omitir",
     "configureWordsSave": "Guardar",
     "configureWordsSaving": "Guardando…",
     "configureWordsSaved": "Guardado",
     "configureWordsSelectAll": "Seleccionar todo",
-    "configureWordsUntitled": "Sección sin título"
+    "configureWordsUntitled": "Sección sin título",
+    "quickReview": "Repaso rápido",
+    "reviewCards": "Repasar ({count})",
+    "learnNewWords": "Aprender nuevo"
   },
   "study": {
     "allSections": "Todas las secciones",
@@ -783,5 +786,19 @@
     "txChargeback": "Contracargo",
     "txAdminGrant": "Subvención de administrador",
     "txUnknown": "Transacción"
+  },
+  "speedReview": {
+    "title": "Repaso Rápido",
+    "score": "Puntuación",
+    "gameOver": "¡Juego terminado!",
+    "complete": "¡Completado!",
+    "cardsReviewed": "{count} tarjetas repasadas",
+    "yourScore": "Tu puntuación",
+    "playAgain": "Jugar de nuevo",
+    "correct": "¡Correcto!",
+    "wrong": "¡Incorrecto!",
+    "timeUp": "¡Tiempo agotado!",
+    "backToCourse": "Volver al curso",
+    "notEnoughCards": "Estudia al menos 3 tarjetas para desbloquear el Repaso Rápido"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Бақылаңыз",
     "share": "Бөлісу",
     "copied": "Көшірілген!",
-    "configureWords": "Сөздерді баптау",
+    "configureWords": "Карталарды баптау",
     "configureWordsTitle": "Үйренетін сөздер",
     "configureWordsDesc": "Өткізіп жіберетін сөздердің белгісін алып тастаңыз",
     "configureWordsSave": "Сақтау",
     "configureWordsSaving": "Сақталуда…",
     "configureWordsSaved": "Сақталды",
     "configureWordsSelectAll": "Барлығын таңдау",
-    "configureWordsUntitled": "Тақырыпсыз бөлім"
+    "configureWordsUntitled": "Тақырыпсыз бөлім",
+    "quickReview": "Жылдам қайталау",
+    "reviewCards": "Қайталау ({count})",
+    "learnNewWords": "Жаңа үйрен"
   },
   "study": {
     "allSections": "Барлық бөлімдер",
@@ -783,5 +786,19 @@
     "txChargeback": "Кері қайтарым",
     "txAdminGrant": "Әкімші гранты",
     "txUnknown": "Транзакция"
+  },
+  "speedReview": {
+    "title": "Жылдам Қайталау",
+    "score": "Ұпай",
+    "gameOver": "Ойын бітті!",
+    "complete": "Аяқталды!",
+    "cardsReviewed": "{count} карта қайталанды",
+    "yourScore": "Сіздің ұпайыңыз",
+    "playAgain": "Қайта ойна",
+    "correct": "Дұрыс!",
+    "wrong": "Қате!",
+    "timeUp": "Уақыт аяқталды!",
+    "backToCourse": "Курсқа қайту",
+    "notEnoughCards": "Ашу үшін кемінде 3 картаны үйреніңіз"
   }
 }

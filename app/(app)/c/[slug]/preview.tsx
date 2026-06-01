@@ -10,7 +10,6 @@ export default function PreviewSection({
   totalCount,
   courseId,
   slug,
-  isEnrolled,
   sections,
   labels,
 }: {
@@ -18,7 +17,6 @@ export default function PreviewSection({
   totalCount: number;
   courseId: string;
   slug: string;
-  isEnrolled: boolean;
   sections: ConfigSection[];
   labels: {
     preview: string;
@@ -46,14 +44,12 @@ export default function PreviewSection({
             · {labels.previewOf.replace("{shown}", String(items.length)).replace("{total}", String(totalCount))}
           </span>
         </p>
-        {isEnrolled && (
-          <WordConfigModal
-            courseId={courseId}
-            slug={slug}
-            sections={sections}
-            labels={labels}
-          />
-        )}
+        <WordConfigModal
+          courseId={courseId}
+          slug={slug}
+          sections={sections}
+          labels={labels}
+        />
       </div>
 
       <div className="flex gap-3 overflow-x-auto pb-1">

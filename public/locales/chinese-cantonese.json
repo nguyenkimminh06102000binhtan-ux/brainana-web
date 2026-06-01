@@ -404,14 +404,17 @@
     "follow": "+ 跟住",
     "share": "分享",
     "copied": "複製咗！",
-    "configureWords": "配置詞彙",
+    "configureWords": "配置卡片",
     "configureWordsTitle": "要學習的詞彙",
     "configureWordsDesc": "取消勾選你想跳過的詞彙",
     "configureWordsSave": "儲存",
     "configureWordsSaving": "儲存中…",
     "configureWordsSaved": "已儲存",
     "configureWordsSelectAll": "全選",
-    "configureWordsUntitled": "未命名章節"
+    "configureWordsUntitled": "未命名章節",
+    "quickReview": "快速複習",
+    "reviewCards": "複習 ({count})",
+    "learnNewWords": "學新內容"
   },
   "study": {
     "allSections": "所有部分",
@@ -783,5 +786,19 @@
     "txChargeback": "退單",
     "txAdminGrant": "管理員贈送",
     "txUnknown": "交易"
+  },
+  "speedReview": {
+    "title": "速度複習",
+    "score": "得分",
+    "gameOver": "遊戲結束！",
+    "complete": "完成！",
+    "cardsReviewed": "已複習 {count} 張卡片",
+    "yourScore": "你的得分",
+    "playAgain": "再玩一次",
+    "correct": "正確！",
+    "wrong": "錯誤！",
+    "timeUp": "時間到！",
+    "backToCourse": "返回課程",
+    "notEnoughCards": "先學習至少3張卡片以解鎖速度複習"
   }
 }

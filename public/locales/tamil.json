@@ -404,14 +404,17 @@
     "follow": "+ பின்பற்றவும்",
     "share": "பகிரவும்",
     "copied": "நகலெடுக்கப்பட்டது!",
-    "configureWords": "வார்த்தைகளை உள்ளமைக்கவும்",
+    "configureWords": "கார்டுகளை உள்ளமைக்கவும்",
     "configureWordsTitle": "கற்கும் வார்த்தைகள்",
     "configureWordsDesc": "தவிர்க்க விரும்பும் வார்த்தைகளின் டிக் நீக்கவும்",
     "configureWordsSave": "சேமிக்கவும்",
     "configureWordsSaving": "சேமிக்கிறது…",
     "configureWordsSaved": "சேமிக்கப்பட்டது",
     "configureWordsSelectAll": "அனைத்தையும் தேர்ந்தெடு",
-    "configureWordsUntitled": "தலைப்பு இல்லாத பிரிவு"
+    "configureWordsUntitled": "தலைப்பு இல்லாத பிரிவு",
+    "quickReview": "விரைவு மதிப்பாய்வு",
+    "reviewCards": "மதிப்பாய்வு ({count})",
+    "learnNewWords": "புதியதை கற்கவும்"
   },
   "study": {
     "allSections": "அனைத்து பிரிவுகளும்",
@@ -783,5 +786,19 @@
     "txChargeback": "திரும்பப் பெறுதல்",
     "txAdminGrant": "நிர்வாக மானியம்",
     "txUnknown": "பரிவர்த்தனை"
+  },
+  "speedReview": {
+    "title": "வேக மதிப்பாய்வு",
+    "score": "மதிப்பெண்",
+    "gameOver": "விளையாட்டு முடிந்தது!",
+    "complete": "முடிந்தது!",
+    "cardsReviewed": "{count} கார்டுகள் மதிப்பாய்வு செய்யப்பட்டன",
+    "yourScore": "உங்கள் மதிப்பெண்",
+    "playAgain": "மீண்டும் விளையாடு",
+    "correct": "சரி!",
+    "wrong": "தவறு!",
+    "timeUp": "நேரம் முடிந்தது!",
+    "backToCourse": "பாடத்திட்டத்திற்கு திரும்பு",
+    "notEnoughCards": "வேக மதிப்பாய்வை திறக்க குறைந்தது 3 கார்டுகளை படிக்கவும்"
   }
 }

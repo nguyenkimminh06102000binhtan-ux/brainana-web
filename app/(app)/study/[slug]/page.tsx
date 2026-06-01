@@ -9,10 +9,14 @@ type QType = "flashcard" | "multiple_choice" | "audio_type" | "speed_match" | "t
 
 export default async function StudyPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ mode?: string }>;
 }) {
   const { slug } = await params;
+  const { mode: rawMode } = await searchParams;
+  const mode = rawMode === "review" || rawMode === "new" ? rawMode : undefined;
   const supabase = createClient(await cookies());
 
   const {
@@ -67,8 +71,10 @@ export default async function StudyPage({
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
 
   const total = totalCount ?? 0;
-  const reviewDue = progressDueCount ?? 0;
-  const newCards = Math.max(0, total - (progressTotalCount ?? 0));
+  const allDue = progressDueCount ?? 0;
+  const allNew = Math.max(0, total - (progressTotalCount ?? 0));
+  const reviewDue = mode === "new" ? 0 : allDue;
+  const newCards = mode === "review" ? 0 : allNew;
   const hasAudio = course.has_audio ?? false;
   const preferredTypesRaw = (
     (enrollment?.preferred_question_types ?? ["flashcard"]) as QType[]
@@ -84,6 +90,7 @@ export default async function StudyPage({
       reviewDue={reviewDue}
       newCards={newCards}
       totalCount={total}
+      mode={mode}
       preferredTypes={preferredTypes}
       hasAudio={hasAudio}
       showRomanization={profile?.show_romanization ?? true}

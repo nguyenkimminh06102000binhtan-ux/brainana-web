@@ -404,14 +404,17 @@
     "follow": "+ અનુસરો",
     "share": "શેર કરો",
     "copied": "નકલ કરી!",
-    "configureWords": "શબ્દો ગોઠવો",
+    "configureWords": "કાર્ડ ગોઠવો",
     "configureWordsTitle": "શીખવા માટે શબ્દો",
     "configureWordsDesc": "જે શબ્દો છોડવા છે તેમની ટિક દૂર કરો",
     "configureWordsSave": "સાચવો",
     "configureWordsSaving": "સાચવી રહ્યા છીએ…",
     "configureWordsSaved": "સાચવ્યું",
     "configureWordsSelectAll": "બધું પસંદ કરો",
-    "configureWordsUntitled": "શીર્ષક વગરનો વિભાગ"
+    "configureWordsUntitled": "શીર્ષક વગરનો વિભાગ",
+    "quickReview": "ઝડપી સમીક્ષા",
+    "reviewCards": "સમીક્ષા ({count})",
+    "learnNewWords": "નવું શીખો"
   },
   "study": {
     "allSections": "બધા વિભાગો",
@@ -783,5 +786,19 @@
     "txChargeback": "ચાર્જબેક",
     "txAdminGrant": "એડમિન અનુદાન",
     "txUnknown": "લેવડદેવડ"
+  },
+  "speedReview": {
+    "title": "સ્પીડ રિવ્યૂ",
+    "score": "સ્કોર",
+    "gameOver": "ગેમ ઓવર!",
+    "complete": "પૂર્ણ!",
+    "cardsReviewed": "{count} કાર્ડ સમીક્ષા થઈ",
+    "yourScore": "તમારો સ્કોર",
+    "playAgain": "ફરી રમો",
+    "correct": "સાચું!",
+    "wrong": "ખોટું!",
+    "timeUp": "સમય સમાપ્ત!",
+    "backToCourse": "કોર્સ પર પાછા",
+    "notEnoughCards": "અનલૉક કરવા ઓછામાં ઓછા 3 કાર્ડ ભણો"
   }
 }

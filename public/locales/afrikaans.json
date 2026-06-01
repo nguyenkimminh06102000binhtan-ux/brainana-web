@@ -404,14 +404,17 @@
     "follow": "+ Volg",
     "share": "Deel",
     "copied": "Gekopieer!",
-    "configureWords": "Stel woorde in",
+    "configureWords": "Stel kaarte in",
     "configureWordsTitle": "Woorde om te leer",
     "configureWordsDesc": "Ontmerk woorde wat jy wil oorslaan",
     "configureWordsSave": "Stoor",
     "configureWordsSaving": "Stoor…",
     "configureWordsSaved": "Gestoor",
     "configureWordsSelectAll": "Kies alles",
-    "configureWordsUntitled": "Naamlose afdeling"
+    "configureWordsUntitled": "Naamlose afdeling",
+    "quickReview": "Vinnige hersiening",
+    "reviewCards": "Hersien ({count})",
+    "learnNewWords": "Leer nuut"
   },
   "study": {
     "allSections": "Alle afdelings",
@@ -783,5 +786,19 @@
     "txChargeback": "Terugboeking",
     "txAdminGrant": "Administratortoelae",
     "txUnknown": "Transaksie"
+  },
+  "speedReview": {
+    "title": "Spoedhersiening",
+    "score": "Telling",
+    "gameOver": "Spel verby!",
+    "complete": "Voltooi!",
+    "cardsReviewed": "{count} kaarte hersien",
+    "yourScore": "Jou telling",
+    "playAgain": "Speel weer",
+    "correct": "Korrek!",
+    "wrong": "Verkeerd!",
+    "timeUp": "Tyd op!",
+    "backToCourse": "Terug na kursus",
+    "notEnoughCards": "Studeer eers minstens 3 kaarte om Spoedhersiening te ontsluit"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Sekojiet",
     "share": "Dalīties",
     "copied": "Kopēts!",
-    "configureWords": "Konfigurēt vārdus",
+    "configureWords": "Konfigurēt kartes",
     "configureWordsTitle": "Vārdi mācīšanās",
     "configureWordsDesc": "Noņemiet atzīmi no vārdiem, kurus vēlaties izlaist",
     "configureWordsSave": "Saglabāt",
     "configureWordsSaving": "Saglabā…",
     "configureWordsSaved": "Saglabāts",
     "configureWordsSelectAll": "Atlasīt visu",
-    "configureWordsUntitled": "Sadaļa bez nosaukuma"
+    "configureWordsUntitled": "Sadaļa bez nosaukuma",
+    "quickReview": "Ātrā atkārtošana",
+    "reviewCards": "Atkārtot ({count})",
+    "learnNewWords": "Mācīties jaunu"
   },
   "study": {
     "allSections": "Visas sadaļas",
@@ -783,5 +786,19 @@
     "txChargeback": "Atmaksa",
     "txAdminGrant": "Administratora dotācija",
     "txUnknown": "Darījums"
+  },
+  "speedReview": {
+    "title": "Ātrā Atkārtošana",
+    "score": "Punkti",
+    "gameOver": "Spēle beigusies!",
+    "complete": "Pabeigts!",
+    "cardsReviewed": "{count} kartes atkārtots",
+    "yourScore": "Jūsu rezultāts",
+    "playAgain": "Spēlēt vēlreiz",
+    "correct": "Pareizi!",
+    "wrong": "Nepareizi!",
+    "timeUp": "Laiks beidzies!",
+    "backToCourse": "Atpakaļ uz kursu",
+    "notEnoughCards": "Apgūstiet vismaz 3 kartes, lai atbloķētu"
   }
 }

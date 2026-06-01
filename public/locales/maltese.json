@@ -404,14 +404,17 @@
     "follow": "+ Segwi",
     "share": "Aqsam",
     "copied": "Ikkopjati!",
-    "configureWords": "Ikkonfigura l-kliem",
+    "configureWords": "Ikkonfigura l-karti",
     "configureWordsTitle": "Kliem biex titgħallem",
     "configureWordsDesc": "Neħħi l-marki mill-kliem li trid taqbeż",
     "configureWordsSave": "Salva",
     "configureWordsSaving": "Qed tissalva…",
     "configureWordsSaved": "Salvat",
     "configureWordsSelectAll": "Agħżel kollox",
-    "configureWordsUntitled": "Taqsima mingħajr titolu"
+    "configureWordsUntitled": "Taqsima mingħajr titolu",
+    "quickReview": "Reviżjoni rapida",
+    "reviewCards": "Irrevedi ({count})",
+    "learnNewWords": "Tgħallem ġdid"
   },
   "study": {
     "allSections": "It-taqsimiet kollha",
@@ -783,5 +786,19 @@
     "txChargeback": "Chargeback",
     "txAdminGrant": "Għotja tal-amministratur",
     "txUnknown": "Transazzjoni"
+  },
+  "speedReview": {
+    "title": "Reviżjoni Rapida",
+    "score": "Punti",
+    "gameOver": "Logħba spiċċat!",
+    "complete": "Lest!",
+    "cardsReviewed": "{count} karti riveduti",
+    "yourScore": "Il-punti tiegħek",
+    "playAgain": "Ilgħab mill-ġdid",
+    "correct": "Korrett!",
+    "wrong": "Żbaljat!",
+    "timeUp": "Intemm il-ħin!",
+    "backToCourse": "Lura lejn il-kors",
+    "notEnoughCards": "Studja mill-inqas 3 karti biex tiftaħ"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ Volg",
     "share": "Deel",
     "copied": "Gekopieerd!",
-    "configureWords": "Woorden instellen",
+    "configureWords": "Kaarten instellen",
     "configureWordsTitle": "Woorden om te leren",
     "configureWordsDesc": "Verwijder het vinkje bij woorden die je wilt overslaan",
     "configureWordsSave": "Opslaan",
     "configureWordsSaving": "Opslaan…",
     "configureWordsSaved": "Opgeslagen",
     "configureWordsSelectAll": "Alles selecteren",
-    "configureWordsUntitled": "Sectie zonder titel"
+    "configureWordsUntitled": "Sectie zonder titel",
+    "quickReview": "Snelle herhaling",
+    "reviewCards": "Herhalen ({count})",
+    "learnNewWords": "Leer nieuw"
   },
   "study": {
     "allSections": "Alle secties",
@@ -783,5 +786,19 @@
     "txChargeback": "Terugboeking",
     "txAdminGrant": "Beheerders-toewijzing",
     "txUnknown": "Transactie"
+  },
+  "speedReview": {
+    "title": "Snelle Herhaling",
+    "score": "Score",
+    "gameOver": "Spel voorbij!",
+    "complete": "Voltooid!",
+    "cardsReviewed": "{count} kaarten herhaald",
+    "yourScore": "Jouw score",
+    "playAgain": "Opnieuw spelen",
+    "correct": "Correct!",
+    "wrong": "Fout!",
+    "timeUp": "Tijd op!",
+    "backToCourse": "Terug naar cursus",
+    "notEnoughCards": "Bestudeer minstens 3 kaarten om te ontgrendelen"
   }
 }

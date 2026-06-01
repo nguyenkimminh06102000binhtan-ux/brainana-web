@@ -404,14 +404,17 @@
     "follow": "+ Segueix",
     "share": "Comparteix",
     "copied": "Copiat!",
-    "configureWords": "Configura paraules",
+    "configureWords": "Configura les targes",
     "configureWordsTitle": "Paraules per aprendre",
     "configureWordsDesc": "Desmarca les paraules que vols ometre",
     "configureWordsSave": "Desa",
     "configureWordsSaving": "Desant…",
     "configureWordsSaved": "Desat",
     "configureWordsSelectAll": "Selecciona-ho tot",
-    "configureWordsUntitled": "Secció sense títol"
+    "configureWordsUntitled": "Secció sense títol",
+    "quickReview": "Revisió ràpida",
+    "reviewCards": "Revisar ({count})",
+    "learnNewWords": "Aprèn nou"
   },
   "study": {
     "allSections": "Totes les seccions",
@@ -783,5 +786,19 @@
     "txChargeback": "Devolució de càrrec",
     "txAdminGrant": "Dotació d'administrador",
     "txUnknown": "Transacció"
+  },
+  "speedReview": {
+    "title": "Revisió Ràpida",
+    "score": "Puntuació",
+    "gameOver": "Joc acabat!",
+    "complete": "Complet!",
+    "cardsReviewed": "{count} targetes revisades",
+    "yourScore": "La teva puntuació",
+    "playAgain": "Jugar de nou",
+    "correct": "Correcte!",
+    "wrong": "Incorrecte!",
+    "timeUp": "Temps esgotat!",
+    "backToCourse": "Torna al curs",
+    "notEnoughCards": "Estudia almenys 3 targetes per desbloquejar la Revisió Ràpida"
   }
 }

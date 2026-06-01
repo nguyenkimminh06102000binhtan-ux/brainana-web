@@ -404,14 +404,17 @@
     "follow": "+ Seuraa",
     "share": "Jakaa",
     "copied": "Kopioitu!",
-    "configureWords": "Määritä sanat",
+    "configureWords": "Määritä kortit",
     "configureWordsTitle": "Opittavat sanat",
     "configureWordsDesc": "Poista rasti sanoista, jotka haluat ohittaa",
     "configureWordsSave": "Tallenna",
     "configureWordsSaving": "Tallennetaan…",
     "configureWordsSaved": "Tallennettu",
     "configureWordsSelectAll": "Valitse kaikki",
-    "configureWordsUntitled": "Nimetön osio"
+    "configureWordsUntitled": "Nimetön osio",
+    "quickReview": "Pikakerhaus",
+    "reviewCards": "Kertaa ({count})",
+    "learnNewWords": "Opi uutta"
   },
   "study": {
     "allSections": "Kaikki osat",
@@ -783,5 +786,19 @@
     "txChargeback": "Takaisinveloitus",
     "txAdminGrant": "Järjestelmänvalvojan apuraha",
     "txUnknown": "Tapahtuma"
+  },
+  "speedReview": {
+    "title": "Pikakerhaus",
+    "score": "Pisteet",
+    "gameOver": "Peli ohi!",
+    "complete": "Valmis!",
+    "cardsReviewed": "{count} korttia kerrattu",
+    "yourScore": "Pisteesi",
+    "playAgain": "Pelaa uudelleen",
+    "correct": "Oikein!",
+    "wrong": "Väärin!",
+    "timeUp": "Aika loppui!",
+    "backToCourse": "Takaisin kurssille",
+    "notEnoughCards": "Opettele vähintään 3 korttia avataksesi Pikaherhaluksen"
   }
 }

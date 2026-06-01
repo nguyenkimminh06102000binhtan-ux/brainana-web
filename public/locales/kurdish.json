@@ -404,14 +404,17 @@
     "follow": "+ Bişopînin",
     "share": "Par",
     "copied": "Kopî kirin!",
-    "configureWords": "Peyvan mîheng bike",
+    "configureWords": "Kartên mîheng bike",
     "configureWordsTitle": "Peyvan ji bo fêrbûnê",
     "configureWordsDesc": "Nîşana peyvên ku dixwazî derbas bikî rake",
     "configureWordsSave": "Tomar bike",
     "configureWordsSaving": "Tomar dibe…",
     "configureWordsSaved": "Hat tomarkirin",
     "configureWordsSelectAll": "Hemûyan hilbijêre",
-    "configureWordsUntitled": "Beşa bê sernavê"
+    "configureWordsUntitled": "Beşa bê sernavê",
+    "quickReview": "Nirxandina bilez",
+    "reviewCards": "Nirxandin ({count})",
+    "learnNewWords": "Nû fêr bibe"
   },
   "study": {
     "allSections": "Hemû beş",
@@ -783,5 +786,19 @@
     "txChargeback": "Chargeback",
     "txAdminGrant": "Destûra rêveberiyê",
     "txUnknown": "Şandindayinî"
+  },
+  "speedReview": {
+    "title": "Nirxandina Bilez",
+    "score": "Xal",
+    "gameOver": "Lîstin qediya!",
+    "complete": "Temam!",
+    "cardsReviewed": "{count} kart hat nirxandin",
+    "yourScore": "Xalên we",
+    "playAgain": "Dîsa bilîze",
+    "correct": "Rast!",
+    "wrong": "Çewt!",
+    "timeUp": "Dem xilas bû!",
+    "backToCourse": "Vegere qursa",
+    "notEnoughCards": "Kêmî 3 kartan fêr bibe da veke"
   }
 }

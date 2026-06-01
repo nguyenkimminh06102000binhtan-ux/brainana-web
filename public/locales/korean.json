@@ -404,14 +404,17 @@
     "follow": "+ 팔로우",
     "share": "공유하다",
     "copied": "복사되었습니다!",
-    "configureWords": "단어 설정",
+    "configureWords": "카드 설정",
     "configureWordsTitle": "학습할 단어",
     "configureWordsDesc": "건너뛰고 싶은 단어의 체크를 해제하세요",
     "configureWordsSave": "저장",
     "configureWordsSaving": "저장 중…",
     "configureWordsSaved": "저장됨",
     "configureWordsSelectAll": "모두 선택",
-    "configureWordsUntitled": "제목 없는 섹션"
+    "configureWordsUntitled": "제목 없는 섹션",
+    "quickReview": "빠른 복습",
+    "reviewCards": "복습 ({count})",
+    "learnNewWords": "새로 배우기"
   },
   "study": {
     "allSections": "모든 섹션",
@@ -783,5 +786,19 @@
     "txChargeback": "지불 거절",
     "txAdminGrant": "관리자 부여",
     "txUnknown": "거래"
+  },
+  "speedReview": {
+    "title": "스피드 리뷰",
+    "score": "점수",
+    "gameOver": "게임 오버!",
+    "complete": "완료!",
+    "cardsReviewed": "{count}개 카드 복습 완료",
+    "yourScore": "내 점수",
+    "playAgain": "다시 하기",
+    "correct": "정답!",
+    "wrong": "오답!",
+    "timeUp": "시간 초과!",
+    "backToCourse": "강의로 돌아가기",
+    "notEnoughCards": "스피드 리뷰를 잠금 해제하려면 카드 3개 이상 학습하세요"
   }
 }

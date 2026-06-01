@@ -404,14 +404,17 @@
     "follow": "+ Sundin",
     "share": "Ibahagi",
     "copied": "Kinopya!",
-    "configureWords": "I-configure ang mga salita",
+    "configureWords": "I-configure ang mga card",
     "configureWordsTitle": "Mga salitang matututo",
     "configureWordsDesc": "Alisan ng tsek ang mga salitang gusto mong laktawan",
     "configureWordsSave": "I-save",
     "configureWordsSaving": "Sine-save…",
     "configureWordsSaved": "Na-save",
     "configureWordsSelectAll": "Piliin lahat",
-    "configureWordsUntitled": "Walang pamagat na seksyon"
+    "configureWordsUntitled": "Walang pamagat na seksyon",
+    "quickReview": "Mabilis na review",
+    "reviewCards": "I-review ({count})",
+    "learnNewWords": "Matuto ng bago"
   },
   "study": {
     "allSections": "Lahat ng mga seksyon",
@@ -783,5 +786,19 @@
     "txChargeback": "Chargeback",
     "txAdminGrant": "Admin grant",
     "txUnknown": "Transaksyon"
+  },
+  "speedReview": {
+    "title": "Speed Review",
+    "score": "Iskor",
+    "gameOver": "Game over!",
+    "complete": "Tapos na!",
+    "cardsReviewed": "{count} card na na-review",
+    "yourScore": "Ang iyong iskor",
+    "playAgain": "Maglaro ulit",
+    "correct": "Tama!",
+    "wrong": "Mali!",
+    "timeUp": "Tapos na ang oras!",
+    "backToCourse": "Bumalik sa kurso",
+    "notEnoughCards": "Mag-aral ng hindi bababa sa 3 card para ma-unlock"
   }
 }

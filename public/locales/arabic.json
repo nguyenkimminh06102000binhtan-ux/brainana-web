@@ -404,14 +404,17 @@
     "follow": "+ متابعة",
     "share": "يشارك",
     "copied": "منسوخ!",
-    "configureWords": "تكوين الكلمات",
+    "configureWords": "تكوين البطاقات",
     "configureWordsTitle": "الكلمات للتعلم",
     "configureWordsDesc": "قم بإلغاء تحديد الكلمات التي تريد تخطيها",
     "configureWordsSave": "حفظ",
     "configureWordsSaving": "جارٍ الحفظ…",
     "configureWordsSaved": "تم الحفظ",
     "configureWordsSelectAll": "تحديد الكل",
-    "configureWordsUntitled": "قسم بلا عنوان"
+    "configureWordsUntitled": "قسم بلا عنوان",
+    "quickReview": "مراجعة سريعة",
+    "reviewCards": "مراجعة ({count})",
+    "learnNewWords": "تعلم جديد"
   },
   "study": {
     "allSections": "جميع الأقسام",
@@ -783,5 +786,19 @@
     "txChargeback": "اعتراض على الدفع",
     "txAdminGrant": "منحة من المسؤول",
     "txUnknown": "معاملة"
+  },
+  "speedReview": {
+    "title": "مراجعة سريعة",
+    "score": "النتيجة",
+    "gameOver": "انتهت اللعبة!",
+    "complete": "اكتمل!",
+    "cardsReviewed": "تمت مراجعة {count} بطاقة",
+    "yourScore": "نتيجتك",
+    "playAgain": "العب مرة أخرى",
+    "correct": "صحيح!",
+    "wrong": "خطأ!",
+    "timeUp": "انتهى الوقت!",
+    "backToCourse": "العودة إلى الدورة",
+    "notEnoughCards": "ادرس 3 بطاقات على الأقل لفتح المراجعة السريعة"
   }
 }

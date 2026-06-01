@@ -404,14 +404,17 @@
     "follow": "+ Obserwuj",
     "share": "Udział",
     "copied": "Skopiowano!",
-    "configureWords": "Konfiguruj słowa",
+    "configureWords": "Konfiguruj karty",
     "configureWordsTitle": "Słowa do nauki",
     "configureWordsDesc": "Odznacz słowa, które chcesz pominąć",
     "configureWordsSave": "Zapisz",
     "configureWordsSaving": "Zapisywanie…",
     "configureWordsSaved": "Zapisano",
     "configureWordsSelectAll": "Zaznacz wszystko",
-    "configureWordsUntitled": "Sekcja bez tytułu"
+    "configureWordsUntitled": "Sekcja bez tytułu",
+    "quickReview": "Szybkie powtórzenie",
+    "reviewCards": "Powtórz ({count})",
+    "learnNewWords": "Ucz się nowego"
   },
   "study": {
     "allSections": "Wszystkie sekcje",
@@ -783,5 +786,19 @@
     "txChargeback": "Obciążenie zwrotne",
     "txAdminGrant": "Dotacja administratora",
     "txUnknown": "Transakcja"
+  },
+  "speedReview": {
+    "title": "Szybkie Powtórzenie",
+    "score": "Wynik",
+    "gameOver": "Koniec gry!",
+    "complete": "Ukończono!",
+    "cardsReviewed": "{count} kart powtórzono",
+    "yourScore": "Twój wynik",
+    "playAgain": "Zagraj ponownie",
+    "correct": "Poprawnie!",
+    "wrong": "Niepoprawnie!",
+    "timeUp": "Czas minął!",
+    "backToCourse": "Wróć do kursu",
+    "notEnoughCards": "Naucz się co najmniej 3 kart, aby odblokować Szybkie Powtórzenie"
   }
 }

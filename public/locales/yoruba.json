@@ -404,14 +404,17 @@
     "follow": "+ Tẹle",
     "share": "Pinpin",
     "copied": "Ti daakọ!",
-    "configureWords": "Ṣeto awọn ọrọ",
+    "configureWords": "Ṣeto awọn kaadi",
     "configureWordsTitle": "Awọn ọrọ lati kọ",
     "configureWordsDesc": "Yọ aami kuro lori awọn ọrọ tí o fẹ fò",
     "configureWordsSave": "Fipamọ",
     "configureWordsSaving": "Fifipamọ…",
     "configureWordsSaved": "Ti fipamọ",
     "configureWordsSelectAll": "Yan gbogbo",
-    "configureWordsUntitled": "Apakan laisi akọle"
+    "configureWordsUntitled": "Apakan laisi akọle",
+    "quickReview": "Atunyẹwo iyara",
+    "reviewCards": "Tunwo ({count})",
+    "learnNewWords": "Kọ tuntun"
   },
   "study": {
     "allSections": "Gbogbo awọn apakan",
@@ -783,5 +786,19 @@
     "txChargeback": "Gbigba agbara pada",
     "txAdminGrant": "Ifunni abojuto",
     "txUnknown": "Idunadura"
+  },
+  "speedReview": {
+    "title": "Atunyẹwo Iyara",
+    "score": "Dimegilio",
+    "gameOver": "Ere tan!",
+    "complete": "Pari!",
+    "cardsReviewed": "Tunwo kaadi {count}",
+    "yourScore": "Dimegilio rẹ",
+    "playAgain": "Tun ere ṣe",
+    "correct": "Tọ!",
+    "wrong": "Aṣiṣe!",
+    "timeUp": "Akoko tan!",
+    "backToCourse": "Pada si ẹkọ",
+    "notEnoughCards": "Kọ kaadi 3 ni o kere ji lati ṣi"
   }
 }

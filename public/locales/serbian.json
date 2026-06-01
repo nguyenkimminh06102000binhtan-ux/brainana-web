@@ -404,14 +404,17 @@
     "follow": "+ Пратите",
     "share": "Схаре",
     "copied": "Копирано!",
-    "configureWords": "Konfiguriši reči",
+    "configureWords": "Konfiguriši kartice",
     "configureWordsTitle": "Reči za učenje",
     "configureWordsDesc": "Odznači reči koje želiš da preskočiš",
     "configureWordsSave": "Sačuvaj",
     "configureWordsSaving": "Čuvanje…",
     "configureWordsSaved": "Sačuvano",
     "configureWordsSelectAll": "Izaberi sve",
-    "configureWordsUntitled": "Odeljak bez naslova"
+    "configureWordsUntitled": "Odeljak bez naslova",
+    "quickReview": "Brzi pregled",
+    "reviewCards": "Pregled ({count})",
+    "learnNewWords": "Uči novo"
   },
   "study": {
     "allSections": "Све секције",
@@ -783,5 +786,19 @@
     "txChargeback": "Поврат",
     "txAdminGrant": "Админ грант",
     "txUnknown": "Трансакција"
+  },
+  "speedReview": {
+    "title": "Brzi Pregled",
+    "score": "Bodovi",
+    "gameOver": "Igra je gotova!",
+    "complete": "Završeno!",
+    "cardsReviewed": "{count} kartica pregledano",
+    "yourScore": "Vaš rezultat",
+    "playAgain": "Igraj ponovo",
+    "correct": "Tačno!",
+    "wrong": "Netačno!",
+    "timeUp": "Vreme isteklo!",
+    "backToCourse": "Nazad na kurs",
+    "notEnoughCards": "Proučite najmanje 3 kartice za otključavanje"
   }
 }

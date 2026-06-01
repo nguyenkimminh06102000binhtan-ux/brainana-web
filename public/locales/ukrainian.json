@@ -404,14 +404,17 @@
     "follow": "+ Слідкуйте",
     "share": "Поділіться",
     "copied": "Скопійовано!",
-    "configureWords": "Налаштувати слова",
+    "configureWords": "Налаштувати картки",
     "configureWordsTitle": "Слова для вивчення",
     "configureWordsDesc": "Зніміть позначку зі слів, які хочете пропустити",
     "configureWordsSave": "Зберегти",
     "configureWordsSaving": "Збереження…",
     "configureWordsSaved": "Збережено",
     "configureWordsSelectAll": "Вибрати все",
-    "configureWordsUntitled": "Розділ без назви"
+    "configureWordsUntitled": "Розділ без назви",
+    "quickReview": "Швидке повторення",
+    "reviewCards": "Повторити ({count})",
+    "learnNewWords": "Вчити нове"
   },
   "study": {
     "allSections": "Всі розділи",
@@ -783,5 +786,19 @@
     "txChargeback": "Повернення платежу",
     "txAdminGrant": "Грант адміністратора",
     "txUnknown": "Транзакція"
+  },
+  "speedReview": {
+    "title": "Швидке Повторення",
+    "score": "Очки",
+    "gameOver": "Гра закінчилась!",
+    "complete": "Завершено!",
+    "cardsReviewed": "{count} карток повторено",
+    "yourScore": "Ваш рахунок",
+    "playAgain": "Грати знову",
+    "correct": "Правильно!",
+    "wrong": "Неправильно!",
+    "timeUp": "Час вийшов!",
+    "backToCourse": "Повернутись до курсу",
+    "notEnoughCards": "Вивчіть принаймні 3 картки для розблокування"
   }
 }

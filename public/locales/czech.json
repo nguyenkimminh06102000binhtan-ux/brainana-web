@@ -404,14 +404,17 @@
     "follow": "+ Sledovat",
     "share": "Podíl",
     "copied": "Zkopírováno!",
-    "configureWords": "Konfigurovat slova",
+    "configureWords": "Konfigurovat karty",
     "configureWordsTitle": "Slova k učení",
     "configureWordsDesc": "Odznačte slova, která chcete přeskočit",
     "configureWordsSave": "Uložit",
     "configureWordsSaving": "Ukládání…",
     "configureWordsSaved": "Uloženo",
     "configureWordsSelectAll": "Vybrat vše",
-    "configureWordsUntitled": "Sekce bez názvu"
+    "configureWordsUntitled": "Sekce bez názvu",
+    "quickReview": "Rychlé opakování",
+    "reviewCards": "Opakovat ({count})",
+    "learnNewWords": "Učit nové"
   },
   "study": {
     "allSections": "Všechny sekce",
@@ -783,5 +786,19 @@
     "txChargeback": "Zpětný zákaz",
     "txAdminGrant": "Správní přidělení",
     "txUnknown": "Transakce"
+  },
+  "speedReview": {
+    "title": "Rychlý Přehled",
+    "score": "Skóre",
+    "gameOver": "Konec hry!",
+    "complete": "Dokončeno!",
+    "cardsReviewed": "{count} karet zkontrolováno",
+    "yourScore": "Vaše skóre",
+    "playAgain": "Hrát znovu",
+    "correct": "Správně!",
+    "wrong": "Špatně!",
+    "timeUp": "Čas vypršel!",
+    "backToCourse": "Zpět na kurz",
+    "notEnoughCards": "Nastudujte alespoň 3 karty pro odemčení Rychlého Přehledu"
   }
 }

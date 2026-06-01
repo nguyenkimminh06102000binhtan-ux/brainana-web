@@ -404,14 +404,17 @@
     "follow": "+ Հետևեք",
     "share": "Կիսվել",
     "copied": "Պատճենվել է",
-    "configureWords": "Կարգավորել բառերը",
+    "configureWords": "Կարգավորել քարտերը",
     "configureWordsTitle": "Բառեր սովորելու համար",
     "configureWordsDesc": "Ապընտրեք բառերը, որոնք ցանկանում եք բաց թողնել",
     "configureWordsSave": "Պահպանել",
     "configureWordsSaving": "Պահպանվում է…",
     "configureWordsSaved": "Պահպանված է",
     "configureWordsSelectAll": "Ընտրել բոլորը",
-    "configureWordsUntitled": "Անտիտղոս բաժին"
+    "configureWordsUntitled": "Անտիտղոս բաժին",
+    "quickReview": "Արագ կրկնություն",
+    "reviewCards": "Կրկնել ({count})",
+    "learnNewWords": "Սովորել նոր"
   },
   "study": {
     "allSections": "Բոլոր բաժինները",
@@ -783,5 +786,19 @@
     "txChargeback": "Վերադարձ գումարի",
     "txAdminGrant": "Ադմինիստրատորի նվիրաբերում",
     "txUnknown": "Գործարք"
+  },
+  "speedReview": {
+    "title": "Արագ Կրկնություն",
+    "score": "Միավոր",
+    "gameOver": "Խաղն ավարտված է!",
+    "complete": "Ավարտված!",
+    "cardsReviewed": "{count} քարտ կրկնվել է",
+    "yourScore": "Ձեր միավորը",
+    "playAgain": "Խաղալ կրկին",
+    "correct": "Ճիշտ!",
+    "wrong": "Սխալ!",
+    "timeUp": "Ժամանակն ավարտվել է!",
+    "backToCourse": "Վերադառնալ դասընթաց",
+    "notEnoughCards": "Նախ 3 քարտ ուսումնասիրեք"
   }
 }

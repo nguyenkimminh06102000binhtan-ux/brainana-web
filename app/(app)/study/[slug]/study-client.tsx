@@ -96,6 +96,7 @@ interface StudyClientProps {
   reviewDue: number;
   newCards: number;
   totalCount: number;
+  mode?: "review" | "new";
   preferredTypes: QType[];
   hasAudio: boolean;
   showRomanization: boolean;
@@ -111,6 +112,7 @@ export default function StudyClient({
   reviewDue,
   newCards,
   totalCount,
+  mode,
   preferredTypes,
   hasAudio,
   showRomanization,
@@ -151,7 +153,7 @@ export default function StudyClient({
   async function handleStart() {
     setStage("loading");
     try {
-      const cards = await fetchStudyCards(courseId, count, selectedTypes);
+      const cards = await fetchStudyCards(courseId, count, selectedTypes, mode);
       setSessionCards(cards);
       setStage("session");
     } catch {

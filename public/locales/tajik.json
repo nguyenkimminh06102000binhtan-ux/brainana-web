@@ -404,14 +404,17 @@
     "follow": "+ Пайравӣ кунед",
     "share": "Мубодила",
     "copied": "Нусхабардорӣ!",
-    "configureWords": "Калимаҳоро танзим кунед",
+    "configureWords": "Корточаҳоро танзим кунед",
     "configureWordsTitle": "Калимаҳо барои омӯхтан",
     "configureWordsDesc": "Аломати калимаҳоеро, ки мехоҳед гузаред, бардоред",
     "configureWordsSave": "Захира кунед",
     "configureWordsSaving": "Захира мешавад…",
     "configureWordsSaved": "Захира шуд",
     "configureWordsSelectAll": "Ҳамаро интихоб кунед",
-    "configureWordsUntitled": "Бахши бе унвон"
+    "configureWordsUntitled": "Бахши бе унвон",
+    "quickReview": "Такрори зуд",
+    "reviewCards": "Такрор кунед ({count})",
+    "learnNewWords": "Нав омӯзед"
   },
   "study": {
     "allSections": "Ҳама бахшҳо",
@@ -783,5 +786,19 @@
     "txChargeback": "Бозгашт",
     "txAdminGrant": "Гранти админ",
     "txUnknown": "Муомила"
+  },
+  "speedReview": {
+    "title": "Такрори Зуд",
+    "score": "Ба",
+    "gameOver": "Бозӣ тамом шуд!",
+    "complete": "Анҷом ёфт!",
+    "cardsReviewed": "{count} корточа такрор карда шуд",
+    "yourScore": "Бали шумо",
+    "playAgain": "Дубора бозӣ кунед",
+    "correct": "Дуруст!",
+    "wrong": "Нодуруст!",
+    "timeUp": "Вақт тамом шуд!",
+    "backToCourse": "Ба курс бозгардед",
+    "notEnoughCards": "Барои кушодан кам кардан 3 корточаро омӯзед"
   }
 }

@@ -404,14 +404,17 @@
     "follow": "+ అనుసరించండి",
     "share": "షేర్ చేయండి",
     "copied": "కాపీ చేయబడింది!",
-    "configureWords": "పదాలు కాన్ఫిగర్ చేయండి",
+    "configureWords": "కార్డులు కాన్ఫిగర్ చేయండి",
     "configureWordsTitle": "నేర్చుకోవడానికి పదాలు",
     "configureWordsDesc": "దాటవేయాలనుకునే పదాల టిక్ తీసివేయండి",
     "configureWordsSave": "సేవ్ చేయండి",
     "configureWordsSaving": "సేవ్ అవుతోంది…",
     "configureWordsSaved": "సేవ్ అయింది",
     "configureWordsSelectAll": "అన్నీ ఎంచుకోండి",
-    "configureWordsUntitled": "శీర్షిక లేని విభాగం"
+    "configureWordsUntitled": "శీర్షిక లేని విభాగం",
+    "quickReview": "శీఘ్ర సమీక్ష",
+    "reviewCards": "సమీక్ష ({count})",
+    "learnNewWords": "కొత్తది నేర్చుకోండి"
   },
   "study": {
     "allSections": "అన్ని విభాగాలు",
@@ -783,5 +786,19 @@
     "txChargeback": "ఛార్జ్బ్యాక్",
     "txAdminGrant": "అడ్మిన్ మంజూరు",
     "txUnknown": "లావాదేవీ"
+  },
+  "speedReview": {
+    "title": "స్పీడ్ రివ్యూ",
+    "score": "స్కోరు",
+    "gameOver": "గేమ్ ఓవర్!",
+    "complete": "పూర్తయింది!",
+    "cardsReviewed": "{count} కార్డులు సమీక్షించబడ్డాయి",
+    "yourScore": "మీ స్కోరు",
+    "playAgain": "మళ్ళీ ఆడండి",
+    "correct": "సరైనది!",
+    "wrong": "తప్పు!",
+    "timeUp": "సమయం అయిపోయింది!",
+    "backToCourse": "కోర్సుకు తిరిగి వెళ్ళండి",
+    "notEnoughCards": "అన్‌లాక్ చేయడానికి కనీసం 3 కార్డులు చదవండి"
   }
 }

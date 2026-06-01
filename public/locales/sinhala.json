@@ -404,14 +404,17 @@
     "follow": "+ අනුගමනය කරන්න",
     "share": "බෙදාගන්න",
     "copied": "පිටපත් කළා!",
-    "configureWords": "වචන වින්‍යාස කරන්න",
+    "configureWords": "කාඩ්පත් වින්‍යාස කරන්න",
     "configureWordsTitle": "ඉගෙනීමට වචන",
     "configureWordsDesc": "මගහැරීමට අවශ්‍ය වචනවල ටික් ඉවත් කරන්න",
     "configureWordsSave": "සුරකින්න",
     "configureWordsSaving": "සුරකිමින්…",
     "configureWordsSaved": "සුරකිනු ලැබිණ",
     "configureWordsSelectAll": "සියල්ල තෝරන්න",
-    "configureWordsUntitled": "නාමයක් නැති කොටස"
+    "configureWordsUntitled": "නාමයක් නැති කොටස",
+    "quickReview": "ඉක්මන් සමාලෝචනය",
+    "reviewCards": "සමාලෝචනය ({count})",
+    "learnNewWords": "නව ඉගෙනීම"
   },
   "study": {
     "allSections": "සියලුම අංශ",
@@ -783,5 +786,19 @@
     "txChargeback": "අයකිරීම",
     "txAdminGrant": "පරිපාලක දීමනාව",
     "txUnknown": "ගනුදෙනුව"
+  },
+  "speedReview": {
+    "title": "ස්පීඩ් රිව්යු",
+    "score": "ලකුණු",
+    "gameOver": "ක්‍රීඩාව අවසන්!",
+    "complete": "සම්පූර්ණ!",
+    "cardsReviewed": "{count} කාඩ් සමාලෝචනය කෙරිණ",
+    "yourScore": "ඔබේ ලකුණු",
+    "playAgain": "නැවත ක්‍රීඩා කරන්න",
+    "correct": "නිවැරදි!",
+    "wrong": "වැරදි!",
+    "timeUp": "කාලය ඉකුත් විය!",
+    "backToCourse": "පාඨමාලාවට ආපසු",
+    "notEnoughCards": "අඩු ගණනේ කාඩ් 3ක් ඉගෙනගෙන සිර කිරීම ඉවත් කරන්න"
   }
 }

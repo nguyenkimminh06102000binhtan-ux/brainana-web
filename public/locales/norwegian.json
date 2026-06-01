@@ -404,14 +404,17 @@
     "follow": "+ Følg",
     "share": "Dele",
     "copied": "Kopiert!",
-    "configureWords": "Konfigurer ord",
+    "configureWords": "Konfigurer kort",
     "configureWordsTitle": "Ord å lære",
     "configureWordsDesc": "Fjern avmerkingen for ord du vil hoppe over",
     "configureWordsSave": "Lagre",
     "configureWordsSaving": "Lagrer…",
     "configureWordsSaved": "Lagret",
     "configureWordsSelectAll": "Velg alle",
-    "configureWordsUntitled": "Navnløs seksjon"
+    "configureWordsUntitled": "Navnløs seksjon",
+    "quickReview": "Rask gjennomgang",
+    "reviewCards": "Gjennomgå ({count})",
+    "learnNewWords": "Lær nytt"
   },
   "study": {
     "allSections": "Alle seksjoner",
@@ -783,5 +786,19 @@
     "txChargeback": "Tilbakeføring",
     "txAdminGrant": "Administrasjonsstipend",
     "txUnknown": "Transaksjon"
+  },
+  "speedReview": {
+    "title": "Rask Gjennomgang",
+    "score": "Poeng",
+    "gameOver": "Spillet er over!",
+    "complete": "Fullført!",
+    "cardsReviewed": "{count} kort gjennomgått",
+    "yourScore": "Din poengsum",
+    "playAgain": "Spill igjen",
+    "correct": "Riktig!",
+    "wrong": "Feil!",
+    "timeUp": "Tid ute!",
+    "backToCourse": "Tilbake til kurset",
+    "notEnoughCards": "Studer minst 3 kort for å låse opp"
   }
 }

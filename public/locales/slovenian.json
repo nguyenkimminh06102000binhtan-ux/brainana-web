@@ -404,14 +404,17 @@
     "follow": "+ Sledi",
     "share": "Delite",
     "copied": "Kopirano!",
-    "configureWords": "Konfigurirajte besede",
+    "configureWords": "Konfigurirajte kartice",
     "configureWordsTitle": "Besede za učenje",
     "configureWordsDesc": "Odkljukajte besede, ki jih želite preskočiti",
     "configureWordsSave": "Shrani",
     "configureWordsSaving": "Shranjevanje…",
     "configureWordsSaved": "Shranjeno",
     "configureWordsSelectAll": "Izberi vse",
-    "configureWordsUntitled": "Razdelek brez naslova"
+    "configureWordsUntitled": "Razdelek brez naslova",
+    "quickReview": "Hitro ponavljanje",
+    "reviewCards": "Ponovi ({count})",
+    "learnNewWords": "Učiti novo"
   },
   "study": {
     "allSections": "Vsi razdelki",
@@ -783,5 +786,19 @@
     "txChargeback": "Povratna bremenitev",
     "txAdminGrant": "Administratorska pomoč",
     "txUnknown": "Transakcija"
+  },
+  "speedReview": {
+    "title": "Hitro Ponavljanje",
+    "score": "Točke",
+    "gameOver": "Igra je končana!",
+    "complete": "Dokončano!",
+    "cardsReviewed": "{count} kartic ponovljenih",
+    "yourScore": "Vaš rezultat",
+    "playAgain": "Igraj znova",
+    "correct": "Pravilno!",
+    "wrong": "Napačno!",
+    "timeUp": "Čas je potekel!",
+    "backToCourse": "Nazaj na tečaj",
+    "notEnoughCards": "Naučite se vsaj 3 kartice za odklepanje"
   }
 }
