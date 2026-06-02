@@ -68,6 +68,12 @@ export default async function StudyPage({
       .eq("course_id", course.id),
   ]);
 
+  const { count: customAttrCount } = await supabase
+    .from("items")
+    .select("id", { count: "exact", head: true })
+    .eq("course_id", course.id)
+    .not("custom_attributes", "is", null);
+
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
 
   const total = totalCount ?? 0;
@@ -94,6 +100,7 @@ export default async function StudyPage({
       preferredTypes={preferredTypes}
       hasAudio={hasAudio}
       showRomanization={profile?.show_romanization ?? true}
+      hasCustomAttributes={(customAttrCount ?? 0) > 0}
       memsLabels={loc.mems}
       labels={{
         ...loc.study,
@@ -104,6 +111,7 @@ export default async function StudyPage({
         speedMatch: loc.course.speedMatch,
         typeAnswer: loc.course.typeAnswer,
         showRomanization: loc.study.showRomanization,
+        showCustomAttributes: loc.study.showCustomAttributes,
       }}
     />
   );

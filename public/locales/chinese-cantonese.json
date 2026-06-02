@@ -484,7 +484,8 @@
       "下次一定得！",
       "繼續練習！"
     ],
-    "showRomanization": "顯示羅馬化"
+    "showRomanization": "顯示羅馬化",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "討論",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "是，設為公開",
     "publicWarningBack": "返回",
     "cardLockedBadge": "已鎖定",
-    "publicWarningIrreversible": "一旦公開，此課程將無法再設為私人。"
+    "publicWarningIrreversible": "一旦公開，此課程將無法再設為私人。",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~ 60秒 · 全部喺一頁",

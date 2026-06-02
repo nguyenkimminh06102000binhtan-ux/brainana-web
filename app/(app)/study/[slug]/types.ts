@@ -12,6 +12,7 @@ export interface StudyCard {
   romanization: string | null;
   acceptedAnswers: string[];
   distractors: string[];
+  customAttributes: Record<string, string> | null;
   questionType: QType;
   progress: {
     easeFactor: number;

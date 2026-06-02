@@ -484,7 +484,8 @@
       "அடுத்த முறை கிடைக்கும்!",
       "பயிற்சியைத் தொடருங்கள்!"
     ],
-    "showRomanization": "ரோமானியமயமாக்கலைக் காட்டு"
+    "showRomanization": "ரோமானியமயமாக்கலைக் காட்டு",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "கலந்துரையாடல்",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "ஆம், பொதுவாக்கவும்",
     "publicWarningBack": "திரும்பு",
     "cardLockedBadge": "பூட்டப்பட்டது",
-    "publicWarningIrreversible": "ஒருமுறை பொதுவாகிவிட்டால், இந்த கோர்ஸை மீண்டும் தனிப்பட்டதாக மாற்ற முடியாது."
+    "publicWarningIrreversible": "ஒருமுறை பொதுவாகிவிட்டால், இந்த கோர்ஸை மீண்டும் தனிப்பட்டதாக மாற்ற முடியாது.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 நொடி · அனைத்தும் ஒரே பக்கத்தில்",

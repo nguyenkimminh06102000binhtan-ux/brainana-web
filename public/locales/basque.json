@@ -484,7 +484,8 @@
       "Hurrengoan lortuko duzu!",
       "Jarraitu praktikatzen!"
     ],
-    "showRomanization": "Erakutsi erromanizazioa"
+    "showRomanization": "Erakutsi erromanizazioa",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Eztabaida",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Bai, egin publikoa",
     "publicWarningBack": "Atzera",
     "cardLockedBadge": "Blokeatua",
-    "publicWarningIrreversible": "Publikoa bihurtu ondoren, ikastaro hau ezin da berriz pribatu bihurtu."
+    "publicWarningIrreversible": "Publikoa bihurtu ondoren, ikastaro hau ezin da berriz pribatu bihurtu.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 segundo · dena orrialde bakarrean",

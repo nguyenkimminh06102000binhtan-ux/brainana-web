@@ -15,6 +15,7 @@ interface TypeAnswerModeProps {
   onReveal?: () => void;
   showNoAudioNotice?: boolean;
   showRomanization?: boolean;
+  showCustomAttributes?: boolean;
   labels: {
     noAudio: string;
     letters: string;
@@ -22,7 +23,6 @@ interface TypeAnswerModeProps {
     placeholder: string;
     playAudio: string;
     correct: string;
-    wrong: string;
     submit: string;
     continueBtn: string;
     feedbackCorrect: string[];
@@ -61,6 +61,7 @@ export default function TypeAnswerMode({
   onReveal,
   showNoAudioNotice,
   showRomanization,
+  showCustomAttributes,
   labels,
 }: TypeAnswerModeProps) {
   const startedAt = useRef(Date.now());
@@ -89,12 +90,9 @@ export default function TypeAnswerMode({
 
   useEffect(() => {
     startedAt.current = Date.now();
-    setValue("");
-    setAttempts(0);
-    setShowFirstLetter(false);
-    setSubmitted(null);
-    setTimeout(() => inputRef.current?.focus(), 50);
-  }, [card.itemId]);
+    const focusTimer = setTimeout(() => inputRef.current?.focus(), 50);
+    return () => clearTimeout(focusTimer);
+  }, []);
 
   useEffect(() => {
     if (!submitted) return;
@@ -171,6 +169,7 @@ export default function TypeAnswerMode({
           outcome={submitted.correct ? "correct" : "incorrect"}
           correctMessages={labels.feedbackCorrect}
           wrongMessages={labels.feedbackWrong}
+          acceptedAnswers={submitted.correct ? undefined : answers}
         />
       )}
       <div className="flex flex-col gap-6 px-4 py-8">
@@ -246,10 +245,28 @@ export default function TypeAnswerMode({
         />
 
         {submitted && (
-          <div className="mt-2">
-            <span className="font-manrope text-sm text-ink-2">
-              {submitted.correct ? labels.correct : t(labels.wrong, { answer: card.backText })}
-            </span>
+          <div className="mt-2 flex flex-col gap-2">
+            {submitted.correct ? (
+              <span className="font-manrope text-sm text-ink-2">{labels.correct}</span>
+            ) : (
+              <div className="flex flex-wrap gap-1.5">
+                {answers.map((ans, i) => (
+                  <span key={i} className="rounded-full border-2 border-electric-pink/40 px-3 py-0.5 font-manrope text-sm text-ink">
+                    {ans}
+                  </span>
+                ))}
+              </div>
+            )}
+            {showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+              <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
+                {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+                  <div key={k}>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
+                    <p className="font-manrope text-sm text-ink-2">{v}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

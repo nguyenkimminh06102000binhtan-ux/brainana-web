@@ -484,7 +484,8 @@
       "በሚቀጥለው ጊዜ ታገኘዋለህ!",
       "መለማመድህን ቀጥል!"
     ],
-    "showRomanization": "ሮማንነትን አሳይ"
+    "showRomanization": "ሮማንነትን አሳይ",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "ውይይት",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "አዎ፣ ይፋዊ አድርጌ",
     "publicWarningBack": "ተመለስ",
     "cardLockedBadge": "ተዘግቷል",
-    "publicWarningIrreversible": "ይፋዊ ከሆነ በኋላ ይህ ኮርስ እንደገና ግላዊ ሊሆን አይችልም።"
+    "publicWarningIrreversible": "ይፋዊ ከሆነ በኋላ ይህ ኮርስ እንደገና ግላዊ ሊሆን አይችልም።",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 ሰከንድ · ሁሉም በአንድ ገጽ ላይ",

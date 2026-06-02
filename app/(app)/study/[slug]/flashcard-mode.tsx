@@ -8,6 +8,7 @@ import type { StudyCard, CardAnswer } from "./types";
 interface FlashcardModeProps {
   card: StudyCard;
   showRomanization: boolean;
+  showCustomAttributes: boolean;
   onAnswer: (answer: CardAnswer) => void;
   onReveal?: () => void;
   labels: {
@@ -22,7 +23,7 @@ interface FlashcardModeProps {
 
 const QUALITIES = [1, 3, 4, 5] as const;
 
-export default function FlashcardMode({ card, showRomanization, onAnswer, onReveal, labels }: FlashcardModeProps) {
+export default function FlashcardMode({ card, showRomanization, showCustomAttributes, onAnswer, onReveal, labels }: FlashcardModeProps) {
   const ratingButtons = [
     { label: labels.ratingAgain, quality: QUALITIES[0] },
     { label: labels.ratingHard,  quality: QUALITIES[1] },
@@ -34,10 +35,6 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
   const ef = card.progress?.easeFactor ?? 2.5;
   const iv = card.progress?.intervalDays ?? 1;
   const rp = card.progress?.repetitions ?? 0;
-
-  useEffect(() => {
-    setFlipped(false);
-  }, [card.itemId]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -113,6 +110,16 @@ export default function FlashcardMode({ card, showRomanization, onAnswer, onReve
             <p className="break-words text-center font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
               {card.backText}
             </p>
+            {showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+              <div className="mt-4 w-full border-t border-ink/10 pt-3 flex flex-col gap-1.5">
+                {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+                  <div key={k} className="text-left">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
+                    <p className="font-manrope text-sm text-ink-2">{v}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

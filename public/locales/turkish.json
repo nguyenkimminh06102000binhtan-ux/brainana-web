@@ -484,7 +484,8 @@
       "Bir dahaki sefere olacak!",
       "Pratik yapmaya devam et!"
     ],
-    "showRomanization": "Latin alfabesini göster"
+    "showRomanization": "Latin alfabesini göster",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Tartışma",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Evet, herkese açık yap",
     "publicWarningBack": "Geri",
     "cardLockedBadge": "Kilitli",
-    "publicWarningIrreversible": "Herkese açık hale getirildikten sonra bu kurs tekrar özel yapılamaz."
+    "publicWarningIrreversible": "Herkese açık hale getirildikten sonra bu kurs tekrar özel yapılamaz.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 saniye · hepsi tek sayfada",

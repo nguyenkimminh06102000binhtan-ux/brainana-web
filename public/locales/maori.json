@@ -484,7 +484,8 @@
       "Ā tērā wā ka taea!",
       "Haere tonu te whakaharatau!"
     ],
-    "showRomanization": "Whakaatuhia te romanization"
+    "showRomanization": "Whakaatuhia te romanization",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Matapakinga",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Āe, whakaaturia",
     "publicWarningBack": "Hoki",
     "cardLockedBadge": "Kua mauhia",
-    "publicWarningIrreversible": "Kia whakaaturia, kāore e taea te huri anō tēnei akoranga hei mea whaiaro."
+    "publicWarningIrreversible": "Kia whakaaturia, kāore e taea te huri anō tēnei akoranga hei mea whaiaro.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 hēkona · kei te whārangi kotahi",

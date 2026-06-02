@@ -484,7 +484,8 @@
       "بل ځل به یې وکړې!",
       "تمرین ته دوام ورکړه!"
     ],
-    "showRomanization": "رومانیزم ښکاره کړئ"
+    "showRomanization": "رومانیزم ښکاره کړئ",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "بحث",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "هو، عامه کړئ",
     "publicWarningBack": "شاته",
     "cardLockedBadge": "قفل",
-    "publicWarningIrreversible": "یوځل چې عامه شو، دا کورس بیا د خصوصي کیدو وړ نه دی."
+    "publicWarningIrreversible": "یوځل چې عامه شو، دا کورس بیا د خصوصي کیدو وړ نه دی.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~ 60 ثانیې · ټول په یوه پاڼه کې",

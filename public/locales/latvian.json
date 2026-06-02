@@ -484,7 +484,8 @@
       "Nākamreiz izdosies!",
       "Turpini trenēties!"
     ],
-    "showRomanization": "Parādiet latinizāciju"
+    "showRomanization": "Parādiet latinizāciju",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Diskusija",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Jā, padarīt publisku",
     "publicWarningBack": "Atpakaļ",
     "cardLockedBadge": "Bloķēts",
-    "publicWarningIrreversible": "Kad kurss ir publisks, to vairs nevar padarīt privātu."
+    "publicWarningIrreversible": "Kad kurss ir publisks, to vairs nevar padarīt privātu.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sek · viss vienā lapā",

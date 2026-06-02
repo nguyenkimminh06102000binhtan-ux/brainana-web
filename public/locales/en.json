@@ -539,7 +539,8 @@
       "Don't give up!",
       "You'll get it next time!",
       "Keep practicing!"
-    ]
+    ],
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Discussion",
@@ -684,7 +685,21 @@
     "publicWarningConfirm": "Yes, make it public",
     "publicWarningBack": "Back",
     "publicWarningIrreversible": "Once public, this course cannot be made private again.",
-    "cardLockedBadge": "Locked"
+    "cardLockedBadge": "Locked",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "mems": {
     "memoryHints": "Memory Hints",

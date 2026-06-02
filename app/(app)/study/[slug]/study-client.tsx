@@ -12,6 +12,7 @@ type Stage = "setup" | "loading" | "session" | "results";
 
 type StudyLabels = {
   showRomanization: string;
+  showCustomAttributes: string;
   allSections: string;
   howManyWords: string;
   dueForReview: string;
@@ -51,7 +52,6 @@ type StudyLabels = {
   typeWhatYouHear: string;
   playAudio: string;
   correctAnswer: string;
-  wrongAnswer: string;
   submitButton: string;
   continueButton: string;
   timesUp: string;
@@ -100,6 +100,7 @@ interface StudyClientProps {
   preferredTypes: QType[];
   hasAudio: boolean;
   showRomanization: boolean;
+  hasCustomAttributes: boolean;
   labels: StudyLabels;
   memsLabels: MemsLabels;
 }
@@ -116,6 +117,7 @@ export default function StudyClient({
   preferredTypes,
   hasAudio,
   showRomanization,
+  hasCustomAttributes,
   labels,
   memsLabels,
 }: StudyClientProps) {
@@ -128,6 +130,7 @@ export default function StudyClient({
   const [count, setCount] = useState(sessionLimit > 0 ? Math.min(10, sessionLimit) : 0);
   const [selectedTypes, setSelectedTypes] = useState<QType[]>(preferredTypes);
   const [localShowRomanization, setLocalShowRomanization] = useState(showRomanization);
+  const [localShowCustomAttributes, setLocalShowCustomAttributes] = useState(true);
   const [isSaving, startSaveTransition] = useTransition();
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -189,6 +192,7 @@ export default function StudyClient({
         courseSlug={courseSlug}
         cards={sessionCards}
         showRomanization={localShowRomanization}
+        showCustomAttributes={localShowCustomAttributes}
         audioOnlyMode={selectedTypes.length === 1 && selectedTypes[0] === "audio_type"}
         memsLabels={memsLabels}
         onComplete={handleSessionComplete}
@@ -213,7 +217,6 @@ export default function StudyClient({
           typeWhatYouHear: labels.typeWhatYouHear,
           playAudio: labels.playAudio,
           correctAnswer: labels.correctAnswer,
-          wrongAnswer: labels.wrongAnswer,
           submitButton: labels.submitButton,
           continueButton: labels.continueButton,
           timesUp: labels.timesUp,
@@ -374,7 +377,7 @@ export default function StudyClient({
         </div>
 
         {/* Romanization toggle */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <span className="font-manrope text-sm text-ink-2">{labels.showRomanization}</span>
           <button
             type="button"
@@ -386,6 +389,22 @@ export default function StudyClient({
             <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-hard-sm transition-transform ${localShowRomanization ? "translate-x-5" : "translate-x-0"}`} />
           </button>
         </div>
+
+        {/* Custom attributes toggle */}
+        {hasCustomAttributes && (
+          <div className="mb-6 flex items-center justify-between">
+            <span className="font-manrope text-sm text-ink-2">{labels.showCustomAttributes}</span>
+            <button
+              type="button"
+              onClick={() => setLocalShowCustomAttributes((v) => !v)}
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${localShowCustomAttributes ? "bg-orange" : "bg-ink/20"}`}
+              role="switch"
+              aria-checked={localShowCustomAttributes}
+            >
+              <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-hard-sm transition-transform ${localShowCustomAttributes ? "translate-x-5" : "translate-x-0"}`} />
+            </button>
+          </div>
+        )}
 
         {/* Buttons */}
         {saveError && (

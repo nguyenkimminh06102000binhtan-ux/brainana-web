@@ -484,7 +484,8 @@
       "Você vai conseguir da próxima vez!",
       "Continue praticando!"
     ],
-    "showRomanization": "Mostrar romanização"
+    "showRomanization": "Mostrar romanização",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Discussão",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Sim, tornar público",
     "publicWarningBack": "Voltar",
     "cardLockedBadge": "Bloqueado",
-    "publicWarningIrreversible": "Uma vez público, este curso não pode ser tornado privado novamente."
+    "publicWarningIrreversible": "Uma vez público, este curso não pode ser tornado privado novamente.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 segundos · tudo em uma página",

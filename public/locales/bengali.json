@@ -484,7 +484,8 @@
       "পরের বার পারবে!",
       "অনুশীলন চালিয়ে যাও!"
     ],
-    "showRomanization": "রোমানাইজেশন দেখান"
+    "showRomanization": "রোমানাইজেশন দেখান",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "আলোচনা",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "হ্যাঁ, পাবলিক করুন",
     "publicWarningBack": "ফিরে যান",
     "cardLockedBadge": "লক",
-    "publicWarningIrreversible": "একবার পাবলিক হলে, এই কোর্সটি আর প্রাইভেট করা যাবে না।"
+    "publicWarningIrreversible": "একবার পাবলিক হলে, এই কোর্সটি আর প্রাইভেট করা যাবে না।",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 সেকেন্ড · সব এক পৃষ্ঠায়",

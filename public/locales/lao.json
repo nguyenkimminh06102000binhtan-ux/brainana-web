@@ -484,7 +484,8 @@
       "ຄັ້ງໜ້າຈະເຮັດໄດ້!",
       "ຝຶກຕໍ່ໄປ!"
     ],
-    "showRomanization": "ສະແດງ romanization"
+    "showRomanization": "ສະແດງ romanization",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "ສົນທະນາ",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "ແມ່ນ, ເຮັດໃຫ້ສາທາລະນະ",
     "publicWarningBack": "ກັບ",
     "cardLockedBadge": "ລ໋ອກ",
-    "publicWarningIrreversible": "ເມື່ອເປັນສາທາລະນະແລ້ວ ຫຼັກສູດນີ້ຈະບໍ່ສາມາດເຮັດໃຫ້ເປັນສ່ວນຕົວໄດ້ອີກ."
+    "publicWarningIrreversible": "ເມື່ອເປັນສາທາລະນະແລ້ວ ຫຼັກສູດນີ້ຈະບໍ່ສາມາດເຮັດໃຫ້ເປັນສ່ວນຕົວໄດ້ອີກ.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 ວິ · ທັງໝົດຢູ່ໃນໜ້າດຽວ",

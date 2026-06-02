@@ -484,7 +484,8 @@
       "ඊළඟ වතාවේ කරගන්න පුළුවන්!",
       "පුහුණුව දිගටම කරගෙන යන්න!"
     ],
-    "showRomanization": "රෝමානුකරණය පෙන්වන්න"
+    "showRomanization": "රෝමානුකරණය පෙන්වන්න",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "සාකච්ඡාව",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "ඔව්, පොදු කරන්න",
     "publicWarningBack": "ආපසු",
     "cardLockedBadge": "අගුළු දමා ඇත",
-    "publicWarningIrreversible": "එක් වරක් පොදු වූ විට, මෙම පාඨමාලාව නැවත පෞද්ගලික කළ නොහැක."
+    "publicWarningIrreversible": "එක් වරක් පොදු වූ විට, මෙම පාඨමාලාව නැවත පෞද්ගලික කළ නොහැක.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 තත්පර · සියල්ල එක පිටුවක",

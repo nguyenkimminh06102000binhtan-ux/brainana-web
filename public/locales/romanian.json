@@ -484,7 +484,8 @@
       "Îți va ieși data viitoare!",
       "Continuă să exersezi!"
     ],
-    "showRomanization": "Arată romanizarea"
+    "showRomanization": "Arată romanizarea",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Discuţie",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Da, faceți public",
     "publicWarningBack": "Înapoi",
     "cardLockedBadge": "Blocat",
-    "publicWarningIrreversible": "Odată public, acest curs nu mai poate fi făcut privat."
+    "publicWarningIrreversible": "Odată public, acest curs nu mai poate fi făcut privat.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sec · toate pe o singură pagină",

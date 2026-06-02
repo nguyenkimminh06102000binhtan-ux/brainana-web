@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import MathToolbar from "@/app/(app)/_components/math-toolbar";
 import Link from "next/link";
@@ -13,12 +13,14 @@ import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/st
 import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
 import { generateBack } from "@/app/actions/generate-back";
+import { generateCustomAttribute } from "@/app/actions/generate-custom-attribute";
 import { getTTSVoice } from "@/utils/tts";
 import { generateTTSAudio } from "@/app/actions/tts";
 import { showQuotaToast } from "@/components/quota-toast";
 import { toast } from "sonner";
 import AiImportModal from "@/app/(app)/create/ai-import-modal";
 import PublicCourseWarningModal from "@/components/public-course-warning-modal";
+import CustomAttributesModal from "@/app/(app)/create/custom-attributes-modal";
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
@@ -41,6 +43,8 @@ type Item = {
   backAudioPath: string;
   backAudioDisplayUrl: string;
   distractors: string[];
+  acceptedAnswers: string[];
+  customAttributeValues: Record<string, string>;
   uploads: Record<UploadField, UploadState>;
 };
 
@@ -49,6 +53,7 @@ type Section = {
   dbId: string | null;
   title: string;
   description: string;
+  customAttributes: string[];
   items: Item[];
 };
 
@@ -69,6 +74,8 @@ type DbSection = {
     back_audio_url: string | null;
     back_audio_display_url: string | null;
     distractors: string[] | null;
+    accepted_answers?: string[] | null;
+    custom_attributes?: Record<string, string> | null;
     position: number;
   }[];
 };
@@ -107,9 +114,11 @@ const makeItem = (): Item => ({
   backAudioPath: "",
   backAudioDisplayUrl: "",
   distractors: [],
+  acceptedAnswers: [],
+  customAttributeValues: {},
   uploads: freshUpload(),
 });
-const makeSection = (): Section => ({ id: uid++, dbId: null, title: "", description: "", items: [makeItem()] });
+const makeSection = (): Section => ({ id: uid++, dbId: null, title: "", description: "", customAttributes: [], items: [makeItem()] });
 
 function fromDb(dbSections: DbSection[]): Section[] {
   return dbSections.map((s) => ({
@@ -117,6 +126,7 @@ function fromDb(dbSections: DbSection[]): Section[] {
     dbId: s.id,
     title: s.title,
     description: s.description ?? "",
+    customAttributes: (s as { custom_attributes?: string[] | null }).custom_attributes ?? [],
     items: s.items.length > 0
       ? s.items.map((i) => ({
           id: uid++,
@@ -131,7 +141,9 @@ function fromDb(dbSections: DbSection[]): Section[] {
           backAudioPath: i.back_audio_url ?? "",
           backAudioDisplayUrl: i.back_audio_display_url ?? "",
           distractors: i.distractors ?? [],
-                  uploads: freshUpload(),
+          acceptedAnswers: i.accepted_answers ?? [],
+          customAttributeValues: (i.custom_attributes as Record<string, string> | null) ?? {},
+          uploads: freshUpload(),
         }))
       : [makeItem()],
   }));
@@ -267,12 +279,15 @@ function ImagePreview({ url, onRemove, removeLabel }: { url: string; onRemove: (
   );
 }
 
-function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onRemove, onUpload, onClearUrl, onFocusInput, locked }: {
+function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, charsExhausted, onQuotaExhausted, labels, onUpdate, onUpdateDistractors, onUpdateAcceptedAnswers, onUpdateCustomAttributeValues, onRemove, onUpload, onClearUrl, onFocusInput, locked, customAttributes }: {
   item: Item; index: number; isOnly: boolean; sourceLanguage: string; targetLanguage: string;
   plan: string; charsExhausted: boolean; onQuotaExhausted: () => void;
   labels: CreateEditLabels;
   onUpdate: (field: "front" | "back" | "romanization", value: string) => void;
   onUpdateDistractors: (distractors: string[]) => void;
+  onUpdateAcceptedAnswers: (acceptedAnswers: string[]) => void;
+  onUpdateCustomAttributeValues: (vals: Record<string, string>) => void;
+  customAttributes: string[];
   onRemove: () => void;
   onUpload: (field: UploadField, file: File) => void;
   onClearUrl: (field: "imagePath" | "backAudioPath") => void;
@@ -495,41 +510,97 @@ function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, c
       </div>
 
       <div className="border-t border-ink/10 bg-paper-2 px-4 py-3">
-        {lbl(labels.distractors, true, labels.optional)}
-        <div className="flex flex-col gap-1.5">
-          {item.distractors.map((d, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <input
-                type="text"
-                value={d}
-                placeholder={labels.distractorPlaceholder}
-                onChange={(e) => {
-                  const next = [...item.distractors];
-                  next[i] = e.target.value;
-                  onUpdateDistractors(next);
-                }}
-                className="min-w-0 flex-1 rounded bg-paper px-3 py-1.5 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
-              />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            {lbl(labels.distractors, true, labels.optional)}
+            <div className="flex flex-col gap-1.5">
+              {item.distractors.map((d, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={d}
+                    placeholder={labels.distractorPlaceholder}
+                    onChange={(e) => {
+                      const next = [...item.distractors];
+                      next[i] = e.target.value;
+                      onUpdateDistractors(next);
+                    }}
+                    className="min-w-0 flex-1 rounded bg-paper px-3 py-1.5 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => onUpdateDistractors(item.distractors.filter((_, j) => j !== i))}
+                    className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text"
+                  >
+                    {labels.remove}
+                  </button>
+                </div>
+              ))}
+              {item.distractors.length < 3 && (
+                <button
+                  type="button"
+                  onClick={() => onUpdateDistractors([...item.distractors, ""])}
+                  className="self-start font-manrope text-xs font-[800] text-ink-2 hover:text-ink"
+                >
+                  {labels.addDistractor}
+                </button>
+              )}
+            </div>
+          </div>
+          <div>
+            {lbl(labels.acceptedAnswers, true, labels.optional)}
+            <div className="flex flex-col gap-1.5">
+              {item.acceptedAnswers.map((a, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={a}
+                    placeholder={labels.acceptedAnswerPlaceholder}
+                    onChange={(e) => {
+                      const next = [...item.acceptedAnswers];
+                      next[i] = e.target.value;
+                      onUpdateAcceptedAnswers(next);
+                    }}
+                    className="min-w-0 flex-1 rounded bg-paper px-3 py-1.5 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => onUpdateAcceptedAnswers(item.acceptedAnswers.filter((_, j) => j !== i))}
+                    className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text"
+                  >
+                    {labels.remove}
+                  </button>
+                </div>
+              ))}
               <button
                 type="button"
-                onClick={() => onUpdateDistractors(item.distractors.filter((_, j) => j !== i))}
-                className="shrink-0 font-manrope text-xs font-[800] text-ink-3 hover:text-orange-text"
+                onClick={() => onUpdateAcceptedAnswers([...item.acceptedAnswers, ""])}
+                className="self-start font-manrope text-xs font-[800] text-ink-2 hover:text-ink"
               >
-                {labels.remove}
+                {labels.addAcceptedAnswer}
               </button>
             </div>
-          ))}
-          {item.distractors.length < 3 && (
-            <button
-              type="button"
-              onClick={() => onUpdateDistractors([...item.distractors, ""])}
-              className="self-start font-manrope text-xs font-[800] text-ink-2 hover:text-ink"
-            >
-              {labels.addDistractor}
-            </button>
-          )}
+          </div>
         </div>
       </div>
+      {customAttributes.length > 0 && (
+        <div className="border-t border-ink/10 bg-paper px-4 py-3">
+          <div className="flex flex-col gap-2">
+            {customAttributes.map((attr) => (
+              <div key={attr}>
+                {lbl(attr)}
+                <input
+                  type="text"
+                  value={item.customAttributeValues[attr] ?? ""}
+                  placeholder={attr}
+                  onChange={(e) => onUpdateCustomAttributeValues({ ...item.customAttributeValues, [attr]: e.target.value })}
+                  className="w-full rounded bg-paper-2 px-3 py-1.5 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -574,11 +645,32 @@ export default function EditCourseForm({
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState(course.source_language ?? "English (US)");
   const [aiImportSectionId, setAiImportSectionId] = useState<number | null>(null);
   const [charsExhausted, setCharsExhausted] = useState(initialCharsBalance <= 0);
-  const [bulkStatuses, setBulkStatuses] = useState<Map<number, string>>(new Map());
-  const [bulkAudioStatuses, setBulkAudioStatuses] = useState<Map<number, string>>(new Map());
   const [bulkBackStatuses, setBulkBackStatuses] = useState<Map<number, string>>(new Map());
+  const [bulkAutoFillStatuses, setBulkAutoFillStatuses] = useState<Map<number, string>>(new Map());
+  const [customAttrDropdownSectionId, setCustomAttrDropdownSectionId] = useState<number | null>(null);
+  const [customAttrDropdownChecked, setCustomAttrDropdownChecked] = useState<Set<string>>(new Set());
+  const customAttrDropdownRef = useRef<HTMLDivElement>(null);
   const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
   const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
+
+  useEffect(() => {
+    if (customAttrDropdownSectionId === null) return;
+    function handleClick(e: MouseEvent) {
+      if (customAttrDropdownRef.current && !customAttrDropdownRef.current.contains(e.target as Node)) {
+        setCustomAttrDropdownSectionId(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [customAttrDropdownSectionId]);
+
+  function openAutoFillDropdown(sectionId: number, section: { customAttributes: string[] }) {
+    setCustomAttrDropdownSectionId(sectionId);
+    const initial = new Set<string>(section.customAttributes);
+    if (getRomanizationSystem(selectedTargetLanguage)) initial.add("__romanization__");
+    if (getTTSVoice(selectedTargetLanguage)) initial.add("__audio__");
+    setCustomAttrDropdownChecked(initial);
+  }
 
   function insertSymbol(sym: string) {
     const el = lastFocusedEl.current;
@@ -596,7 +688,8 @@ export default function EditCourseForm({
   function toggleCollapse(id: number) {
     setCollapsed((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   }
@@ -625,6 +718,46 @@ export default function EditCourseForm({
       s.id === sectionId ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, distractors } : i) } : s
     ));
   }
+
+  function updateAcceptedAnswers(sectionId: number, itemId: number, acceptedAnswers: string[]) {
+    setSections((prev) => prev.map((s) =>
+      s.id === sectionId ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, acceptedAnswers } : i) } : s
+    ));
+  }
+
+  function updateSectionCustomAttributes(sectionId: number, attrs: string[]) {
+    const allowed = new Set(attrs);
+    setSections((prev) => prev.map((s) => {
+      if (s.id !== sectionId) return s;
+      return {
+        ...s,
+        customAttributes: attrs,
+        items: s.items.map((item) => ({
+          ...item,
+          customAttributeValues: Object.fromEntries(
+            Object.entries(item.customAttributeValues).filter(([key]) => allowed.has(key))
+          ),
+        })),
+      };
+    }));
+  }
+
+  function updateCustomAttributeValues(sectionId: number, itemId: number, vals: Record<string, string>) {
+    setSections((prev) => prev.map((s) =>
+      s.id === sectionId ? { ...s, items: s.items.map((i) => i.id === itemId ? { ...i, customAttributeValues: vals } : i) } : s
+    ));
+  }
+
+  function setAutoFillChoice(key: string, checked: boolean) {
+    setCustomAttrDropdownChecked((prev) => {
+      const next = new Set(prev);
+      if (checked) next.add(key);
+      else next.delete(key);
+      return next;
+    });
+  }
+
+  const [customAttrModalSectionId, setCustomAttrModalSectionId] = useState<number | null>(null);
   function removeItem(sectionId: number, itemId: number) {
     const item = sections.find((s) => s.id === sectionId)?.items.find((i) => i.id === itemId);
     if (isPublic && item?.dbId) return; // locked
@@ -640,88 +773,74 @@ export default function EditCourseForm({
         : s
     ));
   }
-  async function handleSectionBulkGenerate(sectionId: number) {
-    const roSystem = getRomanizationSystem(selectedTargetLanguage);
-    if (!roSystem) return;
+  async function handleSectionAutoFill(sectionId: number, selected: Set<string>) {
+    setCustomAttrDropdownSectionId(null);
+    if (selected.size === 0) return;
     const section = sections.find((s) => s.id === sectionId);
     if (!section) return;
-    const missing = section.items
-      .filter((i) => i.back.trim() && !i.romanization.trim())
-      .map((i) => ({ itemId: i.id, back: i.back }));
-    if (missing.length === 0) return;
-    const BATCH = 10;
-    let done = 0;
-    let successCount = 0;
     let minRemaining: number | undefined;
     let quotaRanOut = false;
-    setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done: 0, total: missing.length })));
-    for (let i = 0; i < missing.length; i += BATCH) {
-      if (quotaRanOut) break;
-      const batch = missing.slice(i, i + BATCH);
-      await Promise.all(
-        batch.map(async ({ itemId, back }) => {
+    let successCount = 0;
+    setBulkAutoFillStatuses((prev) => new Map(prev).set(sectionId, labels.autoFilling));
+
+    if (!quotaRanOut && selected.has("__romanization__") && getRomanizationSystem(selectedTargetLanguage)) {
+      const missing = section.items.filter((i) => i.back.trim() && !i.romanization.trim()).map((i) => ({ itemId: i.id, back: i.back }));
+      for (let i = 0; i < missing.length; i += 10) {
+        if (quotaRanOut) break;
+        await Promise.all(missing.slice(i, i + 10).map(async ({ itemId, back }) => {
           const { romanization, remainingChars, quotaExhausted } = await suggestRomanization(back, selectedTargetLanguage);
           if (quotaExhausted) { quotaRanOut = true; return; }
           if (romanization) { updateItem(sectionId, itemId, "romanization", romanization); successCount++; }
-          if (remainingChars !== undefined) {
-            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-          }
-        })
-      );
-      done += batch.length;
-      setBulkStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingRomanization, { done, total: missing.length })));
+          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        }));
+      }
     }
-    setBulkStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingRomanization, { done, total: missing.length }) : t(labels.bulkGenerateDoneRomanization, { count: missing.length })));
-    setTimeout(() => setBulkStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
-    if (quotaRanOut) {
-      setCharsExhausted(true);
-      if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
-      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
-    } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
-  }
 
-  async function handleSectionBulkGenerateAudio(sectionId: number) {
-    if (!getTTSVoice(selectedTargetLanguage)) return;
-    const section = sections.find((s) => s.id === sectionId);
-    if (!section) return;
-    const missing = section.items
-      .filter((i) => i.back.trim() && !i.backAudioPath)
-      .map((i) => ({ itemId: i.id, back: i.back }));
-    if (missing.length === 0) return;
-    const BATCH = 5;
-    let done = 0;
-    let successCount = 0;
-    let minRemaining: number | undefined;
-    let quotaRanOut = false;
-    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done: 0, total: missing.length })));
-    for (let i = 0; i < missing.length; i += BATCH) {
-      if (quotaRanOut) break;
-      const batch = missing.slice(i, i + BATCH);
-      await Promise.all(
-        batch.map(async ({ itemId, back }) => {
+    if (!quotaRanOut && selected.has("__audio__") && getTTSVoice(selectedTargetLanguage)) {
+      const missing = section.items.filter((i) => i.back.trim() && !i.backAudioPath).map((i) => ({ itemId: i.id, back: i.back }));
+      for (let i = 0; i < missing.length; i += 5) {
+        if (quotaRanOut) break;
+        await Promise.all(missing.slice(i, i + 5).map(async ({ itemId, back }) => {
           const { audioBase64, remainingChars, quotaExhausted } = await generateTTSAudio(back, selectedTargetLanguage);
           if (quotaExhausted) { quotaRanOut = true; return; }
           if (!audioBase64) return;
           const bytes = atob(audioBase64);
           const arr = new Uint8Array(bytes.length);
           for (let j = 0; j < bytes.length; j++) arr[j] = bytes.charCodeAt(j);
-          const file = new File([arr], "tts.mp3", { type: "audio/mpeg" });
-          await handleUpload(sectionId, itemId, "backAudio", file);
+          await handleUpload(sectionId, itemId, "backAudio", new File([arr], "tts.mp3", { type: "audio/mpeg" }));
           successCount++;
-          if (remainingChars !== undefined) {
-            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-          }
-        })
-      );
-      done += batch.length;
-      setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingAudio, { done, total: missing.length })));
+          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        }));
+      }
     }
-    setBulkAudioStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingAudio, { done, total: missing.length }) : t(labels.bulkGenerateDoneAudio, { count: missing.length })));
-    setTimeout(() => setBulkAudioStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
+
+    const customAttrs = [...selected].filter((k) => k !== "__romanization__" && k !== "__audio__");
+    if (!quotaRanOut && customAttrs.length > 0) {
+      const missing = section.items.flatMap((item) =>
+        item.front.trim() || item.back.trim()
+          ? customAttrs.filter((attr) => !item.customAttributeValues[attr]?.trim()).map((attr) => ({ itemId: item.id, attr, front: item.front, back: item.back }))
+          : []
+      );
+      for (let i = 0; i < missing.length; i += 5) {
+        if (quotaRanOut) break;
+        await Promise.all(missing.slice(i, i + 5).map(async ({ itemId, attr, front, back }) => {
+          const { value, remainingChars, quotaExhausted } = await generateCustomAttribute(attr, front, back, selectedSourceLanguage, selectedTargetLanguage);
+          if (quotaExhausted) { quotaRanOut = true; return; }
+          if (value) {
+            setSections((prev) => prev.map((s) => s.id === sectionId ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, customAttributeValues: { ...item.customAttributeValues, [attr]: value } } : item) } : s));
+            successCount++;
+          }
+          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        }));
+      }
+    }
+
+    setBulkAutoFillStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneCustomAttributes, { count: successCount })));
+    setTimeout(() => setBulkAutoFillStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
       if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
-      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
+      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: successCount }), { duration: 6000 });
     } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
@@ -819,7 +938,7 @@ export default function EditCourseForm({
   }
 
   function handleAiImport(sectionId: number, cards: Array<{ front: string; back: string; distractors?: string[]; accepted_answers?: string[] }>) {
-    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back, distractors: c.distractors ?? [] }));
+    const newItems = cards.map((c) => ({ ...makeItem(), front: c.front, back: c.back, distractors: c.distractors ?? [], acceptedAnswers: c.accepted_answers ?? [], customAttributeValues: {} }));
     setSections((prev) => prev.map((s) => {
       if (s.id !== sectionId) return s;
       const hasContent = s.items.some((i) => i.front.trim() || i.back.trim());
@@ -839,6 +958,7 @@ export default function EditCourseForm({
       dbId: s.dbId,
       title: s.title || labels.untitledSection,
       description: s.description,
+      customAttributes: s.customAttributes,
       items: s.items.map((i) => ({
         dbId: i.dbId,
         front: i.front,
@@ -848,6 +968,8 @@ export default function EditCourseForm({
         frontAudioPath: i.frontAudioPath,
         backAudioPath: i.backAudioPath,
         distractors: i.distractors,
+        acceptedAnswers: i.acceptedAnswers,
+        customAttributeValues: i.customAttributeValues,
       })),
     }))
   );
@@ -1019,39 +1141,78 @@ export default function EditCourseForm({
                     {labels.bulkGenerateBack}
                   </button>
                 </div>
-                {getRomanizationSystem(selectedTargetLanguage) && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => handleSectionBulkGenerate(section.id)}
-                      disabled={!section.items.some((i) => i.front.trim() && !i.romanization.trim())}
-                      className="min-h-11 rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-0 sm:rounded-md sm:py-1.5"
-                    >
-                      {bulkStatuses.get(section.id) ?? labels.bulkGenerateRomanization}
-                    </button>
-                  </>
-                )}
-                {getTTSVoice(selectedTargetLanguage) && (
-                  <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
-                    {bulkAudioStatuses.get(section.id) && (
-                      <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkAudioStatuses.get(section.id)}</span>
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => handleSectionBulkGenerateAudio(section.id)}
-                      disabled={!!bulkAudioStatuses.get(section.id)}
-                      className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
-                    >
-                      {labels.bulkGenerateAudio}
-                    </button>
-                  </div>
-                )}
                 <button
                   type="button"
                   onClick={() => setAiImportSectionId(section.id)}
                   className="min-h-11 rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-orange-text active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5"
                 >
                   {labels.aiImportButton}
+                </button>
+                {(getRomanizationSystem(selectedTargetLanguage) || getTTSVoice(selectedTargetLanguage) || section.customAttributes.length > 0) && (
+                  <div className="relative min-w-0 sm:flex sm:items-center sm:gap-1.5">
+                    {bulkAutoFillStatuses.get(section.id) && (
+                      <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkAutoFillStatuses.get(section.id)}</span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => customAttrDropdownSectionId === section.id
+                        ? setCustomAttrDropdownSectionId(null)
+                        : openAutoFillDropdown(section.id, section)}
+                      disabled={!!bulkAutoFillStatuses.get(section.id)}
+                      className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
+                    >
+                      {labels.autoFill}
+                    </button>
+                    {customAttrDropdownSectionId === section.id && (
+                      <div
+                        ref={customAttrDropdownRef}
+                        className="absolute left-0 top-full z-40 mt-1 min-w-[200px] rounded-lg bg-paper shadow-hard"
+                      >
+                        <div className="flex flex-col gap-1 px-3 py-3">
+                          {getRomanizationSystem(selectedTargetLanguage) && (
+                            <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                              <input type="checkbox" checked={customAttrDropdownChecked.has("__romanization__")} onChange={(e) => setAutoFillChoice("__romanization__", e.target.checked)} className="accent-orange" />
+                              <span className="font-manrope text-sm text-ink">
+                                {t(labels.romanization, { system: getRomanizationSystem(selectedTargetLanguage)?.system ?? "Romanization" })}
+                              </span>
+                            </label>
+                          )}
+                          {getTTSVoice(selectedTargetLanguage) && (
+                            <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                              <input type="checkbox" checked={customAttrDropdownChecked.has("__audio__")} onChange={(e) => setAutoFillChoice("__audio__", e.target.checked)} className="accent-orange" />
+                              <span className="font-manrope text-sm text-ink">{labels.backAudio}</span>
+                            </label>
+                          )}
+                          {section.customAttributes.map((attr) => (
+                            <label key={attr} className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                              <input type="checkbox" checked={customAttrDropdownChecked.has(attr)} onChange={(e) => setAutoFillChoice(attr, e.target.checked)} className="accent-orange" />
+                              <span className="font-manrope text-sm text-ink">{attr}</span>
+                            </label>
+                          ))}
+                        </div>
+                        <div className="border-t border-ink/10 px-3 py-2.5">
+                          <button
+                            type="button"
+                            disabled={customAttrDropdownChecked.size === 0}
+                            onClick={() => handleSectionAutoFill(section.id, customAttrDropdownChecked)}
+                            className="w-full rounded-full bg-orange px-4 py-2 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-40"
+                          >
+                            {labels.autoFillGenerate}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setCustomAttrModalSectionId(section.id)}
+                  className="min-h-11 rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5"
+                >
+                  {labels.configureCustomAttributes}
+                  {section.customAttributes.length > 0 && (
+                    <span className="ml-1.5 rounded-full bg-ink/10 px-1.5 py-0.5 font-mono text-[10px]">{section.customAttributes.length}</span>
+                  )}
                 </button>
                 <label className="flex min-h-11 cursor-pointer items-center justify-center rounded-[1rem] bg-paper px-3 py-2 text-center font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5">
                   {labels.importCsv}
@@ -1072,6 +1233,9 @@ export default function EditCourseForm({
                       locked={isPublic && !!item.dbId}
                       onUpdate={(field, value) => updateItem(section.id, item.id, field, value)}
                       onUpdateDistractors={(d) => updateDistractors(section.id, item.id, d)}
+                      onUpdateAcceptedAnswers={(a) => updateAcceptedAnswers(section.id, item.id, a)}
+                      onUpdateCustomAttributeValues={(v) => updateCustomAttributeValues(section.id, item.id, v)}
+                      customAttributes={section.customAttributes}
                       onRemove={() => removeItem(section.id, item.id)}
                       onUpload={(field, file) => handleUpload(section.id, item.id, field, file)}
                       onClearUrl={(field) => clearUrl(section.id, item.id, field)}
@@ -1114,6 +1278,19 @@ export default function EditCourseForm({
           onClose={() => setAiImportSectionId(null)}
         />
       )}
+
+      {customAttrModalSectionId !== null && (() => {
+        const sec = sections.find((s) => s.id === customAttrModalSectionId);
+        if (!sec) return null;
+        return (
+          <CustomAttributesModal
+            attributes={sec.customAttributes}
+            onSave={(attrs) => updateSectionCustomAttributes(customAttrModalSectionId, attrs)}
+            onClose={() => setCustomAttrModalSectionId(null)}
+            labels={labels}
+          />
+        );
+      })()}
 
       <div className="flex flex-col gap-3 rounded-[1.4rem] bg-paper-2 p-4 pb-5 shadow-hard-sm sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:p-0 sm:pb-8 sm:shadow-none">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">

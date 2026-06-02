@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import { nextReviewDay } from "@/utils/review-schedule";
 import TopBar from "./top-bar";
 import ExitConfirm from "./exit-confirm";
@@ -37,6 +36,7 @@ interface SessionViewProps {
   courseSlug: string;
   cards: StudyCard[];
   showRomanization: boolean;
+  showCustomAttributes: boolean;
   audioOnlyMode: boolean;
   memsLabels: MemsLabels;
   onComplete: (stats: SessionStats) => void;
@@ -61,7 +61,6 @@ interface SessionViewProps {
     typeWhatYouHear: string;
     playAudio: string;
     correctAnswer: string;
-    wrongAnswer: string;
     submitButton: string;
     continueButton: string;
     timesUp: string;
@@ -86,9 +85,9 @@ export default function SessionView({
   userId,
   courseId,
   courseTitle,
-  courseSlug,
   cards,
   showRomanization,
+  showCustomAttributes,
   audioOnlyMode,
   memsLabels,
   onComplete,
@@ -106,12 +105,6 @@ export default function SessionView({
   const [speedMatchXp, setSpeedMatchXp] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
-
-  // Total for progress bar: speed match phase shows SM card count, regular shows all regular
-  const totalForProgress =
-    phase === "speed_match" ? speedMatchCards.length : regularCards.length;
-  const currentProgress =
-    phase === "speed_match" ? 0 : regularIndex;
 
   // Keyboard: Escape → exit confirm
   useEffect(() => {
@@ -271,8 +264,8 @@ export default function SessionView({
   const topBarLabels = { allSections: labels.allSections };
   const exitLabels = { exitSession: labels.exitSession, exitConfirm: labels.exitConfirm, exit: labels.exit, keepStudying: labels.keepStudying };
   const flashcardLabels = { flip: labels.flashcardFlip, howWellRemember: labels.howWellRemember, ratingAgain: labels.ratingAgain, ratingHard: labels.ratingHard, ratingGood: labels.ratingGood, ratingEasy: labels.ratingEasy };
-  const typeAnswerLabels = { noAudio: labels.noAudio, letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeAnswerPlaceholder, playAudio: labels.playAudio, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
-  const audioTypeLabels = { letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeWhatYouHear, correct: labels.correctAnswer, wrong: labels.wrongAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, noAudio: labels.noAudio, playAudio: labels.playAudio, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
+  const typeAnswerLabels = { noAudio: labels.noAudio, letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeAnswerPlaceholder, playAudio: labels.playAudio, correct: labels.correctAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
+  const audioTypeLabels = { letters: labels.letters, startsWith: labels.startsWith, placeholder: labels.typeWhatYouHear, correct: labels.correctAnswer, submit: labels.submitButton, continueBtn: labels.continueButton, noAudio: labels.noAudio, playAudio: labels.playAudio, feedbackCorrect: labels.feedbackCorrect, feedbackWrong: labels.feedbackWrong };
   const speedMatchLabels = { timesUp: labels.timesUp, xpEarned: labels.xpEarned, result: labels.speedMatchResult, question: labels.speedMatchQuestion, bonus: labels.speedMatchBonus, no: labels.speedMatchNo, yes: labels.speedMatchYes, continueBtn: labels.continueButton };
 
   return (
@@ -299,16 +292,16 @@ export default function SessionView({
           />
           <div className="mx-auto max-w-lg">
             {currentRegularCard.questionType === "flashcard" && (
-              <FlashcardMode card={currentRegularCard} showRomanization={showRomanization} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={flashcardLabels} />
+              <FlashcardMode key={currentRegularCard.itemId} card={currentRegularCard} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
-              <MultipleChoiceMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} showRomanization={showRomanization} />
+              <MultipleChoiceMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
-              <TypeAnswerMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} showRomanization={showRomanization} />
+              <TypeAnswerMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} />
             )}
             {currentRegularCard.questionType === "audio_type" && (
-              <AudioTypeMode card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} />
+              <AudioTypeMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={audioTypeLabels} showFallbackNotice={audioOnlyMode} showCustomAttributes={showCustomAttributes} />
             )}
             {revealedCardId === currentRegularCard.itemId && (
               <div className="px-4 pb-6">

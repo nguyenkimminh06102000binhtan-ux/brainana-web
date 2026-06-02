@@ -484,7 +484,8 @@
       "അടുത്ത തവണ ലഭിക്കും!",
       "പരിശീലനം തുടരു!"
     ],
-    "showRomanization": "റൊമാനൈസേഷൻ കാണിക്കുക"
+    "showRomanization": "റൊമാനൈസേഷൻ കാണിക്കുക",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "ചർച്ച",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "അതെ, പൊതുവായി ചെയ്യൂ",
     "publicWarningBack": "തിരികെ",
     "cardLockedBadge": "ലോക്ക്",
-    "publicWarningIrreversible": "പൊതുവായ ശേഷം, ഈ കോഴ്‌സ് വീണ്ടും സ്വകാര്യമാക്കാൻ കഴിയില്ല."
+    "publicWarningIrreversible": "പൊതുവായ ശേഷം, ഈ കോഴ്‌സ് വീണ്ടും സ്വകാര്യമാക്കാൻ കഴിയില്ല.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 സെക്കൻഡ് · എല്ലാം ഒരു പേജിൽ",

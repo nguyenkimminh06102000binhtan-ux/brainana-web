@@ -99,7 +99,7 @@ export async function fetchStudyCards(
     const { data: overdueRows } = await supabase
       .from("item_progress")
       .select(
-        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
@@ -134,7 +134,7 @@ export async function fetchStudyCards(
 
     let q = supabase
       .from("items")
-      .select("id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors")
+      .select("id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes")
       .eq("course_id", courseId)
       .order("position")
       .limit(needed);
@@ -153,7 +153,7 @@ export async function fetchStudyCards(
     const { data } = await supabase
       .from("item_progress")
       .select(
-        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors)",
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
@@ -189,6 +189,7 @@ export async function fetchStudyCards(
       romanization: item.romanization,
       acceptedAnswers: item.accepted_answers ?? [],
       distractors: pickDistractors(item.back_text, allBackTexts, item.distractors),
+      customAttributes: (item as { custom_attributes?: Record<string, string> | null }).custom_attributes ?? null,
       questionType,
       progress: {
         easeFactor: row.ease_factor,
@@ -215,6 +216,7 @@ export async function fetchStudyCards(
       romanization: item.romanization,
       acceptedAnswers: item.accepted_answers ?? [],
       distractors: pickDistractors(item.back_text, allBackTexts, item.distractors),
+      customAttributes: (item as { custom_attributes?: Record<string, string> | null }).custom_attributes ?? null,
       questionType,
       progress: {
         easeFactor: row.ease_factor,
@@ -239,6 +241,7 @@ export async function fetchStudyCards(
       romanization: item.romanization,
       acceptedAnswers: item.accepted_answers ?? [],
       distractors: pickDistractors(item.back_text, allBackTexts, item.distractors),
+      customAttributes: (item as { custom_attributes?: Record<string, string> | null }).custom_attributes ?? null,
       questionType,
       progress: null,
     });

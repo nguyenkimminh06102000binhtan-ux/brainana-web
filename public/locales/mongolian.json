@@ -484,7 +484,8 @@
       "Дараагийн удаа чадна!",
       "Дасгалаа үргэлжлүүл!"
     ],
-    "showRomanization": "Романчлалыг харуулах"
+    "showRomanization": "Романчлалыг харуулах",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Хэлэлцүүлэг",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Тийм, нийтэд нээлттэй болгох",
     "publicWarningBack": "Буцах",
     "cardLockedBadge": "Хаагдсан",
-    "publicWarningIrreversible": "Нийтэд нээлттэй болсны дараа энэ курсыг дахин хувийн болгох боломжгүй."
+    "publicWarningIrreversible": "Нийтэд нээлттэй болсны дараа энэ курсыг дахин хувийн болгох боломжгүй.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 сек · бүгд нэг хуудсан дээр",

@@ -484,7 +484,8 @@
       "Հաջորդ անգամ կստացվի!",
       "Շարունակիր վարժվել!"
     ],
-    "showRomanization": "Ցույց տալ ռոմանիզացիա"
+    "showRomanization": "Ցույց տալ ռոմանիզացիա",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Քննարկում",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Այո, հրապարակել",
     "publicWarningBack": "Հետ",
     "cardLockedBadge": "Կողպված",
-    "publicWarningIrreversible": "Հրապարակումից հետո այս դասընթացը հնարավոր չէ դարձնել մասնավոր:"
+    "publicWarningIrreversible": "Հրապարակումից հետո այս դասընթացը հնարավոր չէ դարձնել մասնավոր:",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 վայրկյան · բոլորը մեկ էջում",

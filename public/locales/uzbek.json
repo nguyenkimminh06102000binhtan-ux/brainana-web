@@ -484,7 +484,8 @@
       "Keyingi safar uddalaysiz!",
       "Mashq qilishda davom eting!"
     ],
-    "showRomanization": "Romanizatsiyani ko'rsatish"
+    "showRomanization": "Romanizatsiyani ko'rsatish",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Munozara",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Ha, ommaviy qiling",
     "publicWarningBack": "Orqaga",
     "cardLockedBadge": "Qulflangan",
-    "publicWarningIrreversible": "Ommaviy bo'lgandan keyin bu kursni yana shaxsiy qilib bo'lmaydi."
+    "publicWarningIrreversible": "Ommaviy bo'lgandan keyin bu kursni yana shaxsiy qilib bo'lmaydi.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 soniya · hammasi bitta sahifada",

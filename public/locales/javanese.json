@@ -484,7 +484,8 @@
       "Mengko sabanjure mesthi bisa!",
       "Terus latihan!"
     ],
-    "showRomanization": "Tampilake romanisasi"
+    "showRomanization": "Tampilake romanisasi",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "rembugan",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Ya, gawe publik",
     "publicWarningBack": "Bali",
     "cardLockedBadge": "Dikunci",
-    "publicWarningIrreversible": "Sawise dadi publik, kursus iki ora bisa dijadikan pribadi maneh."
+    "publicWarningIrreversible": "Sawise dadi publik, kursus iki ora bisa dijadikan pribadi maneh.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 detik · kabeh ing sak kaca",

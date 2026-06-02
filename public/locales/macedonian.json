@@ -484,7 +484,8 @@
       "Следниот пат ќе успееш!",
       "Продолжи да вежбаш!"
     ],
-    "showRomanization": "Прикажи романизација"
+    "showRomanization": "Прикажи романизација",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Дискусија",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Да, направи го јавен",
     "publicWarningBack": "Назад",
     "cardLockedBadge": "Заклучено",
-    "publicWarningIrreversible": "Откако ќе стане јавен, овој курс не може повторно да се направи приватен."
+    "publicWarningIrreversible": "Откако ќе стане јавен, овој курс не може повторно да се направи приватен.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 секунди · сите на една страница",

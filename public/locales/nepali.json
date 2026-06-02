@@ -484,7 +484,8 @@
       "अर्को पटक हुनेछ!",
       "अभ्यास जारी राख!"
     ],
-    "showRomanization": "रोमनीकरण देखाउनुहोस्"
+    "showRomanization": "रोमनीकरण देखाउनुहोस्",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "छलफल",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "हो, सार्वजनिक गर्नुहोस्",
     "publicWarningBack": "फिर्ता",
     "cardLockedBadge": "लक",
-    "publicWarningIrreversible": "एकपटक सार्वजनिक भएपछि, यो कोर्स फेरि निजी बनाउन सकिँदैन।"
+    "publicWarningIrreversible": "एकपटक सार्वजनिक भएपछि, यो कोर्स फेरि निजी बनाउन सकिँदैन।",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 सेकेन्ड · सबै एक पृष्ठमा",

@@ -484,7 +484,8 @@
       "В следующий раз получится!",
       "Продолжай практиковаться!"
     ],
-    "showRomanization": "Показать латинизацию"
+    "showRomanization": "Показать латинизацию",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Обсуждение",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Да, сделать публичным",
     "publicWarningBack": "Назад",
     "cardLockedBadge": "Заблокировано",
-    "publicWarningIrreversible": "После публикации этот курс нельзя снова сделать приватным."
+    "publicWarningIrreversible": "После публикации этот курс нельзя снова сделать приватным.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 секунд · все на одной странице",

@@ -484,7 +484,8 @@
       "Do ta arrish herën tjetër!",
       "Vazhdo të praktikohesh!"
     ],
-    "showRomanization": "Trego romanizimin"
+    "showRomanization": "Trego romanizimin",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Diskutim",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Po, bëje publik",
     "publicWarningBack": "Kthehu",
     "cardLockedBadge": "Bllokuar",
-    "publicWarningIrreversible": "Pasi të bëhet publik, ky kurs nuk mund të bëhet sërish privat."
+    "publicWarningIrreversible": "Pasi të bëhet publik, ky kurs nuk mund të bëhet sërish privat.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sek · të gjitha në një faqe",

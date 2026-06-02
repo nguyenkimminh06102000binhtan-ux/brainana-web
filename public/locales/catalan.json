@@ -484,7 +484,8 @@
       "La pròxima vegada ho aconseguiràs!",
       "Continua practicant!"
     ],
-    "showRomanization": "Mostra la romanització"
+    "showRomanization": "Mostra la romanització",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Discussió",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Sí, fes-lo públic",
     "publicWarningBack": "Enrere",
     "cardLockedBadge": "Bloquejat",
-    "publicWarningIrreversible": "Un cop públic, aquest curs no pot tornar a ser privat."
+    "publicWarningIrreversible": "Un cop públic, aquest curs no pot tornar a ser privat.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 segons · tot en una pàgina",

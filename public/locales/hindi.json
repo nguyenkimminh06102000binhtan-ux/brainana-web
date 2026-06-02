@@ -484,7 +484,8 @@
       "अगली बार हो जाएगा!",
       "अभ्यास जारी रखो!"
     ],
-    "showRomanization": "रोमानीकरण दिखाएँ"
+    "showRomanization": "रोमानीकरण दिखाएँ",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "बहस",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "हाँ, सार्वजनिक करें",
     "publicWarningBack": "वापस",
     "cardLockedBadge": "लॉक",
-    "publicWarningIrreversible": "एक बार सार्वजनिक होने के बाद, इस कोर्स को दोबारा निजी नहीं बनाया जा सकता।"
+    "publicWarningIrreversible": "एक बार सार्वजनिक होने के बाद, इस कोर्स को दोबारा निजी नहीं बनाया जा सकता।",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 सेकंड · सभी एक पृष्ठ पर",

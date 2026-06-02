@@ -484,7 +484,8 @@
       "下次一定行！",
       "继续练习！"
     ],
-    "showRomanization": "显示罗马化"
+    "showRomanization": "显示罗马化",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "讨论",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "是，设为公开",
     "publicWarningBack": "返回",
     "cardLockedBadge": "已锁定",
-    "publicWarningIrreversible": "一旦公开，此课程将无法再设为私人。"
+    "publicWarningIrreversible": "一旦公开，此课程将无法再设为私人。",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 秒 · 全部在一页上",

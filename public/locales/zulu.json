@@ -484,7 +484,8 @@
       "Uzokuthola ngokuzayo!",
       "Qhubeka uzijwayeza!"
     ],
-    "showRomanization": "Bonisa ukwenza isiRoman"
+    "showRomanization": "Bonisa ukwenza isiRoman",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Ingxoxo",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Yebo, yenza womphakathi",
     "publicWarningBack": "Emuva",
     "cardLockedBadge": "Kuvaliwe",
-    "publicWarningIrreversible": "Uma ususesidlalweni, lo kosi awukwazi ukuba wumuntu siqu futhi."
+    "publicWarningIrreversible": "Uma ususesidlalweni, lo kosi awukwazi ukuba wumuntu siqu futhi.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 isekhondi · konke ekhasini elilodwa",

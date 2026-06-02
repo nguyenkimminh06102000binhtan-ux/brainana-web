@@ -484,7 +484,8 @@
       "Келесі жолы болады!",
       "Жаттығуды жалғастыр!"
     ],
-    "showRomanization": "Романизацияны көрсетіңіз"
+    "showRomanization": "Романизацияны көрсетіңіз",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Талқылау",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Иә, жариялау",
     "publicWarningBack": "Артқа",
     "cardLockedBadge": "Бұғатталған",
-    "publicWarningIrreversible": "Жарияланғаннан кейін бұл курсты жекелікке қайтарып алу мүмкін емес."
+    "publicWarningIrreversible": "Жарияланғаннан кейін бұл курсты жекелікке қайтарып алу мүмкін емес.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 сек · барлығы бір бетте",

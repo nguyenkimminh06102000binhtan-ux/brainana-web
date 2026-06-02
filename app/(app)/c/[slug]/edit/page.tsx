@@ -28,7 +28,7 @@ export default async function EditCoursePage({
   if (course.creator_id !== user.id) redirect(`/c/${slug}`);
 
   const [{ data: sections }, { data: profile }, { data: sub }] = await Promise.all([
-    supabase.from("sections").select("id, title, description, position").eq("course_id", course.id).order("position"),
+    supabase.from("sections").select("id, title, description, custom_attributes, position").eq("course_id", course.id).order("position"),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
     supabase.from("user_subscriptions").select("plan, chars_balance").eq("user_id", user.id).single(),
   ]);
@@ -36,7 +36,7 @@ export default async function EditCoursePage({
 
   const { data: items } = await supabase
     .from("items")
-    .select("id, section_id, front_text, back_text, romanization, image_url, front_audio_url, back_audio_url, distractors, position")
+    .select("id, section_id, front_text, back_text, romanization, image_url, front_audio_url, back_audio_url, distractors, accepted_answers, custom_attributes, position")
     .eq("course_id", course.id)
     .order("position");
 

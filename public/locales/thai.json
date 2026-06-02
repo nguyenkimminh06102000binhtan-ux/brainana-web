@@ -484,7 +484,8 @@
       "ครั้งหน้าจะทำได้!",
       "ฝึกต่อไป!"
     ],
-    "showRomanization": "แสดงสุริยวรมัน"
+    "showRomanization": "แสดงสุริยวรมัน",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "การอภิปราย",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "ใช่ ทำให้เป็นสาธารณะ",
     "publicWarningBack": "กลับ",
     "cardLockedBadge": "ล็อค",
-    "publicWarningIrreversible": "เมื่อเป็นสาธารณะแล้ว คอร์สนี้จะไม่สามารถทำให้เป็นส่วนตัวอีกได้"
+    "publicWarningIrreversible": "เมื่อเป็นสาธารณะแล้ว คอร์สนี้จะไม่สามารถทำให้เป็นส่วนตัวอีกได้",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 วินาที · ทั้งหมดในหน้าเดียว",

@@ -484,7 +484,8 @@
       "Kitą kartą pavyks!",
       "Toliau praktikuokis!"
     ],
-    "showRomanization": "Rodyti romanizaciją"
+    "showRomanization": "Rodyti romanizaciją",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Diskusija",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Taip, padaryti viešą",
     "publicWarningBack": "Atgal",
     "cardLockedBadge": "Užrakinta",
-    "publicWarningIrreversible": "Kai jis tampa viešas, šio kurso nebegalima vėl padaryti privataus."
+    "publicWarningIrreversible": "Kai jis tampa viešas, šio kurso nebegalima vėl padaryti privataus.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sek · viskas viename puslapyje",

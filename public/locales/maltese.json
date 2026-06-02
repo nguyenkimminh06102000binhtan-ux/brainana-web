@@ -484,7 +484,8 @@
       "Id-darba li jmiss jirnexxilek!",
       "Kompli tipprattika!"
     ],
-    "showRomanization": "Uri r-rumanizzazzjoni"
+    "showRomanization": "Uri r-rumanizzazzjoni",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Diskussjoni",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Iva, agħmlu pubbliku",
     "publicWarningBack": "Lura",
     "cardLockedBadge": "Imsikkar",
-    "publicWarningIrreversible": "Ladarba tkun pubblika, din il-kors ma tistax issir privata mill-ġdid."
+    "publicWarningIrreversible": "Ladarba tkun pubblika, din il-kors ma tistax issir privata mill-ġdid.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sek · kollha fuq paġna waħda",

@@ -484,7 +484,8 @@
       "Legközelebb sikerülni fog!",
       "Gyakorolj tovább!"
     ],
-    "showRomanization": "Mutasd a romanizálást"
+    "showRomanization": "Mutasd a romanizálást",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Vita",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Igen, tegyük nyilvánossá",
     "publicWarningBack": "Vissza",
     "cardLockedBadge": "Zárolva",
-    "publicWarningIrreversible": "Miután nyilvánossá vált, ez a kurzus többé nem tehető priváttá."
+    "publicWarningIrreversible": "Miután nyilvánossá vált, ez a kurzus többé nem tehető priváttá.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 mp · minden egy oldalon",

@@ -484,7 +484,8 @@
       "Du klarer den næste gang!",
       "Bliv ved med at øve!"
     ],
-    "showRomanization": "Vis romanisering"
+    "showRomanization": "Vis romanisering",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Diskussion",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Ja, gør det offentligt",
     "publicWarningBack": "Tilbage",
     "cardLockedBadge": "Låst",
-    "publicWarningIrreversible": "Når det er offentliggjort, kan dette kursus ikke gøres privat igen."
+    "publicWarningIrreversible": "Når det er offentliggjort, kan dette kursus ikke gøres privat igen.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sek. · alt på én side",

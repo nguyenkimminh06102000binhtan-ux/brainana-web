@@ -484,7 +484,8 @@
       "លើកក្រោយអ្នកនឹងធ្វើបាន!",
       "បន្តហាត់ប្រាណ!"
     ],
-    "showRomanization": "បង្ហាញមនោសញ្ចេតនា"
+    "showRomanization": "បង្ហាញមនោសញ្ចេតនា",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "ការពិភាក្សា",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "បាទ/ចាស ធ្វើឱ្យជាសាធារណៈ",
     "publicWarningBack": "ត្រឡប់",
     "cardLockedBadge": "ចាក់សោ",
-    "publicWarningIrreversible": "នៅពេលក្លាយជាសាធារណៈ វគ្គសិក្សានេះមិនអាចធ្វើឱ្យជាឯកជនវិញបានទេ។"
+    "publicWarningIrreversible": "នៅពេលក្លាយជាសាធារណៈ វគ្គសិក្សានេះមិនអាចធ្វើឱ្យជាឯកជនវិញបានទេ។",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 វិនាទី · ទាំងអស់នៅលើទំព័រមួយ។",

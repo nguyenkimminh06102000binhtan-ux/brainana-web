@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface AnswerFeedbackProps {
   outcome: "correct" | "incorrect";
   correctMessages: string[];
   wrongMessages: string[];
+  acceptedAnswers?: string[];
 }
 
 const CORRECT_COLOR = "#9EFF00";
@@ -13,15 +14,14 @@ const WRONG_COLOR = "#FF0054";
 const CORRECT_TEXT = "#FF0054";
 const WRONG_TEXT = "#9EFF00";
 
-export default function AnswerFeedback({ outcome, correctMessages, wrongMessages }: AnswerFeedbackProps) {
+export default function AnswerFeedback({ outcome, correctMessages, wrongMessages, acceptedAnswers }: AnswerFeedbackProps) {
   const [showFlash, setShowFlash] = useState(true);
   const isCorrect = outcome === "correct";
   const bg = isCorrect ? CORRECT_COLOR : WRONG_COLOR;
   const fg = isCorrect ? CORRECT_TEXT : WRONG_TEXT;
 
   const messages = isCorrect ? correctMessages : wrongMessages;
-  // Pick once at mount and keep stable
-  const message = useRef(messages[Math.floor(Math.random() * messages.length)] ?? "").current;
+  const [message] = useState(() => messages[Math.floor(Math.random() * messages.length)] ?? "");
 
   useEffect(() => {
     const t = setTimeout(() => setShowFlash(false), 550);
@@ -52,6 +52,19 @@ export default function AnswerFeedback({ outcome, correctMessages, wrongMessages
         <p className="font-fredoka text-2xl font-[700]" style={{ color: fg }}>
           {message}
         </p>
+        {!isCorrect && acceptedAnswers && acceptedAnswers.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {acceptedAnswers.map((ans, i) => (
+              <span
+                key={i}
+                className="rounded-full bg-white/20 px-3 py-1 font-manrope text-sm font-[600]"
+                style={{ color: fg }}
+              >
+                {ans}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

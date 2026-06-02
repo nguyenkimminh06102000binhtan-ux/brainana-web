@@ -14,7 +14,6 @@ interface AudioTypeModeLabels {
   startsWith: string;
   placeholder: string;
   correct: string;
-  wrong: string;
   submit: string;
   continueBtn: string;
   noAudio: string;
@@ -29,9 +28,10 @@ interface AudioTypeModeProps {
   onReveal?: () => void;
   labels: AudioTypeModeLabels;
   showFallbackNotice: boolean;
+  showCustomAttributes?: boolean;
 }
 
-export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFallbackNotice }: AudioTypeModeProps) {
+export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFallbackNotice, showCustomAttributes }: AudioTypeModeProps) {
   if (!card.frontAudioUrl) {
     return (
       <TypeAnswerMode
@@ -39,15 +39,16 @@ export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFa
         onAnswer={(a) => onAnswer({ ...a, questionType: "audio_type" })}
         onReveal={onReveal}
         showNoAudioNotice={showFallbackNotice}
+        showCustomAttributes={showCustomAttributes}
         labels={labels}
       />
     );
   }
 
-  return <AudioTypePlayer card={card} onAnswer={onAnswer} onReveal={onReveal} labels={labels} />;
+  return <AudioTypePlayer card={card} onAnswer={onAnswer} onReveal={onReveal} labels={labels} showCustomAttributes={showCustomAttributes} />;
 }
 
-function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; onReveal?: () => void; labels: AudioTypeModeLabels }) {
+function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttributes }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; onReveal?: () => void; labels: AudioTypeModeLabels; showCustomAttributes?: boolean }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,13 +69,12 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
     audio.onended = () => setPlaying(false);
     audio.play().catch(() => {});
     startedAt.current = Date.now();
-    setValue("");
-    setAttempts(0);
-    setShowFirstLetter(false);
-    setSubmitted(null);
-    setTimeout(() => inputRef.current?.focus(), 200);
-    return () => { audio.pause(); };
-  }, [card.itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+    const focusTimer = setTimeout(() => inputRef.current?.focus(), 200);
+    return () => {
+      clearTimeout(focusTimer);
+      audio.pause();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function replay() {
     if (audioRef.current) {
@@ -179,6 +179,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           outcome={submitted.correct ? "correct" : "incorrect"}
           correctMessages={labels.feedbackCorrect}
           wrongMessages={labels.feedbackWrong}
+          acceptedAnswers={submitted.correct ? undefined : answers}
         />
       )}
       <div className="flex flex-col items-center gap-6 px-4 py-8">
@@ -248,10 +249,28 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels }: { card: StudyCard
           }`}
         />
         {submitted && (
-          <div className="mt-2">
-            <span className="font-manrope text-sm text-ink-2">
-              {submitted.correct ? labels.correct : t(labels.wrong, { answer: card.backText })}
-            </span>
+          <div className="mt-2 flex flex-col gap-2">
+            {submitted.correct ? (
+              <span className="font-manrope text-sm text-ink-2">{labels.correct}</span>
+            ) : (
+              <div className="flex flex-wrap gap-1.5">
+                {answers.map((ans, i) => (
+                  <span key={i} className="rounded-full border-2 border-electric-pink/40 px-3 py-0.5 font-manrope text-sm text-ink">
+                    {ans}
+                  </span>
+                ))}
+              </div>
+            )}
+            {showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+              <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
+                {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+                  <div key={k}>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
+                    <p className="font-manrope text-sm text-ink-2">{v}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
         <div className="mt-3">

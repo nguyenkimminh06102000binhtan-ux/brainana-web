@@ -484,7 +484,8 @@
       "Fe gei di’r tro nesaf!",
       "Parha i ymarfer!"
     ],
-    "showRomanization": "Dangos rhamanteiddio"
+    "showRomanization": "Dangos rhamanteiddio",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Trafodaeth",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Ie, gwneud yn gyhoeddus",
     "publicWarningBack": "Yn ôl",
     "cardLockedBadge": "Wedi'i gloi",
-    "publicWarningIrreversible": "Unwaith y mae'n gyhoeddus, ni ellir gwneud y cwrs hwn yn breifat eto."
+    "publicWarningIrreversible": "Unwaith y mae'n gyhoeddus, ni ellir gwneud y cwrs hwn yn breifat eto.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 eiliad · i gyd ar un dudalen",

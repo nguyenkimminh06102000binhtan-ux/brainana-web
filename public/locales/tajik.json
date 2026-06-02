@@ -484,7 +484,8 @@
       "Дафъаи дигар мешавад!",
       "Машқро идома деҳ!"
     ],
-    "showRomanization": "Романизатсияро нишон диҳед"
+    "showRomanization": "Романизатсияро нишон диҳед",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Муҳокима",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Бале, ҷамъиятӣ кунед",
     "publicWarningBack": "Бозгашт",
     "cardLockedBadge": "Қулф",
-    "publicWarningIrreversible": "Баъд аз нашр, ин курсро дигар хусусӣ кардан мумкин нест."
+    "publicWarningIrreversible": "Баъд аз нашр, ин курсро дигар хусусӣ кардан мумкин нест.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 сония · ҳама дар як саҳифа",

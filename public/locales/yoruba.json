@@ -484,7 +484,8 @@
       "Ìgbà tó ń bọ̀ wàá rí i!",
       "Máa tẹ̀síwájú nínú ìdánwò!"
     ],
-    "showRomanization": "Ṣafihan isọdọkan roman"
+    "showRomanization": "Ṣafihan isọdọkan roman",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Ifọrọwanilẹnuwo",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Bẹẹni, jẹ ki o jẹ gbangba",
     "publicWarningBack": "Pada",
     "cardLockedBadge": "Ti titiipa",
-    "publicWarningIrreversible": "Ni kete ti o ba jẹ gbangba, ẹkọ yii ko le jẹ aṣiri mọ."
+    "publicWarningIrreversible": "Ni kete ti o ba jẹ gbangba, ẹkọ yii ko le jẹ aṣiri mọ.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~ 60 iṣẹju-aaya · gbogbo rẹ ni oju-iwe kan",

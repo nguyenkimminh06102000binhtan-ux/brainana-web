@@ -15,9 +15,10 @@ interface MCModeProps {
   feedbackWrong: string[];
   continueLabel: string;
   showRomanization?: boolean;
+  showCustomAttributes?: boolean;
 }
 
-export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization, showCustomAttributes }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
@@ -43,10 +44,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
 
   useEffect(() => {
     startedAt.current = Date.now();
-    setSelected(null);
-    setOutcome(null);
-    setPendingAnswer(null);
-  }, [card.itemId]);
+  }, []);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -103,6 +101,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
           outcome={outcome}
           correctMessages={feedbackCorrect}
           wrongMessages={feedbackWrong}
+          acceptedAnswers={outcome === "incorrect" ? [card.backText, ...card.acceptedAnswers] : undefined}
         />
       )}
       <div className="rounded-lg bg-paper-2 mx-4 mt-8 p-6 shadow-hard-sm text-center">
@@ -155,6 +154,17 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
           );
         })}
       </div>
+
+      {selected !== null && showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+        <div className="mx-4 flex flex-col gap-1.5 rounded-md bg-paper-2 px-4 py-3">
+          {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+            <div key={k}>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
+              <p className="font-manrope text-sm text-ink-2">{v}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       {pendingAnswer && (
         <div className="px-4">

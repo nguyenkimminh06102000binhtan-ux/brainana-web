@@ -484,7 +484,8 @@
       "Naslednjič ti bo uspelo!",
       "Nadaljuj z vajo!"
     ],
-    "showRomanization": "Prikaži romanizacijo"
+    "showRomanization": "Prikaži romanizacijo",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Razprava",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Da, objavi javno",
     "publicWarningBack": "Nazaj",
     "cardLockedBadge": "Zaklenjeno",
-    "publicWarningIrreversible": "Ko je javen, tega tečaja ni mogoče znova narediti zasebnega."
+    "publicWarningIrreversible": "Ko je javen, tega tečaja ni mogoče znova narediti zasebnega.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 s · vse na eni strani",

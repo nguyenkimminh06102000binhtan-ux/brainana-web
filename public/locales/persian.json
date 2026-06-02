@@ -484,7 +484,8 @@
       "دفعه بعد موفق می‌شوی!",
       "به تمرین ادامه بده!"
     ],
-    "showRomanization": "نمایش رمانتیک"
+    "showRomanization": "نمایش رمانتیک",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "بحث",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "بله، عمومی کن",
     "publicWarningBack": "بازگشت",
     "cardLockedBadge": "قفل‌شده",
-    "publicWarningIrreversible": "پس از عمومی شدن، این دوره دیگر نمی‌تواند خصوصی شود."
+    "publicWarningIrreversible": "پس از عمومی شدن، این دوره دیگر نمی‌تواند خصوصی شود.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 ثانیه · همه در یک صفحه",

@@ -484,7 +484,8 @@
       "ਅਗਲੀ ਵਾਰ ਹੋ ਜਾਵੇਗਾ!",
       "ਅਭਿਆਸ ਜਾਰੀ ਰੱਖੋ!"
     ],
-    "showRomanization": "ਰੋਮਨੀਕਰਨ ਦਿਖਾਓ"
+    "showRomanization": "ਰੋਮਨੀਕਰਨ ਦਿਖਾਓ",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "ਚਰਚਾ",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "ਹਾਂ, ਜਨਤਕ ਕਰੋ",
     "publicWarningBack": "ਵਾਪਸ",
     "cardLockedBadge": "ਲਾਕ",
-    "publicWarningIrreversible": "ਇੱਕ ਵਾਰ ਜਨਤਕ ਹੋਣ ਤੋਂ ਬਾਅਦ, ਇਸ ਕੋਰਸ ਨੂੰ ਦੁਬਾਰਾ ਪ੍ਰਾਈਵੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।"
+    "publicWarningIrreversible": "ਇੱਕ ਵਾਰ ਜਨਤਕ ਹੋਣ ਤੋਂ ਬਾਅਦ, ਇਸ ਕੋਰਸ ਨੂੰ ਦੁਬਾਰਾ ਪ੍ਰਾਈਵੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 ਸਕਿੰਟ · ਸਾਰੇ ਇੱਕ ਪੰਨੇ 'ਤੇ",

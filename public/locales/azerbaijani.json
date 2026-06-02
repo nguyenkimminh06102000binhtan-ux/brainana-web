@@ -484,7 +484,8 @@
       "Növbəti dəfə alınacaq!",
       "Məşq etməyə davam et!"
     ],
-    "showRomanization": "Romanizasiyanı göstərin"
+    "showRomanization": "Romanizasiyanı göstərin",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Müzakirə",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Bəli, ictimai et",
     "publicWarningBack": "Geri",
     "cardLockedBadge": "Kilitli",
-    "publicWarningIrreversible": "İctimai edildikdən sonra bu kurs yenidən gizli edilə bilməz."
+    "publicWarningIrreversible": "İctimai edildikdən sonra bu kurs yenidən gizli edilə bilməz.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 saniyə · hamısı bir səhifədə",

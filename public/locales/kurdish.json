@@ -484,7 +484,8 @@
       "Cara bê te dê bike!",
       "Berdewam rahêne!"
     ],
-    "showRomanization": "Romanîzasyonê nîşan bide"
+    "showRomanization": "Romanîzasyonê nîşan bide",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Nîqaş",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Erê, ragihîne",
     "publicWarningBack": "Vegerîne",
     "cardLockedBadge": "Girtî",
-    "publicWarningIrreversible": "Dema ku bibe giştî, ev qurs nayê vegera taybetiyê."
+    "publicWarningIrreversible": "Dema ku bibe giştî, ev qurs nayê vegera taybetiyê.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~ 60 saniye · hemî li ser yek rûpelê",

@@ -484,7 +484,8 @@
       "다음엔 꼭 될 거예요!",
       "계속 연습해요!"
     ],
-    "showRomanization": "로마자 표시"
+    "showRomanization": "로마자 표시",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "논의",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "예, 공개합니다",
     "publicWarningBack": "뒤로",
     "cardLockedBadge": "잠김",
-    "publicWarningIrreversible": "공개된 후에는 이 코스를 다시 비공개로 만들 수 없습니다."
+    "publicWarningIrreversible": "공개된 후에는 이 코스를 다시 비공개로 만들 수 없습니다.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60초 · 한 페이지에 모두 포함",

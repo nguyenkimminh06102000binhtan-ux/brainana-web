@@ -484,7 +484,8 @@
       "Jy sal dit volgende keer kry!",
       "Hou aan oefen!"
     ],
-    "showRomanization": "Wys romanisering"
+    "showRomanization": "Wys romanisering",
+    "showCustomAttributes": "Show custom info"
   },
   "discussion": {
     "title": "Bespreking",
@@ -629,7 +630,21 @@
     "publicWarningConfirm": "Ja, maak dit publiek",
     "publicWarningBack": "Terug",
     "cardLockedBadge": "Gesluit",
-    "publicWarningIrreversible": "Sodra dit publiek is, kan hierdie kursus nie weer privaat gemaak word nie."
+    "publicWarningIrreversible": "Sodra dit publiek is, kan hierdie kursus nie weer privaat gemaak word nie.",
+    "acceptedAnswers": "Also Accepted",
+    "acceptedAnswerPlaceholder": "e.g. Alternative answer",
+    "addAcceptedAnswer": "+ Add accepted answer",
+    "autoFill": "Auto-fill",
+    "autoFillGenerate": "Generate",
+    "autoFilling": "Generating...",
+    "configureCustomAttributes": "Custom attributes",
+    "customAttributesTitle": "Custom Attributes",
+    "customAttributesDone": "Done",
+    "customAttributeNamePlaceholder": "e.g. Example sentence",
+    "addCustomAttribute": "+ Add attribute",
+    "bulkGenerateCustomAttributes": "Auto-fill custom info",
+    "bulkGeneratingCustomAttributes": "Generating {done}/{total}...",
+    "bulkGenerateDoneCustomAttributes": "Filled {count} fields"
   },
   "start": {
     "estimatedTime": "~60 sekondes · alles op een bladsy",
