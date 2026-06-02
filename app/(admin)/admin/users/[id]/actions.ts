@@ -65,7 +65,7 @@ export async function adminGrantQuota(formData: FormData) {
   redirect(`/admin/users/${targetUserId}`);
 }
 
-/** Refund quota to a user after Paddle refund */
+/** Refund quota to a user after Lemon Squeezy refund */
 export async function adminRefundQuota(formData: FormData) {
   const { adminId } = await requireAdmin();
 
@@ -73,7 +73,7 @@ export async function adminRefundQuota(formData: FormData) {
   const resource      = formData.get("resource") as QuotaResource;
   const amount        = parseInt(formData.get("amount") as string);
   const reason        = (formData.get("reason") as QuotaReason) ?? "refund";
-  const paddleRefundId = formData.get("paddle_refund_id") as string | null;
+  const lemonRefundId = formData.get("lemon_refund_id") as string | null;
 
   if (!targetUserId || !resource || !amount || amount <= 0) {
     throw new Error("Invalid form data");
@@ -82,7 +82,7 @@ export async function adminRefundQuota(formData: FormData) {
   const admin = createAdminClient();
 
   await refundQuota(admin, targetUserId, resource, amount, reason, {
-    paddle_refund_id: paddleRefundId ?? undefined,
+    lemon_refund_id: lemonRefundId ?? undefined,
     granted_by: adminId,
   });
 

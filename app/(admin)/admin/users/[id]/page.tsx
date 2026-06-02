@@ -118,7 +118,7 @@ export default async function AdminUserDetail({
                 <option value="refund">Refund</option>
                 <option value="chargeback">Chargeback</option>
               </select>
-              <input type="text" name="paddle_refund_id" placeholder="Paddle refund ID (optional)" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
+              <input type="text" name="lemon_refund_id" placeholder="Lemon Squeezy refund ID (optional)" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
               <button type="submit" className="rounded-full border-2 border-orange px-4 py-2 font-manrope text-sm font-[700] text-orange transition hover:bg-orange hover:text-on-bright">
                 Process refund
               </button>

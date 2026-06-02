@@ -30,7 +30,7 @@ const sections = [
   },
   {
     title: "6. Payment Processing",
-    body: "Payments are processed by Paddle (paddle.com), our Merchant of Record. Paddle handles all billing on our behalf. If you have a billing query that cannot be resolved by Brainana support, you may also contact Paddle directly.",
+    body: "Payments are processed by Lemon Squeezy (lemonsqueezy.com), our Merchant of Record. Lemon Squeezy handles all billing on our behalf. If you have a billing query that cannot be resolved by Brainana support, you may also contact Lemon Squeezy directly.",
   },
   {
     title: "7. Contact",

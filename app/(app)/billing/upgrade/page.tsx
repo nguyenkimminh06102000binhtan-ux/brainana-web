@@ -89,7 +89,7 @@ export default async function UpgradePage() {
           Choose your <span className="text-orange-text">plan</span>
         </h1>
         <p className="mt-2 font-manrope text-sm text-ink-3">
-          Upgrade anytime. Payments coming soon via Paddle.
+          Upgrade anytime. Payments coming soon via Lemon Squeezy.
         </p>
       </div>
 
@@ -205,7 +205,7 @@ export default async function UpgradePage() {
         <a href="/terms" className="underline hover:text-ink">Terms of Service</a>,{" "}
         <a href="/privacy" className="underline hover:text-ink">Privacy Policy</a>, and{" "}
         <a href="/refund" className="underline hover:text-ink">Refund Policy</a>.
-        Payments processed by Paddle.
+        Payments processed by Lemon Squeezy.
       </p>
     </div>
   );

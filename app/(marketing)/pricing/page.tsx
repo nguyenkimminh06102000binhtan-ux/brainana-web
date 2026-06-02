@@ -92,7 +92,7 @@ const FAQ = [
   },
   {
     q: "What payment methods are accepted?",
-    a: "Payments are processed by Paddle and support major credit and debit cards. Available methods may vary by country.",
+    a: "Payments are processed by Lemon Squeezy and support major credit and debit cards. Available methods may vary by country.",
   },
   {
     q: "Is there a refund policy?",
