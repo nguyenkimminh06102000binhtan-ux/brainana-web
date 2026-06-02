@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { adminGrantQuota, adminRefundQuota, adminSetPlan } from "./actions";
 
@@ -31,7 +32,7 @@ export default async function AdminUserDetail({
     <div className="flex flex-col gap-8">
 
       {/* Back */}
-      <a href="/admin/users" className="font-manrope text-sm text-ink-3 hover:text-ink">← Back to users</a>
+      <Link href="/admin/users" className="font-manrope text-sm text-ink-3 hover:text-ink">← Back to users</Link>
 
       {/* Profile header */}
       <div className="flex items-center gap-4 rounded-lg border border-ink/10 bg-paper-2 px-6 py-5">

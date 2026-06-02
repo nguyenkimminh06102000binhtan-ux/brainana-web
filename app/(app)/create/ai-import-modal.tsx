@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { generateCardsWithAI, type AiImportCard } from "@/app/actions/ai-import";
 import { compressImage } from "@/utils/compress-image";
 import { createClient } from "@/utils/supabase/client";
@@ -111,7 +111,7 @@ export default function AiImportModal({
   // isBusyRef is updated every render so the keydown handler always sees current value.
   const isBusy = status === "loading" || files.some((pf) => pf.status === "processing" || pf.status === "pending");
   const isBusyRef = useRef(isBusy);
-  isBusyRef.current = isBusy;
+  useLayoutEffect(() => { isBusyRef.current = isBusy; }, [isBusy]);
 
   // Estimate generation time based on card count and style
   const tokensPerCard: Record<string, number> = {

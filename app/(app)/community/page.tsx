@@ -3,6 +3,7 @@ export const metadata: Metadata = { title: "Community — Brainana" };
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
@@ -16,6 +17,7 @@ type MemOfWeek = {
 };
 
 export default async function CommunityPage() {
+  noStore(); // Date.now() used in query — opt out of static caching
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");

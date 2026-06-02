@@ -57,10 +57,18 @@ export default function SettingsForm({
   );
   const [avatarUrl, setAvatarUrl] = useState<string | null>(profile.avatar_url);
   const [username, setUsername] = useState(profile.username);
-  const [usernameStatus, setUsernameStatus] = useState<UsernameStatus>("idle");
+  const [asyncUsernameStatus, setAsyncUsernameStatus] = useState<"idle" | "checking" | "available" | "taken">("idle");
   const [dailyGoal, setDailyGoal] = useState(profile.daily_goal);
   const [identityPending, setIdentityPending] = useState(false);
   const [identityError, setIdentityError] = useState<string | null>(null);
+
+  // Derive "idle" and "invalid" synchronously — no setState in effect needed for those cases.
+  const usernameStatus: UsernameStatus = useMemo(() => {
+    const next = username.trim().toLowerCase();
+    if (next === profile.username) return "idle";
+    if (!USERNAME_RE.test(next)) return "invalid";
+    return asyncUsernameStatus;
+  }, [username, profile.username, asyncUsernameStatus]);
 
   const usernameHelp = useMemo(() => {
     if (username === profile.username) return labels.usernameCurrentHelp;
@@ -73,17 +81,11 @@ export default function SettingsForm({
 
   useEffect(() => {
     const nextUsername = username.trim().toLowerCase();
-    if (nextUsername === profile.username) {
-      setUsernameStatus("idle");
-      return;
-    }
-    if (!USERNAME_RE.test(nextUsername)) {
-      setUsernameStatus("invalid");
-      return;
-    }
+    // "idle" and "invalid" are derived synchronously above — no setState needed here.
+    if (nextUsername === profile.username || !USERNAME_RE.test(nextUsername)) return;
 
     let cancelled = false;
-    setUsernameStatus("checking");
+    setAsyncUsernameStatus("checking");
 
     const timer = window.setTimeout(async () => {
       const supabase = createClient();
@@ -95,7 +97,7 @@ export default function SettingsForm({
         .maybeSingle();
 
       if (cancelled) return;
-      setUsernameStatus(error ? "idle" : data ? "taken" : "available");
+      setAsyncUsernameStatus(error ? "idle" : data ? "taken" : "available");
     }, 350);
 
     return () => {

@@ -141,6 +141,14 @@ export async function POST(req: NextRequest) {
       const quota = PLAN_QUOTA[plan] ?? PLAN_QUOTA.free;
       const renewsAt = attrs?.renews_at as string | undefined;
 
+      // Atomic idempotency: INSERT the unique event key first.
+      // If it already exists (unique violation = 23505), this is a duplicate delivery.
+      const renewalKey = `renewal:${String(lemonSubscriptionId ?? "")}:${renewsAt ?? ""}`;
+      const { error: renewalClaimErr } = await supabase
+        .from("processed_lemon_events")
+        .insert({ event_key: renewalKey });
+      if (renewalClaimErr?.code === "23505") break; // Already processed
+
       await supabase
         .from("user_subscriptions")
         .update({
@@ -152,22 +160,9 @@ export async function POST(req: NextRequest) {
         })
         .eq("user_id", userId);
 
-      // Idempotency: skip if we already granted quota for this renewal period.
-      if (renewsAt) {
-        const { data: existingGrant } = await supabase
-          .from("quota_transactions")
-          .select("id")
-          .eq("user_id", userId)
-          .eq("reason", "monthly_grant")
-          .contains("metadata", { period: renewsAt })
-          .limit(1)
-          .maybeSingle();
-        if (existingGrant) break;
-      }
-
       await supabase.from("quota_transactions").insert([
-        { user_id: userId, resource: "chars",          amount: quota.chars,    reason: "monthly_grant", metadata: { plan, event: eventName, period: renewsAt } },
-        { user_id: userId, resource: "tutor_sessions", amount: quota.sessions, reason: "monthly_grant", metadata: { plan, event: eventName, period: renewsAt } },
+        { user_id: userId, resource: "chars",          amount: quota.chars,    reason: "monthly_grant", metadata: { plan, event: eventName } },
+        { user_id: userId, resource: "tutor_sessions", amount: quota.sessions, reason: "monthly_grant", metadata: { plan, event: eventName } },
       ]);
       break;
     }
@@ -184,16 +179,12 @@ export async function POST(req: NextRequest) {
 
       const lsOrderId = String(data?.id ?? "");
 
-      // Idempotency: skip if this order has already been credited.
-      // LS may retry webhook deliveries, which would double-credit quota.
-      const { data: existingTx } = await supabase
-        .from("quota_transactions")
-        .select("id")
-        .eq("reason", "purchase")
-        .contains("metadata", { lemon_order_id: lsOrderId })
-        .limit(1)
-        .maybeSingle();
-      if (existingTx) break;
+      // Atomic idempotency: INSERT event key before crediting quota.
+      // Concurrent retries both attempt the INSERT; only one wins.
+      const { error: orderClaimErr } = await supabase
+        .from("processed_lemon_events")
+        .insert({ event_key: `order:${lsOrderId}` });
+      if (orderClaimErr?.code === "23505") break; // Already credited
 
       if (pack.chars > 0) {
         await supabase.rpc("refund_quota", {

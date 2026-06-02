@@ -39,7 +39,6 @@ export default function SpeedReviewClient({ courseSlug, courseTitle, courseId, c
   const [timeLeft, setTimeLeft] = useState(TIME_PER_CARD);
   const [selected, setSelected] = useState<number | null>(null);
   const [results, setResults] = useState<{ itemId: string; correct: boolean }[]>([]);
-  const [isSaving, setIsSaving] = useState(false);
 
   const card = cards[index];
   const totalCards = cards.length;
@@ -79,16 +78,17 @@ export default function SpeedReviewClient({ courseSlug, courseTitle, courseId, c
     }, SHOW_RESULT_MS);
   }, [stage, results, card, hearts, timeLeft, index, totalCards, courseId]);
 
-  // Countdown timer
+  // Countdown timer — only ticks, never calls advance directly
   useEffect(() => {
-    if (stage !== "playing") return;
-    if (timeLeft <= 0) {
-      advance(false, null);
-      return;
-    }
+    if (stage !== "playing" || timeLeft <= 0) return;
     const id = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearTimeout(id);
-  }, [timeLeft, stage, advance]);
+  }, [timeLeft, stage]);
+
+  // Time expiry — separated so the countdown effect stays pure
+  useEffect(() => {
+    if (stage === "playing" && timeLeft <= 0) advance(false, null);
+  }, [stage, timeLeft, advance]);
 
   function handleRestart() {
     setStage("playing");
@@ -132,7 +132,6 @@ export default function SpeedReviewClient({ courseSlug, courseTitle, courseId, c
             <div className="mt-6 flex flex-col gap-2">
               <button
                 type="button"
-                disabled={isSaving}
                 onClick={handleRestart}
                 className="w-full rounded-full bg-orange py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-hard-sm"
               >
