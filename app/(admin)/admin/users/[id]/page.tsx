@@ -69,18 +69,48 @@ export default async function AdminUserDetail({
 
           {/* Set plan */}
           <div className="rounded-lg border border-ink/10 bg-paper-2 p-5">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-3">Override plan</p>
+            <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">Override plan</p>
+            <p className="mb-3 font-manrope text-xs text-ink-3">Sets plan + resets quota to plan defaults.</p>
             <form action={adminSetPlan} className="flex flex-col gap-2">
               <input type="hidden" name="user_id" value={id} />
+
               <select name="plan" defaultValue={sub?.plan ?? "free"} className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
                 <option value="free">Free</option>
-                <option value="plus">Plus</option>
-                <option value="pro">Pro</option>
+                <option value="plus">Plus — 150K chars · 20 sessions/mo</option>
+                <option value="pro">Pro — 600K chars · 60 sessions/mo</option>
               </select>
+
+              <label className="font-manrope text-xs text-ink-3">Expires at (leave blank = no expiry)</label>
+              <input
+                type="date"
+                name="expires_at"
+                defaultValue={sub?.plan_expires_at ? new Date(sub.plan_expires_at).toISOString().slice(0, 10) : ""}
+                className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink"
+              />
+
+              <label className="flex cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-paper px-3 py-2">
+                <input
+                  type="checkbox"
+                  name="is_manual"
+                  defaultChecked={sub?.is_manual_subscription ?? false}
+                  className="h-4 w-4 accent-orange"
+                />
+                <span className="font-manrope text-sm text-ink">Manual / bank-transfer subscription</span>
+              </label>
+
               <button type="submit" className="rounded-full bg-ink px-4 py-2 font-manrope text-sm font-[700] text-paper transition hover:opacity-80">
                 Save plan
               </button>
             </form>
+
+            {sub?.is_manual_subscription && (
+              <p className="mt-2 font-manrope text-xs text-orange">
+                ⚠ Manual subscription — renewal is not automatic.
+                {sub.plan_expires_at && (
+                  <> Expires {new Date(sub.plan_expires_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}.</>
+                )}
+              </p>
+            )}
           </div>
 
           {/* Grant quota */}

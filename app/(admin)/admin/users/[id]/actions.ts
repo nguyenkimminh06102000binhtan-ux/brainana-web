@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { refundQuota } from "@/utils/quota";
 import type { QuotaResource, QuotaReason } from "@/utils/quota";
+import { PLAN_QUOTA } from "@/utils/lemonsqueezy";
 
 /** Guard: only admins can call these actions */
 async function requireAdmin() {
@@ -89,22 +90,43 @@ export async function adminRefundQuota(formData: FormData) {
   redirect(`/admin/users/${targetUserId}`);
 }
 
-/** Override a user's plan */
+/** Override a user's plan, quota, expiry, and manual-subscription flag */
 export async function adminSetPlan(formData: FormData) {
-  await requireAdmin();
+  const { adminId } = await requireAdmin();
 
-  const targetUserId = formData.get("user_id") as string;
-  const plan         = formData.get("plan") as string;
+  const targetUserId  = formData.get("user_id") as string;
+  const plan          = formData.get("plan") as string;
+  const expiresAtRaw  = (formData.get("expires_at") as string | null)?.trim() || null;
+  const isManual      = formData.get("is_manual") === "on";
 
   if (!targetUserId || !["free", "plus", "pro"].includes(plan)) {
     throw new Error("Invalid form data");
   }
 
-  const admin = createAdminClient();
+  const expiresAt = expiresAtRaw ? new Date(expiresAtRaw).toISOString() : null;
+  const quota     = PLAN_QUOTA[plan] ?? PLAN_QUOTA.free;
+  const admin     = createAdminClient();
+
   await admin
     .from("user_subscriptions")
-    .update({ plan })
+    .update({
+      plan,
+      chars_balance:             quota.chars,
+      tutor_sessions_balance:    quota.sessions,
+      plan_expires_at:           expiresAt,
+      is_manual_subscription:    isManual,
+      lemon_subscription_status: plan === "free" ? "none" : "active",
+      updated_at:                new Date().toISOString(),
+    })
     .eq("user_id", targetUserId);
+
+  // Log the quota grant so the transaction history reflects the change
+  if (quota.chars > 0 || quota.sessions > 0) {
+    const rows = [];
+    if (quota.chars > 0)    rows.push({ user_id: targetUserId, resource: "chars",          amount: quota.chars,    reason: "admin_grant", metadata: { plan, granted_by: adminId, note: "plan override" } });
+    if (quota.sessions > 0) rows.push({ user_id: targetUserId, resource: "tutor_sessions", amount: quota.sessions, reason: "admin_grant", metadata: { plan, granted_by: adminId, note: "plan override" } });
+    await admin.from("quota_transactions").insert(rows);
+  }
 
   redirect(`/admin/users/${targetUserId}`);
 }
