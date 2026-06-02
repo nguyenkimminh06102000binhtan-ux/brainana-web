@@ -52,6 +52,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if (isEditableTarget(e.target)) return;
       if (selected === null) {
         const idx = ["1", "2", "3", "4"].indexOf(e.key);
         if (idx !== -1 && idx < options.length) choose(idx);
@@ -128,7 +129,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-2 px-4">
+      <div className="grid grid-cols-1 gap-2 px-4 pb-3">
         {options.map((opt, i) => {
           const isSelected = selected === i;
           const showCorrect = selected !== null && opt.isCorrect;
@@ -183,6 +184,11 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
       )}
     </div>
   );
+}
+
+function isEditableTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable;
 }
 
 // Deterministic shuffle seed from itemId string

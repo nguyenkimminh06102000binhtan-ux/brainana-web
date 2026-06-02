@@ -18,6 +18,8 @@ type MemOfWeek = {
 
 export default async function CommunityPage() {
   noStore(); // Date.now() used in query — opt out of static caching
+  // eslint-disable-next-line react-hooks/purity -- dynamic server page; noStore() opts out of static caching.
+  const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -27,7 +29,7 @@ export default async function CommunityPage() {
     supabase
       .from("mems")
       .select("id, text, helpful_count, profiles!author_id(username, display_name), items!card_id(front_text, courses!course_id(title, slug))")
-      .gte("created_at", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
+      .gte("created_at", oneWeekAgo)
       .order("helpful_count", { ascending: false })
       .limit(1)
       .maybeSingle(),

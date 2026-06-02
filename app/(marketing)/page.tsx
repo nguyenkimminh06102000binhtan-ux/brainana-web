@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Icon } from "@/components/ui-icons";
+import { BrandLogo } from "@/components/brand-logo";
 import ThemeToggle from "../theme-toggle";
 
 const features = [
@@ -69,10 +70,7 @@ export default async function LandingPage() {
       <header className="sticky top-3 z-40 mx-auto max-w-6xl rounded-[1.6rem] border border-ink/10 bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:rounded-full sm:px-6 sm:py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-              B
-            </span>
-            <span className="truncate">Brainana</span>
+            <BrandLogo labelClassName="hidden truncate sm:inline-flex" priority />
           </Link>
           <nav className="ml-3 flex shrink-0 items-center gap-2 text-sm sm:gap-3">
             <ThemeToggle />

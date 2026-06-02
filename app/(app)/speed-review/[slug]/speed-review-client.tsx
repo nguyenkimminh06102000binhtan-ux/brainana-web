@@ -87,7 +87,9 @@ export default function SpeedReviewClient({ courseSlug, courseTitle, courseId, c
 
   // Time expiry — separated so the countdown effect stays pure
   useEffect(() => {
-    if (stage === "playing" && timeLeft <= 0) advance(false, null);
+    if (stage !== "playing" || timeLeft > 0) return;
+    const id = window.setTimeout(() => advance(false, null), 0);
+    return () => window.clearTimeout(id);
   }, [stage, timeLeft, advance]);
 
   function handleRestart() {

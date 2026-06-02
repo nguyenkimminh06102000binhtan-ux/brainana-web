@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui-icons";
+import { BrandLogo } from "@/components/brand-logo";
 import ThemeToggle from "../../theme-toggle";
 
 export const metadata = {
@@ -235,10 +236,7 @@ function Header() {
     <header className="sticky top-3 z-40 mx-4 mt-4 rounded-[1.6rem] border border-ink/10 bg-paper-2/95 shadow-hard backdrop-blur sm:mx-auto sm:mt-8 sm:max-w-5xl sm:rounded-full">
       <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
-          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-            B
-          </span>
-          <span className="truncate">Brainana</span>
+          <BrandLogo labelClassName="hidden truncate sm:inline-flex" />
         </Link>
         <nav className="flex items-center gap-3 text-sm">
           <ThemeToggle />

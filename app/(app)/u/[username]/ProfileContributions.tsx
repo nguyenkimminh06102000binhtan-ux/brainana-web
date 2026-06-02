@@ -50,7 +50,7 @@ export default function ProfileContributions({
 
   const totalHelpful = mems.reduce((s, m) => s + m.helpful_count, 0);
 
-  function handleUpdate(id: string, newText: string, updatedMem: ProfileMem) {
+  function handleUpdate(id: string, newText: string) {
     setMems((prev) => prev.map((m) => (m.id === id ? { ...m, text: newText } : m)));
   }
 
@@ -79,7 +79,7 @@ export default function ProfileContributions({
               currentUserId={currentUserId}
               isOwnProfile={isOwnProfile}
               labels={labels}
-              onUpdate={(newText) => handleUpdate(mem.id, newText, mem)}
+              onUpdate={(newText) => handleUpdate(mem.id, newText)}
               onDelete={() => handleDelete(mem.id)}
             />
           ))}

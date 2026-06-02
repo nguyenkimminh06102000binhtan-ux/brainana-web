@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { BrandIcon } from "@/components/brand-logo";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/home" className="font-fredoka text-xl font-[700] tracking-tight">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-yellow text-lg text-on-bright shadow-hard-sm">B</span>
+              <BrandIcon className="h-8 w-10" />
             </Link>
             <span className="font-mono text-xs uppercase tracking-widest text-ink-3">Admin</span>
             <nav className="flex items-center gap-2">

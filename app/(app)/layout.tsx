@@ -9,6 +9,7 @@ import OriginLanguageSwitcher from "@/components/origin-language-switcher";
 import ThemeToggle from "@/app/theme-toggle";
 import { getLocale } from "@/utils/i18n";
 import { Icon } from "@/components/ui-icons";
+import { BrandLogo } from "@/components/brand-logo";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient(await cookies());
@@ -43,7 +44,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
     { label: loc.app.nav.browse,    href: "/browse",    icon: "compass" as const },
     { label: loc.app.nav.library,   href: "/library",   icon: "library" as const },
     { label: loc.app.nav.create,    href: "/create",    icon: "plus" as const },
-    { label: loc.app.nav.community, href: "/community", icon: "users" as const },
+    { label: "Feature Request", href: "https://brainana.userjot.com/", icon: "sparkles" as const, external: true },
   ];
 
   return (
@@ -59,24 +60,29 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
 
             {/* Logo */}
             <Link href="/home" className="flex shrink-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight">
-              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-                B
-              </span>
-              <span className="hidden sm:inline">{loc.app.brand}</span>
+              <BrandLogo label={loc.app.brand} labelClassName="hidden sm:inline" priority />
             </Link>
 
             {/* Desktop nav — hidden on mobile */}
             <nav className="hidden min-w-0 flex-1 flex-wrap items-center gap-2 lg:flex">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 transition hover:bg-blue hover:text-ocean"
-                >
-                  <Icon name={item.icon} className="h-4 w-4" />
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const className = "inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 transition hover:bg-blue hover:text-ocean";
+                const content = (
+                  <>
+                    <Icon name={item.icon} className="h-4 w-4" />
+                    {item.label}
+                  </>
+                );
+                return item.external ? (
+                  <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
+                    {content}
+                  </a>
+                ) : (
+                  <Link key={item.href} href={item.href} className={className}>
+                    {content}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Spacer on mobile */}

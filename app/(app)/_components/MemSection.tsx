@@ -84,7 +84,10 @@ export default function MemSection({ cardId, currentUserId, labels }: Props) {
   }, [cardId, currentUserId]);
 
   useEffect(() => {
-    load();
+    const id = window.setTimeout(() => {
+      void load();
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [load]);
 
   async function handleSubmit() {

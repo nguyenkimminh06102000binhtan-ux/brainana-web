@@ -104,13 +104,11 @@ export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string>
       stream:     true,
     });
 
-    let full = "";
     for await (const event of stream) {
       if (
         event.type === "content_block_delta" &&
         event.delta.type === "text_delta"
       ) {
-        full += event.delta.text;
         yield event.delta.text;
       }
     }
@@ -134,10 +132,9 @@ export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string>
     stream: true,
   });
 
-  let full = "";
   for await (const chunk of stream) {
     const delta = chunk.choices[0]?.delta?.content;
-    if (delta) { full += delta; yield delta; }
+    if (delta) yield delta;
   }
 }
 

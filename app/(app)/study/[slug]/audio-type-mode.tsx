@@ -121,17 +121,16 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
 
   useEffect(() => {
     if (!submitted) return;
-    const autoSkip = setTimeout(() => advance(), 3000);
     // Delay before accepting Enter to advance — prevents key-repeat from
     // immediately skipping past the feedback screen.
     let canAdvance = false;
     const timer = setTimeout(() => { canAdvance = true; }, 600);
     function onKey(e: KeyboardEvent) {
+      if (isEditableTarget(e.target)) return;
       if (canAdvance && e.key === "Enter") advance();
     }
     window.addEventListener("keydown", onKey);
     return () => {
-      clearTimeout(autoSkip);
       clearTimeout(timer);
       window.removeEventListener("keydown", onKey);
     };
@@ -302,4 +301,9 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
       </div>
     </div>
   );
+}
+
+function isEditableTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable;
 }

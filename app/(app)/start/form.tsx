@@ -8,6 +8,7 @@ import { PURPOSES, DAILY_GOALS, INTERESTS, LANGUAGES } from "./constants";
 import AvatarPicker from "@/components/avatar-picker";
 import { t } from "@/utils/t";
 import { Icon } from "@/components/ui-icons";
+import { BrandDomainWordmark, BrandLogo } from "@/components/brand-logo";
 
 type StartLabels = {
   estimatedTime: string;
@@ -82,12 +83,7 @@ export default function OnboardingForm({
             href="/home"
             className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight"
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-              B
-            </span>
-            <span>
-              <span className="text-orange-text">brainana</span>.app
-            </span>
+            <BrandLogo label={<BrandDomainWordmark />} />
           </Link>
           <p className="rounded-full bg-paper px-3 py-1.5 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm sm:text-sm">{labels.estimatedTime}</p>
         </div>

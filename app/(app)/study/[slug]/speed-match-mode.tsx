@@ -85,7 +85,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
       });
     }, 1000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const answer = useCallback(
     (userSaysMatch: boolean) => {

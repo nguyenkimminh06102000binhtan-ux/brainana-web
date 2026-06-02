@@ -85,9 +85,9 @@ export default function SettingsForm({
     if (nextUsername === profile.username || !USERNAME_RE.test(nextUsername)) return;
 
     let cancelled = false;
-    setAsyncUsernameStatus("checking");
 
     const timer = window.setTimeout(async () => {
+      setAsyncUsernameStatus("checking");
       const supabase = createClient();
       const { data, error } = await supabase
         .from("profiles")

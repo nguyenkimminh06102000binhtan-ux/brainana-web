@@ -4,6 +4,7 @@ import { useActionState, useMemo, useState } from "react";
 import Link from "next/link";
 import { signupWithEmail, signInWithGoogle } from "../actions";
 import { Icon } from "@/components/ui-icons";
+import { BrandDomainWordmark, BrandLogo } from "@/components/brand-logo";
 import { ThemeToggleFixed } from "../../theme-toggle";
 
 function GoogleIcon() {
@@ -21,12 +22,7 @@ function BrandPanel() {
   return (
     <section className="flex min-h-[560px] flex-col justify-between rounded-[1.5rem] bg-yellow-soft p-8 shadow-hard">
       <Link href="/" className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-green-soft text-2xl text-ink shadow-hard-sm">
-          B
-        </span>
-        <span>
-          <span className="text-orange-text">brainana</span>.app
-        </span>
+        <BrandLogo label={<BrandDomainWordmark />} />
       </Link>
 
       <div>
@@ -112,10 +108,7 @@ export default function SignupPage() {
         <div className="flex items-center justify-center rounded-[1.5rem] bg-paper-2 p-5 shadow-hard sm:p-8">
           <div className="w-full max-w-md">
             <Link href="/" className="mb-8 flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight lg:hidden">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-                B
-              </span>
-              <span>Brainana</span>
+              <BrandLogo />
             </Link>
             <div className="mb-8">
               <h1 className="font-fredoka text-3xl font-[700] tracking-tight sm:text-5xl">Create account</h1>

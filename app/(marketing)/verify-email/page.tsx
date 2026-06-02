@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { resendVerificationEmail } from "../actions";
 import { Icon } from "@/components/ui-icons";
+import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggleFixed } from "../../theme-toggle";
 
 export default async function VerifyEmailPage({
@@ -15,10 +16,7 @@ export default async function VerifyEmailPage({
       <ThemeToggleFixed />
       <div className="w-full max-w-md rounded-[1.5rem] bg-paper-2 p-6 text-center shadow-hard sm:p-8">
         <Link href="/" className="mx-auto mb-8 flex w-fit items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow text-2xl text-on-bright shadow-hard-sm">
-            B
-          </span>
-          <span>Brainana</span>
+          <BrandLogo />
         </Link>
         <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-green-soft text-blue-text shadow-hard-sm">
           <Icon name="check" className="h-7 w-7" />

@@ -4,6 +4,13 @@ import { verifyWebhookSignature, planFromVariantId, PLAN_QUOTA, topupFromVariant
 
 export const runtime = "nodejs";
 
+function idempotencyError(error: { code?: string; message?: string } | null) {
+  if (!error) return null;
+  if (error.code === "23505") return "duplicate";
+  console.error("[lemonsqueezy-webhook] Failed to claim event:", error.message ?? error);
+  return NextResponse.json({ error: "Failed to claim webhook event" }, { status: 500 });
+}
+
 export async function POST(req: NextRequest) {
   const signature = req.headers.get("x-signature") ?? "";
   const rawBody = await req.text();
@@ -147,9 +154,11 @@ export async function POST(req: NextRequest) {
       const { error: renewalClaimErr } = await supabase
         .from("processed_lemon_events")
         .insert({ event_key: renewalKey });
-      if (renewalClaimErr?.code === "23505") break; // Already processed
+      const renewalClaimResult = idempotencyError(renewalClaimErr);
+      if (renewalClaimResult === "duplicate") break;
+      if (renewalClaimResult) return renewalClaimResult;
 
-      await supabase
+      const { error: renewalUpdateError } = await supabase
         .from("user_subscriptions")
         .update({
           lemon_subscription_status: "active",
@@ -159,11 +168,21 @@ export async function POST(req: NextRequest) {
           updated_at:             new Date().toISOString(),
         })
         .eq("user_id", userId);
+      if (renewalUpdateError) {
+        console.error("[lemonsqueezy-webhook] Failed to apply renewal:", renewalUpdateError.message);
+        await supabase.from("processed_lemon_events").delete().eq("event_key", renewalKey);
+        return NextResponse.json({ error: "Failed to apply renewal" }, { status: 500 });
+      }
 
-      await supabase.from("quota_transactions").insert([
+      const { error: renewalTxError } = await supabase.from("quota_transactions").insert([
         { user_id: userId, resource: "chars",          amount: quota.chars,    reason: "monthly_grant", metadata: { plan, event: eventName } },
         { user_id: userId, resource: "tutor_sessions", amount: quota.sessions, reason: "monthly_grant", metadata: { plan, event: eventName } },
       ]);
+      if (renewalTxError) {
+        console.error("[lemonsqueezy-webhook] Failed to log renewal:", renewalTxError.message);
+        await supabase.from("processed_lemon_events").delete().eq("event_key", renewalKey);
+        return NextResponse.json({ error: "Failed to log renewal" }, { status: 500 });
+      }
       break;
     }
 
@@ -184,25 +203,37 @@ export async function POST(req: NextRequest) {
       const { error: orderClaimErr } = await supabase
         .from("processed_lemon_events")
         .insert({ event_key: `order:${lsOrderId}` });
-      if (orderClaimErr?.code === "23505") break; // Already credited
+      const orderClaimResult = idempotencyError(orderClaimErr);
+      if (orderClaimResult === "duplicate") break;
+      if (orderClaimResult) return orderClaimResult;
 
       if (pack.chars > 0) {
-        await supabase.rpc("refund_quota", {
+        const { error: charsCreditError } = await supabase.rpc("refund_quota", {
           p_user_id:          userId,
           p_resource:         "chars",
           p_requested_amount: pack.chars,
           p_reason:           "purchase",
           p_metadata:         { lemon_order_id: lsOrderId, pack: pack.label, event: eventName },
         });
+        if (charsCreditError) {
+          console.error("[lemonsqueezy-webhook] Failed to credit character top-up:", charsCreditError.message);
+          await supabase.from("processed_lemon_events").delete().eq("event_key", `order:${lsOrderId}`);
+          return NextResponse.json({ error: "Failed to credit top-up" }, { status: 500 });
+        }
       }
       if (pack.sessions > 0) {
-        await supabase.rpc("refund_quota", {
+        const { error: sessionsCreditError } = await supabase.rpc("refund_quota", {
           p_user_id:          userId,
           p_resource:         "tutor_sessions",
           p_requested_amount: pack.sessions,
           p_reason:           "purchase",
           p_metadata:         { lemon_order_id: lsOrderId, pack: pack.label, event: eventName },
         });
+        if (sessionsCreditError) {
+          console.error("[lemonsqueezy-webhook] Failed to credit session top-up:", sessionsCreditError.message);
+          await supabase.from("processed_lemon_events").delete().eq("event_key", `order:${lsOrderId}`);
+          return NextResponse.json({ error: "Failed to credit top-up" }, { status: 500 });
+        }
       }
       break;
     }
