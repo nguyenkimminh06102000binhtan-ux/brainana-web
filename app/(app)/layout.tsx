@@ -10,6 +10,7 @@ import ThemeToggle from "@/app/theme-toggle";
 import { getLocale } from "@/utils/i18n";
 import { Icon } from "@/components/ui-icons";
 import { BrandLogo } from "@/components/brand-logo";
+import OriginLanguageGuide from "./_components/origin-language-guide";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient(await cookies());
@@ -55,7 +56,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
       <div className="flex min-w-0 flex-1 flex-col">
         <AppChrome
           header={(
-        <header className="fixed inset-x-3 bottom-3 top-auto z-40 rounded-[1.6rem] border border-ink/10 bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:inset-x-4 sm:bottom-4 sm:px-5 lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-4 lg:m-4 lg:rounded-full lg:px-6">
+        <header className="fixed inset-x-3 bottom-3 top-auto z-40 rounded-[1.6rem] border-2 border-ink bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:inset-x-4 sm:bottom-4 sm:px-5 lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-4 lg:m-4 lg:rounded-full lg:px-6">
           <div className="flex items-center gap-3 lg:gap-4">
 
             {/* Logo */}
@@ -66,7 +67,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
             {/* Desktop nav — hidden on mobile */}
             <nav className="hidden min-w-0 flex-1 flex-wrap items-center gap-2 lg:flex">
               {navItems.map((item) => {
-                const className = "inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-manrope text-sm font-[800] text-ink-2 transition hover:bg-blue hover:text-ocean";
+                const className = "inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-transparent px-4 py-2 font-manrope text-sm font-[800] text-ink-2 transition hover:border-ink hover:bg-yellow-soft hover:text-ink hover:shadow-hard-sm";
                 const content = (
                   <>
                     <Icon name={item.icon} className="h-4 w-4" />
@@ -96,7 +97,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
                   name="q"
                   aria-label="Search courses"
                   placeholder={loc.app.searchPlaceholder}
-                  className="w-full rounded-full bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink"
+                  className="w-full rounded-full border-2 border-ink bg-paper py-2 pl-9 pr-4 font-manrope text-sm text-ink shadow-hard-sm outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-yellow"
                 />
               </div>
             </form>
@@ -140,6 +141,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
         >
           {children}
         </AppChrome>
+        <OriginLanguageGuide />
       </div>
     </div>
   );

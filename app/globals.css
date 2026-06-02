@@ -17,39 +17,40 @@
 @config "../tailwind.config.ts";
 
 :root {
-  --color-orange: #F36B2E;
-  --color-white: #FFF9E8;
-  --color-mango: #F59A1E;
-  --color-ocean: #C4E7E5;
-  --color-blue: #253C96;
-  --color-navy: #19244E;
-  --color-red: #F36B2E;
-  --color-yellow: #F59A1E;
-  --color-green: #C4E7E5;
-  --brainana-ink: #19244E;
-  --brainana-paper: #C4E7E5;
-  --brainana-paper-2: #E7F6F5;
-  --brainana-red-soft: #FFD6C4;
-  --brainana-yellow-soft: #FFE3A6;
-  --brainana-green-soft: #DDF1EF;
-  --brainana-ink-2: #3D4B72;
-  --brainana-ink-3: #4F6270;
-  --brainana-orange-text: #8A3000;
+  --color-orange: #F35B45;
+  --color-white: #FFF8E8;
+  --color-mango: #F7C842;
+  --color-ocean: #BFE7D7;
+  --color-blue: #2F6F89;
+  --color-navy: #1B1716;
+  --color-red: #F35B45;
+  --color-yellow: #F7C842;
+  --color-green: #84BD57;
+  --brainana-ink: #1B1716;
+  --brainana-paper: #FFF3D6;
+  --brainana-paper-2: #FFFBEF;
+  --brainana-red-soft: #FFD8D0;
+  --brainana-yellow-soft: #FFE59B;
+  --brainana-green-soft: #DCEFC8;
+  --brainana-ink-2: #4F4038;
+  --brainana-ink-3: #78675B;
+  --brainana-orange-text: #B63C24;
   --brainana-danger-text: #B0003A;
-  --brainana-blue-text: #253C96;
-  --brainana-on-ink: #FFF9E8;
-  --background-glow-1: #F59A1E45;
-  --background-glow-2: #F36B2E38;
-  --background-glow-3: #253C9620;
+  --brainana-blue-text: #2F6F89;
+  --brainana-on-ink: #FFF8E8;
+  --brand-outline: #1B1716;
+  --background-glow-1: #F7C84255;
+  --background-glow-2: #F35B4538;
+  --background-glow-3: #84BD5738;
   --font-fredoka: "Young Typeface", sans-serif;
   --font-manrope: "Young Typeface", sans-serif;
   --font-kalam: "Young Typeface", sans-serif;
   --font-mono: "Young Typeface", sans-serif;
   --font-young: "Young Typeface", sans-serif;
-  --brainana-shadow-hard: 0 18px 40px #19244E24;
-  --brainana-shadow-hard-sm: 0 10px 24px #19244E1F;
-  --brainana-shadow-hard-red: 0 18px 36px #F36B2E40;
-  --border-default: 1.5px;
+  --brainana-shadow-hard: 0 8px 0 #1B1716, 0 18px 36px #1B171624;
+  --brainana-shadow-hard-sm: 0 4px 0 #1B1716, 0 10px 20px #1B17161F;
+  --brainana-shadow-hard-red: 0 8px 0 #1B1716, 0 18px 34px #F35B4540;
+  --border-default: 2px;
   --radius-sm: 14px;
   --radius-md: 22px;
   --radius-lg: 30px;
@@ -57,36 +58,37 @@
 }
 
 :root[data-theme="dark"] {
-  --brainana-ink: #FFF9E8;
-  --brainana-paper: #19244E;
-  --brainana-paper-2: #2D3764;
-  --brainana-red-soft: #4D2A33;
-  --brainana-yellow-soft: #4E4021;
-  --brainana-green-soft: #28495A;
-  --brainana-ink-2: #C9D2E8;
-  --brainana-ink-3: #AEB9D8;
-  --brainana-orange-text: #FFB46F;
+  --brainana-ink: #FFF8E8;
+  --brainana-paper: #1E2420;
+  --brainana-paper-2: #2F382D;
+  --brainana-red-soft: #55302D;
+  --brainana-yellow-soft: #554A26;
+  --brainana-green-soft: #334A32;
+  --brainana-ink-2: #F0D8BA;
+  --brainana-ink-3: #CDAF91;
+  --brainana-orange-text: #FF9A72;
   --brainana-danger-text: #FFA0BC;
-  --brainana-blue-text: #C4E7E5;
-  --brainana-on-ink: #19244E;
-  --background-glow-1: #F59A1E40;
-  --background-glow-2: #F36B2E45;
-  --background-glow-3: #253C9680;
-  --brainana-shadow-hard: 0 24px 60px #070B1F80;
-  --brainana-shadow-hard-sm: 0 12px 28px #070B1F66;
-  --brainana-shadow-hard-red: 0 18px 42px #F36B2E66;
+  --brainana-blue-text: #BFE7D7;
+  --brainana-on-ink: #1B1716;
+  --brand-outline: #1B1716;
+  --background-glow-1: #F7C8422E;
+  --background-glow-2: #F35B453A;
+  --background-glow-3: #84BD5745;
+  --brainana-shadow-hard: 0 8px 0 #0C0A09, 0 24px 58px #0C0A0970;
+  --brainana-shadow-hard-sm: 0 4px 0 #0C0A09, 0 12px 28px #0C0A0960;
+  --brainana-shadow-hard-red: 0 8px 0 #0C0A09, 0 20px 44px #F35B4566;
 }
 
 @theme inline {
-  --color-orange: #F36B2E;
-  --color-white: #FFF9E8;
-  --color-mango: #F59A1E;
-  --color-ocean: #C4E7E5;
-  --color-blue: #253C96;
-  --color-navy: #19244E;
-  --color-red: #F36B2E;
-  --color-yellow: #F59A1E;
-  --color-green: #C4E7E5;
+  --color-orange: #F35B45;
+  --color-white: #FFF8E8;
+  --color-mango: #F7C842;
+  --color-ocean: #BFE7D7;
+  --color-blue: #2F6F89;
+  --color-navy: #1B1716;
+  --color-red: #F35B45;
+  --color-yellow: #F7C842;
+  --color-green: #84BD57;
   --color-electric-pink: #FF0054;
   --color-acid-green: #9EFF00;
   --color-ink: var(--brainana-ink);
@@ -143,15 +145,38 @@
   border-color: var(--brainana-ink);
 }
 
+::selection {
+  background: var(--color-yellow);
+  color: var(--brainana-ink);
+}
+
 ::placeholder {
   opacity: 1;
 }
 
+:where(a, button, input, textarea, select, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a, button, input, textarea, select, [role="button"]):focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 3px;
+}
+
+.origin-language-guide-target {
+  position: relative;
+  z-index: 120;
+  outline: 4px solid var(--color-yellow);
+  outline-offset: 5px;
+  box-shadow: var(--brainana-shadow-hard-red);
+}
+
 body {
   background:
-    radial-gradient(circle at 58% 18%, var(--background-glow-1) 0, transparent 16rem),
-    radial-gradient(circle at 88% 78%, var(--background-glow-2) 0, transparent 18rem),
-    radial-gradient(circle at 12% 5%, var(--background-glow-3) 0, transparent 22rem),
+    radial-gradient(circle at 58% 18%, var(--background-glow-1) 0, transparent 17rem),
+    radial-gradient(circle at 88% 78%, var(--background-glow-2) 0, transparent 19rem),
+    radial-gradient(circle at 12% 5%, var(--background-glow-3) 0, transparent 23rem),
+    linear-gradient(135deg, #FFFFFF66 0, transparent 28rem),
     var(--brainana-paper);
   color: var(--brainana-ink);
   font-family: var(--font-manrope);

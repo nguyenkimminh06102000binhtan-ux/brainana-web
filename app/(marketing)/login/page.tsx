@@ -20,7 +20,7 @@ function GoogleIcon() {
 
 function BrandPanel() {
   return (
-    <section className="flex min-h-[560px] flex-col justify-between rounded-[1.5rem] bg-yellow-soft p-8 shadow-hard">
+    <section className="flex min-h-[560px] flex-col justify-between rounded-[1.5rem] border-2 border-ink bg-yellow-soft p-8 shadow-hard">
       <Link href="/" className="flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight">
         <BrandLogo label={<BrandDomainWordmark />} />
       </Link>
@@ -39,8 +39,8 @@ function BrandPanel() {
           { eyebrow: "[ korean ]", title: "Korean", accent: "bg-green-soft" },
           { eyebrow: "[ GRE ]", title: "GRE Vocab", accent: "bg-red-soft" },
         ].map((card) => (
-          <article key={card.title} className="w-40 overflow-hidden rounded-[1rem] bg-paper-2 shadow-hard-sm">
-            <div className={`${card.accent} border-b border-ink px-4 py-5`}>
+          <article key={card.title} className="w-40 overflow-hidden rounded-[1rem] border-2 border-ink bg-paper-2 shadow-hard-sm">
+            <div className={`${card.accent} border-b-2 border-ink px-4 py-5`}>
               <p className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">
                 {card.eyebrow}
               </p>
@@ -90,7 +90,7 @@ export default function LoginPage() {
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl gap-8 lg:grid-cols-2 lg:items-stretch">
         <div className="hidden lg:block"><BrandPanel /></div>
 
-        <div className="flex items-center justify-center rounded-[1.5rem] bg-paper-2 p-5 shadow-hard sm:p-8">
+        <div className="flex items-center justify-center rounded-[1.5rem] border-2 border-ink bg-paper-2 p-5 shadow-hard sm:p-8">
           <div className="w-full max-w-md">
             <Link href="/" className="mb-8 flex items-center gap-3 font-fredoka text-2xl font-[700] tracking-tight lg:hidden">
               <BrandLogo />
@@ -108,7 +108,7 @@ export default function LoginPage() {
             <form action={signInWithGoogle}>
               <button
                 type="submit"
-                className="flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-paper px-5 py-4 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
+                className="flex min-h-12 w-full items-center justify-center gap-3 rounded-full border-2 border-ink bg-paper px-5 py-4 font-manrope text-base font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none"
               >
                 <GoogleIcon />
                 Continue with Google
@@ -177,7 +177,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="mt-1 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-orange px-5 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
+                className="mt-1 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-5 py-4 font-manrope text-base font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm disabled:cursor-not-allowed disabled:bg-ink-3 disabled:text-on-ink disabled:shadow-none"
               >
                 {pending ? "Logging in..." : "Log in"}
                 {!pending && <Icon name="arrowRight" className="h-4 w-4" />}

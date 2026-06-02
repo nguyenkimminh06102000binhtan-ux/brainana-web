@@ -53,12 +53,9 @@ export default function GoalRing({ studied, goal, courseSlug, labels }: GoalRing
           {labels.continueLearning} →
         </a>
       ) : (
-        <a
-          href="/browse"
-          className="rounded-full bg-paper px-5 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px]"
-        >
-          {labels.browseAction} →
-        </a>
+        <p className="max-w-40 text-center font-manrope text-sm font-[700] leading-5 text-ink-2">
+          Pick a course below to start filling the ring.
+        </p>
       )}
     </div>
   );

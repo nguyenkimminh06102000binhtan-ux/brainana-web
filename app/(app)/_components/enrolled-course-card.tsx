@@ -56,10 +56,10 @@ export default function EnrolledCourseCard({
   const dotColor = LEVEL_DOT[course.level ?? ""] ?? "#93c5fd";
 
   return (
-    <div className="overflow-hidden rounded-[1.2rem] bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
+    <div className="overflow-hidden rounded-[1.2rem] border-2 border-ink bg-paper-2 shadow-hard transition hover:-translate-y-0.5">
       <Link
         href={`/c/${course.slug}`}
-        className={`relative flex h-24 items-end px-4 pb-3 sm:h-20 ${headerBg} block`}
+        className={`relative block flex h-24 items-end border-b-2 border-ink px-4 pb-3 sm:h-20 ${headerBg}`}
         style={STRIPE}
       >
         {course.cover_image_url ? (
@@ -70,7 +70,7 @@ export default function EnrolledCourseCard({
           </span>
         )}
         <span
-          className="absolute right-3 top-3 z-10 h-3 w-3 rounded-full border-2 border-paper-2"
+          className="absolute right-3 top-3 z-10 h-3 w-3 rounded-full border-2 border-ink"
           style={{ backgroundColor: dotColor }}
         />
       </Link>
@@ -91,8 +91,8 @@ export default function EnrolledCourseCard({
             <span>{t(labels.masteredProgress, { mastered: course.masteredCount, total: course.card_count })}</span>
             <span>{pct}%</span>
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-paper">
-            <div className="h-full rounded-full bg-orange transition-all" style={{ width: `${pct}%` }} />
+          <div className="h-2 w-full overflow-hidden rounded-full border-2 border-ink bg-paper">
+            <div className="h-full bg-orange transition-all" style={{ width: `${pct}%` }} />
           </div>
         </div>
 
@@ -100,7 +100,7 @@ export default function EnrolledCourseCard({
           {!course.hasStudied ? (
             <span className="font-mono text-xs text-ink-3">{labels.notStarted}</span>
           ) : course.dueCount > 0 ? (
-            <span className="rounded-full bg-orange/10 px-2.5 py-0.5 font-mono text-xs font-[700] text-orange-text">
+            <span className="rounded-full border-2 border-ink bg-red-soft px-2.5 py-0.5 font-mono text-xs font-[700] text-orange-text shadow-hard-sm">
               {t(labels.due, { count: course.dueCount })}
             </span>
           ) : (
@@ -108,7 +108,7 @@ export default function EnrolledCourseCard({
           )}
           <Link
             href={`/study/${course.slug}`}
-            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
+            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full border-2 border-ink bg-orange px-4 py-1.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px]"
           >
             {labels.study} <Icon name="arrowRight" className="h-3.5 w-3.5" />
           </Link>

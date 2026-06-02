@@ -77,17 +77,17 @@ export default function RefundPolicyPage() {
 
 function Header() {
   return (
-    <header className="sticky top-3 z-40 mx-4 mt-4 rounded-[1.6rem] border border-ink/10 bg-paper-2/95 shadow-hard backdrop-blur sm:mx-auto sm:mt-8 sm:max-w-5xl sm:rounded-full">
+    <header className="sticky top-3 z-40 mx-4 mt-4 rounded-[1.6rem] border-2 border-ink bg-paper-2/95 shadow-hard backdrop-blur sm:mx-auto sm:mt-8 sm:max-w-5xl sm:rounded-full">
       <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">
           <BrandLogo labelClassName="hidden truncate sm:inline-flex" />
         </Link>
         <nav className="flex items-center gap-3 text-sm">
           <ThemeToggle />
-          <Link href="/login" className="inline-flex min-h-10 items-center rounded-full bg-paper px-4 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5">
+          <Link href="/login" className="inline-flex min-h-10 items-center rounded-full border-2 border-ink bg-paper px-4 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition active:translate-y-[2px] active:shadow-none sm:px-5">
             Log in
           </Link>
-          <Link href="/signup" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-5">
+          <Link href="/signup" className="inline-flex min-h-10 items-center gap-1.5 rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition active:translate-y-[2px] active:shadow-hard-sm sm:px-5">
             Sign up <Icon name="arrowRight" className="h-3.5 w-3.5" />
           </Link>
         </nav>

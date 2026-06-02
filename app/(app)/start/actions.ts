@@ -127,5 +127,5 @@ export async function saveOnboarding(
   if (!data || data.length === 0)
     return { error: locale.start.validationProfileNotFound };
 
-  redirect("/home");
+  redirect("/home?guide=origin-language");
 }

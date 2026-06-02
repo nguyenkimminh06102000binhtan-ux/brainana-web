@@ -84,10 +84,10 @@ export default function FlashcardMode({ card, showRomanization, showCustomAttrib
         aria-label={flipped ? "Card back — click to flip back" : "Card front — press Space or click to flip"}
       >
         <div
-          className={`grid min-h-52 w-full rounded-lg bg-paper-2 shadow-hard transition-all duration-300 motion-reduce:duration-0 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
+          className={`grid min-h-52 w-full rounded-[1.4rem] border-2 border-ink bg-paper-2 shadow-hard transition-all duration-300 motion-reduce:duration-0 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
         >
           {/* Front */}
-          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden]">
+          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-[1.4rem] p-6 [backface-visibility:hidden]">
             {card.imageUrl && (
               <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
                 <Image
@@ -110,12 +110,12 @@ export default function FlashcardMode({ card, showRomanization, showCustomAttrib
             </p>
           </div>
           {/* Back */}
-          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-lg p-6 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <div className="[grid-area:1/1] flex flex-col items-center justify-center rounded-[1.4rem] bg-yellow-soft p-6 [backface-visibility:hidden] [transform:rotateY(180deg)]">
             <p className="break-words text-center font-fredoka text-xl font-[600] leading-snug text-ink sm:text-3xl">
               {card.backText}
             </p>
             {customAttributeEntries.length > 0 && (
-              <div className="mt-4 w-full border-t border-ink/10 pt-3 flex flex-col gap-1.5">
+              <div className="mt-4 flex w-full flex-col gap-1.5 border-t-2 border-ink pt-3">
                 {customAttributeEntries.map(([k, v]) => (
                   <div key={k} className="text-left">
                     <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
@@ -142,7 +142,7 @@ export default function FlashcardMode({ card, showRomanization, showCustomAttrib
                   key={r.label}
                   type="button"
                   onClick={() => rate(r.quality)}
-                  className="flex cursor-pointer flex-col items-center gap-1 rounded-sm border-2 border-ink/15 bg-ink/5 px-2 py-3 font-manrope transition hover:border-ink/30 hover:bg-ink/10 active:translate-y-[1px]"
+                  className="flex cursor-pointer flex-col items-center gap-1 rounded-[1rem] border-2 border-ink bg-paper px-2 py-3 font-manrope shadow-hard-sm transition hover:bg-yellow-soft active:translate-y-[1px]"
                 >
                   <span className="text-sm font-[700] text-ink">{r.label}</span>
                   <span className="font-mono text-xs text-ink-3">

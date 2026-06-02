@@ -109,7 +109,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
           acceptedAnswers={outcome === "incorrect" ? [card.backText, ...card.acceptedAnswers] : undefined}
         />
       )}
-      <div className="rounded-lg bg-paper-2 mx-4 mt-8 p-6 shadow-hard-sm text-center">
+      <div className="mx-4 mt-8 rounded-[1.4rem] border-2 border-ink bg-paper-2 p-6 text-center shadow-hard-sm">
         {card.imageUrl && (
           <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
             <Image
@@ -143,12 +143,12 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
               disabled={selected !== null}
               aria-pressed={isSelected}
               aria-label={`${i + 1}. ${opt.text}${showCorrect ? " — correct" : showWrong ? " — incorrect" : ""}`}
-              className={`flex cursor-pointer items-center gap-3 rounded-sm border-2 px-4 py-3 text-left font-manrope text-sm font-[600] transition active:translate-y-[1px] disabled:cursor-default ${
+              className={`flex cursor-pointer items-center gap-3 rounded-[1rem] border-2 px-4 py-3 text-left font-manrope text-sm font-[700] shadow-hard-sm transition active:translate-y-[1px] disabled:cursor-default ${
                 showCorrect
-                  ? "border-acid-green bg-acid-green text-on-bright"
+                  ? "border-ink bg-green-soft text-ink"
                   : showWrong
-                    ? "border-electric-pink bg-electric-pink text-on-bright"
-                    : "border-ink/15 bg-ink/5 text-ink hover:border-ink/30 hover:bg-ink/10"
+                    ? "border-ink bg-red-soft text-ink"
+                    : "border-ink bg-paper text-ink hover:bg-yellow-soft"
               }`}
             >
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-current font-mono text-xs" aria-hidden="true">
@@ -161,7 +161,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
       </div>
 
       {selected !== null && customAttributeEntries.length > 0 && (
-        <div className="mx-4 flex flex-col gap-1.5 rounded-md bg-paper-2 px-4 py-3">
+        <div className="mx-4 flex flex-col gap-1.5 rounded-[1rem] border-2 border-ink bg-paper-2 px-4 py-3 shadow-hard-sm">
           {customAttributeEntries.map(([k, v]) => (
             <div key={k}>
               <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
@@ -176,7 +176,7 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
           <button
             type="button"
             onClick={() => onAnswer(pendingAnswer)}
-            className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+            className="w-full cursor-pointer rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
           >
             {continueLabel}
           </button>

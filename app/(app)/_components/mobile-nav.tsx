@@ -17,12 +17,12 @@ export default function MobileNav({ items }: { items: NavItem[] }) {
   return (
     <nav
       aria-label="Primary"
-      className="grid grid-cols-5 rounded-[1.35rem] border border-ink/10 bg-paper p-1.5 shadow-hard-sm lg:hidden"
+      className="grid grid-cols-5 rounded-[1.35rem] border-2 border-ink bg-paper p-1.5 shadow-hard-sm lg:hidden"
     >
       {items.map((item) => {
         const active = !item.external && (pathname === item.href || (item.href !== "/home" && pathname.startsWith(item.href)));
-        const className = `flex min-h-14 flex-col items-center justify-center gap-1 rounded-[1.1rem] px-1 text-center font-manrope text-[0.68rem] font-[800] leading-none transition active:scale-95 ${
-          active ? "bg-orange text-on-bright shadow-hard-red" : "text-ink-2 hover:bg-paper hover:text-ink"
+        const className = `flex min-h-14 flex-col items-center justify-center gap-1 rounded-[1.1rem] border-2 px-1 text-center font-manrope text-[0.68rem] font-[800] leading-none transition active:scale-95 ${
+          active ? "border-ink bg-orange text-on-bright shadow-hard-red" : "border-transparent text-ink-2 hover:border-ink hover:bg-yellow-soft hover:text-ink"
         }`;
         const content = (
           <>

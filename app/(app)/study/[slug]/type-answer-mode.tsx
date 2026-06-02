@@ -178,12 +178,12 @@ export default function TypeAnswerMode({
       )}
       <div className="flex flex-col gap-6 px-4 py-8">
         {showNoAudioNotice && (
-        <p className="rounded-sm bg-yellow-soft px-3 py-2 text-center font-manrope text-xs text-ink-2">
+        <p className="rounded-[1rem] border-2 border-ink bg-yellow-soft px-3 py-2 text-center font-manrope text-xs text-ink-2 shadow-hard-sm">
           {labels.noAudio}
         </p>
       )}
 
-      <div className="rounded-lg bg-paper-2 p-6 shadow-hard-sm text-center">
+      <div className="rounded-[1.4rem] border-2 border-ink bg-paper-2 p-6 text-center shadow-hard-sm">
         {card.imageUrl && (
           <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
             <Image
@@ -211,16 +211,16 @@ export default function TypeAnswerMode({
 
       {/* Hint chips */}
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
+        <span className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-mono text-xs text-ink-2 shadow-hard-sm">
           {t(labels.letters, { count: letterCount })}
         </span>
         {showFirstLetter && (
-          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
+          <span className="rounded-full border-2 border-ink bg-yellow-soft px-3 py-1 font-mono text-xs text-orange-text shadow-hard-sm">
             {t(labels.startsWith, { letter: firstLetter })}
           </span>
         )}
         {attempts > 0 && showRomanization && card.romanization && (
-          <span className="rounded-full border-2 border-ink/20 px-3 py-1 font-kalam text-sm text-ink-2">
+          <span className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-kalam text-sm text-ink-2 shadow-hard-sm">
             {card.romanization}
           </span>
         )}
@@ -239,12 +239,12 @@ export default function TypeAnswerMode({
           onKeyDown={(e) => e.key === "Enter" && !isComposing && submit()}
           disabled={!!submitted}
           placeholder={labels.placeholder}
-          className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
+          className={`w-full rounded-[1rem] border-2 px-4 py-3 font-manrope text-base text-ink shadow-hard-sm focus:outline-none disabled:opacity-70 ${
             submitted
               ? submitted.correct
-                ? "border-acid-green bg-acid-green text-on-bright"
-                : "border-electric-pink bg-electric-pink text-on-bright"
-              : "border-ink/20 bg-ink/5 focus:border-orange"
+                ? "border-ink bg-green-soft text-ink"
+                : "border-ink bg-red-soft text-ink"
+              : "border-ink bg-paper focus:border-orange"
           }`}
         />
 
@@ -255,14 +255,14 @@ export default function TypeAnswerMode({
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {answers.map((ans, i) => (
-                  <span key={i} className="rounded-full border-2 border-electric-pink/40 px-3 py-0.5 font-manrope text-sm text-ink">
+                  <span key={i} className="rounded-full border-2 border-ink bg-red-soft px-3 py-0.5 font-manrope text-sm text-ink shadow-hard-sm">
                     {ans}
                   </span>
                 ))}
               </div>
             )}
             {customAttributeEntries.length > 0 && (
-              <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
+              <div className="flex flex-col gap-1.5 rounded-[1rem] border-2 border-ink bg-paper-2 px-3 py-2.5 shadow-hard-sm">
                 {customAttributeEntries.map(([k, v]) => (
                   <div key={k}>
                     <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
@@ -279,7 +279,7 @@ export default function TypeAnswerMode({
             <button
               type="button"
               onClick={submit}
-              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="flex-1 cursor-pointer rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.submit}
             </button>
@@ -287,7 +287,7 @@ export default function TypeAnswerMode({
             <button
               type="button"
               onClick={advance}
-              className="flex-1 cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="flex-1 cursor-pointer rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>

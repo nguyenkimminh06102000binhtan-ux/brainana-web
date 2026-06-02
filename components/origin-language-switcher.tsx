@@ -49,7 +49,7 @@ export default function OriginLanguageSwitcher({
   }
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative" data-origin-language-switcher>
       {isPending && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-paper/80 px-4 backdrop-blur-sm"
@@ -69,6 +69,7 @@ export default function OriginLanguageSwitcher({
 
       <button
         type="button"
+        data-origin-language-button
         onClick={() => setOpen((v) => !v)}
         disabled={isPending}
         className="flex items-center gap-1.5 rounded-full bg-paper px-3 py-2 font-mono text-xs font-[700] text-ink shadow-hard-sm transition hover:bg-blue hover:text-ocean disabled:opacity-60"

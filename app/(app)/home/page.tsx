@@ -26,6 +26,20 @@ type CourseRow = {
   card_count: number;
 };
 
+type HardCard = {
+  itemId: string;
+  courseSlug: string;
+  courseTitle: string;
+  frontText: string;
+  backText: string;
+  score: number;
+  reason: string;
+  incorrectCount: number;
+  easeFactor: number;
+  isDue: boolean;
+  markedHard: boolean;
+};
+
 export default async function HomePage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
@@ -87,7 +101,19 @@ export default async function HomePage() {
   const { data: progressRows } = courseIds.length > 0
     ? await supabase
         .from("item_progress")
-        .select("course_id, mastered, next_review_at")
+        .select(`
+          item_id,
+          course_id,
+          mastered,
+          next_review_at,
+          ease_factor,
+          correct_count,
+          incorrect_count,
+          hard,
+          ignored,
+          items!item_id (front_text, back_text),
+          courses!course_id (title, slug)
+        `)
         .eq("user_id", user.id)
         .in("course_id", courseIds)
     : { data: [] };
@@ -108,6 +134,66 @@ export default async function HomePage() {
       dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
     }
   }
+
+  const hardCards = ((progressRows ?? []) as unknown as Array<{
+    item_id: string;
+    mastered: boolean;
+    next_review_at: string;
+    ease_factor: number | string | null;
+    correct_count: number | null;
+    incorrect_count: number | null;
+    hard: boolean | null;
+    ignored: boolean | null;
+    items: { front_text: string; back_text: string } | { front_text: string; back_text: string }[] | null;
+    courses: { title: string; slug: string } | { title: string; slug: string }[] | null;
+  }>)
+    .map((row): HardCard | null => {
+      const item = Array.isArray(row.items) ? row.items[0] : row.items;
+      const course = Array.isArray(row.courses) ? row.courses[0] : row.courses;
+      if (!item || !course || row.mastered || row.ignored) return null;
+
+      const incorrectCount = row.incorrect_count ?? 0;
+      const correctCount = row.correct_count ?? 0;
+      const easeFactor = Number(row.ease_factor ?? 2.5);
+      const markedHard = Boolean(row.hard);
+      const isDue = row.next_review_at < dueCutoff;
+      const lowEase = easeFactor <= 2.3;
+      const errorHeavy = incorrectCount >= 2 || incorrectCount > correctCount;
+
+      if (!markedHard && !errorHeavy && !lowEase && !(isDue && incorrectCount > 0)) return null;
+
+      const score =
+        (markedHard ? 100 : 0) +
+        incorrectCount * 16 +
+        (isDue ? 24 : 0) +
+        (lowEase ? Math.round((2.5 - easeFactor) * 60) : 0) +
+        (incorrectCount > correctCount ? 12 : 0);
+
+      const reason = markedHard
+        ? "Marked hard"
+        : incorrectCount >= 2
+          ? `${incorrectCount} misses`
+          : lowEase
+            ? `Ease ${easeFactor.toFixed(1)}`
+            : "Due again";
+
+      return {
+        itemId: row.item_id,
+        courseSlug: course.slug,
+        courseTitle: course.title,
+        frontText: item.front_text,
+        backText: item.back_text,
+        score,
+        reason,
+        incorrectCount,
+        easeFactor,
+        isDue,
+        markedHard,
+      };
+    })
+    .filter((card): card is HardCard => card !== null)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
 
   const coursesInProgress = enrolledCourses.filter((c) => studiedCourseIds.has(c.id)).length;
 
@@ -132,7 +218,6 @@ export default async function HomePage() {
     categories: loc.categories,
     levels: levelLabels,
   };
-
   return (
     <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6 sm:py-8">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_260px]">
@@ -141,7 +226,7 @@ export default async function HomePage() {
         <div className="flex flex-col gap-6">
 
           {/* Header */}
-          <section className="flex items-center gap-4 rounded-[1.4rem] bg-paper-2 p-4 shadow-hard-sm sm:bg-transparent sm:p-0 sm:shadow-none">
+          <section className="flex items-center gap-4 rounded-[1.4rem] border-2 border-ink bg-paper-2 p-4 shadow-hard-sm sm:p-5">
             {profile?.avatar_url ? (
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-blue">
                 <Image src={profile.avatar_url} alt={displayName} fill sizes="56px" className="object-cover" />
@@ -162,11 +247,11 @@ export default async function HomePage() {
                   ? t(loc.home.cardsDueProgress, { due: fmt(totalDue), courses: coursesInProgress })
                   : t(loc.home.allCaughtUpProgress, { courses: coursesInProgress })}
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
+              <div className="mt-3 flex flex-wrap gap-2 pb-1">
+                <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
                   <Icon name="flame" className="h-3.5 w-3.5 text-orange-text" /> {t(loc.home.dayStreak, { count: streak })}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-paper px-3 py-1 font-mono text-xs font-[700] shadow-hard-sm sm:bg-paper-2">
                   <Icon name="check" className="h-3.5 w-3.5 text-blue-text" /> {t(loc.home.mastered, { count: fmt(totalMastered) })}
                 </span>
               </div>
@@ -175,7 +260,7 @@ export default async function HomePage() {
 
           {/* Today's Review card */}
           {totalDue > 0 && topDueCourse ? (
-            <section className="rounded-[1.4rem] bg-red-soft p-5 shadow-hard">
+            <section className="rounded-[1.4rem] border-2 border-ink bg-red-soft p-5 shadow-hard">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
               <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
@@ -188,14 +273,14 @@ export default async function HomePage() {
                 </div>
                 <Link
                   href={`/study/${topDueCourse.slug}`}
-                  className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                  className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                 >
                   {loc.home.startReview} <Icon name="arrowRight" className="h-4 w-4" />
                 </Link>
               </div>
             </section>
           ) : (
-            <section className="rounded-[1.4rem] bg-green-soft p-5 shadow-hard">
+            <section className="rounded-[1.4rem] border-2 border-ink bg-green-soft p-5 shadow-hard">
               <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
               <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp}</p>
               <p className="mt-1 font-manrope text-sm text-ink-2">{loc.home.noCardsDue}</p>
@@ -212,11 +297,11 @@ export default async function HomePage() {
             </div>
 
             {enrolledCourses.length === 0 ? (
-              <div className="flex flex-col gap-4 rounded-[1.4rem] bg-paper-2 px-5 py-5 shadow-hard-sm sm:flex-row sm:items-center sm:px-6">
+              <div className="flex flex-col gap-4 rounded-[1.4rem] border-2 border-ink bg-paper-2 px-5 py-5 shadow-hard-sm sm:flex-row sm:items-center sm:px-6">
                 <p className="font-manrope text-sm text-ink-2">{loc.home.noCourses}</p>
                 <Link
                   href="/browse"
-                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] sm:ml-auto"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] sm:ml-auto"
                 >
                   {loc.common.browseCourses} <Icon name="arrowRight" className="h-4 w-4" />
                 </Link>
@@ -256,7 +341,7 @@ export default async function HomePage() {
                   <Link
                     key={course.id}
                     href={`/c/${course.slug}`}
-                    className="flex min-h-20 items-center gap-3 rounded-[1.2rem] bg-paper-2 p-4 shadow-hard-sm transition hover:-translate-y-0.5 hover:shadow-hard"
+                    className="flex min-h-20 items-center gap-3 rounded-[1.2rem] border-2 border-ink bg-paper-2 p-4 shadow-hard-sm transition hover:-translate-y-0.5 hover:bg-yellow-soft hover:shadow-hard"
                   >
                     {course.cover_image_url ? (
                       <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
@@ -280,7 +365,7 @@ export default async function HomePage() {
 
         {/* ── RIGHT SIDEBAR ── */}
         <div className="flex flex-col gap-4">
-          <aside className="rounded-[1.4rem] bg-paper-2 p-5 shadow-hard flex flex-col items-center">
+          <aside className="flex flex-col items-center rounded-[1.4rem] border-2 border-ink bg-paper-2 p-5 shadow-hard">
             <GoalRing
               studied={studiedToday}
               goal={dailyGoal}
@@ -294,15 +379,65 @@ export default async function HomePage() {
             />
           </aside>
 
-          <aside className="rounded-[1.4rem] bg-paper-2 p-5 shadow-hard">
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.quickLinks}</p>
-            <div className="flex flex-col gap-2">
-              <Link href="/browse" className="flex min-h-12 items-center justify-between rounded-[1rem] bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
-                {loc.common.browseCourses} <Icon name="chevronRight" className="h-4 w-4" />
-              </Link>
-              <Link href="/library" className="flex min-h-12 items-center justify-between rounded-[1rem] bg-paper px-4 py-3 font-manrope text-sm font-[700] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright">
-                {loc.home.myLibrary} <Icon name="chevronRight" className="h-4 w-4" />
-              </Link>
+          <aside className="overflow-hidden rounded-[1.4rem] border-2 border-ink bg-yellow-soft shadow-hard">
+            <div className="relative min-h-28 border-b-2 border-ink bg-paper-2 px-5 py-4">
+              <div className="relative z-10">
+                <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Hard cards</p>
+                <h2 className="mt-1 font-fredoka text-2xl font-[700] leading-tight tracking-tight">Words to tame</h2>
+              </div>
+              <Image
+                src="/logos/brainana-mascot-192.png"
+                alt=""
+                width={192}
+                height={154}
+                className="absolute -bottom-5 -right-5 w-28 object-contain drop-shadow-sm"
+              />
+            </div>
+            <div className="p-5">
+              {hardCards.length > 0 ? (
+                <div className="flex flex-col gap-3">
+                  {hardCards.map((card) => (
+                    <Link
+                      key={card.itemId}
+                      href={`/c/${card.courseSlug}`}
+                      className="block rounded-[1rem] border-2 border-ink bg-paper px-4 py-3 shadow-hard-sm transition hover:-translate-y-0.5 hover:bg-red-soft"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="line-clamp-2 font-fredoka text-lg font-[700] leading-tight text-ink">
+                          {card.frontText}
+                        </p>
+                        <span className="shrink-0 rounded-full border-2 border-ink bg-red-soft px-2 py-0.5 font-mono text-[10px] font-[800] uppercase text-orange-text">
+                          {card.reason}
+                        </span>
+                      </div>
+                      <p className="mt-1 line-clamp-2 font-manrope text-xs leading-5 text-ink-2">
+                        {card.backText}
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-3">
+                        <span>{card.courseTitle}</span>
+                        {card.isDue && <span>due</span>}
+                        {card.incorrectCount > 0 && <span>{card.incorrectCount} misses</span>}
+                      </div>
+                    </Link>
+                  ))}
+                  <Link
+                    href={`/study/${hardCards[0].courseSlug}`}
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+                  >
+                    Practice hardest <Icon name="arrowRight" className="h-4 w-4" />
+                  </Link>
+                </div>
+              ) : (
+                <div className="rounded-[1rem] border-2 border-ink bg-paper px-4 py-4 shadow-hard-sm">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-green-soft shadow-hard-sm">
+                    <Icon name="check" className="h-5 w-5 text-blue-text" />
+                  </div>
+                  <p className="font-fredoka text-xl font-[700] leading-tight">No stubborn cards yet</p>
+                  <p className="mt-2 font-manrope text-sm leading-6 text-ink-2">
+                    Cards will show here after they are marked hard, missed often, or start dropping in ease.
+                  </p>
+                </div>
+              )}
             </div>
           </aside>
         </div>

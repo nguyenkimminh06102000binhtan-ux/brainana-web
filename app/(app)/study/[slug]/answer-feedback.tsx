@@ -9,10 +9,10 @@ interface AnswerFeedbackProps {
   acceptedAnswers?: string[];
 }
 
-const CORRECT_COLOR = "#9EFF00";
-const WRONG_COLOR = "#FF0054";
-const CORRECT_TEXT = "#FF0054";
-const WRONG_TEXT = "#9EFF00";
+const CORRECT_COLOR = "#DCEFC8";
+const WRONG_COLOR = "#FFD8D0";
+const CORRECT_TEXT = "#1B1716";
+const WRONG_TEXT = "#1B1716";
 
 export default function AnswerFeedback({ outcome, correctMessages, wrongMessages, acceptedAnswers }: AnswerFeedbackProps) {
   const [showFlash, setShowFlash] = useState(true);
@@ -43,7 +43,7 @@ export default function AnswerFeedback({ outcome, correctMessages, wrongMessages
 
       {/* Feedback bar — inline, sits right below the progress bar */}
       <div
-        className="w-full overflow-hidden px-6 py-4"
+        className="w-full overflow-hidden border-b-2 border-ink px-6 py-4 shadow-hard-sm"
         style={{
           backgroundColor: bg,
           animation: "slide-down 0.18s ease-out forwards",
@@ -57,7 +57,7 @@ export default function AnswerFeedback({ outcome, correctMessages, wrongMessages
             {acceptedAnswers.map((ans, i) => (
               <span
                 key={i}
-                className="rounded-full bg-white/20 px-3 py-1 font-manrope text-sm font-[600]"
+                className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-manrope text-sm font-[700] shadow-hard-sm"
                 style={{ color: fg }}
               >
                 {ans}

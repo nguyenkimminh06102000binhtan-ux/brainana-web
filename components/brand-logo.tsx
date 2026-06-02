@@ -16,8 +16,8 @@ type BrandDomainWordmarkProps = {
 };
 
 const wordmarkOutline = {
-  WebkitTextStroke: "1.25px #19244E",
-  textShadow: "1.5px 1.5px 0 #19244E",
+  WebkitTextStroke: "1.25px var(--brand-outline)",
+  textShadow: "1.5px 1.5px 0 var(--brand-outline)",
 };
 
 export function BrandIcon({ className = "h-10 w-12", priority = false }: BrandIconProps) {
@@ -58,7 +58,7 @@ export function BrandLogo({
 export function BrandNameWordmark({ className = "", label = "Brainana" }: BrandDomainWordmarkProps & { label?: string }) {
   return (
     <span
-      className={`inline-flex items-baseline font-fredoka text-[1.45rem] font-[800] leading-none tracking-normal text-[#F36B4A] ${className}`}
+      className={`inline-flex items-baseline font-fredoka text-[1.45rem] font-[800] leading-none tracking-normal text-orange ${className}`}
       style={wordmarkOutline}
     >
       {label}
@@ -72,8 +72,8 @@ export function BrandDomainWordmark({ className = "" }: BrandDomainWordmarkProps
       className={`inline-flex items-baseline font-fredoka text-[1.45rem] font-[800] leading-none tracking-normal ${className}`}
       aria-label="brainana.app"
     >
-      <span className="text-[#F36B4A]" style={wordmarkOutline}>brainana</span>
-      <span className="ml-0.5 text-[#F5C842]" style={wordmarkOutline}>.app</span>
+      <span className="text-orange" style={wordmarkOutline}>brainana</span>
+      <span className="ml-0.5 text-yellow" style={wordmarkOutline}>.app</span>
     </span>
   );
 }

@@ -204,14 +204,14 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
           type="button"
           onClick={replay}
           aria-label="Play audio"
-          className={`flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-4 border-orange text-3xl shadow-hard-red transition active:scale-95 ${playing ? "bg-orange text-on-bright" : "bg-ink/5 text-orange-text hover:bg-orange/10"}`}
+          className={`flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-4 border-ink text-3xl shadow-hard-red transition active:scale-95 ${playing ? "bg-orange text-on-bright" : "bg-yellow-soft text-orange-text hover:bg-orange/10"}`}
         >
           {playing ? "◼" : "▶"}
         </button>
         <button
           type="button"
           onClick={toggleSpeed}
-          className={`rounded-full border-2 px-3 py-1 font-mono text-xs transition ${isSlowSpeed ? "border-orange bg-orange/10 text-orange-text" : "border-ink/20 text-ink-3 hover:border-ink/40"}`}
+          className={`rounded-full border-2 px-3 py-1 font-mono text-xs shadow-hard-sm transition ${isSlowSpeed ? "border-ink bg-yellow-soft text-orange-text" : "border-ink bg-paper text-ink-3 hover:bg-yellow-soft"}`}
         >
           0.75×
         </button>
@@ -219,16 +219,16 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
 
       {/* Hint chips */}
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-full border-2 border-ink/10 px-3 py-1 font-mono text-xs text-ink-2">
+        <span className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-mono text-xs text-ink-2 shadow-hard-sm">
           {t(labels.letters, { count: card.backText.length })}
         </span>
         {showFirstLetter && (
-          <span className="rounded-full border-2 border-orange/40 px-3 py-1 font-mono text-xs text-orange-text">
+          <span className="rounded-full border-2 border-ink bg-yellow-soft px-3 py-1 font-mono text-xs text-orange-text shadow-hard-sm">
             {t(labels.startsWith, { letter: card.backText[0] ?? "" })}
           </span>
         )}
         {card.romanization && (
-          <span className="rounded-full border-2 border-ink/20 px-3 py-1 font-kalam text-sm text-ink-2">
+          <span className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-kalam text-sm text-ink-2 shadow-hard-sm">
             {card.romanization}
           </span>
         )}
@@ -246,10 +246,10 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
           onKeyDown={(e) => e.key === "Enter" && !isComposing && submit()}
           disabled={!!submitted}
           placeholder={labels.placeholder}
-          className={`w-full rounded-sm border-2 px-4 py-3 font-manrope text-base text-ink focus:outline-none disabled:opacity-70 ${
+          className={`w-full rounded-[1rem] border-2 px-4 py-3 font-manrope text-base text-ink shadow-hard-sm focus:outline-none disabled:opacity-70 ${
             submitted
-              ? submitted.correct ? "border-acid-green bg-acid-green text-on-bright" : "border-electric-pink bg-electric-pink text-on-bright"
-              : "border-ink/20 bg-ink/5 focus:border-orange"
+              ? submitted.correct ? "border-ink bg-green-soft text-ink" : "border-ink bg-red-soft text-ink"
+              : "border-ink bg-paper focus:border-orange"
           }`}
         />
         {submitted && (
@@ -259,14 +259,14 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {answers.map((ans, i) => (
-                  <span key={i} className="rounded-full border-2 border-electric-pink/40 px-3 py-0.5 font-manrope text-sm text-ink">
+                  <span key={i} className="rounded-full border-2 border-ink bg-red-soft px-3 py-0.5 font-manrope text-sm text-ink shadow-hard-sm">
                     {ans}
                   </span>
                 ))}
               </div>
             )}
             {customAttributeEntries.length > 0 && (
-              <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
+              <div className="flex flex-col gap-1.5 rounded-[1rem] border-2 border-ink bg-paper-2 px-3 py-2.5 shadow-hard-sm">
                 {customAttributeEntries.map(([k, v]) => (
                   <div key={k}>
                     <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
@@ -282,7 +282,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
             <button
               type="button"
               onClick={submit}
-              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="w-full cursor-pointer rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.submit}
             </button>
@@ -290,7 +290,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
             <button
               type="button"
               onClick={advance}
-              className="w-full cursor-pointer rounded-full bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              className="w-full cursor-pointer rounded-full border-2 border-ink bg-orange px-4 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
             >
               {labels.continueBtn}
             </button>
