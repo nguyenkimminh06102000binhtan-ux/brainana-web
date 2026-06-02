@@ -71,6 +71,15 @@ export default async function AdminUserDetail({
           <div className="rounded-lg border border-ink/10 bg-paper-2 p-5">
             <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">Override plan</p>
             <p className="mb-3 font-manrope text-xs text-ink-3">Sets plan + resets quota to plan defaults.</p>
+
+            {sub?.lemon_subscription_id && (
+              <div className="mb-3 rounded-md border border-red-300 bg-red-50 px-3 py-2">
+                <p className="font-manrope text-xs font-[700] text-red-600">⚠ Active Lemon Squeezy subscription</p>
+                <p className="mt-0.5 font-manrope text-xs text-red-500">
+                  This user has an active LS subscription ({sub.lemon_subscription_id}). Any override here will be overwritten by the next LS webhook. Use <strong>Grant quota</strong> below instead, or cancel the LS subscription first.
+                </p>
+              </div>
+            )}
             <form action={adminSetPlan} className="flex flex-col gap-2">
               <input type="hidden" name="user_id" value={id} />
 
