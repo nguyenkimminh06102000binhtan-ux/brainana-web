@@ -16,13 +16,17 @@ interface MCModeProps {
   continueLabel: string;
   showRomanization?: boolean;
   showCustomAttributes?: boolean;
+  hiddenCustomAttributeKeys?: string[];
 }
 
-export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization, showCustomAttributes }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization, showCustomAttributes, hiddenCustomAttributeKeys = [] }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
   const [pendingAnswer, setPendingAnswer] = useState<CardAnswer | null>(null);
+  const customAttributeEntries = showCustomAttributes && card.customAttributes
+    ? Object.entries(card.customAttributes).filter(([key, value]) => value && !hiddenCustomAttributeKeys.includes(key))
+    : [];
 
   const options = useMemo(() => {
     const seen = new Set<string>();
@@ -155,9 +159,9 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
         })}
       </div>
 
-      {selected !== null && showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+      {selected !== null && customAttributeEntries.length > 0 && (
         <div className="mx-4 flex flex-col gap-1.5 rounded-md bg-paper-2 px-4 py-3">
-          {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+          {customAttributeEntries.map(([k, v]) => (
             <div key={k}>
               <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
               <p className="font-manrope text-sm text-ink-2">{v}</p>

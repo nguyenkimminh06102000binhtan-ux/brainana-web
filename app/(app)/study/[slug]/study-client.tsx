@@ -60,6 +60,10 @@ type StudyLabels = {
   speedMatchBonus: string;
   speedMatchNo: string;
   speedMatchYes: string;
+  dontKnow: string;
+  markHard: string;
+  unmarkHard: string;
+  ignoreWord: string;
   studyWith: string;
   flashcard: string;
   multipleChoice: string;
@@ -101,6 +105,7 @@ interface StudyClientProps {
   hasAudio: boolean;
   showRomanization: boolean;
   hasCustomAttributes: boolean;
+  customAttributeKeys: string[];
   labels: StudyLabels;
   memsLabels: MemsLabels;
 }
@@ -118,6 +123,7 @@ export default function StudyClient({
   hasAudio,
   showRomanization,
   hasCustomAttributes,
+  customAttributeKeys,
   labels,
   memsLabels,
 }: StudyClientProps) {
@@ -130,9 +136,10 @@ export default function StudyClient({
   const [count, setCount] = useState(sessionLimit > 0 ? Math.min(10, sessionLimit) : 0);
   const [selectedTypes, setSelectedTypes] = useState<QType[]>(preferredTypes);
   const [localShowRomanization, setLocalShowRomanization] = useState(showRomanization);
-  const [localShowCustomAttributes, setLocalShowCustomAttributes] = useState(true);
+  const [hiddenCustomAttributeKeys, setHiddenCustomAttributeKeys] = useState<Set<string>>(() => new Set());
   const [isSaving, startSaveTransition] = useTransition();
   const [saveError, setSaveError] = useState<string | null>(null);
+  const visibleCustomAttributeCount = customAttributeKeys.length - hiddenCustomAttributeKeys.size;
 
   function toggleType(type: QType) {
     const next = selectedTypes.includes(type)
@@ -155,8 +162,14 @@ export default function StudyClient({
 
   async function handleStart() {
     setStage("loading");
+    setSaveError(null);
     try {
-      const cards = await fetchStudyCards(courseId, count, selectedTypes, mode);
+      const cards = await fetchStudyCards(courseId, count, selectedTypes, isPracticeMode ? undefined : mode);
+      if (cards.length === 0) {
+        setSaveError(available === 0 ? labels.allCaughtUpNoDue : labels.preferencesSaveError);
+        setStage("setup");
+        return;
+      }
       setSessionCards(cards);
       setStage("session");
     } catch {
@@ -192,7 +205,8 @@ export default function StudyClient({
         courseSlug={courseSlug}
         cards={sessionCards}
         showRomanization={localShowRomanization}
-        showCustomAttributes={localShowCustomAttributes}
+        showCustomAttributes={visibleCustomAttributeCount > 0}
+        hiddenCustomAttributeKeys={Array.from(hiddenCustomAttributeKeys)}
         audioOnlyMode={selectedTypes.length === 1 && selectedTypes[0] === "audio_type"}
         memsLabels={memsLabels}
         onComplete={handleSessionComplete}
@@ -226,6 +240,10 @@ export default function StudyClient({
           speedMatchNo: labels.speedMatchNo,
           speedMatchYes: labels.speedMatchYes,
           xpEarned: labels.xpEarned,
+          dontKnow: labels.dontKnow,
+          markHard: labels.markHard,
+          unmarkHard: labels.unmarkHard,
+          ignoreWord: labels.ignoreWord,
           feedbackCorrect: labels.feedbackCorrect,
           feedbackWrong: labels.feedbackWrong,
         }}
@@ -268,6 +286,15 @@ export default function StudyClient({
     if (!Number.isNaN(val)) {
       setCount(Math.min(sessionLimit, Math.max(1, val)));
     }
+  }
+
+  function toggleCustomAttribute(key: string) {
+    setHiddenCustomAttributeKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
   }
 
   return (
@@ -390,20 +417,33 @@ export default function StudyClient({
           </button>
         </div>
 
-        {/* Custom attributes toggle */}
-        {hasCustomAttributes && (
-          <div className="mb-6 flex items-center justify-between">
-            <span className="font-manrope text-sm text-ink-2">{labels.showCustomAttributes}</span>
-            <button
-              type="button"
-              onClick={() => setLocalShowCustomAttributes((v) => !v)}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${localShowCustomAttributes ? "bg-orange" : "bg-ink/20"}`}
-              role="switch"
-              aria-checked={localShowCustomAttributes}
-            >
-              <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-hard-sm transition-transform ${localShowCustomAttributes ? "translate-x-5" : "translate-x-0"}`} />
-            </button>
-          </div>
+        {/* Custom attributes selector */}
+        {hasCustomAttributes && customAttributeKeys.length > 0 && (
+          <details className="group mb-6">
+            <summary className="flex cursor-pointer list-none items-center justify-between rounded-md border-2 border-ink/10 bg-paper px-3 py-2 font-manrope text-sm text-ink-2 transition hover:border-ink/20 [&::-webkit-details-marker]:hidden">
+              <span>{labels.showCustomAttributes}</span>
+              <span className="flex items-center gap-2 font-mono text-xs text-ink-3">
+                {visibleCustomAttributeCount}/{customAttributeKeys.length}
+                <span className="transition-transform group-open:rotate-180" aria-hidden="true">⌄</span>
+              </span>
+            </summary>
+            <div className="mt-2 flex max-h-36 flex-col gap-2 overflow-y-auto rounded-md bg-paper px-3 py-2 shadow-hard-sm">
+              {customAttributeKeys.map((key) => {
+                const checked = !hiddenCustomAttributeKeys.has(key);
+                return (
+                  <label key={key} className="flex cursor-pointer items-center gap-2 font-manrope text-sm text-ink-2">
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => toggleCustomAttribute(key)}
+                      className="h-4 w-4 accent-orange"
+                    />
+                    <span className="truncate">{key}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </details>
         )}
 
         {/* Buttons */}

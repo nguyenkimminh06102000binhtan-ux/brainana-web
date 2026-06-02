@@ -485,7 +485,11 @@
       "பயிற்சியைத் தொடருங்கள்!"
     ],
     "showRomanization": "ரோமானியமயமாக்கலைக் காட்டு",
-    "showCustomAttributes": "Show custom info"
+    "showCustomAttributes": "Show custom info",
+    "dontKnow": "I don't know",
+    "markHard": "Mark as hard",
+    "unmarkHard": "Unmark hard",
+    "ignoreWord": "Ignore word"
   },
   "discussion": {
     "title": "கலந்துரையாடல்",

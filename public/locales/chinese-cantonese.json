@@ -485,7 +485,11 @@
       "繼續練習！"
     ],
     "showRomanization": "顯示羅馬化",
-    "showCustomAttributes": "Show custom info"
+    "showCustomAttributes": "Show custom info",
+    "dontKnow": "I don't know",
+    "markHard": "Mark as hard",
+    "unmarkHard": "Unmark hard",
+    "ignoreWord": "Ignore word"
   },
   "discussion": {
     "title": "討論",

@@ -29,9 +29,10 @@ interface AudioTypeModeProps {
   labels: AudioTypeModeLabels;
   showFallbackNotice: boolean;
   showCustomAttributes?: boolean;
+  hiddenCustomAttributeKeys?: string[];
 }
 
-export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFallbackNotice, showCustomAttributes }: AudioTypeModeProps) {
+export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFallbackNotice, showCustomAttributes, hiddenCustomAttributeKeys = [] }: AudioTypeModeProps) {
   if (!card.frontAudioUrl) {
     return (
       <TypeAnswerMode
@@ -40,15 +41,16 @@ export default function AudioTypeMode({ card, onAnswer, onReveal, labels, showFa
         onReveal={onReveal}
         showNoAudioNotice={showFallbackNotice}
         showCustomAttributes={showCustomAttributes}
+        hiddenCustomAttributeKeys={hiddenCustomAttributeKeys}
         labels={labels}
       />
     );
   }
 
-  return <AudioTypePlayer card={card} onAnswer={onAnswer} onReveal={onReveal} labels={labels} showCustomAttributes={showCustomAttributes} />;
+  return <AudioTypePlayer card={card} onAnswer={onAnswer} onReveal={onReveal} labels={labels} showCustomAttributes={showCustomAttributes} hiddenCustomAttributeKeys={hiddenCustomAttributeKeys} />;
 }
 
-function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttributes }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; onReveal?: () => void; labels: AudioTypeModeLabels; showCustomAttributes?: boolean }) {
+function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttributes, hiddenCustomAttributeKeys }: { card: StudyCard; onAnswer: (a: CardAnswer) => void; onReveal?: () => void; labels: AudioTypeModeLabels; showCustomAttributes?: boolean; hiddenCustomAttributeKeys: string[] }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const startedAt = useRef(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +63,9 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
   const [playing, setPlaying] = useState(false);
 
   const answers = [card.backText, ...card.acceptedAnswers];
+  const customAttributeEntries = showCustomAttributes && card.customAttributes
+    ? Object.entries(card.customAttributes).filter(([key, value]) => value && !hiddenCustomAttributeKeys.includes(key))
+    : [];
 
   useEffect(() => {
     const audio = new Audio(card.frontAudioUrl!);
@@ -261,9 +266,9 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
                 ))}
               </div>
             )}
-            {showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+            {customAttributeEntries.length > 0 && (
               <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
-                {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+                {customAttributeEntries.map(([k, v]) => (
                   <div key={k}>
                     <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
                     <p className="font-manrope text-sm text-ink-2">{v}</p>

@@ -485,7 +485,11 @@
       "અભ્યાસ ચાલુ રાખો!"
     ],
     "showRomanization": "રોમનાઇઝેશન બતાવો",
-    "showCustomAttributes": "Show custom info"
+    "showCustomAttributes": "Show custom info",
+    "dontKnow": "I don't know",
+    "markHard": "Mark as hard",
+    "unmarkHard": "Unmark hard",
+    "ignoreWord": "Ignore word"
   },
   "discussion": {
     "title": "ચર્ચા",

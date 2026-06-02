@@ -17,9 +17,11 @@ export interface StudyCard {
   progress: {
     easeFactor: number;
     intervalDays: number;
-    repetitions: number;
-    correctCount: number;
-    incorrectCount: number;
+      repetitions: number;
+      correctCount: number;
+      incorrectCount: number;
+      hard: boolean;
+      ignored: boolean;
   } | null;
 }
 
@@ -33,6 +35,8 @@ export interface CardAnswer {
   newInterval: number;
   newRepetitions: number;
   newlyMastered: boolean;
+  hard?: boolean;
+  ignored?: boolean;
 }
 
 export interface SessionStats {
@@ -42,4 +46,3 @@ export interface SessionStats {
   masteredCount: number;
   updatedStreak: number;
 }
-

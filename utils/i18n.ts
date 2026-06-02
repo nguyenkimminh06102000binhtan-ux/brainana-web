@@ -405,6 +405,10 @@ export type Locale = {
     speedMatchYes: string;
     showRomanization: string;
     showCustomAttributes: string;
+    dontKnow: string;
+    markHard: string;
+    unmarkHard: string;
+    ignoreWord: string;
     savingPreferences: string;
     preferencesSaveError: string;
     feedbackCorrect: string[];

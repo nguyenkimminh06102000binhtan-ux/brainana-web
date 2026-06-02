@@ -96,23 +96,25 @@ export async function fetchStudyCards(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let overdue: any[] = [];
   if (mode !== "new") {
-    const { data: overdueRows } = await supabase
+    const { data: overdueRows, error: overdueError } = await supabase
       .from("item_progress")
       .select(
-        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, hard, ignored, items!item_progress_item_id_fkey!inner(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
       .eq("ignored", false)
       .lt("next_review_at", dueCutoff)
+      .order("hard", { ascending: false })
       .order("next_review_at", { ascending: true })
       .limit(count);
+    if (overdueError) throw new Error(overdueError.message);
     overdue = overdueRows ?? [];
   }
 
   // Fetch new items if we need more (skip in "review" mode)
   const needed = mode === "review" ? 0 : count - overdue.length;
-  let newItems: { id: string; front_text: string; back_text: string; image_url: string | null; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null }[] = [];
+  let newItems: { id: string; front_text: string; back_text: string; image_url: string | null; front_audio_url: string | null; back_audio_url: string | null; romanization: string | null; accepted_answers: string[] | null; distractors: string[] | null; custom_attributes?: Record<string, string> | null }[] = [];
 
   if (needed > 0) {
     const { data: allProgressIds } = await supabase
@@ -150,17 +152,19 @@ export async function fetchStudyCards(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let practiceRows: any[] = [];
   if (overdue.length === 0 && newItems.length === 0 && count > 0 && !mode) {
-    const { data } = await supabase
+    const { data, error: practiceError } = await supabase
       .from("item_progress")
       .select(
-        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, items!item_progress_item_id_fkey(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
+        "item_id, ease_factor, interval_days, repetitions, last_question_type, correct_count, incorrect_count, hard, ignored, items!item_progress_item_id_fkey!inner(id, front_text, back_text, image_url, front_audio_url, back_audio_url, romanization, accepted_answers, distractors, custom_attributes)",
       )
       .eq("user_id", user.id)
       .eq("course_id", courseId)
       .eq("ignored", false)
+      .order("hard", { ascending: false })
       .order("last_reviewed_at", { ascending: true, nullsFirst: false })
       .limit(count);
 
+    if (practiceError) throw new Error(practiceError.message);
     practiceRows = data ?? [];
   }
 
@@ -197,6 +201,8 @@ export async function fetchStudyCards(
         repetitions: row.repetitions,
         correctCount: row.correct_count,
         incorrectCount: row.incorrect_count,
+        hard: row.hard ?? false,
+        ignored: row.ignored ?? false,
       },
     });
   }
@@ -224,6 +230,8 @@ export async function fetchStudyCards(
         repetitions: row.repetitions,
         correctCount: row.correct_count,
         incorrectCount: row.incorrect_count,
+        hard: row.hard ?? false,
+        ignored: row.ignored ?? false,
       },
     });
   }

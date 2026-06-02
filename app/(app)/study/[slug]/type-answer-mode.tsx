@@ -16,6 +16,7 @@ interface TypeAnswerModeProps {
   showNoAudioNotice?: boolean;
   showRomanization?: boolean;
   showCustomAttributes?: boolean;
+  hiddenCustomAttributeKeys?: string[];
   labels: {
     noAudio: string;
     letters: string;
@@ -62,6 +63,7 @@ export default function TypeAnswerMode({
   showNoAudioNotice,
   showRomanization,
   showCustomAttributes,
+  hiddenCustomAttributeKeys = [],
   labels,
 }: TypeAnswerModeProps) {
   const startedAt = useRef(Date.now());
@@ -85,6 +87,9 @@ export default function TypeAnswerMode({
   const [isComposing, setIsComposing] = useState(false);
 
   const answers = [card.backText, ...card.acceptedAnswers];
+  const customAttributeEntries = showCustomAttributes && card.customAttributes
+    ? Object.entries(card.customAttributes).filter(([key, value]) => value && !hiddenCustomAttributeKeys.includes(key))
+    : [];
   const letterCount = card.backText.length;
   const firstLetter = card.backText[0] ?? "";
 
@@ -257,9 +262,9 @@ export default function TypeAnswerMode({
                 ))}
               </div>
             )}
-            {showCustomAttributes && card.customAttributes && Object.entries(card.customAttributes).filter(([, v]) => v).length > 0 && (
+            {customAttributeEntries.length > 0 && (
               <div className="flex flex-col gap-1.5 rounded-md bg-paper-2 px-3 py-2.5">
-                {Object.entries(card.customAttributes).filter(([, v]) => v).map(([k, v]) => (
+                {customAttributeEntries.map(([k, v]) => (
                   <div key={k}>
                     <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3">{k}</span>
                     <p className="font-manrope text-sm text-ink-2">{v}</p>

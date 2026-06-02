@@ -93,6 +93,8 @@ create table item_progress (
   last_reviewed_at timestamptz,
   correct_count integer not null default 0,
   incorrect_count integer not null default 0,
+  ignored boolean not null default false,
+  hard boolean not null default false,
   unique(user_id, item_id)
 );
 
@@ -347,7 +349,9 @@ where front is null;
 -- =====================
 alter table item_progress
   add column if not exists mastered boolean not null default false,
-  add column if not exists streak integer not null default 0;
+  add column if not exists streak integer not null default 0,
+  add column if not exists ignored boolean not null default false,
+  add column if not exists hard boolean not null default false;
 
 -- =====================
 -- STEP 5: CREATE MEMS TABLE

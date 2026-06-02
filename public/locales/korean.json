@@ -485,7 +485,11 @@
       "계속 연습해요!"
     ],
     "showRomanization": "로마자 표시",
-    "showCustomAttributes": "Show custom info"
+    "showCustomAttributes": "Show custom info",
+    "dontKnow": "I don't know",
+    "markHard": "Mark as hard",
+    "unmarkHard": "Unmark hard",
+    "ignoreWord": "Ignore word"
   },
   "discussion": {
     "title": "논의",

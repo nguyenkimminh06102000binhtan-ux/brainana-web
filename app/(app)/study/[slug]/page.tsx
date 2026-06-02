@@ -57,24 +57,34 @@ export default async function StudyPage({
       .eq("course_id", course.id),
     supabase
       .from("item_progress")
-      .select("*", { count: "exact", head: true })
+      .select("item_id,items!item_progress_item_id_fkey!inner(id)", { count: "exact", head: true })
       .eq("user_id", user.id)
       .eq("course_id", course.id)
+      .eq("ignored", false)
       .lt("next_review_at", dueCutoff),
     supabase
       .from("item_progress")
-      .select("*", { count: "exact", head: true })
+      .select("item_id,items!item_progress_item_id_fkey!inner(id)", { count: "exact", head: true })
       .eq("user_id", user.id)
       .eq("course_id", course.id),
   ]);
 
-  const { count: customAttrCount } = await supabase
+  const { data: customAttrRows } = await supabase
     .from("items")
-    .select("id", { count: "exact", head: true })
+    .select("custom_attributes")
     .eq("course_id", course.id)
     .not("custom_attributes", "is", null);
 
   const loc = getLocale((profile?.active_origin_language as string | null) ?? null);
+  const customAttributeKeys = Array.from(
+    new Set(
+      (customAttrRows ?? []).flatMap((row) =>
+        Object.entries((row.custom_attributes ?? {}) as Record<string, unknown>)
+          .filter(([, value]) => value !== null && value !== undefined && String(value).trim().length > 0)
+          .map(([key]) => key),
+      ),
+    ),
+  ).sort((a, b) => a.localeCompare(b));
 
   const total = totalCount ?? 0;
   const allDue = progressDueCount ?? 0;
@@ -100,7 +110,8 @@ export default async function StudyPage({
       preferredTypes={preferredTypes}
       hasAudio={hasAudio}
       showRomanization={profile?.show_romanization ?? true}
-      hasCustomAttributes={(customAttrCount ?? 0) > 0}
+      hasCustomAttributes={customAttributeKeys.length > 0}
+      customAttributeKeys={customAttributeKeys}
       memsLabels={loc.mems}
       labels={{
         ...loc.study,

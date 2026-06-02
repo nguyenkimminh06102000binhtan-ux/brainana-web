@@ -485,7 +485,11 @@
       "បន្តហាត់ប្រាណ!"
     ],
     "showRomanization": "បង្ហាញមនោសញ្ចេតនា",
-    "showCustomAttributes": "Show custom info"
+    "showCustomAttributes": "Show custom info",
+    "dontKnow": "I don't know",
+    "markHard": "Mark as hard",
+    "unmarkHard": "Unmark hard",
+    "ignoreWord": "Ignore word"
   },
   "discussion": {
     "title": "ការពិភាក្សា",
