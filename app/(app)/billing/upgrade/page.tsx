@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import { startCheckout } from "@/app/actions/billing";
 
 const PLANS = [
   {
@@ -89,7 +90,7 @@ export default async function UpgradePage() {
           Choose your <span className="text-orange-text">plan</span>
         </h1>
         <p className="mt-2 font-manrope text-sm text-ink-3">
-          Upgrade anytime. Payments coming soon via Lemon Squeezy.
+          Upgrade anytime. Cancel anytime.
         </p>
       </div>
 
@@ -174,21 +175,16 @@ export default async function UpgradePage() {
                     Downgrade
                   </div>
                 ) : (
-                  <div className="group relative">
+                  <form action={startCheckout.bind(null, plan.key as "plus" | "pro")}>
                     <button
-                      type="button"
-                      disabled
-                      className={`w-full rounded-full py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition disabled:cursor-not-allowed disabled:opacity-70 ${
-                        isRecommended ? "bg-blue text-ocean shadow-none" : "bg-orange"
+                      type="submit"
+                      className={`w-full rounded-full py-2.5 font-manrope text-sm font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px] ${
+                        isRecommended ? "bg-blue text-ocean shadow-none" : "bg-orange shadow-hard-red"
                       }`}
                     >
                       Upgrade to {plan.label}
                     </button>
-                    <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-44 -translate-x-1/2 rounded-lg bg-ink px-3 py-2 text-center font-manrope text-xs text-paper shadow-lg group-hover:block">
-                      Payments coming soon
-                      <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-ink" />
-                    </div>
-                  </div>
+                  </form>
                 )}
               </div>
             </div>

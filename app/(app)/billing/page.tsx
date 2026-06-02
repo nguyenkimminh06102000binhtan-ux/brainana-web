@@ -6,6 +6,9 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
+import { startTopUpCheckout } from "@/app/actions/billing";
+import { TOPUP_PACKS, getSubscriptionUrls } from "@/utils/lemonsqueezy";
+import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 
 const PLAN_ALLOWANCES = {
   free:  { chars: 0,        sessions: 0  },
@@ -55,6 +58,10 @@ export default async function BillingPage() {
   const charsBalance   = sub?.chars_balance ?? 0;
   const sessionsBalance = sub?.tutor_sessions_balance ?? 0;
 
+  const portalUrls = plan !== "free" && sub?.lemon_subscription_id
+    ? await getSubscriptionUrls(sub.lemon_subscription_id)
+    : null;
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
 
@@ -92,6 +99,30 @@ export default async function BillingPage() {
             )}
           </div>
         </div>
+
+        {/* Subscription management */}
+        {portalUrls && (
+          <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
+            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-3">Manage subscription</p>
+            <div className="flex flex-col gap-3">
+              {portalUrls.updatePaymentMethod && (
+                <a
+                  href={portalUrls.updatePaymentMethod}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-lg border border-ink/10 bg-paper px-4 py-3 transition hover:border-ink/30 hover:bg-paper-3"
+                >
+                  <div>
+                    <p className="font-manrope text-sm font-[700] text-ink">Payment method</p>
+                    <p className="font-manrope text-xs text-ink-3">Update or change your card</p>
+                  </div>
+                  <span className="font-manrope text-xs text-ink-3">→</span>
+                </a>
+              )}
+              <CancelSubscriptionButton expiresAt={sub?.plan_expires_at ?? null} />
+            </div>
+          </div>
+        )}
 
         {/* Usage */}
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
@@ -159,28 +190,36 @@ export default async function BillingPage() {
             </div>
           ) : (
             <>
-              <p className="mb-4 font-manrope text-xs text-ink-3">{b.topUpDescription}</p>
+              {/* Expiry warning */}
+              <div className="mb-5 rounded-lg border border-orange/30 bg-orange/5 px-4 py-3">
+                <p className="font-manrope text-sm font-[700] text-ink">
+                  ⚠️ Top-up credits expire at your next renewal
+                </p>
+                <p className="mt-1 font-manrope text-xs leading-relaxed text-ink-2">
+                  Credits are added to your current balance and expire at the end of your billing period.
+                  They do <span className="font-[700]">not</span> carry over to the next month.
+                  {sub?.plan_expires_at && (
+                    <> Your current period ends on <span className="font-[700]">{new Date(sub.plan_expires_at as string).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>.</>
+                  )}
+                </p>
+              </div>
+
               <div className="grid grid-cols-2 gap-3">
-                {[
-                  { label: "50K chars",    price: "$0.99" },
-                  { label: "200K chars",   price: "$2.99" },
-                  { label: "1M chars",     price: "$9.99" },
-                  { label: "10 sessions",  price: "$0.99" },
-                  { label: "30 sessions",  price: "$1.99" },
-                  { label: "100 sessions", price: "$4.99" },
-                ].map((pack) => (
-                  <button
-                    key={pack.label}
-                    type="button"
-                    disabled
-                    className="flex items-center justify-between rounded-lg border border-ink/10 bg-paper px-4 py-3 opacity-60 cursor-not-allowed"
-                  >
-                    <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
-                    <span className="font-manrope text-sm text-ink-3">{pack.price}</span>
-                  </button>
+                {Object.entries(TOPUP_PACKS).map(([key, pack]) => (
+                  <form key={key} action={startTopUpCheckout.bind(null, key)}>
+                    <button
+                      type="submit"
+                      className="flex w-full flex-col rounded-lg border border-ink/10 bg-paper px-4 py-3 text-left transition hover:border-orange hover:bg-orange/5 active:translate-y-[1px]"
+                    >
+                      <div className="flex w-full items-center justify-between">
+                        <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
+                        <span className="font-manrope text-sm font-[700] text-ink">{pack.price}</span>
+                      </div>
+                      <span className="mt-1 font-manrope text-[10px] text-ink-3">Expires at renewal</span>
+                    </button>
+                  </form>
                 ))}
               </div>
-              <p className="mt-3 font-manrope text-xs text-ink-3 text-center">{b.paymentsComing}</p>
             </>
           )}
         </div>
