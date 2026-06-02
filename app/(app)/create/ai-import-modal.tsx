@@ -25,8 +25,6 @@ const TOTAL_MAX  = 100 * 1024 * 1024;
 
 const IMAGE_EXTS   = new Set(["jpg", "jpeg", "png", "gif", "webp"]);
 const DOC_EXTS     = new Set(["pdf", "docx", "pptx", "epub"]);
-const TEXT_EXTS    = new Set(["txt", "md", "csv", "json"]);
-const SHEET_EXTS   = new Set(["xlsx"]);
 const BLOCKED_EXTS = new Set([
   "exe", "dmg", "pkg", "zip", "rar", "tar",
   "mp3", "mp4", "mov", "psd", "ai", "fig",
@@ -104,11 +102,16 @@ export default function AiImportModal({
   const [fileError, setFileError]               = useState<string | null>(null);
   const [status, setStatus]                     = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg]                 = useState<string | null>(null);
-  const [processedCharCount, setProcessedCharCount] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds]     = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dialogRef    = useRef<HTMLDivElement>(null);
+
+  // Derived early so the useEffect below can reference it without a stale closure.
+  // isBusyRef is updated every render so the keydown handler always sees current value.
+  const isBusy = status === "loading" || files.some((pf) => pf.status === "processing" || pf.status === "pending");
+  const isBusyRef = useRef(isBusy);
+  isBusyRef.current = isBusy;
 
   // Estimate generation time based on card count and style
   const tokensPerCard: Record<string, number> = {
@@ -128,7 +131,7 @@ export default function AiImportModal({
     els[0]?.focus();
 
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") { if (!isBusy) onClose(); return; }
+      if (e.key === "Escape") { if (!isBusyRef.current) onClose(); return; }
       if (e.key !== "Tab" || els.length === 0) return;
       const first = els[0]!;
       const last  = els[els.length - 1]!;
@@ -276,13 +279,10 @@ export default function AiImportModal({
       return;
     }
 
-    setProcessedCharCount(result.charCount);
     if (result.remainingChars !== undefined) showQuotaToast("chars", result.remainingChars);
     onImport(result.cards);
     onClose();
   }
-
-  const isBusy = status === "loading" || files.some((pf) => pf.status === "processing" || pf.status === "pending");
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (

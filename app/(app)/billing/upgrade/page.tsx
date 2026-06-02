@@ -198,9 +198,9 @@ export default async function UpgradePage() {
       </p>
       <p className="mt-3 text-center font-manrope text-xs text-ink-3">
         By subscribing you agree to our{" "}
-        <a href="/terms" className="underline hover:text-ink">Terms of Service</a>,{" "}
-        <a href="/privacy" className="underline hover:text-ink">Privacy Policy</a>, and{" "}
-        <a href="/refund" className="underline hover:text-ink">Refund Policy</a>.
+        <Link href="/terms" className="underline hover:text-ink">Terms of Service</Link>,{" "}
+        <Link href="/privacy" className="underline hover:text-ink">Privacy Policy</Link>, and{" "}
+        <Link href="/refund" className="underline hover:text-ink">Refund Policy</Link>.
         Payments processed by Lemon Squeezy.
       </p>
     </div>

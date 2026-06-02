@@ -51,8 +51,9 @@ export async function POST(req: NextRequest) {
         await supabase
           .from("user_subscriptions")
           .update({
-            lemon_customer_id:     String(lemonCustomerId ?? ""),
-            lemon_subscription_id: String(lemonSubscriptionId ?? ""),
+            lemon_customer_id:          String(lemonCustomerId ?? ""),
+            lemon_subscription_id:      String(lemonSubscriptionId ?? ""),
+            lemon_subscription_status:  status,
             plan_expires_at: endsAt ?? renewsAt ?? null,
             updated_at: new Date().toISOString(),
           })
@@ -68,8 +69,9 @@ export async function POST(req: NextRequest) {
         .from("user_subscriptions")
         .update({
           plan: effectivePlan,
-          lemon_customer_id:     String(lemonCustomerId ?? ""),
-          lemon_subscription_id: String(lemonSubscriptionId ?? ""),
+          lemon_customer_id:          String(lemonCustomerId ?? ""),
+          lemon_subscription_id:      String(lemonSubscriptionId ?? ""),
+          lemon_subscription_status:  status ?? "active",
           chars_balance:          effectiveQuota.chars,
           tutor_sessions_balance: effectiveQuota.sessions,
           plan_expires_at: endsAt ?? renewsAt ?? null,
@@ -97,11 +99,12 @@ export async function POST(req: NextRequest) {
     }
 
     case "subscription_cancelled": {
-      // Subscription will expire at end of period — mark expiry but keep current quota until then
+      // Subscription will expire at end of period — keep quota, just mark status
       const endsAt = attrs?.ends_at as string | undefined;
       await supabase
         .from("user_subscriptions")
         .update({
+          lemon_subscription_status: "cancelled",
           plan_expires_at: endsAt ?? null,
           updated_at: new Date().toISOString(),
         })
@@ -114,7 +117,8 @@ export async function POST(req: NextRequest) {
       await supabase
         .from("user_subscriptions")
         .update({
-          plan:                   "free",
+          plan:                      "free",
+          lemon_subscription_status: "expired",
           chars_balance:          0,
           tutor_sessions_balance: 0,
           plan_expires_at:        null,
@@ -125,7 +129,7 @@ export async function POST(req: NextRequest) {
     }
 
     case "subscription_payment_success": {
-      // Monthly renewal — refresh quota to full plan allowance
+      // Monthly renewal — refresh quota to full plan allowance and reset status
       const lemonSubscriptionId = attrs?.subscription_id;
       const { data: sub } = await supabase
         .from("user_subscriptions")
@@ -140,6 +144,7 @@ export async function POST(req: NextRequest) {
       await supabase
         .from("user_subscriptions")
         .update({
+          lemon_subscription_status: "active",
           chars_balance:          quota.chars,
           tutor_sessions_balance: quota.sessions,
           plan_expires_at:        renewsAt ?? null,
@@ -147,9 +152,22 @@ export async function POST(req: NextRequest) {
         })
         .eq("user_id", userId);
 
+      // Idempotency: skip if we already granted quota for this renewal period.
+      if (renewsAt) {
+        const { data: existingGrant } = await supabase
+          .from("quota_transactions")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("reason", "monthly_grant")
+          .contains("metadata", { period: renewsAt })
+          .limit(1)
+          .maybeSingle();
+        if (existingGrant) break;
+      }
+
       await supabase.from("quota_transactions").insert([
-        { user_id: userId, resource: "chars",          amount: quota.chars,    reason: "monthly_grant", metadata: { plan, event: eventName } },
-        { user_id: userId, resource: "tutor_sessions", amount: quota.sessions, reason: "monthly_grant", metadata: { plan, event: eventName } },
+        { user_id: userId, resource: "chars",          amount: quota.chars,    reason: "monthly_grant", metadata: { plan, event: eventName, period: renewsAt } },
+        { user_id: userId, resource: "tutor_sessions", amount: quota.sessions, reason: "monthly_grant", metadata: { plan, event: eventName, period: renewsAt } },
       ]);
       break;
     }
@@ -165,6 +183,17 @@ export async function POST(req: NextRequest) {
       if (!pack) break;
 
       const lsOrderId = String(data?.id ?? "");
+
+      // Idempotency: skip if this order has already been credited.
+      // LS may retry webhook deliveries, which would double-credit quota.
+      const { data: existingTx } = await supabase
+        .from("quota_transactions")
+        .select("id")
+        .eq("reason", "purchase")
+        .contains("metadata", { lemon_order_id: lsOrderId })
+        .limit(1)
+        .maybeSingle();
+      if (existingTx) break;
 
       if (pack.chars > 0) {
         await supabase.rpc("refund_quota", {

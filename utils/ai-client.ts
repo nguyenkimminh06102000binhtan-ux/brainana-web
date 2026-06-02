@@ -37,7 +37,6 @@ export interface AICompleteResult {
 
 // ── Non-streaming completion ──────────────────────────────────────────────────
 export async function aiComplete(opts: AICompleteOptions): Promise<AICompleteResult> {
-  console.log(`[AI] provider=${PROVIDER}  model=${MODELS[PROVIDER]}  maxTokens=${opts.maxTokens}`);
 
   if (PROVIDER === "anthropic") {
     const Anthropic = (await import("@anthropic-ai/sdk")).default;
@@ -59,7 +58,6 @@ export async function aiComplete(opts: AICompleteOptions): Promise<AICompleteRes
       text:       block?.type === "text" ? block.text : "",
       stopReason: msg.stop_reason ?? "end_turn",
     };
-    console.log(`[AI] response (${result.text.length} chars): ${result.text.slice(0, 500)}${result.text.length > 500 ? "…" : ""}`);
     return result;
   }
 
@@ -84,13 +82,11 @@ export async function aiComplete(opts: AICompleteOptions): Promise<AICompleteRes
     text:       choice?.message?.content ?? "",
     stopReason: choice?.finish_reason ?? "stop",
   };
-  console.log(`[AI] response (${result.text.length} chars): ${result.text.slice(0, 500)}${result.text.length > 500 ? "…" : ""}`);
   return result;
 }
 
 // ── Streaming completion ──────────────────────────────────────────────────────
 export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string> {
-  console.log(`[AI] provider=${PROVIDER}  model=${MODELS[PROVIDER]}  maxTokens=${opts.maxTokens}  streaming=true`);
 
   if (PROVIDER === "anthropic") {
     const Anthropic = (await import("@anthropic-ai/sdk")).default;
@@ -118,7 +114,6 @@ export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string>
         yield event.delta.text;
       }
     }
-    console.log(`[AI] stream response (${full.length} chars): ${full.slice(0, 500)}${full.length > 500 ? "…" : ""}`);
     return;
   }
 
@@ -144,7 +139,6 @@ export async function* aiStream(opts: AICompleteOptions): AsyncGenerator<string>
     const delta = chunk.choices[0]?.delta?.content;
     if (delta) { full += delta; yield delta; }
   }
-  console.log(`[AI] stream response (${full.length} chars): ${full.slice(0, 500)}${full.length > 500 ? "…" : ""}`);
 }
 
 // ── Vision: extract text from an image (replaces Tesseract) ──────────────────

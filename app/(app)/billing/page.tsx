@@ -37,7 +37,12 @@ function BalanceBar({ value, max, color }: { value: number; max: number; color: 
   );
 }
 
-export default async function BillingPage() {
+export default async function BillingPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
+  const params = await searchParams;
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -58,7 +63,12 @@ export default async function BillingPage() {
   const charsBalance   = sub?.chars_balance ?? 0;
   const sessionsBalance = sub?.tutor_sessions_balance ?? 0;
 
-  const portalUrls = plan !== "free" && sub?.lemon_subscription_id
+  // isCancelled: DB is authoritative once the webhook fires; ?cancelled=1 covers
+  // the window between the server action redirect and the webhook arriving.
+  const isCancelled =
+    sub?.lemon_subscription_status === "cancelled" || params.cancelled === "1";
+
+  const portalUrls = plan !== "free" && sub?.lemon_subscription_id && !isCancelled
     ? await getSubscriptionUrls(sub.lemon_subscription_id)
     : null;
 
@@ -89,7 +99,7 @@ export default async function BillingPage() {
                 )}
               </div>
             </div>
-            {plan !== "pro" && (
+            {plan !== "pro" && !isCancelled && (
               <Link
                 href="/billing/upgrade"
                 className="rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
@@ -100,27 +110,55 @@ export default async function BillingPage() {
           </div>
         </div>
 
-        {/* Subscription management */}
-        {portalUrls && (
+        {/* Subscription management — only shown for paid plans */}
+        {plan !== "free" && (
           <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
             <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-3">Manage subscription</p>
-            <div className="flex flex-col gap-3">
-              {portalUrls.updatePaymentMethod && (
-                <a
-                  href={portalUrls.updatePaymentMethod}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-ink/10 bg-paper px-4 py-3 transition hover:border-ink/30 hover:bg-paper-3"
+
+            {isCancelled ? (
+              /* Post-cancellation notice */
+              <div className="rounded-lg border border-orange/30 bg-orange/5 px-4 py-4">
+                <p className="font-manrope text-sm font-[700] text-ink">Subscription cancelled</p>
+                <p className="mt-1 font-manrope text-xs leading-relaxed text-ink-2">
+                  Your subscription has been cancelled.
+                  {sub?.plan_expires_at ? (
+                    <> You still have full access until{" "}
+                      <span className="font-[700]">
+                        {new Date(sub.plan_expires_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                      </span>
+                      . After that, your character and session balance resets to 0 and your account reverts to Free.
+                    </>
+                  ) : (
+                    <> Your access will continue until the end of your current billing period, then your account reverts to Free.</>
+                  )}
+                </p>
+                <Link
+                  href="/billing/upgrade"
+                  className="mt-3 inline-block rounded-full bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
                 >
-                  <div>
-                    <p className="font-manrope text-sm font-[700] text-ink">Payment method</p>
-                    <p className="font-manrope text-xs text-ink-3">Update or change your card</p>
-                  </div>
-                  <span className="font-manrope text-xs text-ink-3">→</span>
-                </a>
-              )}
-              <CancelSubscriptionButton expiresAt={sub?.plan_expires_at ?? null} />
-            </div>
+                  Resubscribe
+                </Link>
+              </div>
+            ) : (
+              /* Active subscription controls */
+              <div className="flex flex-col gap-3">
+                {portalUrls?.updatePaymentMethod && (
+                  <a
+                    href={portalUrls.updatePaymentMethod}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-lg border border-ink/10 bg-paper px-4 py-3 transition hover:border-ink/30 hover:bg-paper-3"
+                  >
+                    <div>
+                      <p className="font-manrope text-sm font-[700] text-ink">Payment method</p>
+                      <p className="font-manrope text-xs text-ink-3">Update or change your card</p>
+                    </div>
+                    <span className="font-manrope text-xs text-ink-3">→</span>
+                  </a>
+                )}
+                <CancelSubscriptionButton expiresAt={sub?.plan_expires_at ?? null} />
+              </div>
+            )}
           </div>
         )}
 

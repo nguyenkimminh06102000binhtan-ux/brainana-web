@@ -4,6 +4,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { createCheckout, PLAN_VARIANT_IDS, topupVariantId, cancelLemonSubscription } from "@/utils/lemonsqueezy";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 export async function startCheckout(plan: "plus" | "pro") {
   const supabase = createClient(await cookies());
@@ -63,6 +64,14 @@ export async function cancelSubscription() {
 
   const ok = await cancelLemonSubscription(subscriptionId);
   if (!ok) throw new Error("Failed to cancel subscription — please try again or contact support");
+
+  // Write cancelled status immediately so the billing page shows the correct UI
+  // on any subsequent visit, without depending on the webhook arriving first.
+  const admin = createAdminClient();
+  await admin
+    .from("user_subscriptions")
+    .update({ lemon_subscription_status: "cancelled" })
+    .eq("user_id", user.id);
 
   redirect("/billing?cancelled=1");
 }

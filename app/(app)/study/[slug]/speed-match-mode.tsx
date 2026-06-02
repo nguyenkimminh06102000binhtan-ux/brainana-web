@@ -63,6 +63,9 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
   const [flash, setFlash] = useState<"correct" | "wrong" | null>(null);
   const [streakCelebration, setStreakCelebration] = useState(false);
   const [done, setDone] = useState(false);
+  // finalStats captures ref values at game-end so they can be read safely in JSX
+  // (the React Compiler disallows reading .current during render).
+  const [finalStats, setFinalStats] = useState<{ xp: number; total: number } | null>(null);
   const xpRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const totalRef = useRef(0);
@@ -74,6 +77,7 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(timerRef.current!);
+          setFinalStats({ xp: xpRef.current, total: totalRef.current });
           setDone(true);
           return 0;
         }
@@ -82,16 +86,6 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
     }, 1000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (done) return;
-      if (e.key === "ArrowRight") answer(true);
-      if (e.key === "ArrowLeft") answer(false);
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [done, index, streak, correct]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const answer = useCallback(
     (userSaysMatch: boolean) => {
@@ -123,20 +117,30 @@ export default function SpeedMatchMode({ cards, onComplete, labels }: SpeedMatch
     [done, streak, correct, currentPairing],
   );
 
-  if (done) {
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (done) return;
+      if (e.key === "ArrowRight") answer(true);
+      if (e.key === "ArrowLeft") answer(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [done, answer]);
+
+  if (done && finalStats) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4">
         <p className="font-fredoka text-4xl font-[600] text-ink">{labels.timesUp}</p>
         <div className="rounded-lg bg-paper-2 p-6 shadow-hard text-center">
-          <p className="font-mono text-5xl font-[700] text-orange-text">{xpRef.current}</p>
+          <p className="font-mono text-5xl font-[700] text-orange-text">{finalStats.xp}</p>
           <p className="mt-1 font-manrope text-sm text-ink-2">{labels.xpEarned}</p>
           <p className="mt-4 font-manrope text-sm text-ink-2">
-            {t(labels.result, { correct, wrong: totalRef.current - correct })}
+            {t(labels.result, { correct, wrong: finalStats.total - correct })}
           </p>
         </div>
         <button
           type="button"
-          onClick={() => onComplete({ correct, total: totalRef.current, xp: xpRef.current })}
+          onClick={() => onComplete({ correct, total: finalStats.total, xp: finalStats.xp })}
           className="w-full max-w-sm cursor-pointer rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
         >
           {labels.continueBtn}
