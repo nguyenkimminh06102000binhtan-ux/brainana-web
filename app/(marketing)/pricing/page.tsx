@@ -16,13 +16,13 @@ const PLANS = [
     description: "Get started and explore",
     badge: null,
     features: [
-      "500 AI characters to try features",
-      "1 AI tutor session",
       "Unlimited public courses",
       "All study modes",
       "Access to community courses",
     ],
     missing: [
+      "AI features",
+      "AI tutor sessions",
       "Private courses",
       "TTS audio generation",
       "AI romanization",

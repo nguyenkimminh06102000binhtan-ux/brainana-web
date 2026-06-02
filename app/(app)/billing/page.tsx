@@ -8,7 +8,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
 
 const PLAN_ALLOWANCES = {
-  free:  { chars: 500,      sessions: 1  },
+  free:  { chars: 0,        sessions: 0  },
   plus:  { chars: 150_000,  sessions: 20 },
   pro:   { chars: 600_000,  sessions: 60 },
 } as const;
