@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { rateLimitUser } from "@/utils/rate-limit";
 import { aiExtractTextFromImage } from "@/utils/ai-client";
 
 const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "gif", "webp"]);
@@ -56,6 +57,9 @@ export async function POST(req: NextRequest) {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
+
+  const rl = await rateLimitUser(user.id, "analyze-file", { limit: 20, windowSeconds: 3600 });
+  if (!rl.allowed) return Response.json({ error: "Rate limit exceeded. Try again later." }, { status: 429 });
 
   const formData = await req.formData();
 

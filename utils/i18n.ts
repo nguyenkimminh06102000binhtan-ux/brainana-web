@@ -493,7 +493,6 @@ export type Locale = {
     upgradeForTopUp: string;
     topUpPacksInfo: string;
     upgradeNow: string;
-    topUpDescription: string;
     paymentsComing: string;
     transactionHistory: string;
     noTransactions: string;

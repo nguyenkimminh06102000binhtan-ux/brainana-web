@@ -38,13 +38,16 @@ export async function GET(request: Request) {
         .eq("id", data.user.id)
         .single();
 
+      const base = process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+
       if (!hasCompletedOnboarding(profile as OnboardingProfile | null)) {
-        return NextResponse.redirect(new URL("/start", request.url));
+        return NextResponse.redirect(new URL("/start", base));
       }
 
-      return NextResponse.redirect(new URL(nextPath, request.url));
+      return NextResponse.redirect(new URL(nextPath, base));
     }
   }
 
-  return NextResponse.redirect(new URL("/login", request.url));
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+  return NextResponse.redirect(new URL("/login", base));
 }
