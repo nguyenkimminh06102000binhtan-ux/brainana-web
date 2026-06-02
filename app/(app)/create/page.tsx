@@ -36,6 +36,7 @@ export default async function CreatePage() {
       </div>
 
       <CreateCourseForm
+        userId={user?.id ?? ""}
         plan={plan}
         initialCharsBalance={initialCharsBalance}
         labels={loc.createEdit}

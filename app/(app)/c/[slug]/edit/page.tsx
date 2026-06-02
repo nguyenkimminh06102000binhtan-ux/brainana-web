@@ -70,6 +70,7 @@ export default async function EditCoursePage({
       </div>
 
       <EditCourseForm
+        userId={user.id}
         course={course}
         sections={sectionsWithItems}
         plan={(sub?.plan as string | null) ?? "free"}

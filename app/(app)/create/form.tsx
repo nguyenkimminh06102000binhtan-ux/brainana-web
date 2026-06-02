@@ -1,6 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { useDraftAutosave, formatDraftAge } from "@/hooks/useDraftAutosave";
+import type { DraftSection } from "@/hooks/useDraftAutosave";
 import { useRouter } from "next/navigation";
 import { createCourse } from "./actions";
 import MathToolbar from "@/app/(app)/_components/math-toolbar";
@@ -8,7 +10,7 @@ import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
 import { t } from "@/utils/t";
-import { bucketForVisibility, buildStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
+import { bucketForVisibility, buildStoragePath, parseStoragePath, PUBLIC_BUCKET } from "@/utils/storage";
 import { getRomanizationSystem } from "@/utils/romanization";
 import { suggestRomanization } from "@/app/actions/romanization";
 import { generateBack } from "@/app/actions/generate-back";
@@ -125,9 +127,22 @@ function parseCsv(text: string): Array<[string, string, string]> {
   return results;
 }
 
+/** Re-generate a display URL from a stored path (used when restoring a draft). */
+async function resolveStorageUrl(supabase: ReturnType<typeof createClient>, storagePath: string): Promise<string> {
+  const parsed = parseStoragePath(storagePath);
+  if (!parsed) return "";
+  const { bucket, objectPath } = parsed;
+  if (bucket === PUBLIC_BUCKET) {
+    return supabase.storage.from(bucket).getPublicUrl(objectPath).data.publicUrl;
+  }
+  const { data } = await supabase.storage.from(bucket).createSignedUrl(objectPath, 7200);
+  return data?.signedUrl ?? "";
+}
+
 async function uploadToStorage(
   file: File,
   labels: CreateEditLabels,
+  userId: string,
   courseId: string,
   visibility: string,
 ): Promise<{ storagePath: string; displayUrl: string }> {
@@ -139,7 +154,7 @@ async function uploadToStorage(
   const fileToUpload = isImage ? await compressImage(file, IMAGE_MAX) : file;
   const supabase = createClient();
   const ext = fileToUpload.name.split(".").pop();
-  const objectPath = `courses/${courseId}/items/${crypto.randomUUID()}.${ext}`;
+  const objectPath = `users/${userId}/courses/${courseId}/items/${crypto.randomUUID()}.${ext}`;
   const bucket = bucketForVisibility(visibility);
 
   const { data, error } = await supabase.storage
@@ -151,11 +166,12 @@ async function uploadToStorage(
   if (bucket === PUBLIC_BUCKET) {
     displayUrl = supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl;
   } else {
-    const { data: signData, error: signError } = await supabase.storage
+    const { data: signData } = await supabase.storage
       .from(bucket)
       .createSignedUrl(data.path, 3600);
-    if (signError || !signData?.signedUrl) throw new Error("Failed to get preview URL");
-    displayUrl = signData.signedUrl;
+    // A missing signed URL is non-fatal: the file is in storage and will be
+    // submitted correctly. Preview just won't render until the course is saved.
+    displayUrl = signData?.signedUrl ?? "";
   }
 
   return { storagePath: buildStoragePath(bucket, data.path), displayUrl };
@@ -504,12 +520,14 @@ function ItemCard({ item, index, isOnly, sourceLanguage, targetLanguage, plan, c
 const COLLAPSE_THRESHOLD = 5;
 
 export default function CreateCourseForm({
+  userId,
   plan,
   initialCharsBalance,
   labels,
   categories,
   levels,
 }: {
+  userId: string;
   plan: string;
   initialCharsBalance: number;
   labels: CreateEditLabels;
@@ -521,7 +539,9 @@ export default function CreateCourseForm({
   const formRef = useRef<HTMLFormElement>(null);
   const [sections, setSections] = useState<Section[]>([makeSection()]);
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
-  const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]);
+  const [selectedCategory, setSelectedCategory] = useState(TOP_LEVEL_CATEGORIES[0]!);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(() => getCategoryItems(TOP_LEVEL_CATEGORIES[0]!)[0] ?? "");
+  const [selectedLevel, setSelectedLevel] = useState("beginner");
   const [selectedVisibility, setSelectedVisibility] = useState("public");
   const [selectedTargetLanguage, setSelectedTargetLanguage] = useState("Vietnamese");
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState("English (US)");
@@ -538,6 +558,90 @@ export default function CreateCourseForm({
   const prospectiveCourseId = useRef(crypto.randomUUID());
   const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
   const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
+
+  // ── Draft autosave ──────────────────────────────────────────────────────────
+  const draftKey = userId ? `brainana:draft:create:${userId}` : null;
+
+  const draftState = useMemo(() => ({
+    formTitle,
+    selectedCategory,
+    selectedSubcategory,
+    selectedLevel,
+    selectedVisibility,
+    selectedSourceLanguage,
+    selectedTargetLanguage,
+    sections: sections.map((s) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      customAttributes: s.customAttributes,
+      items: s.items.map((i) => ({
+        id: i.id,
+        front: i.front,
+        back: i.back,
+        romanization: i.romanization,
+        imagePath: i.imagePath || undefined,
+        backAudioPath: i.backAudioPath || undefined,
+        distractors: i.distractors,
+        acceptedAnswers: i.acceptedAnswers,
+        customAttributeValues: i.customAttributeValues,
+      })),
+    })) as DraftSection[],
+  }), [formTitle, selectedCategory, selectedSubcategory, selectedLevel, selectedVisibility, selectedSourceLanguage, selectedTargetLanguage, sections]);
+
+  const { hasDraft, draftSavedAt, loadDraft, clearDraft, dismissDraft } = useDraftAutosave(draftKey, draftState);
+
+  async function restoreDraft() {
+    const draft = loadDraft();
+    if (!draft) return;
+    if (draft.formTitle !== undefined) setFormTitle(draft.formTitle);
+    setSelectedCategory(draft.selectedCategory);
+    if (draft.selectedSubcategory !== undefined) setSelectedSubcategory(draft.selectedSubcategory);
+    if (draft.selectedLevel !== undefined) setSelectedLevel(draft.selectedLevel);
+    setSelectedVisibility(draft.selectedVisibility);
+    setSelectedSourceLanguage(draft.selectedSourceLanguage);
+    setSelectedTargetLanguage(draft.selectedTargetLanguage);
+
+    // Build sections with paths but empty display URLs first so the form
+    // renders immediately, then fill in display URLs asynchronously.
+    const restored = draft.sections.map((s) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      customAttributes: s.customAttributes ?? [],
+      items: s.items.map((i) => ({
+        id: i.id,
+        front: i.front,
+        back: i.back,
+        romanization: i.romanization ?? "",
+        imagePath: i.imagePath ?? "",
+        imageDisplayUrl: "",
+        backAudioPath: i.backAudioPath ?? "",
+        backAudioDisplayUrl: "",
+        distractors: i.distractors ?? [],
+        acceptedAnswers: i.acceptedAnswers ?? [],
+        customAttributeValues: i.customAttributeValues ?? {},
+        uploads: freshUpload(),
+      })),
+    }));
+    setSections(restored);
+    const maxId = restored.flatMap((s) => [s.id, ...s.items.map((i) => i.id)]).reduce((a, b) => Math.max(a, b), uid);
+    uid = maxId + 1;
+    dismissDraft();
+
+    // Regenerate display URLs for any items that have media paths.
+    const supabase = createClient();
+    const withUrls = await Promise.all(restored.map(async (s) => ({
+      ...s,
+      items: await Promise.all(s.items.map(async (i) => {
+        const imageDisplayUrl   = i.imagePath   ? await resolveStorageUrl(supabase, i.imagePath)   : "";
+        const backAudioDisplayUrl = i.backAudioPath ? await resolveStorageUrl(supabase, i.backAudioPath) : "";
+        return { ...i, imageDisplayUrl, backAudioDisplayUrl };
+      })),
+    })));
+    setSections(withUrls);
+  }
+  // ── End draft autosave ──────────────────────────────────────────────────────
 
   useEffect(() => {
     if (customAttrDropdownSectionId === null) return;
@@ -798,6 +902,7 @@ export default function CreateCourseForm({
       const { storagePath, displayUrl } = await uploadToStorage(
         file,
         labels,
+        userId,
         prospectiveCourseId.current,
         selectedVisibility,
       );
@@ -888,6 +993,28 @@ export default function CreateCourseForm({
 
   return (
     <>
+    {hasDraft && (
+      <div className="mb-2 rounded-lg border border-orange/40 bg-orange/5 px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="font-manrope text-sm text-ink">
+            📝 Unsaved work found from <strong>{formatDraftAge(draftSavedAt!)}</strong>
+          </p>
+          <div className="flex gap-2">
+            <button type="button" onClick={restoreDraft}
+              className="rounded-full bg-orange px-4 py-1.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90">
+              Restore
+            </button>
+            <button type="button" onClick={clearDraft}
+              className="rounded-full border border-ink/20 px-4 py-1.5 font-manrope text-xs font-[700] text-ink-2 transition hover:bg-ink/5">
+              Discard
+            </button>
+          </div>
+        </div>
+        <p className="mt-1 font-manrope text-xs text-ink-3">
+          All text content, images, and audio will be restored.
+        </p>
+      </div>
+    )}
     <form ref={formRef} action={formAction} className="flex flex-col gap-6">
       <input type="hidden" name="sections_data" value={sectionsPayload} />
       <input type="hidden" name="prospective_course_id" value={prospectiveCourseId.current} />
@@ -922,7 +1049,7 @@ export default function CreateCourseForm({
                 id="category"
                 name="category"
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(e) => { setSelectedCategory(e.target.value); setSelectedSubcategory(getCategoryItems(e.target.value)[0] ?? ""); }}
                 className={selectCls}
               >
                 {TOP_LEVEL_CATEGORIES.map((c) => <option key={c} value={c}>{categories[c] ?? c}</option>)}
@@ -930,13 +1057,15 @@ export default function CreateCourseForm({
             </div>
             <div>
               {label(labels.subcategory)}
-              <select id="subcategory" name="subcategory" className={selectCls}>
+              <select id="subcategory" name="subcategory" value={selectedSubcategory}
+                onChange={(e) => setSelectedSubcategory(e.target.value)} className={selectCls}>
                 {getCategoryItems(selectedCategory).map((s) => <option key={s} value={s}>{categories[s] ?? s}</option>)}
               </select>
             </div>
             <div>
               {label(labels.difficulty)}
-              <select id="level" name="level" defaultValue="beginner" className={selectCls}>
+              <select id="level" name="level" value={selectedLevel}
+                onChange={(e) => setSelectedLevel(e.target.value)} className={selectCls}>
                 <option value="">{labels.anyLevel}</option>
                 <option value="beginner">{levels.beginner}</option>
                 <option value="intermediate">{levels.intermediate}</option>
@@ -1202,6 +1331,7 @@ export default function CreateCourseForm({
             if (selectedVisibility === "public") {
               setShowPublicWarning(true);
             } else {
+              clearDraft();
               formRef.current?.requestSubmit();
             }
           }}
@@ -1245,7 +1375,7 @@ export default function CreateCourseForm({
     {showPublicWarning && (
       <PublicCourseWarningModal
         labels={{ publicWarningTitle: labels.publicWarningTitle, publicWarningSubtitle: labels.publicWarningSubtitle, publicWarningLock: labels.publicWarningLock, publicWarningNoDelete: labels.publicWarningNoDelete, publicWarningVisible: labels.publicWarningVisible, publicWarningConfirm: labels.publicWarningConfirm, publicWarningBack: labels.publicWarningBack }}
-        onConfirm={() => { setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
+        onConfirm={() => { clearDraft(); setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
         onBack={() => setShowPublicWarning(false)}
       />
     )}
