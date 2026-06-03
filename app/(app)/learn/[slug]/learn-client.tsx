@@ -7,7 +7,6 @@ import ChatMessage from "./chat-message";
 import MathToolbar from "./math-toolbar";
 import { t } from "@/utils/t";
 import type { Locale } from "@/utils/i18n";
-import { showQuotaToast } from "@/components/quota-toast";
 
 export type LearnCard = {
   id: string;
@@ -147,6 +146,7 @@ export default function LearnClient({
   const [isStreaming, setIsStreaming] = useState(false);
   const [evals, setEvals] = useState<EvalResult[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+  const [sessionBannerBalance, setSessionBannerBalance] = useState<number | null>(null);
 
   // Card selection
   const [cardSelectionMode, setCardSelectionMode] = useState<CardSelectionMode>("quick");
@@ -156,6 +156,7 @@ export default function LearnClient({
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const composerRef = useRef<HTMLDivElement>(null);
 
   // Map cardId → resolved audio URL for all cards that have audio
   const audioMap = useMemo(
@@ -213,6 +214,38 @@ export default function LearnClient({
     }
   }, [messages]);
 
+  const keepComposerVisible = useCallback(() => {
+    requestAnimationFrame(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
+      composerRef.current?.scrollIntoView({ block: "end", inline: "nearest" });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (stage !== "chat") return;
+
+    function syncVisualViewport() {
+      const visualViewport = window.visualViewport;
+      const height = visualViewport?.height ?? window.innerHeight;
+      document.documentElement.style.setProperty("--brainana-visual-vh", `${height}px`);
+      keepComposerVisible();
+    }
+
+    syncVisualViewport();
+    window.visualViewport?.addEventListener("resize", syncVisualViewport);
+    window.visualViewport?.addEventListener("scroll", syncVisualViewport);
+    window.addEventListener("orientationchange", syncVisualViewport);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", syncVisualViewport);
+      window.visualViewport?.removeEventListener("scroll", syncVisualViewport);
+      window.removeEventListener("orientationchange", syncVisualViewport);
+      document.documentElement.style.removeProperty("--brainana-visual-vh");
+    };
+  }, [stage, keepComposerVisible]);
+
   function buildSessionCards(): LearnCard[] {
     if (cardSelectionMode === "quick") {
       const count = Math.min(quickPickCount, poolCards.length);
@@ -258,7 +291,7 @@ export default function LearnClient({
         if (remaining !== null) {
           const n = Number(remaining);
           setSessionsBalance(n);
-          showQuotaToast("sessions", n);
+          setSessionBannerBalance(n);
         }
       }
 
@@ -734,6 +767,7 @@ export default function LearnClient({
                 setStage("setup");
                 setMessages([]);
                 setEvals([]);
+                setSessionBannerBalance(null);
               }}
               className="w-full rounded-full bg-orange px-4 py-3 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
             >
@@ -753,7 +787,10 @@ export default function LearnClient({
 
   // ── Chat ─────────────────────────────────────────────────────────────────
   return (
-    <div className="mx-auto flex h-[calc(100dvh-4rem)] max-w-2xl flex-col px-4 py-4">
+    <div
+      className="mx-auto flex min-h-0 max-w-2xl flex-col px-4 py-3 sm:py-4"
+      style={{ height: "calc(var(--brainana-visual-vh, 100dvh) - env(safe-area-inset-bottom))" }}
+    >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <div>
@@ -770,8 +807,17 @@ export default function LearnClient({
         </button>
       </div>
 
+      {sessionBannerBalance !== null && (
+        <div
+          role="status"
+          className="mb-3 rounded-2xl border-2 border-ink bg-paper-2 px-4 py-2 font-manrope text-sm font-[800] text-ink shadow-hard-sm"
+        >
+          {sessionBannerBalance} AI session{sessionBannerBalance === 1 ? "" : "s"} remaining
+        </div>
+      )}
+
       {/* Messages */}
-      <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto pb-4">
+      <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pb-3">
         {messages.map((m, i) => (
           <div
             key={i}
@@ -807,7 +853,7 @@ export default function LearnClient({
       </div>
 
       {/* Input */}
-      <div className="pt-2">
+      <div ref={composerRef} className="shrink-0 bg-paper pt-2 pb-[max(env(safe-area-inset-bottom),0.25rem)]">
         {!isStreaming && sessionCards.length > 0 && evals.length >= sessionCards.length ? (
           <div className="flex items-center justify-between rounded-2xl bg-paper-2 px-4 py-3 shadow-hard-sm">
             <span className="font-manrope text-sm text-ink-3">{t(labels.allCardsCovered, { count: sessionCards.length })}</span>
@@ -840,6 +886,7 @@ export default function LearnClient({
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                onFocus={keepComposerVisible}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
