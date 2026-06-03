@@ -85,7 +85,7 @@ export default async function AdminUserDetail({
 
               <select name="plan" defaultValue={sub?.plan ?? "free"} className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
                 <option value="free">Free</option>
-                <option value="plus">Plus — 250K chars · 25 sessions/mo</option>
+                <option value="plus">Plus — 300K chars · 30 sessions/mo</option>
                 <option value="pro">Pro — 900K chars · 90 sessions/mo</option>
               </select>
 

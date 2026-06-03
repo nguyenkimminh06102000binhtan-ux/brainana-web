@@ -48,8 +48,8 @@ const PLANS = [
     description: "For serious learners",
     badge: "Most popular",
     features: [
-      { label: "250,000 AI characters / month", children: AI_CHARACTER_USES },
-      { label: "25 AI tutor sessions / month" },
+      { label: "300,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "30 AI tutor sessions / month" },
       { label: "Private courses" },
       { label: "Everything in Free" },
     ],

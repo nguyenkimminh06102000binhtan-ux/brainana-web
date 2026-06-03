@@ -21,7 +21,7 @@ import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 
 const PLAN_ALLOWANCES = {
   free:  { chars: 0,        sessions: 0  },
-  plus:  { chars: 250_000,  sessions: 25 },
+  plus:  { chars: 300_000,  sessions: 30 },
   pro:   { chars: 900_000,  sessions: 90 },
 } as const;
 
@@ -233,6 +233,8 @@ export default async function BillingPage({
   const portalUrls = plan !== "free" && sub?.billing_subscription_id && !isCancelled
     ? await getSubscriptionUrls(sub.billing_subscription_id)
     : null;
+  const characterTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.chars > 0);
+  const sessionTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.sessions > 0);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
@@ -404,20 +406,28 @@ export default async function BillingPage({
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                {Object.entries(TOPUP_PACKS).map(([key, pack]) => (
-                  <form key={key} action={startTopUpCheckout.bind(null, key)}>
-                    <button
-                      type="submit"
-                      className="flex w-full flex-col rounded-lg border border-ink/10 bg-paper px-4 py-3 text-left transition hover:border-orange hover:bg-orange/5 active:translate-y-[1px]"
-                    >
-                      <div className="flex w-full items-center justify-between">
-                        <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
-                        <span className="font-manrope text-sm font-[700] text-ink">{pack.price}</span>
-                      </div>
-                      <span className="mt-1 font-manrope text-[10px] text-ink-3">Expires at renewal</span>
-                    </button>
-                  </form>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {[
+                  { title: "AI characters", packs: characterTopUps },
+                  { title: "AI tutor sessions", packs: sessionTopUps },
+                ].map((group) => (
+                  <div key={group.title} className="flex flex-col gap-3">
+                    <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{group.title}</p>
+                    {group.packs.map(([key, pack]) => (
+                      <form key={key} action={startTopUpCheckout.bind(null, key)}>
+                        <button
+                          type="submit"
+                          className="flex w-full flex-col rounded-lg border border-ink/10 bg-paper px-4 py-3 text-left transition hover:border-orange hover:bg-orange/5 active:translate-y-[1px]"
+                        >
+                          <div className="flex w-full items-center justify-between gap-3">
+                            <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
+                            <span className="shrink-0 font-manrope text-sm font-[700] text-ink">{pack.price}</span>
+                          </div>
+                          <span className="mt-1 font-manrope text-[10px] text-ink-3">Expires at renewal</span>
+                        </button>
+                      </form>
+                    ))}
+                  </div>
                 ))}
               </div>
             </>
