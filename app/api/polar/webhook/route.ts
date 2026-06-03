@@ -113,8 +113,9 @@ async function fulfillOrder(
     .from("processed_billing_events")
     .insert({ provider: "polar", event_key: eventKey });
   const orderClaimResult = idempotencyError(orderClaimErr);
-  const eventWasAlreadyClaimed = orderClaimResult === "duplicate";
-  if (eventWasAlreadyClaimed) {
+  let eventWasAlreadyClaimed = false;
+  if (orderClaimResult === "duplicate") {
+    eventWasAlreadyClaimed = true;
     const { data: existingCredit, error } = await supabase
       .from("quota_transactions")
       .select("id")
@@ -126,8 +127,9 @@ async function fulfillOrder(
     const errRes = webhookWriteError("Failed to verify top-up credit", error);
     if (errRes) return errRes;
     if (existingCredit) return null;
+  } else if (orderClaimResult) {
+    return orderClaimResult;
   }
-  if (orderClaimResult) return orderClaimResult;
 
   if (pack.chars > 0) {
     const { error } = await supabase.rpc("refund_quota", {
