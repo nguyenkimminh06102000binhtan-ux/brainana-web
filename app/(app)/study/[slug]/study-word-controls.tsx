@@ -25,7 +25,7 @@ export default function StudyWordControls({
   onIgnore: () => void;
 }) {
   return (
-    <div className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 pb-6">
+    <div className="mx-auto mt-4 flex w-full max-w-lg items-center justify-between gap-3 px-4 pb-6">
       {showDontKnow && (
         <button
           type="button"

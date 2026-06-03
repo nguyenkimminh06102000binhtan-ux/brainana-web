@@ -57,7 +57,7 @@ export default function AnswerFeedback({ outcome, correctMessages, wrongMessages
             {acceptedAnswers.map((ans, i) => (
               <span
                 key={i}
-                className="rounded-full border-2 border-ink bg-paper px-3 py-1 font-manrope text-sm font-[700] shadow-hard-sm"
+                className="block max-w-full break-words rounded-[1rem] border-2 border-ink bg-paper px-3 py-1.5 font-manrope text-sm font-[700] leading-relaxed shadow-hard-sm"
                 style={{ color: fg }}
               >
                 {ans}

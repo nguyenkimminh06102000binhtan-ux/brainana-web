@@ -192,11 +192,11 @@ export default async function CourseDetailPage({
                 </div>
 
                 {/* CTA row */}
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-4">
                   {!hasStarted ? (
                     <Link
                       href={`/study/${course.slug}`}
-                      className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                      className="inline-flex min-h-11 items-center rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                     >
                       {cl.startLearning}
                     </Link>
@@ -204,14 +204,14 @@ export default async function CourseDetailPage({
                     <>
                       <Link
                         href={`/speed-review/${course.slug}`}
-                        className="rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                        className="inline-flex min-h-11 items-center rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
                       >
                         {cl.quickReview}
                       </Link>
                       <Link
                         href={reviewDue > 0 ? `/study/${course.slug}?mode=review` : "#"}
                         aria-disabled={reviewDue === 0}
-                        className={`rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
+                        className={`inline-flex min-h-11 items-center rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
                           reviewDue > 0
                             ? "bg-paper text-ink hover:bg-paper-2 active:translate-y-[1px] active:shadow-none"
                             : "pointer-events-none bg-ink/10 text-ink-3"
@@ -222,7 +222,7 @@ export default async function CourseDetailPage({
                       <Link
                         href={newCardsCount > 0 ? `/study/${course.slug}?mode=new` : "#"}
                         aria-disabled={newCardsCount === 0}
-                        className={`rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
+                        className={`inline-flex min-h-11 items-center rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition ${
                           newCardsCount > 0
                             ? "bg-paper text-ink hover:bg-paper-2 active:translate-y-[1px] active:shadow-none"
                             : "pointer-events-none bg-ink/10 text-ink-3"
@@ -235,7 +235,7 @@ export default async function CourseDetailPage({
 
                   <Link
                     href={`/learn/${course.slug}`}
-                    className="rounded-full bg-blue px-5 py-2.5 font-manrope text-sm font-[800] text-ocean shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
+                    className="inline-flex min-h-11 items-center rounded-full bg-blue px-5 py-2.5 font-manrope text-sm font-[800] text-ocean shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
                   >
                     {loc.learn.aiTutor}
                   </Link>
@@ -254,7 +254,7 @@ export default async function CourseDetailPage({
                       <input type="hidden" name="slug" value={course.slug} />
                       <button
                         type="submit"
-                        className={`cursor-pointer rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] active:shadow-none ${
+                        className={`inline-flex min-h-11 cursor-pointer items-center rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] active:shadow-none ${
                           isEnrolled
                             ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange-text"
                             : "bg-paper text-ink hover:bg-paper"
@@ -268,7 +268,7 @@ export default async function CourseDetailPage({
                   {isOwner && (
                     <Link
                       href={`/c/${course.slug}/edit`}
-                      className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px] active:shadow-none"
+                      className="inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-orange hover:text-on-bright active:translate-y-[1px] active:shadow-none"
                     >
                       {cl.editCourse}
                     </Link>

@@ -392,7 +392,7 @@ export default function SessionView({
               <FlashcardMode key={currentRegularCard.itemId} card={currentRegularCard} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} hiddenCustomAttributeKeys={hiddenCustomAttributeKeys} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={flashcardLabels} />
             )}
             {currentRegularCard.questionType === "multiple_choice" && (
-              <MultipleChoiceMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} feedbackCorrect={labels.feedbackCorrect} feedbackWrong={labels.feedbackWrong} continueLabel={labels.continueButton} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} hiddenCustomAttributeKeys={hiddenCustomAttributeKeys} />
+              <MultipleChoiceMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} continueLabel={labels.continueButton} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} hiddenCustomAttributeKeys={hiddenCustomAttributeKeys} />
             )}
             {currentRegularCard.questionType === "type_answer" && (
               <TypeAnswerMode key={currentRegularCard.itemId} card={currentRegularCard} onAnswer={handleRegularAnswer} onReveal={() => setRevealedCardId(currentRegularCard.itemId)} labels={typeAnswerLabels} showRomanization={showRomanization} showCustomAttributes={showCustomAttributes} hiddenCustomAttributeKeys={hiddenCustomAttributeKeys} />

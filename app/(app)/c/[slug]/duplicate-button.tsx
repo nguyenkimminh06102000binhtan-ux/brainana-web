@@ -24,7 +24,7 @@ export default function DuplicateButton({ courseId, canDuplicate, labels }: Prop
       <a
         href="/billing/upgrade"
         title={labels.duplicateUpsell}
-        className="flex items-center gap-1.5 rounded-full bg-ink/10 px-5 py-2.5 font-manrope text-sm font-[800] text-ink-3 shadow-hard-sm transition hover:bg-ink/20"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-ink/10 px-5 py-2.5 font-manrope text-sm font-[800] text-ink-3 shadow-hard-sm transition hover:bg-ink/20"
       >
         🔒 {labels.duplicateCourse}
       </a>
@@ -45,12 +45,12 @@ export default function DuplicateButton({ courseId, canDuplicate, labels }: Prop
   }
 
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-start gap-1 self-start">
       <button
         type="button"
         disabled={state === "loading"}
         onClick={handleClick}
-        className="rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-paper-2 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-paper-2 active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === "loading" ? labels.duplicating : labels.duplicateCourse}
       </button>

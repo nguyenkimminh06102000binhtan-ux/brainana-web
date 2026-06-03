@@ -132,13 +132,6 @@ export async function updateQuestionTypes(formData: FormData) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: existing } = await supabase
-    .from("user_courses")
-    .select("id")
-    .eq("user_id", user.id)
-    .eq("course_id", courseId)
-    .maybeSingle();
-
   await supabase
     .from("user_courses")
     .upsert(
@@ -146,14 +139,7 @@ export async function updateQuestionTypes(formData: FormData) {
       { onConflict: "user_id,course_id" }
     );
 
-  // Keep learner_count in sync when this creates a new row
-  if (!existing) {
-    const { count } = await supabase
-      .from("user_courses")
-      .select("*", { count: "exact", head: true })
-      .eq("course_id", courseId);
-    await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
-  }
+  // learner_count is maintained by the database trigger.
 }
 
 export async function toggleFollow(formData: FormData) {
@@ -232,11 +218,9 @@ export async function toggleEnroll(formData: FormData) {
     await supabase.from("user_courses").insert({ user_id: user.id, course_id: courseId });
   }
 
-  const { count } = await supabase
-    .from("user_courses")
-    .select("*", { count: "exact", head: true })
-    .eq("course_id", courseId);
-  await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
+  // learner_count is maintained by the database trigger.
 
   revalidatePath(`/c/${slug}`);
+  revalidatePath("/browse");
+  revalidatePath("/courses");
 }

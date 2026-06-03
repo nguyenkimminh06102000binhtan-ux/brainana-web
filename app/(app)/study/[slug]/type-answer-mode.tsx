@@ -173,7 +173,6 @@ export default function TypeAnswerMode({
           outcome={submitted.correct ? "correct" : "incorrect"}
           correctMessages={labels.feedbackCorrect}
           wrongMessages={labels.feedbackWrong}
-          acceptedAnswers={submitted.correct ? undefined : answers}
         />
       )}
       <div className="flex flex-col gap-6 px-4 py-8">
@@ -255,7 +254,7 @@ export default function TypeAnswerMode({
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {answers.map((ans, i) => (
-                  <span key={i} className="rounded-full border-2 border-ink bg-red-soft px-3 py-0.5 font-manrope text-sm text-ink shadow-hard-sm">
+                  <span key={i} className="block max-w-full break-words rounded-[1rem] border-2 border-ink bg-red-soft px-3 py-1.5 font-manrope text-sm leading-relaxed text-ink shadow-hard-sm">
                     {ans}
                   </span>
                 ))}

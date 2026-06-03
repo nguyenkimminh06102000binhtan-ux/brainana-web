@@ -15,18 +15,11 @@ export async function enrollInCourse(formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // Insert enrollment (ignore conflict if already enrolled)
-  const { error } = await supabase
+  // Insert enrollment. learner_count is maintained by the database trigger.
+  await supabase
     .from("user_courses")
     .insert({ user_id: user.id, course_id: courseId });
 
-  if (!error) {
-    const { count } = await supabase
-      .from("user_courses")
-      .select("*", { count: "exact", head: true })
-      .eq("course_id", courseId);
-    await supabase.from("courses").update({ learner_count: count ?? 0 }).eq("id", courseId);
-  }
-
   revalidatePath("/courses");
+  revalidatePath("/browse");
 }

@@ -4,22 +4,19 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import { calculateSM2, getQualityScore } from "@/utils/sm2";
 import { playCorrectSound, playWrongSound } from "@/utils/answer-audio";
-import AnswerFeedback from "./answer-feedback";
 import type { StudyCard, CardAnswer, Outcome } from "./types";
 
 interface MCModeProps {
   card: StudyCard;
   onAnswer: (answer: CardAnswer) => void;
   onReveal?: () => void;
-  feedbackCorrect: string[];
-  feedbackWrong: string[];
   continueLabel: string;
   showRomanization?: boolean;
   showCustomAttributes?: boolean;
   hiddenCustomAttributeKeys?: string[];
 }
 
-export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackCorrect, feedbackWrong, continueLabel, showRomanization, showCustomAttributes, hiddenCustomAttributeKeys = [] }: MCModeProps) {
+export default function MultipleChoiceMode({ card, onAnswer, onReveal, continueLabel, showRomanization, showCustomAttributes, hiddenCustomAttributeKeys = [] }: MCModeProps) {
   const startedAt = useRef(Date.now());
   const [selected, setSelected] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"correct" | "incorrect" | null>(null);
@@ -100,15 +97,6 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
 
   return (
     <div className="flex flex-col gap-6">
-      {outcome && (
-        <AnswerFeedback
-          key={card.itemId}
-          outcome={outcome}
-          correctMessages={feedbackCorrect}
-          wrongMessages={feedbackWrong}
-          acceptedAnswers={outcome === "incorrect" ? [card.backText, ...card.acceptedAnswers] : undefined}
-        />
-      )}
       <div className="mx-4 mt-8 rounded-[1.4rem] border-2 border-ink bg-paper-2 p-6 text-center shadow-hard-sm">
         {card.imageUrl && (
           <div className="relative mb-4 h-32 w-full overflow-hidden rounded-md">
@@ -145,9 +133,9 @@ export default function MultipleChoiceMode({ card, onAnswer, onReveal, feedbackC
               aria-label={`${i + 1}. ${opt.text}${showCorrect ? " — correct" : showWrong ? " — incorrect" : ""}`}
               className={`flex cursor-pointer items-center gap-3 rounded-[1rem] border-2 px-4 py-3 text-left font-manrope text-sm font-[700] shadow-hard-sm transition active:translate-y-[1px] disabled:cursor-default ${
                 showCorrect
-                  ? "border-ink bg-green-soft text-ink"
+                  ? "border-paper bg-green text-paper"
                   : showWrong
-                    ? "border-ink bg-red-soft text-ink"
+                    ? "border-paper bg-red text-paper"
                     : "border-ink bg-paper text-ink hover:bg-yellow-soft"
               }`}
             >

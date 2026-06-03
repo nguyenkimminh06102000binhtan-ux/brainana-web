@@ -183,7 +183,6 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
           outcome={submitted.correct ? "correct" : "incorrect"}
           correctMessages={labels.feedbackCorrect}
           wrongMessages={labels.feedbackWrong}
-          acceptedAnswers={submitted.correct ? undefined : answers}
         />
       )}
       <div className="flex flex-col items-center gap-6 px-4 py-8">
@@ -259,7 +258,7 @@ function AudioTypePlayer({ card, onAnswer, onReveal, labels, showCustomAttribute
             ) : (
               <div className="flex flex-wrap gap-1.5">
                 {answers.map((ans, i) => (
-                  <span key={i} className="rounded-full border-2 border-ink bg-red-soft px-3 py-0.5 font-manrope text-sm text-ink shadow-hard-sm">
+                  <span key={i} className="block max-w-full break-words rounded-[1rem] border-2 border-ink bg-red-soft px-3 py-1.5 font-manrope text-sm leading-relaxed text-ink shadow-hard-sm">
                     {ans}
                   </span>
                 ))}

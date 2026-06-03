@@ -28,7 +28,7 @@ export default function ShareButton({
     <button
       type="button"
       onClick={handleShare}
-      className="cursor-pointer rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-paper active:translate-y-[1px] active:shadow-none"
+      className="inline-flex min-h-11 cursor-pointer items-center rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink shadow-hard-sm transition hover:bg-paper active:translate-y-[1px] active:shadow-none"
     >
       {copied ? labels.copied : labels.share}
     </button>
