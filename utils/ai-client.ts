@@ -35,6 +35,21 @@ export interface AICompleteResult {
   stopReason: string;
 }
 
+type ChatCompletionLike = {
+  choices: Array<{
+    message?: { content?: string | null };
+    finish_reason?: string | null;
+  }>;
+};
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isRateLimitError(error: unknown) {
+  return Boolean(error && typeof error === "object" && "status" in error && (error as { status?: number }).status === 429);
+}
+
 // ── Non-streaming completion ──────────────────────────────────────────────────
 export async function aiComplete(opts: AICompleteOptions): Promise<AICompleteResult> {
 
@@ -68,16 +83,25 @@ export async function aiComplete(opts: AICompleteOptions): Promise<AICompleteRes
     baseURL: "https://api.mistral.ai/v1",
   });
 
-  const completion = await client.chat.completions.create({
-    model:      MODELS.mistral,
-    max_tokens: opts.maxTokens,
-    messages: [
-      { role: "system", content: opts.system },
-      ...opts.messages,
-    ],
-  });
+  let completion: ChatCompletionLike | null = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      completion = await client.chat.completions.create({
+        model:      MODELS.mistral,
+        max_tokens: opts.maxTokens,
+        messages: [
+          { role: "system", content: opts.system },
+          ...opts.messages,
+        ],
+      }) as ChatCompletionLike;
+      break;
+    } catch (error) {
+      if (!isRateLimitError(error) || attempt === 2) throw error;
+      await sleep(5_000 * (attempt + 1));
+    }
+  }
 
-  const choice = completion.choices[0];
+  const choice = completion?.choices[0];
   const result = {
     text:       choice?.message?.content ?? "",
     stopReason: choice?.finish_reason ?? "stop",

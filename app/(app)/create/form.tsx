@@ -1,11 +1,12 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useRef, useState } from "react";
-import { useDraftAutosave, formatDraftAge } from "@/hooks/useDraftAutosave";
+import { useActionState, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useDraftAutosave } from "@/hooks/useDraftAutosave";
 import type { DraftSection } from "@/hooks/useDraftAutosave";
 import { useRouter } from "next/navigation";
 import { createCourse } from "./actions";
 import MathToolbar from "@/app/(app)/_components/math-toolbar";
+import DraftAutosaveStatus from "@/components/draft-autosave-status";
 import { createClient } from "@/utils/supabase/client";
 import { compressImage } from "@/utils/compress-image";
 import { SUPPORTED_COURSE_LANGUAGES, TOP_LEVEL_CATEGORIES, getCategoryItems } from "@/app/constants/categories";
@@ -27,6 +28,7 @@ const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/webm"];
 const IMAGE_MAX = 5 * 1024 * 1024;
 const AUDIO_MAX = 10 * 1024 * 1024;
+const BULK_AI_REQUEST_DELAY_MS = 4_500;
 
 type UploadState = { uploading: boolean; compressing: boolean; error: string | null };
 type UploadField = "image" | "backAudio";
@@ -90,6 +92,10 @@ function label(text: string, optional?: boolean, optionalLabel = "optional") {
       {text}{optional && <span className="ml-1 normal-case">({optionalLabel})</span>}
     </p>
   );
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const inputCls = "w-full rounded-md bg-paper px-4 py-3 font-manrope text-sm text-ink outline-none placeholder:text-ink-3 focus:ring-2 focus:ring-ink";
@@ -563,9 +569,10 @@ export default function CreateCourseForm({
   const prospectiveCourseId = useRef(crypto.randomUUID());
   const lastFocusedEl = useRef<HTMLTextAreaElement | null>(null);
   const lastFocusedSetter = useRef<((v: string) => void) | null>(null);
+  const draftAutoAppliedRef = useRef(false);
 
   // ── Draft autosave ──────────────────────────────────────────────────────────
-  const draftKey = userId ? `brainana:draft:create:${userId}` : null;
+  const draftKey = userId ? "create" : null;
 
   const draftState = useMemo(() => ({
     formTitle,
@@ -594,10 +601,10 @@ export default function CreateCourseForm({
     })) as DraftSection[],
   }), [formTitle, selectedCategory, selectedSubcategory, selectedLevel, selectedVisibility, selectedSourceLanguage, selectedTargetLanguage, sections]);
 
-  const { hasDraft, draftSavedAt, loadDraft, clearDraft, dismissDraft } = useDraftAutosave(draftKey, draftState);
+  const { hasDraft, draftSavedAt, loadDraft, clearDraft, suppressDraftSaves } = useDraftAutosave(draftKey, draftState);
 
-  async function restoreDraft() {
-    const draft = loadDraft();
+  const restoreDraft = useCallback(async () => {
+    const draft = await loadDraft();
     if (!draft) return;
     if (draft.formTitle !== undefined) setFormTitle(draft.formTitle);
     setSelectedCategory(draft.selectedCategory);
@@ -632,7 +639,6 @@ export default function CreateCourseForm({
     setSections(restored);
     const maxId = restored.flatMap((s) => [s.id, ...s.items.map((i) => i.id)]).reduce((a, b) => Math.max(a, b), uid);
     uid = maxId + 1;
-    dismissDraft();
 
     // Regenerate display URLs for any items that have media paths.
     const supabase = createClient();
@@ -645,7 +651,13 @@ export default function CreateCourseForm({
       })),
     })));
     setSections(withUrls);
-  }
+  }, [loadDraft]);
+
+  useEffect(() => {
+    if (!hasDraft || draftAutoAppliedRef.current) return;
+    draftAutoAppliedRef.current = true;
+    void restoreDraft();
+  }, [hasDraft, restoreDraft]);
   // ── End draft autosave ──────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -814,34 +826,34 @@ export default function CreateCourseForm({
 
     if (!quotaRanOut && selected.has("__back__")) {
       const missing = section.items.filter((i) => i.front.trim() && !i.back.trim()).map((i) => ({ itemId: i.id, front: i.front }));
-      for (let i = 0; i < missing.length; i += 5) {
+      for (let i = 0; i < missing.length; i++) {
         if (quotaRanOut) break;
-        await Promise.all(missing.slice(i, i + 5).map(async ({ itemId, front }) => {
-          const { back, distractors, remainingChars, quotaExhausted } = await generateBack(front, selectedSourceLanguage, selectedTargetLanguage);
-          if (quotaExhausted) { quotaRanOut = true; return; }
-          if (back) {
-            setSections((prev) => prev.map((s) =>
-              s.id === sectionId
-                ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, back, distractors } : item) }
-                : s
-            ));
-            successCount++;
-          }
-          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-        }));
+        const { itemId, front } = missing[i]!;
+        const { back, distractors, remainingChars, quotaExhausted } = await generateBack(front, selectedSourceLanguage, selectedTargetLanguage);
+        if (quotaExhausted) { quotaRanOut = true; break; }
+        if (back) {
+          setSections((prev) => prev.map((s) =>
+            s.id === sectionId
+              ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, back, distractors } : item) }
+              : s
+          ));
+          successCount++;
+        }
+        if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        if (i < missing.length - 1) await wait(BULK_AI_REQUEST_DELAY_MS);
       }
     }
 
     if (!quotaRanOut && selected.has("__romanization__") && getRomanizationSystem(selectedTargetLanguage)) {
       const missing = section.items.filter((i) => i.back.trim() && !i.romanization.trim()).map((i) => ({ itemId: i.id, back: i.back }));
-      for (let i = 0; i < missing.length; i += 10) {
+      for (let i = 0; i < missing.length; i++) {
         if (quotaRanOut) break;
-        await Promise.all(missing.slice(i, i + 10).map(async ({ itemId, back }) => {
-          const { romanization, remainingChars, quotaExhausted } = await suggestRomanization(back, selectedTargetLanguage);
-          if (quotaExhausted) { quotaRanOut = true; return; }
-          if (romanization) { updateItem(sectionId, itemId, "romanization", romanization); successCount++; }
-          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-        }));
+        const { itemId, back } = missing[i]!;
+        const { romanization, remainingChars, quotaExhausted } = await suggestRomanization(back, selectedTargetLanguage);
+        if (quotaExhausted) { quotaRanOut = true; break; }
+        if (romanization) { updateItem(sectionId, itemId, "romanization", romanization); successCount++; }
+        if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        if (i < missing.length - 1) await wait(BULK_AI_REQUEST_DELAY_MS);
       }
     }
 
@@ -870,17 +882,17 @@ export default function CreateCourseForm({
           ? customAttrs.filter((attr) => !item.customAttributeValues[attr]?.trim()).map((attr) => ({ itemId: item.id, attr, front: item.front, back: item.back }))
           : []
       );
-      for (let i = 0; i < missing.length; i += 5) {
+      for (let i = 0; i < missing.length; i++) {
         if (quotaRanOut) break;
-        await Promise.all(missing.slice(i, i + 5).map(async ({ itemId, attr, front, back }) => {
-          const { value, remainingChars, quotaExhausted } = await generateCustomAttribute(attr, front, back, selectedSourceLanguage, selectedTargetLanguage);
-          if (quotaExhausted) { quotaRanOut = true; return; }
-          if (value) {
-            setSections((prev) => prev.map((s) => s.id === sectionId ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, customAttributeValues: { ...item.customAttributeValues, [attr]: value } } : item) } : s));
-            successCount++;
-          }
-          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-        }));
+        const { itemId, attr, front, back } = missing[i]!;
+        const { value, remainingChars, quotaExhausted } = await generateCustomAttribute(attr, front, back, selectedSourceLanguage, selectedTargetLanguage);
+        if (quotaExhausted) { quotaRanOut = true; break; }
+        if (value) {
+          setSections((prev) => prev.map((s) => s.id === sectionId ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, customAttributeValues: { ...item.customAttributeValues, [attr]: value } } : item) } : s));
+          successCount++;
+        }
+        if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        if (i < missing.length - 1) await wait(BULK_AI_REQUEST_DELAY_MS);
       }
     }
 
@@ -1002,31 +1014,14 @@ export default function CreateCourseForm({
 
   return (
     <>
-    {hasDraft && (
-      <div className="mb-2 rounded-lg border border-orange/40 bg-orange/5 px-4 py-3">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="font-manrope text-sm text-ink">
-            📝 Unsaved work found from <strong>{formatDraftAge(draftSavedAt!)}</strong>
-          </p>
-          <div className="flex gap-2">
-            <button type="button" onClick={restoreDraft}
-              className="rounded-full bg-orange px-4 py-1.5 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90">
-              Restore
-            </button>
-            <button type="button" onClick={clearDraft}
-              className="rounded-full border border-ink/20 px-4 py-1.5 font-manrope text-xs font-[700] text-ink-2 transition hover:bg-ink/5">
-              Discard
-            </button>
-          </div>
-        </div>
-        <p className="mt-1 font-manrope text-xs text-ink-3">
-          All text content, images, and audio will be restored.
-        </p>
-      </div>
-    )}
     <form ref={formRef} action={formAction} className="flex flex-col gap-6">
       <input type="hidden" name="sections_data" value={sectionsPayload} />
       <input type="hidden" name="prospective_course_id" value={prospectiveCourseId.current} />
+      <input type="hidden" name="draft_key" value={draftKey ?? ""} />
+
+      <div className="flex justify-end">
+        <DraftAutosaveStatus savedAt={draftSavedAt} />
+      </div>
 
       {/* Course info */}
       <section className="rounded-lg bg-paper-2 p-8 shadow-hard">
@@ -1334,7 +1329,7 @@ export default function CreateCourseForm({
             if (selectedVisibility === "public") {
               setShowPublicWarning(true);
             } else {
-              clearDraft();
+              suppressDraftSaves();
               formRef.current?.requestSubmit();
             }
           }}
@@ -1380,7 +1375,7 @@ export default function CreateCourseForm({
     {showPublicWarning && (
       <PublicCourseWarningModal
         labels={{ publicWarningTitle: labels.publicWarningTitle, publicWarningSubtitle: labels.publicWarningSubtitle, publicWarningLock: labels.publicWarningLock, publicWarningNoDelete: labels.publicWarningNoDelete, publicWarningVisible: labels.publicWarningVisible, publicWarningConfirm: labels.publicWarningConfirm, publicWarningBack: labels.publicWarningBack }}
-        onConfirm={() => { clearDraft(); setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
+        onConfirm={() => { suppressDraftSaves(); setShowPublicWarning(false); formRef.current?.requestSubmit(); }}
         onBack={() => setShowPublicWarning(false)}
       />
     )}

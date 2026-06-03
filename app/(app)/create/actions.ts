@@ -35,6 +35,7 @@ const MAX_ACCEPTED_ANSWERS = 20;
 const MAX_ACCEPTED_ANSWER_LENGTH = 200;
 const MAX_DISTRACTORS = 10;
 const MAX_DISTRACTOR_LENGTH = 200;
+const DRAFT_KEY_RE = /^(create|edit:[0-9a-fA-F-]{36})$/;
 
 function generateSlug(title: string): string {
   const base = title
@@ -126,6 +127,7 @@ export async function createCourse(
   if (!UUID_RE.test(prospectiveCourseId)) {
     return { error: "Invalid form state. Please refresh and try again." };
   }
+  const draftKey = String(formData.get("draft_key") ?? "").trim();
 
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim() || null;
@@ -229,6 +231,14 @@ export async function createCourse(
       await supabase.from("courses").delete().eq("id", course.id);
       return { error: itemsError.message };
     }
+  }
+
+  if (draftKey === "create" && DRAFT_KEY_RE.test(draftKey)) {
+    await supabase
+      .from("course_drafts")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("draft_key", draftKey);
   }
 
   redirect(`/c/${course.slug}`);

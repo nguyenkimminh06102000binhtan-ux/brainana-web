@@ -38,6 +38,7 @@ const MAX_ACCEPTED_ANSWERS = 20;
 const MAX_ACCEPTED_ANSWER_LENGTH = 200;
 const MAX_DISTRACTORS = 10;
 const MAX_DISTRACTOR_LENGTH = 200;
+const DRAFT_KEY_RE = /^(create|edit:[0-9a-fA-F-]{36})$/;
 
 function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
@@ -161,6 +162,7 @@ export async function updateCourse(
   const courseId = String(formData.get("course_id") ?? "");
   const courseSlug = String(formData.get("course_slug") ?? "");
   if (!UUID_RE.test(courseId)) return { error: "Invalid form state. Please refresh and try again." };
+  const draftKey = String(formData.get("draft_key") ?? "").trim();
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim() || null;
   const category = String(formData.get("category") ?? "").trim() || null;
@@ -344,6 +346,14 @@ export async function updateCourse(
     .from("courses")
     .update({ card_count: totalCards, has_images: hasImages, has_audio: hasAudio, has_romanization: hasRomanization })
     .eq("id", courseId);
+
+  if (draftKey === `edit:${courseId}` && DRAFT_KEY_RE.test(draftKey)) {
+    await supabase
+      .from("course_drafts")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("draft_key", draftKey);
+  }
 
   redirect(`/c/${courseSlug}`);
 }
