@@ -7,13 +7,22 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
 import { startTopUpCheckout } from "@/app/actions/billing";
-import { TOPUP_PACKS, getSubscriptionUrls } from "@/utils/lemonsqueezy";
+import {
+  TOPUP_PACKS,
+  getSubscriptionUrls,
+  fetchCompletedCheckout,
+  fetchCompletedTopUpCheckout,
+  planFromProductId,
+  PLAN_QUOTA,
+  topupFromProductId,
+} from "@/utils/polar";
+import { createAdminClient } from "@/utils/supabase/admin";
 import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 
 const PLAN_ALLOWANCES = {
   free:  { chars: 0,        sessions: 0  },
-  plus:  { chars: 150_000,  sessions: 20 },
-  pro:   { chars: 600_000,  sessions: 60 },
+  plus:  { chars: 250_000,  sessions: 25 },
+  pro:   { chars: 900_000,  sessions: 90 },
 } as const;
 
 const PLAN_LABELS = {
@@ -47,6 +56,157 @@ export default async function BillingPage({
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  // When Polar redirects back after checkout it appends ?checkout_id=...
+  // Sync the subscription directly from the Polar API so the page reflects
+  // the new plan immediately, before any webhook arrives.
+  if (params.topup === "1" && params.checkout_id) {
+    const checkout = await fetchCompletedTopUpCheckout(params.checkout_id);
+    if (checkout && checkout.userId === user.id) {
+      const pack = topupFromProductId(checkout.productId);
+      if (pack) {
+        const admin = createAdminClient();
+        const eventKey = checkout.orderId
+          ? `topup:order:${checkout.orderId}`
+          : `topup:checkout:${checkout.checkoutId}`;
+        const { data: existingCredit, error: existingCreditErr } = await admin
+          .from("quota_transactions")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("reason", "purchase")
+          .contains("metadata", { checkout_id: checkout.checkoutId })
+          .limit(1)
+          .maybeSingle();
+        if (existingCreditErr) {
+          throw new Error(`Failed to verify top-up credit: ${existingCreditErr.message}`);
+        }
+
+        if (!existingCredit) {
+          const { error: topUpClaimErr } = await admin
+            .from("processed_billing_events")
+            .insert({ provider: "polar", event_key: eventKey });
+          if (topUpClaimErr && topUpClaimErr.code !== "23505") {
+            throw new Error(`Failed to claim top-up sync event: ${topUpClaimErr.message}`);
+          }
+          const topUpWasAlreadyClaimed = topUpClaimErr?.code === "23505";
+
+          const metadata = {
+            event_key: eventKey,
+            order_id: checkout.orderId,
+            checkout_id: checkout.checkoutId,
+            pack: pack.label,
+            event: "checkout_return",
+          };
+
+          if (pack.chars > 0) {
+            const { error } = await admin.rpc("refund_quota", {
+              p_user_id: user.id,
+              p_resource: "chars",
+              p_requested_amount: pack.chars,
+              p_reason: "purchase",
+              p_metadata: metadata,
+            });
+            if (error) {
+              if (!topUpWasAlreadyClaimed) {
+                await admin
+                  .from("processed_billing_events")
+                  .delete()
+                  .eq("provider", "polar")
+                  .eq("event_key", eventKey);
+              }
+              throw new Error(`Failed to credit character top-up: ${error.message}`);
+            }
+          }
+
+          if (pack.sessions > 0) {
+            const { error } = await admin.rpc("refund_quota", {
+              p_user_id: user.id,
+              p_resource: "tutor_sessions",
+              p_requested_amount: pack.sessions,
+              p_reason: "purchase",
+              p_metadata: metadata,
+            });
+            if (error) {
+              if (!topUpWasAlreadyClaimed) {
+                await admin
+                  .from("processed_billing_events")
+                  .delete()
+                  .eq("provider", "polar")
+                  .eq("event_key", eventKey);
+              }
+              throw new Error(`Failed to credit session top-up: ${error.message}`);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (params.upgraded === "1" && params.checkout_id) {
+    const checkout = await fetchCompletedCheckout(params.checkout_id);
+    if (checkout && checkout.userId === user.id) {
+      const plan = planFromProductId(checkout.productId);
+      if (plan) {
+        const status =
+          checkout.status === "trialing" || checkout.status === "active"
+            ? checkout.status
+            : "active";
+        const quota = PLAN_QUOTA[plan] ?? PLAN_QUOTA.free;
+        const admin = createAdminClient();
+        const grantKey = `subscription:${checkout.subscriptionId}:${checkout.periodEnd ?? "none"}`;
+        const { error: grantClaimErr } = await admin
+          .from("processed_billing_events")
+          .insert({ provider: "polar", event_key: grantKey });
+        if (grantClaimErr && grantClaimErr.code !== "23505") {
+          throw new Error(`Failed to claim billing sync event: ${grantClaimErr.message}`);
+        }
+        const shouldGrantQuota = !grantClaimErr;
+
+        const subscriptionUpdate: Record<string, unknown> = {
+          user_id: user.id,
+          plan,
+          billing_customer_id:     checkout.customerId,
+          billing_subscription_id: checkout.subscriptionId,
+          subscription_status:     status,
+          plan_expires_at:         checkout.periodEnd ?? null,
+          updated_at:              new Date().toISOString(),
+        };
+        if (shouldGrantQuota) {
+          subscriptionUpdate.chars_balance = quota.chars;
+          subscriptionUpdate.tutor_sessions_balance = quota.sessions;
+        }
+
+        const { error: subscriptionUpdateErr } = await admin
+          .from("user_subscriptions")
+          .upsert(subscriptionUpdate, { onConflict: "user_id" });
+        if (subscriptionUpdateErr) {
+          throw new Error(`Failed to sync Polar subscription: ${subscriptionUpdateErr.message}`);
+        }
+
+        if (shouldGrantQuota) {
+          const { error: quotaTxErr } = await admin.from("quota_transactions").insert([
+            {
+              user_id: user.id,
+              resource: "chars",
+              amount: quota.chars,
+              reason: "monthly_grant",
+              metadata: { plan, event: "checkout_return", period_end: checkout.periodEnd },
+            },
+            {
+              user_id: user.id,
+              resource: "tutor_sessions",
+              amount: quota.sessions,
+              reason: "monthly_grant",
+              metadata: { plan, event: "checkout_return", period_end: checkout.periodEnd },
+            },
+          ]);
+          if (quotaTxErr) {
+            throw new Error(`Failed to record Polar quota grant: ${quotaTxErr.message}`);
+          }
+        }
+      }
+    }
+  }
+
   const [{ data: sub }, { data: transactions }, { data: profile }] = await Promise.all([
     supabase.from("user_subscriptions").select("*").eq("user_id", user.id).single(),
     supabase.from("quota_transactions").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(20),
@@ -66,10 +226,12 @@ export default async function BillingPage({
   // isCancelled: DB is authoritative once the webhook fires; ?cancelled=1 covers
   // the window between the server action redirect and the webhook arriving.
   const isCancelled =
-    sub?.lemon_subscription_status === "cancelled" || params.cancelled === "1";
+    sub?.subscription_status === "cancelled" ||
+    sub?.subscription_status === "canceled" ||
+    params.cancelled === "1";
 
-  const portalUrls = plan !== "free" && sub?.lemon_subscription_id && !isCancelled
-    ? await getSubscriptionUrls(sub.lemon_subscription_id)
+  const portalUrls = plan !== "free" && sub?.billing_subscription_id && !isCancelled
+    ? await getSubscriptionUrls(sub.billing_subscription_id)
     : null;
 
   return (
@@ -231,11 +393,11 @@ export default async function BillingPage({
               {/* Expiry warning */}
               <div className="mb-5 rounded-lg border border-orange/30 bg-orange/5 px-4 py-3">
                 <p className="font-manrope text-sm font-[700] text-ink">
-                  ⚠️ Top-up credits expire at your next renewal
+                  Top-ups are one-time boosts for this billing period
                 </p>
                 <p className="mt-1 font-manrope text-xs leading-relaxed text-ink-2">
-                  Credits are added to your current balance and expire at the end of your billing period.
-                  They do <span className="font-[700]">not</span> carry over to the next month.
+                  They do <span className="font-[700]">not</span> renew and unused balance resets on your next billing date.
+                  If you need this amount regularly, Pro is the better value.
                   {sub?.plan_expires_at && (
                     <> Your current period ends on <span className="font-[700]">{new Date(sub.plan_expires_at as string).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>.</>
                   )}

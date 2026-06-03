@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "6. Subscriptions and Payments",
-    body: `Brainana offers a Free tier and two paid subscription plans — Plus ($9 / month) and Pro ($19 / month) — billed monthly in USD. Payments are processed securely by Lemon Squeezy (lemonsqueezy.com), our authorised reseller and Merchant of Record. When you subscribe you authorise Lemon Squeezy to charge your payment method on a recurring monthly basis. Your subscription renews automatically at the end of each billing period unless you cancel before the renewal date. You can cancel at any time from your account settings; cancellation takes effect at the end of the current billing period. Monthly quota (AI characters and tutor sessions) resets on your billing anniversary and does not roll over.`,
+    body: `Brainana offers a Free tier and two paid subscription plans — Plus ($9 / month) and Pro ($19 / month) — billed monthly in USD. Payments are processed securely by Polar (polar.sh). When you subscribe you authorise Polar to charge your payment method on a recurring monthly basis. Your subscription renews automatically at the end of each billing period unless you cancel before the renewal date. You can cancel at any time from your account settings; cancellation takes effect at the end of the current billing period. Monthly quota and one-time top-up balances (AI characters and tutor sessions) reset on your billing anniversary and do not roll over.`,
   },
   {
     title: "7. Refunds",

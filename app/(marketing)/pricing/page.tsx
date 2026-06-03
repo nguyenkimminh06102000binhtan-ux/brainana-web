@@ -8,6 +8,16 @@ export const metadata = {
   description: "Simple, transparent pricing for Brainana. Start free, upgrade when you're ready.",
 };
 
+const AI_CHARACTER_USES = [
+  "Generate answer/back cards",
+  "Auto text-to-speech audio",
+  "Romanization",
+  "Example sentences",
+  "Pronunciation",
+  "Custom attributes",
+  "AI import from notes or documents",
+] as const;
+
 const PLANS = [
   {
     key: "free",
@@ -17,17 +27,14 @@ const PLANS = [
     description: "Get started and explore",
     badge: null,
     features: [
-      "Unlimited public courses",
-      "All study modes",
-      "Access to community courses",
+      { label: "Unlimited public courses" },
+      { label: "All study modes" },
+      { label: "Access to community courses" },
     ],
     missing: [
-      "AI features",
-      "AI tutor sessions",
-      "Private courses",
-      "TTS audio generation",
-      "AI romanization",
-      "AI import from files",
+      { label: "AI characters", children: AI_CHARACTER_USES },
+      { label: "AI tutor sessions" },
+      { label: "Private courses" },
     ],
     cta: "Sign up free",
     ctaHref: "/signup",
@@ -41,13 +48,10 @@ const PLANS = [
     description: "For serious learners",
     badge: "Most popular",
     features: [
-      "150,000 AI characters / month",
-      "20 AI tutor sessions / month",
-      "Private courses",
-      "TTS audio generation",
-      "AI romanization",
-      "AI import from files",
-      "Everything in Free",
+      { label: "250,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "25 AI tutor sessions / month" },
+      { label: "Private courses" },
+      { label: "Everything in Free" },
     ],
     missing: [],
     cta: "Get Plus",
@@ -62,10 +66,10 @@ const PLANS = [
     description: "For power users & teachers",
     badge: null,
     features: [
-      "600,000 AI characters / month",
-      "60 AI tutor sessions / month",
-      "Everything in Plus",
-      "Priority support",
+      { label: "900,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "90 AI tutor sessions / month" },
+      { label: "Everything in Plus" },
+      { label: "Priority support" },
     ],
     missing: [],
     cta: "Get Pro",
@@ -74,10 +78,36 @@ const PLANS = [
   },
 ] as const;
 
+function FeatureLine({
+  item,
+  muted = false,
+}: {
+  item: { label: string; children?: readonly string[] };
+  muted?: boolean;
+}) {
+  return (
+    <li className={`font-manrope text-sm ${muted ? "text-ink-3" : "text-ink"}`}>
+      <div className="flex items-start gap-2">
+        <span className={`mt-0.5 shrink-0 ${muted ? "" : "text-green-600"}`}>
+          {muted ? "✗" : "✓"}
+        </span>
+        <span>{item.label}</span>
+      </div>
+      {item.children && (
+        <ul className="ml-6 mt-1 flex flex-col gap-1 border-l border-ink/10 pl-3 text-xs leading-5 text-ink-3">
+          {item.children.map((child) => (
+            <li key={child}>{child}</li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
 const FAQ = [
   {
     q: "What counts as an AI character?",
-    a: "AI characters are the total characters processed by AI features — including AI-generated course content, TTS audio scripts, romanization, and AI import. Each month your quota resets on your billing anniversary.",
+    a: "AI characters are input characters processed by AI features: generating answer/back cards, auto text-to-speech audio, autofilling custom attributes such as romanization, example sentences, and pronunciation, plus AI import from notebooks and documents. Each month your quota resets on your billing anniversary.",
   },
   {
     q: "What is an AI tutor session?",
@@ -93,7 +123,7 @@ const FAQ = [
   },
   {
     q: "What payment methods are accepted?",
-    a: "Payments are processed by Lemon Squeezy and support major credit and debit cards. Available methods may vary by country.",
+    a: "Payments are processed by Polar and support major credit and debit cards. Available methods may vary by country.",
   },
   {
     q: "Is there a refund policy?",
@@ -161,18 +191,8 @@ export default function PricingPage() {
                 </div>
 
                 <ul className="mb-6 flex flex-col gap-2">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 font-manrope text-sm text-ink">
-                      <span className="mt-0.5 shrink-0 text-green-600">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                  {plan.missing.map((f) => (
-                    <li key={f} className="flex items-start gap-2 font-manrope text-sm text-ink-3">
-                      <span className="mt-0.5 shrink-0">✗</span>
-                      {f}
-                    </li>
-                  ))}
+                  {plan.features.map((f) => <FeatureLine key={f.label} item={f} />)}
+                  {plan.missing.map((f) => <FeatureLine key={f.label} item={f} muted />)}
                 </ul>
 
                 <div className="mt-auto">
@@ -193,7 +213,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-6 text-center font-manrope text-xs text-ink-3">
-          Prices in USD · Monthly billing · Cancel anytime · Characters and sessions reset each month
+          Prices in USD · Monthly billing · Cancel anytime · AI characters and sessions reset each month
         </p>
       </section>
 

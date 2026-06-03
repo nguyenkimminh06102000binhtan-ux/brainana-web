@@ -72,11 +72,11 @@ export default async function AdminUserDetail({
             <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">Override plan</p>
             <p className="mb-3 font-manrope text-xs text-ink-3">Sets plan + resets quota to plan defaults.</p>
 
-            {sub?.lemon_subscription_id && (
+            {sub?.billing_subscription_id && (
               <div className="mb-3 rounded-md border border-red-300 bg-red-50 px-3 py-2">
-                <p className="font-manrope text-xs font-[700] text-red-600">⚠ Active Lemon Squeezy subscription</p>
+                <p className="font-manrope text-xs font-[700] text-red-600">⚠ Active Polar subscription</p>
                 <p className="mt-0.5 font-manrope text-xs text-red-500">
-                  This user has an active LS subscription ({sub.lemon_subscription_id}). Any override here will be overwritten by the next LS webhook. Use <strong>Grant quota</strong> below instead, or cancel the LS subscription first.
+                  This user has an active Polar subscription ({sub.billing_subscription_id}). Any override here will be overwritten by the next Polar webhook. Use <strong>Grant quota</strong> below instead, or cancel the Polar subscription first.
                 </p>
               </div>
             )}
@@ -85,8 +85,8 @@ export default async function AdminUserDetail({
 
               <select name="plan" defaultValue={sub?.plan ?? "free"} className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
                 <option value="free">Free</option>
-                <option value="plus">Plus — 150K chars · 20 sessions/mo</option>
-                <option value="pro">Pro — 600K chars · 60 sessions/mo</option>
+                <option value="plus">Plus — 250K chars · 25 sessions/mo</option>
+                <option value="pro">Pro — 900K chars · 90 sessions/mo</option>
               </select>
 
               <label className="font-manrope text-xs text-ink-3">Expires at (leave blank = no expiry)</label>
@@ -158,7 +158,7 @@ export default async function AdminUserDetail({
                 <option value="refund">Refund</option>
                 <option value="chargeback">Chargeback</option>
               </select>
-              <input type="text" name="lemon_refund_id" placeholder="Lemon Squeezy refund ID (optional)" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
+              <input type="text" name="refund_id" placeholder="Polar refund ID (optional)" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
               <button type="submit" className="rounded-full border-2 border-orange px-4 py-2 font-manrope text-sm font-[700] text-orange transition hover:bg-orange hover:text-on-bright">
                 Process refund
               </button>

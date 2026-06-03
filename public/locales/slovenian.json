@@ -639,6 +639,7 @@
     "acceptedAnswerPlaceholder": "e.g. Alternative answer",
     "addAcceptedAnswer": "+ Add accepted answer",
     "autoFill": "Auto-fill",
+    "autoFillAnswers": "Answer/back cards",
     "autoFillGenerate": "Generate",
     "autoFilling": "Generating...",
     "configureCustomAttributes": "Custom attributes",

@@ -19,11 +19,11 @@ const sections = [
   },
   {
     title: "3. Payment Processing",
-    body: "Payments are processed by Lemon Squeezy (lemonsqueezy.com), our authorised Merchant of Record. When you subscribe to a paid plan, you provide your payment details directly to Lemon Squeezy. Brainana does not store your full card number or banking credentials. Lemon Squeezy's own privacy policy governs how it handles payment data. We receive from Lemon Squeezy only the information needed to fulfil your subscription (e.g., payment status, last four digits of card, billing country).",
+    body: "Payments are processed by Polar (polar.sh). When you subscribe to a paid plan, you provide your payment details directly to Polar. Brainana does not store your full card number or banking credentials. Polar's own privacy policy governs how it handles payment data. We receive from Polar only the information needed to fulfil your subscription (e.g., payment status, last four digits of card, billing country).",
   },
   {
     title: "4. Sharing",
-    body: "We do not sell your personal information. We share data only with service providers that help us operate the product — including Supabase (database and authentication), Vercel (hosting), Anthropic (AI features), and Lemon Squeezy (payments). Each provider is contractually required to handle data in accordance with applicable privacy law.",
+    body: "We do not sell your personal information. We share data only with service providers that help us operate the product — including Supabase (database and authentication), Vercel (hosting), Anthropic (AI features), and Polar (payments). Each provider is contractually required to handle data in accordance with applicable privacy law.",
   },
   {
     title: "5. Retention",
@@ -47,7 +47,7 @@ const sections = [
   },
   {
     title: "10. Contact",
-    body: "Questions about this policy can be sent to privacy@brainana.app. For billing-related data inquiries, you may also contact Lemon Squeezy directly at lemonsqueezy.com.",
+    body: "Questions about this policy can be sent to privacy@brainana.app. For billing-related data inquiries, you may also contact Polar directly at polar.sh.",
   },
 ];
 

@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { refundQuota } from "@/utils/quota";
 import type { QuotaResource, QuotaReason } from "@/utils/quota";
-import { PLAN_QUOTA } from "@/utils/lemonsqueezy";
+import { PLAN_QUOTA } from "@/utils/polar";
 
 /** Guard: only admins can call these actions */
 async function requireAdmin() {
@@ -66,15 +66,15 @@ export async function adminGrantQuota(formData: FormData) {
   redirect(`/admin/users/${targetUserId}`);
 }
 
-/** Refund quota to a user after Lemon Squeezy refund */
+/** Refund quota to a user after a billing refund */
 export async function adminRefundQuota(formData: FormData) {
   const { adminId } = await requireAdmin();
 
-  const targetUserId  = formData.get("user_id") as string;
-  const resource      = formData.get("resource") as QuotaResource;
-  const amount        = parseInt(formData.get("amount") as string);
-  const reason        = (formData.get("reason") as QuotaReason) ?? "refund";
-  const lemonRefundId = formData.get("lemon_refund_id") as string | null;
+  const targetUserId = formData.get("user_id") as string;
+  const resource     = formData.get("resource") as QuotaResource;
+  const amount       = parseInt(formData.get("amount") as string);
+  const reason       = (formData.get("reason") as QuotaReason) ?? "refund";
+  const refundId     = formData.get("refund_id") as string | null;
 
   if (!targetUserId || !resource || !amount || amount <= 0) {
     throw new Error("Invalid form data");
@@ -83,7 +83,7 @@ export async function adminRefundQuota(formData: FormData) {
   const admin = createAdminClient();
 
   await refundQuota(admin, targetUserId, resource, amount, reason, {
-    lemon_refund_id: lemonRefundId ?? undefined,
+    refund_id: refundId ?? undefined,
     granted_by: adminId,
   });
 
@@ -115,7 +115,7 @@ export async function adminSetPlan(formData: FormData) {
       tutor_sessions_balance:    quota.sessions,
       plan_expires_at:           expiresAt,
       is_manual_subscription:    isManual,
-      lemon_subscription_status: plan === "free" ? "none" : "active",
+      subscription_status: plan === "free" ? "none" : "active",
       updated_at:                new Date().toISOString(),
     })
     .eq("user_id", targetUserId);

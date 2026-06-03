@@ -15,7 +15,7 @@ const sections = [
   },
   {
     title: "2. Why We Do Not Offer Refunds",
-    body: "Paid plans on Brainana grant an immediate monthly quota of AI characters and AI tutor sessions. These quotas are provisioned and begin to be available for consumption the moment payment is processed. Because the value of the plan is delivered upfront at the start of each billing period, we are unable to issue refunds for a period that has already commenced.",
+    body: "Paid plans and top-ups on Brainana grant immediate quota of AI characters and AI tutor sessions. These quotas are provisioned and begin to be available for consumption the moment payment is processed. Because the value is delivered upfront for the current billing period, we are unable to issue refunds for a period that has already commenced.",
   },
   {
     title: "3. Cancellation",
@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "6. Payment Processing",
-    body: "Payments are processed by Lemon Squeezy (lemonsqueezy.com), our Merchant of Record. Lemon Squeezy handles all billing on our behalf. If you have a billing query that cannot be resolved by Brainana support, you may also contact Lemon Squeezy directly.",
+    body: "Payments are processed by Polar (polar.sh). Polar handles all billing on our behalf. If you have a billing query that cannot be resolved by Brainana support, you may also contact Polar directly at polar.sh.",
   },
   {
     title: "7. Contact",

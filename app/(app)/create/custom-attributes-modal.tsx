@@ -5,16 +5,21 @@ import { useState, useRef, useEffect } from "react";
 export default function CustomAttributesModal({
   attributes,
   onSave,
+  onAddAttribute,
+  onDeleteAttribute,
   onClose,
   labels,
 }: {
   attributes: string[];
   onSave: (attrs: string[]) => void;
+  onAddAttribute?: (attr: string, scope: "section" | "all") => void;
+  onDeleteAttribute?: (attr: string, scope: "section" | "all") => void;
   onClose: () => void;
   labels: Record<string, string>;
 }) {
   const [draft, setDraft] = useState<string[]>(attributes);
   const [inputVal, setInputVal] = useState("");
+  const [pendingAdd, setPendingAdd] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -43,8 +48,21 @@ export default function CustomAttributesModal({
   function addAttribute() {
     const val = inputVal.trim();
     if (!val || draft.includes(val)) return;
-    setDraft((prev) => [...prev, val]);
+    setPendingAdd(val);
+  }
+
+  function confirmAddAttribute(scope: "section" | "all") {
+    if (!pendingAdd) return;
+    setDraft((prev) => prev.includes(pendingAdd) ? prev : [...prev, pendingAdd]);
+    onAddAttribute?.(pendingAdd, scope);
     setInputVal("");
+    setPendingAdd(null);
+  }
+
+  function confirmDeleteAttribute(attr: string, scope: "section" | "all") {
+    setDraft((prev) => prev.filter((a) => a !== attr));
+    onDeleteAttribute?.(attr, scope);
+    setPendingDelete(null);
   }
 
   function handleDone() {
@@ -88,15 +106,22 @@ export default function CustomAttributesModal({
                 {pendingDelete === attr && (
                   <div className="border-t border-ink/10 bg-electric-pink/10 px-3 py-3">
                     <p className="mb-2.5 font-manrope text-xs font-[600] text-ink">
-                      Remove <span className="font-[800]">{attr}</span>? This will permanently delete the attribute and all its values from every card. This cannot be undone.
+                      Remove <span className="font-[800]">{attr}</span> from this section only or all sections?
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <button
                         type="button"
-                        onClick={() => { setDraft((prev) => prev.filter((a) => a !== attr)); setPendingDelete(null); }}
+                        onClick={() => confirmDeleteAttribute(attr, "section")}
                         className="rounded-full bg-electric-pink px-3 py-1 font-manrope text-xs font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px]"
                       >
-                        Delete
+                        This section
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => confirmDeleteAttribute(attr, "all")}
+                        className="rounded-full bg-electric-pink px-3 py-1 font-manrope text-xs font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px]"
+                      >
+                        All sections
                       </button>
                       <button
                         type="button"
@@ -131,6 +156,36 @@ export default function CustomAttributesModal({
               {labels.addCustomAttribute}
             </button>
           </div>
+          {pendingAdd && (
+            <div className="rounded-md bg-paper-2 px-3 py-3">
+              <p className="mb-2.5 font-manrope text-xs font-[600] text-ink">
+                Add <span className="font-[800]">{pendingAdd}</span> to this section only or all sections?
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => confirmAddAttribute("section")}
+                  className="rounded-full bg-orange px-3 py-1 font-manrope text-xs font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px]"
+                >
+                  This section
+                </button>
+                <button
+                  type="button"
+                  onClick={() => confirmAddAttribute("all")}
+                  className="rounded-full bg-orange px-3 py-1 font-manrope text-xs font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px]"
+                >
+                  All sections
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPendingAdd(null)}
+                  className="rounded-full bg-ink/10 px-3 py-1 font-manrope text-xs font-[800] text-ink transition hover:bg-ink/20 active:translate-y-[1px]"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
           <button
             type="button"
             onClick={handleDone}

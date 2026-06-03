@@ -73,7 +73,13 @@ const makeItem = (): Item => ({
   customAttributeValues: {},
   uploads: freshUpload(),
 });
-const makeSection = (): Section => ({ id: uid++, title: "", description: "", customAttributes: [], items: [makeItem()] });
+const makeSection = (customAttributes: string[] = []): Section => ({
+  id: uid++,
+  title: "",
+  description: "",
+  customAttributes: [...customAttributes],
+  items: [makeItem()],
+});
 
 type CreateEditLabels = Record<string, string>;
 type LevelLabels = { beginner: string; intermediate: string; advanced: string };
@@ -546,7 +552,6 @@ export default function CreateCourseForm({
   const [selectedTargetLanguage, setSelectedTargetLanguage] = useState("Vietnamese");
   const [selectedSourceLanguage, setSelectedSourceLanguage] = useState("English (US)");
   const [formTitle, setFormTitle] = useState("");
-  const [bulkBackStatuses, setBulkBackStatuses] = useState<Map<number, string>>(new Map());
   const [bulkAutoFillStatuses, setBulkAutoFillStatuses] = useState<Map<number, string>>(new Map());
   const [customAttrDropdownSectionId, setCustomAttrDropdownSectionId] = useState<number | null>(null);
   const [customAttrDropdownChecked, setCustomAttrDropdownChecked] = useState<Set<string>>(new Set());
@@ -657,6 +662,7 @@ export default function CreateCourseForm({
   function openAutoFillDropdown(sectionId: number, section: { customAttributes: string[] }) {
     setCustomAttrDropdownSectionId(sectionId);
     const initial = new Set<string>(section.customAttributes);
+    initial.add("__back__");
     if (getRomanizationSystem(selectedTargetLanguage)) initial.add("__romanization__");
     if (getTTSVoice(selectedTargetLanguage)) initial.add("__audio__");
     setCustomAttrDropdownChecked(initial);
@@ -693,7 +699,7 @@ export default function CreateCourseForm({
   }
 
   function addSection() {
-    setSections((prev) => [...prev, makeSection()]);
+    setSections((prev) => [...prev, makeSection(prev[prev.length - 1]?.customAttributes ?? [])]);
   }
 
   function addItem(sectionId: number) {
@@ -741,6 +747,29 @@ export default function CreateCourseForm({
     }));
   }
 
+  function addSectionCustomAttribute(sectionId: number, attr: string, scope: "section" | "all") {
+    setSections((prev) => prev.map((s) => {
+      if (scope === "section" && s.id !== sectionId) return s;
+      if (s.customAttributes.includes(attr)) return s;
+      return { ...s, customAttributes: [...s.customAttributes, attr] };
+    }));
+  }
+
+  function deleteSectionCustomAttribute(sectionId: number, attr: string, scope: "section" | "all") {
+    setSections((prev) => prev.map((s) => {
+      if (scope === "section" && s.id !== sectionId) return s;
+      return {
+        ...s,
+        customAttributes: s.customAttributes.filter((a) => a !== attr),
+        items: s.items.map((item) => {
+          const customAttributeValues = { ...item.customAttributeValues };
+          delete customAttributeValues[attr];
+          return { ...item, customAttributeValues };
+        }),
+      };
+    }));
+  }
+
   function updateCustomAttributeValues(sectionId: number, itemId: number, vals: Record<string, string>) {
     setSections((prev) => prev.map((s) =>
       s.id === sectionId
@@ -783,6 +812,26 @@ export default function CreateCourseForm({
     let successCount = 0;
     setBulkAutoFillStatuses((prev) => new Map(prev).set(sectionId, labels.autoFilling));
 
+    if (!quotaRanOut && selected.has("__back__")) {
+      const missing = section.items.filter((i) => i.front.trim() && !i.back.trim()).map((i) => ({ itemId: i.id, front: i.front }));
+      for (let i = 0; i < missing.length; i += 5) {
+        if (quotaRanOut) break;
+        await Promise.all(missing.slice(i, i + 5).map(async ({ itemId, front }) => {
+          const { back, distractors, remainingChars, quotaExhausted } = await generateBack(front, selectedSourceLanguage, selectedTargetLanguage);
+          if (quotaExhausted) { quotaRanOut = true; return; }
+          if (back) {
+            setSections((prev) => prev.map((s) =>
+              s.id === sectionId
+                ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, back, distractors } : item) }
+                : s
+            ));
+            successCount++;
+          }
+          if (remainingChars !== undefined) minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
+        }));
+      }
+    }
+
     if (!quotaRanOut && selected.has("__romanization__") && getRomanizationSystem(selectedTargetLanguage)) {
       const missing = section.items.filter((i) => i.back.trim() && !i.romanization.trim()).map((i) => ({ itemId: i.id, back: i.back }));
       for (let i = 0; i < missing.length; i += 10) {
@@ -814,7 +863,7 @@ export default function CreateCourseForm({
       }
     }
 
-    const customAttrs = [...selected].filter((k) => k !== "__romanization__" && k !== "__audio__");
+    const customAttrs = [...selected].filter((k) => k !== "__back__" && k !== "__romanization__" && k !== "__audio__");
     if (!quotaRanOut && customAttrs.length > 0) {
       const missing = section.items.flatMap((item) =>
         item.front.trim() || item.back.trim()
@@ -835,55 +884,15 @@ export default function CreateCourseForm({
       }
     }
 
-    setBulkAutoFillStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGenerateDoneCustomAttributes, { count: successCount })));
+    const doneLabel = selected.size === 1 && selected.has("__back__")
+      ? labels.bulkGenerateDoneBack
+      : labels.bulkGenerateDoneCustomAttributes;
+    setBulkAutoFillStatuses((prev) => new Map(prev).set(sectionId, t(doneLabel, { count: successCount })));
     setTimeout(() => setBulkAutoFillStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
     if (quotaRanOut) {
       setCharsExhausted(true);
       if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
       else toast.warning(t(labels.quotaRanOut, { done: successCount, total: successCount }), { duration: 6000 });
-    } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
-  }
-
-  async function handleSectionBulkGenerateBack(sectionId: number) {
-    const section = sections.find((s) => s.id === sectionId);
-    if (!section) return;
-    const missing = section.items.filter((i) => i.front.trim() && !i.back.trim()).map((i) => ({ itemId: i.id, front: i.front }));
-    if (missing.length === 0) return;
-    const BATCH = 5;
-    let done = 0;
-    let successCount = 0;
-    let minRemaining: number | undefined;
-    let quotaRanOut = false;
-    setBulkBackStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingBack, { done: 0, total: missing.length })));
-    for (let i = 0; i < missing.length; i += BATCH) {
-      if (quotaRanOut) break;
-      const batch = missing.slice(i, i + BATCH);
-      await Promise.all(
-        batch.map(async ({ itemId, front }) => {
-          const { back, distractors, remainingChars, quotaExhausted } = await generateBack(front, selectedSourceLanguage, selectedTargetLanguage);
-          if (quotaExhausted) { quotaRanOut = true; return; }
-          if (back) {
-            setSections((prev) => prev.map((s) =>
-              s.id === sectionId
-                ? { ...s, items: s.items.map((item) => item.id === itemId ? { ...item, back, distractors } : item) }
-                : s
-            ));
-            successCount++;
-          }
-          if (remainingChars !== undefined) {
-            minRemaining = minRemaining === undefined ? remainingChars : Math.min(minRemaining, remainingChars);
-          }
-        })
-      );
-      done += batch.length;
-      setBulkBackStatuses((prev) => new Map(prev).set(sectionId, t(labels.bulkGeneratingBack, { done, total: missing.length })));
-    }
-    setBulkBackStatuses((prev) => new Map(prev).set(sectionId, quotaRanOut ? t(labels.bulkGeneratingBack, { done, total: missing.length }) : t(labels.bulkGenerateDoneBack, { count: successCount })));
-    setTimeout(() => setBulkBackStatuses((prev) => { const next = new Map(prev); next.delete(sectionId); return next; }), 3000);
-    if (quotaRanOut) {
-      setCharsExhausted(true);
-      if (successCount === 0) toast.warning(labels.notEnoughChars, { duration: 6000 });
-      else toast.warning(t(labels.quotaRanOut, { done: successCount, total: missing.length }), { duration: 6000 });
     } else if (minRemaining !== undefined) showQuotaToast("chars", minRemaining);
   }
 
@@ -1169,19 +1178,6 @@ export default function CreateCourseForm({
                 {t(labels.cardsSummary, { count: section.items.length })}
               </button>
               <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end">
-                <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
-                  {bulkBackStatuses.get(section.id) && (
-                    <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkBackStatuses.get(section.id)}</span>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => handleSectionBulkGenerateBack(section.id)}
-                    disabled={!!bulkBackStatuses.get(section.id)}
-                    className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
-                  >
-                    {labels.bulkGenerateBack}
-                  </button>
-                </div>
                 <button
                   type="button"
                   onClick={() => openAiImport(section.id)}
@@ -1194,62 +1190,69 @@ export default function CreateCourseForm({
                   <input type="file" accept=".csv,text/csv" className="hidden"
                     onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
                 </label>
-                {(getRomanizationSystem(selectedTargetLanguage) || getTTSVoice(selectedTargetLanguage) || section.customAttributes.length > 0) && (
-                  <div className="relative min-w-0 sm:flex sm:items-center sm:gap-1.5">
-                    {bulkAutoFillStatuses.get(section.id) && (
-                      <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkAutoFillStatuses.get(section.id)}</span>
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => customAttrDropdownSectionId === section.id
-                        ? setCustomAttrDropdownSectionId(null)
-                        : openAutoFillDropdown(section.id, section)}
-                      disabled={!!bulkAutoFillStatuses.get(section.id)}
-                      className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
+                <div className="relative min-w-0 sm:flex sm:items-center sm:gap-1.5">
+                  {bulkAutoFillStatuses.get(section.id) && (
+                    <span className="mb-1 block truncate font-manrope text-xs text-ink-2 sm:mb-0">{bulkAutoFillStatuses.get(section.id)}</span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => customAttrDropdownSectionId === section.id
+                      ? setCustomAttrDropdownSectionId(null)
+                      : openAutoFillDropdown(section.id, section)}
+                    disabled={!!bulkAutoFillStatuses.get(section.id)}
+                    className="min-h-11 w-full rounded-[1rem] bg-paper px-3 py-2 font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:w-auto sm:rounded-md sm:py-1.5"
+                  >
+                    {labels.autoFill}
+                  </button>
+                  {customAttrDropdownSectionId === section.id && (
+                    <div
+                      ref={customAttrDropdownRef}
+                      className="absolute left-0 top-full z-40 mt-1 min-w-[200px] rounded-lg bg-paper shadow-hard"
                     >
-                      {labels.autoFill}
-                    </button>
-                    {customAttrDropdownSectionId === section.id && (
-                      <div
-                        ref={customAttrDropdownRef}
-                        className="absolute left-0 top-full z-40 mt-1 min-w-[200px] rounded-lg bg-paper shadow-hard"
-                      >
-                        <div className="flex flex-col gap-1 px-3 py-3">
-                          {getRomanizationSystem(selectedTargetLanguage) && (
-                            <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
-                              <input type="checkbox" checked={customAttrDropdownChecked.has("__romanization__")} onChange={(e) => setAutoFillChoice("__romanization__", e.target.checked)} className="accent-orange" />
-                              <span className="font-manrope text-sm text-ink">
-                                {t(labels.romanization, { system: getRomanizationSystem(selectedTargetLanguage)?.system ?? "Romanization" })}
-                              </span>
-                            </label>
-                          )}
-                          {getTTSVoice(selectedTargetLanguage) && (
-                            <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
-                              <input type="checkbox" checked={customAttrDropdownChecked.has("__audio__")} onChange={(e) => setAutoFillChoice("__audio__", e.target.checked)} className="accent-orange" />
-                              <span className="font-manrope text-sm text-ink">{labels.backAudio}</span>
-                            </label>
-                          )}
-                          {section.customAttributes.map((attr) => (
-                            <label key={attr} className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
-                              <input type="checkbox" checked={customAttrDropdownChecked.has(attr)} onChange={(e) => setAutoFillChoice(attr, e.target.checked)} className="accent-orange" />
-                              <span className="font-manrope text-sm text-ink">{attr}</span>
-                            </label>
-                          ))}
-                        </div>
-                        <div className="border-t border-ink/10 px-3 py-2.5">
-                          <button
-                            type="button"
-                            disabled={customAttrDropdownChecked.size === 0}
-                            onClick={() => handleSectionAutoFill(section.id, customAttrDropdownChecked)}
-                            className="w-full rounded-full bg-orange px-4 py-2 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-40"
-                          >
-                            {labels.autoFillGenerate}
-                          </button>
-                        </div>
+                      <div className="flex flex-col gap-1 px-3 py-3">
+                        <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                          <input
+                            type="checkbox"
+                            checked={customAttrDropdownChecked.has("__back__")}
+                            onChange={(e) => setAutoFillChoice("__back__", e.target.checked)}
+                            className="accent-orange"
+                          />
+                          <span className="font-manrope text-sm text-ink">{labels.autoFillAnswers}</span>
+                        </label>
+                        {getRomanizationSystem(selectedTargetLanguage) && (
+                          <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                            <input type="checkbox" checked={customAttrDropdownChecked.has("__romanization__")} onChange={(e) => setAutoFillChoice("__romanization__", e.target.checked)} className="accent-orange" />
+                            <span className="font-manrope text-sm text-ink">
+                              {t(labels.romanization, { system: getRomanizationSystem(selectedTargetLanguage)?.system ?? "Romanization" })}
+                            </span>
+                          </label>
+                        )}
+                        {getTTSVoice(selectedTargetLanguage) && (
+                          <label className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                            <input type="checkbox" checked={customAttrDropdownChecked.has("__audio__")} onChange={(e) => setAutoFillChoice("__audio__", e.target.checked)} className="accent-orange" />
+                            <span className="font-manrope text-sm text-ink">{labels.backAudio}</span>
+                          </label>
+                        )}
+                        {section.customAttributes.map((attr) => (
+                          <label key={attr} className="flex cursor-pointer items-center gap-2.5 rounded px-1 py-1 hover:bg-paper-2">
+                            <input type="checkbox" checked={customAttrDropdownChecked.has(attr)} onChange={(e) => setAutoFillChoice(attr, e.target.checked)} className="accent-orange" />
+                            <span className="font-manrope text-sm text-ink">{attr}</span>
+                          </label>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                )}
+                      <div className="border-t border-ink/10 px-3 py-2.5">
+                        <button
+                          type="button"
+                          disabled={customAttrDropdownChecked.size === 0}
+                          onClick={() => handleSectionAutoFill(section.id, customAttrDropdownChecked)}
+                          className="w-full rounded-full bg-orange px-4 py-2 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          {labels.autoFillGenerate}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 <button
                   type="button"
                   onClick={() => setCustomAttrModalSectionId(section.id)}
@@ -1362,6 +1365,8 @@ export default function CreateCourseForm({
           <CustomAttributesModal
             attributes={sec.customAttributes}
             onSave={(attrs) => updateSectionCustomAttributes(customAttrModalSectionId, attrs)}
+            onAddAttribute={(attr, scope) => addSectionCustomAttribute(customAttrModalSectionId, attr, scope)}
+            onDeleteAttribute={(attr, scope) => deleteSectionCustomAttribute(customAttrModalSectionId, attr, scope)}
             onClose={() => setCustomAttrModalSectionId(null)}
             labels={labels}
           />

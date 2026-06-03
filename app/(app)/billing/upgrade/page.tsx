@@ -7,6 +7,16 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { startCheckout } from "@/app/actions/billing";
 
+const AI_CHARACTER_USES = [
+  "Generate answer/back cards",
+  "Auto text-to-speech audio",
+  "Romanization",
+  "Example sentences",
+  "Pronunciation",
+  "Custom attributes",
+  "AI import from notes or documents",
+] as const;
+
 const PLANS = [
   {
     key: "free",
@@ -17,15 +27,15 @@ const PLANS = [
     sessions: "0",
     badge: null,
     features: [
-      "Unlimited public courses",
-      "All study modes",
-      "Community courses",
+      { label: "Unlimited public courses" },
+      { label: "All study modes" },
+      { label: "Community courses" },
     ],
     missing: [
-      "AI features",
-      "AI tutor sessions",
-      "Private courses",
-      "Top-up packs",
+      { label: "AI characters", children: AI_CHARACTER_USES },
+      { label: "AI tutor sessions" },
+      { label: "Private courses" },
+      { label: "Top-up packs" },
     ],
   },
   {
@@ -33,17 +43,14 @@ const PLANS = [
     label: "Plus",
     price: "$9",
     description: "For serious learners",
-    chars: "150,000",
-    sessions: "20",
+    chars: "250,000",
+    sessions: "25",
     badge: "Most popular",
     features: [
-      "150,000 characters / month",
-      "20 AI tutor sessions / month",
-      "Private courses",
-      "TTS audio generation",
-      "AI romanization",
-      "AI import from files",
-      "Everything in Free",
+      { label: "250,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "25 AI tutor sessions / month" },
+      { label: "Private courses" },
+      { label: "Everything in Free" },
     ],
     missing: [],
   },
@@ -52,18 +59,50 @@ const PLANS = [
     label: "Pro",
     price: "$19",
     description: "For power users & teachers",
-    chars: "600,000",
-    sessions: "60",
+    chars: "900,000",
+    sessions: "90",
     badge: null,
     features: [
-      "600,000 characters / month",
-      "60 AI tutor sessions / month",
-      "Everything in Plus",
-      "Priority support",
+      { label: "900,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "90 AI tutor sessions / month" },
+      { label: "Everything in Plus" },
+      { label: "Priority support" },
     ],
     missing: [],
   },
 ] as const;
+
+const PLAN_RANK = {
+  free: 0,
+  plus: 1,
+  pro: 2,
+} as const;
+
+function FeatureLine({
+  item,
+  muted = false,
+}: {
+  item: { label: string; children?: readonly string[] };
+  muted?: boolean;
+}) {
+  return (
+    <li className={`font-manrope text-sm ${muted ? "text-ink-3" : "text-ink"}`}>
+      <div className="flex items-start gap-2">
+        <span className={`mt-0.5 shrink-0 ${muted ? "" : "text-green-600"}`}>
+          {muted ? "✗" : "✓"}
+        </span>
+        <span>{item.label}</span>
+      </div>
+      {item.children && (
+        <ul className="ml-6 mt-1 flex flex-col gap-1 border-l border-ink/10 pl-3 text-xs leading-5 text-ink-3">
+          {item.children.map((child) => (
+            <li key={child}>{child}</li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
 
 export default async function UpgradePage() {
   const supabase = createClient(await cookies());
@@ -99,6 +138,8 @@ export default async function UpgradePage() {
         {PLANS.map((plan) => {
           const isCurrent = plan.key === currentPlan;
           const isRecommended = plan.badge !== null;
+          const isLowerPlan =
+            (PLAN_RANK[plan.key] ?? 0) < (PLAN_RANK[currentPlan as keyof typeof PLAN_RANK] ?? 0);
 
           return (
             <div
@@ -150,18 +191,8 @@ export default async function UpgradePage() {
 
               {/* Features */}
               <ul className="mb-6 flex flex-col gap-2">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 font-manrope text-sm text-ink">
-                    <span className="mt-0.5 shrink-0 text-green-600">✓</span>
-                    {f}
-                  </li>
-                ))}
-                {plan.missing.map((f) => (
-                  <li key={f} className="flex items-start gap-2 font-manrope text-sm text-ink-3">
-                    <span className="mt-0.5 shrink-0">✗</span>
-                    {f}
-                  </li>
-                ))}
+                {plan.features.map((f) => <FeatureLine key={f.label} item={f} />)}
+                {plan.missing.map((f) => <FeatureLine key={f.label} item={f} muted />)}
               </ul>
 
               {/* CTA */}
@@ -170,7 +201,7 @@ export default async function UpgradePage() {
                   <div className="w-full rounded-full border-2 border-orange/30 py-2.5 text-center font-manrope text-sm font-[700] text-orange-text">
                     Current plan
                   </div>
-                ) : plan.key === "free" ? (
+                ) : plan.key === "free" || isLowerPlan ? (
                   <div className="w-full rounded-full border-2 border-ink/10 py-2.5 text-center font-manrope text-sm font-[700] text-ink-3">
                     Downgrade
                   </div>
@@ -194,14 +225,14 @@ export default async function UpgradePage() {
 
       {/* Footer note */}
       <p className="mt-8 text-center font-manrope text-xs text-ink-3">
-        Prices in USD · Monthly billing · Cancel anytime · Characters and sessions reset each month
+        Prices in USD · Monthly billing · Cancel anytime · AI characters and sessions reset each month
       </p>
       <p className="mt-3 text-center font-manrope text-xs text-ink-3">
         By subscribing you agree to our{" "}
         <Link href="/terms" className="underline hover:text-ink">Terms of Service</Link>,{" "}
         <Link href="/privacy" className="underline hover:text-ink">Privacy Policy</Link>, and{" "}
         <Link href="/refund" className="underline hover:text-ink">Refund Policy</Link>.
-        Payments processed by Lemon Squeezy.
+        Payments processed by Polar.
       </p>
     </div>
   );

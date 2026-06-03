@@ -242,6 +242,7 @@ export type Locale = {
     acceptedAnswerPlaceholder: string;
     addAcceptedAnswer: string;
     autoFill: string;
+    autoFillAnswers: string;
     autoFillGenerate: string;
     autoFilling: string;
     configureCustomAttributes: string;
