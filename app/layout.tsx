@@ -8,11 +8,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brainana.app";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Brainana — Learn with mems that stick",
+    default: "Brainana | AI Flashcards & Spaced Repetition Courses",
     template: "%s",
   },
   description:
-    "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat. Spaced repetition with community courses.",
+    "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
   keywords: [
     "flashcards",
     "spaced repetition",
@@ -30,16 +30,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Brainana",
-    title: "Brainana — Learn with mems that stick",
+    title: "Brainana | AI Flashcards & Spaced Repetition Courses",
     description:
-      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+      "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
   },
   twitter: {
     card: "summary_large_image",
     site: "@brainana",
-    title: "Brainana — Learn with mems that stick",
+    title: "Brainana | AI Flashcards & Spaced Repetition Courses",
     description:
-      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+      "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
   },
   robots: {
     index: true,
@@ -77,7 +77,7 @@ const jsonLd = {
       url: siteUrl,
       name: "Brainana",
       description:
-        "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+        "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
       publisher: { "@id": `${siteUrl}/#organization` },
       potentialAction: {
         "@type": "SearchAction",

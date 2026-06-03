@@ -9,22 +9,22 @@ import { BrandDomainWordmark, BrandLogo } from "@/components/brand-logo";
 import ThemeToggle from "../theme-toggle";
 
 export const metadata: Metadata = {
-  title: "Brainana — Learn with mems that stick",
+  title: "Brainana | AI Flashcards & Spaced Repetition Courses",
   description:
-    "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat. Spaced repetition with community courses.",
+    "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Brainana — Learn with mems that stick",
+    title: "Brainana | AI Flashcards & Spaced Repetition Courses",
     description:
-      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+      "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
     url: "/",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brainana — Learn with mems that stick",
+    title: "Brainana | AI Flashcards & Spaced Repetition Courses",
     description:
-      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+      "Create or join community courses, study with AI-powered review modes, and build memory tricks that actually stick. Free to start.",
   },
 };
 
