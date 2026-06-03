@@ -6,6 +6,18 @@ import ThemeToggle from "../../theme-toggle";
 export const metadata = {
   title: "Privacy Policy - Brainana",
   description: "How Brainana collects, uses, and protects your personal data.",
+  alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: "Privacy Policy - Brainana",
+    description: "How Brainana collects, uses, and protects your personal data.",
+    url: "/privacy",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy - Brainana",
+    description: "How Brainana collects, uses, and protects your personal data.",
+  },
 };
 
 const sections = [

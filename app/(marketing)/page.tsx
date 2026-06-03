@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
@@ -6,6 +7,26 @@ import Image from "next/image";
 import { Icon } from "@/components/ui-icons";
 import { BrandDomainWordmark, BrandLogo } from "@/components/brand-logo";
 import ThemeToggle from "../theme-toggle";
+
+export const metadata: Metadata = {
+  title: "Brainana — Learn with mems that stick",
+  description:
+    "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat. Spaced repetition with community courses.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Brainana — Learn with mems that stick",
+    description:
+      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brainana — Learn with mems that stick",
+    description:
+      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+  },
+};
 
 const features = [
   {
@@ -66,8 +87,26 @@ export default async function LandingPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (user) redirect("/home");
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Brainana — Learn with mems that stick",
+    description:
+      "Build tiny memory tricks, study with playful review modes, and keep every course feeling friendly instead of flat.",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://brainana.app",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Brainana",
+      url: process.env.NEXT_PUBLIC_SITE_URL || "https://brainana.app",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-paper px-4 py-5 text-ink sm:px-5 sm:py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="sticky top-3 z-40 mx-auto max-w-6xl rounded-[1.6rem] border-2 border-ink bg-paper-2/95 px-3 py-3 shadow-hard backdrop-blur sm:rounded-full sm:px-6 sm:py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex min-w-0 items-center gap-3 font-fredoka text-xl font-[700] tracking-tight sm:text-2xl">

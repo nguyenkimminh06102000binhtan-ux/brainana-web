@@ -1,10 +1,5 @@
 User-agent: *
-Allow: /$
-Allow: /login
-Allow: /signup
-Allow: /terms
-Allow: /privacy
-Allow: /legal/
+Allow: /
 Disallow: /home
 Disallow: /browse
 Disallow: /library
@@ -18,3 +13,5 @@ Disallow: /start
 Disallow: /leaderboard
 Disallow: /courses
 Disallow: /api/
+
+Sitemap: https://brainana.app/sitemap.xml

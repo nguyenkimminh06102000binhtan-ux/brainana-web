@@ -6,6 +6,18 @@ import ThemeToggle from "../../theme-toggle";
 export const metadata = {
   title: "Pricing - Brainana",
   description: "Simple, transparent pricing for Brainana. Start free, upgrade when you're ready.",
+  alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Pricing - Brainana",
+    description: "Simple, transparent pricing for Brainana. Start free, upgrade when you're ready.",
+    url: "/pricing",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pricing - Brainana",
+    description: "Simple, transparent pricing for Brainana. Start free, upgrade when you're ready.",
+  },
 };
 
 const AI_CHARACTER_USES = [

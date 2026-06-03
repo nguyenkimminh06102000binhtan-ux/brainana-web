@@ -6,6 +6,18 @@ import ThemeToggle from "../../theme-toggle";
 export const metadata = {
   title: "Refund Policy - Brainana",
   description: "Brainana's refund policy for subscription plans.",
+  alternates: { canonical: "/refund" },
+  openGraph: {
+    title: "Refund Policy - Brainana",
+    description: "Brainana's refund policy for subscription plans.",
+    url: "/refund",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Refund Policy - Brainana",
+    description: "Brainana's refund policy for subscription plans.",
+  },
 };
 
 const sections = [

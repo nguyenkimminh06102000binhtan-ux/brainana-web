@@ -6,6 +6,18 @@ import ThemeToggle from "../../theme-toggle";
 export const metadata = {
   title: "Terms of Service - Brainana",
   description: "The terms and conditions governing your use of Brainana.",
+  alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms of Service - Brainana",
+    description: "The terms and conditions governing your use of Brainana.",
+    url: "/terms",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms of Service - Brainana",
+    description: "The terms and conditions governing your use of Brainana.",
+  },
 };
 
 const sections = [
