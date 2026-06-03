@@ -38,8 +38,6 @@ export function useDraftAutosave(
     let cancelled = false;
     if (!key) {
       draftRef.current = null;
-      setHasDraft(false);
-      setDraftSavedAt(null);
       return;
     }
 
@@ -132,7 +130,13 @@ export function useDraftAutosave(
     try { await deleteCourseDraft(key); } catch { /* ignore */ }
   }, [key, suppressDraftSaves]);
 
-  return { hasDraft, draftSavedAt, loadDraft, clearDraft, suppressDraftSaves };
+  return {
+    hasDraft: key ? hasDraft : false,
+    draftSavedAt: key ? draftSavedAt : null,
+    loadDraft,
+    clearDraft,
+    suppressDraftSaves,
+  };
 }
 
 // ── Helper ────────────────────────────────────────────────────────────────────
