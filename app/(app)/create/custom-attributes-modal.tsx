@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { t } from "@/utils/t";
 
 export default function CustomAttributesModal({
   attributes,
@@ -156,6 +157,9 @@ export default function CustomAttributesModal({
               {labels.addCustomAttribute}
             </button>
           </div>
+          <p className="font-manrope text-xs leading-relaxed text-ink-3">
+            💡 {t(labels.customAttributeAiHint!, { example1: "Example sentence in Korean", example2: "Example sentence" })}
+          </p>
           {pendingAdd && (
             <div className="rounded-md bg-paper-2 px-3 py-3">
               <p className="mb-2.5 font-manrope text-xs font-[600] text-ink">

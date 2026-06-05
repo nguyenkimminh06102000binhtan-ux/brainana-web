@@ -1345,11 +1345,18 @@ export default function EditCourseForm({
                     <span className="ml-1.5 rounded-full bg-ink/10 px-1.5 py-0.5 font-mono text-[10px]">{section.customAttributes.length}</span>
                   )}
                 </button>
-                <label className="flex min-h-11 cursor-pointer items-center justify-center rounded-[1rem] bg-paper px-3 py-2 text-center font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5">
-                  {labels.importCsv}
-                  <input type="file" accept=".csv,text/csv" className="hidden"
-                    onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
-                </label>
+                <div className="group relative">
+                  <label className="flex min-h-11 cursor-pointer items-center justify-center rounded-[1rem] bg-paper px-3 py-2 text-center font-manrope text-xs font-[800] text-ink-2 shadow-hard-sm transition hover:text-ink active:translate-y-[1px] active:shadow-none sm:min-h-0 sm:rounded-md sm:py-1.5">
+                    {labels.importCsv}
+                    <input type="file" accept=".csv,text/csv" className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCsvImport(section.id, f); e.target.value = ""; }} />
+                  </label>
+                  <div className="pointer-events-none absolute left-0 top-full z-20 mt-1 hidden min-w-max rounded-lg bg-ink px-3 py-2.5 shadow-lg group-hover:pointer-events-auto group-hover:block">
+                    <p className="mb-1.5 font-mono text-[10px] uppercase tracking-widest text-paper/50">{labels.importCsv}</p>
+                    <a href="/csv-example-2col.csv" download className="block font-manrope text-xs text-paper hover:text-orange-text">{labels.csvExample2col} ↓</a>
+                    <a href="/csv-example-3col.csv" download className="mt-1 block font-manrope text-xs text-paper hover:text-orange-text">{labels.csvExample3col} ↓</a>
+                  </div>
+                </div>
               </div>
             </div>
 
