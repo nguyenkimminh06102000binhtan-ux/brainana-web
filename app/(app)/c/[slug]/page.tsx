@@ -8,7 +8,7 @@ import PreviewSection from "./preview";
 import FollowButton from "./follow-button";
 import ShareButton from "./share-button";
 import DiscussionThread from "./discussion-thread";
-import { toggleEnroll } from "./actions";
+import { toggleSave, enrollCourse, unenrollCourse } from "./actions";
 import DuplicateButton from "./duplicate-button";
 
 function formatCount(n: number) {
@@ -61,6 +61,7 @@ export default async function CourseDetailPage({
     { count: imageCount },
     { data: creatorCoursesData },
     { data: enrollmentData },
+    { data: savedData },
     { data: followData },
     { count: creatorFollowerCount },
     { data: profile },
@@ -68,6 +69,7 @@ export default async function CourseDetailPage({
     { count: seenCount },
     { count: dueCount },
     { data: subData },
+    { data: accuracyRows },
     topMems,
   ] = await Promise.all([
     supabase.from("sections").select("id, title, position, items(id, front_text, back_text, position)").eq("course_id", course.id).order("position"),
@@ -75,6 +77,7 @@ export default async function CourseDetailPage({
     supabase.from("items").select("*", { count: "exact", head: true }).eq("course_id", course.id).not("image_url", "is", null),
     supabase.from("courses").select("id, learner_count").eq("creator_id", course.creator_id).eq("is_published", true),
     supabase.from("user_courses").select("id, preferred_question_types").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
+    supabase.from("saved_courses").select("course_id").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
     supabase.from("follows").select("follower_id").eq("follower_id", user.id).eq("following_id", course.creator_id).maybeSingle(),
     supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", course.creator_id),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
@@ -82,6 +85,7 @@ export default async function CourseDetailPage({
     supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false),
     supabase.from("item_progress").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false).lt("next_review_at", dueCutoff),
     supabase.from("user_subscriptions").select("plan").eq("user_id", user.id).single(),
+    supabase.from("item_progress").select("correct_count, incorrect_count").eq("user_id", user.id).eq("course_id", course.id).eq("ignored", false),
     (async (): Promise<TopMem[]> => {
       const { data: itemRows } = await supabase.from("items").select("id").eq("course_id", course.id);
       const ids = (itemRows ?? []).map((r) => r.id as string);
@@ -118,6 +122,7 @@ export default async function CourseDetailPage({
   const cl = loc.course;
 
   const isEnrolled = Boolean(enrollmentData);
+  const isSaved = Boolean(savedData);
   const isFollowing = Boolean(followData);
   const userPlan = (subData?.plan as string | null) ?? "free";
   const canDuplicate = ["plus", "pro"].includes(userPlan);
@@ -125,6 +130,10 @@ export default async function CourseDetailPage({
   const reviewDue = dueCount ?? 0;
   const totalNonIgnored = configSections.flatMap((s) => s.cards.filter((c) => !c.ignored)).length;
   const newCardsCount = Math.max(0, totalNonIgnored - (seenCount ?? 0));
+
+  const totalCorrect = (accuracyRows ?? []).reduce((s, r) => s + (r.correct_count ?? 0), 0);
+  const totalAttempts = totalCorrect + (accuracyRows ?? []).reduce((s, r) => s + (r.incorrect_count ?? 0), 0);
+  const accuracyPct = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : null;
 
   const creatorCourseCount = creatorCoursesData?.length ?? 0;
   const learnerCount = course.learner_count ?? 0;
@@ -193,14 +202,7 @@ export default async function CourseDetailPage({
 
                 {/* CTA row */}
                 <div className="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-4">
-                  {!hasStarted ? (
-                    <Link
-                      href={`/study/${course.slug}`}
-                      className="inline-flex min-h-11 items-center rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
-                    >
-                      {cl.startLearning}
-                    </Link>
-                  ) : (
+                  {(isEnrolled || isOwner) && (
                     <>
                       <Link
                         href={`/speed-review/${course.slug}`}
@@ -248,19 +250,45 @@ export default async function CourseDetailPage({
                     />
                   )}
 
-                  {!isOwner && (
-                    <form action={toggleEnroll}>
+                  {!isOwner && !isEnrolled && (
+                    <form action={toggleSave}>
                       <input type="hidden" name="course_id" value={course.id} />
                       <input type="hidden" name="slug" value={course.slug} />
                       <button
                         type="submit"
                         className={`inline-flex min-h-11 cursor-pointer items-center rounded-full px-5 py-2.5 font-manrope text-sm font-[800] shadow-hard-sm transition active:translate-y-[1px] active:shadow-none ${
-                          isEnrolled
+                          isSaved
                             ? "bg-green-soft text-ink hover:bg-red-soft hover:text-orange-text"
-                            : "bg-paper text-ink hover:bg-paper"
+                            : "bg-paper text-ink hover:bg-paper-2"
                         }`}
                       >
-                        {isEnrolled ? cl.saved : cl.save}
+                        {isSaved ? cl.saved : cl.save}
+                      </button>
+                    </form>
+                  )}
+
+                  {!isOwner && !isEnrolled && (
+                    <form action={enrollCourse}>
+                      <input type="hidden" name="course_id" value={course.id} />
+                      <input type="hidden" name="slug" value={course.slug} />
+                      <button
+                        type="submit"
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-full bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
+                      >
+                        {cl.startLearning}
+                      </button>
+                    </form>
+                  )}
+
+                  {!isOwner && isEnrolled && (
+                    <form action={unenrollCourse}>
+                      <input type="hidden" name="course_id" value={course.id} />
+                      <input type="hidden" name="slug" value={course.slug} />
+                      <button
+                        type="submit"
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-full bg-paper px-5 py-2.5 font-manrope text-sm font-[800] text-ink-2 shadow-hard-sm transition hover:bg-red-soft hover:text-orange-text active:translate-y-[1px] active:shadow-none"
+                      >
+                        {cl.leave}
                       </button>
                     </form>
                   )}
@@ -389,6 +417,9 @@ export default async function CourseDetailPage({
                 <StatRow label={loc.common.audio} value={`${audioCount ?? 0}/${course.card_count}`} />
                 <StatRow label={cl.images} value={`${imageCount ?? 0}/${course.card_count}`} />
                 <StatRow label={loc.common.mems} value={formatCount(course.mems_count ?? 0)} />
+              {accuracyPct !== null && (
+                <StatRow label={cl.accuracy} value={`${accuracyPct}%`} />
+              )}
               </div>
             </aside>
           </div>
@@ -446,6 +477,9 @@ export default async function CourseDetailPage({
               <StatRow label={loc.common.audio} value={`${audioCount ?? 0}/${course.card_count}`} />
               <StatRow label={cl.images} value={`${imageCount ?? 0}/${course.card_count}`} />
               <StatRow label={loc.common.mems} value={formatCount(course.mems_count ?? 0)} />
+              {accuracyPct !== null && (
+                <StatRow label={cl.accuracy} value={`${accuracyPct}%`} />
+              )}
             </div>
           </aside>
 

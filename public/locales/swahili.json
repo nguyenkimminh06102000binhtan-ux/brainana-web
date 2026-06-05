@@ -383,6 +383,7 @@
     "avgTime": "Muda wa wastani",
     "avgTimeDays": "{count} siku",
     "images": "Picha",
+    "accuracy": "Accuracy",
     "verified": "imethibitishwa",
     "noFriends": "Hakuna rafiki yako anayejifunza hili bado.",
     "moreFriends": "+{count} zaidi",
@@ -417,7 +418,8 @@
     "learnNewWords": "Jifunza kipya",
     "duplicateCourse": "Nakili kwenye maktaba yangu",
     "duplicating": "Kunakili…",
-    "duplicateUpsell": "Kipengele cha Plus/Pro — boresha ili kunakili"
+    "duplicateUpsell": "Kipengele cha Plus/Pro — boresha ili kunakili",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Sehemu zote",

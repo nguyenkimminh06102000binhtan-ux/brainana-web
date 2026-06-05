@@ -197,7 +197,7 @@ export async function saveWordConfig(courseId: string, slug: string, ignoredItem
   revalidatePath(`/c/${slug}`);
 }
 
-export async function toggleEnroll(formData: FormData) {
+export async function toggleSave(formData: FormData) {
   const courseId = String(formData.get("course_id") ?? "");
   const slug = String(formData.get("slug") ?? "");
 
@@ -206,21 +206,56 @@ export async function toggleEnroll(formData: FormData) {
   if (!user) redirect("/login");
 
   const { data: existing } = await supabase
-    .from("user_courses")
-    .select("id")
+    .from("saved_courses")
+    .select("course_id")
     .eq("user_id", user.id)
     .eq("course_id", courseId)
-    .single();
+    .maybeSingle();
 
   if (existing) {
-    await supabase.from("user_courses").delete().eq("user_id", user.id).eq("course_id", courseId);
+    await supabase.from("saved_courses").delete().eq("user_id", user.id).eq("course_id", courseId);
   } else {
-    await supabase.from("user_courses").insert({ user_id: user.id, course_id: courseId });
+    await supabase.from("saved_courses").insert({ user_id: user.id, course_id: courseId });
   }
 
-  // learner_count is maintained by the database trigger.
+  revalidatePath(`/c/${slug}`);
+  revalidatePath("/library");
+}
+
+export async function enrollCourse(formData: FormData) {
+  const courseId = String(formData.get("course_id") ?? "");
+  const slug = String(formData.get("slug") ?? "");
+
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  await Promise.all([
+    supabase.from("user_courses").upsert(
+      { user_id: user.id, course_id: courseId },
+      { onConflict: "user_id,course_id" },
+    ),
+    supabase.from("saved_courses").delete().eq("user_id", user.id).eq("course_id", courseId),
+  ]);
 
   revalidatePath(`/c/${slug}`);
+  revalidatePath("/home");
+  revalidatePath("/library");
+  redirect(`/study/${slug}`);
+}
+
+export async function unenrollCourse(formData: FormData) {
+  const courseId = String(formData.get("course_id") ?? "");
+  const slug = String(formData.get("slug") ?? "");
+
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  await supabase.from("user_courses").delete().eq("user_id", user.id).eq("course_id", courseId);
+
+  revalidatePath(`/c/${slug}`);
+  revalidatePath("/home");
+  revalidatePath("/library");
   revalidatePath("/browse");
-  revalidatePath("/courses");
 }

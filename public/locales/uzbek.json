@@ -383,6 +383,7 @@
     "avgTime": "Oʻrtacha vaqt",
     "avgTimeDays": "{count} kunlar",
     "images": "Tasvirlar",
+    "accuracy": "Accuracy",
     "verified": "tasdiqlangan",
     "noFriends": "Do'stlaringizdan hech biri buni hali o'rganmayapti.",
     "moreFriends": "+{count} Ko'proq",
@@ -417,7 +418,8 @@
     "learnNewWords": "Yangi o'rganish",
     "duplicateCourse": "Kutubxonamga nusxa olish",
     "duplicating": "Nusxa olinmoqda…",
-    "duplicateUpsell": "Plus/Pro xususiyati — nusxa olish uchun yangilang"
+    "duplicateUpsell": "Plus/Pro xususiyati — nusxa olish uchun yangilang",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Barcha bo'limlar",

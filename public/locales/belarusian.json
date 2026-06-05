@@ -383,6 +383,7 @@
     "avgTime": "Сярэдні час",
     "avgTimeDays": "{count} дзён",
     "images": "Малюнкі",
+    "accuracy": "Accuracy",
     "verified": "правераны",
     "noFriends": "Ніхто з вашых сяброў яшчэ не вывучае гэта.",
     "moreFriends": "+{count} больш",
@@ -417,7 +418,8 @@
     "learnNewWords": "Вучыць новае",
     "duplicateCourse": "Скапіяваць у маю бібліятэку",
     "duplicating": "Капіраванне…",
-    "duplicateUpsell": "Функцыя Plus/Pro — абнавіце план для капіравання"
+    "duplicateUpsell": "Функцыя Plus/Pro — абнавіце план для капіравання",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Усе раздзелы",

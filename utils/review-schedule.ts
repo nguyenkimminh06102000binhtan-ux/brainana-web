@@ -1,9 +1,9 @@
 export function startOfDay(date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 }
 
 export function startOfNextDay(date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1));
 }
 
 export function reviewDayCutoff(date = new Date()) {
@@ -11,5 +11,5 @@ export function reviewDayCutoff(date = new Date()) {
 }
 
 export function nextReviewDay(date: Date, intervalDays: number) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + intervalDays);
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + intervalDays));
 }

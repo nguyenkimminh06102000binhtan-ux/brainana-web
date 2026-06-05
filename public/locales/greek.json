@@ -383,6 +383,7 @@
     "avgTime": "Μέσος χρόνος",
     "avgTimeDays": "{count} ημέρες",
     "images": "εικόνες",
+    "accuracy": "Accuracy",
     "verified": "επαληθεύτηκε",
     "noFriends": "Κανείς από τους φίλους σας δεν το έχει μάθει ακόμα.",
     "moreFriends": "+{count} περισσότερο",
@@ -417,7 +418,8 @@
     "learnNewWords": "Μάθε νέα",
     "duplicateCourse": "Αντιγραφή στη βιβλιοθήκη μου",
     "duplicating": "Αντιγραφή…",
-    "duplicateUpsell": "Λειτουργία Plus/Pro — αναβαθμίστε για αντιγραφή"
+    "duplicateUpsell": "Λειτουργία Plus/Pro — αναβαθμίστε για αντιγραφή",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Όλα τα τμήματα",

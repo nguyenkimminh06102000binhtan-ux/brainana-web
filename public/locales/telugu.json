@@ -383,6 +383,7 @@
     "avgTime": "సగటు సమయం",
     "avgTimeDays": "{count} రోజులు",
     "images": "చిత్రాలు",
+    "accuracy": "Accuracy",
     "verified": "ధృవీకరించబడింది",
     "noFriends": "మీ స్నేహితులు ఎవరూ దీన్ని ఇంకా నేర్చుకోలేదు.",
     "moreFriends": "+{count} మరింత",
@@ -417,7 +418,8 @@
     "learnNewWords": "కొత్తది నేర్చుకోండి",
     "duplicateCourse": "నా లైబ్రరీకి డూప్లికేట్ చేయి",
     "duplicating": "డూప్లికేట్ అవుతోంది…",
-    "duplicateUpsell": "Plus/Pro ఫీచర్ — డూప్లికేట్ చేయడానికి అప్‌గ్రేడ్ చేయండి"
+    "duplicateUpsell": "Plus/Pro ఫీచర్ — డూప్లికేట్ చేయడానికి అప్‌గ్రేడ్ చేయండి",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "అన్ని విభాగాలు",

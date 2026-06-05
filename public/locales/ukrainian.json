@@ -383,6 +383,7 @@
     "avgTime": "Середній час",
     "avgTimeDays": "{count} днів",
     "images": "Зображення",
+    "accuracy": "Accuracy",
     "verified": "перевірено",
     "noFriends": "Ніхто з ваших друзів цього ще не вивчає.",
     "moreFriends": "+{count} більше",
@@ -417,7 +418,8 @@
     "learnNewWords": "Вчити нове",
     "duplicateCourse": "Дублювати до моєї бібліотеки",
     "duplicating": "Дублювання…",
-    "duplicateUpsell": "Функція Plus/Pro — оновіть план для дублювання"
+    "duplicateUpsell": "Функція Plus/Pro — оновіть план для дублювання",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Всі розділи",

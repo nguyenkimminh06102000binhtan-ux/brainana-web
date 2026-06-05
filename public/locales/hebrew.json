@@ -383,6 +383,7 @@
     "avgTime": "זמן ממוצע",
     "avgTimeDays": "{count} ימים",
     "images": "תמונות",
+    "accuracy": "Accuracy",
     "verified": "מְאוּמָת",
     "noFriends": "אף אחד מהחברים שלך לא לומד את זה עדיין.",
     "moreFriends": "+{count} יוֹתֵר",
@@ -417,7 +418,8 @@
     "learnNewWords": "למד חדש",
     "duplicateCourse": "שכפל לספריה שלי",
     "duplicating": "משכפל…",
-    "duplicateUpsell": "תכונת Plus/Pro — שדרג לשכפול"
+    "duplicateUpsell": "תכונת Plus/Pro — שדרג לשכפול",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "כל הסעיפים",

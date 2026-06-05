@@ -383,6 +383,7 @@
     "avgTime": "ਔਸਤ ਸਮਾਂ",
     "avgTimeDays": "{count} ਦਿਨ",
     "images": "ਚਿੱਤਰ",
+    "accuracy": "Accuracy",
     "verified": "ਪ੍ਰਮਾਣਿਤ",
     "noFriends": "ਤੁਹਾਡਾ ਕੋਈ ਵੀ ਦੋਸਤ ਅਜੇ ਤੱਕ ਇਹ ਨਹੀਂ ਸਿੱਖ ਰਿਹਾ ਹੈ।",
     "moreFriends": "+{count} ਹੋਰ",
@@ -417,7 +418,8 @@
     "learnNewWords": "ਨਵਾਂ ਸਿੱਖੋ",
     "duplicateCourse": "ਮੇਰੀ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਨਕਲ ਕਰੋ",
     "duplicating": "ਨਕਲ ਹੋ ਰਹੀ ਹੈ…",
-    "duplicateUpsell": "Plus/Pro ਵਿਸ਼ੇਸ਼ਤਾ — ਨਕਲ ਕਰਨ ਲਈ ਅਪਗ੍ਰੇਡ ਕਰੋ"
+    "duplicateUpsell": "Plus/Pro ਵਿਸ਼ੇਸ਼ਤਾ — ਨਕਲ ਕਰਨ ਲਈ ਅਪਗ੍ਰੇਡ ਕਰੋ",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ਸਾਰੇ ਭਾਗ",

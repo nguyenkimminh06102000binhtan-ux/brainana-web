@@ -383,6 +383,7 @@
     "avgTime": "საშუალო დრო",
     "avgTimeDays": "{count} დღეები",
     "images": "სურათები",
+    "accuracy": "Accuracy",
     "verified": "დამოწმებული",
     "noFriends": "ამას ჯერ არცერთი თქვენი მეგობარი არ სწავლობს.",
     "moreFriends": "+{count} მეტი",
@@ -417,7 +418,8 @@
     "learnNewWords": "ახლის სწავლა",
     "duplicateCourse": "ჩემს ბიბლიოთეკაში დუბლირება",
     "duplicating": "დუბლირება…",
-    "duplicateUpsell": "Plus/Pro ფუნქცია — განაახლეთ დუბლირებისთვის"
+    "duplicateUpsell": "Plus/Pro ფუნქცია — განაახლეთ დუბლირებისთვის",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ყველა განყოფილება",

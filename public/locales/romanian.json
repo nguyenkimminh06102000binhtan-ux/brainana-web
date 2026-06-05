@@ -383,6 +383,7 @@
     "avgTime": "Timp mediu",
     "avgTimeDays": "{count} zile",
     "images": "Imagini",
+    "accuracy": "Accuracy",
     "verified": "verificat",
     "noFriends": "Niciunul dintre prietenii tăi nu învață încă asta.",
     "moreFriends": "+{count} Mai mult",
@@ -417,7 +418,8 @@
     "learnNewWords": "Învață nou",
     "duplicateCourse": "Duplicați în biblioteca mea",
     "duplicating": "Duplicare…",
-    "duplicateUpsell": "Funcție Plus/Pro — actualizați pentru a duplica"
+    "duplicateUpsell": "Funcție Plus/Pro — actualizați pentru a duplica",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Toate secțiunile",

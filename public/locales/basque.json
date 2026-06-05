@@ -383,6 +383,7 @@
     "avgTime": "Batez besteko denbora",
     "avgTimeDays": "{count} egunak",
     "images": "Irudiak",
+    "accuracy": "Accuracy",
     "verified": "egiaztatuta",
     "noFriends": "Zure lagunetako inork ez du oraindik hau ikasten.",
     "moreFriends": "+{count} gehiago",
@@ -417,7 +418,8 @@
     "learnNewWords": "Berri ikasi",
     "duplicateCourse": "Bikoiztu nire liburutegian",
     "duplicating": "Bikoizten…",
-    "duplicateUpsell": "Plus/Pro eginbidea — eguneratu bikoizteko"
+    "duplicateUpsell": "Plus/Pro eginbidea — eguneratu bikoizteko",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Atal guztiak",

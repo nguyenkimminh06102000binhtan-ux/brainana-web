@@ -383,6 +383,7 @@
     "avgTime": "Matsakaicin lokaci",
     "avgTimeDays": "{count} kwanaki",
     "images": "Hotuna",
+    "accuracy": "Accuracy",
     "verified": "tabbatarwa",
     "noFriends": "Babu abokanka da ke koyon wannan tukuna.",
     "moreFriends": "+{count} Kara",
@@ -417,7 +418,8 @@
     "learnNewWords": "Koyi sabo",
     "duplicateCourse": "Kwafi zuwa ɗakin karatu na",
     "duplicating": "Ana kwafawa…",
-    "duplicateUpsell": "Fasali na Plus/Pro — inganta don kwafawa"
+    "duplicateUpsell": "Fasali na Plus/Pro — inganta don kwafawa",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Duk sassan",

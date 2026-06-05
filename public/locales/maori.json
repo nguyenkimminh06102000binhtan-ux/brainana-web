@@ -383,6 +383,7 @@
     "avgTime": "Wā toharite",
     "avgTimeDays": "{count} nga ra",
     "images": "Whakaahua",
+    "accuracy": "Accuracy",
     "verified": "manatoko",
     "noFriends": "Kaore ano tetahi o o hoa e ako ana i tenei.",
     "moreFriends": "+{count} atu",
@@ -417,7 +418,8 @@
     "learnNewWords": "Ako hou",
     "duplicateCourse": "Tārua ki tōku whare pukapuka",
     "duplicating": "E tārua ana…",
-    "duplicateUpsell": "Āhuatanga Plus/Pro — whakahou ki te tārua"
+    "duplicateUpsell": "Āhuatanga Plus/Pro — whakahou ki te tārua",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Nga waahanga katoa",

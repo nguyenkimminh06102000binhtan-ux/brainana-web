@@ -383,6 +383,7 @@
     "avgTime": "Thời gian TB",
     "avgTimeDays": "{count} ngày",
     "images": "Hình ảnh",
+    "accuracy": "Accuracy",
     "verified": "xác minh",
     "noFriends": "Chưa có bạn bè nào đang học điều này.",
     "moreFriends": "+{count} người nữa",
@@ -417,7 +418,8 @@
     "learnNewWords": "Học mới",
     "duplicateCourse": "Nhân bản vào thư viện của tôi",
     "duplicating": "Đang nhân bản…",
-    "duplicateUpsell": "Tính năng Plus/Pro — nâng cấp để nhân bản"
+    "duplicateUpsell": "Tính năng Plus/Pro — nâng cấp để nhân bản",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Tất cả chương",

@@ -383,6 +383,7 @@
     "avgTime": "اوسط وخت",
     "avgTimeDays": "{count} ورځې",
     "images": "انځورونه",
+    "accuracy": "Accuracy",
     "verified": "تصدیق شوی",
     "noFriends": "ستاسو هیڅ ملګري تر اوسه دا نه دي زده کړي.",
     "moreFriends": "+{count} نور",
@@ -417,7 +418,8 @@
     "learnNewWords": "نوې زده کړه",
     "duplicateCourse": "زما کتابتون ته کاپي کړئ",
     "duplicating": "کاپي کیږي…",
-    "duplicateUpsell": "د Plus/Pro ځانګړتیا — د کاپي کولو لپاره ارتقا ورکړئ"
+    "duplicateUpsell": "د Plus/Pro ځانګړتیا — د کاپي کولو لپاره ارتقا ورکړئ",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ټولې برخې",

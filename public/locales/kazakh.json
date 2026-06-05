@@ -383,6 +383,7 @@
     "avgTime": "Орташа уақыт",
     "avgTimeDays": "{count} күндер",
     "images": "Суреттер",
+    "accuracy": "Accuracy",
     "verified": "тексерілді",
     "noFriends": "Достарыңыздың ешқайсысы мұны әлі үйреніп жатқан жоқ.",
     "moreFriends": "+{count} көбірек",
@@ -417,7 +418,8 @@
     "learnNewWords": "Жаңа үйрен",
     "duplicateCourse": "Менің кітапханама көшіру",
     "duplicating": "Көшіру…",
-    "duplicateUpsell": "Plus/Pro мүмкіндігі — көшіру үшін жаңартыңыз"
+    "duplicateUpsell": "Plus/Pro мүмкіндігі — көшіру үшін жаңартыңыз",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Барлық бөлімдер",

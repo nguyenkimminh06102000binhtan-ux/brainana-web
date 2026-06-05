@@ -383,6 +383,7 @@
     "avgTime": "میانگین زمان",
     "avgTimeDays": "{count} روز",
     "images": "تصاویر",
+    "accuracy": "Accuracy",
     "verified": "تایید شده است",
     "noFriends": "هیچ یک از دوستان شما هنوز این را یاد نمی گیرند.",
     "moreFriends": "+{count} بیشتر",
@@ -417,7 +418,8 @@
     "learnNewWords": "یادگیری جدید",
     "duplicateCourse": "تکثیر به کتابخانه‌ام",
     "duplicating": "در حال تکثیر…",
-    "duplicateUpsell": "قابلیت Plus/Pro — برای تکثیر ارتقا دهید"
+    "duplicateUpsell": "قابلیت Plus/Pro — برای تکثیر ارتقا دهید",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "همه بخش ها",

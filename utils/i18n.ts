@@ -119,6 +119,7 @@ export type Locale = {
     learnNewWords: string;
     saved: string;
     save: string;
+    leave: string;
     editCourse: string;
     about: string;
     creatorSection: string;
@@ -132,6 +133,7 @@ export type Locale = {
     avgTime: string;
     avgTimeDays: string;
     images: string;
+    accuracy: string;
     verified: string;
     noFriends: string;
     moreFriends: string;

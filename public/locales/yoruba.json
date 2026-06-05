@@ -383,6 +383,7 @@
     "avgTime": "Aago akoko",
     "avgTimeDays": "{count} awọn ọjọ",
     "images": "Awọn aworan",
+    "accuracy": "Accuracy",
     "verified": "wadi",
     "noFriends": "Ko si ọkan ninu awọn ọrẹ rẹ ti o kọ ẹkọ yii sibẹsibẹ.",
     "moreFriends": "+{count} siwaju sii",
@@ -417,7 +418,8 @@
     "learnNewWords": "Kọ tuntun",
     "duplicateCourse": "Ṣe ẹdà si ile-ikawe mi",
     "duplicating": "Ṣiṣe ẹdà…",
-    "duplicateUpsell": "Ẹya Plus/Pro — gba ìgbésókè lati ṣe ẹdà"
+    "duplicateUpsell": "Ẹya Plus/Pro — gba ìgbésókè lati ṣe ẹdà",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Gbogbo awọn apakan",

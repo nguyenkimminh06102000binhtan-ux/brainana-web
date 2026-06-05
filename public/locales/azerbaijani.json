@@ -383,6 +383,7 @@
     "avgTime": "Orta vaxt",
     "avgTimeDays": "{count} günlər",
     "images": "Şəkillər",
+    "accuracy": "Accuracy",
     "verified": "yoxlanılıb",
     "noFriends": "Dostlarınızdan heç biri hələ bunu öyrənmir.",
     "moreFriends": "+{count} daha çox",
@@ -417,7 +418,8 @@
     "learnNewWords": "Yeni öyrən",
     "duplicateCourse": "Kitabxanama kopyala",
     "duplicating": "Kopyalanır…",
-    "duplicateUpsell": "Plus/Pro funksiyası — kopyalamaq üçün yüksəldin"
+    "duplicateUpsell": "Plus/Pro funksiyası — kopyalamaq üçün yüksəldin",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Bütün bölmələr",

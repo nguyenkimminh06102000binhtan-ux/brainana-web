@@ -383,6 +383,7 @@
     "avgTime": "ಸರಾಸರಿ ಸಮಯ",
     "avgTimeDays": "{count} ದಿನಗಳು",
     "images": "ಚಿತ್ರಗಳು",
+    "accuracy": "Accuracy",
     "verified": "ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
     "noFriends": "ನಿಮ್ಮ ಸ್ನೇಹಿತರಲ್ಲಿ ಯಾರೂ ಇದನ್ನು ಇನ್ನೂ ಕಲಿಯುತ್ತಿಲ್ಲ.",
     "moreFriends": "+{count} ಹೆಚ್ಚು",
@@ -417,7 +418,8 @@
     "learnNewWords": "ಹೊಸದು ಕಲಿಯಿರಿ",
     "duplicateCourse": "ನನ್ನ ಲೈಬ್ರರಿಗೆ ನಕಲಿಸಿ",
     "duplicating": "ನಕಲಿಸಲಾಗುತ್ತಿದೆ…",
-    "duplicateUpsell": "Plus/Pro ವೈಶಿಷ್ಟ್ಯ — ನಕಲಿಸಲು ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ"
+    "duplicateUpsell": "Plus/Pro ವೈಶಿಷ್ಟ್ಯ — ನಕಲಿಸಲು ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",

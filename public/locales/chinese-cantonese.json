@@ -383,6 +383,7 @@
     "avgTime": "平均時間",
     "avgTimeDays": "{count} 日",
     "images": "圖片",
+    "accuracy": "Accuracy",
     "verified": "已經驗證咗",
     "noFriends": "你啲朋友仲未學緊呢樣嘢。",
     "moreFriends": "+{count} 多啲",
@@ -417,7 +418,8 @@
     "learnNewWords": "學新內容",
     "duplicateCourse": "複製到我的書庫",
     "duplicating": "複製中…",
-    "duplicateUpsell": "Plus/Pro 功能 — 升級以複製"
+    "duplicateUpsell": "Plus/Pro 功能 — 升級以複製",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "所有部分",

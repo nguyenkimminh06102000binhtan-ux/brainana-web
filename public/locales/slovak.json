@@ -383,6 +383,7 @@
     "avgTime": "Priemerný čas",
     "avgTimeDays": "{count} dní",
     "images": "Obrázky",
+    "accuracy": "Accuracy",
     "verified": "overené",
     "noFriends": "Nikto z vašich priateľov sa to ešte neučí.",
     "moreFriends": "+{count} viac",
@@ -417,7 +418,8 @@
     "learnNewWords": "Učiť sa nové",
     "duplicateCourse": "Duplikovať do mojej knižnice",
     "duplicating": "Duplikovanie…",
-    "duplicateUpsell": "Funkcia Plus/Pro — aktualizujte na duplikovanie"
+    "duplicateUpsell": "Funkcia Plus/Pro — aktualizujte na duplikovanie",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Všetky sekcie",

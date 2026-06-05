@@ -383,6 +383,7 @@
     "avgTime": "Meán-am",
     "avgTimeDays": "{count} laethanta",
     "images": "Íomhánna",
+    "accuracy": "Accuracy",
     "verified": "fíoraithe",
     "noFriends": "Níl aon duine de do chairde ag foghlaim é seo go fóill.",
     "moreFriends": "+{count} níos mó",
@@ -417,7 +418,8 @@
     "learnNewWords": "Foghlaim nua",
     "duplicateCourse": "Dúblaigh chuig mo leabharlann",
     "duplicating": "Dúblú…",
-    "duplicateUpsell": "Gné Plus/Pro — uasghrádaigh le dúblú"
+    "duplicateUpsell": "Gné Plus/Pro — uasghrádaigh le dúblú",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Gach rannóg",

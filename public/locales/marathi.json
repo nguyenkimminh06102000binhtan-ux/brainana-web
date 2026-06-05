@@ -383,6 +383,7 @@
     "avgTime": "सरासरी वेळ",
     "avgTimeDays": "{count} दिवस",
     "images": "प्रतिमा",
+    "accuracy": "Accuracy",
     "verified": "सत्यापित",
     "noFriends": "तुमचे कोणीही मित्र अद्याप हे शिकत नाहीत.",
     "moreFriends": "+{count} अधिक",
@@ -417,7 +418,8 @@
     "learnNewWords": "नवे शिका",
     "duplicateCourse": "माझ्या लायब्ररीत डुप्लिकेट करा",
     "duplicating": "डुप्लिकेट होत आहे…",
-    "duplicateUpsell": "Plus/Pro वैशिष्ट्य — डुप्लिकेट करण्यासाठी अपग्रेड करा"
+    "duplicateUpsell": "Plus/Pro वैशिष्ट्य — डुप्लिकेट करण्यासाठी अपग्रेड करा",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "सर्व विभाग",

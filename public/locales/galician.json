@@ -383,6 +383,7 @@
     "avgTime": "Tempo medio",
     "avgTimeDays": "{count} días",
     "images": "Imaxes",
+    "accuracy": "Accuracy",
     "verified": "verificado",
     "noFriends": "Ningún dos teus amigos está aprendendo isto aínda.",
     "moreFriends": "+{count} máis",
@@ -417,7 +418,8 @@
     "learnNewWords": "Aprender novo",
     "duplicateCourse": "Duplicar na miña biblioteca",
     "duplicating": "Duplicando…",
-    "duplicateUpsell": "Función Plus/Pro — actualiza para duplicar"
+    "duplicateUpsell": "Función Plus/Pro — actualiza para duplicar",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Todas as seccións",

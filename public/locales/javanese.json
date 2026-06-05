@@ -383,6 +383,7 @@
     "avgTime": "Wektu rata-rata",
     "avgTimeDays": "{count} dina",
     "images": "Gambar",
+    "accuracy": "Accuracy",
     "verified": "diverifikasi",
     "noFriends": "Durung ana kancamu sing sinau iki.",
     "moreFriends": "+{count} liyane",
@@ -417,7 +418,8 @@
     "learnNewWords": "Sinau anyar",
     "duplicateCourse": "Duplikat menyang perpustakaan saya",
     "duplicating": "Duplikasi…",
-    "duplicateUpsell": "Fitur Plus/Pro — upgrade kanggo duplikasi"
+    "duplicateUpsell": "Fitur Plus/Pro — upgrade kanggo duplikasi",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Kabeh bagean",

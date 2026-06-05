@@ -383,6 +383,7 @@
     "avgTime": "ശരാശരി സമയം",
     "avgTimeDays": "{count} ദിവസങ്ങൾ",
     "images": "ചിത്രങ്ങൾ",
+    "accuracy": "Accuracy",
     "verified": "പരിശോധിച്ചു",
     "noFriends": "നിങ്ങളുടെ സുഹൃത്തുക്കളാരും ഇത് ഇതുവരെ പഠിച്ചിട്ടില്ല.",
     "moreFriends": "+{count} കൂടുതൽ",
@@ -417,7 +418,8 @@
     "learnNewWords": "പുതിയത് പഠിക്കുക",
     "duplicateCourse": "എന്റെ ലൈബ്രറിയിലേക്ക് പകർത്തുക",
     "duplicating": "പകർത്തുന്നു…",
-    "duplicateUpsell": "Plus/Pro ഫീച്ചർ — പകർത്താൻ അപ്‌ഗ്രേഡ് ചെയ്യുക"
+    "duplicateUpsell": "Plus/Pro ഫീച്ചർ — പകർത്താൻ അപ്‌ഗ്രേഡ് ചെയ്യുക",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "എല്ലാ വിഭാഗങ്ങളും",

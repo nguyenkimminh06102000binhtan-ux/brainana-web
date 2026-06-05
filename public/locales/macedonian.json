@@ -383,6 +383,7 @@
     "avgTime": "Просечно време",
     "avgTimeDays": "{count} денови",
     "images": "Слики",
+    "accuracy": "Accuracy",
     "verified": "потврдена",
     "noFriends": "Никој од вашите пријатели сè уште не го учи ова.",
     "moreFriends": "+{count} повеќе",
@@ -417,7 +418,8 @@
     "learnNewWords": "Учи ново",
     "duplicateCourse": "Дупликат во мојата библиотека",
     "duplicating": "Дупликат…",
-    "duplicateUpsell": "Plus/Pro функција — надградете за дупликат"
+    "duplicateUpsell": "Plus/Pro функција — надградете за дупликат",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Сите делови",

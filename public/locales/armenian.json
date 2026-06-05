@@ -383,6 +383,7 @@
     "avgTime": "Միջին ժամանակ",
     "avgTimeDays": "{count} օրեր",
     "images": "Պատկերներ",
+    "accuracy": "Accuracy",
     "verified": "ստուգված",
     "noFriends": "Ձեր ընկերներից ոչ ոք դեռ չի սովորում դա:",
     "moreFriends": "+{count} ավելին",
@@ -417,7 +418,8 @@
     "learnNewWords": "Սովորել նոր",
     "duplicateCourse": "Կրկնօրինակել իմ գրադարան",
     "duplicating": "Կրկնօրինակում…",
-    "duplicateUpsell": "Plus/Pro հատկություն — բարձրացրեք պլանն ու կրկնօրինակեք"
+    "duplicateUpsell": "Plus/Pro հատկություն — բարձրացրեք պլանն ու կրկնօրինակեք",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Բոլոր բաժինները",

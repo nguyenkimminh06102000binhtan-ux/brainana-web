@@ -383,6 +383,7 @@
     "avgTime": "เวลาเฉลี่ย",
     "avgTimeDays": "{count} วัน",
     "images": "รูปภาพ",
+    "accuracy": "Accuracy",
     "verified": "ตรวจสอบแล้ว",
     "noFriends": "ยังไม่มีเพื่อนของคุณกำลังเรียนรู้สิ่งนี้",
     "moreFriends": "+{count} มากกว่า",
@@ -417,7 +418,8 @@
     "learnNewWords": "เรียนใหม่",
     "duplicateCourse": "ทำสำเนาลงในคลังของฉัน",
     "duplicating": "กำลังทำสำเนา…",
-    "duplicateUpsell": "ฟีเจอร์ Plus/Pro — อัปเกรดเพื่อทำสำเนา"
+    "duplicateUpsell": "ฟีเจอร์ Plus/Pro — อัปเกรดเพื่อทำสำเนา",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ทุกส่วน",

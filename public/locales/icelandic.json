@@ -383,6 +383,7 @@
     "avgTime": "Meðaltími",
     "avgTimeDays": "{count} daga",
     "images": "Myndir",
+    "accuracy": "Accuracy",
     "verified": "staðfest",
     "noFriends": "Enginn af vinum þínum er að læra þetta ennþá.",
     "moreFriends": "+{count} meira",
@@ -417,7 +418,8 @@
     "learnNewWords": "Læra nýtt",
     "duplicateCourse": "Tvöfalda í mitt bókasafn",
     "duplicating": "Tvöfalda…",
-    "duplicateUpsell": "Plus/Pro eiginleiki — uppfærðu til að tvöfalda"
+    "duplicateUpsell": "Plus/Pro eiginleiki — uppfærðu til að tvöfalda",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Allir kaflar",

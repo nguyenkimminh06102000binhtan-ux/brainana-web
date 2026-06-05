@@ -383,6 +383,7 @@
     "avgTime": "Povpr. čas",
     "avgTimeDays": "{count} dni",
     "images": "Slike",
+    "accuracy": "Accuracy",
     "verified": "preverjeno",
     "noFriends": "Nihče od vaših prijateljev se tega še ne uči.",
     "moreFriends": "+{count} več",
@@ -417,7 +418,8 @@
     "learnNewWords": "Učiti novo",
     "duplicateCourse": "Podvoji v mojo knjižnico",
     "duplicating": "Podvajanje…",
-    "duplicateUpsell": "Funkcija Plus/Pro — nadgradite za podvajanje"
+    "duplicateUpsell": "Funkcija Plus/Pro — nadgradite za podvajanje",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Vsi razdelki",

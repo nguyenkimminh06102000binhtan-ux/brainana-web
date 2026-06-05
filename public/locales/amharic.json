@@ -383,6 +383,7 @@
     "avgTime": "አማካይ ጊዜ",
     "avgTimeDays": "{count} ቀናት",
     "images": "ምስሎች",
+    "accuracy": "Accuracy",
     "verified": "ተረጋግጧል",
     "noFriends": "ከጓደኞችህ መካከል አንዳቸውም ይህን አልተማሩም።",
     "moreFriends": "+{count} ተጨማሪ",
@@ -417,7 +418,8 @@
     "learnNewWords": "አዲስ ተማር",
     "duplicateCourse": "ወደ ቤተ-መጻሕፍቴ ቅዳ",
     "duplicating": "በመቅዳት ላይ…",
-    "duplicateUpsell": "Plus/Pro ባህሪ — ለማባዛት አሻሽል"
+    "duplicateUpsell": "Plus/Pro ባህሪ — ለማባዛት አሻሽል",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ሁሉም ክፍሎች",

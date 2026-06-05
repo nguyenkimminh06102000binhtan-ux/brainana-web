@@ -7,6 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import GoalRing from "./goal-ring";
+import HardCardsCarousel from "./hard-cards-carousel";
+import AnalyticsStrip, {
+  type ReviewForecastDay,
+  type AccuracyTrendDay,
+  type MasteryWeek,
+  type EaseCourse,
+} from "./analytics-strip";
 import EnrolledCourseCard from "../_components/enrolled-course-card";
 import { getLocale, t } from "@/utils/i18n";
 import { reviewDayCutoff } from "@/utils/review-schedule";
@@ -60,9 +67,19 @@ export default async function HomePage() {
   const todayStart = new Date();
   todayStart.setUTCHours(0, 0, 0, 0);
 
+  const _now = new Date();
+  const sevenDaysAgo = new Date(Date.UTC(_now.getUTCFullYear(), _now.getUTCMonth(), _now.getUTCDate() - 7));
+  const fourWeeksAgo = new Date(Date.UTC(_now.getUTCFullYear(), _now.getUTCMonth(), _now.getUTCDate() - 28));
+
   const activeOriginLanguage = (profile?.active_origin_language as string | null) ?? null;
 
-  const [{ data: sessionsToday }, { data: enrolledRaw }, { data: discoverRaw }] = await Promise.all([
+  const [
+    { data: sessionsToday },
+    { data: enrolledRaw },
+    { data: discoverRaw },
+    { data: recentSessions },
+    { data: recentMastered },
+  ] = await Promise.all([
     supabase
       .from("study_sessions")
       .select("items_studied")
@@ -84,6 +101,21 @@ export default async function HomePage() {
           .order("learner_count", { ascending: false })
           .limit(4)
       : Promise.resolve({ data: [] }),
+
+    supabase
+      .from("study_sessions")
+      .select("started_at, correct_count, items_studied")
+      .eq("user_id", user.id)
+      .gte("started_at", sevenDaysAgo.toISOString())
+      .gt("items_studied", 0),
+
+    supabase
+      .from("item_progress")
+      .select("mastered_at")
+      .eq("user_id", user.id)
+      .eq("mastered", true)
+      .gte("mastered_at", fourWeeksAgo.toISOString())
+      .not("mastered_at", "is", null),
   ]);
 
   const studiedToday = (sessionsToday ?? []).reduce((sum, s) => sum + (s.items_studied ?? 0), 0);
@@ -96,7 +128,7 @@ export default async function HomePage() {
 
   // Single item_progress query for all per-course + global stats
   const courseIds = enrolledCourses.map((c) => c.id);
-  const dueCutoff = reviewDayCutoff().toISOString();
+  const dueCutoff = reviewDayCutoff(); // Date — avoid string-format mismatch with PostgREST "+00:00" vs ".000Z"
 
   const { data: progressRows } = courseIds.length > 0
     ? await supabase
@@ -129,7 +161,7 @@ export default async function HomePage() {
     if (row.mastered) {
       totalMastered++;
       masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
-    } else if (row.next_review_at < dueCutoff) {
+    } else if (!row.ignored && new Date(row.next_review_at) < dueCutoff) {
       totalDue++;
       dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
     }
@@ -156,7 +188,7 @@ export default async function HomePage() {
       const correctCount = row.correct_count ?? 0;
       const easeFactor = Number(row.ease_factor ?? 2.5);
       const markedHard = Boolean(row.hard);
-      const isDue = row.next_review_at < dueCutoff;
+      const isDue = new Date(row.next_review_at) < dueCutoff;
       const lowEase = easeFactor <= 2.3;
       const errorHeavy = incorrectCount >= 2 || incorrectCount > correctCount;
 
@@ -193,9 +225,84 @@ export default async function HomePage() {
     })
     .filter((card): card is HardCard => card !== null)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+    .slice(0, 10);
 
   const coursesInProgress = enrolledCourses.filter((c) => studiedCourseIds.has(c.id)).length;
+
+  // ── Analytics data — all bucketing uses UTC dates to match Supabase timestamps ──
+
+  const DAY_ABBR = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  // Helper: UTC date string "YYYY-MM-DD" offset by `offset` days from today
+  const now = new Date();
+  function utcDay(offset: number) {
+    return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + offset));
+  }
+
+  // Review load forecast: next 7 UTC days
+  const reviewForecast: ReviewForecastDay[] = Array.from({ length: 7 }, (_, i) => {
+    const d = utcDay(i);
+    return { day: d.toISOString().slice(0, 10), dayLabel: i === 0 ? "·" : DAY_ABBR[d.getUTCDay()], count: 0, isToday: i === 0 };
+  });
+  for (const row of progressRows ?? []) {
+    if (row.mastered || row.ignored) continue;
+    const rev = new Date(row.next_review_at);
+    const dayStr = new Date(Date.UTC(rev.getUTCFullYear(), rev.getUTCMonth(), rev.getUTCDate())).toISOString().slice(0, 10);
+    const slot = dayStr < reviewForecast[0].day
+      ? reviewForecast[0]
+      : reviewForecast.find((d) => d.day === dayStr);
+    if (slot) slot.count++;
+  }
+
+  // Accuracy trend: correct % per UTC day over the last 7 days
+  const byDay: Record<string, { correct: number; total: number }> = {};
+  for (const s of recentSessions ?? []) {
+    // started_at from Supabase is ISO 8601 — slice(0,10) gives the UTC date
+    const day = (s.started_at as string).slice(0, 10);
+    if (!byDay[day]) byDay[day] = { correct: 0, total: 0 };
+    byDay[day].correct += s.correct_count ?? 0;
+    byDay[day].total += s.items_studied ?? 0;
+  }
+  const accuracyTrend: AccuracyTrendDay[] = Array.from({ length: 7 }, (_, i) => {
+    const d = utcDay(i - 6);
+    const day = d.toISOString().slice(0, 10);
+    const data = byDay[day];
+    return {
+      day,
+      dayLabel: i === 6 ? "·" : DAY_ABBR[d.getUTCDay()],
+      pct: data && data.total > 0 ? Math.round((data.correct / data.total) * 100) : null,
+    };
+  });
+
+  // Mastery velocity: cards mastered per UTC week over last 4 weeks
+  const byWeek: Record<string, number> = {};
+  for (const row of recentMastered ?? []) {
+    const d = new Date((row as { mastered_at: string }).mastered_at);
+    const dow = d.getUTCDay();
+    const monday = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - (dow === 0 ? 6 : dow - 1)));
+    byWeek[monday.toISOString().slice(0, 10)] = (byWeek[monday.toISOString().slice(0, 10)] ?? 0) + 1;
+  }
+  const cdow = now.getUTCDay();
+  const currentMonday = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - (cdow === 0 ? 6 : cdow - 1)));
+  const masteryVelocity: MasteryWeek[] = Array.from({ length: 4 }, (_, i) => {
+    const d = new Date(Date.UTC(currentMonday.getUTCFullYear(), currentMonday.getUTCMonth(), currentMonday.getUTCDate() - (3 - i) * 7));
+    const key = d.toISOString().slice(0, 10);
+    return { weekLabel: `${MONTH_ABBR[d.getUTCMonth()]} ${d.getUTCDate()}`, count: byWeek[key] ?? 0 };
+  });
+
+  // Ease factor per course (active cards only, hardest first)
+  const easeSum: Record<string, number> = {};
+  const easeCount: Record<string, number> = {};
+  for (const row of progressRows ?? []) {
+    if (row.mastered || row.ignored) continue;
+    easeSum[row.course_id] = (easeSum[row.course_id] ?? 0) + Number(row.ease_factor ?? 2.5);
+    easeCount[row.course_id] = (easeCount[row.course_id] ?? 0) + 1;
+  }
+  const easeByCourse: EaseCourse[] = enrolledCourses
+    .filter((c) => (easeCount[c.id] ?? 0) > 0)
+    .map((c) => ({ courseId: c.id, title: c.title, slug: c.slug, avgEase: easeSum[c.id] / easeCount[c.id] }))
+    .sort((a, b) => a.avgEase - b.avgEase);
 
   const topDueCourse = enrolledCourses
     .filter((c) => (dueByCourse[c.id] ?? 0) > 0)
@@ -223,7 +330,7 @@ export default async function HomePage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_260px]">
 
         {/* ── LEFT COLUMN ── */}
-        <div className="flex flex-col gap-6">
+        <div className="flex min-w-0 flex-col gap-6">
 
           {/* Header */}
           <section className="flex items-center gap-4 rounded-[1.4rem] border-2 border-ink bg-paper-2 p-4 shadow-hard-sm sm:p-5">
@@ -258,32 +365,29 @@ export default async function HomePage() {
             </div>
           </section>
 
-          {/* Today's Review card */}
-          {totalDue > 0 && topDueCourse ? (
-            <section className="rounded-[1.4rem] border-2 border-ink bg-red-soft p-5 shadow-hard">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
-              <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="font-fredoka text-2xl font-[700] leading-tight tracking-tight">
-                    {t(loc.home.cardsDue, { count: fmt(totalDue) })}
-                  </p>
-                  <p className="font-manrope text-sm text-ink-2">
-                    {t(loc.home.reviewEstimate, { minutes: estMinutes, course: topDueCourse.title })}
-                  </p>
-                </div>
-                <Link
-                  href={`/study/${topDueCourse.slug}`}
-                  className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-5 py-2.5 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[2px] active:shadow-hard-sm"
-                >
-                  {loc.home.startReview} <Icon name="arrowRight" className="h-4 w-4" />
-                </Link>
-              </div>
-            </section>
-          ) : (
-            <section className="rounded-[1.4rem] border-2 border-ink bg-green-soft p-5 shadow-hard">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
-              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp}</p>
-              <p className="mt-1 font-manrope text-sm text-ink-2">{loc.home.noCardsDue}</p>
+          {/* Analytics Strip */}
+          <AnalyticsStrip
+            reviewForecast={reviewForecast}
+            accuracyTrend={accuracyTrend}
+            masteryVelocity={masteryVelocity}
+            easeByCourse={easeByCourse}
+          />
+
+          {/* Words to Tame — carousel with arrow navigation */}
+          {hardCards.length > 0 && (
+            <section>
+              <HardCardsCarousel
+                cards={hardCards.map((c) => ({
+                  itemId: c.itemId,
+                  courseSlug: c.courseSlug,
+                  courseTitle: c.courseTitle,
+                  frontText: c.frontText,
+                  backText: c.backText,
+                  reason: c.reason,
+                  incorrectCount: c.incorrectCount,
+                  isDue: c.isDue,
+                }))}
+              />
             </section>
           )}
 
@@ -379,67 +483,30 @@ export default async function HomePage() {
             />
           </aside>
 
-          <aside className="overflow-hidden rounded-[1.4rem] border-2 border-ink bg-yellow-soft shadow-hard">
-            <div className="relative min-h-28 border-b-2 border-ink bg-paper-2 px-5 py-4">
-              <div className="relative z-10">
-                <p className="font-mono text-xs uppercase tracking-widest text-ink-2">Hard cards</p>
-                <h2 className="mt-1 font-fredoka text-2xl font-[700] leading-tight tracking-tight">Words to tame</h2>
-              </div>
-              <Image
-                src="/logos/brainana-mascot-192.png"
-                alt=""
-                width={192}
-                height={154}
-                className="absolute -bottom-5 -right-5 w-28 object-contain drop-shadow-sm"
-              />
-            </div>
-            <div className="p-5">
-              {hardCards.length > 0 ? (
-                <div className="flex flex-col gap-3">
-                  {hardCards.map((card) => (
-                    <Link
-                      key={card.itemId}
-                      href={`/c/${card.courseSlug}`}
-                      className="block rounded-[1rem] border-2 border-ink bg-paper px-4 py-3 shadow-hard-sm transition hover:-translate-y-0.5 hover:bg-red-soft"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="line-clamp-2 font-fredoka text-lg font-[700] leading-tight text-ink">
-                          {card.frontText}
-                        </p>
-                        <span className="shrink-0 rounded-full border-2 border-ink bg-red-soft px-2 py-0.5 font-mono text-[10px] font-[800] uppercase text-orange-text">
-                          {card.reason}
-                        </span>
-                      </div>
-                      <p className="mt-1 line-clamp-2 font-manrope text-xs leading-5 text-ink-2">
-                        {card.backText}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-3">
-                        <span>{card.courseTitle}</span>
-                        {card.isDue && <span>due</span>}
-                        {card.incorrectCount > 0 && <span>{card.incorrectCount} misses</span>}
-                      </div>
-                    </Link>
-                  ))}
-                  <Link
-                    href={`/study/${hardCards[0].courseSlug}`}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
-                  >
-                    Practice hardest <Icon name="arrowRight" className="h-4 w-4" />
-                  </Link>
-                </div>
-              ) : (
-                <div className="rounded-[1rem] border-2 border-ink bg-paper px-4 py-4 shadow-hard-sm">
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-green-soft shadow-hard-sm">
-                    <Icon name="check" className="h-5 w-5 text-blue-text" />
-                  </div>
-                  <p className="font-fredoka text-xl font-[700] leading-tight">No stubborn cards yet</p>
-                  <p className="mt-2 font-manrope text-sm leading-6 text-ink-2">
-                    Cards will show here after they are marked hard, missed often, or start dropping in ease.
-                  </p>
-                </div>
-              )}
-            </div>
-          </aside>
+          {/* Today's Review */}
+          {totalDue > 0 && topDueCourse ? (
+            <aside className="rounded-[1.4rem] border-2 border-ink bg-red-soft p-5 shadow-hard">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
+              <p className="mt-2 font-fredoka text-2xl font-[700] leading-tight tracking-tight">
+                {t(loc.home.cardsDue, { count: fmt(totalDue) })}
+              </p>
+              <p className="mt-1 font-manrope text-sm text-ink-2">
+                {t(loc.home.reviewEstimate, { minutes: estMinutes, course: topDueCourse.title })}
+              </p>
+              <Link
+                href={`/study/${topDueCourse.slug}`}
+                className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-orange px-4 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+              >
+                {loc.home.startReview} <Icon name="arrowRight" className="h-4 w-4" />
+              </Link>
+            </aside>
+          ) : (
+            <aside className="rounded-[1.4rem] border-2 border-ink bg-green-soft p-5 shadow-hard">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-2">{loc.home.todaysReview}</p>
+              <p className="mt-2 font-fredoka text-2xl font-[700] tracking-tight">{loc.home.allCaughtUp}</p>
+              <p className="mt-1 font-manrope text-sm text-ink-2">{loc.home.noCardsDue}</p>
+            </aside>
+          )}
         </div>
       </div>
     </div>

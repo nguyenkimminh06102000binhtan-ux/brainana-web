@@ -383,6 +383,7 @@
     "avgTime": "Gem. tyd",
     "avgTimeDays": "{count} dae",
     "images": "Beelde",
+    "accuracy": "Accuracy",
     "verified": "geverifieer",
     "noFriends": "Nie een van jou vriende leer dit nog nie.",
     "moreFriends": "+{count} meer",
@@ -417,7 +418,8 @@
     "learnNewWords": "Leer nuut",
     "duplicateCourse": "Dupliseer na my biblioteek",
     "duplicating": "Dupliseer…",
-    "duplicateUpsell": "Plus/Pro-funksie — opgradeer om te dupliseer"
+    "duplicateUpsell": "Plus/Pro-funksie — opgradeer om te dupliseer",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Alle afdelings",

@@ -383,6 +383,7 @@
     "avgTime": "Celcelis ahaan wakhtiga",
     "avgTimeDays": "{count} maalmo",
     "images": "Sawirada",
+    "accuracy": "Accuracy",
     "verified": "la xaqiijiyay",
     "noFriends": "Midkoodna saaxiibbadaa midna ma baran tan weli.",
     "moreFriends": "+{count} dheeraad ah",
@@ -417,7 +418,8 @@
     "learnNewWords": "Baro cusub",
     "duplicateCourse": "U nuqul gaar maktabadeyda",
     "duplicating": "Koobiyaynta…",
-    "duplicateUpsell": "Astaamaha Plus/Pro — kor u qaad si aad u nuqul gaarto"
+    "duplicateUpsell": "Astaamaha Plus/Pro — kor u qaad si aad u nuqul gaarto",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Dhammaan qaybaha",

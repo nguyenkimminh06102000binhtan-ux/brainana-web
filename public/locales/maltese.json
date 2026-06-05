@@ -383,6 +383,7 @@
     "avgTime": "Ħin medju",
     "avgTimeDays": "{count} jiem",
     "images": "Stampi",
+    "accuracy": "Accuracy",
     "verified": "verifikati",
     "noFriends": "Ħadd mill-ħbieb tiegħek għadu mhu qed jitgħallem dan.",
     "moreFriends": "+{count} aktar",
@@ -417,7 +418,8 @@
     "learnNewWords": "Tgħallem ġdid",
     "duplicateCourse": "Idduplika fil-librerija tiegħi",
     "duplicating": "Qed tidduplika…",
-    "duplicateUpsell": "Karatteristika Plus/Pro — aġġorna biex tidduplika"
+    "duplicateUpsell": "Karatteristika Plus/Pro — aġġorna biex tidduplika",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "It-taqsimiet kollha",

@@ -383,6 +383,7 @@
     "avgTime": "Avg amser",
     "avgTimeDays": "{count} dyddiau",
     "images": "Delweddau",
+    "accuracy": "Accuracy",
     "verified": "wedi'i wirio",
     "noFriends": "Nid oes unrhyw un o'ch ffrindiau yn dysgu hyn eto.",
     "moreFriends": "+{count} mwy",
@@ -417,7 +418,8 @@
     "learnNewWords": "Dysgu newydd",
     "duplicateCourse": "Dyblygu i fy llyfrgell",
     "duplicating": "Yn dyblygu…",
-    "duplicateUpsell": "Nodwedd Plus/Pro — uwchraddiwch i ddyblygu"
+    "duplicateUpsell": "Nodwedd Plus/Pro — uwchraddiwch i ddyblygu",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Pob adran",

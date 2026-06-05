@@ -54,8 +54,7 @@ export async function saveSpeedReviewResults(
       newRepetitions = Math.max(0, repetitions - 1);
     }
 
-    const nextReview = new Date(now);
-    nextReview.setDate(nextReview.getDate() + newInterval);
+    const nextReview = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + newInterval));
 
     return {
       user_id: user.id,

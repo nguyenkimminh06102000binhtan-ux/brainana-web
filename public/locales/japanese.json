@@ -383,6 +383,7 @@
     "avgTime": "平均時間",
     "avgTimeDays": "{count} 日",
     "images": "画像",
+    "accuracy": "Accuracy",
     "verified": "検証済み",
     "noFriends": "あなたの友達はまだこれを学んでいません。",
     "moreFriends": "+{count} もっと",
@@ -417,7 +418,8 @@
     "learnNewWords": "新しく学ぶ",
     "duplicateCourse": "マイライブラリに複製",
     "duplicating": "複製中…",
-    "duplicateUpsell": "Plus/Pro機能 — 複製するにはアップグレード"
+    "duplicateUpsell": "Plus/Pro機能 — 複製するにはアップグレード",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "すべてのセクション",

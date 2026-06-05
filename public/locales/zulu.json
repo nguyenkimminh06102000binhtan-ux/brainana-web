@@ -383,6 +383,7 @@
     "avgTime": "Isikhathi esimaphakathi",
     "avgTimeDays": "{count} izinsuku",
     "images": "Izithombe",
+    "accuracy": "Accuracy",
     "verified": "kuqinisekisiwe",
     "noFriends": "Abekho abangani bakho abafunda lokhu okwamanje.",
     "moreFriends": "+{count} Okuningi",
@@ -417,7 +418,8 @@
     "learnNewWords": "Funda okutsha",
     "duplicateCourse": "Phindaphinda kubhulokhi lami",
     "duplicating": "Iyaphindaphinda…",
-    "duplicateUpsell": "Isici se-Plus/Pro — thola ukuphakanyiswa ukuphindaphinda"
+    "duplicateUpsell": "Isici se-Plus/Pro — thola ukuphakanyiswa ukuphindaphinda",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Zonke izigaba",

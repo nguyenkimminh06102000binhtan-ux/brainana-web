@@ -383,6 +383,7 @@
     "avgTime": "Дундаж хугацаа",
     "avgTimeDays": "{count} өдрүүд",
     "images": "Зураг",
+    "accuracy": "Accuracy",
     "verified": "баталгаажуулсан",
     "noFriends": "Таны найзуудын хэн нь ч үүнийг хараахан сураагүй байна.",
     "moreFriends": "+{count} илүү",
@@ -417,7 +418,8 @@
     "learnNewWords": "Шинэ сурах",
     "duplicateCourse": "Миний номын санд хуулах",
     "duplicating": "Хуулж байна…",
-    "duplicateUpsell": "Plus/Pro функц — хуулахын тулд шинэчлэх"
+    "duplicateUpsell": "Plus/Pro функц — хуулахын тулд шинэчлэх",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Бүх хэсгүүд",

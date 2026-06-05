@@ -383,6 +383,7 @@
     "avgTime": "Dema navîn",
     "avgTimeDays": "{count} rojan",
     "images": "Images",
+    "accuracy": "Accuracy",
     "verified": "verast kirin",
     "noFriends": "Yek ji hevalên we hîn hînî vê yekê nebûye.",
     "moreFriends": "+{count} zêde",
@@ -417,7 +418,8 @@
     "learnNewWords": "Nû fêr bibe",
     "duplicateCourse": "Li pirtûkxaneya min dubare bike",
     "duplicating": "Dubarekirin…",
-    "duplicateUpsell": "Taybetmendiya Plus/Pro — ji bo dubarekirin xwe bilind bike"
+    "duplicateUpsell": "Taybetmendiya Plus/Pro — ji bo dubarekirin xwe bilind bike",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Hemû beş",

@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { fetchStudyCards, updateQuestionTypes } from "./actions";
 import PageLoading from "../../_components/page-loading";
 import SessionView from "./session-view";
@@ -130,6 +131,7 @@ export default function StudyClient({
   const available = reviewDue + newCards;
   const sessionLimit = available > 0 ? available : totalCount;
   const isPracticeMode = available === 0 && totalCount > 0;
+  const router = useRouter();
   const [stage, setStage] = useState<Stage>("setup");
   const [sessionCards, setSessionCards] = useState<StudyCard[]>([]);
   const [sessionStats, setSessionStats] = useState<SessionStats | null>(null);
@@ -180,6 +182,7 @@ export default function StudyClient({
   function handleSessionComplete(stats: SessionStats) {
     setSessionStats(stats);
     setStage("results");
+    router.refresh();
   }
 
   function handleExit() {

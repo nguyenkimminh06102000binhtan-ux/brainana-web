@@ -73,7 +73,7 @@ export default async function LibraryPage() {
     levels: levelLabels,
   };
 
-  const [{ data: createdRaw }, { data: enrolledRaw }] = await Promise.all([
+  const [{ data: createdRaw }, { data: enrolledRaw }, { data: savedRaw }] = await Promise.all([
     supabase
       .from("courses")
       .select("id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility")
@@ -84,19 +84,27 @@ export default async function LibraryPage() {
       .from("user_courses")
       .select("courses!course_id (id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility, creator_id)")
       .eq("user_id", user.id),
+
+    supabase
+      .from("saved_courses")
+      .select("courses!course_id (id, slug, title, category, cover_image_url, level, card_count, learner_count, rating, has_audio, mems_count, is_published, visibility)")
+      .eq("user_id", user.id),
   ]);
 
   const created = (createdRaw ?? []) as CourseCard[];
 
-  const allEnrolled = ((enrolledRaw ?? []) as unknown as {
+  const learning = ((enrolledRaw ?? []) as unknown as {
     courses: CourseCard & { creator_id: string };
   }[])
     .filter((row) => row.courses.creator_id !== user.id)
-    .map((row) => row.courses) as (CourseCard & { creator_id: string })[];
+    .map((row) => row.courses) as CourseCard[];
 
-  // Single query for all progress data across enrolled courses
-  const enrolledCourseIds = allEnrolled.map((c) => c.id);
-  const dueCutoff = reviewDayCutoff().toISOString();
+  const saved = ((savedRaw ?? []) as unknown as { courses: CourseCard }[])
+    .map((row) => row.courses) as CourseCard[];
+
+  // Progress data for enrolled courses
+  const dueCutoff = reviewDayCutoff();
+  const enrolledCourseIds = learning.map((c) => c.id);
 
   const { data: progressRows } = enrolledCourseIds.length > 0
     ? await supabase
@@ -106,21 +114,16 @@ export default async function LibraryPage() {
         .in("course_id", enrolledCourseIds)
     : { data: [] };
 
-  const studiedCourseIds = new Set<string>();
   const masteredByCourse: Record<string, number> = {};
   const dueByCourse: Record<string, number> = {};
 
   for (const row of progressRows ?? []) {
-    studiedCourseIds.add(row.course_id);
     if (row.mastered) {
       masteredByCourse[row.course_id] = (masteredByCourse[row.course_id] ?? 0) + 1;
-    } else if (row.next_review_at < dueCutoff) {
+    } else if (new Date(row.next_review_at) < dueCutoff) {
       dueByCourse[row.course_id] = (dueByCourse[row.course_id] ?? 0) + 1;
     }
   }
-
-  const learning = allEnrolled.filter((c) => studiedCourseIds.has(c.id));
-  const saved    = allEnrolled.filter((c) => !studiedCourseIds.has(c.id));
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8 space-y-10">
@@ -137,7 +140,7 @@ export default async function LibraryPage() {
         ))}
       </Section>
 
-      <Section title={loc.library.learning} count={learning.length} emptyText={loc.library.emptyLearning}>
+      <Section title={loc.library.learning} count={learning.length} emptyText={loc.library.emptyLearning} emptyLink={{ href: "/browse", label: loc.common.browseCourses }}>
         {learning.map((course) => (
           <EnrolledCourseCard
             key={course.id}
@@ -146,7 +149,7 @@ export default async function LibraryPage() {
               ...course,
               masteredCount: masteredByCourse[course.id] ?? 0,
               dueCount: dueByCourse[course.id] ?? 0,
-              hasStudied: true,
+              hasStudied: (masteredByCourse[course.id] ?? 0) + (dueByCourse[course.id] ?? 0) > 0,
             }}
           />
         ))}

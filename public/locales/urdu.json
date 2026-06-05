@@ -383,6 +383,7 @@
     "avgTime": "اوسط وقت",
     "avgTimeDays": "{count} دن",
     "images": "امیجز",
+    "accuracy": "Accuracy",
     "verified": "تصدیق شدہ",
     "noFriends": "آپ کا کوئی دوست ابھی تک یہ نہیں سیکھ رہا ہے۔",
     "moreFriends": "+{count} مزید",
@@ -417,7 +418,8 @@
     "learnNewWords": "نیا سیکھیں",
     "duplicateCourse": "میری لائبریری میں نقل کریں",
     "duplicating": "نقل ہو رہا ہے…",
-    "duplicateUpsell": "Plus/Pro فیچر — نقل کرنے کے لیے اپگریڈ کریں"
+    "duplicateUpsell": "Plus/Pro فیچر — نقل کرنے کے لیے اپگریڈ کریں",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "تمام سیکشنز",

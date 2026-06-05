@@ -383,6 +383,7 @@
     "avgTime": "Средно време",
     "avgTimeDays": "{count} дни",
     "images": "Изображения",
+    "accuracy": "Accuracy",
     "verified": "проверени",
     "noFriends": "Никой от вашите приятели все още не е научил това.",
     "moreFriends": "+{count} повече",
@@ -417,7 +418,8 @@
     "learnNewWords": "Учи ново",
     "duplicateCourse": "Дублирай в моята библиотека",
     "duplicating": "Дублиране…",
-    "duplicateUpsell": "Функция Plus/Pro — надградете за дублиране"
+    "duplicateUpsell": "Функция Plus/Pro — надградете за дублиране",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Всички раздели",
