@@ -11,7 +11,7 @@ export type Locale = {
     searchPlaceholder: string;
     loadingPage: string;
     streakDays: string;
-    avatar: { profile: string; settings: string; billing: string; logout: string };
+    avatar: { profile: string; settings: string; billing: string; upgrade: string; logout: string };
     originLanguage: {
       setOrigin: string;
       addLanguage: string;

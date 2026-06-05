@@ -17,11 +17,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("display_name, username, avatar_url, native_language, origin_languages, active_origin_language")
-    .eq("id", user.id)
-    .single();
+  const [{ data: profile }, { data: sub }] = await Promise.all([
+    supabase.from("profiles").select("display_name, username, avatar_url, native_language, origin_languages, active_origin_language").eq("id", user.id).single(),
+    supabase.from("user_subscriptions").select("plan").eq("user_id", user.id).single(),
+  ]);
+  const plan = (sub?.plan as string | null) ?? "free";
 
   const displayName = profile?.display_name ?? profile?.username ?? user.email?.split("@")[0] ?? "Learner";
   const initial = displayName[0].toUpperCase();
@@ -102,7 +102,7 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
               </div>
             </form>
 
-            {/* Right: theme toggle, language, avatar */}
+            {/* Right: theme toggle, language, plan badge, avatar */}
             <div className="flex shrink-0 items-center gap-2">
               <ThemeToggle />
 
@@ -111,10 +111,28 @@ let originLanguages = (profile?.origin_languages as string[] | null) ?? [];
                 activeOriginLanguage={activeOriginLanguage}
                 labels={loc.app.originLanguage}
               />
+
+              {plan === "free" ? (
+                <Link
+                  href="/billing/upgrade"
+                  className="inline-flex rounded-full bg-orange px-4 py-2 font-manrope text-xs font-[800] text-on-bright shadow-hard-red transition hover:opacity-90 active:translate-y-[1px]"
+                >
+                  ⚡ {loc.app.avatar.upgrade}
+                </Link>
+              ) : (
+                <Link
+                  href="/billing"
+                  className="inline-flex rounded-full border-2 border-ink/20 px-3 py-1.5 font-mono text-xs font-[700] uppercase tracking-widest text-ink-2 transition hover:border-ink hover:text-ink"
+                >
+                  {plan}
+                </Link>
+              )}
+
               <AvatarMenu
                 avatarUrl={profile?.avatar_url ?? null}
                 initial={initial}
                 username={profile?.username ?? ""}
+                plan={plan}
                 labels={loc.app.avatar}
               />
             </div>

@@ -10,10 +10,11 @@ interface AvatarMenuProps {
   avatarUrl: string | null;
   initial: string;
   username: string;
-  labels: { profile: string; settings: string; billing: string; logout: string };
+  plan: string;
+  labels: { profile: string; settings: string; billing: string; upgrade: string; logout: string };
 }
 
-export default function AvatarMenu({ avatarUrl, initial, username, labels }: AvatarMenuProps) {
+export default function AvatarMenu({ avatarUrl, initial, username, plan, labels }: AvatarMenuProps) {
   const [open, setOpen] = useState(false);
   const ref        = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -79,6 +80,28 @@ export default function AvatarMenu({ avatarUrl, initial, username, labels }: Ava
 
       {open && (
         <div role="menu" aria-label="Account menu" className="absolute bottom-12 right-0 z-50 min-w-44 overflow-hidden rounded-xl border border-ink/10 bg-paper-2 shadow-hard lg:bottom-auto lg:top-12">
+          {plan === "free" ? (
+            <Link
+              href="/billing/upgrade"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between gap-2 bg-orange/10 px-4 py-3 transition hover:bg-orange/20"
+            >
+              <span className="font-mono text-xs font-[700] uppercase tracking-widest text-orange-text">Free</span>
+              <span className="rounded-full bg-orange px-2.5 py-1 font-manrope text-xs font-[800] text-on-bright shadow-hard-red">⚡ {labels.upgrade}</span>
+            </Link>
+          ) : (
+            <Link
+              href="/billing"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between gap-2 px-4 py-3 transition hover:bg-paper"
+            >
+              <span className="font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">Plan</span>
+              <span className="rounded-full border-2 border-ink/20 px-2.5 py-0.5 font-mono text-xs font-[700] uppercase tracking-widest text-ink-2">{plan}</span>
+            </Link>
+          )}
+          <div className="mx-4 border-t border-ink/10" role="separator" />
           <Link
             href={`/u/${username}`}
             role="menuitem"
