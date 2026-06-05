@@ -197,6 +197,8 @@ export type Locale = {
     removeSection: string;
     cardsSummary: string;
     importCsv: string;
+    csvExample2col: string;
+    csvExample3col: string;
     addCard: string;
     addSection: string;
     cardLabel: string;
@@ -251,6 +253,7 @@ export type Locale = {
     customAttributesTitle: string;
     customAttributesDone: string;
     customAttributeNamePlaceholder: string;
+    customAttributeAiHint: string;
     addCustomAttribute: string;
     autoGenerateBack: string;
     bulkGenerateBack: string;
