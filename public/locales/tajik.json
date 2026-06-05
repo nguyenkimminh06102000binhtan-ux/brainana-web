@@ -383,6 +383,7 @@
     "avgTime": "Вақти миёна",
     "avgTimeDays": "{count} рӯз",
     "images": "Тасвирҳо",
+    "accuracy": "Accuracy",
     "verified": "санҷида шуд",
     "noFriends": "Ҳеҷ яке аз дӯстони шумо ҳанӯз инро намеомӯзад.",
     "moreFriends": "+{count} Бештар",
@@ -417,7 +418,8 @@
     "learnNewWords": "Нав омӯзед",
     "duplicateCourse": "Ба китобхонаи ман нусхабардорӣ кунед",
     "duplicating": "Нусхабардорӣ…",
-    "duplicateUpsell": "Функсияи Plus/Pro — барои нусхабардорӣ навсозӣ кунед"
+    "duplicateUpsell": "Функсияи Plus/Pro — барои нусхабардорӣ навсозӣ кунед",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Ҳама бахшҳо",

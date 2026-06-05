@@ -383,6 +383,7 @@
     "avgTime": "சராசரி நேரம்",
     "avgTimeDays": "{count} நாட்கள்",
     "images": "படங்கள்",
+    "accuracy": "Accuracy",
     "verified": "சரிபார்க்கப்பட்டது",
     "noFriends": "உங்கள் நண்பர்கள் யாரும் இதை இன்னும் கற்றுக்கொள்ளவில்லை.",
     "moreFriends": "+{count} மேலும்",
@@ -417,7 +418,8 @@
     "learnNewWords": "புதியதை கற்கவும்",
     "duplicateCourse": "என் நூலகத்தில் நகலெடு",
     "duplicating": "நகலெடுக்கிறது…",
-    "duplicateUpsell": "Plus/Pro அம்சம் — நகலெடுக்க மேம்படுத்தவும்"
+    "duplicateUpsell": "Plus/Pro அம்சம் — நகலெடுக்க மேம்படுத்தவும்",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "அனைத்து பிரிவுகளும்",

@@ -383,6 +383,7 @@
     "avgTime": "Keskimääräinen aika",
     "avgTimeDays": "{count} päivää",
     "images": "Kuvat",
+    "accuracy": "Accuracy",
     "verified": "vahvistettu",
     "noFriends": "Kukaan ystävistäsi ei ole vielä oppinut tätä.",
     "moreFriends": "+{count} lisää",
@@ -417,7 +418,8 @@
     "learnNewWords": "Opi uutta",
     "duplicateCourse": "Kopioi kirjastooni",
     "duplicating": "Kopioidaan…",
-    "duplicateUpsell": "Plus/Pro-ominaisuus — päivitä kopioidaksesi"
+    "duplicateUpsell": "Plus/Pro-ominaisuus — päivitä kopioidaksesi",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Kaikki osat",

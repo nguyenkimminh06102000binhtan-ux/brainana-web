@@ -383,6 +383,7 @@
     "avgTime": "平均时间",
     "avgTimeDays": "{count} 天",
     "images": "图片",
+    "accuracy": "Accuracy",
     "verified": "已验证",
     "noFriends": "你的朋友还没有学会这一点。",
     "moreFriends": "+{count} 更多的",
@@ -417,7 +418,8 @@
     "learnNewWords": "学新内容",
     "duplicateCourse": "复制到我的库",
     "duplicating": "复制中…",
-    "duplicateUpsell": "Plus/Pro 功能 — 升级以复制"
+    "duplicateUpsell": "Plus/Pro 功能 — 升级以复制",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "所有部分",

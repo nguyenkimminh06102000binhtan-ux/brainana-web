@@ -383,6 +383,7 @@
     "avgTime": "Avg na oras",
     "avgTimeDays": "{count} araw",
     "images": "Mga imahe",
+    "accuracy": "Accuracy",
     "verified": "napatunayan",
     "noFriends": "Wala pa sa iyong mga kaibigan ang natututo nito.",
     "moreFriends": "+{count} higit pa",
@@ -417,7 +418,8 @@
     "learnNewWords": "Matuto ng bago",
     "duplicateCourse": "I-duplicate sa aking library",
     "duplicating": "Dina-duplicate…",
-    "duplicateUpsell": "Plus/Pro feature — i-upgrade para mag-duplicate"
+    "duplicateUpsell": "Plus/Pro feature — i-upgrade para mag-duplicate",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Lahat ng mga seksyon",

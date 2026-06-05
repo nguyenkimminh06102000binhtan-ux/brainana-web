@@ -389,6 +389,7 @@
     "avgTime": "Avg time",
     "avgTimeDays": "{count} days",
     "images": "Images",
+    "accuracy": "Accuracy",
     "verified": "verified",
     "noFriends": "None of your friends are learning this yet.",
     "moreFriends": "+{count} more",
@@ -417,7 +418,8 @@
     "following": "Following",
     "follow": "+ Follow",
     "share": "Share",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "leave": "Leave course"
   },
   "speedReview": {
     "title": "Speed Review",

@@ -383,6 +383,7 @@
     "avgTime": "Átl. idő",
     "avgTimeDays": "{count} napokon",
     "images": "Képek",
+    "accuracy": "Accuracy",
     "verified": "ellenőrizve",
     "noFriends": "Ezt még egyik barátod sem tanulja.",
     "moreFriends": "+{count} több",
@@ -417,7 +418,8 @@
     "learnNewWords": "Újat tanulni",
     "duplicateCourse": "Másolás a könyvtáramba",
     "duplicating": "Másolás…",
-    "duplicateUpsell": "Plus/Pro funkció — frissítsen a másoláshoz"
+    "duplicateUpsell": "Plus/Pro funkció — frissítsen a másoláshoz",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Minden szakasz",

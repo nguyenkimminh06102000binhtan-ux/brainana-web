@@ -383,6 +383,7 @@
     "avgTime": "සාමාන්‍ය කාලය",
     "avgTimeDays": "{count} දින",
     "images": "රූප",
+    "accuracy": "Accuracy",
     "verified": "තහවුරු කර ඇත",
     "noFriends": "ඔබේ මිතුරන් කිසිවෙක් තවම මෙය ඉගෙන ගෙන නැත.",
     "moreFriends": "+{count} තව",
@@ -417,7 +418,8 @@
     "learnNewWords": "නව ඉගෙනීම",
     "duplicateCourse": "මගේ පුස්තකාලයට නකල් කරන්න",
     "duplicating": "නකල් කෙරෙමින්…",
-    "duplicateUpsell": "Plus/Pro විශේෂාංගය — නකල් කිරීමට උත්‍සාහ කරන්න"
+    "duplicateUpsell": "Plus/Pro විශේෂාංගය — නකල් කිරීමට උත්‍සාහ කරන්න",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "සියලුම අංශ",

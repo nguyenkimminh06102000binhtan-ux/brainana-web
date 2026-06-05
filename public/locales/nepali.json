@@ -383,6 +383,7 @@
     "avgTime": "औसत समय",
     "avgTimeDays": "{count} दिनहरू",
     "images": "छविहरू",
+    "accuracy": "Accuracy",
     "verified": "प्रमाणित",
     "noFriends": "तपाईंका कुनै पनि साथीहरूले यो अझै सिक्नुभएको छैन।",
     "moreFriends": "+{count} थप",
@@ -417,7 +418,8 @@
     "learnNewWords": "नयाँ सिक्नुहोस्",
     "duplicateCourse": "मेरो पुस्तकालयमा नक्कल गर्नुहोस्",
     "duplicating": "नक्कल हुँदैछ…",
-    "duplicateUpsell": "Plus/Pro सुविधा — नक्कल गर्न अपग्रेड गर्नुहोस्"
+    "duplicateUpsell": "Plus/Pro सुविधा — नक्कल गर्न अपग्रेड गर्नुहोस्",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "सबै खण्डहरू",

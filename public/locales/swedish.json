@@ -383,6 +383,7 @@
     "avgTime": "Genomsnittlig tid",
     "avgTimeDays": "{count} dagar",
     "images": "Bilder",
+    "accuracy": "Accuracy",
     "verified": "verifierad",
     "noFriends": "Ingen av dina vänner lär sig detta än.",
     "moreFriends": "+{count} mer",
@@ -417,7 +418,8 @@
     "learnNewWords": "Lär nytt",
     "duplicateCourse": "Duplicera till mitt bibliotek",
     "duplicating": "Duplicerar…",
-    "duplicateUpsell": "Plus/Pro-funktion — uppgradera för att duplicera"
+    "duplicateUpsell": "Plus/Pro-funktion — uppgradera för att duplicera",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Alla avsnitt",

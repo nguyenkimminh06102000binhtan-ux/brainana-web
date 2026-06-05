@@ -383,6 +383,7 @@
     "avgTime": "평균 시간",
     "avgTimeDays": "{count} 날",
     "images": "이미지",
+    "accuracy": "Accuracy",
     "verified": "검증됨",
     "noFriends": "당신의 친구 중 누구도 아직 이것을 배우고 있지 않습니다.",
     "moreFriends": "+{count} 더",
@@ -417,7 +418,8 @@
     "learnNewWords": "새로 배우기",
     "duplicateCourse": "내 라이브러리에 복제",
     "duplicating": "복제 중…",
-    "duplicateUpsell": "Plus/Pro 기능 — 복제하려면 업그레이드"
+    "duplicateUpsell": "Plus/Pro 기능 — 복제하려면 업그레이드",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "모든 섹션",

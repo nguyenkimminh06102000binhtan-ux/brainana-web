@@ -383,6 +383,7 @@
     "avgTime": "গড় সময়",
     "avgTimeDays": "{count} দিন",
     "images": "ছবি",
+    "accuracy": "Accuracy",
     "verified": "যাচাই করা হয়েছে",
     "noFriends": "আপনার বন্ধুদের কেউ এখনও এই শিখছে না.",
     "moreFriends": "+{count} আরো",
@@ -417,7 +418,8 @@
     "learnNewWords": "নতুন শিখুন",
     "duplicateCourse": "আমার লাইব্রেরিতে কপি করুন",
     "duplicating": "কপি হচ্ছে…",
-    "duplicateUpsell": "Plus/Pro ফিচার — কপি করতে আপগ্রেড করুন"
+    "duplicateUpsell": "Plus/Pro ফিচার — কপি করতে আপগ্রেড করুন",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "সব বিভাগ",

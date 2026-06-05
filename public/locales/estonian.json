@@ -383,6 +383,7 @@
     "avgTime": "Keskmine aeg",
     "avgTimeDays": "{count} päevadel",
     "images": "Pildid",
+    "accuracy": "Accuracy",
     "verified": "kontrollitud",
     "noFriends": "Ükski teie sõber ei õpi seda veel.",
     "moreFriends": "+{count} rohkem",
@@ -417,7 +418,8 @@
     "learnNewWords": "Õpi uut",
     "duplicateCourse": "Dubleeri minu kogusse",
     "duplicating": "Dubleerimine…",
-    "duplicateUpsell": "Plus/Pro funktsioon — uuenda dubleerimiseks"
+    "duplicateUpsell": "Plus/Pro funktsioon — uuenda dubleerimiseks",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Kõik sektsioonid",

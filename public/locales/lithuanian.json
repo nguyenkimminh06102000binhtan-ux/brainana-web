@@ -383,6 +383,7 @@
     "avgTime": "Vidutinis laikas",
     "avgTimeDays": "{count} dienų",
     "images": "Vaizdai",
+    "accuracy": "Accuracy",
     "verified": "patikrinta",
     "noFriends": "Nė vienas iš jūsų draugų to dar nesimoko.",
     "moreFriends": "+{count} daugiau",
@@ -417,7 +418,8 @@
     "learnNewWords": "Mokytis naujų",
     "duplicateCourse": "Kopijuoti į mano biblioteką",
     "duplicating": "Kopijuojama…",
-    "duplicateUpsell": "Plus/Pro funkcija — atnaujinkite kopijavimui"
+    "duplicateUpsell": "Plus/Pro funkcija — atnaujinkite kopijavimui",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Visi skyriai",

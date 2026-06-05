@@ -85,8 +85,8 @@ export default async function PublicProfilePage({
   ]);
 
   // Private queries — only return data when viewer IS the profile owner (RLS)
-  const twelveWeeksAgo = new Date();
-  twelveWeeksAgo.setDate(twelveWeeksAgo.getDate() - 83);
+  const _now = new Date();
+  const twelveWeeksAgo = new Date(Date.UTC(_now.getUTCFullYear(), _now.getUTCMonth(), _now.getUTCDate() - 83));
 
   const [
     { count: masteredCount },

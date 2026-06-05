@@ -383,6 +383,7 @@
     "avgTime": "Purata masa",
     "avgTimeDays": "{count} hari",
     "images": "Imej",
+    "accuracy": "Accuracy",
     "verified": "disahkan",
     "noFriends": "Belum ada rakan anda yang mempelajari perkara ini.",
     "moreFriends": "+{count} lebih",
@@ -417,7 +418,8 @@
     "learnNewWords": "Belajar baru",
     "duplicateCourse": "Duplikat ke perpustakaan saya",
     "duplicating": "Menduplikat…",
-    "duplicateUpsell": "Ciri Plus/Pro — naik taraf untuk menduplikat"
+    "duplicateUpsell": "Ciri Plus/Pro — naik taraf untuk menduplikat",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Semua bahagian",

@@ -313,8 +313,9 @@ export default function SessionView({
       .single();
 
     if (profile) {
-      const today = new Date().toISOString().slice(0, 10);
-      const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      const _n = new Date();
+      const today = new Date(Date.UTC(_n.getUTCFullYear(), _n.getUTCMonth(), _n.getUTCDate())).toISOString().slice(0, 10);
+      const yesterday = new Date(Date.UTC(_n.getUTCFullYear(), _n.getUTCMonth(), _n.getUTCDate() - 1)).toISOString().slice(0, 10);
       let newStreak = 1;
       if (profile.last_activity_date === today) {
         newStreak = profile.current_streak;

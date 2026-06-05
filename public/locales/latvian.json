@@ -383,6 +383,7 @@
     "avgTime": "Vidējais laiks",
     "avgTimeDays": "{count} dienas",
     "images": "Attēli",
+    "accuracy": "Accuracy",
     "verified": "pārbaudīts",
     "noFriends": "Neviens no jūsu draugiem to vēl nemācās.",
     "moreFriends": "+{count} vairāk",
@@ -417,7 +418,8 @@
     "learnNewWords": "Mācīties jaunu",
     "duplicateCourse": "Dublēt manā bibliotēkā",
     "duplicating": "Dublēšana…",
-    "duplicateUpsell": "Plus/Pro funkcija — jauniniet, lai dublētu"
+    "duplicateUpsell": "Plus/Pro funkcija — jauniniet, lai dublētu",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Visas sadaļas",

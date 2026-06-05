@@ -383,6 +383,7 @@
     "avgTime": "Temps mitjà",
     "avgTimeDays": "{count} dies",
     "images": "Imatges",
+    "accuracy": "Accuracy",
     "verified": "verificat",
     "noFriends": "Cap dels teus amics encara no està aprenent això.",
     "moreFriends": "+{count} més",
@@ -417,7 +418,8 @@
     "learnNewWords": "Aprèn nou",
     "duplicateCourse": "Duplica a la meva biblioteca",
     "duplicating": "Duplicant…",
-    "duplicateUpsell": "Funció Plus/Pro — actualitza per duplicar"
+    "duplicateUpsell": "Funció Plus/Pro — actualitza per duplicar",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Totes les seccions",

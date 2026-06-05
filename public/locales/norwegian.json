@@ -383,6 +383,7 @@
     "avgTime": "Gj.sn. tid",
     "avgTimeDays": "{count} dager",
     "images": "Bilder",
+    "accuracy": "Accuracy",
     "verified": "verifisert",
     "noFriends": "Ingen av vennene dine lærer dette ennå.",
     "moreFriends": "+{count} flere",
@@ -417,7 +418,8 @@
     "learnNewWords": "Lær nytt",
     "duplicateCourse": "Dupliser til mitt bibliotek",
     "duplicating": "Dupliserer…",
-    "duplicateUpsell": "Plus/Pro-funksjon — oppgrader for å duplisere"
+    "duplicateUpsell": "Plus/Pro-funksjon — oppgrader for å duplisere",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Alle seksjoner",

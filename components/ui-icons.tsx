@@ -5,6 +5,7 @@ type IconName =
   | "arrowRight"
   | "bookOpen"
   | "check"
+  | "chevronLeft"
   | "chevronRight"
   | "compass"
   | "filter"
@@ -25,10 +26,11 @@ type IconName =
   | "x";
 
 const paths: Record<IconName, ReactNode> = {
-  creditCard: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></>,
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   bookOpen: <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7a3 3 0 0 0-3 3V5.5Zm0 0V21M20 3v15" />,
   check: <path d="m5 12 4 4L19 6" />,
+  chevronLeft: <path d="m15 18-6-6 6-6" />,
+  creditCard: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></>,
   chevronRight: <path d="m9 18 6-6-6-6" />,
   compass: <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm3.5-12.5-2 5-5 2 2-5 5-2Z" />,
   filter: <path d="M4 5h16M7 12h10M10 19h4" />,

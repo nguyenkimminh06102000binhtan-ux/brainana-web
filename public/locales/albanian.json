@@ -383,6 +383,7 @@
     "avgTime": "Koha mesatare",
     "avgTimeDays": "{count} ditë",
     "images": "Imazhet",
+    "accuracy": "Accuracy",
     "verified": "verifikuar",
     "noFriends": "Asnjë nga miqtë tuaj nuk e ka mësuar ende këtë.",
     "moreFriends": "+{count} më shumë",
@@ -417,7 +418,8 @@
     "learnNewWords": "Mëso të reja",
     "duplicateCourse": "Dupliko në bibliotekën time",
     "duplicating": "Duke duplifikuar…",
-    "duplicateUpsell": "Veçori Plus/Pro — përmirëso për të duplifikuar"
+    "duplicateUpsell": "Veçori Plus/Pro — përmirëso për të duplifikuar",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Të gjitha seksionet",

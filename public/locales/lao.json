@@ -383,6 +383,7 @@
     "avgTime": "ເວລາສະເລ່ຍ",
     "avgTimeDays": "{count} ມື້",
     "images": "ຮູບພາບ",
+    "accuracy": "Accuracy",
     "verified": "ຢືນຢັນ",
     "noFriends": "ບໍ່ມີໝູ່ຂອງເຈົ້າກຳລັງຮຽນເລື່ອງນີ້ເທື່ອ.",
     "moreFriends": "+{count} ເພີ່ມເຕີມ",
@@ -417,7 +418,8 @@
     "learnNewWords": "ຮຽນໃໝ່",
     "duplicateCourse": "ຄັດລອກໄປຫ້ອງສະໝຸດຂອງຂ້ອຍ",
     "duplicating": "ກຳລັງຄັດລອກ…",
-    "duplicateUpsell": "ຄຸນສົມບັດ Plus/Pro — ອັບເກຣດເພື່ອຄັດລອກ"
+    "duplicateUpsell": "ຄຸນສົມບັດ Plus/Pro — ອັບເກຣດເພື່ອຄັດລອກ",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "ທຸກພາກສ່ວນ",

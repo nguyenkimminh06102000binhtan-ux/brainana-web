@@ -22,8 +22,7 @@ export default function ActivityHeatmap({ data, totalReviewed }: ActivityHeatmap
   const today = new Date();
   const cells: { date: string; count: number }[] = [];
   for (let i = 83; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
+    const d = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - i));
     const dateStr = d.toISOString().slice(0, 10);
     cells.push({ date: dateStr, count: data[dateStr] ?? 0 });
   }

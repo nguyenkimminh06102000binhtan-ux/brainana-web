@@ -383,6 +383,7 @@
     "avgTime": "Waktu rata-rata",
     "avgTimeDays": "{count} hari",
     "images": "Gambar",
+    "accuracy": "Accuracy",
     "verified": "diverifikasi",
     "noFriends": "Belum ada teman Anda yang mempelajarinya.",
     "moreFriends": "+{count} lagi",
@@ -417,7 +418,8 @@
     "learnNewWords": "Belajar baru",
     "duplicateCourse": "Duplikasi ke perpustakaan saya",
     "duplicating": "Menduplikasi…",
-    "duplicateUpsell": "Fitur Plus/Pro — upgrade untuk menduplikasi"
+    "duplicateUpsell": "Fitur Plus/Pro — upgrade untuk menduplikasi",
+    "leave": "Leave course"
   },
   "study": {
     "allSections": "Semua bagian",
