@@ -6,6 +6,9 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
+// Set to true to re-enable top-up pack purchasing
+const TOPUP_ENABLED = false;
+
 import { startTopUpCheckout } from "@/app/actions/billing";
 import {
   TOPUP_PACKS,
@@ -236,6 +239,55 @@ export default async function BillingPage({
   const characterTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.chars > 0);
   const sessionTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.sessions > 0);
 
+  const topUpSection = !TOPUP_ENABLED ? null : (
+    <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
+      <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">{b.topUp}</p>
+      {plan === "free" ? (
+        <div className="mt-3 flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-ink/20 py-8 text-center">
+          <p className="font-manrope text-sm font-[700] text-ink">{b.upgradeForTopUp}</p>
+          <p className="font-manrope text-xs text-ink-3">{b.topUpPacksInfo}</p>
+          <Link href="/billing/upgrade" className="mt-1 rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90">
+            {b.upgradeNow}
+          </Link>
+        </div>
+      ) : (
+        <>
+          <div className="mb-5 rounded-lg border border-orange/30 bg-orange/5 px-4 py-3">
+            <p className="font-manrope text-sm font-[700] text-ink">Top-ups are one-time boosts for this billing period</p>
+            <p className="mt-1 font-manrope text-xs leading-relaxed text-ink-2">
+              They do <span className="font-[700]">not</span> renew and unused balance resets on your next billing date.
+              If you need this amount regularly, Pro is the better value.
+              {sub?.plan_expires_at && (
+                <> Your current period ends on <span className="font-[700]">{new Date(sub.plan_expires_at as string).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>.</>
+              )}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {[
+              { title: "AI characters", packs: characterTopUps },
+              { title: "AI tutor sessions", packs: sessionTopUps },
+            ].map((group) => (
+              <div key={group.title} className="flex flex-col gap-3">
+                <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{group.title}</p>
+                {group.packs.map(([key, pack]) => (
+                  <form key={key} action={startTopUpCheckout.bind(null, key)}>
+                    <button type="submit" className="flex w-full flex-col rounded-lg border border-ink/10 bg-paper px-4 py-3 text-left transition hover:border-orange hover:bg-orange/5 active:translate-y-[1px]">
+                      <div className="flex w-full items-center justify-between gap-3">
+                        <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
+                        <span className="shrink-0 font-manrope text-sm font-[700] text-ink">{pack.price}</span>
+                      </div>
+                      <span className="mt-1 font-manrope text-[10px] text-ink-3">Expires at renewal</span>
+                    </button>
+                  </form>
+                ))}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
 
@@ -375,64 +427,8 @@ export default async function BillingPage({
           </div>
         </div>
 
-        {/* Top-up packs */}
-        <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
-          <p className="mb-1 font-mono text-xs uppercase tracking-widest text-ink-3">{b.topUp}</p>
-
-          {plan === "free" ? (
-            <div className="mt-3 flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-ink/20 py-8 text-center">
-              <p className="font-manrope text-sm font-[700] text-ink">{b.upgradeForTopUp}</p>
-              <p className="font-manrope text-xs text-ink-3">{b.topUpPacksInfo}</p>
-              <Link
-                href="/billing/upgrade"
-                className="mt-1 rounded-full bg-orange px-5 py-2 font-manrope text-sm font-[800] text-on-bright shadow-hard-red transition hover:opacity-90"
-              >
-                {b.upgradeNow}
-              </Link>
-            </div>
-          ) : (
-            <>
-              {/* Expiry warning */}
-              <div className="mb-5 rounded-lg border border-orange/30 bg-orange/5 px-4 py-3">
-                <p className="font-manrope text-sm font-[700] text-ink">
-                  Top-ups are one-time boosts for this billing period
-                </p>
-                <p className="mt-1 font-manrope text-xs leading-relaxed text-ink-2">
-                  They do <span className="font-[700]">not</span> renew and unused balance resets on your next billing date.
-                  If you need this amount regularly, Pro is the better value.
-                  {sub?.plan_expires_at && (
-                    <> Your current period ends on <span className="font-[700]">{new Date(sub.plan_expires_at as string).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>.</>
-                  )}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {[
-                  { title: "AI characters", packs: characterTopUps },
-                  { title: "AI tutor sessions", packs: sessionTopUps },
-                ].map((group) => (
-                  <div key={group.title} className="flex flex-col gap-3">
-                    <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{group.title}</p>
-                    {group.packs.map(([key, pack]) => (
-                      <form key={key} action={startTopUpCheckout.bind(null, key)}>
-                        <button
-                          type="submit"
-                          className="flex w-full flex-col rounded-lg border border-ink/10 bg-paper px-4 py-3 text-left transition hover:border-orange hover:bg-orange/5 active:translate-y-[1px]"
-                        >
-                          <div className="flex w-full items-center justify-between gap-3">
-                            <span className="font-manrope text-sm font-[700] text-ink">{pack.label}</span>
-                            <span className="shrink-0 font-manrope text-sm font-[700] text-ink">{pack.price}</span>
-                          </div>
-                          <span className="mt-1 font-manrope text-[10px] text-ink-3">Expires at renewal</span>
-                        </button>
-                      </form>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
+        {/* Top-up packs — hidden until TOPUP_ENABLED is set to true */}
+        {topUpSection}
 
         {/* Transaction history */}
         <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
