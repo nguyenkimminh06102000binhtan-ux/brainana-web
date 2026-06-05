@@ -35,7 +35,7 @@ const PLANS = [
       { label: "AI characters", children: AI_CHARACTER_USES },
       { label: "AI tutor sessions" },
       { label: "Private courses" },
-      { label: "Top-up packs" },
+      // { label: "Top-up packs" }, // hidden — re-enable with TOPUP_ENABLED in billing/page.tsx
     ],
   },
   {
