@@ -163,6 +163,7 @@ export type Locale = {
     follow: string;
     share: string;
     copied: string;
+    ignoredLabel: string;
   };
   createEdit: {
     createEyebrow: string;
@@ -292,47 +293,6 @@ export type Locale = {
     timeUp: string;
     backToCourse: string;
     notEnoughCards: string;
-  };
-  learn: {
-    aiTutor: string;
-    whichSections: string;
-    allSections: string;
-    untitledSection: string;
-    difficulty: string;
-    beginnerLabel: string;
-    beginnerNote: string;
-    intermediateLabel: string;
-    intermediateNote: string;
-    advancedLabel: string;
-    advancedNote: string;
-    anyLabel: string;
-    anyNote: string;
-    cardSelectionMode: string;
-    quickPick: string;
-    chooseCards: string;
-    cardsSelected: string;
-    maxCardsNote: string;
-    searchCards: string;
-    ignoredLabel: string;
-    trackProgress: string;
-    startSession: string;
-    backToCourse: string;
-    sessionComplete: string;
-    score: string;
-    studyAgain: string;
-    saving: string;
-    endSession: string;
-    inputPlaceholder: string;
-    send: string;
-    audioPlay: string;
-    audioPlaying: string;
-    noSessionsRemaining: string;
-    upgradeToStart: string;
-    viewPlans: string;
-    noSessionsLeft: string;
-    allCardsCovered: string;
-    seeResults: string;
-    messageLimitReached: string;
   };
   start: {
     estimatedTime: string;
@@ -492,9 +452,6 @@ export type Locale = {
     charactersDescription: string;
     quota: string;
     runningLow: string;
-    tutorSessions: string;
-    tutorSessionsDescription: string;
-    noSessionsLeft: string;
     topUp: string;
     upgradeForTopUp: string;
     topUpPacksInfo: string;

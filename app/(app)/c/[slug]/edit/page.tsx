@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import EditCourseForm from "./form";
 import { getLocale } from "@/utils/i18n";
 import { resolveMediaUrl } from "@/utils/resolve-media-url";
+import { refreshQuotaIfDue } from "@/utils/quota";
 
 export default async function EditCoursePage({
   params,
@@ -26,6 +27,8 @@ export default async function EditCoursePage({
 
   if (!course) notFound();
   if (course.creator_id !== user.id) redirect(`/c/${slug}`);
+
+  await refreshQuotaIfDue(supabase, user.id);
 
   const [{ data: sections }, { data: profile }, { data: sub }] = await Promise.all([
     supabase.from("sections").select("id, title, description, custom_attributes, position").eq("course_id", course.id).order("position"),

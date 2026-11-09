@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { refundQuota } from "@/utils/quota";
 import type { QuotaResource, QuotaReason } from "@/utils/quota";
-import { PLAN_QUOTA } from "@/utils/polar";
+import { PLAN_QUOTA, nextQuotaResetAt } from "@/utils/polar";
 
 /** Guard: only admins can call these actions */
 async function requireAdmin() {
@@ -113,6 +113,7 @@ export async function adminSetPlan(formData: FormData) {
       plan,
       chars_balance:             quota.chars,
       tutor_sessions_balance:    quota.sessions,
+      quota_reset_at:            nextQuotaResetAt(),
       plan_expires_at:           expiresAt,
       is_manual_subscription:    isManual,
       subscription_status: plan === "free" ? "none" : "active",

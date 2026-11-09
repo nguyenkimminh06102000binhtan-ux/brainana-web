@@ -10,8 +10,20 @@ import {
   topupProductId,
   cancelPolarSubscription,
   updatePolarSubscriptionProduct,
+  type BillingInterval,
+  type PaidPlan,
 } from "@/utils/polar";
 import { createAdminClient } from "@/utils/supabase/admin";
+
+/**
+ * Polar errors meaning the stored subscription can't be changed any more
+ * (canceled, or gone — e.g. the customer was deleted). In that case we start a
+ * fresh checkout instead of updating it in place.
+ */
+function isDeadSubscriptionError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return /AlreadyCanceledSubscription|ResourceNotFound|NotFound|"status":\s*404/i.test(message);
+}
 
 const PLAN_RANK = {
   free: 0,
@@ -19,13 +31,13 @@ const PLAN_RANK = {
   pro: 2,
 } as const;
 
-export async function startCheckout(plan: "plus" | "pro") {
+export async function startCheckout(plan: PaidPlan, interval: BillingInterval = "monthly") {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const productId = PLAN_PRODUCT_IDS[plan];
-  if (!productId) throw new Error(`No product ID configured for plan: ${plan}`);
+  const productId = PLAN_PRODUCT_IDS[plan]?.[interval];
+  if (!productId) throw new Error(`No product ID configured for plan: ${plan} (${interval})`);
 
   const { data: sub } = await supabase
     .from("user_subscriptions")
@@ -44,16 +56,30 @@ export async function startCheckout(plan: "plus" | "pro") {
     currentSubscriptionId &&
     currentPlan !== "free" &&
     currentStatus !== "expired" &&
-    currentStatus !== "unpaid";
+    currentStatus !== "unpaid" &&
+    // Polar refuses to change a subscription that is canceled (even if it is
+    // still running until period end) — those users get a new checkout.
+    currentStatus !== "cancelled" &&
+    currentStatus !== "canceled";
 
+  let updated: Awaited<ReturnType<typeof updatePolarSubscriptionProduct>> = null;
   if (hasActiveSubscription) {
-    const updated = await updatePolarSubscriptionProduct({
-      subscriptionId: currentSubscriptionId,
-      productId,
-      prorationBehavior: "invoice",
-    });
-    if (!updated) throw new Error("Polar did not return an updated subscription");
+    let subscriptionIsDead = false;
+    try {
+      updated = await updatePolarSubscriptionProduct({
+        subscriptionId: currentSubscriptionId,
+        productId,
+        prorationBehavior: "invoice",
+      });
+    } catch (error) {
+      if (!isDeadSubscriptionError(error)) throw error;
+      subscriptionIsDead = true;
+      console.warn("[billing] Stored subscription is no longer updatable; starting a new checkout:", currentSubscriptionId);
+    }
+    if (!updated && !subscriptionIsDead) throw new Error("Polar did not return an updated subscription");
+  }
 
+  if (updated) {
     const admin = createAdminClient();
     const currentQuota = PLAN_QUOTA[currentPlan] ?? PLAN_QUOTA.free;
     const nextQuota = PLAN_QUOTA[plan];
@@ -124,7 +150,7 @@ export async function startCheckout(plan: "plus" | "pro") {
     email: user.email ?? "",
     userId: user.id,
     redirectUrl,
-    metadata: { provider: "polar", kind: "subscription", plan },
+    metadata: { provider: "polar", kind: "subscription", plan, interval },
   });
 
   redirect(checkoutUrl);

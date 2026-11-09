@@ -5,6 +5,7 @@ import {
   planFromProductId,
   PLAN_QUOTA,
   topupFromProductId,
+  nextQuotaResetAt,
 } from "@/utils/polar";
 
 export const runtime = "nodejs";
@@ -52,6 +53,31 @@ function getWebhookUserId(data: Record<string, unknown> | undefined) {
     (data?.external_customer_id as string | undefined) ||
     (customer?.external_id as string | undefined) ||
     (customerMetadata?.user_id as string | undefined)
+  );
+}
+
+/**
+ * True when an event is about an old subscription while the user has since
+ * started a different, live one (e.g. they re-subscribed after cancelling).
+ * Such events must not overwrite the current subscription or downgrade the user.
+ */
+async function isStaleSubscriptionEvent(
+  supabase: ReturnType<typeof createAdminClient>,
+  userId: string,
+  subscriptionId: string | undefined,
+): Promise<boolean> {
+  if (!subscriptionId) return false;
+  const { data } = await supabase
+    .from("user_subscriptions")
+    .select("billing_subscription_id, subscription_status")
+    .eq("user_id", userId)
+    .maybeSingle();
+  const currentId = data?.billing_subscription_id as string | null | undefined;
+  const currentStatus = data?.subscription_status as string | null | undefined;
+  return (
+    !!currentId &&
+    currentId !== subscriptionId &&
+    (currentStatus === "active" || currentStatus === "trialing")
   );
 }
 
@@ -226,6 +252,7 @@ async function applySubscriptionGrant({
       subscription_status:     status,
       chars_balance:           effectiveQuota.chars,
       tutor_sessions_balance:  effectiveQuota.sessions,
+      quota_reset_at:          nextQuotaResetAt(),
       plan_expires_at:         periodEnd ?? null,
       updated_at:              new Date().toISOString(),
     }, { onConflict: "user_id" });
@@ -238,22 +265,13 @@ async function applySubscriptionGrant({
     return subscriptionUpdateErrRes;
   }
 
-  const { error: quotaTxError } = await supabase.from("quota_transactions").insert([
-    {
-      user_id:  userId,
-      resource: "chars",
-      amount:   effectiveQuota.chars,
-      reason:   "monthly_grant",
-      metadata: { plan: effectivePlan, event: eventType, period_end: periodEnd },
-    },
-    {
-      user_id:  userId,
-      resource: "tutor_sessions",
-      amount:   effectiveQuota.sessions,
-      reason:   "monthly_grant",
-      metadata: { plan: effectivePlan, event: eventType, period_end: periodEnd },
-    },
-  ]);
+  const { error: quotaTxError } = await supabase.from("quota_transactions").insert({
+    user_id:  userId,
+    resource: "chars",
+    amount:   effectiveQuota.chars,
+    reason:   "monthly_grant",
+    metadata: { plan: effectivePlan, event: eventType, period_end: periodEnd },
+  });
   const quotaTxErrRes = webhookWriteError("Failed to record subscription grant", quotaTxError);
   if (quotaTxErrRes) {
     await supabase.from("processed_billing_events").delete().eq("event_key", grantKey);
@@ -303,6 +321,7 @@ export async function POST(req: NextRequest) {
 
       // cancel_at_period_end=true: user cancelled but still active until period end
       if (cancelAtEnd) {
+        if (await isStaleSubscriptionEvent(supabase, userId, subscriptionId)) break;
         const { error } = await supabase
           .from("user_subscriptions")
           .upsert({
@@ -322,6 +341,7 @@ export async function POST(req: NextRequest) {
 
       // Non-active statuses: update metadata only, no quota grant
       if (status === "cancelled" || status === "expired" || status === "past_due" || status === "unpaid") {
+        if (await isStaleSubscriptionEvent(supabase, userId, subscriptionId)) break;
         const { error } = await supabase
           .from("user_subscriptions")
           .upsert({
@@ -355,6 +375,7 @@ export async function POST(req: NextRequest) {
       const periodEnd      = data?.current_period_end as string | undefined;
       const subscriptionId = data?.id as string | undefined;
       const customerId     = data?.customer_id as string | undefined;
+      if (await isStaleSubscriptionEvent(supabase, userId, subscriptionId)) break;
       const { error } = await supabase
         .from("user_subscriptions")
         .upsert({
@@ -371,6 +392,7 @@ export async function POST(req: NextRequest) {
     }
 
     case "subscription.revoked": {
+      if (await isStaleSubscriptionEvent(supabase, userId, data?.id as string | undefined)) break;
       const { error } = await supabase
         .from("user_subscriptions")
         .upsert({
@@ -379,6 +401,8 @@ export async function POST(req: NextRequest) {
           subscription_status: "expired",
           chars_balance:          0,
           tutor_sessions_balance: 0,
+          // NULL = refill to the free allowance on next use
+          quota_reset_at:         null,
           plan_expires_at:        null,
           updated_at:             new Date().toISOString(),
         }, { onConflict: "user_id" });

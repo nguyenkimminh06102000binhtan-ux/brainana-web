@@ -18,15 +18,11 @@ import {
   planFromProductId,
   PLAN_QUOTA,
   topupFromProductId,
+  nextQuotaResetAt,
 } from "@/utils/polar";
+import { refreshQuotaIfDue } from "@/utils/quota";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
-
-const PLAN_ALLOWANCES = {
-  free:  { chars: 0,        sessions: 0  },
-  plus:  { chars: 300_000,  sessions: 30 },
-  pro:   { chars: 900_000,  sessions: 90 },
-} as const;
 
 const PLAN_LABELS = {
   free: { label: "Free",  color: "bg-ink/10 text-ink-2" },
@@ -176,6 +172,7 @@ export default async function BillingPage({
         if (shouldGrantQuota) {
           subscriptionUpdate.chars_balance = quota.chars;
           subscriptionUpdate.tutor_sessions_balance = quota.sessions;
+          subscriptionUpdate.quota_reset_at = nextQuotaResetAt();
         }
 
         const { error: subscriptionUpdateErr } = await admin
@@ -186,22 +183,13 @@ export default async function BillingPage({
         }
 
         if (shouldGrantQuota) {
-          const { error: quotaTxErr } = await admin.from("quota_transactions").insert([
-            {
-              user_id: user.id,
-              resource: "chars",
-              amount: quota.chars,
-              reason: "monthly_grant",
-              metadata: { plan, event: "checkout_return", period_end: checkout.periodEnd },
-            },
-            {
-              user_id: user.id,
-              resource: "tutor_sessions",
-              amount: quota.sessions,
-              reason: "monthly_grant",
-              metadata: { plan, event: "checkout_return", period_end: checkout.periodEnd },
-            },
-          ]);
+          const { error: quotaTxErr } = await admin.from("quota_transactions").insert({
+            user_id: user.id,
+            resource: "chars",
+            amount: quota.chars,
+            reason: "monthly_grant",
+            metadata: { plan, event: "checkout_return", period_end: checkout.periodEnd },
+          });
           if (quotaTxErr) {
             throw new Error(`Failed to record Polar quota grant: ${quotaTxErr.message}`);
           }
@@ -210,9 +198,11 @@ export default async function BillingPage({
     }
   }
 
+  await refreshQuotaIfDue(supabase, user.id);
+
   const [{ data: sub }, { data: transactions }, { data: profile }] = await Promise.all([
     supabase.from("user_subscriptions").select("*").eq("user_id", user.id).single(),
-    supabase.from("quota_transactions").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(20),
+    supabase.from("quota_transactions").select("*").eq("user_id", user.id).eq("resource", "chars").order("created_at", { ascending: false }).limit(20),
     supabase.from("profiles").select("active_origin_language").eq("id", user.id).single(),
   ]);
 
@@ -220,11 +210,10 @@ export default async function BillingPage({
   const b = loc.billing;
 
   const plan = (sub?.plan ?? "free") as "free" | "plus" | "pro";
-  const allowance = PLAN_ALLOWANCES[plan];
+  const allowance = PLAN_QUOTA[plan] ?? PLAN_QUOTA.free;
   const planMeta  = PLAN_LABELS[plan];
 
   const charsBalance   = sub?.chars_balance ?? 0;
-  const sessionsBalance = sub?.tutor_sessions_balance ?? 0;
 
   // isCancelled: DB is authoritative once the webhook fires; ?cancelled=1 covers
   // the window between the server action redirect and the webhook arriving.
@@ -237,7 +226,6 @@ export default async function BillingPage({
     ? await getSubscriptionUrls(sub.billing_subscription_id)
     : null;
   const characterTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.chars > 0);
-  const sessionTopUps = Object.entries(TOPUP_PACKS).filter(([, pack]) => pack.sessions > 0);
 
   const topUpSection = !TOPUP_ENABLED ? null : (
     <div className="rounded-lg border border-ink/10 bg-paper-2 p-6">
@@ -262,10 +250,9 @@ export default async function BillingPage({
               )}
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4">
             {[
               { title: "AI characters", packs: characterTopUps },
-              { title: "AI tutor sessions", packs: sessionTopUps },
             ].map((group) => (
               <div key={group.title} className="flex flex-col gap-3">
                 <p className="font-mono text-xs uppercase tracking-widest text-ink-3">{group.title}</p>
@@ -404,27 +391,6 @@ export default async function BillingPage({
             )}
           </div>
 
-          {/* Tutor sessions */}
-          <div>
-            <div className="mb-2 flex items-end justify-between">
-              <div>
-                <p className="font-manrope text-sm font-[700] text-ink">{b.tutorSessions}</p>
-                <p className="font-manrope text-xs text-ink-3">{b.tutorSessionsDescription}</p>
-              </div>
-              <div className="text-right">
-                <p className="font-mono text-sm font-[700] text-ink">{sessionsBalance}</p>
-                <p className="font-mono text-xs text-ink-3">{b.quota.replace("{max}", String(allowance.sessions))}</p>
-              </div>
-            </div>
-            <BalanceBar
-              value={sessionsBalance}
-              max={allowance.sessions}
-              color={sessionsBalance < allowance.sessions * 0.2 ? "bg-orange" : "bg-blue"}
-            />
-            {sessionsBalance === 0 && (
-              <p className="mt-1.5 font-manrope text-xs text-orange">{b.noSessionsLeft}</p>
-            )}
-          </div>
         </div>
 
         {/* Top-up packs — hidden until TOPUP_ENABLED is set to true */}

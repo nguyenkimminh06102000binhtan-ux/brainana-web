@@ -235,13 +235,6 @@ export default async function CourseDetailPage({
                     </>
                   )}
 
-                  <Link
-                    href={`/learn/${course.slug}`}
-                    className="inline-flex min-h-11 items-center rounded-full bg-blue px-5 py-2.5 font-manrope text-sm font-[800] text-ocean shadow-hard-sm transition hover:opacity-90 active:translate-y-[1px] active:shadow-none"
-                  >
-                    {loc.learn.aiTutor}
-                  </Link>
-
                   {!isOwner && course.visibility === "public" && (
                     <DuplicateButton
                       courseId={course.id}
@@ -336,7 +329,7 @@ export default async function CourseDetailPage({
                 configureWordsSaved: cl.configureWordsSaved,
                 configureWordsSelectAll: cl.configureWordsSelectAll,
                 configureWordsUntitled: cl.configureWordsUntitled,
-                ignoredLabel: loc.learn.ignoredLabel,
+                ignoredLabel: cl.ignoredLabel,
               }}
             />
           )}

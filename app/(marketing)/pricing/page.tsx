@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui-icons";
 import { BrandLogo } from "@/components/brand-logo";
 import ThemeToggle from "../../theme-toggle";
+import { PLAN_PRICES } from "@/utils/polar";
 
 export const metadata = {
   title: "Pricing - Brainana",
@@ -39,13 +40,12 @@ const PLANS = [
     description: "Get started and explore",
     badge: null,
     features: [
+      { label: "5,000 AI characters / month", children: AI_CHARACTER_USES },
       { label: "Unlimited public courses" },
       { label: "All study modes" },
       { label: "Access to community courses" },
     ],
     missing: [
-      { label: "AI characters", children: AI_CHARACTER_USES },
-      { label: "AI tutor sessions" },
       { label: "Private courses" },
     ],
     cta: "Sign up free",
@@ -55,13 +55,12 @@ const PLANS = [
   {
     key: "plus",
     label: "Plus",
-    price: "$9",
-    priceNote: "per month, billed monthly",
+    price: PLAN_PRICES.plus.monthly,
+    priceNote: `per month, or ${PLAN_PRICES.plus.yearly} / year (2 months free)`,
     description: "For serious learners",
     badge: "Most popular",
     features: [
       { label: "300,000 AI characters / month", children: AI_CHARACTER_USES },
-      { label: "30 AI tutor sessions / month" },
       { label: "Private courses" },
       { label: "Everything in Free" },
     ],
@@ -73,13 +72,12 @@ const PLANS = [
   {
     key: "pro",
     label: "Pro",
-    price: "$19",
-    priceNote: "per month, billed monthly",
+    price: PLAN_PRICES.pro.monthly,
+    priceNote: `per month, or ${PLAN_PRICES.pro.yearly} / year (2 months free)`,
     description: "For power users & teachers",
     badge: null,
     features: [
-      { label: "900,000 AI characters / month", children: AI_CHARACTER_USES },
-      { label: "90 AI tutor sessions / month" },
+      { label: "1,000,000 AI characters / month", children: AI_CHARACTER_USES },
       { label: "Everything in Plus" },
       { label: "Priority support" },
     ],
@@ -119,19 +117,15 @@ function FeatureLine({
 const FAQ = [
   {
     q: "What counts as an AI character?",
-    a: "AI characters are input characters processed by AI features: generating answer/back cards, auto text-to-speech audio, autofilling custom attributes such as romanization, example sentences, and pronunciation, plus AI import from notebooks and documents. Each month your quota resets on your billing anniversary.",
-  },
-  {
-    q: "What is an AI tutor session?",
-    a: "Each AI tutor session is one conversation with the in-course AI tutor. Sessions are counted per conversation start and reset monthly with your quota.",
+    a: "AI characters are input characters processed by AI features: generating answer/back cards, auto text-to-speech audio, autofilling custom attributes such as romanization, example sentences, and pronunciation, plus AI import from notebooks and documents. Your allowance refills once a month on every plan, including Free and yearly plans.",
   },
   {
     q: "Can I cancel anytime?",
     a: "Yes. You can cancel your subscription at any time from your billing settings. You keep paid-plan access until the end of your current billing period, then your account moves to the Free tier.",
   },
   {
-    q: "Do unused characters or sessions roll over?",
-    a: "No. Quota resets at the start of each billing period and unused amounts do not carry over.",
+    q: "Do unused characters roll over?",
+    a: "No. Your allowance refills to the full amount each month and unused characters do not carry over.",
   },
   {
     q: "What payment methods are accepted?",
@@ -225,7 +219,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-6 text-center font-manrope text-xs text-ink-3">
-          Prices in USD · Monthly billing · Cancel anytime · AI characters and sessions reset each month
+          Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month
         </p>
       </section>
 

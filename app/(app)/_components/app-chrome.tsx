@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function AppChrome({ header, children }: { header: React.ReactNode; children: React.ReactNode }) {
   const pathname = usePathname();
-  const hideNav = pathname.startsWith("/study/") || pathname.startsWith("/learn/");
+  const hideNav = pathname.startsWith("/study/");
 
   return (
     <>
