@@ -616,15 +616,16 @@ Users can set preferred question types per course in `user_courses.preferred_que
 
 | Plan | Monthly | Yearly | Monthly Characters |
 |---|---|---|---|
-| Free | $0 | — | 5,000 |
+| Free | $0 | — | 5,000 (one-time) |
 | Plus | $5 | $48 | 300,000 |
 | Pro | $10 | $96 | 1,000,000 |
 
-Character allowances refill once a month on every plan. Polar renewals grant the
-allowance for monthly plans; free users and yearly subscribers are refilled lazily
-by `refresh_quota_if_due()` (see `supabase/migrations/058_monthly_quota_refresh.sql`),
-using `user_subscriptions.quota_reset_at`. Allowances live in `PLAN_QUOTA`
-(`utils/polar.ts`) and `plan_monthly_chars()` (SQL) — keep them in sync.
+Free accounts get a one-time 5,000 characters on first use
+(`user_subscriptions.free_chars_granted`). Paid plans refill once a month: Polar
+renewals grant the allowance for monthly plans, and yearly subscribers are refilled
+lazily by `refresh_quota_if_due()` using `user_subscriptions.quota_reset_at`
+(see migrations `058` and `059`). Allowances live in `PLAN_QUOTA` (`utils/polar.ts`)
+and `plan_monthly_chars()` (SQL) — keep them in sync.
 
 ### One-Time Top-Ups
 

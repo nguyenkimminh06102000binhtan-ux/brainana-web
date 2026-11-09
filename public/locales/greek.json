@@ -779,7 +779,8 @@
     "txRefund": "Επιστροφή χρημάτων",
     "txChargeback": "Αντίστροφη χρέωση",
     "txAdminGrant": "Χορήγηση από διαχειριστή",
-    "txUnknown": "Συναλλαγή"
+    "txUnknown": "Συναλλαγή",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Γρήγορη Επανάληψη",

@@ -28,7 +28,7 @@ const PLANS = [
     chars: "5,000",
     badge: null,
     features: [
-      { label: "5,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "5,000 free AI characters to start", children: AI_CHARACTER_USES },
       { label: "Unlimited public courses" },
       { label: "All study modes" },
       { label: "Community courses" },
@@ -235,7 +235,7 @@ export default async function UpgradePage() {
 
       {/* Footer note */}
       <p className="mt-8 text-center font-manrope text-xs text-ink-3">
-        Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month, on every plan
+        Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month on paid plans
       </p>
       <p className="mt-3 text-center font-manrope text-xs text-ink-3">
         By subscribing you agree to our{" "}

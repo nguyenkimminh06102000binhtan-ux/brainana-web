@@ -779,7 +779,8 @@
     "txRefund": "بازپرداخت",
     "txChargeback": "استرداد شارژ",
     "txAdminGrant": "کمک هزینه مدیریت",
-    "txUnknown": "معامله"
+    "txUnknown": "معامله",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "مرور سریع",

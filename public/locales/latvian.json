@@ -779,7 +779,8 @@
     "txRefund": "Atmaksa",
     "txChargeback": "Atmaksa",
     "txAdminGrant": "Administratora dotācija",
-    "txUnknown": "Darījums"
+    "txUnknown": "Darījums",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Ātrā Atkārtošana",

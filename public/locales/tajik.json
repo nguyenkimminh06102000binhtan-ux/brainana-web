@@ -779,7 +779,8 @@
     "txRefund": "Бозгашт",
     "txChargeback": "Бозгашт",
     "txAdminGrant": "Гранти админ",
-    "txUnknown": "Муомила"
+    "txUnknown": "Муомила",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Такрори Зуд",

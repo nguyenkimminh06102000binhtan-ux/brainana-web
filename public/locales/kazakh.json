@@ -779,7 +779,8 @@
     "txRefund": "Қайтару",
     "txChargeback": "Кері қайтарым",
     "txAdminGrant": "Әкімші гранты",
-    "txUnknown": "Транзакция"
+    "txUnknown": "Транзакция",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Жылдам Қайталау",

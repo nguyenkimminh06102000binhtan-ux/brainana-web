@@ -779,7 +779,8 @@
     "txRefund": "بیرته ورکول",
     "txChargeback": "چارج بیک",
     "txAdminGrant": "اداری مرسته",
-    "txUnknown": "معامله"
+    "txUnknown": "معامله",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "د سرعت کتنه",

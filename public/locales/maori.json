@@ -779,7 +779,8 @@
     "txRefund": "Whakahoki",
     "txChargeback": "Utu utu",
     "txAdminGrant": "Karahipi Kaiwhakahaere",
-    "txUnknown": "Tauwhitinga"
+    "txUnknown": "Tauwhitinga",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Arotake Tere",

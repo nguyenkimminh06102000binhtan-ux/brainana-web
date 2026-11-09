@@ -779,7 +779,8 @@
     "txRefund": "திரும்பப்பெறுதல்",
     "txChargeback": "திரும்பப் பெறுதல்",
     "txAdminGrant": "நிர்வாக மானியம்",
-    "txUnknown": "பரிவர்த்தனை"
+    "txUnknown": "பரிவர்த்தனை",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "வேக மதிப்பாய்வு",

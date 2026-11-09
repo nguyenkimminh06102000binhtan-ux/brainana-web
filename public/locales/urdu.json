@@ -779,7 +779,8 @@
     "txRefund": "رقم کی واپسی",
     "txChargeback": "چارج بیک",
     "txAdminGrant": "ایڈمن گرانٹ",
-    "txUnknown": "لین دین"
+    "txUnknown": "لین دین",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "سپیڈ ریویو",

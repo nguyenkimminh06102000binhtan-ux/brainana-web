@@ -779,7 +779,8 @@
     "txRefund": "ಮರುಪಾವತಿ",
     "txChargeback": "ಚಾರ್ಜ್‌ಬ್ಯಾಕ್",
     "txAdminGrant": "ಆಡ್ಮಿನ್ ಅನುದಾನ",
-    "txUnknown": "ಲೆನದೇನ"
+    "txUnknown": "ಲೆನದೇನ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ಸ್ಪೀಡ್ ರಿವ್ಯೂ",

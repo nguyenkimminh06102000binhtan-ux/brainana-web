@@ -779,7 +779,8 @@
     "txRefund": "Lacag soo celin",
     "txChargeback": "Dib u soo celinta",
     "txAdminGrant": "deeqda maamulka",
-    "txUnknown": "Wax kala iibsiga"
+    "txUnknown": "Wax kala iibsiga",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Dib u Eegis Degdeg",

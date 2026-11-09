@@ -779,7 +779,8 @@
     "txRefund": "Rifużjoni",
     "txChargeback": "Chargeback",
     "txAdminGrant": "Għotja tal-amministratur",
-    "txUnknown": "Transazzjoni"
+    "txUnknown": "Transazzjoni",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Reviżjoni Rapida",

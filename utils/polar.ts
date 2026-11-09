@@ -27,9 +27,10 @@ export const PLAN_PRICES: Record<PaidPlan, Record<BillingInterval, string>> = {
   pro:  { monthly: "$10", yearly: "$96" },
 };
 
-// Monthly quota per plan. Yearly plans get the same monthly allowance, refilled
-// every month by refresh_quota_if_due(). Chars must match plan_monthly_chars()
-// in supabase/migrations/058_monthly_quota_refresh.sql.
+// Character allowance per plan. Free: a one-time grant on first use. Paid plans
+// (monthly and yearly): refilled every month by refresh_quota_if_due().
+// Chars must match plan_monthly_chars() in
+// supabase/migrations/059_one_time_free_chars.sql.
 export const PLAN_QUOTA: Record<string, { chars: number; sessions: number }> = {
   // sessions: legacy AI tutor quota — the tutor was removed, so always 0.
   free: { chars: 5_000,     sessions: 0 },

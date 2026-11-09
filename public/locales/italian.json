@@ -779,7 +779,8 @@
     "txRefund": "Rimborso",
     "txChargeback": "Storno",
     "txAdminGrant": "Concessione amministratore",
-    "txUnknown": "Transazione"
+    "txUnknown": "Transazione",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Revisione Rapida",

@@ -104,7 +104,9 @@ export async function adminSetPlan(formData: FormData) {
   }
 
   const expiresAt = expiresAtRaw ? new Date(expiresAtRaw).toISOString() : null;
-  const quota     = PLAN_QUOTA[plan] ?? PLAN_QUOTA.free;
+  // Free's 5,000 chars are a one-time grant handled by refresh_quota_if_due(),
+  // so moving someone to Free doesn't hand it out again.
+  const quota     = plan === "free" ? { chars: 0, sessions: 0 } : PLAN_QUOTA[plan];
   const admin     = createAdminClient();
 
   await admin
@@ -113,7 +115,7 @@ export async function adminSetPlan(formData: FormData) {
       plan,
       chars_balance:             quota.chars,
       tutor_sessions_balance:    quota.sessions,
-      quota_reset_at:            nextQuotaResetAt(),
+      quota_reset_at:            plan === "free" ? null : nextQuotaResetAt(),
       plan_expires_at:           expiresAt,
       is_manual_subscription:    isManual,
       subscription_status: plan === "free" ? "none" : "active",

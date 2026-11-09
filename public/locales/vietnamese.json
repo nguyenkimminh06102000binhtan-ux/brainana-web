@@ -779,7 +779,8 @@
     "txRefund": "Đền bù",
     "txChargeback": "Khoản bồi hoàn",
     "txAdminGrant": "Cấp quản trị viên",
-    "txUnknown": "Giao dịch"
+    "txUnknown": "Giao dịch",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Ôn Tập Nhanh",

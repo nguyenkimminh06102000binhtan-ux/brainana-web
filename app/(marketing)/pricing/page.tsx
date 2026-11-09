@@ -40,7 +40,7 @@ const PLANS = [
     description: "Get started and explore",
     badge: null,
     features: [
-      { label: "5,000 AI characters / month", children: AI_CHARACTER_USES },
+      { label: "5,000 free AI characters to start", children: AI_CHARACTER_USES },
       { label: "Unlimited public courses" },
       { label: "All study modes" },
       { label: "Access to community courses" },
@@ -117,7 +117,7 @@ function FeatureLine({
 const FAQ = [
   {
     q: "What counts as an AI character?",
-    a: "AI characters are input characters processed by AI features: generating answer/back cards, auto text-to-speech audio, autofilling custom attributes such as romanization, example sentences, and pronunciation, plus AI import from notebooks and documents. Your allowance refills once a month on every plan, including Free and yearly plans.",
+    a: "AI characters are input characters processed by AI features: generating answer/back cards, auto text-to-speech audio, autofilling custom attributes such as romanization, example sentences, and pronunciation, plus AI import from notebooks and documents. Paid plans refill once a month, including yearly plans. Free accounts get a one-time 5,000 characters to try every AI feature.",
   },
   {
     q: "Can I cancel anytime?",
@@ -219,7 +219,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-6 text-center font-manrope text-xs text-ink-3">
-          Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month
+          Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month on paid plans
         </p>
       </section>
 

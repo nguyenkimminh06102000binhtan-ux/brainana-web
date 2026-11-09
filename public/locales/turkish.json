@@ -779,7 +779,8 @@
     "txRefund": "Geri ödemek",
     "txChargeback": "Ters ibraz",
     "txAdminGrant": "Yönetici izni",
-    "txUnknown": "İşlem"
+    "txUnknown": "İşlem",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Hızlı Tekrar",

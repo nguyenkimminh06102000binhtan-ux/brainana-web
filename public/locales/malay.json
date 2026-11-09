@@ -779,7 +779,8 @@
     "txRefund": "Bayaran balik",
     "txChargeback": "Caj balik",
     "txAdminGrant": "Pemberian admin",
-    "txUnknown": "Transaksi"
+    "txUnknown": "Transaksi",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Semakan Pantas",

@@ -779,7 +779,8 @@
     "txRefund": "ਰਿਫੰਡ",
     "txChargeback": "ਚਾਰਜਬੈਕ",
     "txAdminGrant": "ਐਡਮਿਨ ਗ੍ਰਾਂਟ",
-    "txUnknown": "ਲੈਣ-ਦੇਣ"
+    "txUnknown": "ਲੈਣ-ਦੇਣ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ਸਪੀਡ ਰਿਵਿਊ",

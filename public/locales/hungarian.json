@@ -779,7 +779,8 @@
     "txRefund": "Visszatérítés",
     "txChargeback": "Visszaterhelés",
     "txAdminGrant": "Adminisztrátori támogatás",
-    "txUnknown": "Tranzakció"
+    "txUnknown": "Tranzakció",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Gyors Ismétlés",

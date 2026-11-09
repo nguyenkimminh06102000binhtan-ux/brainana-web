@@ -779,7 +779,8 @@
     "txRefund": "Возврат",
     "txChargeback": "Чарджбэк",
     "txAdminGrant": "Адміністратыўны грант",
-    "txUnknown": "Трансакцыя"
+    "txUnknown": "Трансакцыя",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Хуткі Агляд",

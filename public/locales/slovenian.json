@@ -779,7 +779,8 @@
     "txRefund": "Povračilo",
     "txChargeback": "Povratna bremenitev",
     "txAdminGrant": "Administratorska pomoč",
-    "txUnknown": "Transakcija"
+    "txUnknown": "Transakcija",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Hitro Ponavljanje",

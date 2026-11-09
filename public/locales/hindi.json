@@ -779,7 +779,8 @@
     "txRefund": "रिफंड",
     "txChargeback": "चार्जबैक",
     "txAdminGrant": "एडमिन अनुदान",
-    "txUnknown": "लेन-देन"
+    "txUnknown": "लेन-देन",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "स्पीड रिव्यू",

@@ -779,7 +779,8 @@
     "txRefund": "መመለሻ",
     "txChargeback": "የተመለሰ ክፍያ",
     "txAdminGrant": "የአስተዳዳሪ ስጦታ",
-    "txUnknown": "ግብይት"
+    "txUnknown": "ግብይት",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ፈጣን ክለሳ",

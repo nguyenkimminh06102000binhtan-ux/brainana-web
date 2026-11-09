@@ -779,7 +779,8 @@
     "txRefund": "फिर्ता",
     "txChargeback": "चार्जब्याक",
     "txAdminGrant": "प्रशासन अनुदान",
-    "txUnknown": "लेनदेन"
+    "txUnknown": "लेनदेन",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "स्पिड रिभ्यू",

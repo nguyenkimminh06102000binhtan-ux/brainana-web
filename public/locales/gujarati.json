@@ -779,7 +779,8 @@
     "txRefund": "રિફંડ",
     "txChargeback": "ચાર્જબેક",
     "txAdminGrant": "એડમિન અનુદાન",
-    "txUnknown": "લેવડદેવડ"
+    "txUnknown": "લેવડદેવડ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "સ્પીડ રિવ્યૂ",

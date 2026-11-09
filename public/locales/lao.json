@@ -779,7 +779,8 @@
     "txRefund": "ເງິນຄືນ",
     "txChargeback": "ຈ່າຍຄືນ",
     "txAdminGrant": "ການຊ່ວຍເຫຼືອຜູ້ເບິ່ງແຍງ",
-    "txUnknown": "ທຸລະກໍາ"
+    "txUnknown": "ທຸລະກໍາ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ທົບທວນດ່ວນ",

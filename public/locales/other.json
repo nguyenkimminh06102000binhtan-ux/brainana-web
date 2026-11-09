@@ -779,7 +779,8 @@
     "txRefund": "Refund",
     "txChargeback": "Chargeback",
     "txAdminGrant": "Admin grant",
-    "txUnknown": "Transaction"
+    "txUnknown": "Transaction",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Speed Review",

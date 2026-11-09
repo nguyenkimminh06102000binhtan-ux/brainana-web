@@ -80,7 +80,7 @@ export default async function AdminUserDetail({
               <input type="hidden" name="user_id" value={id} />
 
               <select name="plan" defaultValue={sub?.plan ?? "free"} className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
-                <option value="free">Free — 5K chars/mo</option>
+                <option value="free">Free — one-time 5K chars</option>
                 <option value="plus">Plus — 300K chars/mo</option>
                 <option value="pro">Pro — 1M chars/mo</option>
               </select>

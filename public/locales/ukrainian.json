@@ -779,7 +779,8 @@
     "txRefund": "Повернення",
     "txChargeback": "Повернення платежу",
     "txAdminGrant": "Грант адміністратора",
-    "txUnknown": "Транзакція"
+    "txUnknown": "Транзакція",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Швидке Повторення",

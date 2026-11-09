@@ -779,7 +779,8 @@
     "txRefund": "환불하다",
     "txChargeback": "지불 거절",
     "txAdminGrant": "관리자 부여",
-    "txUnknown": "거래"
+    "txUnknown": "거래",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "스피드 리뷰",

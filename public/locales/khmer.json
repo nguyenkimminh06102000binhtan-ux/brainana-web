@@ -779,7 +779,8 @@
     "txRefund": "សងប្រាក់វិញ",
     "txChargeback": "ការបង្វិលប្រាក់វិញ",
     "txAdminGrant": "ការផ្តល់ដោយអ្នកគ្រប់គ្រង",
-    "txUnknown": "ប្រតិបត្តិការ"
+    "txUnknown": "ប្រតិបត្តិការ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ពិនិត្យរហ័ស",

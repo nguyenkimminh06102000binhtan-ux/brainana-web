@@ -779,7 +779,8 @@
     "txRefund": "Şûndadan",
     "txChargeback": "Chargeback",
     "txAdminGrant": "Destûra rêveberiyê",
-    "txUnknown": "Şandindayinî"
+    "txUnknown": "Şandindayinî",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Nirxandina Bilez",

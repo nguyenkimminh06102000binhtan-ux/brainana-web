@@ -779,7 +779,8 @@
     "txRefund": "To'lovni qaytarish",
     "txChargeback": "To'lovni qaytarish",
     "txAdminGrant": "Admin granti",
-    "txUnknown": "Tranzaksiya"
+    "txUnknown": "Tranzaksiya",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Tezkor Takrorlash",

@@ -779,7 +779,8 @@
     "txRefund": "Povrat",
     "txChargeback": "Povratna transakcija",
     "txAdminGrant": "Admin dohodak",
-    "txUnknown": "Transakcija"
+    "txUnknown": "Transakcija",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Brzi Pregled",

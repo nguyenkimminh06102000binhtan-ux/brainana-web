@@ -779,7 +779,8 @@
     "txRefund": "వాపసు",
     "txChargeback": "ఛార్జ్బ్యాక్",
     "txAdminGrant": "అడ్మిన్ మంజూరు",
-    "txUnknown": "లావాదేవీ"
+    "txUnknown": "లావాదేవీ",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "స్పీడ్ రివ్యూ",

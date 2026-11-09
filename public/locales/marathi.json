@@ -779,7 +779,8 @@
     "txRefund": "परतावा",
     "txChargeback": "चार्जबॅक",
     "txAdminGrant": "प्रशासन अनुदान",
-    "txUnknown": "व्यवहार"
+    "txUnknown": "व्यवहार",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "स्पीड रिव्ह्यू",

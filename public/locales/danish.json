@@ -779,7 +779,8 @@
     "txRefund": "Refundering",
     "txChargeback": "Tilbageførsel",
     "txAdminGrant": "Administrator-tildeling",
-    "txUnknown": "Transaktion"
+    "txUnknown": "Transaktion",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Hurtig Gennemgang",

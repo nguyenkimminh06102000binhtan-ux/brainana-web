@@ -779,7 +779,8 @@
     "txRefund": "คืนเงิน",
     "txChargeback": "การปฏิเสธการชำระเงิน",
     "txAdminGrant": "ผู้ดูแลระบบให้สิทธิ์",
-    "txUnknown": "ธุรกรรม"
+    "txUnknown": "ธุรกรรม",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "สปีดรีวิว",

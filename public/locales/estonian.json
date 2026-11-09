@@ -779,7 +779,8 @@
     "txRefund": "Tagasimakse",
     "txChargeback": "Tagasinõue",
     "txAdminGrant": "Administraatori grant",
-    "txUnknown": "Kanne"
+    "txUnknown": "Kanne",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Kiire Kordamine",

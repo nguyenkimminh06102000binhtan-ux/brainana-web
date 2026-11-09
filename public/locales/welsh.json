@@ -779,7 +779,8 @@
     "txRefund": "Ad-daliad",
     "txChargeback": "Tâl yn ôl",
     "txAdminGrant": "Grant gweinyddol",
-    "txUnknown": "Trafodyn"
+    "txUnknown": "Trafodyn",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Adolygiad Cyflym",

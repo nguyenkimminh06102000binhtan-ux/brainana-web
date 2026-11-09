@@ -779,7 +779,8 @@
     "txRefund": "استرداد",
     "txChargeback": "اعتراض على الدفع",
     "txAdminGrant": "منحة من المسؤول",
-    "txUnknown": "معاملة"
+    "txUnknown": "معاملة",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "مراجعة سريعة",

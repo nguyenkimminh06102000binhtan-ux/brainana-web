@@ -779,7 +779,8 @@
     "txRefund": "Restitutie",
     "txChargeback": "Terugboeking",
     "txAdminGrant": "Beheerders-toewijzing",
-    "txUnknown": "Transactie"
+    "txUnknown": "Transactie",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Snelle Herhaling",

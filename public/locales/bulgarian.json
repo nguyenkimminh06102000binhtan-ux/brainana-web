@@ -779,7 +779,8 @@
     "txRefund": "Възстановяване",
     "txChargeback": "Отказ на плащане",
     "txAdminGrant": "Администраторски дял",
-    "txUnknown": "Транзакция"
+    "txUnknown": "Транзакция",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Бърз Преглед",

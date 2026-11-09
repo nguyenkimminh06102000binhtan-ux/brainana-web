@@ -779,7 +779,8 @@
     "txRefund": "Palautus",
     "txChargeback": "Takaisinveloitus",
     "txAdminGrant": "Järjestelmänvalvojan apuraha",
-    "txUnknown": "Tapahtuma"
+    "txUnknown": "Tapahtuma",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Pikakerhaus",

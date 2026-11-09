@@ -779,7 +779,8 @@
     "txRefund": "Rückerstattung",
     "txChargeback": "Reklamation",
     "txAdminGrant": "Admin-Zuteilung",
-    "txUnknown": "Transaktion"
+    "txUnknown": "Transaktion",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Schnelle Wiederholung",

@@ -378,7 +378,9 @@ export default async function BillingPage({
               </div>
               <div className="text-right">
                 <p className="font-mono text-sm font-[700] text-ink">{fmt(charsBalance)}</p>
-                <p className="font-mono text-xs text-ink-3">{b.quota.replace("{max}", fmt(allowance.chars))}</p>
+                <p className="font-mono text-xs text-ink-3">
+                  {plan === "free" ? `/ ${fmt(allowance.chars)}` : b.quota.replace("{max}", fmt(allowance.chars))}
+                </p>
               </div>
             </div>
             <BalanceBar
@@ -422,7 +424,11 @@ export default async function BillingPage({
                       {isCredit ? "+" : ""}{fmt(tx.amount)}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="font-manrope text-sm text-ink">{reasonLabel[tx.reason] ?? tx.reason}</p>
+                      <p className="font-manrope text-sm text-ink">
+                        {(tx.metadata as { event?: string } | null)?.event === "free_grant"
+                          ? b.txFreeGrant
+                          : reasonLabel[tx.reason] ?? tx.reason}
+                      </p>
                       <p className="font-mono text-xs text-ink-3">{tx.resource}</p>
                     </div>
                     <span className="shrink-0 font-mono text-xs text-ink-3">

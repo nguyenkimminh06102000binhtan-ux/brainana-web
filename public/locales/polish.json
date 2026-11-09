@@ -779,7 +779,8 @@
     "txRefund": "Refundacja",
     "txChargeback": "Obciążenie zwrotne",
     "txAdminGrant": "Dotacja administratora",
-    "txUnknown": "Transakcja"
+    "txUnknown": "Transakcja",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Szybkie Powtórzenie",

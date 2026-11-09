@@ -779,7 +779,8 @@
     "txRefund": "Imbuyiselo",
     "txChargeback": "Inkokhelo emuva",
     "txAdminGrant": "Admin grant",
-    "txUnknown": "Okwenziwayo"
+    "txUnknown": "Okwenziwayo",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "Ukubuyekeza Okusha",

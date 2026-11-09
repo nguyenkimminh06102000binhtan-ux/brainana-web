@@ -779,7 +779,8 @@
     "txRefund": "退款",
     "txChargeback": "退单",
     "txAdminGrant": "管理员赠送",
-    "txUnknown": "交易"
+    "txUnknown": "交易",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "速度复习",

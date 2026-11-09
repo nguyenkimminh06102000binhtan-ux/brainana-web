@@ -466,6 +466,7 @@ export type Locale = {
     txChargeback: string;
     txAdminGrant: string;
     txUnknown: string;
+    txFreeGrant: string;
   };
   categories: Record<string, string>;
   mems: {

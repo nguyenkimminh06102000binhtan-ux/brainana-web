@@ -779,7 +779,8 @@
     "txRefund": "ආපසු ගෙවීම",
     "txChargeback": "අයකිරීම",
     "txAdminGrant": "පරිපාලක දීමනාව",
-    "txUnknown": "ගනුදෙනුව"
+    "txUnknown": "ගනුදෙනුව",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "ස්පීඩ් රිව්යු",

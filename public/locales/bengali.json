@@ -779,7 +779,8 @@
     "txRefund": "ফেরত",
     "txChargeback": "চার্জব্যাক",
     "txAdminGrant": "অ্যাডমিন অনুদান",
-    "txUnknown": "লেনদেন"
+    "txUnknown": "লেনদেন",
+    "txFreeGrant": "Free starter credits"
   },
   "speedReview": {
     "title": "স্পিড রিভিউ",
