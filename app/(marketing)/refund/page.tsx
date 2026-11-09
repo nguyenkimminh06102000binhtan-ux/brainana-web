@@ -27,7 +27,7 @@ const sections = [
   },
   {
     title: "2. Why We Do Not Offer Refunds",
-    body: "Paid plans and top-ups on Brainana grant immediate quota of AI characters and AI tutor sessions. These quotas are provisioned and begin to be available for consumption the moment payment is processed. Because the value is delivered upfront for the current billing period, we are unable to issue refunds for a period that has already commenced.",
+    body: "Paid plans and top-ups on Brainana grant immediate quota of AI characters. This quota is provisioned and begins to be available for consumption the moment payment is processed. Because the value is delivered upfront for the current billing period, we are unable to issue refunds for a period that has already commenced.",
   },
   {
     title: "3. Cancellation",

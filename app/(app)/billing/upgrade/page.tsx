@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { startCheckout } from "@/app/actions/billing";
+import { PLAN_PRICES } from "@/utils/polar";
 
 const AI_CHARACTER_USES = [
   "Generate answer/back cards",
@@ -22,18 +23,17 @@ const PLANS = [
     key: "free",
     label: "Free",
     price: null,
+    yearlyPrice: null,
     description: "Get started and explore",
-    chars: "0",
-    sessions: "0",
+    chars: "5,000",
     badge: null,
     features: [
+      { label: "5,000 AI characters / month", children: AI_CHARACTER_USES },
       { label: "Unlimited public courses" },
       { label: "All study modes" },
       { label: "Community courses" },
     ],
     missing: [
-      { label: "AI characters", children: AI_CHARACTER_USES },
-      { label: "AI tutor sessions" },
       { label: "Private courses" },
       // { label: "Top-up packs" }, // hidden — re-enable with TOPUP_ENABLED in billing/page.tsx
     ],
@@ -41,14 +41,13 @@ const PLANS = [
   {
     key: "plus",
     label: "Plus",
-    price: "$9",
+    price: PLAN_PRICES.plus.monthly,
+    yearlyPrice: PLAN_PRICES.plus.yearly,
     description: "For serious learners",
     chars: "300,000",
-    sessions: "30",
     badge: "Most popular",
     features: [
       { label: "300,000 AI characters / month", children: AI_CHARACTER_USES },
-      { label: "30 AI tutor sessions / month" },
       { label: "Private courses" },
       { label: "Everything in Free" },
     ],
@@ -57,14 +56,13 @@ const PLANS = [
   {
     key: "pro",
     label: "Pro",
-    price: "$19",
+    price: PLAN_PRICES.pro.monthly,
+    yearlyPrice: PLAN_PRICES.pro.yearly,
     description: "For power users & teachers",
-    chars: "900,000",
-    sessions: "90",
+    chars: "1,000,000",
     badge: null,
     features: [
-      { label: "900,000 AI characters / month", children: AI_CHARACTER_USES },
-      { label: "90 AI tutor sessions / month" },
+      { label: "1,000,000 AI characters / month", children: AI_CHARACTER_USES },
       { label: "Everything in Plus" },
       { label: "Priority support" },
     ],
@@ -177,15 +175,17 @@ export default async function UpgradePage() {
                     <span className="font-fredoka text-4xl font-[700] text-ink">Free</span>
                   )}
                 </div>
+                {plan.yearlyPrice && (
+                  <p className="mt-1 font-manrope text-xs text-ink-3">
+                    or {plan.yearlyPrice} / year — 2 months free
+                  </p>
+                )}
               </div>
 
               {/* Quota pills */}
               <div className="mb-5 flex flex-wrap gap-2">
                 <span className="rounded-full bg-paper px-3 py-1 font-manrope text-xs font-[700] text-ink shadow-hard-sm">
                   {plan.chars} chars
-                </span>
-                <span className="rounded-full bg-paper px-3 py-1 font-manrope text-xs font-[700] text-ink shadow-hard-sm">
-                  {plan.sessions} AI sessions
                 </span>
               </div>
 
@@ -206,16 +206,26 @@ export default async function UpgradePage() {
                     Downgrade
                   </div>
                 ) : (
-                  <form action={startCheckout.bind(null, plan.key as "plus" | "pro")}>
-                    <button
-                      type="submit"
-                      className={`w-full rounded-full py-2.5 font-manrope text-sm font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px] ${
-                        isRecommended ? "bg-blue text-ocean shadow-none" : "bg-orange shadow-hard-red"
-                      }`}
-                    >
-                      Upgrade to {plan.label}
-                    </button>
-                  </form>
+                  <div className="flex flex-col gap-2">
+                    <form action={startCheckout.bind(null, plan.key as "plus" | "pro", "monthly")}>
+                      <button
+                        type="submit"
+                        className={`w-full rounded-full py-2.5 font-manrope text-sm font-[800] text-on-bright transition hover:opacity-90 active:translate-y-[1px] ${
+                          isRecommended ? "bg-blue text-ocean shadow-none" : "bg-orange shadow-hard-red"
+                        }`}
+                      >
+                        Upgrade to {plan.label} — {plan.price}/mo
+                      </button>
+                    </form>
+                    <form action={startCheckout.bind(null, plan.key as "plus" | "pro", "yearly")}>
+                      <button
+                        type="submit"
+                        className="w-full rounded-full border-2 border-ink/15 py-2 font-manrope text-sm font-[700] text-ink transition hover:border-ink/30 active:translate-y-[1px]"
+                      >
+                        Pay yearly — {plan.yearlyPrice}/yr
+                      </button>
+                    </form>
+                  </div>
                 )}
               </div>
             </div>
@@ -225,7 +235,7 @@ export default async function UpgradePage() {
 
       {/* Footer note */}
       <p className="mt-8 text-center font-manrope text-xs text-ink-3">
-        Prices in USD · Monthly billing · Cancel anytime · AI characters and sessions reset each month
+        Prices in USD · Monthly or yearly billing · Cancel anytime · AI characters refill every month, on every plan
       </p>
       <p className="mt-3 text-center font-manrope text-xs text-ink-3">
         By subscribing you agree to our{" "}

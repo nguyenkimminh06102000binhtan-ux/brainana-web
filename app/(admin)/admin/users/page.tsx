@@ -12,7 +12,7 @@ export default async function AdminUsers({
 
   let query = supabase
     .from("profiles")
-    .select("id, username, display_name, avatar_url, created_at, user_subscriptions(plan, chars_balance, tutor_sessions_balance)")
+    .select("id, username, display_name, avatar_url, created_at, user_subscriptions(plan, chars_balance)")
     .order("created_at", { ascending: false })
     .limit(50);
 
@@ -41,7 +41,7 @@ export default async function AdminUsers({
         <table className="w-full">
           <thead className="bg-paper-2 border-b border-ink/10">
             <tr>
-              {["User", "Plan", "Chars balance", "Sessions balance", ""].map((h) => (
+              {["User", "Plan", "Chars balance", ""].map((h) => (
                 <th key={h} className="px-4 py-3 text-left font-mono text-xs uppercase tracking-widest text-ink-3">{h}</th>
               ))}
             </tr>
@@ -65,7 +65,6 @@ export default async function AdminUsers({
                     </span>
                   </td>
                   <td className="px-4 py-3 font-mono text-sm text-ink">{(sub?.chars_balance ?? 0).toLocaleString()}</td>
-                  <td className="px-4 py-3 font-mono text-sm text-ink">{sub?.tutor_sessions_balance ?? 0}</td>
                   <td className="px-4 py-3 text-right">
                     <Link href={`/admin/users/${u.id}`} className="font-manrope text-xs font-[700] text-ink-2 hover:text-ink">
                       View →

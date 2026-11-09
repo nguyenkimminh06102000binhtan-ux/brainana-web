@@ -60,10 +60,6 @@ export default async function AdminUserDetail({
                 <span className="font-manrope text-sm text-ink-2">Characters</span>
                 <span className="font-mono text-sm font-[700] text-ink">{fmt(sub?.chars_balance ?? 0)}</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="font-manrope text-sm text-ink-2">Tutor sessions</span>
-                <span className="font-mono text-sm font-[700] text-ink">{sub?.tutor_sessions_balance ?? 0}</span>
-              </div>
             </div>
           </div>
 
@@ -84,9 +80,9 @@ export default async function AdminUserDetail({
               <input type="hidden" name="user_id" value={id} />
 
               <select name="plan" defaultValue={sub?.plan ?? "free"} className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
-                <option value="free">Free</option>
-                <option value="plus">Plus — 300K chars · 30 sessions/mo</option>
-                <option value="pro">Pro — 900K chars · 90 sessions/mo</option>
+                <option value="free">Free — 5K chars/mo</option>
+                <option value="plus">Plus — 300K chars/mo</option>
+                <option value="pro">Pro — 1M chars/mo</option>
               </select>
 
               <label className="font-manrope text-xs text-ink-3">Expires at (leave blank = no expiry)</label>
@@ -129,7 +125,6 @@ export default async function AdminUserDetail({
               <input type="hidden" name="user_id" value={id} />
               <select name="resource" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
                 <option value="chars">Characters</option>
-                <option value="tutor_sessions">Tutor sessions</option>
               </select>
               <input type="number" name="amount" min={1} placeholder="Amount" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
               <select name="reason" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
@@ -151,7 +146,6 @@ export default async function AdminUserDetail({
               <input type="hidden" name="user_id" value={id} />
               <select name="resource" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">
                 <option value="chars">Characters</option>
-                <option value="tutor_sessions">Tutor sessions</option>
               </select>
               <input type="number" name="amount" min={1} placeholder="Amount to refund" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink" />
               <select name="reason" className="w-full rounded-md bg-paper px-3 py-2 font-manrope text-sm text-ink outline-none focus:ring-2 focus:ring-ink">

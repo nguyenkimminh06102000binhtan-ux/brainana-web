@@ -16,11 +16,26 @@ export interface QuotaBalance {
   tutor_sessions_balance: number;
 }
 
+/**
+ * Refill the user's monthly AI-character allowance if their reset date has
+ * passed. Call before reading chars_balance for display; deduct_quota() already
+ * does this itself. Failures are logged, not thrown — a stale balance is
+ * better than a broken page.
+ */
+export async function refreshQuotaIfDue(
+  supabase: SupabaseClient,
+  userId: string,
+): Promise<void> {
+  const { error } = await supabase.rpc("refresh_quota_if_due", { p_user_id: userId });
+  if (error) console.error("[quota] refreshQuotaIfDue error:", error.message);
+}
+
 /** Fetch a user's current quota balance and plan */
 export async function getQuotaBalance(
   supabase: SupabaseClient,
   userId: string,
 ): Promise<QuotaBalance | null> {
+  await refreshQuotaIfDue(supabase, userId);
   const { data, error } = await supabase
     .from("user_subscriptions")
     .select("plan, chars_balance, tutor_sessions_balance")

@@ -5,10 +5,12 @@ import { cookies } from "next/headers";
 import CreateCourseForm from "./form";
 import { createClient } from "@/utils/supabase/server";
 import { getLocale } from "@/utils/i18n";
+import { refreshQuotaIfDue } from "@/utils/quota";
 
 export default async function CreatePage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();
+  if (user) await refreshQuotaIfDue(supabase, user.id);
 
   const [profileResult, subResult] = await Promise.all([
     user

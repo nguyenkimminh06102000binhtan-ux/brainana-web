@@ -1,6 +1,6 @@
 # brainana-web
 
-Marketing site and full-stack web app for **brainana.app** — an AI-powered flashcard and spaced-repetition learning platform supporting 80+ languages, AI tutoring, course creation, and subscription billing.
+Marketing site and full-stack web app for **brainana.app** — an AI-powered flashcard and spaced-repetition learning platform supporting 80+ languages, course creation, and subscription billing.
 
 ---
 
@@ -146,14 +146,13 @@ POLAR_ACCESS_TOKEN=polar_oat_...
 POLAR_WEBHOOK_SECRET=polar_whs_...
 
 # Product IDs (from your Polar dashboard)
-POLAR_PLUS_PRODUCT_ID=<uuid>
-POLAR_PRO_PRODUCT_ID=<uuid>
+POLAR_PLUS_PRODUCT_ID=<uuid>              # Plus monthly ($5)
+POLAR_PLUS_YEARLY_PRODUCT_ID=<uuid>       # Plus yearly ($48)
+POLAR_PRO_PRODUCT_ID=<uuid>               # Pro monthly ($10)
+POLAR_PRO_YEARLY_PRODUCT_ID=<uuid>        # Pro yearly ($96)
 POLAR_TOPUP_CHARS_100K_PRODUCT_ID=<uuid>
 POLAR_TOPUP_CHARS_300K_PRODUCT_ID=<uuid>
 POLAR_TOPUP_CHARS_1M_PRODUCT_ID=<uuid>
-POLAR_TOPUP_SESSIONS_10_PRODUCT_ID=<uuid>
-POLAR_TOPUP_SESSIONS_30_PRODUCT_ID=<uuid>
-POLAR_TOPUP_SESSIONS_100_PRODUCT_ID=<uuid>
 ```
 
 ### Legacy (Lemon Squeezy — deprecated, keep for reference)
@@ -182,7 +181,6 @@ brainana-web/
 │   │   ├── create/               # Course builder
 │   │   ├── courses/              # User's created courses list
 │   │   ├── home/                 # Dashboard
-│   │   ├── learn/[slug]/         # AI tutor for a course
 │   │   ├── leaderboard/          # Global XP leaderboard
 │   │   ├── library/              # User's enrolled courses
 │   │   ├── settings/             # User preferences
@@ -194,7 +192,6 @@ brainana-web/
 │   ├── actions/                  # Global server actions (AI, TTS, drafts, billing)
 │   ├── api/                      # API route handlers
 │   │   ├── analyze-file/         # File → text extraction
-│   │   ├── learn-chat/           # Streaming AI tutor chat
 │   │   └── polar/webhook/        # Billing webhook receiver
 │   ├── auth/callback/            # OAuth code exchange
 │   ├── constants/                # Shared constants (languages, categories)
@@ -246,8 +243,6 @@ Browser
   │
   ├─ Auth ──► Supabase Auth (email + Google OAuth)
   │               └─ Session cookies refreshed by middleware on every request
-  │
-  ├─ AI chat (streaming) ──► /api/learn-chat ──► Claude / Mistral (switchable)
   │
   ├─ File upload ──► Supabase Storage (temp-uploads bucket) ──► /api/analyze-file
   │
@@ -409,7 +404,6 @@ The app uses Next.js route groups to separate layouts:
 | `/c/[slug]` | Public course detail page |
 | `/c/[slug]/edit` | Edit course cards and metadata |
 | `/study/[slug]` | Active study session (SM-2 flashcard modes) |
-| `/learn/[slug]` | AI tutor chat for a course |
 | `/speed-review/[slug]` | High-speed drilling mode |
 | `/leaderboard` | Global XP rankings (paginated) |
 | `/u/[username]` | Public user profile (XP heatmap, courses, bio) |
@@ -447,29 +441,6 @@ Extracts text from uploaded files for use in AI card generation.
 **Rate limit:** 20 requests / hour / user
 
 **Errors:** `SCANNED_PDF` (no text layer detected), `FILE_TOO_LARGE`, `RATE_LIMITED`
-
----
-
-### `POST /api/learn-chat`
-
-Streams AI tutor responses for the interactive learn mode.
-
-**Request body:**
-```json
-{
-  "cards": [{ "front": "...", "back": "..." }],
-  "courseLanguages": { "source": "English", "target": "Spanish" },
-  "category": "language",
-  "difficulty": "intermediate",
-  "messages": [{ "role": "user", "content": "..." }]
-}
-```
-
-**Response:** NDJSON stream of text chunks.
-
-The system prompt adapts to category: language courses get translation/vocabulary tasks, math courses get formula/word problem generation, general courses get Q&A.
-
-**Quota deduction:** Deducts characters (input + output length) from `user_subscriptions.chars_balance`.
 
 ---
 
@@ -591,7 +562,6 @@ aiExtractTextFromImage(bytes: Buffer, mediaType: string): Promise<string>
 | Feature | Function | Provider |
 |---|---|---|
 | Card generation from text/files | `generateCardsWithAI()` | Both |
-| AI tutor chat | `/api/learn-chat` | Both (streaming) |
 | Card back generation | `generateCardBack()` | Both |
 | Image/file OCR | `/api/analyze-file` | Vision model |
 | Romanization | `generateRomanization()` | Both |
@@ -644,11 +614,17 @@ Users can set preferred question types per course in `user_courses.preferred_que
 
 ### Plans
 
-| Plan | Monthly Characters | Monthly Tutor Sessions |
-|---|---|---|
-| Free | 0 | 0 |
-| Plus | 300,000 | 30 |
-| Pro | 900,000 | 90 |
+| Plan | Monthly | Yearly | Monthly Characters |
+|---|---|---|---|
+| Free | $0 | — | 5,000 |
+| Plus | $5 | $48 | 300,000 |
+| Pro | $10 | $96 | 1,000,000 |
+
+Character allowances refill once a month on every plan. Polar renewals grant the
+allowance for monthly plans; free users and yearly subscribers are refilled lazily
+by `refresh_quota_if_due()` (see `supabase/migrations/058_monthly_quota_refresh.sql`),
+using `user_subscriptions.quota_reset_at`. Allowances live in `PLAN_QUOTA`
+(`utils/polar.ts`) and `plan_monthly_chars()` (SQL) — keep them in sync.
 
 ### One-Time Top-Ups
 

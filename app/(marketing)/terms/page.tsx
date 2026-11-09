@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "3. The Service",
-    body: "Brainana is an AI-powered language learning platform that lets you create and study flashcard-style courses, track spaced-repetition progress, and access AI tutor sessions. Features may change as the product evolves. We will notify you of significant changes.",
+    body: "Brainana is an AI-powered language learning platform that lets you create and study flashcard-style courses, and track spaced-repetition progress. Features may change as the product evolves. We will notify you of significant changes.",
   },
   {
     title: "4. User Content",
@@ -43,11 +43,11 @@ const sections = [
   },
   {
     title: "6. Subscriptions and Payments",
-    body: `Brainana offers a Free tier and two paid subscription plans — Plus ($9 / month) and Pro ($19 / month) — billed monthly in USD. Payments are processed securely by Polar (polar.sh). When you subscribe you authorise Polar to charge your payment method on a recurring monthly basis. Your subscription renews automatically at the end of each billing period unless you cancel before the renewal date. You can cancel at any time from your account settings; cancellation takes effect at the end of the current billing period. Monthly quota and one-time top-up balances (AI characters and tutor sessions) reset on your billing anniversary and do not roll over.`,
+    body: `Brainana offers a Free tier and two paid subscription plans — Plus ($5 / month or $48 / year) and Pro ($10 / month or $96 / year) — billed in USD. Payments are processed securely by Polar (polar.sh). When you subscribe you authorise Polar to charge your payment method on a recurring monthly or yearly basis, depending on the billing period you choose. Your subscription renews automatically at the end of each billing period unless you cancel before the renewal date. You can cancel at any time from your account settings; cancellation takes effect at the end of the current billing period. AI character allowances refill once a month on every plan (including yearly plans), and monthly quota and one-time top-up balances do not roll over.`,
   },
   {
     title: "7. Refunds",
-    body: "All purchases are final and non-refundable. Because paid plans grant an immediate monthly quota of AI characters and tutor sessions that begins to be consumed on activation, we do not issue refunds or credits for any unused portion of a billing period. If you cancel, you retain access to paid features through the end of your current billing period. See our Refund Policy at brainana.app/refund for full details.",
+    body: "All purchases are final and non-refundable. Because paid plans grant an immediate monthly quota of AI characters that begins to be consumed on activation, we do not issue refunds or credits for any unused portion of a billing period. If you cancel, you retain access to paid features through the end of your current billing period. See our Refund Policy at brainana.app/refund for full details.",
   },
   {
     title: "8. Intellectual Property",

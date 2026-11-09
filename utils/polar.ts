@@ -6,18 +6,43 @@ export const POLAR_API_BASE =
     ? "https://sandbox-api.polar.sh"
     : "https://api.polar.sh";
 
-// Maps plan key → Polar product ID (set via env vars)
-export const PLAN_PRODUCT_IDS: Record<string, string> = {
-  plus: process.env.POLAR_PLUS_PRODUCT_ID ?? "",
-  pro:  process.env.POLAR_PRO_PRODUCT_ID  ?? "",
+export type PaidPlan = "plus" | "pro";
+export type BillingInterval = "monthly" | "yearly";
+
+// Maps plan key + billing interval → Polar product ID (set via env vars)
+export const PLAN_PRODUCT_IDS: Record<PaidPlan, Record<BillingInterval, string>> = {
+  plus: {
+    monthly: process.env.POLAR_PLUS_PRODUCT_ID        ?? "",
+    yearly:  process.env.POLAR_PLUS_YEARLY_PRODUCT_ID ?? "",
+  },
+  pro: {
+    monthly: process.env.POLAR_PRO_PRODUCT_ID         ?? "",
+    yearly:  process.env.POLAR_PRO_YEARLY_PRODUCT_ID  ?? "",
+  },
 };
 
-// Monthly quota granted per plan on activation/renewal
-export const PLAN_QUOTA: Record<string, { chars: number; sessions: number }> = {
-  free: { chars: 0,       sessions: 0  },
-  plus: { chars: 300_000, sessions: 30 },
-  pro:  { chars: 900_000, sessions: 90 },
+// Display prices — must match the prices configured on the Polar products.
+export const PLAN_PRICES: Record<PaidPlan, Record<BillingInterval, string>> = {
+  plus: { monthly: "$5",  yearly: "$48" },
+  pro:  { monthly: "$10", yearly: "$96" },
 };
+
+// Monthly quota per plan. Yearly plans get the same monthly allowance, refilled
+// every month by refresh_quota_if_due(). Chars must match plan_monthly_chars()
+// in supabase/migrations/058_monthly_quota_refresh.sql.
+export const PLAN_QUOTA: Record<string, { chars: number; sessions: number }> = {
+  // sessions: legacy AI tutor quota — the tutor was removed, so always 0.
+  free: { chars: 5_000,     sessions: 0 },
+  plus: { chars: 300_000,   sessions: 0 },
+  pro:  { chars: 1_000_000, sessions: 0 },
+};
+
+/** When a quota granted now should next refill (one calendar month later). */
+export function nextQuotaResetAt(from = new Date()): string {
+  const next = new Date(from);
+  next.setUTCMonth(next.getUTCMonth() + 1);
+  return next.toISOString();
+}
 
 // One-time top-up packs — each maps to a separate Polar product (one-time purchase)
 export const TOPUP_PACKS: Record<string, {
@@ -30,9 +55,6 @@ export const TOPUP_PACKS: Record<string, {
   chars_100k:   { label: "100K chars",   price: "$1.99",  chars: 100_000,   sessions: 0,   productEnvKey: "POLAR_TOPUP_CHARS_100K_PRODUCT_ID"   },
   chars_300k:   { label: "300K chars",   price: "$4.99",  chars: 300_000,   sessions: 0,   productEnvKey: "POLAR_TOPUP_CHARS_300K_PRODUCT_ID"   },
   chars_1m:     { label: "1M chars",     price: "$14.99", chars: 1_000_000, sessions: 0,   productEnvKey: "POLAR_TOPUP_CHARS_1M_PRODUCT_ID"     },
-  sessions_10:  { label: "10 sessions",  price: "$1.99",  chars: 0,         sessions: 10,  productEnvKey: "POLAR_TOPUP_SESSIONS_10_PRODUCT_ID"  },
-  sessions_30:  { label: "30 sessions",  price: "$4.99",  chars: 0,         sessions: 30,  productEnvKey: "POLAR_TOPUP_SESSIONS_30_PRODUCT_ID"  },
-  sessions_100: { label: "100 sessions", price: "$14.99", chars: 0,         sessions: 100, productEnvKey: "POLAR_TOPUP_SESSIONS_100_PRODUCT_ID" },
 };
 
 /** Return product ID for a top-up pack key (resolved from env). */
@@ -45,8 +67,9 @@ export function topupProductId(packKey: string): string {
 /** Resolve a Polar product ID back to a plan key. */
 export function planFromProductId(productId: string): string | null {
   if (!productId) return null;
-  for (const [plan, pid] of Object.entries(PLAN_PRODUCT_IDS)) {
-    if (pid && pid === productId) return plan;
+  for (const plan of ["plus", "pro"] as const) {
+    const { monthly, yearly } = PLAN_PRODUCT_IDS[plan];
+    if ((monthly && monthly === productId) || (yearly && yearly === productId)) return plan;
   }
   return null;
 }
